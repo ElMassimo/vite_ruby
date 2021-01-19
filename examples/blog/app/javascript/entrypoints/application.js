@@ -11,8 +11,8 @@
 // Turbolinks.start()
 // ActiveStorage.start()
 
-// Example: Import a stylesheet in app/javascript/index.css
-// import '~/index.css'
+// Example: Import a stylesheet in app/javascript/styles
+import '~/styles/index.css'
 
 console.log('Vite ⚡️ Rails')
 

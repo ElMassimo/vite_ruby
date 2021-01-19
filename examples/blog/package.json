@@ -13,6 +13,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "tailwindcss": "^2.0.2",
+    "postcss": "8.2.4",
     "webpack-dev-server": "^3.11.2"
   }
 }
