@@ -47,3 +47,12 @@ export default {
 
 You can now configure it using `config/vite.json`, check out the available
 [configuration options] for reference.
+
+
+## Thanks
+
+- [vite-plugin-components](https://github.com/antfu/vite-plugin-components): Picked up that neat pnpm setup.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
