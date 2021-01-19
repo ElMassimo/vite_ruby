@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop', '0.93.1'
   s.add_development_dependency 'rubocop-performance'
 
-  s.files = Dir.glob('{lib}/**/*.rb') + %w[package.json package/default.vite.json README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]
+  s.files = Dir.glob('{lib}/**/*.{rb,rake}') + %w[package.json package/default.vite.json README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]
   s.test_files = `git ls-files -- test/*`.split("\n")
 end
