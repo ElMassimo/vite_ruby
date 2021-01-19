@@ -22,6 +22,7 @@
 [vite_rails]: https://github.com/ElMassimo/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
+[config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
 
 [__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend.
 
@@ -37,7 +38,7 @@
 
 ## Documentation 📖
 
-Coming Soon!
+A documentation website is coming soon!
 
 ## Installation 💿
 
@@ -55,6 +56,29 @@ bin/rake vite:install
 ```
 
 This will generate configuration files and a sample setup.
+
+## Configuration ⚙️
+
+This is what your `config/vite.json` might look like:
+
+```json
+{
+  "all": {
+    "watchAdditionalPaths": []
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3036
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test"
+  }
+}
+```
+
+Check [this file][config file] to see all config options, documentation is coming soon.
 
 ## Inspiration 💡
 
