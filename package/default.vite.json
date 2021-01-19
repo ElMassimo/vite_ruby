@@ -1,0 +1,15 @@
+{
+  "assetsDir": "assets",
+  "autoBuild": false,
+  "buildCacheDir": "tmp/cache/vite",
+  "publicOutputDir": "vite",
+  "configPath": "config/vite.json",
+  "publicDir": "public",
+  "entrypointsDir": "entrypoints",
+  "sourceCodeDir": "app/javascript",
+  "host": "localhost",
+  "https": null,
+  "port": 3036,
+  "hideBuildConsoleOutput": false,
+  "watchAdditionalPaths": []
+}

@@ -1,0 +1,123 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - "public/**/*"
+    - "package/**/*"
+    - "examples/rails_app/**/*"
+    - "vendor/bundle"
+    - "tmp/**/*"
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  Enabled: false
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
+
+Layout/SpaceInsideStringInterpolation:
+  EnforcedStyle: space
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Style/SymbolArray:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Style/MissingRespondToMissing:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Layout/AccessModifierIndentation:
+  Enabled: true
+  EnforcedStyle: outdent
+
+Layout/CaseIndentation:
+  EnforcedStyle: 'end'
+
+# Disabled to allow the outdented comment style
+Layout/CommentIndentation:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Security/YAMLLoad:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false

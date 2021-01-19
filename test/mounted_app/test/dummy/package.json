@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "vite_rails": "file:../../../../"
+  },
+  "license": "MIT"
+}
