@@ -57,6 +57,48 @@ bin/rake vite:install
 
 This will generate configuration files and a sample setup.
 
+## Usage 🚀
+
+Drawing inspiration from [webpacker], any files in `app/javascript/entrypoints`
+will be considered entries to your application (SPAs or pages).
+
+These files will be detected, and passed on to Vite, all configuration is done
+for you.
+
+### Imports ⤵️
+
+For convenience, a `~/` import alias is configured to `app/javascript`, allowing
+you to use absolute paths:
+
+```js
+import { createApp } from 'vue'
+import App from '~/App.vue'
+import '~/channels'
+
+createApp(App).mount('#app')
+```
+
+### Tags 🏷
+
+`vite_typescript_tag`, `vite_javascript_tag`, and `vite_stylesheet_tag` can be
+used to output `<script>` and `<link>` tags in your Rails layouts or templates.
+
+```html
+<head>
+  <title>Joie</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <%= vite_stylesheet_tag 'strange' %>
+  <%= vite_typescript_tag 'application' %>
+</head>
+```
+
+For other types of assets, you can use `vite_asset_path` and pass that to the appropriate tag helper.
+
 ## Configuration ⚙️
 
 This is what your `config/vite.json` might look like:
