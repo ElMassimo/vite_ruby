@@ -1,0 +1,18 @@
+{
+  "name": "blog",
+  "private": true,
+  "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.3.0",
+    "turbolinks": "^5.2.0",
+    "vite": "^2.0.0-beta.30",
+    "vite-plugin-ruby": "1.0.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "tailwindcss": "^2.0.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
