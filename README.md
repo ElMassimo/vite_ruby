@@ -18,3 +18,47 @@
     </a>
   </p>
 </h1>
+
+[vite_rails]: https://github.com/ElMassimo/vite_rails
+[webpacker]: https://github.com/rails/webpacker
+[vite]: http://vitejs.dev/
+
+[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend.
+
+[Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
+
+## Features ⚡️
+
+- 🤖 Automatic Entrypoint Detection
+- ⚡️ Hot Reload
+- ⚙️ Rake Tasks
+- 🪝 Hooks to <kbd>assets:precompile</kbd> and friends
+
+## Documentation 📖
+
+Coming Soon!
+
+## Installation 💿
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'vite_rails'
+```
+
+Then, run:
+
+```bash
+bundle install
+bin/rake vite:install
+```
+
+This will generate configuration files and a sample setup.
+
+## Inspiration 💡
+
+- [webpacker]
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
