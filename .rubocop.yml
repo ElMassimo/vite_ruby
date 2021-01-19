@@ -23,6 +23,9 @@ Layout/EndAlignment:
 Layout/IndentationWidth:
   Enabled: false
 
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
 Layout/IndentationConsistency:
   Enabled: false
 

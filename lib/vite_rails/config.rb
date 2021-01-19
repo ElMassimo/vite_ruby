@@ -66,8 +66,6 @@ private
     # Internal: Used to load a JSON file from the specified path.
     def load_json(path)
       JSON.parse(File.read(File.expand_path(path))).deep_transform_keys(&:underscore)
-    rescue => error
-      (require 'pry-byebug';binding.pry;);
     end
 
     # Internal: Retrieves a configuration option from environment variables.

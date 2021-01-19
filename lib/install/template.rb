@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-# Install ViteRails
+# Install Vite Rails
+say 'Creating configuration files'
 copy_file "#{ __dir__ }/config/vite.json", ViteRails.config.config_path
+copy_file "#{ __dir__ }/config/vite.config.ts", Rails.root
 
-if Dir.exist?(ViteRails.config.source_code_dir)
-  say 'The JavaScript app source directory already exists. Move it and try again to see a basic setup.'
-else
-  say 'Creating JavaScript app source directory'
-  directory "#{ __dir__ }/javascript", ViteRails.config.source_code_dir
-end
+say 'Creating entrypoints directory'
+directory "#{ __dir__ }/javascript/entrypoints", ViteRails.config.source_code_dir.join(ViteRails.config.entrypoints_dir)
 
 apply "#{ __dir__ }/binstubs.rb"
 
