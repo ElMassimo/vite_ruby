@@ -27,11 +27,11 @@ module.exports = {
 
     nav: [
       { text: 'Guide', link: '/guide/' },
-      { text: 'Config Reference', link: '/config/' },
+      { text: 'Config', link: '/config/' },
+      { text: 'Vite', link: 'https://vitejs.dev/' },
       {
         text: 'Changelog',
-        link:
-          'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md',
+        link: 'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md',
       },
     ],
 
