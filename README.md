@@ -70,6 +70,7 @@ Restart your Rails server, and then run `bin/vite` to start the Vite development
 Add the following your `views/layouts/application.html.erb`:
 
 ```erb
+<%= vite_client_tag %>
 <%= vite_javascript_tag 'application' %>
 ```
 

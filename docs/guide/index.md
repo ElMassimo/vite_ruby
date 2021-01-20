@@ -64,6 +64,7 @@ Restart your Rails server, and ensure `bin/vite` is running the Vite development
 Add the following to your `views/layouts/application.html.erb`:
 
 ```erb
+<%= vite_client_tag %>
 <%= vite_javascript_tag 'application' %>
 ```
 
@@ -96,12 +97,14 @@ The following helpers can be used to output tags in your Rails layouts or templa
 - <kbd>vite_javascript_tag</kbd>: Render a `<script>` tag referencing a JavaScript file.
 - <kbd>vite_typescript_tag</kbd>: Render a `<script>` tag referencing a TypeScript file.
 - <kbd>vite_stylesheet_tag</kbd>: Render a `<link>` tag referencing a CSS file.
+- <kbd>vite_client_tag</kbd>: Renders the Vite client to enable Hot Module Reload.
 
 ```erb
 <head>
   <title>Example</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <%= vite_client_tag %>
 
   <%= vite_javascript_tag 'application' %>
   <%= vite_stylesheet_tag 'typography' %>

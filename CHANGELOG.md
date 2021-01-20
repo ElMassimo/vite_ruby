@@ -1,3 +1,7 @@
+## Vite Rails 1.0.7  (2020-01-20)
+
+- Add `vite_client_tag` to ensure the Vite client can be loaded in apps that don't use any imports.
+
 ## Vite Rails 1.0.6  (2020-01-20)
 
 - Ensure running `bin/rake assets:precompile` automatically invokes `vite:build`.

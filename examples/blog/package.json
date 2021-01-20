@@ -6,7 +6,6 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
-    "postcss": "8.2.4",
     "tailwindcss": "^2.0.2",
     "turbolinks": "^5.2.0",
     "vite": "^2.0.0-beta.34",
@@ -14,6 +13,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "postcss": "8.2.4"
   }
 }
