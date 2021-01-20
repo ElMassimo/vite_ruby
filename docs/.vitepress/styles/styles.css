@@ -9,3 +9,7 @@
   background-color: var(--bg-colored-light);
   border-color: #00c7cc;
 }
+
+.custom-block.custom-block.tip a {
+  color: #007d80;
+}
