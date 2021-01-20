@@ -12,7 +12,7 @@ available configuration options please check Vite's [config reference].
 
 ## Configuring Vite ⚡
 
-When running `bin/vite` from the command line, Vite will use your `vite.config.ts`.
+When running <kbd>bin/vite</kbd> from the command line, Vite will use your `vite.config.ts`.
 
 If you followed the [installation] section, it should look similar to:
 

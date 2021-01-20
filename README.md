@@ -70,7 +70,7 @@ Additional installation instructions are available in the [documentation website
 
 ## Getting Started 💻
 
-Restart your Rails server, and then run `bin/vite` to start the Vite development server.
+Restart your Rails server, and then run <kbd>bin/vite</kbd> to start the Vite development server.
 
 Add the following your `views/layouts/application.html.erb`:
 

@@ -42,14 +42,10 @@ module.exports = {
         {
           text: 'Guide',
           children: [
-            {
-              text: 'Introduction',
-              link: '/guide/introduction',
-            },
-            {
-              text: 'Getting Started',
-              link: '/guide/',
-            },
+            { text: 'Introduction', link: '/guide/introduction' },
+            { text: 'Getting Started', link: '/guide/' },
+            { text: 'Development', link: '/guide/development' },
+            { text: 'Deployment', link: '/guide/deployment' },
           ],
         },
       ],
