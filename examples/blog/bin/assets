@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Compiles the app assets in production mode.
+RAILS_ENV=production bin/rake assets:precompile
