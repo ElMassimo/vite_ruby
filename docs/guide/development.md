@@ -13,6 +13,8 @@
 [dev options]: /config/#development-options
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
+[sourceCodeDir]: /config/#sourcecodedir
+[autoBuild]: /config/#autobuild
 
 # Developing with Vite
 
@@ -24,6 +26,19 @@ Run <kbd>bin/vite</kbd> to start a Vite development server.
 
 It will read your [`config/vite.json`][json config] configuration, which can be
 used to configure the `host` and `port`, as well as [other options][dev options].
+
+## Auto-Build 🤖
+
+Even when not running the Vite development server, _Vite Rails_ can detect if
+any assets have changed in [`sourceCodeDir`][sourceCodeDir], and trigger a build
+automatically.
+
+This is very convenient when running integration tests, or when a developer
+does not want to start the Vite development server (at the expense of a slower feedback loop).
+
+::: tip Enabled locally
+By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test</kbd> and <kbd>development</kbd> environments.
+:::
 
 ## Entrypoints ⤵️
 
