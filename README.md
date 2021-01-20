@@ -28,7 +28,7 @@
 [vite]: http://vitejs.dev/
 [config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
 
-[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend.
+[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
