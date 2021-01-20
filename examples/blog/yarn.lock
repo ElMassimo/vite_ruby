@@ -7654,10 +7654,10 @@ vite-plugin-ruby@1.0.0:
   dependencies:
     fast-glob "^3.2.4"
 
-vite@^2.0.0-beta.30:
-  version "2.0.0-beta.33"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.33.tgz#8f420e1c679ccc7bcba78a796996ce2458f4a614"
-  integrity sha512-vg7rZbO19w1+nkV3fXsk0ggfI7J8DBDm74olVKgN7/SarrlisOZI/YWwP4XybGVNPnsSsOG9pKXhXl1mY6Oe5A==
+vite@^2.0.0-beta.34:
+  version "2.0.0-beta.34"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.34.tgz#8db57443789b1bb0eac624cc596f3aeb7fde9eea"
+  integrity sha512-D4/2WBf219mZBgDRiKfMwK/07UGiP+d56W2a2SEqf21iMOfM3yNBf3cfTY7qrHoi28EUo8l1LVwkSFPNbFlV2w==
   dependencies:
     esbuild "^0.8.26"
     postcss "^8.2.1"

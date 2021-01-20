@@ -1,24 +1,7 @@
-# README
+<h1 align="center">
+  Vite ⚡️ Rails
+</h1>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[vite_rails]: https://github.com/ElMassimo/vite_rails
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This app is an example using [vite_rails] to manage assets with Vite.

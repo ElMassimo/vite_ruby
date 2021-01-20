@@ -7,7 +7,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "turbolinks": "^5.2.0",
-    "vite": "^2.0.0-beta.30",
+    "vite": "^2.0.0-beta.34",
     "vite-plugin-ruby": "1.0.0"
   },
   "version": "0.1.0",
