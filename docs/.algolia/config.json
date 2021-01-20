@@ -15,6 +15,8 @@
   ],
   "stop_urls": [
     "https://vite-rails.netlify.app/config/index.html",
+    "https://vite-rails.netlify.app/guide/development.html",
+    "https://vite-rails.netlify.app/guide/deployment.html",
     "https://vite-rails.netlify.app/guide/index.html",
     "https://vite-rails.netlify.app/guide/introduction.html"
   ],
