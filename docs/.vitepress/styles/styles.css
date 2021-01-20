@@ -14,9 +14,12 @@
   color: #007d80;
 }
 
+.DocSearch.DocSearch {
+  --docsearch-primary-color: var(--c-brand);
+}
 
 @media (min-width: 720px) {
-  nav.nav-links.nav-links {
+  .nav-links.nav-links.nav-links {
     padding-top: 2px;
   }
 }
