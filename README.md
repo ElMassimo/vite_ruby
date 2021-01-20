@@ -33,7 +33,7 @@
 - 🤖 Automatic Entrypoint Detection
 - ⚡️ Hot Reload
 - ⚙️ Rake Tasks
-- 🪝 Hooks to <kbd>assets:precompile</kbd> and friends
+- 🤝 Integrated with <kbd>assets:precompile</kbd> and friends
 - And more! (detects changes, and builds automatically if Vite is not running)
 
 ## Documentation 📖

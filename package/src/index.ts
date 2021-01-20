@@ -1,5 +1,5 @@
-import type { Plugin } from 'vite'
 import { resolve, join } from 'path'
+import type { Plugin } from 'vite'
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { loadConfiguration, resolveEntrypoints } from './config'
 
@@ -12,10 +12,10 @@ export {
 
 // Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
 // a shared JSON configuration file that can be read from Ruby.
-export default function ViteRubyPlugin () : Plugin {
+export default function ViteRubyPlugin(): Plugin {
   return {
     name: 'vite-plugin-ruby',
-    config (config) {
+    config(config) {
       const {
         assetsDir,
         base,

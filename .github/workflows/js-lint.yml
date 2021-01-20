@@ -1,6 +1,6 @@
 name: JS lint
 
-on: [push, pull_request]
+on: []
 
 jobs:
   build:

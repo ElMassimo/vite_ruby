@@ -4,7 +4,7 @@ AllCops:
   Exclude:
     - "public/**/*"
     - "package/**/*"
-    - "examples/rails_app/**/*"
+    - "examples/**/*"
     - "vendor/bundle"
     - "tmp/**/*"
 

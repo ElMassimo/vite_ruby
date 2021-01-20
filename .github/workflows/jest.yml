@@ -1,6 +1,6 @@
 name: Jest specs
 
-on: [push, pull_request]
+on: []
 
 jobs:
   build:
