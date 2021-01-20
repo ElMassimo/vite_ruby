@@ -19,3 +19,26 @@ gemfiles/*.lock
 node_modules
 *.local
 .DS_Store
+
+# Vitepress
+dist
+examples_dist
+node_modules
+coverage
+.nyc_output
+.rpt2_cache
+.env
+local.log
+.DS_Store
+e2e/reports
+e2e/screenshots
+__build__
+playground_dist
+yarn-error.log
+temp
+markdown
+explorations
+selenium-server.log
+
+# Algolia
+.algolia.env
