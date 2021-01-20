@@ -31,8 +31,8 @@ export default defineConfig({
 })
 ```
 
-::: tip
-Because some Rails installations will require `vite-plugin-ruby` to be in `dependencies` instead of `devDependencies`, we need to whitelist it so that Vite doesn't attempt to move it.
+::: tip About optimizeDeps
+Some Rails installations will require `vite-plugin-ruby` to be in `dependencies` instead of `devDependencies`, so we need to whitelist it so that Vite doesn't attempt to move it.
 :::
 
 You can customize this file as needed, check Vite's [plugins] and [config reference] for more info.

@@ -43,7 +43,7 @@ will:
 - Create the `app/javascript/entrypoints` directory with an example
 - Add the `bin/vite` executable to start the dev server
 
-::: tip
+::: tip Manual Setup
 Check the configuration in this [example app](https://github.com/ElMassimo/vite_rails/tree/main/examples/blog) if you would prefer to do it manually.
 :::
 
