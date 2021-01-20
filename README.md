@@ -20,6 +20,7 @@
 </h1>
 
 [website]: https://vite-rails.netlify.app/
+[configuration reference]: https://vite-rails.netlify.app/config/
 [features]: https://vite-rails.netlify.app/guide/introduction.html
 [guides]: https://vite-rails.netlify.app/guide/
 [config]: https://vite-rails.netlify.app/config/
