@@ -18,6 +18,8 @@
     "default.vite.json"
   ],
   "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
     "dev": "npm run build -- --watch",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
@@ -35,10 +37,17 @@
     "@types/node": "^14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "eslint": "^7.17.0",
+    "jest": "^26.5.3",
     "rollup": "^2.36.1",
     "standard-version": "^9.1.0",
     "tsup": "^3.11.0",
     "typescript": "^4.1.3",
     "vite": "^2.0.0-beta.30"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/))\\.jsx?$",
+    "roots": [
+      "<rootDir>/package"
+    ]
   }
 }

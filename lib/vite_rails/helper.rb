@@ -19,12 +19,12 @@ module ViteRails::Helper
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_javascript_tag(*names,
-    type: 'module',
-    asset_type: :javascript,
-    skip_preload_tags: DEFAULT_VITE_SKIP_PRELOAD_TAGS,
-    skip_style_tags: false,
-    crossorigin: 'anonymous',
-    **options)
+                          type: 'module',
+                          asset_type: :javascript,
+                          skip_preload_tags: DEFAULT_VITE_SKIP_PRELOAD_TAGS,
+                          skip_style_tags: false,
+                          crossorigin: 'anonymous',
+                          **options)
     js_entries = names.map { |name| current_vite_instance.manifest.lookup!(name, type: asset_type) }
     js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, type: type, crossorigin: crossorigin, **options)
 
@@ -39,8 +39,6 @@ module ViteRails::Helper
     end
 
     safe_join [js_tags, preload_tags, style_tags]
-  rescue => error
-    (require 'pry-byebug';binding.pry;);
   end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.

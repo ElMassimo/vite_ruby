@@ -4,9 +4,6 @@ import Vue from '@vitejs/plugin-vue'
 import ViteRuby from 'vite-plugin-ruby'
 
 const config: UserConfig = {
-  alias: {
-    '~/': `${path.resolve(__dirname)}/`,
-  },
   plugins: [
     Vue(),
     ViteRuby(),

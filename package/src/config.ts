@@ -10,30 +10,28 @@ import { Config, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 const defaultConfig: Config = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
 
 // Internal: Returns the entrypoints defined in the Ruby application.
-export function resolveEntrypoints (entrypointsDir: string, projectRoot: string): Entrypoints {
+export function resolveEntrypoints(entrypointsDir: string, projectRoot: string): Entrypoints {
   const entrypoints: Entrypoints = {}
-  debugger
   glob.sync(`${entrypointsDir}/**/*`, { onlyFiles: true, cwd: projectRoot })
-    .forEach(filename => {
-      debugger
-      entrypoints[withoutExtension(basename(filename))] = filename//resolve(__dirname, filename)
+    .forEach((filename) => {
+      entrypoints[withoutExtension(basename(filename))] = filename// resolve(__dirname, filename)
     })
   return entrypoints
 }
 
 // Internal: Loads configuration options provided through env variables.
-function configFromEnv (): Config {
+function configFromEnv(): Config {
   const envConfig: Record<string, any> = {}
-  for (const optionName in defaultConfig) {
+  Object.keys(defaultConfig).forEach((optionName) => {
     const envValue = configOptionFromEnv(optionName)
     if (envValue !== undefined) envConfig[optionName] = envValue
-  }
+  })
   return envConfig
 }
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration (currentConfig: UserConfig): UnifiedConfig {
+export function loadConfiguration(currentConfig: UserConfig): UnifiedConfig {
   const envConfig = configFromEnv()
   const mode = envConfig.mode || currentConfig.mode || APP_ENV
   const filePath = envConfig.configPath || (defaultConfig.configPath as string)
