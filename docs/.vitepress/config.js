@@ -10,8 +10,8 @@ module.exports = {
     [
       'style',
       {},
-      'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }'
-    ]
+      'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }',
+    ],
   ],
   themeConfig: {
     repo: 'ElMassimo/vite_rails',
@@ -26,8 +26,8 @@ module.exports = {
       {
         text: 'Changelog',
         link:
-          'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md'
-      }
+          'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md',
+      },
     ],
 
     sidebar: {
@@ -39,15 +39,15 @@ module.exports = {
           children: [
             {
               text: 'Introduction',
-              link: '/guide/introduction'
+              link: '/guide/introduction',
             },
             {
               text: 'Getting Started',
-              link: '/guide/'
+              link: '/guide/',
             },
-          ]
+          ],
         },
-      ]
-    }
-  }
+      ],
+    },
+  },
 }
