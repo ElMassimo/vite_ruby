@@ -1,0 +1,182 @@
+[installation]: /guide/#installation-💿
+[config reference]: https://vitejs.dev/config/
+[plugins]: https://vitejs.dev/plugins/
+[entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
+
+# Configuring Vite Rails
+
+The following section is an overview of basic configuration for _Vite Rails_.
+
+Most of the options discussed are specific to _Vite Rails_, for the rest of the
+available configuration options please check Vite's [config reference].
+
+## Configuring Vite ⚡
+
+When running `bin/vite` from the command line, Vite will use your `vite.config.ts`.
+
+If you followed the [installation] section, it should look similar to:
+
+```js
+// vite.config.ts
+import { defineConfig } from 'vite'
+import RubyPlugin from 'vite-plugin-ruby'
+
+export default defineConfig({
+  plugins: [
+    RubyPlugin(),
+  ],
+  optimizeDeps: {
+    exclude: [/webpack/, /vite-plugin-ruby/],
+  },
+})
+```
+
+::: tip About optimizeDeps
+Some Rails installations will require `vite-plugin-ruby` to be in `dependencies` instead of `devDependencies`, so we need to whitelist it so that Vite doesn't attempt to move it.
+:::
+
+You can customize this file as needed, check Vite's [plugins] and [config reference] for more info.
+
+## Shared Configuration File 📄
+
+_Vite Rails_ leverages a simple `config/vite.json` configuration file, which is
+read both from Ruby and JavaScript, and allows you to easily configure options
+such as the host and port of the Vite development server.
+
+If you followed the [installation] section, it should look similar to:
+
+```json
+{
+  "all": {
+    "watchAdditionalPaths": []
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3036
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test"
+  }
+}
+```
+
+The `all` section is applied to all environments, including production. You can override specific options in an environment-specific group.
+
+The following options can all be specified in your `config/vite.json` file, or
+overriden with environment variables.
+
+## Development Options
+
+### autoBuild
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_AUTO_BUILD`
+
+  By default, the generated config enables it for the <kbd>test</kbd> and <kbd>development</kbd> environments.
+
+  When enabled, Vite Rails will automatically track changes to <kbd>sourceCodeDir</kbd>,
+  and trigger a Vite build on demand if files have changed.
+
+  This is very convenient when running integration tests, or when a developer
+  does not want to start the Vite development server (although it's highly recommended).
+
+### host
+
+- **Default:** `"localhost"`
+- **Env Var:** `VITE_RUBY_HOST`
+
+  Specify the hostname for the Vite development server.
+
+### port
+
+- **Default:** `3036`
+- **Env Var:** `VITE_RUBY_PORT`
+
+  Specify the port for the Vite development server.
+
+### https
+
+- **Type:** `boolean`
+- **Env Var:** `VITE_RUBY_HTTPS`
+
+  Enable TLS + HTTP/2 for the Vite development server.
+
+## Build Options
+
+The default configuration expects your code to be in `app/javascript`, and your
+entrypoint files to be in the `app/javascript/entrypoints` directory.
+
+The compiled assets will be outputed to the `public/vite/assets` directory.
+
+You can customize this behavior using the following options.
+
+### assetsDir
+
+- **Default:** `assets`
+- **Env Var:** `VITE_RUBY_ASSETS_DIR`
+
+  Specify the directory to nest generated assets under (relative to `publicOutDir`).
+
+### buildCacheDir
+
+- **Default:** `tmp/cache/vite`
+- **Env Var:** `VITE_RUBY_BUILD_CACHE_DIR`
+
+  Specify the directory where the `autoBuild` cache should be stored, used to
+  detect if a build is needed when the development server is not running.
+
+### publicOutputDir
+
+- **Default:** `vite`
+- **Env Var:** `VITE_RUBY_PUBLIC_OUTPUT_DIR`
+
+  Specify the output directory (relative to `publicDir`).
+
+### publicDir
+
+- **Default:** `public`
+- **Env Var:** `VITE_RUBY_PUBLIC_OUTPUT_DIR`
+
+  Specify the public directory (relative to the project root).
+
+  It's expected for this directory to be served by Apache/NGINX, or loaded into a CDN.
+
+  Check Rails `public_file_server.enabled` for more information.
+
+### entrypointsDir
+
+- **Default:** `entrypoints`
+- **Env Var:** `VITE_RUBY_ENTRYPOINTS_DIR`
+
+  Specify the directory where the [entrypoints] will be defined (relative to `sourceCodeDir`).
+
+### sourceCodeDir
+
+- **Default:** `app/javascript`
+- **Env Var:** `VITE_RUBY_SOURCE_CODE_DIR`
+
+  Specify the directory where your source code will be defined (relative to the project root).
+
+  Vite Rails will alias this directory as `~/` allowing you to make absolute imports, which are more convenient.
+
+  It be watched for changes when using `autoBuild`, you can add aditional paths
+  to keep track of using `watchAdditionalPaths`.
+
+## Other Options
+
+### hideBuildConsoleOutput
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT`
+
+  Allows to skip Vite build output from logs, to keep the noise down.
+
+### watchAdditionalPaths
+
+- **Default:** `[]`
+
+  Specify which other paths should be tracked for changes when using `autoBuild`.
+
+  The `sourceCodeDir` is included by default.

@@ -1,0 +1,99 @@
+{
+  "index_name": "vite_rails",
+  "start_urls": [
+    {
+      "url": "https://vite-rails.netlify.app/api/options.html",
+      "selectors_key": "options",
+      "tags": ["options"],
+      "page_rank": 1
+    },
+    {
+      "url": "https://vite-rails.netlify.app/api/",
+      "selectors_key": "api",
+      "tags": ["api"],
+      "page_rank": 2
+    },
+    {
+      "url": "https://vite-rails.netlify.app/",
+      "tags": ["guide"],
+      "page_rank": 3
+    }
+  ],
+  "stop_urls": [
+    "https://vite-rails.netlify.app/introduction.html",
+    "https://vite-rails.netlify.app/installation.html",
+    "https://vite-rails.netlify.app/guide/index.html",
+    "https://vite-rails.netlify.app/guide/essentials/actions.html",
+    "https://vite-rails.netlify.app/guide/essentials/finders.html",
+    "https://vite-rails.netlify.app/guide/essentials/querying.html",
+    "https://vite-rails.netlify.app/guide/essentials/assertions.html",
+    "https://vite-rails.netlify.app/guide/essentials/aliases.html",
+    "https://vite-rails.netlify.app/guide/essentials/current-context.html",
+    "https://vite-rails.netlify.app/guide/essentials/injection.html",
+    "https://vite-rails.netlify.app/guide/advanced/assertions.html",
+    "https://vite-rails.netlify.app/guide/advanced/composition.html",
+    "https://vite-rails.netlify.app/guide/advanced/debugging.html",
+    "https://vite-rails.netlify.app/guide/advanced/design-patterns.html",
+    "https://vite-rails.netlify.app/guide/advanced/filtering.html",
+    "https://vite-rails.netlify.app/guide/advanced/synchronization.html",
+    "https://vite-rails.netlify.app/guide/cucumber/index.html"
+  ],
+  "selectors": {
+    "default": {
+      "lvl0": {
+        "selector": "p.sidebar-heading.open",
+        "global": true,
+        "default_value": "Guide"
+      },
+      "lvl1": ".content h1",
+      "lvl2": ".content h2",
+      "lvl3": ".content h3",
+      "lvl4": ".content h4",
+      "lvl5": ".content h5",
+      "text": ".content p, .content li",
+      "lang": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "api": {
+      "lvl0": {
+        "selector": "p.sidebar-heading.open",
+        "global": true,
+        "default_value": "API"
+      },
+      "lvl1": ".content h2",
+      "lvl2": ".content h3",
+      "text": ".content p, .content li",
+      "lang": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "options": {
+      "lvl0": {
+        "selector": "p.sidebar-heading.open",
+        "global": true,
+        "default_value": "Selectors"
+      },
+      "lvl1": ".content h1",
+      "lvl2": ".content h2",
+      "lvl3": ".content ul li code",
+      "text": ".content p, .content li",
+      "lang": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    }
+  },
+  "scrape_start_urls": true,
+  "strip_chars": " .,;:#",
+  "custom_settings": {
+    "attributesForFaceting": [
+      "lang"
+    ]
+  }
+}
