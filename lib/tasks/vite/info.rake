@@ -14,7 +14,6 @@ namespace :vite do
       $stdout.puts "vite-plugin-ruby: \n#{ `npm list vite-plugin-ruby version` }"
 
       $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
-      $stdout.puts "Is bin/vite-dev-server present?: #{ File.exist? 'bin/vite-dev-server' }"
       $stdout.puts "Is bin/yarn present?: #{ File.exist? 'bin/yarn' }"
     end
   end

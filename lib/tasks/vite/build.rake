@@ -3,7 +3,7 @@
 $stdout.sync = true
 
 def enhance_assets_precompile
-  Rake::Task['assets:precompile'] do |task|
+  Rake::Task['assets:precompile'].enhance do |task|
     prefix = task.name.split(/#|assets:precompile/).first
 
     Rake::Task["#{ prefix }vite:build"].invoke

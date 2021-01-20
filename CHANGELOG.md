@@ -1,3 +1,7 @@
+## Vite Rails 1.0.6  (2020-01-20)
+
+- Ensure running `bin/rake assets:precompile` automatically invokes `vite:build`.
+
 ## Vite Rails 1.0.5  (2020-01-20)
 
 - Automatically add `<link rel="modulepreload">` and `<link rel="stylesheet">` when using `vite_javascript_tag`, which simplifies usage.
