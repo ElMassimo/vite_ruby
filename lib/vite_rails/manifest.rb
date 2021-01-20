@@ -5,7 +5,7 @@
 #
 # Example:
 #   lookup_entrypoint('calendar', type: :javascript)
-#   => "/vite/assets/calendar-1016838bab065ae1e314.js"
+#   => { "file" => "/vite/assets/calendar-1016838bab065ae1e314.js", "imports" => [] }
 #
 # NOTE: Using "autoBuild": true` in `config/vite.json` file will trigger a build
 # on demand as needed, before performing any lookup.
@@ -29,7 +29,8 @@ class ViteRails::Manifest
   # Returns a relative path, or nil if the asset is not found.
   #
   # Example:
-  #   ViteRails.manifest.lookup('calendar.js') # => "/vite/assets/calendar-1016838bab065ae1e122.js"
+  #   ViteRails.manifest.lookup('calendar.js')
+  #   # { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, type:)
     build if should_build?
 
@@ -43,12 +44,7 @@ class ViteRails::Manifest
 
 private
 
-  delegate :config, :builder, :dev_server, to: :@vite_rails
-
-  # Public: Returns true if the Vite development server is running.
-  def dev_server_running?
-    ViteRails.run_proxy? && dev_server.running?
-  end
+  delegate :config, :builder, :dev_server_running?, to: :@vite_rails
 
   # NOTE: Auto compilation is convenient when running tests, when the developer
   # won't focus on the frontend, or when running the Vite server is not desired.
@@ -59,9 +55,9 @@ private
   # Internal: Finds the specified entry in the manifest.
   def find_manifest_entry(name)
     if dev_server_running?
-      "/#{ config.public_output_dir.join(name.to_s) }"
-    elsif file = manifest.dig(name.to_s, 'file')
-      "/#{ config.public_output_dir.join(file) }"
+      { 'file' => "/#{ config.public_output_dir.join(name.to_s) }" }
+    else
+      manifest[name.to_s]
     end
   end
 
@@ -83,7 +79,10 @@ private
   # Internal: Returns a Hash with the entries in the manifest.json.
   def load_manifest
     if config.manifest_path.exist?
-      JSON.parse(config.manifest_path.read)
+      JSON.parse(config.manifest_path.read).each do |_, entry|
+        entry['file'] = within_public_output_dir(entry['file'])
+        entry['imports'] = entry['imports']&.map { |path| within_public_output_dir(path) }
+      end
     else
       {}
     end
@@ -94,6 +93,11 @@ private
     return name unless File.extname(name.to_s).empty?
 
     "#{ name }.#{ extension_for_type(entry_type) }"
+  end
+
+  # Internal: Scopes the paths in the manifest to the output folder in public.
+  def within_public_output_dir(path)
+    "/#{ config.public_output_dir.join(path) }"
   end
 
   # Internal: Allows to receive :javascript and :stylesheet as :type in helpers.

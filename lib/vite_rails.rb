@@ -22,7 +22,7 @@ class ViteRails
   cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
 
   class << self
-    delegate :config, :builder, :manifest, :commands, :dev_server, to: :instance
+    delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, to: :instance
     delegate :mode, to: :config
     delegate :bootstrap, :clean, :clobber, :build, to: :commands
 
@@ -60,6 +60,11 @@ class ViteRails
     ensure
       ViteRails.logger = old_logger
     end
+  end
+
+  # Public: Returns true if the Vite development server is running.
+  def dev_server_running?
+    ViteRails.run_proxy? && dev_server.running?
   end
 
   # Public: Current instance configuration for Vite.
