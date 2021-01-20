@@ -47,23 +47,6 @@ module.exports = {
             },
           ]
         },
-        {
-          text: 'APIs',
-          children: [
-            {
-              text: 'Plugin API',
-              link: '/guide/api-plugin'
-            },
-            {
-              text: 'HMR API',
-              link: '/guide/api-hmr'
-            },
-            {
-              text: 'JavaScript API',
-              link: '/guide/api-javascript'
-            }
-          ]
-        }
       ]
     }
   }

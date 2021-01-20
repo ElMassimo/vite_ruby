@@ -19,6 +19,10 @@
   </p>
 </h1>
 
+[website]: https://vite-rails.netlify.app/
+[features]: https://vite-rails.netlify.app/guide/introduction.html
+[guides]: https://vite-rails.netlify.app/guide/
+[config]: https://vite-rails.netlify.app/config/
 [vite_rails]: https://github.com/ElMassimo/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
@@ -30,15 +34,15 @@
 
 ## Features ⚡️
 
-- 🤖 Automatic Entrypoint Detection
-- ⚡️ Hot Reload
-- ⚙️ Rake Tasks
-- 🤝 Integrated with <kbd>assets:precompile</kbd> and friends
-- And more! (detects changes, and builds automatically if Vite is not running)
+- 🤖 Automatic entrypoint detection
+- ⚡️ Blazing fast hot reload
+- 🚀 Zero-config deployments
+- 🤝 Integrated with <kbd>assets:precompile</kbd>
+- [And more!][features]
 
 ## Documentation 📖
 
-A documentation website is coming soon!
+Visit the [documentation website][website] to check out the [guides] and searchable [configuration reference].
 
 ## Installation 💿
 
@@ -57,70 +61,21 @@ bin/rake vite:install
 
 This will generate configuration files and a sample setup.
 
-## Usage 🚀
+Additional installation instructions are available in the [documentation website][website].
 
-Drawing inspiration from [webpacker], any files in `app/javascript/entrypoints`
-will be considered entries to your application (SPAs or pages).
+## Getting Started 💻
 
-These files will be detected, and passed on to Vite, all configuration is done
-for you.
+Restart your Rails server, and then run `bin/vite` to start the Vite development server.
 
-### Imports ⤵️
+Add the following your `views/layouts/application.html.erb`:
 
-For convenience, a `~/` import alias is configured to `app/javascript`, allowing
-you to use absolute paths:
-
-```js
-import { createApp } from 'vue'
-import App from '~/App.vue'
-import '~/channels'
-
-createApp(App).mount('#app')
+```erb
+<%= vite_javascript_tag 'application' %>
 ```
 
-### Tags 🏷
+Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
 
-`vite_typescript_tag`, `vite_javascript_tag`, and `vite_stylesheet_tag` can be
-used to output `<script>` and `<link>` tags in your Rails layouts or templates.
-
-```html
-<head>
-  <title>Joie</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  <%= vite_stylesheet_tag 'strange' %>
-  <%= vite_typescript_tag 'application' %>
-</head>
-```
-
-For other types of assets, you can use `vite_asset_path` and pass that to the appropriate tag helper.
-
-## Configuration ⚙️
-
-This is what your `config/vite.json` might look like:
-
-```json
-{
-  "all": {
-    "watchAdditionalPaths": []
-  },
-  "development": {
-    "autoBuild": true,
-    "publicOutputDir": "vite-dev",
-    "port": 3036
-  },
-  "test": {
-    "autoBuild": true,
-    "publicOutputDir": "vite-test"
-  }
-}
-```
-
-Check [this file][config file] to see all config options, documentation is coming soon.
+For more [guides] and a full [configuration reference], check the [documentation website][website].
 
 ## Inspiration 💡
 
