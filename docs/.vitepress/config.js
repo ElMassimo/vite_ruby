@@ -14,6 +14,11 @@ module.exports = {
     ],
   ],
   themeConfig: {
+    algolia: {
+      appId: 'GERZE019PN',
+      apiKey: 'cdb4a3df8ecf73fadf6bde873fc1b0d2',
+      indexName: 'vite_rails',
+    },
     repo: 'ElMassimo/vite_rails',
     docsDir: 'docs',
     docsBranch: 'main',

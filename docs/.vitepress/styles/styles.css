@@ -13,3 +13,10 @@
 .custom-block.custom-block.tip a {
   color: #007d80;
 }
+
+
+@media (min-width: 720px) {
+  nav.nav-links.nav-links {
+    padding-top: 2px;
+  }
+}

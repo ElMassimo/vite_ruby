@@ -1,3 +1,4 @@
+[discussions]: https://github.com/ElMassimo/vite_rails/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_rails
@@ -141,3 +142,6 @@ When rendering styles and preload manually, it's important to avoid rendering wh
 <br>
 
 If you are looking for configuration options, check out the [configuration reference].
+
+Would you like to learn more about it? Visit the [discussions] for the library,
+so that I can get some feedback about the library and which guides to add next.

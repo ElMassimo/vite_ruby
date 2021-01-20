@@ -2,41 +2,21 @@
   "index_name": "vite_rails",
   "start_urls": [
     {
-      "url": "https://vite-rails.netlify.app/api/options.html",
-      "selectors_key": "options",
-      "tags": ["options"],
-      "page_rank": 1
-    },
-    {
-      "url": "https://vite-rails.netlify.app/api/",
-      "selectors_key": "api",
-      "tags": ["api"],
-      "page_rank": 2
-    },
-    {
-      "url": "https://vite-rails.netlify.app/",
-      "tags": ["guide"],
+      "url": "https://vite-rails.netlify.app/config/",
+      "selectors_key": "config",
+      "tags": ["config"],
       "page_rank": 3
+    },
+    {
+      "url": "https://vite-rails.netlify.app/guide/",
+      "tags": ["guide"],
+      "page_rank": 1
     }
   ],
   "stop_urls": [
-    "https://vite-rails.netlify.app/introduction.html",
-    "https://vite-rails.netlify.app/installation.html",
+    "https://vite-rails.netlify.app/config/index.html",
     "https://vite-rails.netlify.app/guide/index.html",
-    "https://vite-rails.netlify.app/guide/essentials/actions.html",
-    "https://vite-rails.netlify.app/guide/essentials/finders.html",
-    "https://vite-rails.netlify.app/guide/essentials/querying.html",
-    "https://vite-rails.netlify.app/guide/essentials/assertions.html",
-    "https://vite-rails.netlify.app/guide/essentials/aliases.html",
-    "https://vite-rails.netlify.app/guide/essentials/current-context.html",
-    "https://vite-rails.netlify.app/guide/essentials/injection.html",
-    "https://vite-rails.netlify.app/guide/advanced/assertions.html",
-    "https://vite-rails.netlify.app/guide/advanced/composition.html",
-    "https://vite-rails.netlify.app/guide/advanced/debugging.html",
-    "https://vite-rails.netlify.app/guide/advanced/design-patterns.html",
-    "https://vite-rails.netlify.app/guide/advanced/filtering.html",
-    "https://vite-rails.netlify.app/guide/advanced/synchronization.html",
-    "https://vite-rails.netlify.app/guide/cucumber/index.html"
+    "https://vite-rails.netlify.app/guide/introduction.html"
   ],
   "selectors": {
     "default": {
@@ -57,30 +37,14 @@
         "global": true
       }
     },
-    "api": {
+    "config": {
       "lvl0": {
         "selector": "p.sidebar-heading.open",
         "global": true,
-        "default_value": "API"
+        "default_value": "Configuration Options"
       },
       "lvl1": ".content h2",
       "lvl2": ".content h3",
-      "text": ".content p, .content li",
-      "lang": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "options": {
-      "lvl0": {
-        "selector": "p.sidebar-heading.open",
-        "global": true,
-        "default_value": "Selectors"
-      },
-      "lvl1": ".content h1",
-      "lvl2": ".content h2",
-      "lvl3": ".content ul li code",
       "text": ".content p, .content li",
       "lang": {
         "selector": "/html/@lang",
