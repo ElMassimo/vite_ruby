@@ -4,10 +4,13 @@
 [vite]: https://vitejs.dev/
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
+[configuration reference]: /config/
 
 # Getting Started
 
-If you are interested to learn more about Vite Rails before trying it, check out the [Introduction](./introduction) section.
+If you are interested to learn more about Vite Rails before trying it, check out the [Introduction](./introduction).
+
+If you are looking for configuration options, check out the [configuration reference].
 
 ::: tip Compatibility Note
 [Vite] requires [Node.js](https://nodejs.org/en/) version >= 12.0.0.
@@ -126,3 +129,8 @@ When rendering styles and preload manually, it's important to avoid rendering wh
 <%= vite_typescript_tag 'application', skip_style_tags: true %>
 <%= vite_stylesheet_tag 'application' unless ViteRails.dev_server_running? %>
 ```
+<br>
+<hr>
+<br>
+
+If you are looking for configuration options, check out the [configuration reference].
