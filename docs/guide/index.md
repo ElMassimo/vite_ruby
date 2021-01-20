@@ -5,6 +5,8 @@
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
+[example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[heroku]: https://vite-rails-demo.herokuapp.com/
 
 # Getting Started
 
@@ -69,6 +71,8 @@ Add the following to your `views/layouts/application.html.erb`:
 ```
 
 Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
+
+Check an [example app] running on [Heroku].
 
 ## Import Aliases 👉
 

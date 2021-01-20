@@ -28,10 +28,14 @@
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
 [config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
+[example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[heroku]: https://vite-rails-demo.herokuapp.com/
 
 [__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
+
+Check an [example app] running on [Heroku].
 
 ## Features ⚡️
 
