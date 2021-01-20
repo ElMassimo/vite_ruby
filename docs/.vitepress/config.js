@@ -26,7 +26,7 @@ module.exports = {
       {
         text: 'Changelog',
         link:
-          'https://github.com/ElMassimo/vite_rails/blob/main/;CHANGELOG.md'
+          'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md'
       }
     ],
 
@@ -45,34 +45,6 @@ module.exports = {
               text: 'Getting Started',
               link: '/guide/'
             },
-            {
-              text: 'Features',
-              link: '/guide/features'
-            },
-            {
-              text: 'Dependency Pre-Bundling',
-              link: '/guide/dep-pre-bundling'
-            },
-            {
-              text: 'Building for Production',
-              link: '/guide/build'
-            },
-            {
-              text: 'Env Variables and Modes',
-              link: '/guide/env-and-mode'
-            },
-            {
-              text: 'Backend Integration',
-              link: '/guide/backend-integration'
-            },
-            {
-              text: 'Comparisons',
-              link: '/guide/comparisons'
-            },
-            {
-              text: 'Migration from v1',
-              link: '/guide/migration'
-            }
           ]
         },
         {

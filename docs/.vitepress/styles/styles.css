@@ -2,10 +2,10 @@
   --c-brand: #cc0000;
   --c-brand-light: #d53f3f;
 
-  --bg-colored-light: #f7f3f3;
+  --bg-colored-light: #f3f7f7;
 }
 
 .custom-block.custom-block.tip {
   background-color: var(--bg-colored-light);
-  border-color: var(--c-brand);
+  border-color: #00c7cc;
 }
