@@ -83,9 +83,10 @@ Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
 
 For more [guides] and a full [configuration reference], check the [documentation website][website].
 
-## Inspiration 💡
+## Special Thanks 🙏
 
 - [webpacker]
+- [vite]
 
 ## License
 
