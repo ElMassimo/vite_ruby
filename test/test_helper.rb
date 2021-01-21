@@ -3,32 +3,29 @@
 require 'minitest/autorun'
 require 'rails'
 require 'rails/test_help'
-require 'byebug'
+require 'pry-byebug'
 
 require_relative 'test_app/config/environment'
 
 Rails.env = 'production'
 
-ViteRails.instance = ::ViteRails.new
+ViteRails.instance = ViteRails.new
 
 class ViteRails::Test < Minitest::Test
 private
 
-  def reloaded_config
-    ViteRails.instance.instance_variable_set(:@config, nil)
-    ViteRails.instance.instance_variable_set(:@dev_server, nil)
-    ViteRails.env = {}
-    ViteRails.config
-    ViteRails.dev_server
+  def refresh_config(env_variables = ViteRails.load_env_variables)
+    ViteRails.env = env_variables
+    (ViteRails.instance = ViteRails.new).config
   end
 
   def with_rails_env(env)
     original = Rails.env
     Rails.env = ActiveSupport::StringInquirer.new(env)
-    reloaded_config
+    refresh_config
     yield
   ensure
     Rails.env = ActiveSupport::StringInquirer.new(original)
-    reloaded_config
+    refresh_config
   end
 end

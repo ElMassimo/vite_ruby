@@ -5,10 +5,11 @@
 class ViteRails::Config
   delegate :as_json, :inspect, to: :@config
 
-  def initialize(config)
-    @config = config.tap { coerce_values(config) }.freeze
+  def initialize(attrs)
+    @config = attrs.clone.tap { |config| coerce_values(config) }.freeze
 
-    config.each_key do |option|
+    # Define getters for the configuration options.
+    @config.each_key do |option|
       define_singleton_method(option) { @config[option] }
     end
   end
@@ -36,10 +37,15 @@ private
   # Internal: Coerces all the configuration values, in case they were passed
   # as environment variables which are always strings.
   def coerce_values(config)
+    config['root'] ||= Rails.root
+    config['port'] = config['port'].to_i
     coerce_booleans(config, 'auto_build', 'https')
     coerce_paths(config, 'assets_dir', 'build_cache_dir', 'config_path', 'public_dir', 'source_code_dir', 'public_output_dir', 'root')
-    config['port'] = config['port'].to_i
-    config['root'] ||= Rails.root
+
+    # Prefix paths that are relative to the project root.
+    ['build_cache_dir', 'public_dir', 'source_code_dir'].each do |option|
+      config[option] = root.join(config[option])
+    end
   end
 
   # Internal: Coerces configuration options to boolean.

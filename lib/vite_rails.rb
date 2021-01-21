@@ -13,14 +13,6 @@ class ViteRails
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
 
-  # Public: Additional environment variables to pass to Vite.
-  #
-  # Example:
-  #   ViteRails.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
-  cattr_accessor(:env) { ENV.select { |key, _| key.start_with?(ENV_PREFIX) } }
-
-  cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
-
   class << self
     delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, to: :instance
     delegate :mode, to: :config
@@ -53,6 +45,11 @@ class ViteRails
       ENV['NODE_ENV'] = original
     end
 
+    # Internal: Allows to obtain any env variables for configuration options.
+    def load_env_variables
+      ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
+    end
+
     def ensure_log_goes_to_stdout
       old_logger = ViteRails.logger
       ViteRails.logger = ActiveSupport::Logger.new(STDOUT)
@@ -61,6 +58,14 @@ class ViteRails
       ViteRails.logger = old_logger
     end
   end
+
+  # Public: Additional environment variables to pass to Vite.
+  #
+  # Example:
+  #   ViteRails.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
+  cattr_accessor(:env) { load_env_variables }
+
+  cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
 
   # Public: Returns true if the Vite development server is running.
   def dev_server_running?
