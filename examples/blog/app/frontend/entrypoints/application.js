@@ -10,7 +10,7 @@ import.meta.globEager('../channels/**/*_channel.js')
 Turbolinks.start()
 ActiveStorage.start()
 
-// Example: Import a stylesheet in app/javascript/styles
+// Example: Import a stylesheet in app/frontend/styles
 import '~/styles/tailwind.css'
 import '~/styles/index.css'
 

@@ -43,11 +43,11 @@ By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test<
 
 ## Entrypoints ⤵️
 
-Drawing inspiration from [webpacker], any files in [`app/javascript/entrypoints`][build]
+Drawing inspiration from [webpacker], any files in [`app/frontend/entrypoints`][build]
 will be considered [entries][entrypoints] to your application (SPAs or pages).
 
 ```
-app/javascript:
+app/frontend:
   ├── entrypoints:
   │   # only Vite entry files here
   │   └── application.js
@@ -136,7 +136,7 @@ When rendering styles and preload manually, it's important to avoid rendering wh
 
 ## Import Aliases 👉
 
-For convenience, a `~/` import alias is configured to `app/javascript`, allowing
+For convenience, a `~/` import alias is configured to `app/frontend`, allowing
 you to use absolute paths:
 
 ```js

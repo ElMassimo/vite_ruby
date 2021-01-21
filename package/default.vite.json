@@ -6,7 +6,7 @@
   "configPath": "config/vite.json",
   "publicDir": "public",
   "entrypointsDir": "entrypoints",
-  "sourceCodeDir": "app/javascript",
+  "sourceCodeDir": "app/frontend",
   "host": "localhost",
   "https": null,
   "port": 3036,

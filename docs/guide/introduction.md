@@ -27,7 +27,7 @@ By following existing Rails conventions, and adding [a few of its own][plugin], 
 
 #### 🤖 Automatic entrypoint detection
 
-  Simply place your code under [`app/javascript/entrypoints`][entrypoints], and the [entrypoints]
+  Simply place your code under [`app/frontend/entrypoints`][entrypoints], and the [entrypoints]
   will be configured automatically.
 
 #### ⚡️ Lightning-fast hot reload

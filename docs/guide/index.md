@@ -46,7 +46,7 @@ will:
 
 - Add [`vite.config.ts`][vite config] and [`config/vite.json`][json config] configuration files
 - Install <kbd>vite</kbd> and <kbd>vite-plugin-ruby</kbd> (which is used to configure Vite)
-- Create the `app/javascript/entrypoints` directory with an example
+- Create the `app/frontend/entrypoints` directory with an example
 - Add the <kbd>bin/vite</kbd> executable to start the dev server
 
 ::: tip Manual Setup

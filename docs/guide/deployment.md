@@ -65,12 +65,3 @@ The following rake tasks are available:
 All these tasks are aware of the environment. When running them locally in
 development you can provide `RAILS_ENV=production` to simulate a production build.
 :::
-
-<br>
-<hr>
-<br>
-
-If you are looking for configuration options, check out the [configuration reference].
-
-Would you like to learn more about it? Visit the [discussions] for the library,
-so that I can get some feedback about the library and which guides to add next.

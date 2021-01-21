@@ -110,8 +110,8 @@ overriden with environment variables.
 
 ## Build Options
 
-The default configuration expects your code to be in `app/javascript`, and your
-entrypoint files to be in the `app/javascript/entrypoints` directory.
+The default configuration expects your code to be in `app/frontend`, and your
+entrypoint files to be in the `app/frontend/entrypoints` directory.
 
 The compiled assets will be outputed to the `public/vite/assets` directory.
 
@@ -159,7 +159,7 @@ You can customize this behavior using the following options.
 
 ### sourceCodeDir
 
-- **Default:** `app/javascript`
+- **Default:** `app/frontend`
 - **Env Var:** `VITE_RUBY_SOURCE_CODE_DIR`
 
   Specify the directory where your source code will be defined (relative to the project root).

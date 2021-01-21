@@ -1,3 +1,8 @@
+## Vite Rails 1.0.8  (2020-01-20)
+
+- Change the default of `sourceCodeDir` to `app/frontend`, add instructions for folks migrating
+from a `app/javascript` structure.
+
 ## Vite Rails 1.0.7  (2020-01-20)
 
 - Add `vite_client_tag` to ensure the Vite client can be loaded in apps that don't use any imports.
