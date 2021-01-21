@@ -1,18 +1,20 @@
 // @ts-check
 
+const head = [
+  ['style', {}, 'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }'],
+]
+
+if (process.env.NODE_ENV === 'production') {
+  head.push(['script', { src: 'https://unpkg.com/thesemetrics@latest', async: '' }])
+}
+
 /**
  * @type {import('vitepress').UserConfig}
  */
 module.exports = {
   title: 'Vite ⚡ Rails',
   description: 'Bringing joy to your frontend experience',
-  head: [
-    [
-      'style',
-      {},
-      'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }',
-    ],
-  ],
+  head,
   themeConfig: {
     algolia: {
       appId: 'GERZE019PN',
