@@ -15,6 +15,7 @@
 [vite config]: /config/#configuring-vite-%E2%9A%A1
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
+[entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
 
 # Developing with Vite
 
@@ -31,7 +32,7 @@ used to configure the `host` and `port`, as well as [other options][dev options]
 
 Even when not running the Vite development server, _Vite Rails_ can detect if
 any assets have changed in [`sourceCodeDir`][sourceCodeDir], and trigger a build
-automatically.
+automatically when the asset is requested.
 
 This is very convenient when running integration tests, or when a developer
 does not want to start the Vite development server (at the expense of a slower feedback loop).
@@ -43,7 +44,7 @@ By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test<
 ## Entrypoints ⤵️
 
 Drawing inspiration from [webpacker], any files in [`app/javascript/entrypoints`][build]
-will be considered entries to your application (SPAs or pages).
+will be considered [entries][entrypoints] to your application (SPAs or pages).
 
 ```
 app/javascript:
@@ -62,7 +63,7 @@ app/javascript:
       └── logo.svg
 ```
 
-These files will be automatically detected and passed on to Vite, all configuration is done
+These files will be automatically detected and passed on to Vite, all [configuration][entrypoints] is done
 for you.
 
 You can add them to your HTML layouts or views using the provided [tag helpers].

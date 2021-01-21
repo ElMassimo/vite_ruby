@@ -3,7 +3,11 @@
 [vite]: https://vitejs.dev/
 [webpacker]: https://github.com/rails/webpacker
 [webpack]: https://github.com/webpack/webpack
-[entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
+[entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
+[deployment]: /guide/deployment
+[rake tasks]: /guide/deployment.html#rake-tasks-⚙%EF%B8%8F
+[recompile assets]: /guide/development.html#auto-build-🤖
+[tag helpers]: /guide/development.html#tag-helpers-🏷
 
 # Introduction
 
@@ -23,7 +27,7 @@ By following existing Rails conventions, and adding [a few of its own][plugin], 
 
 #### 🤖 Automatic entrypoint detection
 
-  Simply place your code under `app/javascript/entrypoints`, and the [entrypoints]
+  Simply place your code under [`app/javascript/entrypoints`][entrypoints], and the [entrypoints]
   will be configured automatically.
 
 #### ⚡️ Lightning-fast hot reload
@@ -32,15 +36,15 @@ By following existing Rails conventions, and adding [a few of its own][plugin], 
 
 #### 🚀 Integrated with <kbd>assets:precompile</kbd>
 
-  Rake tasks for building and cleaning Vite assets are automatically integrated
-  with `assets:precompile` and `assets:clean`, so deploying is straightforward.
+  [Rake tasks] for building and cleaning Vite assets are [automatically integrated][deployment]
+  with <kbd>assets:precompile</kbd> and <kbd>assets:clean</kbd>, so deploying is straightforward.
 
 #### 🏗 Auto-build when not running Vite
 
   When the development server is not running, it will automatically detect
-  changes and recompile assets for you. Makes it seamless to run integration tests.
+  changes and [recompile assets] for you. Makes it seamless to run integration tests.
 
 #### 🏷 Smart tag helpers
 
-  Tag helpers for <kbd>script</kbd> and <kbd>link</kbd> tags are provided, and
+  [Tag helpers] for <kbd>script</kbd> and <kbd>link</kbd> tags are provided, and
   will automatically output `preload` tags in production to optimize load time.
