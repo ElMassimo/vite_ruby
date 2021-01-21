@@ -5,11 +5,13 @@ require 'test_helper'
 class BuilderTest < ViteRails::Test
   def setup
     refresh_config
-    ViteRails.clobber
+    ViteRails.builder.send(:files_digest_path).tap do |path|
+      path.delete if path.exist?
+    end
   end
 
   def teardown
-    ViteRails.clobber
+    setup
   end
 
   def vite_env
@@ -41,11 +43,10 @@ class BuilderTest < ViteRails::Test
   end
 
   def test_freshness_on_build_fail
-    status = OpenStruct.new(success?: false)
-
     assert ViteRails.builder.stale?
+    status = OpenStruct.new(success?: false)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      ViteRails.builder.build
+      assert !ViteRails.builder.build
       assert ViteRails.builder.fresh?
     end
   end
@@ -55,14 +56,16 @@ class BuilderTest < ViteRails::Test
   end
 
   def test_external_env_variables
-    ViteRails.env = {}
-    assert_equal vite_env['VITE_RUBY_MODE'], 'production'
-    assert_equal vite_env['VITE_RUBY_ROOT'], Rails.root.to_s
+    assert_equal 'production', vite_env['VITE_RUBY_MODE']
+    assert_equal Rails.root.to_s, vite_env['VITE_RUBY_ROOT']
 
     ENV['VITE_RUBY_MODE'] = 'foo.bar'
     ENV['VITE_RUBY_ROOT'] = '/baz'
-
-    assert_equal vite_env['VITE_RUBY_MODE'], 'foo.bar'
-    assert_equal vite_env['VITE_RUBY_ROOT'], '/baz'
+    refresh_config
+    assert_equal 'foo.bar', vite_env['VITE_RUBY_MODE']
+    assert_equal '/baz', vite_env['VITE_RUBY_ROOT']
+  ensure
+    ENV.delete('VITE_RUBY_MODE')
+    ENV.delete('VITE_RUBY_ROOT')
   end
 end

@@ -44,7 +44,7 @@ private
 
     # Prefix paths that are relative to the project root.
     ['build_cache_dir', 'public_dir', 'source_code_dir'].each do |option|
-      config[option] = root.join(config[option])
+      config[option] = config['root'].join(config[option])
     end
   end
 

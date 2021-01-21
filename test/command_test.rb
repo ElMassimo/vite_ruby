@@ -3,33 +3,35 @@
 require 'test_helper'
 
 class CommandTest < Minitest::Test
-  def test_compile_command_returns_success_status_when_stale
-    ViteRails.builder.stub :stale?, true do
-      ViteRails.builder.stub :run_vite, true do
-        assert_equal true, ViteRails.commands.compile
+  def stub_builder(stale:, build_with_vite:)
+    ViteRails.builder.stub :stale?, stale do
+      ViteRails.builder.stub :build_with_vite, build_with_vite do
+        yield
       end
     end
+  end
+
+  def test_compile_command_returns_success_status_when_stale
+    stub_builder(stale: true, build_with_vite: true) {
+      assert_equal true, ViteRails.build
+    }
   end
 
   def test_compile_command_returns_success_status_when_fresh
-    ViteRails.builder.stub :stale?, false do
-      ViteRails.builder.stub :run_vite, true do
-        assert_equal true, ViteRails.commands.compile
-      end
-    end
+    stub_builder(stale: false, build_with_vite: true) {
+      assert_equal true, ViteRails.build
+    }
   end
 
   def test_compile_command_returns_failure_status_when_stale
-    ViteRails.builder.stub :stale?, true do
-      ViteRails.builder.stub :run_vite, false do
-        assert_equal false, ViteRails.commands.compile
-      end
-    end
+    stub_builder(stale: true, build_with_vite: false) {
+      assert_equal false, ViteRails.build
+    }
   end
 
   def test_clean_command_works_with_nested_hashes_and_without_any_compiled_files
-    File.stub :delete, true do
-      assert ViteRails.commands.clean
-    end
+    File.stub(:delete, true) {
+      assert ViteRails.clean
+    }
   end
 end

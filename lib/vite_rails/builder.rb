@@ -37,7 +37,6 @@ private
   # Internal: Writes a digest of the watched files to disk for future checks.
   def record_files_digest
     config.build_cache_dir.mkpath
-    (require 'pry-byebug';binding.pry;);
     files_digest_path.write(watched_files_digest)
   end
 
@@ -78,7 +77,6 @@ private
     else
       non_empty_streams = [stdout, stderr].delete_if(&:empty?)
       logger.error "Build with Vite failed:\n#{ non_empty_streams.join("\n\n") }"
-      binding.pry
     end
 
     status.success?
