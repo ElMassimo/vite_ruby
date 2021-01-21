@@ -1,10 +1,16 @@
 ---
 home: true
+
+heroText: Vite Rails
+
 actionText: Get Started
 actionLink: /guide/
 
 altActionText: Learn More
 altActionLink: /guide/introduction
+
+heroImage: /logo.svg
+heroAlt: Vite Rails Logo by Maximo Mussini
 
 features:
   - title: 💡 Instant Server Start
