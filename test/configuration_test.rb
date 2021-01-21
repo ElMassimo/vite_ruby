@@ -3,50 +3,53 @@
 require 'test_helper'
 
 class ConfigurationTest < ViteRails::Test
+  def expanded_path(path)
+    File.expand_path(Pathname.new(__dir__).join(path).to_s)
+  end
+
   def setup
-    @config = ViteRails::Configuration.new(
-      root_path: Pathname.new(File.expand_path('test_app', __dir__)),
-      config_path: Pathname.new(File.expand_path('./test_app/config/vite.yml', __dir__)),
-      env: 'production',
+    @config = ViteRails::Config.resolve_config(
+      mode: 'production',
+      root: expanded_path('test_app'),
+      config_path: 'test_app/config/vite.json',
     )
   end
 
-  def test_source_path
-    source_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/app/javascript').to_s
-    assert_equal source_path, @config.source_path.to_s
+  def test_source_dir
+    assert_equal expanded_path('test_app/app/frontend'), @config.source_code_dir.to_s
   end
 
   def test_source_entry_path
-    source_entry_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/app/javascript', 'packs').to_s
+    source_entry_path = expanded_path('test_app/app/javascript', 'packs')
     assert_equal @config.source_entry_path.to_s, source_entry_path
   end
 
   def test_public_root_path
-    public_root_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/public').to_s
+    public_root_path = expanded_path('test_app/public')
     assert_equal @config.public_path.to_s, public_root_path
   end
 
   def test_public_output_path
-    public_output_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/public/packs').to_s
+    public_output_path = expanded_path('test_app/public/packs')
     assert_equal @config.public_output_path.to_s, public_output_path
 
     @config = ViteRails::Configuration.new(
       root_path: @config.root_path,
-      config_path: Pathname.new(File.expand_path('./test_app/config/vite_public_root.yml', __dir__)),
+      config_path: Pathname.new(File.expand_expanded_path('./test_app/config/vite_public_root.yml', __dir__)),
       env: 'production',
     )
 
-    public_output_path = File.expand_path File.join(File.dirname(__FILE__), 'public/packs').to_s
+    public_output_path = expanded_path('public/packs')
     assert_equal @config.public_output_path.to_s, public_output_path
   end
 
   def test_public_manifest_path
-    public_manifest_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/public/packs', 'manifest.json').to_s
+    public_manifest_path = expanded_path('test_app/public/packs', 'manifest.json')
     assert_equal @config.public_manifest_path.to_s, public_manifest_path
   end
 
   def test_cache_path
-    cache_path = File.expand_path File.join(File.dirname(__FILE__), 'test_app/tmp/cache/vite').to_s
+    cache_path = expanded_path('test_app/tmp/cache/vite')
     assert_equal @config.cache_path.to_s, cache_path
   end
 

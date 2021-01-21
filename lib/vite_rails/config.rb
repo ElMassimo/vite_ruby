@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+
+
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
 class ViteRails::Config
   delegate :as_json, :inspect, to: :@config
 
   def initialize(attrs)
-    @config = attrs.clone.tap { |config| coerce_values(config) }.freeze
+    @config = attrs.transform_keys(&:to_s).tap { |config| coerce_values(config) }.freeze
 
     # Define getters for the configuration options.
     @config.each_key do |option|
@@ -43,8 +45,8 @@ private
     coerce_paths(config, 'assets_dir', 'build_cache_dir', 'config_path', 'public_dir', 'source_code_dir', 'public_output_dir', 'root')
 
     # Prefix paths that are relative to the project root.
-    ['build_cache_dir', 'public_dir', 'source_code_dir'].each do |option|
-      config[option] = config['root'].join(config[option])
+    config.slice('build_cache_dir', 'public_dir', 'source_code_dir').each do |option, dir|
+      config[option] = config['root'].join(dir) if dir
     end
   end
 
@@ -60,8 +62,8 @@ private
 
   class << self
     # Public: Returns the project configuration for Vite.
-    def resolve_config
-      new DEFAULT_CONFIG.merge(config_from_file).merge(config_from_env)
+    def resolve_config(attrs = {})
+      new DEFAULT_CONFIG.merge(config_from_file).merge(config_from_env).merge(attrs)
     rescue Errno::ENOENT => error
       warn "Check that your vite.json configuration file is available in the load path. #{ error.message }"
       new DEFAULT_CONFIG.merge(config_from_env)
