@@ -1,7 +1,12 @@
 [installation]: /guide/#installation-💿
 [config reference]: https://vitejs.dev/config/
 [plugins]: https://vitejs.dev/plugins/
-[entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
+[entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
+[sourceCodeDir]: /config/#sourcecodedir
+[autoBuild]: /config/#autobuild
+[publicOutputDir]: /config/#publicoutputdir
+[watchAdditionalPaths]: /config/#watchadditionalpaths
+[publicDir]: /config/#publicdir
 
 # Configuring Vite Rails
 
@@ -76,7 +81,7 @@ overriden with environment variables.
 
   By default, the generated config enables it for the <kbd>test</kbd> and <kbd>development</kbd> environments.
 
-  When enabled, Vite Rails will automatically track changes to <kbd>sourceCodeDir</kbd>,
+  When enabled, Vite Rails will automatically track changes to <kbd>[sourceCodeDir]</kbd>,
   and trigger a Vite build on demand if files have changed.
 
   This is very convenient when running integration tests, or when a developer
@@ -117,14 +122,14 @@ You can customize this behavior using the following options.
 - **Default:** `assets`
 - **Env Var:** `VITE_RUBY_ASSETS_DIR`
 
-  Specify the directory to nest generated assets under (relative to `publicOutDir`).
+  Specify the directory to nest generated assets under (relative to <kbd>[publicOutputDir]</kbd>).
 
 ### buildCacheDir
 
 - **Default:** `tmp/cache/vite`
 - **Env Var:** `VITE_RUBY_BUILD_CACHE_DIR`
 
-  Specify the directory where the `autoBuild` cache should be stored, used to
+  Specify the directory where the <kbd>[autoBuild]</kbd> cache should be stored, used to
   detect if a build is needed when the development server is not running.
 
 ### publicOutputDir
@@ -132,7 +137,7 @@ You can customize this behavior using the following options.
 - **Default:** `vite`
 - **Env Var:** `VITE_RUBY_PUBLIC_OUTPUT_DIR`
 
-  Specify the output directory (relative to `publicDir`).
+  Specify the output directory (relative to <kbd>[publicDir]</kbd>).
 
 ### publicDir
 
@@ -150,7 +155,7 @@ You can customize this behavior using the following options.
 - **Default:** `entrypoints`
 - **Env Var:** `VITE_RUBY_ENTRYPOINTS_DIR`
 
-  Specify the directory where the [entrypoints] will be defined (relative to `sourceCodeDir`).
+  Specify the directory where the [entrypoints] will be defined (relative to <kbd>[sourceCodeDir]</kbd>).
 
 ### sourceCodeDir
 
@@ -161,8 +166,8 @@ You can customize this behavior using the following options.
 
   Vite Rails will alias this directory as `~/` allowing you to make absolute imports, which are more convenient.
 
-  It be watched for changes when using `autoBuild`, you can add aditional paths
-  to keep track of using `watchAdditionalPaths`.
+  It be watched for changes when using <kbd>[autoBuild]</kbd>, you can add aditional paths
+  to keep track of using <kbd>[watchAdditionalPaths]</kbd>.
 
 ## Other Options
 
@@ -177,6 +182,26 @@ You can customize this behavior using the following options.
 
 - **Default:** `[]`
 
-  Specify which other paths should be tracked for changes when using `autoBuild`.
+  Specify which other paths should be tracked for changes when using <kbd>[autoBuild]</kbd>.
 
-  The `sourceCodeDir` is included by default.
+  The <kbd>[sourceCodeDir]</kbd> is included by default.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
