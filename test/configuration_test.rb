@@ -3,58 +3,53 @@
 require 'test_helper'
 
 class ConfigurationTest < ViteRails::Test
-  def expanded_path(path)
+  def expand_path(path)
     File.expand_path(Pathname.new(__dir__).join(path).to_s)
   end
 
+  def assert_path(expected, actual)
+    assert_equal expand_path(expected), actual.to_s
+  end
+
+  def resolve_config(mode: 'production', root: expand_path('test_app'), **attrs)
+    ViteRails::Config.resolve_config(mode: mode, root: root, **attrs)
+  end
+
   def setup
-    @config = ViteRails::Config.resolve_config(
-      mode: 'production',
-      root: expanded_path('test_app'),
-      config_path: 'test_app/config/vite.json',
-    )
+    @config = resolve_config
   end
 
-  def test_source_dir
-    assert_equal expanded_path('test_app/app/frontend'), @config.source_code_dir.to_s
+  def test_source_code_dir
+    assert_path 'test_app/app/frontend', @config.source_code_dir
   end
 
-  def test_source_entry_path
-    source_entry_path = expanded_path('test_app/app/javascript', 'packs')
-    assert_equal @config.source_entry_path.to_s, source_entry_path
+  def test_entrypoints_dir
+    assert_path 'test_app/app/frontend/entrypoints', @config.resolved_entrypoints_dir
   end
 
   def test_public_root_path
-    public_root_path = expanded_path('test_app/public')
-    assert_equal @config.public_path.to_s, public_root_path
+    assert_path 'test_app/public', @config.public_dir
   end
 
   def test_public_output_path
-    public_output_path = expanded_path('test_app/public/packs')
-    assert_equal @config.public_output_path.to_s, public_output_path
+    assert_path 'test_app/public/vite-production', @config.build_output_dir
 
-    @config = ViteRails::Configuration.new(
-      root_path: @config.root_path,
-      config_path: Pathname.new(File.expand_expanded_path('./test_app/config/vite_public_root.yml', __dir__)),
-      env: 'production',
-    )
-
-    public_output_path = expanded_path('public/packs')
-    assert_equal @config.public_output_path.to_s, public_output_path
+    @config = resolve_config(config_path: 'config/vite_public_dir.json')
+    assert_path 'public/vite', @config.build_output_dir
   end
 
   def test_public_manifest_path
-    public_manifest_path = expanded_path('test_app/public/packs', 'manifest.json')
-    assert_equal @config.public_manifest_path.to_s, public_manifest_path
+    public_manifest_path = expand_path('test_app/public/packs', 'manifest.json')
+    assert_path @config.public_manifest_path.to_s, public_manifest_path
   end
 
   def test_cache_path
-    cache_path = expanded_path('test_app/tmp/cache/vite')
-    assert_equal @config.cache_path.to_s, cache_path
+    cache_path = expand_path('test_app/tmp/cache/vite')
+    assert_path @config.cache_path.to_s, cache_path
   end
 
   def test_additional_paths
-    assert_equal @config.additional_paths, ['app/assets', '/etc/yarn', 'some.config.js', 'app/elm']
+    assert_path @config.additional_paths, ['app/assets', '/etc/yarn', 'some.config.js', 'app/elm']
   end
 
   def test_cache_manifest?

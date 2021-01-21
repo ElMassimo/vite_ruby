@@ -6,7 +6,7 @@ copy_file "#{ __dir__ }/config/vite.json", ViteRails.config.config_path
 copy_file "#{ __dir__ }/config/vite.config.ts", Rails.root.join('vite.config.ts')
 
 say 'Creating entrypoints directory'
-directory "#{ __dir__ }/javascript/entrypoints", ViteRails.config.source_code_dir.join(ViteRails.config.entrypoints_dir)
+directory "#{ __dir__ }/javascript/entrypoints", ViteRails.config.resolved_entrypoints_dir
 
 apply "#{ __dir__ }/binstubs.rb"
 
