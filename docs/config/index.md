@@ -7,6 +7,7 @@
 [publicOutputDir]: /config/#publicoutputdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [publicDir]: /config/#publicdir
+[root]: /config/#root
 
 # Configuring Vite Rails
 
@@ -117,12 +118,12 @@ The compiled assets will be outputed to the `public/vite/assets` directory.
 
 You can customize this behavior using the following options.
 
-### assetsDir
+### root
 
-- **Default:** `assets`
-- **Env Var:** `VITE_RUBY_ASSETS_DIR`
+- **Default:** `Rails.root`
+- **Env Var:** `VITE_RUBY_ROOT`
 
-  Specify the directory to nest generated assets under (relative to <kbd>[publicOutputDir]</kbd>).
+  Specify the project root.
 
 ### buildCacheDir
 
@@ -132,6 +133,17 @@ You can customize this behavior using the following options.
   Specify the directory where the <kbd>[autoBuild]</kbd> cache should be stored, used to
   detect if a build is needed when the development server is not running.
 
+### publicDir
+
+- **Default:** `public`
+- **Env Var:** `VITE_RUBY_PUBLIC_DIR`
+
+  Specify the public directory (relative to <kbd>[root]</kbd>).
+
+  It's expected for this directory to be served by Apache/NGINX, or loaded into a CDN.
+
+  Check Rails `public_file_server.enabled` for more information.
+
 ### publicOutputDir
 
 - **Default:** `vite`
@@ -139,16 +151,24 @@ You can customize this behavior using the following options.
 
   Specify the output directory (relative to <kbd>[publicDir]</kbd>).
 
-### publicDir
+### assetsDir
 
-- **Default:** `public`
-- **Env Var:** `VITE_RUBY_PUBLIC_OUTPUT_DIR`
+- **Default:** `assets`
+- **Env Var:** `VITE_RUBY_ASSETS_DIR`
 
-  Specify the public directory (relative to the project root).
+  Specify the directory to nest generated assets under (relative to <kbd>[publicOutputDir]</kbd>).
 
-  It's expected for this directory to be served by Apache/NGINX, or loaded into a CDN.
+### sourceCodeDir
 
-  Check Rails `public_file_server.enabled` for more information.
+- **Default:** `app/frontend`
+- **Env Var:** `VITE_RUBY_SOURCE_CODE_DIR`
+
+  Specify the directory where your source code will be defined (relative to <kbd>[root]</kbd>).
+
+  Vite Rails will alias this directory as `~/` allowing you to make absolute imports, which are more convenient.
+
+  It be watched for changes when using <kbd>[autoBuild]</kbd>, you can add aditional paths
+  to keep track of using <kbd>[watchAdditionalPaths]</kbd>.
 
 ### entrypointsDir
 
@@ -156,18 +176,6 @@ You can customize this behavior using the following options.
 - **Env Var:** `VITE_RUBY_ENTRYPOINTS_DIR`
 
   Specify the directory where the [entrypoints] will be defined (relative to <kbd>[sourceCodeDir]</kbd>).
-
-### sourceCodeDir
-
-- **Default:** `app/frontend`
-- **Env Var:** `VITE_RUBY_SOURCE_CODE_DIR`
-
-  Specify the directory where your source code will be defined (relative to the project root).
-
-  Vite Rails will alias this directory as `~/` allowing you to make absolute imports, which are more convenient.
-
-  It be watched for changes when using <kbd>[autoBuild]</kbd>, you can add aditional paths
-  to keep track of using <kbd>[watchAdditionalPaths]</kbd>.
 
 ## Other Options
 

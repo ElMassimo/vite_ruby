@@ -6,7 +6,6 @@
 
 ```
 bundle install
-yarn
 ```
 
 ## Making sure your changes pass all tests

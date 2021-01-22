@@ -1,0 +1,22 @@
+{
+  "application.js": {
+    "file": "assets/application.a0ba047e.js",
+    "imports": [
+      "assets/example_import.8e1fddc0.js"
+    ]
+  },
+  "example_import.js": {
+    "file": "assets/example_import.8e1fddc0.js",
+    "imports": []
+  },
+  "colored.js": {
+    "file": "assets/colored.1173bfe0.js",
+    "imports": []
+  },
+  "application.css": {
+    "file": "assets/application.cccfef34.css"
+  },
+  "colored.css": {
+    "file": "assets/colored.84277fd6.css"
+  }
+}

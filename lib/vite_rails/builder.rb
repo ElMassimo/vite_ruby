@@ -67,9 +67,18 @@ private
   def build_with_vite
     logger.info 'Building with Vite ⚡️'
 
-    stdout, stderr, status = Open3.capture3(vite_env,
-      "#{ which_ruby } ./bin/vite build --mode #{ config.mode }", chdir: File.expand_path(config.root))
+    command = "#{ which_ruby } ./bin/vite build --mode #{ config.mode }"
+    stdout, stderr, status = Open3.capture3(vite_env, command, chdir: File.expand_path(config.root))
 
+    log_build_result(stdout, stderr, status)
+
+    status.success?
+  end
+
+  # Internal: Outputs the build results.
+  #
+  # NOTE: By default it also outputs the manifest entries.
+  def log_build_result(stdout, stderr, status)
     if status.success?
       logger.info "Build with Vite complete: #{ config.build_output_dir }"
       logger.error(stderr.to_s) unless stderr.empty?
@@ -78,8 +87,6 @@ private
       non_empty_streams = [stdout, stderr].delete_if(&:empty?)
       logger.error "Build with Vite failed:\n#{ non_empty_streams.join("\n\n") }"
     end
-
-    status.success?
   end
 
   # Internal: Used to prefix the bin/vite executable file.

@@ -3,19 +3,14 @@
 require 'test_helper'
 
 class ModeTest < ViteRails::Test
-  def test_current
-    assert_equal ViteRails.config.mode, Rails.env
+  def test_mode
+    assert_equal Rails.env, ViteRails.config.mode
+    assert_equal ViteRails.config.mode, ViteRails.mode
   end
 
-  def test_custom_without_config
-    with_rails_env('foo') do
-      assert_equal ViteRails.config.mode, 'production'
-    end
-  end
-
-  def test_custom_with_config
-    with_rails_env('staging') do
-      assert_equal ViteRails.config.mode, 'staging'
+  def test_mode_with_rails_env
+    with_rails_env('staging') do |config|
+      assert_equal 'staging', config.mode
     end
   end
 end

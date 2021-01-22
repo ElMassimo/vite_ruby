@@ -31,10 +31,10 @@ function configFromEnv(): Config {
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration(currentConfig: UserConfig): UnifiedConfig {
+export function loadConfiguration(currentConfig: UserConfig, projectRoot: string): UnifiedConfig {
   const envConfig = configFromEnv()
   const mode = envConfig.mode || currentConfig.mode || APP_ENV
-  const filePath = envConfig.configPath || (defaultConfig.configPath as string)
+  const filePath = join(projectRoot, envConfig.configPath || (defaultConfig.configPath as string))
   const multiEnvConfig = loadJsonConfig<MultiEnvConfig>(filePath)
   const fileConfig: Config = { ...multiEnvConfig[ALL_ENVS_KEY], ...multiEnvConfig[mode] }
 
@@ -47,7 +47,7 @@ export function loadConfiguration(currentConfig: UserConfig): UnifiedConfig {
 
   // Ensure Vite places HTML files in public with the proper dir structure.
   const buildOutputDir = join(config.publicDir!, config.publicOutputDir!)
-  config.root = join(config.sourceCodeDir!, config.entrypointsDir!)
+  config.root = join(projectRoot, config.sourceCodeDir!, config.entrypointsDir!)
   config.outDir = relative(config.root!, buildOutputDir) // Vite expects it to be relative
   config.base = `/${config.publicOutputDir!}`
 

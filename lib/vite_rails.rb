@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_support'
-require 'active_support/core_ext/class/attribute_accessors'
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem
@@ -13,18 +12,10 @@ class ViteRails
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
 
-  # Public: Additional environment variables to pass to Vite.
-  #
-  # Example:
-  #   ViteRails.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
-  cattr_accessor(:env) { ENV.select { |key, _| key.start_with?(ENV_PREFIX) } }
-
-  cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
-
   class << self
     delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, to: :instance
     delegate :mode, to: :config
-    delegate :bootstrap, :clean, :clobber, :build, to: :commands
+    delegate :bootstrap, :clean, :clean_from_rake, :clobber, :build, :build_from_rake, to: :commands
 
     attr_writer :instance
 
@@ -45,22 +36,19 @@ class ViteRails
       false
     end
 
-    def with_node_env(env)
-      original = ENV['NODE_ENV']
-      ENV['NODE_ENV'] = env
-      yield
-    ensure
-      ENV['NODE_ENV'] = original
-    end
-
-    def ensure_log_goes_to_stdout
-      old_logger = ViteRails.logger
-      ViteRails.logger = ActiveSupport::Logger.new(STDOUT)
-      yield
-    ensure
-      ViteRails.logger = old_logger
+    # Internal: Allows to obtain any env variables for configuration options.
+    def load_env_variables
+      ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
     end
   end
+
+  # Public: Additional environment variables to pass to Vite.
+  #
+  # Example:
+  #   ViteRails.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
+  cattr_accessor(:env) { load_env_variables }
+
+  cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
 
   # Public: Returns true if the Vite development server is running.
   def dev_server_running?

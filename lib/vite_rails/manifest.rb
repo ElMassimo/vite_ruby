@@ -31,7 +31,7 @@ class ViteRails::Manifest
   # Example:
   #   ViteRails.manifest.lookup('calendar.js')
   #   # { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
-  def lookup(name, type:)
+  def lookup(name, type: nil)
     build if should_build?
 
     find_manifest_entry(with_file_extension(name, type))
@@ -92,7 +92,8 @@ private
   def with_file_extension(name, entry_type)
     return name unless File.extname(name.to_s).empty?
 
-    "#{ name }.#{ extension_for_type(entry_type) }"
+    extension = extension_for_type(entry_type)
+    extension ? "#{ name }.#{ extension }" : name
   end
 
   # Internal: Scopes the paths in the manifest to the output folder in public.
@@ -106,7 +107,7 @@ private
     when :javascript then 'js'
     when :stylesheet then 'css'
     when :typescript then dev_server_running? ? 'ts' : 'js'
-    else entry_type.to_s
+    else entry_type
     end
   end
 

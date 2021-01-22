@@ -31,7 +31,7 @@ module ViteRails::Helper
                           crossorigin: 'anonymous',
                           **options)
     js_entries = names.map { |name| current_vite_instance.manifest.lookup!(name, type: asset_type) }
-    js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, type: type, crossorigin: crossorigin, **options)
+    js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, crossorigin: crossorigin, type: type, **options)
 
     unless skip_preload_tags || ViteRails.dev_server_running?
       preload_paths = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq
@@ -39,7 +39,9 @@ module ViteRails::Helper
     end
 
     unless skip_style_tags || ViteRails.dev_server_running?
-      style_paths = names.map { |name| current_vite_instance.manifest.lookup(name, type: :stylesheet)&.fetch('file') }.compact
+      style_paths = names.map { |name|
+        current_vite_instance.manifest.lookup(name.delete_suffix('.js'), type: :stylesheet)&.fetch('file')
+      }.compact
       style_tags = stylesheet_link_tag(*style_paths)
     end
 
