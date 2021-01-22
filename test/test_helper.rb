@@ -38,7 +38,7 @@ private
   end
 
   def assert_run_command(*argv, use_yarn: false, flags: [])
-    command = use_yarn ? ['yarn', 'vite'] : ["#{ test_app_path }/node_modules/.bin/vite"]
+    command = use_yarn ? %w[yarn vite] : ["#{ test_app_path }/node_modules/.bin/vite"]
     cwd = Dir.pwd
     Dir.chdir(test_app_path)
 

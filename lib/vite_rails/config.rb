@@ -112,5 +112,5 @@ private
   DEFAULT_CONFIG = load_json("#{ __dir__ }/../../package/default.vite.json").freeze
 
   # Internal: Configuration options that can be provided as env vars.
-  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + ['mode', 'root']).freeze
+  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root]).freeze
 end
