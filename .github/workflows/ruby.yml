@@ -1,10 +1,10 @@
-name: Ruby specs
+name: build
 
 on: [push]
 
 jobs:
   build:
-    name: Ruby specs
+    name: build
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' || matrix.experimental }}
     env:
