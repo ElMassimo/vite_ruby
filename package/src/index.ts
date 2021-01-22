@@ -11,9 +11,9 @@ export {
 }
 
 function config(config: UserConfig): UserConfig {
-  const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config)
+  const projectRoot = configOptionFromEnv('root') || process.cwd()
+  const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config, projectRoot)
 
-  const projectRoot = config.root || configOptionFromEnv('root') || process.cwd()
   const entrypoints = resolveEntrypoints(root!, projectRoot)
 
   const server = { host, https, port, strictPort: true }
