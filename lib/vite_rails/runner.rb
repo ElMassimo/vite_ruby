@@ -33,7 +33,6 @@ private
     cmd.prepend('node', '--trace-deprecation') if args.delete('--trace-deprecation')
     args.append('--mode', ENV['RAILS_ENV']) unless args.include?('--mode') || args.include?('-m')
     cmd += args
-    puts cmd.join(' ')
     Dir.chdir(File.expand_path('.', Dir.pwd)) { Kernel.exec(ViteRails.env, *cmd) }
   end
 
@@ -49,8 +48,6 @@ private
 
   # Internal: Returns a path where a Vite executable should be found.
   def vite_bin_path
-    ENV["#{ ViteRails::ENV_PREFIX }_VITE_BIN_PATH"] || `yarn bin vite`.chomp
-  rescue StandardError
-    "#{ `npm bin`.chomp }/vite"
+    ENV["#{ ViteRails::ENV_PREFIX }_VITE_BIN_PATH"] || `yarn bin vite`.chomp.presence || "#{ `npm bin`.chomp }/vite"
   end
 end

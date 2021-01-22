@@ -15,7 +15,7 @@ class ConfigurationTest < ViteRails::Test
     assert_equal Pathname.new(expand_path("test_app/#{ expected }")), actual
   end
 
-  def resolve_config(mode: 'production', root: expand_path('test_app'), **attrs)
+  def resolve_config(mode: 'production', root: test_app_path, **attrs)
     ViteRails::Config.resolve_config(mode: mode, root: root, **attrs)
   end
 
