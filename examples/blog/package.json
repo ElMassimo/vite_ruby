@@ -9,7 +9,7 @@
     "tailwindcss": "^2.0.2",
     "turbolinks": "^5.2.0",
     "vite": "^2.0.0-beta.34",
-    "vite-plugin-ruby": "../../package"
+    "vite-plugin-ruby": "^1.0.3"
   },
   "version": "0.1.0",
   "devDependencies": {
