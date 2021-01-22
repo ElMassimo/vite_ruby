@@ -5,9 +5,7 @@ $stdout.sync = true
 namespace :vite do
   desc 'Remove old compiled vites'
   task :clean, [:keep, :age] => [:'vite:verify_install', :environment] do |_, args|
-    ViteRails.ensure_log_goes_to_stdout do
-      ViteRails.clean(keep_up_to: Integer(args.keep || 2), age_in_seconds: Integer(args.age || 3600))
-    end
+    ViteRails.clean_from_rake(args)
   end
 end
 

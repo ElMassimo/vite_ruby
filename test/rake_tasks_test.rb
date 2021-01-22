@@ -21,7 +21,7 @@ class RakeTasksTest < Minitest::Test
   def test_rake_vite_install_dependencies_in_non_production_environments
     assert_includes test_app_dev_dependencies, 'right-pad'
 
-    ViteRails.with_node_env('test') do
+    ViteRails.commands.send(:with_node_env, 'test') do
       Dir.chdir(test_app_path) do
         `bundle exec rake vite:install_dependencies`
       end
@@ -32,7 +32,7 @@ class RakeTasksTest < Minitest::Test
   end
 
   def test_rake_vite_install_dependencies_in_production_environment
-    ViteRails.with_node_env('production') do
+    ViteRails.commands.send(:with_node_env, 'production') do
       Dir.chdir(test_app_path) do
         `bundle exec rake vite:install_dependencies`
       end

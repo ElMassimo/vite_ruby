@@ -13,11 +13,7 @@ end
 namespace :vite do
   desc 'Compile JavaScript packs using vite for production with digests'
   task build: [:'vite:verify_install', :environment] do
-    ViteRails.with_node_env(ENV.fetch('NODE_ENV', 'production')) do
-      ViteRails.ensure_log_goes_to_stdout do
-        ViteRails.build || exit!
-      end
-    end
+    ViteRails.build_from_rake
   end
 end
 

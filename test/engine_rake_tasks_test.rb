@@ -4,34 +4,72 @@ require 'test_helper'
 
 class EngineRakeTasksTest < Minitest::Test
   def setup
-    remove_vite_binstub
+    remove_vite_files
   end
 
   def teardown
-    remove_vite_binstub
+    remove_vite_files
   end
 
   def test_tasks_mounted
-    output = Dir.chdir(mounted_app_path) { `bundle exec rake -T` }
+    output = within_mounted_app { `bundle exec rake -T` }
     assert_includes output, 'app:vite'
   end
 
-  def test_binstub
-    Dir.chdir(mounted_app_path) { `bundle exec rake app:vite:binstubs` }
-    assert File.exist?(vite_binstub_path)
+  def test_rake_tasks
+    within_mounted_app { `bundle exec rake app:vite:binstubs` }
+    assert vite_binstub_path.exist?
+
+    within_mounted_app { `bundle exec rake app:vite:install` }
+    assert vite_config_ts_path.exist?
+    assert app_frontend_dir.exist?
+
+    within_mounted_app { `bundle exec rake app:vite:build` }
+    assert app_public_dir.exist?
+    assert app_public_dir.join('manifest.json').exist?
+    assert app_public_dir.join('assets').exist?
+
+    within_mounted_app { `bundle exec rake app:vite:clean[0,0]` }
+    refute app_public_dir.join('manifest.json').exist?
+
+    within_mounted_app { `bundle exec rake app:vite:clobber` }
+    refute app_public_dir.exist?
   end
 
 private
 
+  def within_mounted_app
+    Dir.chdir(mounted_app_path) { yield }
+  end
+
   def mounted_app_path
-    File.expand_path('mounted_app', __dir__)
+    Pathname.new(File.expand_path(__dir__)).join('mounted_app')
+  end
+
+  def root_dir
+    mounted_app_path.join('test/dummy')
   end
 
   def vite_binstub_path
-    "#{ mounted_app_path }/test/dummy/bin/vite"
+    root_dir.join('bin/vite')
   end
 
-  def remove_vite_binstub
-    File.delete(vite_binstub_path) if File.exist?(vite_binstub_path)
+  def vite_config_ts_path
+    root_dir.join('vite.config.ts')
+  end
+
+  def app_frontend_dir
+    root_dir.join('app/frontend')
+  end
+
+  def app_public_dir
+    root_dir.join('app/public/vite')
+  end
+
+  def remove_vite_files
+    vite_binstub_path.delete if vite_binstub_path.exist?
+    vite_config_ts_path.delete if vite_config_ts_path.exist?
+    app_frontend_dir.rmtree if app_frontend_dir.exist?
+    app_public_dir.rmtree if app_public_dir.exist?
   end
 end

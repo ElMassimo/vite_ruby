@@ -12,7 +12,7 @@ namespace :vite do
       exit!
     end
     unless ViteRails.config.config_path.exist?
-      path = ViteRails.config.config_path.relative_path_from(Pathname.new(pwd)).to_s
+      path = ViteRails.config.config_path.relative_path_from(Rails.root).to_s
       warn <<~WARN
         Configuration #{ path } file for vite-plugin-ruby not found.
         Make sure vite:install has run successfully before running dependent tasks.
