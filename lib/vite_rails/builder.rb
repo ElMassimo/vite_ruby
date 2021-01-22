@@ -68,7 +68,7 @@ private
     logger.info 'Building with Vite ⚡️'
 
     command = "#{ which_ruby } ./bin/vite build --mode #{ config.mode }"
-    stdout, stderr, status = Open3.capture3(vite_env, commmand, chdir: File.expand_path(config.root))
+    stdout, stderr, status = Open3.capture3(vite_env, command, chdir: File.expand_path(config.root))
 
     log_build_result(stdout, stderr, status)
 

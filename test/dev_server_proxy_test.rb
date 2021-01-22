@@ -1,0 +1,101 @@
+# frozen_string_literal: true
+
+require 'test_helper'
+
+class DevServerProxyTest < ViteRails::Test
+  include Rack::Test::Methods
+
+  def app
+    # Capture all changes to the env made by the proxy.
+    capture_app = Rack::Builder.new.run(->(env) {
+      [200, { 'Content-Type' => 'application/json' }, env.to_json]
+    })
+    # Avoid actually using the proxy.
+    Rack::Proxy.define_method(:perform_request) { |env| capture_app.call(env) }
+
+    ViteRails::DevServerProxy.new(capture_app)
+  end
+
+  def test_non_asset
+    get_with_dev_server_running '/'
+    assert_not_forwarded
+  end
+
+  def test_non_vite_asset
+    get_with_dev_server_running '/example_import.js'
+    assert_not_forwarded
+  end
+
+  def test_vite_asset
+    get_with_dev_server_running '/vite-production/application.js'
+    assert_forwarded to: '/application.js'
+  end
+
+  def test_vite_client
+    get_with_dev_server_running '/@vite/client'
+    assert_forwarded to: '/@vite/client'
+  end
+
+  def test_vite_import
+    get_with_dev_server_running '/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css'
+    assert_forwarded to: '/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css'
+  end
+
+  def test_hmr_for_stylesheet
+    get_with_dev_server_running '/colored.css?t=1611322562923'
+    assert_forwarded to: '/colored.css?t=1611322562923'
+  end
+
+  def test_hmr_for_imported_entrypoint
+    get_with_dev_server_running '/colored.css?import&t=1611322562923'
+    assert_forwarded to: '/colored.css?import&t=1611322562923'
+  end
+
+  def test_entrypoint_imported_from_entrypoint
+    header 'Referer', 'http://localhost:3000/vite-production/application.js'
+    get_with_dev_server_running '/example_import.js'
+    assert_forwarded to: '/example_import.js'
+  end
+
+  def test_without_dev_server_running
+    get '/vite-production/application.js'
+    assert_not_forwarded
+
+    get '/colored.css?import&t=1611322562923'
+    assert_not_forwarded
+
+    header 'Referer', 'http://localhost:3000/vite-production/application.js'
+    get '/example_import.js'
+    assert_not_forwarded
+  end
+
+private
+
+  def get_with_dev_server_running(*args)
+    with_dev_server_running {
+      get(*args)
+    }
+  end
+
+  def assert_not_forwarded
+    assert last_response.ok?
+    env = JSON.parse(last_response.body)
+    assert_nil env['HTTP_X_FORWARDED_HOST']
+    assert_nil env['HTTP_X_FORWARDED_PORT']
+  end
+
+  def assert_forwarded(to: nil)
+    assert last_response.ok?
+    env = JSON.parse(last_response.body)
+
+    assert_equal ViteRails.config.host, env['HTTP_X_FORWARDED_HOST']
+    assert_equal ViteRails.config.port, Integer(env['HTTP_X_FORWARDED_PORT'])
+
+    if to
+      path, query = to.split('?')
+      assert_equal path, env['PATH_INFO']
+      assert_equal query, env['QUERY_STRING']
+      assert_equal to, env['REQUEST_URI']
+    end
+  end
+end
