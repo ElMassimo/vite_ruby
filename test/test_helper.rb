@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'rails'
-require 'rails/test_help'
-require 'pry-byebug'
-
 require 'simplecov'
 SimpleCov.start {
   add_filter '/test/'
 }
+
+require 'minitest/autorun'
+require 'rails'
+require 'rails/test_help'
+require 'pry-byebug'
 
 require_relative 'test_app/config/environment'
 

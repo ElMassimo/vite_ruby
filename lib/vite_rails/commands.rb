@@ -33,21 +33,16 @@ class ViteRails::Commands
   #   To force only 1 backup to be kept: clean(1, 0)
   #   To only keep files created within the last 10 minutes: clean(0, 600)
   def clean(keep_up_to: 2, age_in_seconds: 3600)
-    return false unless config.build_output_dir.exist? && config.manifest_path.exist?
+    return false unless may_clean?
 
-    versions.sort.reverse
+    versions
       .each_with_index
       .drop_while { |(mtime, _), index|
         max_age = [0, Time.now - Time.at(mtime)].max
         max_age < age_in_seconds || index < keep_up_to
       }
-      .each do |(_, files), _index|
-        files.each do |file|
-          next unless File.file?(file)
-
-          File.delete(file)
-          logger.info("Removed #{ file }")
-        end
+      .each do |(_, files), _|
+        clean_files(files)
       end
     true
   end
@@ -56,10 +51,23 @@ private
 
   delegate :config, :builder, :manifest, :logger, to: :@vite_rails
 
+  def may_clean?
+    config.build_output_dir.exist? && config.manifest_path.exist?
+  end
+
+  def clean_files(files)
+    files.select { |file| File.file?(file) }.each do |file|
+      File.delete(file)
+      logger.info("Removed #{ file }")
+    end
+  end
+
   def versions
     all_files = Dir.glob("#{ config.build_output_dir }/**/*")
     entries = all_files - [config.manifest_path] - current_version_files
-    entries.reject { |file| File.directory?(file) }.group_by { |file| File.mtime(file).utc.to_i }
+    entries.reject { |file| File.directory?(file) }
+      .group_by { |file| File.mtime(file).utc.to_i }
+      .sort.reverse
   end
 
   def current_version_files

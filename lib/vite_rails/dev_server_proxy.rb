@@ -15,11 +15,7 @@ class ViteRails::DevServerProxy < Rack::Proxy
   # Rack: Intercept asset requests and send them to the Vite server.
   def perform_request(env)
     if vite_should_handle?(env['REQUEST_URI'], env['HTTP_REFERER']) && dev_server.running?
-      env['REQUEST_URI'] = env['REQUEST_URI']
-        .sub(vite_asset_url_prefix, '/')
-        .sub('.ts.js', '.ts') # Patch: Rails helpers always append the extension.
-      env['PATH_INFO'], env['QUERY_STRING'] = env['REQUEST_URI'].split('?')
-
+      rewrite_request_uri(env)
       env['HTTP_HOST'] = env['HTTP_X_FORWARDED_HOST'] = config.host
       env['HTTP_X_FORWARDED_SERVER'] = config.host_with_port
       env['HTTP_PORT'] = env['HTTP_X_FORWARDED_PORT'] = config.port.to_s
@@ -35,6 +31,13 @@ class ViteRails::DevServerProxy < Rack::Proxy
 private
 
   delegate :config, :dev_server, to: :@vite_rails
+
+  def rewrite_request_uri(env)
+    env['REQUEST_URI'] = env['REQUEST_URI']
+      .sub(vite_asset_url_prefix, '/')
+      .sub('.ts.js', '.ts') # Patch: Rails helpers always append the extension.
+    env['PATH_INFO'], env['QUERY_STRING'] = env['REQUEST_URI'].split('?')
+  end
 
   def vite_should_handle?(url, referer)
     return true if url.start_with?(vite_asset_url_prefix) # Vite Asset
