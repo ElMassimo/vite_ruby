@@ -72,9 +72,9 @@ private
 
   def js_tag_attributes
     if Rails.gem_version > Gem::Version.new('6.0.1')
-      %(crossorigin="anonymous" type="module")
-    else
       %(type="module" crossorigin="anonymous")
+    else
+      %(crossorigin="anonymous" type="module")
     end
   end
 end

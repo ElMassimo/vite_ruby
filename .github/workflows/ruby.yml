@@ -21,7 +21,8 @@ jobs:
         ]
         gemfile: [
           "gemfiles/Gemfile-rails.5.2.x",
-          "gemfiles/Gemfile-rails.6.0.x"
+          "gemfiles/Gemfile-rails.6.0.x",
+          "gemfiles/Gemfile-rails.6.1.x"
         ]
         experimental: [false]
         exclude:
