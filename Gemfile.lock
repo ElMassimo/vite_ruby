@@ -155,7 +155,6 @@ GEM
       rubocop (>= 0.87.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.10.1)
-    semantic_range (2.3.0)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -191,7 +190,6 @@ DEPENDENCIES
   rake (>= 11.1)
   rubocop (= 0.93.1)
   rubocop-performance
-  semantic_range
   simplecov (< 0.18)
   vite_rails!
 
