@@ -11,10 +11,10 @@ namespace :vite do
       WARN
       exit!
     end
-    unless ViteRails.config.config_path.exist?
-      path = ViteRails.config.config_path.relative_path_from(Rails.root).to_s
+    config_path = Rails.root.join(ViteRails.config.config_path)
+    unless config_path.exist?
       warn <<~WARN
-        Configuration #{ path } file for vite-plugin-ruby not found.
+        Configuration #{ config_path } file for vite-plugin-ruby not found.
         Make sure vite:install has run successfully before running dependent tasks.
       WARN
       exit!

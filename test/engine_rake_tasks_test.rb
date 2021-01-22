@@ -29,6 +29,9 @@ class EngineRakeTasksTest < Minitest::Test
     assert app_public_dir.join('manifest.json').exist?
     assert app_public_dir.join('assets').exist?
 
+    within_mounted_app { `bundle exec rake app:vite:clean` }
+    assert app_public_dir.join('manifest.json').exist? # Still fresh
+
     within_mounted_app { `bundle exec rake app:vite:clean[0,0]` }
     refute app_public_dir.join('manifest.json').exist?
 
@@ -63,7 +66,7 @@ private
   end
 
   def app_public_dir
-    root_dir.join('app/public/vite')
+    root_dir.join('public/vite-dev')
   end
 
   def remove_vite_files
