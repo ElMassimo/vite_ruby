@@ -2,6 +2,7 @@
 [config reference]: https://vitejs.dev/config/
 [plugins]: https://vitejs.dev/plugins/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
+[json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
 [publicOutputDir]: /config/#publicoutputdir
@@ -118,13 +119,6 @@ The compiled assets will be outputed to the `public/vite/assets` directory.
 
 You can customize this behavior using the following options.
 
-### root
-
-- **Default:** `Rails.root`
-- **Env Var:** `VITE_RUBY_ROOT`
-
-  Specify the project root.
-
 ### buildCacheDir
 
 - **Default:** `tmp/cache/vite`
@@ -179,12 +173,28 @@ You can customize this behavior using the following options.
 
 ## Other Options
 
+### configPath
+
+- **Default:** `config/vite.json`
+- **Env Var:** `VITE_RUBY_CONFIG_PATH`
+
+  Specify where the [JSON config] file is located (relative to <kbd>[root]</kbd>).
+
+  Not supported in the JSON file.
+
 ### hideBuildConsoleOutput
 
 - **Default:** `false`
 - **Env Var:** `VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT`
 
   Allows to skip Vite build output from logs, to keep the noise down.
+
+### root
+
+- **Default:** `Rails.root`
+- **Env Var:** `VITE_RUBY_ROOT`
+
+  Specify the project root.
 
 ### watchAdditionalPaths
 

@@ -1,4 +1,8 @@
-## Vite Rails 1.0.8  (2020-01-20)
+## Vite Rails 1.0.9  (2020-01-22)
+
+- Ensure `configPath` and `publicDir` are scoped from `root`, both in Ruby and JS.
+
+## Vite Rails 1.0.8  (2020-01-21)
 
 - Change the default of `sourceCodeDir` to `app/frontend`, add instructions for folks migrating
 from a `app/javascript` structure.

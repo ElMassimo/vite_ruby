@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'active_support'
+require 'rails'
+require 'active_support/all'
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem

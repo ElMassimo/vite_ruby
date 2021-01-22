@@ -70,7 +70,7 @@ private
     def resolve_config(attrs = {})
       attrs = attrs.transform_keys(&:to_s)
       mode = (attrs['mode'] ||= config_option_from_env('mode') || Rails.env.to_s).to_s
-      root = Pathname.new(attrs['root'] ||= config_option_from_env('root') || Rails.root)
+      root = Pathname.new(attrs['root'] ||= config_option_from_env('root') || Rails.root || Dir.pwd)
       config_path = (attrs['config_path'] ||= config_option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'))
       file_attrs = config_from_file(root: root, mode: mode, config_path: config_path)
       new DEFAULT_CONFIG.merge(file_attrs).merge(config_from_env).merge(attrs)
