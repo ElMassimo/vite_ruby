@@ -91,11 +91,11 @@ private
     assert_equal ViteRails.config.host, env['HTTP_X_FORWARDED_HOST']
     assert_equal ViteRails.config.port, Integer(env['HTTP_X_FORWARDED_PORT'])
 
-    if to
-      path, query = to.split('?')
-      assert_equal path, env['PATH_INFO']
-      assert_equal query, env['QUERY_STRING']
-      assert_equal to, env['REQUEST_URI']
-    end
+    return unless to
+
+    path, query = to.split('?')
+    assert_equal path, env['PATH_INFO']
+    assert_equal query, env['QUERY_STRING']
+    assert_equal to, env['REQUEST_URI']
   end
 end

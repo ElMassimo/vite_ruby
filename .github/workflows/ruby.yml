@@ -15,28 +15,29 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ruby: [
-          2.4,
           2.5,
-          2.6,
-          2.7
+          2.7,
+          3.0
         ]
         gemfile: [
           "gemfiles/Gemfile-rails.5.2.x",
           "gemfiles/Gemfile-rails.6.0.x"
         ]
-        exclude:
-          - ruby: "2.4"
-            gemfile: gemfiles/Gemfile-rails.6.0.x
         experimental: [false]
-        include:
-          - ruby: head
-            os: ubuntu-latest
-            gemfile: gemfiles/Gemfile-rails.6.0.x
-            experimental: true
-          - ruby: head
-            os: ubuntu-latest
+        exclude:
+          - ruby: "2.5"
             gemfile: gemfiles/Gemfile-rails-edge
-            experimental: true
+          - ruby: "3.0"
+            gemfile: gemfiles/Gemfile-rails.5.2.x
+        include:
+          # - ruby: head
+          #   os: ubuntu-latest
+          #   gemfile: gemfiles/Gemfile-rails.6.0.x
+          #   experimental: true
+          # - ruby: head
+          #   os: ubuntu-latest
+          #   gemfile: gemfiles/Gemfile-rails-edge
+          #   experimental: true
           - ruby: 2.6
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
