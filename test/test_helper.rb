@@ -16,9 +16,7 @@ Rails.env = 'production'
 
 ViteRails.instance = ViteRails.new
 
-class ViteRails::Test < Minitest::Test
-private
-
+module ViteRailsTestHelpers
   def refresh_config(env_variables = ViteRails.load_env_variables)
     ViteRails.env = env_variables
     (ViteRails.instance = ViteRails.new).config
@@ -36,6 +34,16 @@ private
   def test_app_path
     File.expand_path('test_app', __dir__)
   end
+
+  def with_dev_server_running(&block)
+    ViteRails.instance.stub(:dev_server_running?, true, &block)
+  end
+end
+
+class ViteRails::Test < Minitest::Test
+  include ViteRailsTestHelpers
+
+private
 
   def assert_run_command(*argv, use_yarn: false, flags: [])
     command = use_yarn ? %w[yarn vite] : ["#{ test_app_path }/node_modules/.bin/vite"]

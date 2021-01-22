@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ManifestTest < Minitest::Test
+class ManifestTest < ViteRails::Test
   def test_lookup_exception!
     asset_file = 'calendar.js'
 
@@ -64,10 +64,6 @@ class ManifestTest < Minitest::Test
   end
 
 private
-
-  def with_dev_server_running(&block)
-    ViteRails.instance.stub(:dev_server_running?, true, &block)
-  end
 
   def assert_raises_manifest_missing_entry_error(&block)
     error = nil

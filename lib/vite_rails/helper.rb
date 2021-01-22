@@ -39,7 +39,9 @@ module ViteRails::Helper
     end
 
     unless skip_style_tags || ViteRails.dev_server_running?
-      style_paths = names.map { |name| current_vite_instance.manifest.lookup(name, type: :stylesheet)&.fetch('file') }.compact
+      style_paths = names.map { |name|
+        current_vite_instance.manifest.lookup(name.delete_suffix('.js'), type: :stylesheet)&.fetch('file')
+      }.compact
       style_tags = stylesheet_link_tag(*style_paths)
     end
 
