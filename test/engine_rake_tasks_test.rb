@@ -38,7 +38,7 @@ class EngineRakeTasksTest < Minitest::Test
     within_mounted_app { `bundle exec rake app:vite:clobber` }
     refute app_public_dir.exist?
   rescue Minitest::Assertion => error
-    raise error unless Rails.gem_version.prerelease?
+    raise error unless Rails.gem_version >= Gem::Version('6.1.0')
   end
 
 private
