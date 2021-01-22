@@ -51,7 +51,7 @@ class HelperTest < ActionView::TestCase
 
   def test_vite_javascript_tag
     assert_equal [
-      %(<script src="/vite-production/assets/application.a0ba047e.js" #{ js_tag_attributes }></script>),
+      %(<script src="/vite-production/assets/application.a0ba047e.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="preload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">),
       %(<link rel="stylesheet" media="screen" href="/vite-production/assets/application.cccfef34.css" />),
     ].join, vite_javascript_tag('application')
@@ -60,21 +60,11 @@ class HelperTest < ActionView::TestCase
     assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')
 
     with_dev_server_running {
-      assert_equal %(<script src="/vite-production/application.js" #{ js_tag_attributes }></script>),
+      assert_equal %(<script src="/vite-production/application.js" crossorigin="anonymous" type="module"></script>),
         vite_javascript_tag('application')
 
-      assert_equal %(<script src="/vite-production/application.ts.js" #{ js_tag_attributes }></script>),
+      assert_equal %(<script src="/vite-production/application.ts.js" crossorigin="anonymous" type="module"></script>),
         vite_typescript_tag('application')
     }
-  end
-
-private
-
-  def js_tag_attributes
-    if Rails.gem_version >= Gem::Version.new('6.1.0') && Rails.gem_version < Gem::Version.new('6.2.0.alpha')
-      %(type="module" crossorigin="anonymous")
-    else
-      %(crossorigin="anonymous" type="module")
-    end
   end
 end
