@@ -5,6 +5,11 @@ require 'rails'
 require 'rails/test_help'
 require 'pry-byebug'
 
+require 'simplecov'
+SimpleCov.start {
+  add_filter '/test/'
+}
+
 require_relative 'test_app/config/environment'
 
 Rails.env = 'production'
@@ -32,19 +37,18 @@ private
     File.expand_path('test_app', __dir__)
   end
 
-  def assert_run_command(*cmd, use_node_modules: true, argv: [])
-    command, *flags = cmd
-    command = "#{ test_app_path }/node_modules/.bin/#{ command }" if use_node_modules
+  def assert_run_command(*argv, use_yarn: false, flags: [])
+    command = use_yarn ? ['yarn', 'vite'] : ["#{ test_app_path }/node_modules/.bin/vite"]
     cwd = Dir.pwd
     Dir.chdir(test_app_path)
 
     klass = ViteRails::Runner
     instance = klass.new(argv)
     mock = Minitest::Mock.new
-    mock.expect(:call, nil, [ViteRails.env, command, *argv, *flags])
+    mock.expect(:call, nil, [ViteRails.env, *command, *argv, *flags])
 
     klass.stub(:new, instance) do
-      instance.stub(:executable_exists?, use_node_modules) do
+      instance.stub(:executable_exists?, !use_yarn) do
         Kernel.stub(:exec, mock) { ViteRails.run(argv) }
       end
     end

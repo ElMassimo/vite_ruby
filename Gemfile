@@ -13,4 +13,5 @@ group :test do
   gem 'minitest', '~> 5.0'
   gem 'm'
   gem 'pry-byebug'
+  gem 'simplecov', '< 0.18'
 end

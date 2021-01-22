@@ -71,11 +71,13 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    docile (1.3.2)
     erubi (1.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    json (2.3.1)
     loofah (2.6.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -154,6 +156,11 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.10.1)
     semantic_range (2.3.0)
+    simplecov (0.17.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -185,6 +192,7 @@ DEPENDENCIES
   rubocop (= 0.93.1)
   rubocop-performance
   semantic_range
+  simplecov (< 0.18)
   vite_rails!
 
 BUNDLED WITH
