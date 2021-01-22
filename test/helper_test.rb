@@ -71,7 +71,7 @@ class HelperTest < ActionView::TestCase
 private
 
   def js_tag_attributes
-    if Rails.gem_version >= Gem::Version.new('6.2.0.alpha')
+    if Rails.gem_version >= Gem::Version.new('6.1.0') && Rails.gem_version < Gem::Version.new('6.2.0.alpha')
       %(type="module" crossorigin="anonymous")
     else
       %(crossorigin="anonymous" type="module")
