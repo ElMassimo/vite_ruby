@@ -136,7 +136,7 @@ You can customize this behavior using the following options.
 ### publicDir
 
 - **Default:** `public`
-- **Env Var:** `VITE_RUBY_PUBLIC_OUTPUT_DIR`
+- **Env Var:** `VITE_RUBY_PUBLIC_DIR`
 
   Specify the public directory (relative to <kbd>[root]</kbd>).
 

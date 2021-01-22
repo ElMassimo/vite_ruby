@@ -22,8 +22,7 @@ private
   def with_rails_env(env)
     original = Rails.env
     Rails.env = ActiveSupport::StringInquirer.new(env)
-    refresh_config
-    yield
+    yield(refresh_config)
   ensure
     Rails.env = ActiveSupport::StringInquirer.new(original)
     refresh_config

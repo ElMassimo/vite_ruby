@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-
+require 'json'
 
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
@@ -46,7 +46,7 @@ private
   def coerce_values(config)
     config['mode'] = config['mode'].to_s
     config['port'] = config['port'].to_i
-    coerce_booleans(config, 'auto_build', 'https')
+    coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https')
     coerce_paths(config, 'config_path', 'public_output_dir', 'root')
 
     # Prefix paths that are relative to the project root.
@@ -85,7 +85,7 @@ private
 
     # Internal: Retrieves a configuration option from environment variables.
     def config_option_from_env(name)
-      ENV["#{ ViteRails::ENV_PREFIX }_#{ name.upcase }"]
+      ViteRails.env["#{ ViteRails::ENV_PREFIX }_#{ name.upcase }"]
     end
 
     # Internal: Extracts the configuration options provided as env vars.

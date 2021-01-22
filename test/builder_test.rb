@@ -55,6 +55,12 @@ class BuilderTest < ViteRails::Test
     assert_equal ViteRails.builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRails.config.mode }"
   end
 
+  def test_watched_files_digest
+    previous_digest = ViteRails.builder.send(:watched_files_digest)
+    refresh_config
+    assert_equal previous_digest, ViteRails.builder.send(:watched_files_digest)
+  end
+
   def test_external_env_variables
     assert_equal 'production', vite_env['VITE_RUBY_MODE']
     assert_equal Rails.root.to_s, vite_env['VITE_RUBY_ROOT']
