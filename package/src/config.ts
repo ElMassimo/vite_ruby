@@ -43,7 +43,7 @@ export function loadConfiguration(currentConfig: UserConfig, projectRoot: string
 }
 
 // Internal: Coerces the configuration values and deals with relative paths.
-function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string): UnifiedConfig {
+function coerceConfigurationValues(config: UnifiedConfig, projectRoot: string): UnifiedConfig {
   // Coerce the values to the expected types.
   config.port = parseInt(config.port as unknown as string)
   config.https = booleanOption(config.https)
