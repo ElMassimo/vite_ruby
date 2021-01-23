@@ -29,6 +29,7 @@ class ViteRails::Commands
   def clobber
     config.build_output_dir.rmtree if config.build_output_dir.exist?
     config.build_cache_dir.rmtree if config.build_cache_dir.exist?
+    config.vite_cache_dir.rmtree if config.vite_cache_dir.exist?
   end
 
   # Public: Receives arguments from a rake task.

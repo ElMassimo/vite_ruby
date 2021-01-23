@@ -39,6 +39,11 @@ class ViteRails::Config
     source_code_dir.join(entrypoints_dir)
   end
 
+  # Internal: The directory where Vite stores its processing cache.
+  def vite_cache_dir
+    root.join('node_modules/.vite')
+  end
+
 private
 
   # Internal: Coerces all the configuration values, in case they were passed
