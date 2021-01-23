@@ -173,6 +173,13 @@ You can customize this behavior using the following options.
 
 ## Other Options
 
+### assetHost
+
+- **Default:** `Rails.application.config.action_controller.asset_host`
+- **Env Var:** `VITE_RUBY_ASSET_HOST`
+
+  Specify the asset host when using a CDN. Usually there's no need to explicitly configure it.
+
 ### configPath
 
 - **Default:** `config/vite.json`

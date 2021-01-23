@@ -39,8 +39,11 @@ export function loadConfiguration(currentConfig: UserConfig, projectRoot: string
   const fileConfig: Config = { ...multiEnvConfig[ALL_ENVS_KEY], ...multiEnvConfig[mode] }
 
   // Combine the three possible sources: env > json file > defaults.
-  const config: UnifiedConfig = { ...defaultConfig, ...fileConfig, ...envConfig, mode }
+  return coerceConfigurationValues({ ...defaultConfig, ...fileConfig, ...envConfig, mode }, projectRoot)
+}
 
+// Internal: Coerces the configuration values and deals with relative paths.
+function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string): UnifiedConfig {
   // Coerce the values to the expected types.
   config.port = parseInt(config.port as unknown as string)
   config.https = booleanOption(config.https)
@@ -49,7 +52,11 @@ export function loadConfiguration(currentConfig: UserConfig, projectRoot: string
   const buildOutputDir = join(config.publicDir!, config.publicOutputDir!)
   config.root = join(projectRoot, config.sourceCodeDir!, config.entrypointsDir!)
   config.outDir = relative(config.root!, buildOutputDir) // Vite expects it to be relative
-  config.base = `/${config.publicOutputDir!}`
+
+  // Add the asset host to enable usage of a CDN.
+  const { assetHost = '' } = config
+  const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
+  config.base = `${assetHostWithProtocol}/${config.publicOutputDir!}`
 
   return config
 }

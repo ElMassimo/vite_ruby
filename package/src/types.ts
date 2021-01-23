@@ -1,4 +1,5 @@
 export interface Config {
+  assetHost?: string
   assetsDir?: string
   configPath?: string
   publicDir?: string
