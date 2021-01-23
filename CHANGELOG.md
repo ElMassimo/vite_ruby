@@ -1,3 +1,8 @@
+## Vite Rails 1.0.10  (2020-01-22)
+
+- Use `path_to_asset` in `vite_asset_path` so that it's prefixed automatically
+  when using a CDN (`config.action_controller.asset_host`).
+
 ## Vite Rails 1.0.9  (2020-01-22)
 
 - Ensure `configPath` and `publicDir` are scoped from `root`, both in Ruby and JS.

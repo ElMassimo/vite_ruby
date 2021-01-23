@@ -14,12 +14,12 @@ module ViteRails::Helper
     content_tag('script', '', src: '/@vite/client', type: 'module') if ViteRails.dev_server_running?
   end
 
-  # Public: Computes the relative path for the specified given Vite asset.
+  # Public: Resolves the path for the specified Vite asset.
   #
   # Example:
   #   <%= vite_asset_path 'calendar.css' %> # => "/vite/assets/calendar-1016838bab065ae1e122.css"
   def vite_asset_path(name, **options)
-    current_vite_instance.manifest.lookup!(name, **options).fetch('file')
+    path_to_asset current_vite_instance.manifest.lookup!(name, **options).fetch('file')
   end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
