@@ -25,7 +25,7 @@
     "example:build": "npm -C example run build",
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "prerelease": "npm run build",
-    "release": "npx bumpp --commit --tag --push && npm publish"
+    "release": "npm run build && npm publish"
   },
   "dependencies": {
     "fast-glob": "^3.2.4"
