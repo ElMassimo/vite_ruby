@@ -53,7 +53,7 @@ private
     klass = ViteRails::Runner
     instance = klass.new(argv)
     mock = Minitest::Mock.new
-    mock.expect(:call, nil, [ViteRails.env, *command, *argv, *flags])
+    mock.expect(:call, nil, [ViteRails.config.to_env, *command, *argv, *flags])
 
     klass.stub(:new, instance) do
       instance.stub(:executable_exists?, !use_yarn) do
