@@ -1,5 +1,16 @@
 <h1 align="center">
-  Vite ⚡️ Rails
+  <a href="https://vite-rails.netlify.app/">
+    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="120px"/>
+  </a>
+
+  <br>
+
+  <a href="https://vite-rails.netlify.app/">
+    Vite Rails
+  </a>
+
+  <br>
+  
   <p align="center">
     <a href="https://github.com/ElMassimo/vite_rails/actions">
       <img alt="Build Status" src="https://github.com/ElMassimo/vite_rails/workflows/build/badge.svg"/>
