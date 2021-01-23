@@ -63,7 +63,7 @@ class HelperTest < ActionView::TestCase
       assert_equal %(<script src="/vite-production/application.js" crossorigin="anonymous" type="module"></script>),
         vite_javascript_tag('application')
 
-      assert_equal %(<script src="/vite-production/application.ts.js" crossorigin="anonymous" type="module"></script>),
+      assert_equal %(<script src="/vite-production/application.ts" crossorigin="anonymous" type="module"></script>),
         vite_typescript_tag('application')
     }
   end

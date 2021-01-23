@@ -29,7 +29,6 @@ private
   def rewrite_uri_for_vite(env)
     uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject(&:blank?).join('?') }
       .sub(vite_asset_url_prefix, '/')
-      .sub('.ts.js', '.ts') # Patch: Rails helpers always append the extension.
     env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 

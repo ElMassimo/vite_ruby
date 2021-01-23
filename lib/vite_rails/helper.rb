@@ -2,7 +2,7 @@
 
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
 module ViteRails::Helper
-  DEFAULT_VITE_SKIP_PRELOAD_TAGS = Rails::VERSION::MAJOR <= 5 && Rails::VERSION::MINOR < 2
+  DEFAULT_VITE_SKIP_PRELOAD_TAGS = Rails.gem_version < Gem::Version.new('5.2.0')
 
   # Public: Returns the current Vite Rails instance.
   def current_vite_instance
@@ -53,7 +53,7 @@ module ViteRails::Helper
   # NOTE: Because TypeScript is not a valid target in browsers, we only specify
   # the ts file when running the Vite development server.
   def vite_typescript_tag(*names, **options)
-    vite_javascript_tag(*names, asset_type: :typescript, **options)
+    vite_javascript_tag(*names, asset_type: :typescript, extname: false, **options)
   end
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
