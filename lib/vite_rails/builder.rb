@@ -68,7 +68,7 @@ private
     logger.info 'Building with Vite ⚡️'
 
     command = "#{ which_ruby } ./bin/vite build --mode #{ config.mode }"
-    stdout, stderr, status = Open3.capture3(vite_env, command, chdir: File.expand_path(config.root))
+    stdout, stderr, status = Open3.capture3(ViteRails.config.to_env, command, chdir: File.expand_path(config.root))
 
     log_build_result(stdout, stderr, status)
 
@@ -107,14 +107,5 @@ private
       'package.json',
       config.config_path,
     ].freeze
-  end
-
-  # Internal: Sets additional environment variables for vite-plugin-ruby.
-  def vite_env
-    ViteRails.env.merge(
-      "#{ ViteRails::ENV_PREFIX }_CONFIG_PATH" => config.config_path,
-      "#{ ViteRails::ENV_PREFIX }_MODE" => config.mode,
-      "#{ ViteRails::ENV_PREFIX }_ROOT" => config.root,
-    ).transform_values(&:to_s)
   end
 end

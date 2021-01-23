@@ -9,11 +9,6 @@ class ViteRails::Config
 
   def initialize(attrs)
     @config = attrs.tap { |config| coerce_values(config) }.freeze
-
-    # Define getters for the configuration options.
-    CONFIGURABLE_WITH_ENV.each do |option|
-      define_singleton_method(option) { @config[option] }
-    end
   end
 
   def protocol
@@ -31,17 +26,26 @@ class ViteRails::Config
 
   # Public: The directory where Vite will store the built assets.
   def build_output_dir
-    public_dir.join(public_output_dir)
+    root.join(public_dir, public_output_dir)
   end
 
   # Public: The directory where the entries are located.
   def resolved_entrypoints_dir
-    source_code_dir.join(entrypoints_dir)
+    root.join(source_code_dir, entrypoints_dir)
   end
 
   # Internal: The directory where Vite stores its processing cache.
   def vite_cache_dir
     root.join('node_modules/.vite')
+  end
+
+  # Public: Sets additional environment variables for vite-plugin-ruby.
+  def to_env
+    CONFIGURABLE_WITH_ENV.each_with_object({}) do |option, env|
+      unless (value = @config[option]).nil?
+        env["#{ ViteRails::ENV_PREFIX }_#{ option.upcase }"] = value.to_s
+      end
+    end.merge(ViteRails.env)
   end
 
 private
@@ -51,13 +55,9 @@ private
   def coerce_values(config)
     config['mode'] = config['mode'].to_s
     config['port'] = config['port'].to_i
+    coerce_paths(config, 'root', 'public_output_dir')
+    config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
     coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https')
-    coerce_paths(config, 'config_path', 'public_output_dir', 'root')
-
-    # Prefix paths that are relative to the project root.
-    config.slice('build_cache_dir', 'public_dir', 'source_code_dir').each do |option, dir|
-      config[option] = config['root'].join(dir) if dir
-    end
   end
 
   # Internal: Coerces configuration options to boolean.
@@ -73,15 +73,23 @@ private
   class << self
     # Public: Returns the project configuration for Vite.
     def resolve_config(attrs = {})
-      attrs = attrs.transform_keys(&:to_s)
-      mode = (attrs['mode'] ||= config_option_from_env('mode') || Rails.env.to_s).to_s
-      root = Pathname.new(attrs['root'] ||= config_option_from_env('root') || Rails.root || Dir.pwd)
-      config_path = (attrs['config_path'] ||= config_option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'))
-      file_attrs = config_from_file(root: root, mode: mode, config_path: config_path)
-      new DEFAULT_CONFIG.merge(file_attrs).merge(config_from_env).merge(attrs)
+      config = attrs.transform_keys(&:to_s).reverse_merge(config_defaults)
+      file_path = File.join(config['root'], config['config_path'])
+      file_config = config_from_file(file_path, mode: config['mode'])
+      new DEFAULT_CONFIG.merge(file_config).merge(config_from_env).merge(config)
     end
 
   private
+
+    # Internal: Default values for a Rails application.
+    def config_defaults
+      {
+        'asset_host' => option_from_env('asset_host') || Rails.application&.config&.action_controller&.asset_host,
+        'config_path' => option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'),
+        'mode' => option_from_env('mode') || Rails.env.to_s,
+        'root' => option_from_env('root') || Rails.root || Dir.pwd,
+      }
+    end
 
     # Internal: Used to load a JSON file from the specified path.
     def load_json(path)
@@ -89,22 +97,22 @@ private
     end
 
     # Internal: Retrieves a configuration option from environment variables.
-    def config_option_from_env(name)
+    def option_from_env(name)
       ViteRails.env["#{ ViteRails::ENV_PREFIX }_#{ name.upcase }"]
     end
 
     # Internal: Extracts the configuration options provided as env vars.
     def config_from_env
-      CONFIGURABLE_WITH_ENV.each_with_object({}) do |key, env_vars|
-        if value = config_option_from_env(key)
-          env_vars[key] = value
+      CONFIGURABLE_WITH_ENV.each_with_object({}) do |option, env_vars|
+        if value = option_from_env(option)
+          env_vars[option] = value
         end
       end
     end
 
     # Internal: Loads the configuration options provided in a JSON file.
-    def config_from_file(root:, mode:, config_path:)
-      multi_env_config = load_json(root.join(config_path))
+    def config_from_file(path, mode:)
+      multi_env_config = load_json(path)
       multi_env_config.fetch('all', {})
         .merge(multi_env_config.fetch(mode, {}))
     rescue Errno::ENOENT => error
@@ -116,6 +124,16 @@ private
   # Internal: Shared configuration with the Vite plugin for Ruby.
   DEFAULT_CONFIG = load_json("#{ __dir__ }/../../package/default.vite.json").freeze
 
+  # Internal: Configuration options that can not be provided as env vars.
+  NOT_CONFIGURABLE_WITH_ENV = %w[watch_additional_paths].freeze
+
   # Internal: Configuration options that can be provided as env vars.
-  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root]).freeze
+  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root] - NOT_CONFIGURABLE_WITH_ENV).freeze
+
+public
+
+  # Define getters for the configuration options.
+  (CONFIGURABLE_WITH_ENV + NOT_CONFIGURABLE_WITH_ENV).each do |option|
+    define_method(option) { @config[option] }
+  end
 end

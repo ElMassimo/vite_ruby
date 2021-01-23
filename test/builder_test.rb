@@ -15,7 +15,7 @@ class BuilderTest < ViteRails::Test
   end
 
   def vite_env
-    ViteRails.builder.send(:vite_env)
+    ViteRails.config.to_env
   end
 
   def test_custom_environment_variables

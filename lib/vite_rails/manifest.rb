@@ -130,9 +130,10 @@ private
     [
       (dev_server_running? && 'Vite has not yet re-built your latest changes.'),
       (local && !dev_server_running? && "\"autoBuild\": false in your #{ config.mode } configuration."),
+      (local && !dev_server_running? && 'The Vite development server has crashed or is no longer available.'),
       'You have misconfigured config/vite.json file.',
       (!local && 'Assets have not been precompiled'),
-    ].select(&:itself)
+    ].compact
   rescue StandardError
     []
   end

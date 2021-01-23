@@ -33,7 +33,7 @@ private
     cmd.prepend('node', '--trace-deprecation') if args.delete('--trace-deprecation')
     args.append('--mode', ViteRails.mode) unless args.include?('--mode') || args.include?('-m')
     cmd += args
-    Dir.chdir(File.expand_path('.', Dir.pwd)) { Kernel.exec(ViteRails.env, *cmd) }
+    Dir.chdir(File.expand_path('.', Dir.pwd)) { Kernel.exec(ViteRails.config.to_env, *cmd) }
   end
 
   # Internal: Resolves to an executable for Vite.

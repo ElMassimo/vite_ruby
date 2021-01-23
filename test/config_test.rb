@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ConfigurationTest < ViteRails::Test
+class ConfigTest < ViteRails::Test
   def expand_path(path)
     File.expand_path(Pathname.new(__dir__).join(path).to_s)
   end
@@ -24,7 +24,7 @@ class ConfigurationTest < ViteRails::Test
   end
 
   def test_source_code_dir
-    assert_path 'test_app/app/frontend', @config.source_code_dir
+    assert_equal 'app/frontend', @config.source_code_dir
   end
 
   def test_entrypoints_dir
@@ -32,7 +32,7 @@ class ConfigurationTest < ViteRails::Test
   end
 
   def test_public_dir
-    assert_path 'test_app/public', @config.public_dir
+    assert_equal 'public', @config.public_dir
   end
 
   def test_build_output_dir
@@ -85,6 +85,17 @@ class ConfigurationTest < ViteRails::Test
     end
   end
 
+  def test_to_env
+    env = @config.to_env
+    assert_nil env['VITE_RUBY_ASSET_HOST']
+
+    Rails.application.config.action_controller.asset_host = 'assets-cdn.com'
+    env = refresh_config.to_env
+    assert_equal env['VITE_RUBY_ASSET_HOST'], 'assets-cdn.com'
+  ensure
+    Rails.application.config.action_controller.asset_host = nil
+  end
+
   def test_environment_vars
     ViteRails.env = {
       'VITE_RUBY_AUTO_BUILD' => 'true',
@@ -106,13 +117,13 @@ class ConfigurationTest < ViteRails::Test
     assert_equal 1920, @config.port
     assert_equal true, @config.https
     assert_equal 'https', @config.protocol
-    assert_equal Pathname.new('config/vite_additional_paths.json'), @config.config_path
+    assert_equal 'config/vite_additional_paths.json', @config.config_path
     assert_pathname 'tmp/vitebuild', @config.build_cache_dir
-    assert_pathname 'pb', @config.public_dir
+    assert_equal 'pb', @config.public_dir
     assert_equal Pathname.new('ft'), @config.public_output_dir
     assert_pathname 'pb/ft', @config.build_output_dir
     assert_equal 'as', @config.assets_dir
-    assert_pathname 'app', @config.source_code_dir
+    assert_equal 'app', @config.source_code_dir
     assert_equal 'frontend/entrypoints', @config.entrypoints_dir
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
     assert_equal true, @config.hide_build_console_output
