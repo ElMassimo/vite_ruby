@@ -207,7 +207,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_rails (1.0.9)
+    vite_rails (1.0.10)
       activesupport (>= 5.1)
       rack-proxy (>= 0.6.1)
       railties (>= 5.1)
@@ -252,7 +252,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
-  vite_rails (= 1.0.9)
+  vite_rails (= 1.0.10)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
