@@ -10,7 +10,7 @@
   </a>
 
   <br>
-  
+
   <p align="center">
     <a href="https://github.com/ElMassimo/vite_rails/actions">
       <img alt="Build Status" src="https://github.com/ElMassimo/vite_rails/workflows/build/badge.svg"/>
@@ -41,6 +41,8 @@
 [config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
 [example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
 [heroku]: https://vite-rails-demo.herokuapp.com/
+[Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
+[Discussions]: https://github.com/ElMassimo/vite_rails/discussions
 
 [__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
 
@@ -93,6 +95,13 @@ Add the following your `views/layouts/application.html.erb`:
 Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
 
 For more [guides] and a full [configuration reference], check the [documentation website][website].
+
+## Contact ✉️
+
+Please use [Issues] to report bugs you find, and [Discussions] to make feature requests or get help.
+
+Don't hesitate to _⭐️ star the project_ if you find it useful!
+
 
 ## Special Thanks 🙏
 

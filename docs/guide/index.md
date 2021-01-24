@@ -11,6 +11,8 @@
 [dev options]: /config/#development-options
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
+[GitHub Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
+[GitHub Discussions]: https://github.com/ElMassimo/vite_rails/discussions
 
 # Getting Started
 
@@ -73,3 +75,9 @@ Visit any page and you should see a printed console output: `Vite ⚡️ Rails`!
 You can now start writing modern JavaScript apps with Vite! 😃
 
 Check an [example app] running on [Heroku].
+
+### Contact ✉️
+
+Please visit [GitHub Issues] to report bugs you find, and [GitHub Discussions] to make feature requests, or to get help.
+
+Don't hesitate to [⭐️ star the project][vite rails] if you find it useful!
