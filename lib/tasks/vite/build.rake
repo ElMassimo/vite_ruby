@@ -3,14 +3,24 @@
 $stdout.sync = true
 
 def enhance_assets_precompile
+  # Before installing
+  ['yarn:install', 'webpacker:yarn_install'].each do |name|
+    Rake::Task[name].enhance([:'vite:set_node_env']) if Rake::Task.task_defined?(name)
+  end
+
+  # After precompiling
   Rake::Task['assets:precompile'].enhance do |task|
     prefix = task.name.split(/#|assets:precompile/).first
-
     Rake::Task["#{ prefix }vite:build"].invoke
   end
 end
 
 namespace :vite do
+  desc 'Fixes Rails management of node dev dependencies (build dependencies)'
+  task :set_node_env do
+    ENV['NODE_ENV'] = 'development'
+  end
+
   desc 'Compile JavaScript packs using vite for production with digests'
   task build: [:'vite:verify_install', :environment] do
     ViteRails.build_from_rake

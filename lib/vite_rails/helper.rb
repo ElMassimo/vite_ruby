@@ -11,7 +11,9 @@ module ViteRails::Helper
 
   # Public: Renders a script tag for vite/client to enable HMR in development.
   def vite_client_tag
-    content_tag('script', '', src: '/@vite/client', type: 'module') if ViteRails.dev_server_running?
+    return unless current_vite_instance.dev_server_running?
+
+    content_tag('script', '', src: current_vite_instance.manifest.prefix_vite_asset('@vite/client'), type: 'module')
   end
 
   # Public: Resolves the path for the specified Vite asset.
@@ -33,12 +35,12 @@ module ViteRails::Helper
     js_entries = names.map { |name| current_vite_instance.manifest.lookup!(name, type: asset_type) }
     js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, crossorigin: crossorigin, type: type, **options)
 
-    unless skip_preload_tags || ViteRails.dev_server_running?
+    unless skip_preload_tags || current_vite_instance.dev_server_running?
       preload_paths = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq
       preload_tags = preload_paths.map { |path| preload_link_tag(path, crossorigin: crossorigin) }
     end
 
-    unless skip_style_tags || ViteRails.dev_server_running?
+    unless skip_style_tags || current_vite_instance.dev_server_running?
       style_paths = names.map { |name|
         current_vite_instance.manifest.lookup(name.delete_suffix('.js'), type: :stylesheet)&.fetch('file')
       }.compact

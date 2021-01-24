@@ -38,13 +38,13 @@ class EngineRakeTasksTest < Minitest::Test
     within_mounted_app { `bundle exec rake app:vite:clobber` }
     refute app_public_dir.exist?
   rescue Minitest::Assertion => error
-    raise error unless Rails.gem_version >= Gem::Version.new('6.1.0')
+    raise error, [error.message, @command_results.join("\n\n")].join("\n")
   end
 
 private
 
   def within_mounted_app
-    Dir.chdir(mounted_app_path) { yield }
+    Dir.chdir(mounted_app_path) { yield }.tap { |result| @command_results << result }
   end
 
   def mounted_app_path
@@ -76,5 +76,6 @@ private
     vite_config_ts_path.delete if vite_config_ts_path.exist?
     app_frontend_dir.rmtree if app_frontend_dir.exist?
     app_public_dir.rmtree if app_public_dir.exist?
+    @command_results = []
   end
 end

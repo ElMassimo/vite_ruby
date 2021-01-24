@@ -55,7 +55,7 @@ private
   def coerce_values(config)
     config['mode'] = config['mode'].to_s
     config['port'] = config['port'].to_i
-    coerce_paths(config, 'root', 'public_output_dir')
+    config['root'] = Pathname.new(config['root'])
     config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
     coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https')
   end
@@ -65,14 +65,9 @@ private
     names.each { |name| config[name] = [true, 'true'].include?(config[name]) }
   end
 
-  # Internal: Converts configuration options to pathname.
-  def coerce_paths(config, *names)
-    names.each { |name| config[name] = Pathname.new(config[name]) unless config[name].nil? }
-  end
-
   class << self
     # Public: Returns the project configuration for Vite.
-    def resolve_config(attrs = {})
+    def resolve_config(**attrs)
       config = attrs.transform_keys(&:to_s).reverse_merge(config_defaults)
       file_path = File.join(config['root'], config['config_path'])
       file_config = config_from_file(file_path, mode: config['mode'])

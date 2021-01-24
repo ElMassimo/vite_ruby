@@ -2,7 +2,7 @@
 import '@rails/ujs'
 
 import Turbolinks from 'turbolinks'
-import ActiveStorage from '@rails/activestorage'
+import * as ActiveStorage from '@rails/activestorage'
 
 // Import all channels.
 import.meta.globEager('../channels/**/*_channel.js')
