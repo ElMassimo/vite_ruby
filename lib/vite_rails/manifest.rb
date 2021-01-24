@@ -42,6 +42,11 @@ class ViteRails::Manifest
     @manifest = load_manifest
   end
 
+  # Public: Scopes an asset to the output folder in public, as a path.
+  def prefix_vite_asset(path)
+    File.join("/#{ config.public_output_dir }", path)
+  end
+
 private
 
   delegate :config, :builder, :dev_server_running?, to: :@vite_rails
@@ -55,7 +60,7 @@ private
   # Internal: Finds the specified entry in the manifest.
   def find_manifest_entry(name)
     if dev_server_running?
-      { 'file' => "/#{ config.public_output_dir.join(name.to_s) }" }
+      { 'file' => prefix_vite_asset(name.to_s) }
     else
       manifest[name.to_s]
     end
@@ -80,8 +85,8 @@ private
   def load_manifest
     if config.manifest_path.exist?
       JSON.parse(config.manifest_path.read).each do |_, entry|
-        entry['file'] = within_public_output_dir(entry['file'])
-        entry['imports'] = entry['imports']&.map { |path| within_public_output_dir(path) }
+        entry['file'] = prefix_vite_asset(entry['file'])
+        entry['imports'] = entry['imports']&.map { |path| prefix_vite_asset(path) }
       end
     else
       {}
@@ -94,11 +99,6 @@ private
 
     extension = extension_for_type(entry_type)
     extension ? "#{ name }.#{ extension }" : name
-  end
-
-  # Internal: Scopes the paths in the manifest to the output folder in public.
-  def within_public_output_dir(path)
-    "/#{ config.public_output_dir.join(path) }"
   end
 
   # Internal: Allows to receive :javascript and :stylesheet as :type in helpers.

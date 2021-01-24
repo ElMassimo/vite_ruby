@@ -13,7 +13,7 @@ module ViteRails::Helper
   def vite_client_tag
     return unless current_vite_instance.dev_server_running?
 
-    content_tag('script', '', src: current_vite_instance.config.public_output_dir.join('@vite/client'), type: 'module')
+    content_tag('script', '', src: current_vite_instance.manifest.prefix_vite_asset('@vite/client'), type: 'module')
   end
 
   # Public: Resolves the path for the specified Vite asset.

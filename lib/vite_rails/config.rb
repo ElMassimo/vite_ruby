@@ -55,7 +55,7 @@ private
   def coerce_values(config)
     config['mode'] = config['mode'].to_s
     config['port'] = config['port'].to_i
-    coerce_paths(config, 'root', 'public_output_dir')
+    config['root'] = Pathname.new(config['root'])
     config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
     coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https')
   end
@@ -63,11 +63,6 @@ private
   # Internal: Coerces configuration options to boolean.
   def coerce_booleans(config, *names)
     names.each { |name| config[name] = [true, 'true'].include?(config[name]) }
-  end
-
-  # Internal: Converts configuration options to pathname.
-  def coerce_paths(config, *names)
-    names.each { |name| config[name] = Pathname.new(config[name]) unless config[name].nil? }
   end
 
   class << self

@@ -38,8 +38,8 @@ class RakeTasksTest < Minitest::Test
       end
     end
 
-    refute_includes installed_node_module_names, 'right-pad',
-                    'Expected only production dependencies to be installed'
+    assert_includes installed_node_module_names, 'right-pad',
+                    'Expected development dependencies to be installed as well'
   end
 
 private

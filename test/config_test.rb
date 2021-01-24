@@ -120,7 +120,7 @@ class ConfigTest < ViteRails::Test
     assert_equal 'config/vite_additional_paths.json', @config.config_path
     assert_pathname 'tmp/vitebuild', @config.build_cache_dir
     assert_equal 'pb', @config.public_dir
-    assert_equal Pathname.new('ft'), @config.public_output_dir
+    assert_equal 'ft', @config.public_output_dir
     assert_pathname 'pb/ft', @config.build_output_dir
     assert_equal 'as', @config.assets_dir
     assert_equal 'app', @config.source_code_dir
