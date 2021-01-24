@@ -11,6 +11,7 @@ class DevServerProxyTest < ViteRails::Test
       [200, { 'Content-Type' => 'application/json' }, env.to_json]
     })
     # Avoid actually using the proxy.
+    Rack::Proxy.remove_method(:perform_request)
     Rack::Proxy.define_method(:perform_request) { |env| capture_app.call(env) }
 
     ViteRails::DevServerProxy.new(capture_app)

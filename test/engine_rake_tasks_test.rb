@@ -24,7 +24,7 @@ class EngineRakeTasksTest < Minitest::Test
     assert vite_config_ts_path.exist?
     assert app_frontend_dir.exist?
 
-    within_mounted_app { `bundle exec rake app:vite:build` }
+    within_mounted_app { @build_result = `bundle exec rake app:vite:build` }
     assert app_public_dir.exist?
     assert app_public_dir.join('manifest.json').exist?
     assert app_public_dir.join('assets').exist?
@@ -38,7 +38,7 @@ class EngineRakeTasksTest < Minitest::Test
     within_mounted_app { `bundle exec rake app:vite:clobber` }
     refute app_public_dir.exist?
   rescue Minitest::Assertion => error
-    raise error unless Rails.gem_version >= Gem::Version.new('6.1.0')
+    raise error, [error.message, @build_result].join("\n")
   end
 
 private
