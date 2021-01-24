@@ -54,9 +54,9 @@ function coerceConfigurationValues(config: UnifiedConfig, projectRoot: string): 
   config.outDir = relative(config.root!, buildOutputDir) // Vite expects it to be relative
 
   // Add the asset host to enable usage of a CDN.
-  const { assetHost = '' } = config
+  const assetHost = config.assetHost || ''
   const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
-  config.base = `${assetHostWithProtocol}/${config.publicOutputDir!}`
+  config.base = `${assetHostWithProtocol}/${config.publicOutputDir!}/`
 
   return config
 }
