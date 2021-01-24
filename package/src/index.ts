@@ -20,7 +20,6 @@ function config(config: UserConfig): UserConfig {
 
   const build = {
     assetsDir,
-    base,
     emptyOutDir: false,
     outDir,
     manifest: true,
@@ -32,6 +31,7 @@ function config(config: UserConfig): UserConfig {
     alias: {
       '~/': `${resolve(join(projectRoot, sourceCodeDir!))}/`,
     },
+    base,
     root,
     server,
     build,
