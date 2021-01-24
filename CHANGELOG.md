@@ -1,3 +1,9 @@
+## Vite Rails 1.0.11  (2020-01-24)
+
+- Fix bug in `assetHost` that caused `base` to be configured incorrectly.
+- Allow installing `vite` and `vite-plugin-ruby` as devDependencies, and install them when precompiling assets.
+- Move `base` to the configuration root after Vite's update in beta.38
+
 ## Vite Rails 1.0.10  (2020-01-23)
 
 - Use `path_to_asset` in `vite_asset_path` so that it's prefixed automatically
