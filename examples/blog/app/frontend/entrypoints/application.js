@@ -11,8 +11,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 // Example: Import a stylesheet in app/frontend/styles
-import '~/styles/tailwind.css'
-import '~/styles/index.css'
+import '~/styles/theme.css'
 
 import '~/entrypoints/example_import.js'
 import '~/outer_import.js'
