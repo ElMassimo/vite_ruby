@@ -1,13 +1,15 @@
 ### Description 📖
 
-This pull request
+When attempting to
 
 ### Background 📜
 
-This was happening because
+This seems to happen when
 
-### The Fix 🔨
+Running `bin/rake vite:info` gives the following output:
 
-By changing
+```
+
+```
 
 ### Screenshots 📷
