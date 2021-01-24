@@ -67,7 +67,7 @@ private
 
   class << self
     # Public: Returns the project configuration for Vite.
-    def resolve_config(attrs = {})
+    def resolve_config(**attrs)
       config = attrs.transform_keys(&:to_s).reverse_merge(config_defaults)
       file_path = File.join(config['root'], config['config_path'])
       file_config = config_from_file(file_path, mode: config['mode'])

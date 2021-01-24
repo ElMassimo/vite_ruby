@@ -3,16 +3,10 @@
 $stdout.sync = true
 
 def enhance_assets_precompile
-  install_task = if Rake::Task.task_defined?('yarn:install')
-    # Prevent double installation
-    Rake::Task['webpacker:yarn_install'].clear if Rake::Task.task_defined?('webpacker:yarn_install')
-    Rake::Task['yarn:install']
-  elsif Rake::Task.task_defined?('webpacker:yarn_install')
-    Rake::Task['webpacker:yarn_install']
-  end
-
   # Before installing
-  install_task&.enhance([:'vite:set_node_env'])
+  ['yarn:install', 'webpacker:yarn_install'].each do |name|
+    Rake::Task[name].enhance([:'vite:set_node_env']) if Rake::Task.task_defined?(name)
+  end
 
   # After precompiling
   Rake::Task['assets:precompile'].enhance do |task|
