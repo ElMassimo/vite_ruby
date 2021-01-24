@@ -6,11 +6,12 @@
     "docs:build": "npm -C docs run docs:build",
     "docs:search": "npm -C docs run docs:search",
     "docs:lint": "npm -C docs run lint",
+    "build": "rm -rf package/dist && npm -C package run prerelease",
     "lint": "npm -C package run lint",
     "test": "npm -C package run test"
   },
   "dependencies": {
-    "vite": "^2.0.0-beta.34",
-    "vite-plugin-ruby": "^1.0.4"
+    "vite": "2.0.0-beta.46",
+    "vite-plugin-ruby": "^1.0.5"
   }
 }

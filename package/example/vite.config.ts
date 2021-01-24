@@ -9,7 +9,7 @@ const config: UserConfig = {
     ViteRuby(),
   ],
   optimizeDeps: {
-    exclude: [/webpack/, /vite-plugin-ruby/],
+    exclude: [/webpack/], // In case webpacker is installed (these deps won't be imported)
   },
 }
 

@@ -14,7 +14,7 @@ class ViteRails
   ENV_PREFIX = 'VITE_RUBY'
 
   class << self
-    delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, to: :instance
+    delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, :run_proxy?, to: :instance
     delegate :mode, to: :config
     delegate :bootstrap, :clean, :clean_from_rake, :clobber, :build, :build_from_rake, to: :commands
 
@@ -27,14 +27,6 @@ class ViteRails
     def run(args)
       $stdout.sync = true
       ViteRails::Runner.new(args).run
-    end
-
-    # Public: The proxy for assets should only run in development mode.
-    def run_proxy?
-      config.mode == 'development'
-    rescue StandardError => error
-      logger.error("Failed to check mode for Vite: #{ error.message }")
-      false
     end
 
     # Internal: Allows to obtain any env variables for configuration options.
@@ -53,7 +45,15 @@ class ViteRails
 
   # Public: Returns true if the Vite development server is running.
   def dev_server_running?
-    ViteRails.run_proxy? && dev_server.running?
+    run_proxy? && dev_server.running?
+  end
+
+  # Public: The proxy for assets should only run in development mode.
+  def run_proxy?
+    config.mode == 'development'
+  rescue StandardError => error
+    ViteRails.logger.error("Failed to check mode for Vite: #{ error.message }")
+    false
   end
 
   # Public: Current instance configuration for Vite.

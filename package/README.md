@@ -39,9 +39,6 @@ export default {
     Vue(),
     ViteRuby(),
   ],
-  optimizeDeps: {
-    exclude: [/vite-plugin-ruby/],
-  },
 };
 ```
 

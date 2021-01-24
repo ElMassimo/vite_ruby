@@ -33,8 +33,8 @@ Dir.chdir(Rails.root) do
   vite_version = package_json.match(/"vite": "(.*)"/)[1]
   plugin_version = package_json.match(/"vite-plugin-ruby": "(.*)"/)[1]
 
-  say 'Installing vite as direct dependencies'
-  run "yarn add vite@#{ vite_version } vite-plugin-ruby@#{ plugin_version }"
+  say 'Installing vite as build dependencies'
+  run "yarn add -D vite@#{ vite_version } vite-plugin-ruby@#{ plugin_version }"
 end
 
 say 'Vite ⚡️ Rails successfully installed! 🎉', :green
