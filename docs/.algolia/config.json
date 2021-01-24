@@ -29,7 +29,7 @@
       },
       "lvl1": ".content h1",
       "lvl2": ".content h2",
-      "lvl3": ".content h3",
+      "lvl3": ".content h3, .content li kbd",
       "lvl4": ".content h4",
       "lvl5": ".content h5",
       "text": ".content p, .content li",

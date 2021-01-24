@@ -16,6 +16,11 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
 [entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
+[vite_client_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L13-L17
+[vite_javascript_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L28-L51
+[vite_typescript_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L57-L59
+[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L62-L64
+[vite_asset_path]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L23-L25
 
 # Developing with Vite
 
@@ -73,10 +78,10 @@ You can add them to your HTML layouts or views using the provided [tag helpers].
 In order to link the JavaScript and CSS managed by Vite in your Rails layouts or
 templates, you can by using the following helpers:
 
-- <kbd>vite_client_tag</kbd>: Renders the Vite client to enable Hot Module Reload.
-- <kbd>vite_javascript_tag</kbd>: Render a `<script>` tag referencing a JavaScript file.
-- <kbd>vite_typescript_tag</kbd>: Render a `<script>` tag referencing a TypeScript file.
-- <kbd>vite_stylesheet_tag</kbd>: Render a `<link>` tag referencing a CSS file.
+- <kbd>[vite_client_tag]</kbd>: Renders the Vite client to enable Hot Module Reload.
+- <kbd>[vite_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
+- <kbd>[vite_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
+- <kbd>[vite_stylesheet_tag]</kbd>: Render a `<link>` tag referencing a CSS file.
 
 You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd>stylesheet_link_tag</kbd>.
 
@@ -92,7 +97,7 @@ You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd
 </head>
 ```
 
-For other types of assets, you can use <kbd>vite_asset_path</kbd> and pass the resulting URI to the appropriate tag helper.
+For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the resulting URI to the appropriate tag helper.
 
 ```erb
 <img src="<%= vite_asset_path 'images/logo.svg' %>" />
@@ -101,7 +106,7 @@ For other types of assets, you can use <kbd>vite_asset_path</kbd> and pass the r
 
 ### Smart Output ✨
 
-For convenience, <kbd>vite_javascript_tag</kbd> will automatically inject tags for styles or entries imported within a script.
+For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
 
 ```erb
 <%= vite_javascript_tag 'application' %>
