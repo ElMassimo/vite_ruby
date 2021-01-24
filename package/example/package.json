@@ -2,6 +2,7 @@
   "name": "Vite Plugin Ruby Example",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "cross-env DEBUG=vite-plugin-ruby:* vite",
     "build": "cross-env DEBUG=vite-plugin-ruby:* vite build --mode production"

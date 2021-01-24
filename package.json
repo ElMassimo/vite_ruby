@@ -1,12 +1,14 @@
 {
   "name": "only-for-workflows",
   "version": "unknown",
+  "license": "MIT",
   "scripts": {
     "docs": "npm -C docs run docs",
     "docs:build": "npm -C docs run docs:build",
     "docs:search": "npm -C docs run docs:search",
     "docs:lint": "npm -C docs run lint",
     "build": "rm -rf package/dist && npm -C package run prerelease",
+    "release": "rm -rf package/dist && npm -C package run release",
     "lint": "npm -C package run lint",
     "test": "npm -C package run test"
   },
