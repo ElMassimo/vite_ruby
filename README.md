@@ -50,7 +50,7 @@ Check an [example app] running on [Heroku].
 
 ## Features ⚡️
 
-- 🤖 Automatic entrypoint detection
+- 💡 Instant server start
 - ⚡️ Blazing fast hot reload
 - 🚀 Zero-config deployments
 - 🤝 Integrated with <kbd>assets:precompile</kbd>
