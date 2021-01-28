@@ -21,8 +21,7 @@ module ViteRails::Helper
   # Example:
   #   <%= vite_asset_path 'calendar.css' %> # => "/vite/assets/calendar-1016838bab065ae1e122.css"
   def vite_asset_path(name, **options)
-    entry = current_vite_instance.manifest.lookup!(name, **options)
-    path_to_asset entry.fetch(options[:type] == :stylesheet ? 'css' : 'file')
+    path_to_asset current_vite_instance.manifest.lookup!(name, **options).fetch('file')
   end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
@@ -41,7 +40,7 @@ module ViteRails::Helper
     }
 
     unless skip_preload_tags || current_vite_instance.dev_server_running?
-      preload_paths = preload_entries.map { |entry| entry['file'] }.compact.uniq
+      preload_paths = preload_entries.map { |entry| entry['file'] }.compact
       preload_tags = preload_paths.map { |path| preload_link_tag(path, crossorigin: crossorigin) }
     end
 
