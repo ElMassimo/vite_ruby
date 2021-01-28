@@ -36,7 +36,7 @@ function config(config: UserConfig): UserConfig {
     server,
     build,
     optimizeDeps: {
-      exclude: [/webpack/, /vite-plugin-ruby/],
+      exclude: ['vite-plugin-ruby'],
     },
   })
 }

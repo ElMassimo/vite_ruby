@@ -86,7 +86,7 @@ private
     if config.manifest_path.exist?
       JSON.parse(config.manifest_path.read).each do |_, entry|
         entry['file'] = prefix_vite_asset(entry['file'])
-        entry['imports'] = entry['imports']&.map { |path| prefix_vite_asset(path) }
+        entry['css'] = prefix_vite_asset(entry['css']) if entry['css']
       end
     else
       {}

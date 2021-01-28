@@ -8,9 +8,6 @@ const config: UserConfig = {
     Vue(),
     ViteRuby(),
   ],
-  optimizeDeps: {
-    exclude: [/webpack/], // In case webpacker is installed (these deps won't be imported)
-  },
 }
 
 export default config
