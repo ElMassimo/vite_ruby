@@ -1,6 +1,8 @@
 ---
 home: true
 
+title: ''
+
 heroText: Vite Rails
 
 actionText: Get Started
