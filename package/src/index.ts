@@ -8,12 +8,19 @@ import { assetsManifestPlugin } from './manifest'
 
 export * from './types'
 
-const projectRoot = configOptionFromEnv('root') || process.cwd()
+// Public: The resolved project root.
+export const projectRoot = configOptionFromEnv('root') || process.cwd()
 
-export {
-  projectRoot,
-  loadConfiguration,
-  resolveEntrypoints,
+// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
+// a shared JSON configuration file that can be read from Ruby.
+export default function ViteRubyPlugin(): Plugin[] {
+  return [
+    {
+      name: 'vite-plugin-ruby',
+      config,
+    },
+    assetsManifestPlugin(),
+  ]
 }
 
 const debug = createDebugger('vite-plugin-ruby:config')
@@ -48,16 +55,4 @@ function config(config: UserConfig): UserConfig {
       exclude: ['vite-plugin-ruby'],
     },
   })
-}
-
-// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
-// a shared JSON configuration file that can be read from Ruby.
-export default function ViteRubyPlugin(): Plugin[] {
-  return [
-    {
-      name: 'vite-plugin-ruby',
-      config,
-    },
-    assetsManifestPlugin(),
-  ]
 }

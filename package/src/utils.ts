@@ -1,16 +1,6 @@
-import path from 'path'
-import os from 'os'
 import { readFileSync } from 'fs'
-import slash from 'slash'
 
 import { ENV_PREFIX } from './constants'
-
-const isWindows = os.platform() === 'win32'
-
-// Internal: Normalizes a file path.
-export function normalizePath(id: string): string {
-  return path.posix.normalize(isWindows ? slash(id) : id)
-}
 
 // Internal: Returns true if the specified value is a string.
 export function isString(value: unknown): value is string {

@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env DEBUG=vite-plugin-ruby:assets* vite",
-    "build": "cross-env DEBUG=vite-plugin-ruby:assets* vite build --mode production",
+    "dev": "cross-env DEBUG=vite-plugin-ruby:* vite",
+    "build": "cross-env DEBUG=vite-plugin-ruby:* vite build --mode production",
     "serve": "cross-env RAILS_ENV=production DEBUG=vite-plugin-ruby:* vite preview"
   },
   "devDependencies": {
