@@ -7426,8 +7426,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vite-plugin-ruby@file:../../package":
+vite-plugin-ruby@1.0.6:
   version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.6.tgz#7ecaf2b8ad4237096c631587e7170c4ce95c0a26"
+  integrity sha512-wJ0Djf/t1bqaowO14ceeNKeqgKW69WwNHboV/Gxq+66NpuDSm8jLKRtm+CiqnvlT9fK5NCiNwtyFkgsKbKAH/g==
   dependencies:
     fast-glob "^3.2.4"
 
