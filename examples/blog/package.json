@@ -11,9 +11,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "vite-plugin-ruby": "1.0.5",
+    "vite-plugin-ruby": "file:../../package",
     "postcss": "8.2.4",
-    "vite": "^2.0.0-beta.54",
+    "vite": "^2.0.0-beta.56",
     "webpack-dev-server": "^3.11.2"
   }
 }

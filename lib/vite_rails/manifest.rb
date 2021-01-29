@@ -37,9 +37,11 @@ class ViteRails::Manifest
     find_manifest_entry(with_file_extension(name, type))
   end
 
-  # Public: Refreshes the cached mappings by reading the updated manifest.
+  # Public: Refreshes the cached mappings by reading the updated manifest files.
   def refresh
-    @manifest = load_manifest
+    @manifest = [config.manifest_path, config.assets_manifest_path].each_with_object({}) do |path, manifest|
+      manifest.merge!(load_manifest_file(path))
+    end
   end
 
   # Public: Scopes an asset to the output folder in public, as a path.
@@ -78,18 +80,16 @@ private
   def manifest
     return refresh if config.auto_build
 
-    @manifest ||= load_manifest
+    @manifest || refresh
   end
 
-  # Internal: Returns a Hash with the entries in the manifest.json.
-  def load_manifest
-    if config.manifest_path.exist?
-      JSON.parse(config.manifest_path.read).each do |_, entry|
-        entry['file'] = prefix_vite_asset(entry['file'])
-        entry['css'] = prefix_vite_asset(entry['css']) if entry['css']
-      end
-    else
-      {}
+  # Internal: Returns a Hash with the entries in a manifest file.
+  def load_manifest_file(path)
+    return {} unless path.exist?
+
+    JSON.parse(path.read).each do |_, entry|
+      entry['file'] = prefix_vite_asset(entry['file'])
+      entry['css'] = Array.wrap(entry['css']).map { |path| prefix_vite_asset(path) } if entry['css']
     end
   end
 
@@ -115,12 +115,12 @@ private
   def missing_entry_error(name, type: nil, **_options)
     file_name = with_file_extension(name, type)
     raise ViteRails::Manifest::MissingEntryError, <<~MSG
-      Vite Rails can't find #{ file_name } in #{ config.manifest_path }.
+      Vite Rails can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
 
       Possible causes:
       #{ missing_entry_causes.map { |cause| "\t- #{ cause }" }.join("\n") }
 
-      Your manifest contains:
+      Content in your manifests:
       #{ JSON.pretty_generate(@manifest) }
     MSG
   end

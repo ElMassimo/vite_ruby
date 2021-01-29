@@ -40,7 +40,7 @@ export function assetsManifestPlugin(): Plugin {
     },
     generateBundle({ format }, bundle) {
       const manifest: AssetsManifest = {}
-      
+
       Object.values(bundle).forEach((chunk) => {
         if (chunk.type === 'asset' && entries.has(chunk.name!))
           manifest[chunk.name!] = { file: chunk.fileName, src: chunk.name }
