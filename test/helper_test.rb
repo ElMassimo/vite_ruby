@@ -36,14 +36,12 @@ class HelperTest < ActionView::TestCase
   end
 
   def test_vite_stylesheet_tag
-    assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/assets/styles.0e53e684.css" />),
-      vite_stylesheet_tag('styles')
+    assert_equal link(href: '/vite-production/assets/styles.0e53e684.css'), vite_stylesheet_tag('styles')
 
     assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
 
     with_dev_server_running {
-      assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/styles.css" />),
-        vite_stylesheet_tag('styles')
+      assert_equal link(href: '/vite-production/styles.css'), vite_stylesheet_tag('styles')
 
       assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
     }
@@ -54,7 +52,7 @@ class HelperTest < ActionView::TestCase
       %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="preload" href="/vite-production/assets/vendor.880705da.js" as="script" type="text/javascript" crossorigin="anonymous">),
       %(<link rel="preload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">),
-      %(<link rel="stylesheet" media="screen" href="/vite-production/assets/application.f510c1e9.css" />),
+      link(href: '/vite-production/assets/application.f510c1e9.css'),
     ].join, vite_javascript_tag('application')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
@@ -67,5 +65,11 @@ class HelperTest < ActionView::TestCase
       assert_equal %(<script src="/vite-production/application.ts" crossorigin="anonymous" type="module"></script>),
         vite_typescript_tag('application')
     }
+  end
+
+  def link(href:, rel: 'stylesheet', media: 'screen')
+    attrs = [%(media="#{ media }"), %(href="#{ href }")]
+    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.1.1')
+    %(<link rel="#{ rel }" #{attrs.join(' ')} />)
   end
 end
