@@ -37,7 +37,7 @@ class ViteRails::Manifest
     find_manifest_entry(with_file_extension(name, type))
   end
 
-  # Public: Refreshes the cached mappings by reading the updated manifest.
+  # Public: Refreshes the cached mappings by reading the updated manifest files.
   def refresh
     @manifest = load_manifest
   end
@@ -81,15 +81,18 @@ private
     @manifest ||= load_manifest
   end
 
-  # Internal: Returns a Hash with the entries in the manifest.json.
+  # Internal: Loads and merges the manifest files, resolving the asset paths.
   def load_manifest
-    if config.manifest_path.exist?
-      JSON.parse(config.manifest_path.read).each do |_, entry|
-        entry['file'] = prefix_vite_asset(entry['file'])
-        entry['imports'] = entry['imports']&.map { |path| prefix_vite_asset(path) }
-      end
-    else
-      {}
+    files = [config.manifest_path, config.assets_manifest_path].select(&:exist?)
+    files.map { |path| JSON.parse(path.read) }.inject({}, &:merge).tap(&method(:resolve_references))
+  end
+
+  # Internal: Resolves the paths that reference a manifest entry.
+  def resolve_references(manifest)
+    manifest.each_value do |entry|
+      entry['file'] = prefix_vite_asset(entry['file'])
+      entry['css'] = Array.wrap(entry['css']).map { |path| prefix_vite_asset(path) } if entry['css']
+      entry['imports']&.map! { |name| manifest.fetch(name) }
     end
   end
 
@@ -106,7 +109,7 @@ private
     case entry_type
     when :javascript then 'js'
     when :stylesheet then 'css'
-    when :typescript then dev_server_running? ? 'ts' : 'js'
+    when :typescript then 'ts'
     else entry_type
     end
   end
@@ -115,12 +118,12 @@ private
   def missing_entry_error(name, type: nil, **_options)
     file_name = with_file_extension(name, type)
     raise ViteRails::Manifest::MissingEntryError, <<~MSG
-      Vite Rails can't find #{ file_name } in #{ config.manifest_path }.
+      Vite Rails can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
 
       Possible causes:
       #{ missing_entry_causes.map { |cause| "\t- #{ cause }" }.join("\n") }
 
-      Your manifest contains:
+      Content in your manifests:
       #{ JSON.pretty_generate(@manifest) }
     MSG
   end
@@ -133,7 +136,7 @@ private
       (local && !dev_server_running? && 'The Vite development server has crashed or is no longer available.'),
       'You have misconfigured config/vite.json file.',
       (!local && 'Assets have not been precompiled'),
-    ].compact
+    ].select(&:present?)
   rescue StandardError
     []
   end

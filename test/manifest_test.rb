@@ -25,13 +25,19 @@ class ManifestTest < ViteRails::Test
 
   def test_lookup_success!
     entry = {
-      'file' => '/vite-production/assets/application.a0ba047e.js',
+      'file' => '/vite-production/assets/application.d9514acc.js',
+      'src' => 'application.js',
+      'isEntry' => true,
       'imports' => [
-        '/vite-production/assets/example_import.8e1fddc0.js',
+        { 'file' => '/vite-production/assets/vendor.880705da.js' },
+        { 'file' => '/vite-production/assets/example_import.8e1fddc0.js', 'src' => 'example_import.js', 'isEntry' => true },
+      ],
+      'css' => [
+        '/vite-production/assets/application.f510c1e9.css',
       ],
     }
     assert_equal entry, ViteRails.manifest.lookup!('application.js', type: :javascript)
-    assert_equal entry, ViteRails.manifest.lookup!('application', type: :typescript)
+    assert_equal entry.merge('src' => 'application.ts'), ViteRails.manifest.lookup!('application', type: :typescript)
   end
 
   def test_lookup_success_with_dev_server_running!
@@ -50,16 +56,16 @@ class ManifestTest < ViteRails::Test
   end
 
   def test_lookup_success
-    entry = { 'file' => '/vite-production/assets/application.cccfef34.css', 'imports' => nil }
-    assert_equal entry, ViteRails.manifest.lookup('application.css')
-    assert_equal entry, ViteRails.manifest.lookup('application.css', type: :stylesheet)
-    assert_equal entry, ViteRails.manifest.lookup('application', type: :stylesheet)
+    entry = { 'file' => '/vite-production/assets/styles.0e53e684.css', 'src' => 'styles.css' }
+    assert_equal entry, ViteRails.manifest.lookup('styles.css')
+    assert_equal entry, ViteRails.manifest.lookup('styles.css', type: :stylesheet)
+    assert_equal entry, ViteRails.manifest.lookup('styles', type: :stylesheet)
   end
 
   def test_lookup_success_with_dev_server_running
-    entry = { 'file' => '/vite-production/application.css' }
+    entry = { 'file' => '/vite-production/styles.css' }
     with_dev_server_running {
-      assert_equal entry, ViteRails.manifest.lookup('application', type: :stylesheet)
+      assert_equal entry, ViteRails.manifest.lookup('styles', type: :stylesheet)
     }
   end
 

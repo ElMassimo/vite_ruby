@@ -1,5 +1,16 @@
 import { readFileSync } from 'fs'
+
 import { ENV_PREFIX } from './constants'
+
+// Internal: Returns true if the specified value is a string.
+export function isString(value: unknown): value is string {
+  return typeof value === 'string'
+}
+
+// Internal: Returns true if the specified value is a plain JS object
+export function isObject(value: unknown): value is Record<string, any> {
+  return Object.prototype.toString.call(value) === '[object Object]'
+}
 
 // Internal: Simplistic version that gets the job done for this scenario.
 // Example: screamCase('buildOutputDir') === 'build_output_dir'
@@ -28,11 +39,11 @@ export function loadJsonConfig<T>(filepath: string): T {
 }
 
 // Internal: Removes any keys with undefined or null values from the object.
-export function cleanConfig(object: Record<any, any>) {
+export function cleanConfig(object: Record<string, any>) {
   Object.keys(object).forEach((key) => {
     const value = object[key]
     if (value === undefined || value === null) delete object[key]
-    else if (typeof value === 'object') cleanConfig(value)
+    else if (isObject(value)) cleanConfig(value)
   })
   return object
 }

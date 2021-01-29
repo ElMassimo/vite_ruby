@@ -1,3 +1,8 @@
+## Vite Rails 1.0.12  (2020-01-29)
+
+- Add support for Vite 2.0.0-beta.56, which modified the manifest to output a `css` field in the manifest.
+- Start generating an assets manifest, since 2.0.0-beta.51 stopped including non-JS entrypoints in the manifest.
+
 ## Vite Rails 1.0.11  (2020-01-24)
 
 - Fix bug in `assetHost` that caused `base` to be configured incorrectly.

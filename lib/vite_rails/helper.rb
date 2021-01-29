@@ -35,15 +35,15 @@ module ViteRails::Helper
     js_entries = names.map { |name| current_vite_instance.manifest.lookup!(name, type: asset_type) }
     js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, crossorigin: crossorigin, type: type, **options)
 
+    preload_entries = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq
+
     unless skip_preload_tags || current_vite_instance.dev_server_running?
-      preload_paths = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq
+      preload_paths = preload_entries.map { |entry| entry['file'] }.compact.uniq
       preload_tags = preload_paths.map { |path| preload_link_tag(path, crossorigin: crossorigin) }
     end
 
     unless skip_style_tags || current_vite_instance.dev_server_running?
-      style_paths = names.map { |name|
-        current_vite_instance.manifest.lookup(name.delete_suffix('.js'), type: :stylesheet)&.fetch('file')
-      }.compact
+      style_paths = (js_entries + preload_entries).flat_map { |entry| entry['css'] }.compact.uniq
       style_tags = stylesheet_link_tag(*style_paths)
     end
 

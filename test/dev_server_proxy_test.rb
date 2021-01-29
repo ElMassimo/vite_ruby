@@ -96,7 +96,7 @@ private
 
     path, query = to.split('?')
     assert_equal path, env['PATH_INFO']
-    assert_equal query, env['QUERY_STRING']
+    assert_equal query.to_s, env['QUERY_STRING'].to_s
     assert_equal to, env['REQUEST_URI']
   end
 end

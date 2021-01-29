@@ -2,7 +2,7 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
-    "vite": "^2.0.0-beta.46",
-    "vite-plugin-ruby": "^1.0.5"
+    "vite": "^2.0.0-beta.56",
+    "vite-plugin-ruby": "^1.0.6"
   }
 }

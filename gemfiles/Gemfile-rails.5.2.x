@@ -8,3 +8,7 @@ gem "rack-proxy", require: false
 gem "minitest", "~> 5.0"
 gem "pry-byebug"
 gem "simplecov", '< 0.18'
+
+group :test do
+  gem "m"
+end

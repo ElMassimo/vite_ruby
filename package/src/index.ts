@@ -1,17 +1,33 @@
 import { resolve, join } from 'path'
 import type { Plugin, UserConfig } from 'vite'
+import createDebugger from 'debug'
+
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { loadConfiguration, resolveEntrypoints } from './config'
+import { assetsManifestPlugin } from './manifest'
 
 export * from './types'
 
-export {
-  loadConfiguration,
-  resolveEntrypoints,
+// Public: The resolved project root.
+export const projectRoot = configOptionFromEnv('root') || process.cwd()
+
+// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
+// a shared JSON configuration file that can be read from Ruby.
+export default function ViteRubyPlugin(): Plugin[] {
+  return [
+    {
+      name: 'vite-plugin-ruby',
+      config,
+    },
+    assetsManifestPlugin(),
+  ]
 }
 
+const debug = createDebugger('vite-plugin-ruby:config')
+
+// Internal: Resolves the configuration from environment variables and a JSON
+// config file, and configures the entrypoints and manifest generation.
 function config(config: UserConfig): UserConfig {
-  const projectRoot = configOptionFromEnv('root') || process.cwd()
   const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config, projectRoot)
 
   const entrypoints = resolveEntrypoints(root!, projectRoot)
@@ -27,6 +43,8 @@ function config(config: UserConfig): UserConfig {
     sourcemap: mode !== 'development',
   }
 
+  debug({ base, build, root, server })
+
   return cleanConfig({
     alias: {
       '~/': `${resolve(join(projectRoot, sourceCodeDir!))}/`,
@@ -36,16 +54,7 @@ function config(config: UserConfig): UserConfig {
     server,
     build,
     optimizeDeps: {
-      exclude: [/webpack/, /vite-plugin-ruby/],
+      exclude: ['vite-plugin-ruby'],
     },
   })
-}
-
-// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
-// a shared JSON configuration file that can be read from Ruby.
-export default function ViteRubyPlugin(): Plugin {
-  return {
-    name: 'vite-plugin-ruby',
-    config,
-  }
 }

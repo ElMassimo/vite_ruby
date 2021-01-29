@@ -24,6 +24,11 @@ class ViteRails::Config
     build_output_dir.join('manifest.json')
   end
 
+  # Internal: Path where vite-plugin-ruby outputs the assets manifest file.
+  def assets_manifest_path
+    build_output_dir.join('manifest-assets.json')
+  end
+
   # Public: The directory where Vite will store the built assets.
   def build_output_dir
     root.join(public_dir, public_output_dir)
