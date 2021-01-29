@@ -39,9 +39,7 @@ class ViteRails::Manifest
 
   # Public: Refreshes the cached mappings by reading the updated manifest files.
   def refresh
-    @manifest = [config.manifest_path, config.assets_manifest_path].each_with_object({}) do |path, manifest|
-      manifest.merge!(load_manifest_file(path))
-    end
+    @manifest = load_manifest
   end
 
   # Public: Scopes an asset to the output folder in public, as a path.
@@ -80,16 +78,21 @@ private
   def manifest
     return refresh if config.auto_build
 
-    @manifest || refresh
+    @manifest ||= load_manifest
   end
 
-  # Internal: Returns a Hash with the entries in a manifest file.
-  def load_manifest_file(manifest_path)
-    return {} unless manifest_path.exist?
+  # Internal: Loads and merges the manifest files, resolving the asset paths.
+  def load_manifest
+    files = [config.manifest_path, config.assets_manifest_path].select(&:exist?)
+    files.map { |path| JSON.parse(path.read) }.inject({}, &:merge).tap(&method(:resolve_references))
+  end
 
-    JSON.parse(manifest_path.read).each do |_, entry|
+  # Internal: Resolves the paths that reference a manifest entry.
+  def resolve_references(manifest)
+    manifest.each_value do |entry|
       entry['file'] = prefix_vite_asset(entry['file'])
       entry['css'] = Array.wrap(entry['css']).map { |path| prefix_vite_asset(path) } if entry['css']
+      entry['imports']&.map! { |name| manifest.fetch(name) }
     end
   end
 
@@ -106,7 +109,7 @@ private
     case entry_type
     when :javascript then 'js'
     when :stylesheet then 'css'
-    when :typescript then dev_server_running? ? 'ts' : 'js'
+    when :typescript then 'ts'
     else entry_type
     end
   end
@@ -133,7 +136,7 @@ private
       (local && !dev_server_running? && 'The Vite development server has crashed or is no longer available.'),
       'You have misconfigured config/vite.json file.',
       (!local && 'Assets have not been precompiled'),
-    ].compact
+    ].select(&:present?)
   rescue StandardError
     []
   end

@@ -27,33 +27,34 @@ class HelperTest < ActionView::TestCase
   end
 
   def test_vite_asset_path
-    assert_equal '/vite-production/assets/colored.1173bfe0.js', vite_asset_path('colored.js')
-    assert_equal '/vite-production/assets/colored.84277fd6.css', vite_asset_path('colored.css')
+    assert_equal '/vite-production/assets/application.d9514acc.js', vite_asset_path('application.ts')
+    assert_equal '/vite-production/assets/styles.0e53e684.css', vite_asset_path('styles.css')
     with_dev_server_running {
-      assert_equal '/vite-production/colored.js', vite_asset_path('colored.js')
-      assert_equal '/vite-production/colored.css', vite_asset_path('colored.css')
+      assert_equal '/vite-production/application.ts', vite_asset_path('application.ts')
+      assert_equal '/vite-production/styles.css', vite_asset_path('styles.css')
     }
   end
 
   def test_vite_stylesheet_tag
-    assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/assets/colored.84277fd6.css" />),
-      vite_stylesheet_tag('colored')
+    assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/assets/styles.0e53e684.css" />),
+      vite_stylesheet_tag('styles')
 
-    assert_equal vite_stylesheet_tag('colored'), vite_stylesheet_tag('colored.css')
+    assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
 
     with_dev_server_running {
-      assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/colored.css" />),
-        vite_stylesheet_tag('colored')
+      assert_equal %(<link rel="stylesheet" media="screen" href="/vite-production/styles.css" />),
+        vite_stylesheet_tag('styles')
 
-      assert_equal vite_stylesheet_tag('colored'), vite_stylesheet_tag('colored.css')
+      assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
     }
   end
 
   def test_vite_javascript_tag
     assert_equal [
-      %(<script src="/vite-production/assets/application.a0ba047e.js" crossorigin="anonymous" type="module"></script>),
+      %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
+      %(<link rel="preload" href="/vite-production/assets/vendor.880705da.js" as="script" type="text/javascript" crossorigin="anonymous">),
       %(<link rel="preload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">),
-      %(<link rel="stylesheet" media="screen" href="/vite-production/assets/application.cccfef34.css" />),
+      %(<link rel="stylesheet" media="screen" href="/vite-production/assets/application.f510c1e9.css" />),
     ].join, vite_javascript_tag('application')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')

@@ -35,9 +35,7 @@ module ViteRails::Helper
     js_entries = names.map { |name| current_vite_instance.manifest.lookup!(name, type: asset_type) }
     js_tags = javascript_include_tag(*js_entries.map { |entry| entry['file'] }, crossorigin: crossorigin, type: type, **options)
 
-    preload_entries = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq.map { |name|
-      current_vite_instance.manifest.lookup!(name)
-    }
+    preload_entries = js_entries.flat_map { |entry| entry['imports'] }.compact.uniq
 
     unless skip_preload_tags || current_vite_instance.dev_server_running?
       preload_paths = preload_entries.map { |entry| entry['file'] }.compact.uniq
