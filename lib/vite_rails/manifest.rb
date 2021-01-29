@@ -84,10 +84,10 @@ private
   end
 
   # Internal: Returns a Hash with the entries in a manifest file.
-  def load_manifest_file(path)
-    return {} unless path.exist?
+  def load_manifest_file(manifest_path)
+    return {} unless manifest_path.exist?
 
-    JSON.parse(path.read).each do |_, entry|
+    JSON.parse(manifest_path.read).each do |_, entry|
       entry['file'] = prefix_vite_asset(entry['file'])
       entry['css'] = Array.wrap(entry['css']).map { |path| prefix_vite_asset(path) } if entry['css']
     end
