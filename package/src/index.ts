@@ -25,6 +25,8 @@ export default function ViteRubyPlugin(): Plugin[] {
 
 const debug = createDebugger('vite-plugin-ruby:config')
 
+// Internal: Resolves the configuration from environment variables and a JSON
+// config file, and configures the entrypoints and manifest generation.
 function config(config: UserConfig): UserConfig {
   const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config, projectRoot)
 

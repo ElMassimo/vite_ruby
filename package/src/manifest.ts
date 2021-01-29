@@ -14,6 +14,7 @@ interface AssetsManifestChunk {
 
 type AssetsManifest = Record<string, AssetsManifestChunk>
 
+// Internal: Resolves the entrypoint files configured by the main plugin.
 function getEntrypoints(config: ResolvedConfig): string[] {
   const buildInput = config.build.rollupOptions.input
   const resolvePath = (p: string) => path.relative(config.root, path.resolve(config.root, p))
@@ -25,20 +26,21 @@ function getEntrypoints(config: ResolvedConfig): string[] {
   throw new Error(`invalid rollupOptions.input value.\n${buildInput}`)
 }
 
+// Internal: Writes a manifest file that allows to map an entrypoint asset file
+// name to the corresponding output file name.
 export function assetsManifestPlugin(): Plugin {
-  let config: ResolvedConfig
+  let entries: Set<string>
 
   return {
     name: 'vite-plugin-ruby:assets-manifest',
     apply: 'build',
     enforce: 'post',
     configResolved(resolvedConfig: ResolvedConfig) {
-      config = resolvedConfig
+      entries = new Set(getEntrypoints(resolvedConfig))
     },
     generateBundle({ format }, bundle) {
       const manifest: AssetsManifest = {}
-      const entries = new Set(getEntrypoints(config))
-
+      
       Object.values(bundle).forEach((chunk) => {
         if (chunk.type === 'asset' && entries.has(chunk.name!))
           manifest[chunk.name!] = { file: chunk.fileName, src: chunk.name }
