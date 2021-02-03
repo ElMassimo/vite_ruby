@@ -6,6 +6,7 @@ import type { Plugin, ResolvedConfig } from 'vite'
 import { isObject, isString } from './utils'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
+const fingerprintRegex = /\.(\w|\d){8,}\./
 
 interface AssetsManifestChunk {
   src?: string
@@ -29,6 +30,7 @@ function getEntrypoints(config: ResolvedConfig): string[] {
 // Internal: Writes a manifest file that allows to map an entrypoint asset file
 // name to the corresponding output file name.
 export function assetsManifestPlugin(): Plugin {
+  let assetsPrefix: string
   let entries: Set<string>
 
   return {
@@ -36,14 +38,16 @@ export function assetsManifestPlugin(): Plugin {
     apply: 'build',
     enforce: 'post',
     configResolved(resolvedConfig: ResolvedConfig) {
+      assetsPrefix = `${resolvedConfig.build.assetsDir}/`
       entries = new Set(getEntrypoints(resolvedConfig))
     },
     generateBundle({ format }, bundle) {
       const manifest: AssetsManifest = {}
 
       Object.values(bundle).forEach((chunk) => {
-        if (chunk.type === 'asset' && entries.has(chunk.name!))
-          manifest[chunk.name!] = { file: chunk.fileName, src: chunk.name }
+        const name = chunk.name || chunk.fileName.replace(assetsPrefix, '').replace(fingerprintRegex, '.')
+        if (chunk.type === 'asset' && entries.has(name))
+          manifest[name] = { file: chunk.fileName, src: name }
       })
 
       debug(manifest)

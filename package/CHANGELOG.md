@@ -1,3 +1,7 @@
+## vite-plugin-ruby 1.0.7 (2020-01-29)
+
+- Fix assets manifest generation after Vite 2.0.0-beta.62 started sending `name: undefined` for svg entrypoints.
+
 ## vite-plugin-ruby 1.0.6 (2020-01-29)
 
 - Create a new plugin that generates an assets manifest, since Vite 2.0.0-beta.51 stopped including non-JS entrypoints in the manifest.
