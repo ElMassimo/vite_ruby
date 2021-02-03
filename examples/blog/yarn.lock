@@ -7426,17 +7426,17 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-ruby@1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.6.tgz#7ecaf2b8ad4237096c631587e7170c4ce95c0a26"
-  integrity sha512-wJ0Djf/t1bqaowO14ceeNKeqgKW69WwNHboV/Gxq+66NpuDSm8jLKRtm+CiqnvlT9fK5NCiNwtyFkgsKbKAH/g==
+vite-plugin-ruby@1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.7.tgz#824af47ffb95da31cd369fadddd2fc3a245c210f"
+  integrity sha512-PBJ27ciiexEqDve6rlv93n3L+s3RfS62QKDvU1uJMcNeNVPcOkEF7sdXtX0/B34/ZkQhiZjdTHzY665pkPwgPA==
   dependencies:
     fast-glob "^3.2.4"
 
-vite@^2.0.0-beta.56:
-  version "2.0.0-beta.56"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.56.tgz#b254ec4647ae1383d7c5b6f3fdb01f8971b5bcdd"
-  integrity sha512-MX20PSXT6wTfq37B9d/iTmfAut4kBT6DOquw60zVFRtnO7hR9sNmkM6pmoNyVuYJrlkhKZZqoO2DnYs3C7LKCw==
+vite@^2.0.0-beta.62:
+  version "2.0.0-beta.62"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.62.tgz#3227fc63ecd3d6fc67b1b95add68cdcde09844b2"
+  integrity sha512-75RF5H/8Ta2UvTSjiK5EslyTkUTgRMgkeVRDHqlfDNAJUI8+gvXzhEdTpq2bsASjvnlSytBk+odtCxikEoibbg==
   dependencies:
     esbuild "^0.8.34"
     postcss "^8.2.1"
