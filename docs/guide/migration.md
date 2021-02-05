@@ -33,6 +33,15 @@ When migrating from [Webpacker], assuming you were placing your packs in `app/ja
 That way you don't have to move code around, and can proceed to copying your
 [entries][entrypoints] in `app/javascript/packs` to `app/javascript/entrypoints`.
 
+You might also need to:
+
+- Explicitly add a file extension to any non-JS imports.
+- Replace <kbd>javascript_packs_with_chunks_tag</kbd> with <kbd>vite_javascript_tag</kbd>.
+- Replace <kbd>asset_pack_path</kbd> with <kbd>vite_assets_path</kbd>, same for stylesheets.
+- For complex or deeply nested dynamic imports, use [`import.meta.glob`](https://vitejs.dev/guide/features.html#glob-import).
+
+Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1) as an example.
+
 ::: tip Compatibily Note
 Before migrating from [Webpacker], make sure that you are not using any loaders
 that don't have a counterpart in [Vite], which uses [Rollup] when bundling for production.
