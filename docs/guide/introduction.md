@@ -15,6 +15,8 @@
 
 It aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can configure Vite easily as needed.
 
+Check [this video comparison](https://github.com/ElMassimo/pingcrm-vite/pull/1).
+
 ## Why 🤔
 
 [Vite] is great on its own, but configuring it correctly to work for a Rails app structure requires knowledge of its internals.

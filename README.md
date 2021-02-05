@@ -48,7 +48,7 @@
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
-Check an [example app] running on [Heroku].
+Check [this video comparison with webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1), or an [example app] running on [Heroku].
 
 ## Features ⚡️
 
