@@ -6,8 +6,10 @@
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
-[example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
-[heroku]: https://vite-rails-demo.herokuapp.com/
+[example1]: https://github.com/ElMassimo/pingcrm-vite
+[heroku1]: https://pingcrm-vite.herokuapp.com/
+[example2]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[heroku2]: https://vite-rails-demo.herokuapp.com/
 [build options]: /config/#build-options
 [configuration reference]: /config/
 
@@ -65,3 +67,7 @@ The following rake tasks are available:
 All these tasks are aware of the environment. When running them locally in
 development you can provide `RAILS_ENV=production` to simulate a production build.
 :::
+
+<hr/>
+
+If you are looking for example setups, check out this [Vue app][example1] and its [live demo][heroku1], or this very [simple app][example2] and its [live demo][heroku2].

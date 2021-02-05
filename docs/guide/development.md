@@ -7,8 +7,6 @@
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
-[example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
-[heroku]: https://vite-rails-demo.herokuapp.com/
 [build]: /config/#build-options
 [dev options]: /config/#development-options
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84

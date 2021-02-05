@@ -6,8 +6,9 @@
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
-[example app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
-[heroku]: https://vite-rails-demo.herokuapp.com/
+[simple app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[example app]: https://github.com/ElMassimo/pingcrm-vite
+[heroku]: https://pingcrm-vite.herokuapp.com/
 [dev options]: /config/#development-options
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
@@ -52,7 +53,7 @@ will:
 - Add the <kbd>bin/vite</kbd> executable to start the dev server
 
 ::: tip Manual Setup
-Check the configuration in this [example app](https://github.com/ElMassimo/vite_rails/tree/main/examples/blog) if you would prefer to do it manually.
+Check the configuration in this [simple app](https://github.com/ElMassimo/vite_rails/tree/main/examples/blog) if you would prefer to do it manually.
 :::
 
 When working with a framework such as Vue or React, refer to [vite][plugins] to see which [plugins] to add.

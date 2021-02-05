@@ -13,7 +13,7 @@
 
 [__Vite Rails__][library] is a library that provides full [Vite] integration in Rails.
 
-It aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can configure Vite easily as needed.
+It aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can easily configure Vite as needed.
 
 Check [this video comparison](https://github.com/ElMassimo/pingcrm-vite/pull/1).
 
