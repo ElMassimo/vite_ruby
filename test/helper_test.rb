@@ -50,8 +50,8 @@ class HelperTest < ActionView::TestCase
   def test_vite_javascript_tag
     assert_equal [
       %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
-      %(<link rel="preload" href="/vite-production/assets/vendor.880705da.js" as="script" type="text/javascript" crossorigin="anonymous">),
-      %(<link rel="preload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
       link(href: '/vite-production/assets/application.f510c1e9.css'),
     ].join, vite_javascript_tag('application')
 

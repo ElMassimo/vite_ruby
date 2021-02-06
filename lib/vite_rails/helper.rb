@@ -2,8 +2,6 @@
 
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
 module ViteRails::Helper
-  DEFAULT_VITE_SKIP_PRELOAD_TAGS = Rails.gem_version < Gem::Version.new('5.2.0')
-
   # Public: Returns the current Vite Rails instance.
   def current_vite_instance
     ViteRails.instance
@@ -28,7 +26,7 @@ module ViteRails::Helper
   def vite_javascript_tag(*names,
                           type: 'module',
                           asset_type: :javascript,
-                          skip_preload_tags: DEFAULT_VITE_SKIP_PRELOAD_TAGS,
+                          skip_preload_tags: false,
                           skip_style_tags: false,
                           crossorigin: 'anonymous',
                           **options)
@@ -39,7 +37,7 @@ module ViteRails::Helper
 
     unless skip_preload_tags || current_vite_instance.dev_server_running?
       preload_paths = preload_entries.map { |entry| entry['file'] }.compact.uniq
-      preload_tags = preload_paths.map { |path| preload_link_tag(path, crossorigin: crossorigin) }
+      preload_tags = preload_paths.map { |path| vite_preload_tag(path, crossorigin: crossorigin) }
     end
 
     unless skip_style_tags || current_vite_instance.dev_server_running?
@@ -67,5 +65,11 @@ private
 
   def sources_from_vite_manifest(names, type:)
     names.map { |name| vite_asset_path(name, type: type) }
+  end
+
+  def vite_preload_tag(source, crossorigin:)
+    href = path_to_asset(source)
+    try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
+    tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin)
   end
 end

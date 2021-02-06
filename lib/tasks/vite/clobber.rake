@@ -16,5 +16,7 @@ unless skip_vite_clobber
     Rake::Task['assets:clobber'].enhance do
       Rake::Task['vite:clobber'].invoke
     end
+  else
+    Rake::Task.define_task('assets:clobber' => 'vite:clobber')
   end
 end
