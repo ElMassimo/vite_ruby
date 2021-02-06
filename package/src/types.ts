@@ -23,4 +23,4 @@ export type UnifiedConfig = Config & PluginOptions
 // Public: Such as a vite.json configuration file.
 export type MultiEnvConfig = Record<string, Config | undefined>
 
-export type Entrypoints = Record<string, string>
+export type Entrypoints = Array<[string, string]>

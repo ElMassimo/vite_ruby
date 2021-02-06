@@ -1,0 +1,5 @@
+#!/bin/bash
+
+RAILS_ENV=production bin/rake assets:clobber
+bin/assets
+bin/serve

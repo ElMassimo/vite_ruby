@@ -3,7 +3,7 @@ import type { Plugin, UserConfig } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
-import { loadConfiguration, resolveEntrypoints } from './config'
+import { loadConfiguration, resolveEntrypointsForRollup } from './config'
 import { assetsManifestPlugin } from './manifest'
 
 export * from './types'
@@ -30,7 +30,7 @@ const debug = createDebugger('vite-plugin-ruby:config')
 function config(config: UserConfig): UserConfig {
   const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config, projectRoot)
 
-  const entrypoints = resolveEntrypoints(root!, projectRoot)
+  const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
 
   const server = { host, https, port, strictPort: true }
 
@@ -43,11 +43,14 @@ function config(config: UserConfig): UserConfig {
     sourcemap: mode !== 'development',
   }
 
-  debug({ base, build, root, server })
+  debug({ base, build, root, server, entrypoints })
+
+  const codeRoot = resolve(join(projectRoot, sourceCodeDir!))
 
   return cleanConfig({
     alias: {
-      '~/': `${resolve(join(projectRoot, sourceCodeDir!))}/`,
+      '~/': `${codeRoot}/`,
+      '@/': `${codeRoot}/`,
     },
     base,
     root,

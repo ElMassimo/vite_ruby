@@ -31,19 +31,11 @@ jobs:
           - ruby: "3.0"
             gemfile: gemfiles/Gemfile-rails.5.2.x
         include:
-          # - ruby: head
-          #   os: ubuntu-latest
-          #   gemfile: gemfiles/Gemfile-rails.6.0.x
-          #   experimental: true
-          # - ruby: head
-          #   os: ubuntu-latest
-          #   gemfile: gemfiles/Gemfile-rails-edge
-          #   experimental: true
-          - ruby: 2.6
+          - ruby: "2.7"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
-          - ruby: 2.7
+          - ruby: "3.0"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
