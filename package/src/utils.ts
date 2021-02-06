@@ -2,11 +2,6 @@ import { readFileSync } from 'fs'
 
 import { ENV_PREFIX } from './constants'
 
-// Internal: Returns true if the specified value is a string.
-export function isString(value: unknown): value is string {
-  return typeof value === 'string'
-}
-
 // Internal: Returns true if the specified value is a plain JS object
 export function isObject(value: unknown): value is Record<string, any> {
   return Object.prototype.toString.call(value) === '[object Object]'

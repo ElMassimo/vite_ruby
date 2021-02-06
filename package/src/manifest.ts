@@ -1,61 +1,76 @@
 import path from 'path'
+import { promises as fsp } from 'fs'
+import { createHash } from 'crypto'
 import createDebugger from 'debug'
 
 import type { Plugin, ResolvedConfig } from 'vite'
 
-import { isObject, isString } from './utils'
+import { OutputBundle, PluginContext } from 'rollup'
+import { resolveEntrypointAssets } from './config'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
-const fingerprintRegex = /\.(\w|\d){8,}\./
 
 interface AssetsManifestChunk {
   src?: string
   file: string
 }
 
-type AssetsManifest = Record<string, AssetsManifestChunk>
+type AssetsManifest = Map<string, AssetsManifestChunk>
 
-// Internal: Resolves the entrypoint files configured by the main plugin.
-function getEntrypoints(config: ResolvedConfig): string[] {
-  const buildInput = config.build.rollupOptions.input
-  const resolvePath = (p: string) => path.relative(config.root, path.resolve(config.root, p))
-
-  if (isString(buildInput)) return [resolvePath(buildInput)]
-  if (Array.isArray(buildInput)) return buildInput.map(resolvePath)
-  if (isObject(buildInput)) return Object.values(buildInput).map(resolvePath)
-
-  throw new Error(`invalid rollupOptions.input value.\n${buildInput}`)
+function getAssetHash(content: Buffer) {
+  return createHash('sha256').update(content).digest('hex').slice(0, 8)
 }
 
 // Internal: Writes a manifest file that allows to map an entrypoint asset file
 // name to the corresponding output file name.
 export function assetsManifestPlugin(): Plugin {
-  let assetsPrefix: string
-  let entries: Set<string>
+  let config: ResolvedConfig
+
+  // Internal: For stylesheets Vite does not output the result to the manifest,
+  // so we extract the file name of the processed asset from the bundle.
+  function extractChunkAssets(bundle: OutputBundle, manifest: AssetsManifest) {
+    const entrypointFiles = Object.values(config.build.rollupOptions.input as Record<string, string>)
+    const assetFiles = new Set(entrypointFiles.map(file => path.relative(config.root, file)))
+
+    Object.values(bundle).filter(chunk => chunk.type === 'asset' && assetFiles.has(chunk.name!))
+      .forEach((chunk) => { manifest.set(chunk.name!, { file: chunk.fileName, src: chunk.name }) })
+  }
+
+  // Internal: Vite ignores some entrypoint assets, so we need to manually
+  // fingerprint the files and move them to the output directory.
+  async function fingerprintRemainingAssets(ctx: PluginContext, manifest: AssetsManifest) {
+    const remainingAssets = resolveEntrypointAssets(config.root)
+
+    for (const [filename, absoluteFilename] of remainingAssets) {
+      const content = await fsp.readFile(absoluteFilename)
+      const hash = getAssetHash(content)
+
+      const ext = path.extname(filename)
+      const filenameWithoutExt = filename.slice(0, -ext.length)
+      const hashedFilename = path.posix.join(config.build.assetsDir, `${filenameWithoutExt}.${hash}${ext}`)
+
+      manifest.set(filename, { file: hashedFilename, src: filename })
+      ctx.emitFile({ fileName: hashedFilename, type: 'asset', source: content })
+    }
+  }
 
   return {
     name: 'vite-plugin-ruby:assets-manifest',
     apply: 'build',
     enforce: 'post',
     configResolved(resolvedConfig: ResolvedConfig) {
-      assetsPrefix = `${resolvedConfig.build.assetsDir}/`
-      entries = new Set(getEntrypoints(resolvedConfig))
+      config = resolvedConfig
     },
-    generateBundle({ format }, bundle) {
-      const manifest: AssetsManifest = {}
-
-      Object.values(bundle).forEach((chunk) => {
-        const name = chunk.name || chunk.fileName.replace(assetsPrefix, '').replace(fingerprintRegex, '.')
-        if (chunk.type === 'asset' && entries.has(name))
-          manifest[name] = { file: chunk.fileName, src: name }
-      })
-
-      debug(manifest)
+    async generateBundle(_options, bundle) {
+      const manifest: AssetsManifest = new Map()
+      extractChunkAssets(bundle, manifest)
+      await fingerprintRemainingAssets(this, manifest)
+      debug({ manifest })
 
       this.emitFile({
         fileName: 'manifest-assets.json',
         type: 'asset',
-        source: JSON.stringify(manifest, null, 2),
+        source: JSON.stringify(Object.fromEntries(manifest), null, 2),
       })
     },
   }
