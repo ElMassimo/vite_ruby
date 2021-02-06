@@ -188,10 +188,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-vite-plugin-ruby@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.6.tgz#7ecaf2b8ad4237096c631587e7170c4ce95c0a26"
-  integrity sha512-wJ0Djf/t1bqaowO14ceeNKeqgKW69WwNHboV/Gxq+66NpuDSm8jLKRtm+CiqnvlT9fK5NCiNwtyFkgsKbKAH/g==
+vite-plugin-ruby@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.8.tgz#321410c2afa5ecee1a83a61a91cf0b93165a611a"
+  integrity sha512-mE61pWBpRaku/Yp4wEYNu4MM4Z5a3kaWEBT71sbXXK/AFclS6Xe3x6UdxruQFR2vR+LqgAB3pXAX1w1LYp7ivQ==
   dependencies:
     fast-glob "^3.2.4"
 
