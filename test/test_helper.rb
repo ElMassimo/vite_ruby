@@ -42,24 +42,20 @@ class ViteRuby::Test < Minitest::Test
 
 private
 
-  def assert_run_command(*argv, use_yarn: false, flags: [])
-    command = use_yarn ? %w[yarn vite] : ["#{ test_app_path }/node_modules/.bin/vite"]
-    cwd = Dir.pwd
-    Dir.chdir(test_app_path)
+  def assert_run_command(*argv, flags: [])
+    Dir.chdir(test_app_path) {
+      klass = ViteRuby::Runner
+      instance = klass.new(argv)
+      mock = Minitest::Mock.new
+      mock.expect(:call, nil, [ViteRuby.config.to_env, *%w[npx nr vite], *argv, *flags])
 
-    klass = ViteRuby::Runner
-    instance = klass.new(argv)
-    mock = Minitest::Mock.new
-    mock.expect(:call, nil, [ViteRuby.config.to_env, *command, *argv, *flags])
-
-    klass.stub(:new, instance) do
-      instance.stub(:executable_exists?, !use_yarn) do
-        Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
+      klass.stub(:new, instance) do
+        instance.stub(:executable_exists?, !use_yarn) do
+          Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
+        end
       end
-    end
 
-    mock.verify
-  ensure
-    Dir.chdir(cwd)
+      mock.verify
+    }
   end
 end

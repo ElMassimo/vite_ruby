@@ -3,9 +3,11 @@
 require 'test_helper'
 
 class BuilderTest < ViteRuby::Test
+  delegate :builder, to: 'ViteRuby.instance'
+
   def setup
     refresh_config
-    ViteRuby.builder.send(:files_digest_path).tap do |path|
+    builder.send(:files_digest_path).tap do |path|
       path.delete if path.exist?
     end
   end
@@ -25,40 +27,40 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_freshness
-    assert ViteRuby.builder.stale?
-    assert !ViteRuby.builder.fresh?
+    assert builder.stale?
+    assert !builder.fresh?
   end
 
   def test_build
-    assert !ViteRuby.builder.build
+    assert !builder.build
   end
 
   def test_freshness_on_build_success
-    assert ViteRuby.builder.stale?
+    assert builder.stale?
     status = OpenStruct.new(success?: true)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      assert ViteRuby.builder.build
-      assert ViteRuby.builder.fresh?
+      assert builder.build
+      assert builder.fresh?
     end
   end
 
   def test_freshness_on_build_fail
-    assert ViteRuby.builder.stale?
+    assert builder.stale?
     status = OpenStruct.new(success?: false)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      assert !ViteRuby.builder.build
-      assert ViteRuby.builder.fresh?
+      assert !builder.build
+      assert builder.fresh?
     end
   end
 
   def test_files_digest_path
-    assert_equal ViteRuby.builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRuby.config.mode }"
+    assert_equal builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRuby.config.mode }"
   end
 
   def test_watched_files_digest
-    previous_digest = ViteRuby.builder.send(:watched_files_digest)
+    previous_digest = builder.send(:watched_files_digest)
     refresh_config
-    assert_equal previous_digest, ViteRuby.builder.send(:watched_files_digest)
+    assert_equal previous_digest, builder.send(:watched_files_digest)
   end
 
   def test_external_env_variables
@@ -73,5 +75,6 @@ class BuilderTest < ViteRuby::Test
   ensure
     ENV.delete('VITE_RUBY_MODE')
     ENV.delete('VITE_RUBY_ROOT')
+    refresh_config
   end
 end

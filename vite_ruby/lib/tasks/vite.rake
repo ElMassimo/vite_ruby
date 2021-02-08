@@ -5,6 +5,10 @@ $stdout.sync = true
 require 'rake'
 
 namespace :vite do
+  task :binstubs do
+    `bundle binstub vite_ruby`
+  end
+
   desc 'Compile JavaScript packs using vite for production with digests'
   task build: :'vite:verify_install' do
     ViteRuby.commands.build_from_task
