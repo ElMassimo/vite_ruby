@@ -2,17 +2,17 @@
 
 $stdout.sync = true
 
-require 'vite_ruby'
+require 'rake'
 
 namespace :vite do
   desc 'Compile JavaScript packs using vite for production with digests'
   task build: :'vite:verify_install' do
-    ViteRuby.commands.build_from_rake
+    ViteRuby.commands.build_from_task
   end
 
   desc 'Remove old compiled vites'
   task :clean, [:keep, :age] => :'vite:verify_install' do |_, args|
-    ViteRuby.commands.clean_from_rake(args)
+    ViteRuby.commands.clean_from_task(args)
   end
 
   desc 'Remove the vite build output directory'

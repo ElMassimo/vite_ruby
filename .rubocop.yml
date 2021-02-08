@@ -11,6 +11,9 @@ AllCops:
 Style/DoubleNegation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Style/MultilineBlockChain:
   Enabled: false
 

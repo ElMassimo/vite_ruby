@@ -35,7 +35,7 @@ private
 
   # Internal: Returns an Array with the command to run.
   def command_for(args)
-    [vite_env, vite_executable].tap do |cmd|
+    [vite_env, *vite_executable].tap do |cmd|
       cmd.prepend('node', '--inspect-brk') if args.include?('--debug')
       cmd.prepend('node', '--trace-deprecation') if args.delete('--trace-deprecation')
       args.append('--mode', ViteRuby.mode) unless args.include?('--mode') || args.include?('-m')
@@ -50,6 +50,6 @@ private
 
   # Internal: Resolves to an executable for Vite.
   def vite_executable
-    %w[npx vite]
+    %w[npx nr vite]
   end
 end

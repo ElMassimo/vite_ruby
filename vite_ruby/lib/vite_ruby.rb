@@ -45,6 +45,11 @@ class ViteRuby
       instance.manifest.refresh
     end
 
+    # Internal: Loads all available rake tasks.
+    def install_tasks
+      load File.expand_path('tasks/vite.rake', __dir__)
+    end
+
     # Internal: Refreshes the config after setting the env vars.
     def reload_with(env_vars)
       env.update(env_vars)
@@ -65,13 +70,15 @@ class ViteRuby
   end
 
   # Public: Returns true if the Vite development server is currently running.
+  # NOTE: Checks only once every second since every lookup calls this method.
   def dev_server_running?
     return false unless run_proxy?
-
-    Socket.tcp(host, port, connect_timeout: config.dev_server_connect_timeout).close
+    return true if @running_at && Time.now - @running_at < 1
+    Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
+    @running_at = Time.now
     true
-  rescue StandardError
-    false
+  rescue SystemCallError
+    @running_at = false
   end
 
   # Public: The proxy for assets should only run in development mode.

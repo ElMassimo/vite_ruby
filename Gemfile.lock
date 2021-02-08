@@ -3,6 +3,7 @@ PATH
   specs:
     vite_rails (1.0.12)
       railties (>= 5.1)
+      vite_ruby
 
 PATH
   remote: vite_ruby

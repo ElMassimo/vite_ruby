@@ -102,7 +102,7 @@ class ConfigTest < ViteRuby::Test
   end
 
   def test_environment_vars
-    ViteRuby.env = {
+    ViteRuby.env.tap(&:clear).merge!(
       'VITE_RUBY_AUTO_BUILD' => 'true',
       'VITE_RUBY_HOST' => 'example.com',
       'VITE_RUBY_PORT' => '1920',
@@ -115,7 +115,7 @@ class ConfigTest < ViteRuby::Test
       'VITE_RUBY_SOURCE_CODE_DIR' => 'app',
       'VITE_RUBY_ENTRYPOINTS_DIR' => 'frontend/entrypoints',
       'VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT' => 'true',
-    }
+    )
     @config = resolve_config
     assert_equal true, @config.auto_build
     assert_equal 'example.com', @config.host
@@ -133,6 +133,6 @@ class ConfigTest < ViteRuby::Test
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
     assert_equal true, @config.hide_build_console_output
   ensure
-    ViteRuby.env = {}
+    ViteRuby.env.clear
   end
 end

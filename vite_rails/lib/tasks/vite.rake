@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-load 'vite_ruby/tasks/vite.rake'
+require 'vite_ruby'
+ViteRuby.install_tasks
 
 namespace :vite_rails do
   desc 'Fixes Rails management of node dev dependencies (build dependencies)'

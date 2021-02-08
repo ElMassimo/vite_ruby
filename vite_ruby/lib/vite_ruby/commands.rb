@@ -71,13 +71,13 @@ class ViteRuby::Commands
     end
 
     config_path = ViteRuby.config.root.join(ViteRuby.config.config_path)
-    return unless config_path.exist?
-
-    warn <<~WARN
-      Configuration #{ config_path } file for vite-plugin-ruby not found.
-      Make sure `vite install` has run successfully before running dependent tasks.
-    WARN
-    exit!
+    unless config_path.exist?
+      warn <<~WARN
+        Configuration #{ config_path } file for vite-plugin-ruby not found.
+        Make sure `bundle exec vite install` has run successfully before running dependent tasks.
+      WARN
+      exit!
+    end
   end
 
   # Internal: Prints information about ViteRuby's environment.
