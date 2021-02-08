@@ -17,24 +17,25 @@ class ViteRuby::Manifest
     @vite_ruby = vite_ruby
   end
 
-  # Public: Strict version of lookup.
+  # Public: Returns the path for the specified Vite entrypoint file.
   #
-  # Returns a relative path for the asset, or raises an error if not found.
-  def lookup!(*args, **options)
-    lookup(*args, **options) || missing_entry_error(*args, **options)
+  # Raises an error if the resource could not be found in the manifest.
+  def path_for(name, **options)
+    lookup!(name, **options).fetch('file')
   end
 
-  # Public: Computes the path for a given Vite asset using manifest.json.
-  #
-  # Returns a relative path, or nil if the asset is not found.
-  #
-  # Example:
-  #   ViteRuby.manifest.lookup('calendar.js')
-  #   # { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
-  def lookup(name, type: nil)
-    build if should_build?
+  # Public: Returns scripts, imported modules, and stylesheets for the specified
+  # entrypoint files.
+  def resolve_entries(*names, **options)
+    entries = names.map { |name| lookup!(name, **options) }
+    script_paths = entries.map { |entry| entry.fetch('file') }
 
-    find_manifest_entry(with_file_extension(name, type))
+    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry['imports'] }.compact.uniq
+    {
+      scripts: script_paths,
+      modules: imports.map { |entry| entry.fetch('file') }.uniq,
+      stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry['css'] }.compact.uniq,
+    }
   end
 
   # Public: Refreshes the cached mappings by reading the updated manifest files.
@@ -42,9 +43,31 @@ class ViteRuby::Manifest
     @manifest = load_manifest
   end
 
-  # Public: Scopes an asset to the output folder in public, as a path.
-  def prefix_vite_asset(path)
-    File.join("/#{ config.public_output_dir }", path)
+  # Public: The path from where the browser can download the Vite HMR client.
+  def vite_client_src
+    prefix_vite_asset('@vite/client') if dev_server_running?
+  end
+
+protected
+
+  # Internal: Strict version of lookup.
+  #
+  # Returns a relative path for the asset, or raises an error if not found.
+  def lookup!(*args, **options)
+    lookup(*args, **options) || missing_entry_error(*args, **options)
+  end
+
+  # Internal: Computes the path for a given Vite asset using manifest.json.
+  #
+  # Returns a relative path, or nil if the asset is not found.
+  #
+  # Example:
+  #   manifest.lookup('calendar.js')
+  #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
+  def lookup(name, type: nil)
+    build if should_build?
+
+    find_manifest_entry(with_file_extension(name, type))
   end
 
 private
@@ -87,6 +110,11 @@ private
   def load_manifest
     files = [config.manifest_path, config.assets_manifest_path].select(&:exist?)
     files.map { |path| JSON.parse(path.read) }.inject({}, &:merge).tap(&method(:resolve_references))
+  end
+
+  # Internal: Scopes an asset to the output folder in public, as a path.
+  def prefix_vite_asset(path)
+    File.join("/#{ config.public_output_dir }", path)
   end
 
   # Internal: Resolves the paths that reference a manifest entry.

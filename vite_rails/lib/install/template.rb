@@ -2,11 +2,11 @@
 
 # Install Vite Rails
 say 'Creating configuration files'
-copy_file "#{ __dir__ }/config/vite.json", ViteRails.config.config_path
+copy_file "#{ __dir__ }/config/vite.json", ViteRuby.config.config_path
 copy_file "#{ __dir__ }/config/vite.config.ts", Rails.root.join('vite.config.ts')
 
 say 'Creating entrypoints directory'
-directory "#{ __dir__ }/javascript/entrypoints", ViteRails.config.resolved_entrypoints_dir
+directory "#{ __dir__ }/javascript/entrypoints", ViteRuby.config.resolved_entrypoints_dir
 
 apply "#{ __dir__ }/binstubs.rb"
 

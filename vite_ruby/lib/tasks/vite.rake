@@ -29,7 +29,7 @@ namespace :vite do
   desc 'Install all JavaScript dependencies'
   task :install_dependencies do
     valid_node_envs = %w[test development production]
-    rack_env = ENV.fetch('RACK_ENV', 'production')
+    rack_env = ENV.fetch('RACK_ENV') { ENV.fetch('RAILS_ENV', 'production') }
     node_env = ENV.fetch('NODE_ENV') { valid_node_envs.include?(rack_env) ? rack_env : 'production' }
     system({ 'NODE_ENV' => node_env }, 'npx ci --prod=false')
   end

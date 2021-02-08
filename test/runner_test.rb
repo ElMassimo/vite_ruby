@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class RunnerTest < ViteRails::Test
+class RunnerTest < ViteRuby::Test
   def test_dev_server_command
     assert_run_command(flags: ['--mode', 'production'])
   end

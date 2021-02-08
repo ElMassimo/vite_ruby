@@ -7,11 +7,6 @@ class ViteRuby::Commands
     @vite_ruby = vite_ruby
   end
 
-  # Public: Loads the manifest with all the entries compiled by Vite.
-  def bootstrap
-    manifest.refresh
-  end
-
   # Public: Defaults to production, and exits if the build fails.
   def build_from_task
     with_node_env(ENV.fetch('NODE_ENV', 'production')) {
@@ -105,7 +100,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :builder, :manifest, :logger
+  def_delegators :@vite_ruby, :config, :builder, :manifest, :logger, :logger=
 
   def may_clean?
     config.build_output_dir.exist? && config.manifest_path.exist?
@@ -139,10 +134,10 @@ private
   end
 
   def ensure_log_goes_to_stdout
-    old_logger = ViteRuby.logger
-    ViteRuby.logger = Logger.new($stdout)
+    old_logger = logger
+    self.logger = Logger.new($stdout)
     yield
   ensure
-    ViteRuby.logger = old_logger
+    self.logger = old_logger
   end
 end

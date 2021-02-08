@@ -15,7 +15,6 @@ class ViteRuby::CLI::Install < Dry::CLI::Command
 
     say 'Creating configuration files'
     create_configuration_files
-    refresh_config
 
     say 'Installing sample files'
     install_sample_files
@@ -56,6 +55,7 @@ private
   def create_configuration_files
     copy_template 'config/vite.config.ts', to: root.join('vite.config.ts')
     hanami? ? setup_hanami : setup_rack
+    ViteRuby.reload_with('VITE_RUBY_CONFIG_PATH' => config.config_path)
   end
 
   # Internal: Detect if the Ruby application is a Hanami application.
@@ -103,13 +103,6 @@ private
       deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
       say *Open3.capture3({ 'CI' => 'true' }, "npx ni -D #{ deps }")
     end
-  end
-
-  # Internal: Reloads the configuration after the configuration file for the
-  # detected Ruby application has been copied.
-  def refresh_config
-    ViteRuby.env['VITE_RUBY_CONFIG_PATH'] = config.config_path
-    ViteRuby.reset
   end
 
   # Internal: The root path for the Ruby application.

@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ModeTest < ViteRails::Test
+class ModeTest < ViteRuby::Test
   def test_mode
-    assert_equal Rails.env, ViteRails.config.mode
-    assert_equal ViteRails.config.mode, ViteRails.mode
+    assert_equal Rails.env, ViteRuby.config.mode
+    assert_equal ViteRuby.config.mode, ViteRuby.mode
   end
 
   def test_mode_with_rails_env

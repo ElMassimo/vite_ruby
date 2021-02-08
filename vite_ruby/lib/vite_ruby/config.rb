@@ -5,23 +5,6 @@ require 'json'
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
 class ViteRuby::Config
-  extend Forwardable
-
-  # Internal: Converts camelCase to snake_case.
-  SNAKE_CASE = ->(camel_cased_word) {
-    camel_cased_word.to_s.gsub(/::/, '/')
-      .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
-      .gsub(/([a-z\d])([A-Z])/, '\1_\2')
-      .tr('-', '_')
-      .downcase
-  }
-
-  def_delegators :@config, :as_json, :inspect
-
-  def initialize(attrs)
-    @config = attrs.tap { |config| coerce_values(config) }.freeze
-  end
-
   def protocol
     https ? 'https' : 'http'
   end
@@ -81,7 +64,13 @@ private
     names.each { |name| config[name] = [true, 'true'].include?(config[name]) }
   end
 
+  def initialize(attrs)
+    @config = attrs.tap { |config| coerce_values(config) }.freeze
+  end
+
   class << self
+    private :new
+
     # Public: Returns the project configuration for Vite.
     def resolve_config(**attrs)
       config = config_defaults.merge(attrs.transform_keys(&:to_s))
@@ -92,13 +81,22 @@ private
 
   private
 
+    # Internal: Converts camelCase to snake_case.
+    SNAKE_CASE = ->(camel_cased_word) {
+      camel_cased_word.to_s.gsub(/::/, '/')
+        .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+        .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+        .tr('-', '_')
+        .downcase
+    }
+
     # Internal: Default values for a Ruby application.
-    def config_defaults
+    def config_defaults(asset_host: nil, mode: ENV.fetch('RACK_ENV', 'production'), root: Dir.pwd)
       {
-        'asset_host' => option_from_env('asset_host'),
+        'asset_host' => option_from_env('asset_host') || asset_host,
         'config_path' => option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'),
-        'mode' => option_from_env('mode') || ENV.fetch('RACK_ENV', 'production'),
-        'root' => option_from_env('root') || Dir.pwd,
+        'mode' => option_from_env('mode') || mode,
+        'root' => option_from_env('root') || root,
       }
     end
 
@@ -137,7 +135,7 @@ private
   end
 
   # Internal: Shared configuration with the Vite plugin for Ruby.
-  DEFAULT_CONFIG = load_json("#{ __dir__ }/../../package/default.vite.json").freeze
+  DEFAULT_CONFIG = load_json("#{ __dir__ }/../../default.vite.json").freeze
 
   # Internal: Configuration options that can not be provided as env vars.
   NOT_CONFIGURABLE_WITH_ENV = %w[watch_additional_paths].freeze

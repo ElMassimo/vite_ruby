@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop', '0.93.1'
   s.add_development_dependency 'rubocop-performance'
 
-  s.files = Dir.glob('{lib,exe,templates}/**/*') + %w[package.json package/default.vite.json README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]
+  s.files = Dir.glob('{lib,exe,templates}/**/*') + %w[default.vite.json README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]
   s.test_files = `git ls-files -- spec/*`.split("\n")
   s.bindir = 'exe'
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }

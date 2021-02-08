@@ -1,2 +1,2 @@
 /* eslint no-console:0 */
-console.log('Hello World from ViteRails')
+console.log('Hello World from ViteRuby')

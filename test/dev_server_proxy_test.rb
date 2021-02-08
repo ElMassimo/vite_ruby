@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class DevServerProxyTest < ViteRails::Test
+class DevServerProxyTest < ViteRuby::Test
   include Rack::Test::Methods
 
   def app
@@ -14,7 +14,7 @@ class DevServerProxyTest < ViteRails::Test
     Rack::Proxy.remove_method(:perform_request)
     Rack::Proxy.define_method(:perform_request) { |env| capture_app.call(env) }
 
-    ViteRails::DevServerProxy.new(capture_app)
+    ViteRuby::DevServerProxy.new(capture_app)
   end
 
   def test_non_asset
@@ -89,8 +89,8 @@ private
     assert last_response.ok?
     env = JSON.parse(last_response.body)
 
-    assert_equal ViteRails.config.host, env['HTTP_X_FORWARDED_HOST']
-    assert_equal ViteRails.config.port, Integer(env['HTTP_X_FORWARDED_PORT'])
+    assert_equal ViteRuby.config.host, env['HTTP_X_FORWARDED_HOST']
+    assert_equal ViteRuby.config.port, Integer(env['HTTP_X_FORWARDED_PORT'])
 
     return unless to
 

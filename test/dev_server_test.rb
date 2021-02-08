@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class DevServerTest < ViteRails::Test
+class DevServerTest < ViteRuby::Test
   def test_running?
-    refute ViteRails.dev_server.running?
+    refute ViteRuby.instance.dev_server_running?
   end
 end

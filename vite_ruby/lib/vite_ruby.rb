@@ -1,32 +1,55 @@
 # frozen_string_literal: true
 
-require 'rails'
-require 'active_support/all'
+require 'logger'
+require 'forwardable'
+require 'pathname'
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem
 loader.ignore("#{ __dir__ }/install")
 loader.ignore("#{ __dir__ }/tasks")
+loader.ignore("#{ __dir__ }/exe")
+loader.inflector.inflect('cli' => 'CLI')
 loader.setup
 
-class ViteRails
+class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
 
-  class << self
-    delegate :config, :builder, :manifest, :commands, :dev_server, :dev_server_running?, :run_proxy?, to: :instance
-    delegate :mode, to: :config
-    delegate :bootstrap, :clean, :clean_from_rake, :clobber, :build, :build_from_rake, to: :commands
+  # Internal: Versions used by default when running `vite install`.
+  DEFAULT_VITE_VERSION = '^2.0.0-beta.65'
+  DEFAULT_PLUGIN_VERSION = '^1.0.8'
 
-    attr_writer :instance
+  class << self
+    extend Forwardable
+
+    def_delegators :instance, :config, :commands, :run_proxy?
+    def_delegators :config, :mode
+    def_delegators :commands, :build
+    def_delegators 'ViteRuby::Runner.new', :run
 
     def instance
-      @instance ||= ViteRails.new
+      @instance ||= ViteRuby.new
     end
 
-    def run(args)
-      $stdout.sync = true
-      ViteRails::Runner.new(args).run
+    # Public: Additional environment variables to pass to Vite.
+    #
+    # Example:
+    #   ViteRuby.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
+    def env
+      @env ||= load_env_variables
+    end
+
+    # Internal: Refreshes the manifest.
+    def bootstrap
+      instance.manifest.refresh
+    end
+
+    # Internal: Refreshes the config after setting the env vars.
+    def reload_with(env_vars)
+      env.update(env_vars)
+      @instance = nil
+      config
     end
 
     # Internal: Allows to obtain any env variables for configuration options.
@@ -35,51 +58,46 @@ class ViteRails
     end
   end
 
-  # Public: Additional environment variables to pass to Vite.
-  #
-  # Example:
-  #   ViteRails.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
-  cattr_accessor(:env) { load_env_variables }
+  attr_writer :logger
 
-  cattr_accessor(:logger) { ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT)) }
+  def logger
+    @logger ||= Logger.new($stdout)
+  end
 
-  # Public: Returns true if the Vite development server is running.
+  # Public: Returns true if the Vite development server is currently running.
   def dev_server_running?
-    run_proxy? && dev_server.running?
+    return false unless run_proxy?
+    Socket.tcp(host, port, connect_timeout: config.dev_server_connect_timeout).close
+    true
+  rescue
+    false
   end
 
   # Public: The proxy for assets should only run in development mode.
   def run_proxy?
     config.mode == 'development'
-  rescue StandardError => error
-    ViteRails.logger.error("Failed to check mode for Vite: #{ error.message }")
+  rescue => error
+    logger.error("Failed to check mode for Vite: #{ error.message }")
     false
-  end
-
-  # Public: Current instance configuration for Vite.
-  def config
-    @config ||= ViteRails::Config.resolve_config
   end
 
   # Public: Keeps track of watched files and triggers builds as needed.
   def builder
-    @builder ||= ViteRails::Builder.new(self)
-  end
-
-  # Public: Allows to check if the Vite development server is running.
-  def dev_server
-    @dev_server ||= ViteRails::DevServer.new(config)
-  end
-
-  # Public: Enables looking up assets managed by Vite using name and type.
-  def manifest
-    @manifest ||= ViteRails::Manifest.new(self)
+    @builder ||= ViteRuby::Builder.new(self)
   end
 
   # Internal: Helper to run commands related with Vite.
   def commands
-    @commands ||= ViteRails::Commands.new(self)
+    @commands ||= ViteRuby::Commands.new(self)
+  end
+
+  # Public: Current instance configuration for Vite.
+  def config
+    @config ||= ViteRuby::Config.resolve_config
+  end
+
+  # Public: Enables looking up assets managed by Vite using name and type.
+  def manifest
+    @manifest ||= ViteRuby::Manifest.new(self)
   end
 end
-
-ViteRails::Engine if defined?(Rails)

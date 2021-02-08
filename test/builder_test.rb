@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class BuilderTest < ViteRails::Test
+class BuilderTest < ViteRuby::Test
   def setup
     refresh_config
-    ViteRails.builder.send(:files_digest_path).tap do |path|
+    ViteRuby.builder.send(:files_digest_path).tap do |path|
       path.delete if path.exist?
     end
   end
@@ -15,50 +15,50 @@ class BuilderTest < ViteRails::Test
   end
 
   def vite_env
-    ViteRails.config.to_env
+    ViteRuby.config.to_env
   end
 
   def test_custom_environment_variables
     assert_nil vite_env['FOO']
-    ViteRails.env['FOO'] = 'BAR'
+    ViteRuby.env['FOO'] = 'BAR'
     assert vite_env['FOO'] == 'BAR'
   end
 
   def test_freshness
-    assert ViteRails.builder.stale?
-    assert !ViteRails.builder.fresh?
+    assert ViteRuby.builder.stale?
+    assert !ViteRuby.builder.fresh?
   end
 
   def test_build
-    assert !ViteRails.builder.build
+    assert !ViteRuby.builder.build
   end
 
   def test_freshness_on_build_success
-    assert ViteRails.builder.stale?
+    assert ViteRuby.builder.stale?
     status = OpenStruct.new(success?: true)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      assert ViteRails.builder.build
-      assert ViteRails.builder.fresh?
+      assert ViteRuby.builder.build
+      assert ViteRuby.builder.fresh?
     end
   end
 
   def test_freshness_on_build_fail
-    assert ViteRails.builder.stale?
+    assert ViteRuby.builder.stale?
     status = OpenStruct.new(success?: false)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      assert !ViteRails.builder.build
-      assert ViteRails.builder.fresh?
+      assert !ViteRuby.builder.build
+      assert ViteRuby.builder.fresh?
     end
   end
 
   def test_files_digest_path
-    assert_equal ViteRails.builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRails.config.mode }"
+    assert_equal ViteRuby.builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRuby.config.mode }"
   end
 
   def test_watched_files_digest
-    previous_digest = ViteRails.builder.send(:watched_files_digest)
+    previous_digest = ViteRuby.builder.send(:watched_files_digest)
     refresh_config
-    assert_equal previous_digest, ViteRails.builder.send(:watched_files_digest)
+    assert_equal previous_digest, ViteRuby.builder.send(:watched_files_digest)
   end
 
   def test_external_env_variables

@@ -3,9 +3,9 @@
 require 'test_helper'
 
 class HelperTest < ActionView::TestCase
-  include ViteRailsTestHelpers
+  include ViteRubyTestHelpers
 
-  tests ViteRails::Helper
+  tests ViteRails::TagHelpers
 
   attr_reader :request
 
