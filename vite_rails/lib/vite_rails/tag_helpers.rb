@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
-module ViteRails::Helper
+module ViteRails::TagHelpers
   # Public: Returns the current Vite Rails instance.
   def current_vite_instance
-    ViteRails.instance
+    ViteRuby.instance
   end
 
   # Public: Renders a script tag for vite/client to enable HMR in development.

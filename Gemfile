@@ -2,11 +2,13 @@
 
 source 'https://rubygems.org'
 
-gemspec
+gemspec path: './vite_rails'
 
 gem 'rack-proxy', require: false
 gem 'rails'
 gem 'rake', '>= 11.1'
+
+gem 'vite_ruby', path: '../vite_ruby'
 
 group :development, :test do
   gem 'm'

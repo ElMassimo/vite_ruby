@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gemspec path: "../"
+gemspec path: "../vite_rails"
 
 gem "rails", "~> 6.1.0"
 gem "rake", ">= 11.1"
