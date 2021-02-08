@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'vite_ruby'
+
+cli = ViteRuby::CLI
+Dry::CLI.new(cli).call
