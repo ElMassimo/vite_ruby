@@ -19,11 +19,7 @@ class ViteRails::Engine < Rails::Engine
 
   initializer 'vite_rails.logger' do
     config.after_initialize do
-      ViteRuby.instance.logger = if ::Rails.logger.respond_to?(:tagged)
-                           ::Rails.logger
-                         else
-                           ActiveSupport::TaggedLogging.new(::Rails.logger)
-                         end.tagged('Vite')
+      ViteRuby.instance.logger = Rails.logger
     end
   end
 

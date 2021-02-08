@@ -39,7 +39,7 @@ private
       cmd.prepend('node', '--inspect-brk') if args.include?('--debug')
       cmd.prepend('node', '--trace-deprecation') if args.delete('--trace-deprecation')
       args.append('--mode', ViteRuby.mode) unless args.include?('--mode') || args.include?('-m')
-      cmd += args
+      cmd.append(*args)
     end
   end
 

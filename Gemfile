@@ -13,5 +13,7 @@ group :development, :test do
   gem 'm'
   gem 'minitest', '~> 5.0'
   gem 'pry-byebug'
+  gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'simplecov', '< 0.18'
 end

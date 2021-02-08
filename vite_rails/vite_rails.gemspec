@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.5.0'
 
-  s.add_dependency 'railties',      '>= 5.1'
+  s.add_dependency 'railties', '>= 5.1'
 
   s.add_development_dependency 'bundler', '>= 1.3.0'
   s.add_development_dependency 'rubocop', '0.93.1'

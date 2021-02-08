@@ -3,7 +3,7 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Exclude:
     - "public/**/*"
-    - "package/**/*"
+    - "vite-plugin-ruby/**/*"
     - "examples/**/*"
     - "vendor/bundle"
     - "tmp/**/*"

@@ -4,7 +4,7 @@ require 'rack/proxy'
 
 # Public: Allows to relay asset requests to the Vite development server.
 class ViteRuby::DevServerProxy < Rack::Proxy
-  HOST_WITH_PORT_REGEX = %r{^(.+?)(\:\d+)\/}
+  HOST_WITH_PORT_REGEX = %r{^(.+?)(:\d+)/}
   VITE_DEPENDENCY_PREFIX = '/@'
 
   def initialize(app = nil, options = {})

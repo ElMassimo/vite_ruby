@@ -43,8 +43,8 @@ class EngineRakeTasksTest < Minitest::Test
 
 private
 
-  def within_mounted_app
-    Dir.chdir(mounted_app_path) { yield }.tap { |result| @command_results << result }
+  def within_mounted_app(&block)
+    Dir.chdir(mounted_app_path, &block).tap { |result| @command_results << result }
   end
 
   def mounted_app_path

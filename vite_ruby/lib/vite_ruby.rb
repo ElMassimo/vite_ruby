@@ -67,16 +67,17 @@ class ViteRuby
   # Public: Returns true if the Vite development server is currently running.
   def dev_server_running?
     return false unless run_proxy?
+
     Socket.tcp(host, port, connect_timeout: config.dev_server_connect_timeout).close
     true
-  rescue
+  rescue StandardError
     false
   end
 
   # Public: The proxy for assets should only run in development mode.
   def run_proxy?
     config.mode == 'development'
-  rescue => error
+  rescue StandardError => error
     logger.error("Failed to check mode for Vite: #{ error.message }")
     false
   end
