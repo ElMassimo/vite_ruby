@@ -4,8 +4,19 @@ require 'json'
 
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
-class ViteRails::Config
-  delegate :as_json, :inspect, to: :@config
+class ViteRuby::Config
+  extend Forwardable
+
+  # Internal: Converts camelCase to snake_case.
+  SNAKE_CASE = ->(camel_cased_word) {
+    camel_cased_word.to_s.gsub(/::/, '/')
+      .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+      .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+      .tr('-', '_')
+      .downcase
+  }
+
+  def_delegators :@config, :as_json, :inspect
 
   def initialize(attrs)
     @config = attrs.tap { |config| coerce_values(config) }.freeze
@@ -48,9 +59,9 @@ class ViteRails::Config
   def to_env
     CONFIGURABLE_WITH_ENV.each_with_object({}) do |option, env|
       unless (value = @config[option]).nil?
-        env["#{ ViteRails::ENV_PREFIX }_#{ option.upcase }"] = value.to_s
+        env["#{ ViteRuby::ENV_PREFIX }_#{ option.upcase }"] = value.to_s
       end
-    end.merge(ViteRails.env)
+    end.merge(ViteRuby.env)
   end
 
 private
@@ -73,7 +84,7 @@ private
   class << self
     # Public: Returns the project configuration for Vite.
     def resolve_config(**attrs)
-      config = attrs.transform_keys(&:to_s).reverse_merge(config_defaults)
+      config = config_defaults.merge(attrs.transform_keys(&:to_s))
       file_path = File.join(config['root'], config['config_path'])
       file_config = config_from_file(file_path, mode: config['mode'])
       new DEFAULT_CONFIG.merge(file_config).merge(config_from_env).merge(config)
@@ -81,24 +92,28 @@ private
 
   private
 
-    # Internal: Default values for a Rails application.
+    # Internal: Default values for a Ruby application.
     def config_defaults
       {
-        'asset_host' => option_from_env('asset_host') || Rails.application&.config&.action_controller&.asset_host,
+        'asset_host' => option_from_env('asset_host'),
         'config_path' => option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'),
-        'mode' => option_from_env('mode') || Rails.env.to_s,
-        'root' => option_from_env('root') || Rails.root || Dir.pwd,
+        'mode' => option_from_env('mode') || ENV.fetch('RACK_ENV', 'production'),
+        'root' => option_from_env('root') || Dir.pwd,
       }
     end
 
     # Internal: Used to load a JSON file from the specified path.
     def load_json(path)
-      JSON.parse(File.read(File.expand_path(path))).deep_transform_keys(&:underscore)
+      JSON.parse(File.read(File.expand_path(path))).each do |_env, config|
+        config.transform_keys!(&SNAKE_CASE) if config.is_a?(Hash)
+      end.tap do |config|
+        config.transform_keys!(&SNAKE_CASE)
+      end
     end
 
     # Internal: Retrieves a configuration option from environment variables.
     def option_from_env(name)
-      ViteRails.env["#{ ViteRails::ENV_PREFIX }_#{ name.upcase }"]
+      ViteRuby.env["#{ ViteRuby::ENV_PREFIX }_#{ name.upcase }"]
     end
 
     # Internal: Extracts the configuration options provided as env vars.
@@ -116,7 +131,7 @@ private
       multi_env_config.fetch('all', {})
         .merge(multi_env_config.fetch(mode, {}))
     rescue Errno::ENOENT => error
-      warn "Check that your vite.json configuration file is available in the load path. #{ error.message }"
+      warn "Check that your vite.json configuration file is available in the load path:\n\n\t#{ error.message }\n\n"
       {}
     end
   end

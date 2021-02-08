@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-# Public: Encapsulates common tasks, available both programatically and in Rake.
-class ViteRails::Commands
-  def initialize(vite_rails)
-    @vite_rails = vite_rails
+# Public: Encapsulates common tasks, available both programatically and from the
+# CLI and Rake tasks.
+class ViteRuby::Commands
+  def initialize(vite_ruby)
+    @vite_ruby = vite_ruby
   end
 
   # Public: Loads the manifest with all the entries compiled by Vite.
@@ -12,7 +13,7 @@ class ViteRails::Commands
   end
 
   # Public: Defaults to production, and exits if the build fails.
-  def build_from_rake
+  def build_from_task
     with_node_env(ENV.fetch('NODE_ENV', 'production')) {
       ensure_log_goes_to_stdout {
         build || exit!
@@ -33,7 +34,7 @@ class ViteRails::Commands
   end
 
   # Public: Receives arguments from a rake task.
-  def clean_from_rake(args)
+  def clean_from_task(args)
     ensure_log_goes_to_stdout {
       clean(keep_up_to: Integer(args.keep || 2), age_in_seconds: Integer(args.age || 3600))
     }
@@ -64,9 +65,47 @@ class ViteRails::Commands
     true
   end
 
+  # Internal: Verifies if ViteRuby is properly installed.
+  def verify_install
+    unless File.exist?(ViteRuby.config.root.join('bin/vite'))
+      warn <<~WARN
+        vite binstub not found.
+        Have you run `bundle binstub vite`?
+        Make sure the bin directory and bin/vite are not included in .gitignore
+      WARN
+    end
+
+    config_path = ViteRuby.config.root.join(ViteRuby.config.config_path)
+    return unless config_path.exist?
+
+    warn <<~WARN
+      Configuration #{ config_path } file for vite-plugin-ruby not found.
+      Make sure `vite install` has run successfully before running dependent tasks.
+    WARN
+    exit!
+  end
+
+  # Internal: Prints information about ViteRuby's environment.
+  def print_info
+    Dir.chdir(ViteRuby.config.root) do
+      $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
+
+      $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"
+      $stdout.puts "node: #{ `node --version` }"
+      $stdout.puts "npm: #{ `npm --version` }"
+      $stdout.puts "yarn: #{ `yarn --version` }"
+      $stdout.puts "ruby: #{ `ruby --version` }"
+
+      $stdout.puts "\n"
+      $stdout.puts "vite-plugin-ruby: \n#{ `npm list vite-plugin-ruby version` }"
+    end
+  end
+
 private
 
-  delegate :config, :builder, :manifest, :logger, to: :@vite_rails
+  extend Forwardable
+
+  def_delegators :@vite_ruby, :config, :builder, :manifest, :logger
 
   def may_clean?
     config.build_output_dir.exist? && config.manifest_path.exist?
@@ -100,10 +139,10 @@ private
   end
 
   def ensure_log_goes_to_stdout
-    old_logger = ViteRails.logger
-    ViteRails.logger = ActiveSupport::Logger.new(STDOUT)
+    old_logger = ViteRuby.logger
+    ViteRuby.logger = Logger.new($stdout)
     yield
   ensure
-    ViteRails.logger = old_logger
+    ViteRuby.logger = old_logger
   end
 end

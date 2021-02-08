@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require 'open3'
 require 'digest/sha1'
 
 # Public: Keeps track of watched files and triggers builds as needed.
-class ViteRails::Builder
-  def initialize(vite_rails)
-    @vite_rails = vite_rails
+class ViteRuby::Builder
+  def initialize(vite_ruby)
+    @vite_ruby = vite_ruby
   end
 
   # Public: Checks if the watched files have changed since the last compilation,
@@ -32,7 +31,9 @@ class ViteRails::Builder
 
 private
 
-  delegate :config, :logger, to: :@vite_rails
+  extend Forwardable
+
+  def_delegators :@vite_ruby, :config, :logger
 
   # Internal: Writes a digest of the watched files to disk for future checks.
   def record_files_digest
@@ -67,9 +68,7 @@ private
   def build_with_vite
     logger.info 'Building with Vite ⚡️'
 
-    command = "#{ which_ruby } ./bin/vite build --mode #{ config.mode }"
-    stdout, stderr, status = Open3.capture3(ViteRails.config.to_env, command, chdir: File.expand_path(config.root))
-
+    stdout, stderr, status = ViteRuby.run(['build'], capture: true)
     log_build_result(stdout, stderr, status)
 
     status.success?
@@ -87,13 +86,6 @@ private
       non_empty_streams = [stdout, stderr].delete_if(&:empty?)
       logger.error "Build with Vite failed:\n#{ non_empty_streams.join("\n\n") }"
     end
-  end
-
-  # Internal: Used to prefix the bin/vite executable file.
-  def which_ruby
-    bin_vite_path = config.root.join('bin/vite')
-    first_line = File.readlines(bin_vite_path).first.chomp
-    /ruby/.match?(first_line) ? RbConfig.ruby : ''
   end
 
   # Internal: Files and directories that should be watched for changes.

@@ -9,12 +9,12 @@
 #
 # NOTE: Using "autoBuild": true` in `config/vite.json` file will trigger a build
 # on demand as needed, before performing any lookup.
-class ViteRails::Manifest
+class ViteRuby::Manifest
   class MissingEntryError < StandardError
   end
 
-  def initialize(vite_rails)
-    @vite_rails = vite_rails
+  def initialize(vite_ruby)
+    @vite_ruby = vite_ruby
   end
 
   # Public: Strict version of lookup.
@@ -29,7 +29,7 @@ class ViteRails::Manifest
   # Returns a relative path, or nil if the asset is not found.
   #
   # Example:
-  #   ViteRails.manifest.lookup('calendar.js')
+  #   ViteRuby.manifest.lookup('calendar.js')
   #   # { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, type: nil)
     build if should_build?
@@ -49,7 +49,9 @@ class ViteRails::Manifest
 
 private
 
-  delegate :config, :builder, :dev_server_running?, to: :@vite_rails
+  extend Forwardable
+
+  def_delegators :@vite_ruby, :config, :builder, :dev_server_running?
 
   # NOTE: Auto compilation is convenient when running tests, when the developer
   # won't focus on the frontend, or when running the Vite server is not desired.
@@ -68,7 +70,7 @@ private
 
   # Internal: Performs a Vite build.
   def build
-    ViteRails.logger.tagged('Vite') { builder.build }
+    builder.build
   end
 
   # Internal: The parsed data from manifest.json.
@@ -117,8 +119,8 @@ private
   # Internal: Raises a detailed message when an entry is missing in the manifest.
   def missing_entry_error(name, type: nil, **_options)
     file_name = with_file_extension(name, type)
-    raise ViteRails::Manifest::MissingEntryError, <<~MSG
-      Vite Rails can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
+    raise ViteRuby::Manifest::MissingEntryError, <<~MSG
+      Vite Ruby can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
 
       Possible causes:
       #{ missing_entry_causes.map { |cause| "\t- #{ cause }" }.join("\n") }
@@ -136,7 +138,7 @@ private
       (local && !dev_server_running? && 'The Vite development server has crashed or is no longer available.'),
       'You have misconfigured config/vite.json file.',
       (!local && 'Assets have not been precompiled'),
-    ].select(&:present?)
+    ].select(&:itself)
   rescue StandardError
     []
   end

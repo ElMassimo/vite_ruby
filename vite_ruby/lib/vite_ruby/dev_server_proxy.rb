@@ -3,12 +3,13 @@
 require 'rack/proxy'
 
 # Public: Allows to relay asset requests to the Vite development server.
-class ViteRails::DevServerProxy < Rack::Proxy
+class ViteRuby::DevServerProxy < Rack::Proxy
+  HOST_WITH_PORT_REGEX = %r{^(.+?)(\:\d+)\/}
   VITE_DEPENDENCY_PREFIX = '/@'
 
   def initialize(app = nil, options = {})
-    @vite_rails = options.delete(:vite_rails) || ViteRails.instance
-    options[:streaming] = false if Rails.env.test? && !options.key?(:streaming)
+    @vite_ruby = options.delete(:vite_ruby) || ViteRuby.instance
+    options[:streaming] = false if ViteRuby.mode == 'test' && !options.key?(:streaming)
     super
   end
 
@@ -24,11 +25,14 @@ class ViteRails::DevServerProxy < Rack::Proxy
 
 private
 
-  delegate :config, :dev_server_running?, to: :@vite_rails
+  extend Forwardable
+
+  def_delegators :@vite_ruby, :config, :dev_server_running?
 
   def rewrite_uri_for_vite(env)
-    uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject(&:blank?).join('?') }
+    uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject { |str| str.to_s.strip.empty? }.join('?') }
       .sub(vite_asset_url_prefix, '/')
+      .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
     env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 
