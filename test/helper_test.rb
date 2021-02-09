@@ -32,6 +32,7 @@ class HelperTest < ActionView::TestCase
     with_dev_server_running {
       assert_equal '/vite-production/application.ts', vite_asset_path('application.ts')
       assert_equal '/vite-production/styles.css', vite_asset_path('styles.css')
+      assert_equal '/vite-production/image/logo.png', vite_asset_path('image/logo', type: :png)
     }
   end
 

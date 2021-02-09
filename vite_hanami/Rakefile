@@ -4,6 +4,6 @@ require 'bundler/gem_tasks'
 
 class Bundler::GemHelper
   def version_tag
-    "vite_rails@#{ version }"
+    "vite_hanami@#{ version }"
   end
 end

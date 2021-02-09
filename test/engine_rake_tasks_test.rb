@@ -41,7 +41,7 @@ class EngineRakeTasksTest < Minitest::Test
     raise error, [error.message, @command_results.join("\n\n")].join("\n")
   end
 
-  def test_cli_commands
+  def test_cli
     within_mounted_app_root { `bundle exec vite install` }
     assert vite_binstub_path.exist?
     assert vite_config_ts_path.exist?
@@ -53,14 +53,18 @@ class EngineRakeTasksTest < Minitest::Test
     assert app_public_dir.join('assets').exist?
 
     within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }
+  rescue Minitest::Assertion => error
+    raise error, [error.message, @command_results.join("\n\n")].join("\n")
+  end
 
+  def test_cli_commands
+    within_mounted_app_root { ViteRuby::CLI::Install.new.call }
+    within_mounted_app_root { ViteRuby::CLI::Version.new.call }
     within_mounted_app_root {
       stub_runner(expect: ['--debug']) {
         assert_equal 'run', ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--debug'])
       }
     }
-  rescue Minitest::Assertion => error
-    raise error, [error.message, @command_results.join("\n\n")].join("\n")
   end
 
 private

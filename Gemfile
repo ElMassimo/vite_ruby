@@ -6,7 +6,7 @@ gem 'rack-proxy', require: false
 gem 'rails'
 gem 'rake', '>= 11.1'
 
-gem 'vite_rails', path: './vite_rails'
+gemspec path: './vite_rails'
 gem 'vite_ruby', path: './vite_ruby'
 
 group :development, :test do
@@ -14,7 +14,6 @@ group :development, :test do
   gem 'minitest', '~> 5.0'
   gem 'minitest-reporters'
   gem 'pry-byebug'
-  gem 'rubocop'
-  gem 'rubocop-performance'
   gem 'simplecov', '< 0.18'
+  gem 'spring'
 end

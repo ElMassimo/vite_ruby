@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'vite_ruby'
 
   s.add_development_dependency 'bundler', '>= 1.3.0'
-  s.add_development_dependency 'rubocop', '0.93.1'
+  s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-performance'
 
   s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]

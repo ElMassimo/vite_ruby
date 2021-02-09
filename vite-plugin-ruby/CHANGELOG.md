@@ -1,3 +1,7 @@
+## vite-plugin-ruby 1.0.10 (2020-02-09)
+
+- Move `debug` from external to dependency.
+
 ## vite-plugin-ruby 1.0.9 (2020-02-09)
 
 - Add all files under `sourceCodeDir` to the dev server watcher.
