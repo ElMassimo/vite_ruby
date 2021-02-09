@@ -20,7 +20,7 @@ class EngineRakeTasksTest < Minitest::Test
     within_mounted_app { `bundle exec rake app:vite:binstubs` }
     assert vite_binstub_path.exist?
 
-    within_mounted_app { `bundle exec rake app:vite:install` }
+    within_mounted_app { `cd test/dummy && bin/vite install` }
     assert vite_config_ts_path.exist?
     assert app_frontend_dir.exist?
 

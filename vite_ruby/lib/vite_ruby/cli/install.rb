@@ -11,7 +11,7 @@ class ViteRuby::CLI::Install < Dry::CLI::Command
     $stdout.sync = true
 
     say 'Creating binstub'
-    `bundle binstub vite_ruby`
+    ViteRuby.commands.install_binstubs
 
     say 'Creating configuration files'
     create_configuration_files
@@ -41,7 +41,7 @@ private
 
   extend Forwardable
 
-  file_utils = %i[append cp inject_line_after inject_line_before unshift write]
+  file_utils = %i[append cp inject_line_after inject_line_after_last inject_line_before write]
   def_delegators 'Dry::CLI::Utils::Files', *file_utils
   def_delegators 'ViteRuby', :config
 
@@ -81,7 +81,7 @@ private
   # Internal: Setup for a plain Rack application.
   def setup_rack
     copy_template 'config/vite.json', to: config.config_path
-    unshift root.join('config.ru'), 'use(ViteRuby::DevServerProxy, ssl_verify_none: true) if ViteRuby.run_proxy?'
+    inject_line_after_last root.join('config.ru'), 'require', 'use(ViteRuby::DevServerProxy, ssl_verify_none: true) if ViteRuby.run_proxy?'
   end
 
   # Internal: Create a sample JS file and attempt to inject it in an HTML template.

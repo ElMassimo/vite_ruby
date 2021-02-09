@@ -60,9 +60,14 @@ class ViteRuby::Commands
     true
   end
 
+  # Internal: Installs the binstub for the CLI in the appropriate path.
+  def install_binstubs
+    `bundle binstub vite_ruby --path #{ config.root.join('bin') }`
+  end
+
   # Internal: Verifies if ViteRuby is properly installed.
   def verify_install
-    unless File.exist?(ViteRuby.config.root.join('bin/vite'))
+    unless File.exist?(config.root.join('bin/vite'))
       warn <<~WARN
         vite binstub not found.
         Have you run `bundle binstub vite`?
@@ -70,7 +75,7 @@ class ViteRuby::Commands
       WARN
     end
 
-    config_path = ViteRuby.config.root.join(ViteRuby.config.config_path)
+    config_path = config.root.join(config.config_path)
     unless config_path.exist?
       warn <<~WARN
         Configuration #{ config_path } file for vite-plugin-ruby not found.
@@ -82,7 +87,7 @@ class ViteRuby::Commands
 
   # Internal: Prints information about ViteRuby's environment.
   def print_info
-    Dir.chdir(ViteRuby.config.root) do
+    Dir.chdir(config.root) do
       $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
 
       $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"

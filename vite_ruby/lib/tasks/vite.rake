@@ -6,7 +6,7 @@ require 'rake'
 
 namespace :vite do
   task :binstubs do
-    `bundle binstub vite_ruby`
+    ViteRuby.commands.install_binstubs
   end
 
   desc 'Compile JavaScript packs using vite for production with digests'
@@ -32,10 +32,7 @@ namespace :vite do
 
   desc 'Install all JavaScript dependencies'
   task :install_dependencies do
-    valid_node_envs = %w[test development production]
-    rack_env = ENV.fetch('RACK_ENV') { ENV.fetch('RAILS_ENV', 'production') }
-    node_env = ENV.fetch('NODE_ENV') { valid_node_envs.include?(rack_env) ? rack_env : 'production' }
-    system({ 'NODE_ENV' => node_env }, 'npx ci --prod=false')
+    system({ 'NODE_ENV' => 'development' }, 'npx ci')
   end
 
   desc "Provide information on ViteRuby's environment"
