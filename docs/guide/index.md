@@ -43,7 +43,7 @@ And then run:
 
 Running
 
-    $ bin/rake vite:install
+    $ bundle exec vite install
 
 will:
 

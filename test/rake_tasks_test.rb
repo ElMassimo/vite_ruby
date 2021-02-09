@@ -8,7 +8,6 @@ class RakeTasksTest < Minitest::Test
     assert_includes output, 'vite:build'
     assert_includes output, 'vite:clean'
     assert_includes output, 'vite:clobber'
-    assert_includes output, 'vite:install'
     assert_includes output, 'vite:install_dependencies'
     assert_includes output, 'vite:verify_install'
   end

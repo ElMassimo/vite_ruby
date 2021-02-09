@@ -32,13 +32,36 @@ When compiling assets for production on a remote server, such as a CI, it's reco
 
 Check the [configuration reference] to learn more about the [build options].
 
+## Commands ⌨️
+
+The following commands are available in the `vite` CLI tool, which you can run
+using `bundle exec vite`, or `bin/vite` after the installation.
+
+- <kbd>bundle exec vite install</kbd>
+
+  Automatic setup to start using Vite Rails in your application.
+
+- <kbd>bin/vite dev</kbd>
+
+  Starts the Vite development server.
+
+- <kbd>bin/vite build</kbd>
+
+  Makes a production bundle with Vite using Rollup behind the scenes.
+
+- <kbd>bin/vite info</kbd>
+
+  Provide information on _Vite Ruby_ and related libraries.
+
+::: tip Environment-aware
+
+All these commands are aware of the environment. When running them locally in
+development you can provide `RAILS_ENV=production` to simulate a production build.
+:::
+
 ## Rake Tasks ⚙️
 
 The following rake tasks are available:
-
-- <kbd>vite:install</kbd>
-
-  Automatic setup to start using Vite Rails in your application.
 
 - <kbd>vite:build</kbd>
 

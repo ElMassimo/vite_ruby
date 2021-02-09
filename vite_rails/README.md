@@ -6,7 +6,7 @@
   <br>
 
   <a href="https://vite-rails.netlify.app/">
-    Vite in Ruby
+    Vite Rails
   </a>
 
   <br>
@@ -20,6 +20,9 @@
     </a>
     <a href="https://codeclimate.com/github/ElMassimo/vite_rails">
       <img alt="Test Coverage" src="https://codeclimate.com/github/ElMassimo/vite_rails/badges/coverage.svg"/>
+    </a>
+    <a href="https://rubygems.org/gems/vite_rails">
+      <img alt="Gem Version" src="https://img.shields.io/gem/v/vite_rails.svg?colorB=e9573f"/>
     </a>
     <a href="https://github.com/ElMassimo/vite_rails/blob/master/LICENSE.txt">
       <img alt="License" src="https://img.shields.io/badge/license-MIT-428F7E.svg"/>
@@ -41,11 +44,11 @@
 [Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [Discussions]: https://github.com/ElMassimo/vite_rails/discussions
 
+[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
-This repo contains libraries that will allow you to easily integrate Vite in
-your favourite Ruby framework.
+Check [this video comparison with webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1), or an [example app] running on [Heroku].
 
 ## Features ⚡️
 
