@@ -13,13 +13,12 @@ Gem::Specification.new do |s|
   s.license  = 'MIT'
 
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_rails/tree/vite_hanami@#{ ViteRuby::VERSION }/vite_hanami",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_rails/blob/vite_hanami@#{ ViteRuby::VERSION }/vite_hanami/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_rails/tree/vite_hanami@#{ ViteHanami::VERSION }/vite_hanami",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_rails/blob/vite_hanami@#{ ViteHanami::VERSION }/vite_hanami/CHANGELOG.md",
   }
 
   s.required_ruby_version = '>= 2.5.0'
 
-  s.add_dependency 'railties', '>= 5.1'
   s.add_dependency 'vite_ruby'
 
   s.add_development_dependency 'bundler', '>= 1.3.0'

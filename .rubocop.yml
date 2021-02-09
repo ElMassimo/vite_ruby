@@ -8,6 +8,9 @@ AllCops:
     - "vendor/bundle"
     - "tmp/**/*"
 
+Style/RescueModifier:
+  Enabled: false
+
 Style/DoubleNegation:
   Enabled: false
 

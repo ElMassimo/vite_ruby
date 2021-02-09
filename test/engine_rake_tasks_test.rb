@@ -20,7 +20,7 @@ class EngineRakeTasksTest < Minitest::Test
     within_mounted_app { `bundle exec rake app:vite:binstubs` }
     assert vite_binstub_path.exist?
 
-    within_mounted_app { `cd test/dummy && bin/vite install` }
+    within_mounted_app_root { `bin/vite install` }
     assert vite_config_ts_path.exist?
     assert app_frontend_dir.exist?
 
@@ -41,10 +41,43 @@ class EngineRakeTasksTest < Minitest::Test
     raise error, [error.message, @command_results.join("\n\n")].join("\n")
   end
 
+  def test_cli_commands
+    within_mounted_app_root { `bundle exec vite install` }
+    assert vite_binstub_path.exist?
+    assert vite_config_ts_path.exist?
+    assert app_frontend_dir.exist?
+
+    within_mounted_app_root { `bin/vite build` }
+    assert app_public_dir.exist?
+    assert app_public_dir.join('manifest.json').exist?
+    assert app_public_dir.join('assets').exist?
+
+    within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }
+
+    within_mounted_app_root {
+      stub_runner(expect: ['--debug']) {
+        assert_equal 'run', ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--debug'])
+      }
+    }
+  rescue Minitest::Assertion => error
+    raise error, [error.message, @command_results.join("\n\n")].join("\n")
+  end
+
 private
 
   def within_mounted_app(&block)
     Dir.chdir(mounted_app_path, &block).tap { |result| @command_results << result }
+  end
+
+  def within_mounted_app_root(&block)
+    Dir.chdir(mounted_app_path.join('test/dummy'), &block).tap { |result| @command_results << result }
+  end
+
+  def stub_runner(expect:, &block)
+    mock = Minitest::Mock.new
+    mock.expect(:call, 'run', [expect])
+    ViteRuby.stub(:run, mock, &block)
+    mock.verify
   end
 
   def mounted_app_path
