@@ -20,6 +20,9 @@ class ViteRuby
   DEFAULT_VITE_VERSION = '^2.0.0-beta.65'
   DEFAULT_PLUGIN_VERSION = '^1.0.8'
 
+  # Internal: Ruby Frameworks that have a companion library for Vite Ruby.
+  SUPPORTED_FRAMEWORKS = %w[rails hanami roda].freeze
+
   class << self
     extend Forwardable
 
@@ -60,6 +63,12 @@ class ViteRuby
     # Internal: Allows to obtain any env variables for configuration options.
     def load_env_variables
       ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
+    end
+
+    # Internal: Detects if the application has installed a framework-specific
+    # variant of Vite Ruby.
+    def framework_libraries
+      SUPPORTED_FRAMEWORKS.map { |framework| Gem.loaded_specs["vite_#{ framework }"] }.compact
     end
   end
 

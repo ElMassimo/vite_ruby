@@ -110,7 +110,7 @@ private
   end
 end
 
-%w[rails hanami roda].each do |framework|
-  library = "vite_#{ framework }"
-  require "#{ library }/installation" if Gem.loaded_specs.key?(library)
+# NOTE: This allows framework-specific variants to extend the installation.
+ViteRuby.framework_libraries.each do |library|
+  require "#{ library.name }/installation"
 end

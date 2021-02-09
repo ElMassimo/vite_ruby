@@ -91,6 +91,10 @@ class ViteRuby::Commands
       $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
 
       $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"
+      ViteRuby.framework_libraries.each do |library|
+        $stdout.puts "#{ library.name }: #{ library.version }"
+      end
+
       $stdout.puts "node: #{ `node --version` }"
       $stdout.puts "npm: #{ `npm --version` }"
       $stdout.puts "yarn: #{ `yarn --version` }"
