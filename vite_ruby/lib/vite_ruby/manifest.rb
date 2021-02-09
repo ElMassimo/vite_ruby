@@ -33,7 +33,7 @@ class ViteRuby::Manifest
     imports = dev_server_running? ? [] : entries.flat_map { |entry| entry['imports'] }.compact.uniq
     {
       scripts: script_paths,
-      modules: imports.map { |entry| entry.fetch('file') }.uniq,
+      imports: imports.map { |entry| entry.fetch('file') }.uniq,
       stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry['css'] }.compact.uniq,
     }
   end

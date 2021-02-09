@@ -9,7 +9,7 @@
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
-[simple app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[simple app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/rails
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [dev options]: /config/#development-options

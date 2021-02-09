@@ -11,7 +11,7 @@ module ViteHanami::Installation
   def setup_app_files
     cp HANAMI_TEMPLATES.join('config/hanami-vite.json'), config.config_path
     inject_line_after root.join('config/environment.rb'), 'environment :development do', '    middleware.use(ViteRuby::DevServerProxy, ssl_verify_none: true) if ViteRuby.run_proxy?'
-    inject_line_after root.join('apps/web/application.rb'), 'view.prepare do', '        include ViteRuby::HanamiHelpers'
+    inject_line_after_last root.join('apps/web/application.rb'), 'include Web::Assets::Helpers', '        include ViteHanami::TagHelpers'
     inject_line_after root.join('apps/web/application.rb'), 'configure :development do', <<-CSP
       # Allow @vite/client to hot reload changes in development
       security.content_security_policy(

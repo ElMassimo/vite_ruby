@@ -255,9 +255,9 @@ module Web
       #
       # See: http://www.rubydoc.info/gems/hanami-view#Configuration
       view.prepare do
-        include ViteHanami::TagHelpers
         include Hanami::Helpers
         include Web::Assets::Helpers
+        include ViteHanami::TagHelpers
       end
     end
 

@@ -2,11 +2,6 @@
 
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
 module ViteRails::TagHelpers
-  # Public: Returns the current manifest loaded by Vite Ruby.
-  def vite_manifest
-    ViteRuby.instance.manifest
-  end
-
   # Public: Renders a script tag for vite/client to enable HMR in development.
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
@@ -32,7 +27,7 @@ module ViteRails::TagHelpers
                           **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, **options)
-    tags << vite_preload_tag(*entries.fetch(:modules), crossorigin: crossorigin) unless skip_preload_tags
+    tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
     tags << stylesheet_link_tag(*entries.fetch(:stylesheets)) unless skip_style_tags
     tags
   end
@@ -50,6 +45,12 @@ module ViteRails::TagHelpers
 
 private
 
+  # Internal: Returns the current manifest loaded by Vite Ruby.
+  def vite_manifest
+    ViteRuby.instance.manifest
+  end
+
+  # Internal: Renders a modulepreload link tag.
   def vite_preload_tag(*sources, crossorigin:)
     sources.map { |source|
       href = path_to_asset(source)

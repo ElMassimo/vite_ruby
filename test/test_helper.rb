@@ -3,6 +3,7 @@
 require 'simplecov'
 SimpleCov.start {
   add_filter '/test/'
+  add_filter '/vite_ruby/lib/tasks'
 }
 
 require 'minitest/autorun'

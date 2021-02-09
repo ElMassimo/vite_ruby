@@ -29,9 +29,7 @@ module ViteHanami::TagHelpers
     tags = javascript(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, **options)
     tags << vite_modulepreload(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
     tags << stylesheet(*entries.fetch(:stylesheets)) unless skip_style_tags
-    tags
-
-    ::Hanami::Utils::Escape::SafeString.new([js_tags, preload_tags, style_tags].compact.flatten.join("\n"))
+    ::Hanami::Utils::Escape::SafeString.new(tags)
   end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.

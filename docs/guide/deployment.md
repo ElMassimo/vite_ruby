@@ -8,7 +8,7 @@
 [configuration reference]: /config/
 [example1]: https://github.com/ElMassimo/pingcrm-vite
 [heroku1]: https://pingcrm-vite.herokuapp.com/
-[example2]: https://github.com/ElMassimo/vite_rails/tree/main/examples/blog
+[example2]: https://github.com/ElMassimo/vite_rails/tree/main/examples/rails
 [heroku2]: https://vite-rails-demo.herokuapp.com/
 [build options]: /config/#build-options
 [configuration reference]: /config/

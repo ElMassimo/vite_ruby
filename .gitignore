@@ -42,3 +42,7 @@ selenium-server.log
 
 # Algolia
 .algolia.env
+
+# Hanami
+.env.local
+.env.*.local
