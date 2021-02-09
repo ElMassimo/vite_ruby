@@ -2270,18 +2270,12 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /esbuild/0.8.33:
+  /esbuild/0.8.43:
     dev: true
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-2ms/P6Y9zJfopR9dKo2vHzhXKfGSNlquVVoVOF8YnhjuzZVrvManMVBPadBsR/t7jzIkRnwqvxrs7d4f3C3eyg==
-  /esbuild/0.8.34:
-    dev: true
-    hasBin: true
-    requiresBuild: true
-    resolution:
-      integrity: sha512-tnr0V1ooakYr1aRLXQLzCn2GVG1kBTW3FWpRyC+NgrR3ntsouVpJOlTOV0BS4YLATx3/c+x3h/uBq9lWJlUAtQ==
+      integrity: sha512-ZVE2CpootS4jtnfV0bbtJdgRsHEXcMP0P7ZXGfTmNzzhBr2e5ag7Vp3ry0jmw8zduJz4iHzxg4m5jtPxWERz1w==
   /escape-string-regexp/1.0.5:
     dev: true
     engines:
@@ -6529,7 +6523,7 @@ packages:
       cac: 6.7.1
       chalk: 4.1.0
       chokidar: 3.5.1
-      esbuild: 0.8.33
+      esbuild: 0.8.43
       globby: 11.0.2
       joycon: 2.2.5
       postcss-load-config: 3.0.0
@@ -6724,7 +6718,7 @@ packages:
       integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=
   /vite/2.0.0-beta.65:
     dependencies:
-      esbuild: 0.8.34
+      esbuild: 0.8.43
       postcss: 8.2.4
       resolve: 1.19.0
       rollup: 2.36.2
