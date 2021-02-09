@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-ruby",
   "description": "Convention over configuration for using Vite in Ruby apps",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "dev": "npm run build -- --watch",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "build": "tsup src/index.ts --dts --format cjs,esm --external debug",
     "prerelease": "npm run build",
     "release": "npm run build && npm publish"
   },

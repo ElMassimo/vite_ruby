@@ -1,3 +1,7 @@
+## vite-plugin-ruby 1.0.9 (2020-02-09)
+
+- Add all files under `sourceCodeDir` to the dev server watcher.
+
 ## vite-plugin-ruby 1.0.8 (2020-02-06)
 
 - Split entrypoints into assets/non-assets and add fingerprinting for assets, in order to support 2.0.0-beta.65

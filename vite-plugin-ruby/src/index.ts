@@ -1,5 +1,5 @@
 import { resolve, join } from 'path'
-import type { Plugin, UserConfig } from 'vite'
+import type { Plugin, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
@@ -11,6 +11,9 @@ export * from './types'
 // Public: The resolved project root.
 export const projectRoot = configOptionFromEnv('root') || process.cwd()
 
+// Internal: The resolved source code dir.
+let codeRoot: string
+
 // Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
 // a shared JSON configuration file that can be read from Ruby.
 export default function ViteRubyPlugin(): Plugin[] {
@@ -18,6 +21,7 @@ export default function ViteRubyPlugin(): Plugin[] {
     {
       name: 'vite-plugin-ruby',
       config,
+      configureServer,
     },
     assetsManifestPlugin(),
   ]
@@ -45,7 +49,7 @@ function config(config: UserConfig): UserConfig {
 
   debug({ base, build, root, server, entrypoints })
 
-  const codeRoot = resolve(join(projectRoot, sourceCodeDir!))
+  codeRoot = resolve(join(projectRoot, sourceCodeDir!))
 
   return cleanConfig({
     alias: {
@@ -60,4 +64,10 @@ function config(config: UserConfig): UserConfig {
       exclude: ['vite-plugin-ruby'],
     },
   })
+}
+
+// Internal: Allows to watch the entire source code dir, not just entrypoints
+// which is the root for Vite.
+function configureServer(server: ViteDevServer) {
+  server.watcher.add(`${codeRoot}/**/*`)
 }
