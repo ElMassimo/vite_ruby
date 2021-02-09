@@ -3191,11 +3191,6 @@ fsevents@^1.2.7:
     bindings "^1.5.0"
     nan "^2.12.1"
 
-fsevents@~2.1.2:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
-  integrity sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
-
 fsevents@~2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.1.tgz#b209ab14c61012636c8863507edf7fb68cc54e9f"
@@ -6370,12 +6365,12 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rollup@^2.35.1:
-  version "2.37.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.37.1.tgz#aa7aadffd75c80393f9314f9857e851b0ffd34e7"
-  integrity sha512-V3ojEeyGeSdrMSuhP3diBb06P+qV4gKQeanbDv+Qh/BZbhdZ7kHV0xAt8Yjk4GFshq/WjO7R4c7DFM20AwTFVQ==
+rollup@^2.38.5:
+  version "2.38.5"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.38.5.tgz#be41ad4fe0c103a8794377afceb5f22b8f603d6a"
+  integrity sha512-VoWt8DysFGDVRGWuHTqZzT02J0ASgjVq/hPs9QcBOGMd7B+jfTr/iqMVEyOi901rE3xq+Deq66GzIT1yt7sGwQ==
   optionalDependencies:
-    fsevents "~2.1.2"
+    fsevents "~2.3.1"
 
 run-parallel@^1.1.9:
   version "1.1.10"
@@ -7426,24 +7421,24 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-ruby@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.8.tgz#321410c2afa5ecee1a83a61a91cf0b93165a611a"
-  integrity sha512-mE61pWBpRaku/Yp4wEYNu4MM4Z5a3kaWEBT71sbXXK/AFclS6Xe3x6UdxruQFR2vR+LqgAB3pXAX1w1LYp7ivQ==
+vite-plugin-ruby@^1.0.8:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.9.tgz#f174611ab4ab08b34394fb52db617a1a8c883bcf"
+  integrity sha512-DQze9bfIHZz9f3aVQVJg3Os7eE6rXfcQUmLJpni7BN2bfxCp9It/bQeipB4xRB192d1TpaQ+aEq+SQmB+f+36Q==
   dependencies:
     fast-glob "^3.2.4"
 
-vite@2.0.0-beta.65:
-  version "2.0.0-beta.65"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.65.tgz#e4e4576c01b9906d5fb3568e4068c80354107a70"
-  integrity sha512-mdHNTP6fGeb8m8lWAM3UbSPw1+un1lUv0i4MQJcNiK2/P01RHIY02VjQeXBv3NemkExkgLji88LN9ySFMUQpIw==
+vite@^2.0.0-beta.65:
+  version "2.0.0-beta.67"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.67.tgz#2d4e7a62a925539448bd18154008afb2b4484a07"
+  integrity sha512-QNxIRajidVG3ejikBUb17NgCV1bJ9UyKHBdItgw1O/ljQ1hBoph5I2/DrviqV4G9H3WP7teXk5vwQWuCVS9fqQ==
   dependencies:
     esbuild "^0.8.34"
     postcss "^8.2.1"
     resolve "^1.19.0"
-    rollup "^2.35.1"
+    rollup "^2.38.5"
   optionalDependencies:
-    fsevents "~2.1.2"
+    fsevents "~2.3.1"
 
 vm-browserify@^1.0.1:
   version "1.1.2"

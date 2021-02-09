@@ -99,3 +99,8 @@ private
     $stderr = old_stderr
   end
 end
+
+%w[rails hanami roda].each do |framework|
+  library = "vite_#{ framework }"
+  require "#{ library }/installation" if Gem.loaded_specs.key?(library)
+end
