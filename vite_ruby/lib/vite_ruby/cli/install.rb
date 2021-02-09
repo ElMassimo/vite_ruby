@@ -22,17 +22,8 @@ class ViteRuby::CLI::Install < Dry::CLI::Command
     say 'Installing js dependencies'
     install_js_dependencies
 
-    say 'Installing js dependencies'
-    append(root.join('.gitignore'), <<~GITIGNORE)
-
-      # Vite Ruby
-      /public/vite
-      /public/vite-dev
-      /public/vite-test
-      node_modules
-      *.local
-      .DS_Store
-    GITIGNORE
+    say 'Adding files to .gitignore'
+    install_gitignore
 
     say "\nVite ⚡️ Ruby successfully installed! 🎉"
   end
@@ -42,7 +33,10 @@ protected
   # Internal: Setup for a plain Rack application.
   def setup_app_files
     copy_template 'config/vite.json', to: config.config_path
-    inject_line_after_last root.join('config.ru'), 'require', 'use(ViteRuby::DevServerProxy, ssl_verify_none: true) if ViteRuby.run_proxy?'
+
+    if (rackup_file = root.join('config.ru')).exist?
+      inject_line_after_last rackup_file, 'require', 'use(ViteRuby::DevServerProxy, ssl_verify_none: true) if ViteRuby.run_proxy?'
+    end
   end
 
   # Internal: Create a sample JS file and attempt to inject it in an HTML template.
@@ -79,6 +73,22 @@ private
       deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
       say(*Open3.capture3({ 'CI' => 'true' }, "npx ni -D #{ deps }"))
     end
+  end
+
+  # Internal: Adds compilation output dirs to git ignore.
+  def install_gitignore
+    return unless (gitignore_file = root.join('.gitignore')).exist?
+
+    append(gitignore_file, <<~GITIGNORE)
+
+      # Vite Ruby
+      /public/vite
+      /public/vite-dev
+      /public/vite-test
+      node_modules
+      *.local
+      .DS_Store
+    GITIGNORE
   end
 
   # Internal: The root path for the Ruby application.

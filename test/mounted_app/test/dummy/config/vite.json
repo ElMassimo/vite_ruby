@@ -1,6 +1,6 @@
 {
   "all": {
-    "sourceCodeDir": "frontend",
+    "sourceCodeDir": "app/frontend",
     "watchAdditionalPaths": []
   },
   "development": {

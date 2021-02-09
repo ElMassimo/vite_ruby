@@ -13,6 +13,8 @@ module ViteRails::Installation
 
   # Internal: Configure CSP rules that allow to load @vite/client correctly.
   def setup_content_security_policy(csp_file)
+    return unless csp_file.exist?
+
     inject_line_after csp_file, 'policy.script_src', <<-CSP
     # You may need to enable this in production as well depending on your setup.
     policy.script_src *policy.script_src, :blob if Rails.env.test?
@@ -30,10 +32,13 @@ module ViteRails::Installation
   # Override: Create a sample JS file and attempt to inject it in an HTML template.
   def install_sample_files
     cp RAILS_TEMPLATES.join('entrypoints/application.js'), config.resolved_entrypoints_dir.join('application.js')
-    inject_line_before root.join('app/views/layouts/application.html.erb'), '</head>', <<-HTML
-    <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
-    HTML
+
+    if (layout_file = root.join('app/views/layouts/application.html.erb')).exist?
+      inject_line_before layout_file, '</head>', <<-HTML
+      <%= vite_client_tag %>
+      <%= vite_javascript_tag 'application' %>
+      HTML
+    end
   end
 end
 
