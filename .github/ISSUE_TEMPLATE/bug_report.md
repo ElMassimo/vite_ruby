@@ -15,7 +15,7 @@ _Provide a clear and concise description of what the bug is._
 _Please provide a link to a repo that can reproduce the problem you ran into._
 
 <details>
-<summary>Vite Rails Info</summary>
+<summary>Vite Ruby Info</summary>
 
 _Run `bin/rake vite:info` and provide the output:_
 
@@ -31,7 +31,7 @@ _If not providing a reproduction:_
 <details>
 <summary>Output</summary>
 
-_Run `DEBUG=vite-plugin-ruby:* bin/vite` or `DEBUG=vite-plugin-ruby:* bin/rake vite:build` and provide the output:_
+_Run `DEBUG=vite-plugin-ruby:* bin/vite dev` or `DEBUG=vite-plugin-ruby:* bin/vite build` and provide the output:_
 
 ```
 

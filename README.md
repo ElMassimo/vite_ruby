@@ -35,7 +35,7 @@
 [vite_rails]: https://github.com/ElMassimo/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
-[config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
+[config file]: https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
@@ -64,7 +64,7 @@ Visit the [documentation website][website] to check out the [guides] and searcha
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'vite_rails'
+gem 'vite_rails' # vite_hanami for Hanami apps, vite_ruby for Rack apps
 ```
 
 Then, run:
@@ -80,16 +80,16 @@ Additional installation instructions are available in the [documentation website
 
 ## Getting Started 💻
 
-Restart your Rails server, and then run <kbd>bin/vite</kbd> to start the Vite development server.
+Restart your web server, and then run <kbd>bin/vite dev</kbd> to start the Vite development server.
 
-Add the following your `views/layouts/application.html.erb`:
+The installation script should have added the following to your `views/layouts/application.html.erb`:
 
 ```erb
 <%= vite_client_tag %>
 <%= vite_javascript_tag 'application' %>
 ```
 
-Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
+Visit any page and you should see a printed console output: `Vite ⚡️ Ruby`.
 
 For more [guides] and a full [configuration reference], check the [documentation website][website].
 

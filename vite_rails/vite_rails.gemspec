@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => "https://github.com/ElMassimo/vite_rails/blob/vite_rails@#{ ViteRails::VERSION }/vite_rails/CHANGELOG.md",
   }
 
-  s.required_ruby_version = '>= 2.5.0'
+  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
   s.add_dependency 'railties', '>= 5.1'
   s.add_dependency 'vite_ruby'

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'vite_rails'
+
 # Internal: Extends the base installation script from Vite Ruby to work for a
 # typical Rails app.
 module ViteRails::Installation

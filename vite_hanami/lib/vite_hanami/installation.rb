@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'vite_hanami'
+
 # Internal: Extends the base installation script from Vite Ruby to work for a
 # typical Hanami app.
 module ViteHanami::Installation

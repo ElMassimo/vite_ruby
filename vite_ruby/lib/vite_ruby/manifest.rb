@@ -121,7 +121,7 @@ private
   def resolve_references(manifest)
     manifest.each_value do |entry|
       entry['file'] = prefix_vite_asset(entry['file'])
-      entry['css'] = Array.wrap(entry['css']).map { |path| prefix_vite_asset(path) } if entry['css']
+      entry['css'] = entry['css'].map { |path| prefix_vite_asset(path) } if entry['css']
       entry['imports']&.map! { |name| manifest.fetch(name) }
     end
   end

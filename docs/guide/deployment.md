@@ -15,49 +15,18 @@
 
 # Deployment 🚀
 
-Deploying a Rails app using _Vite Rails_ should be straightforward.
+Deploying a Rails app using _Vite Ruby_ should be straightforward.
 
-_Vite Rails_ hooks up a new <kbd>vite:build</kbd> task to <kbd>assets:precompile</kbd>, which gets run whenever you run <kbd>assets:precompile</kbd>.
+_Vite Ruby_ hooks up a new <kbd>vite:build</kbd> task to <kbd>assets:precompile</kbd>, which will run whenever you precompile assets.
 
 ::: tip Aliased
 If not using Sprockets, <kbd>vite:build</kbd> is automatically aliased to <kbd>assets:precompile</kbd>.
 :::
 
-Vite will take `RAILS_ENV` into account, using the appropriate configuration for
+Vite will take `RACK_ENV` and `RAILS_ENV` into account, using the appropriate configuration for
 the current environment as specified in `config/vite.json`.
 
-::: tip Verify dependencies
-When compiling assets for production on a remote server, such as a CI, it's recommended to use `yarn install --frozen-lockfile` to install packages on the remote host, and ensure that the installed packages match the `yarn.lock` file.
-:::
-
 Check the [configuration reference] to learn more about the [build options].
-
-## Commands ⌨️
-
-The following commands are available in the `vite` CLI tool, which you can run
-using `bundle exec vite`, or `bin/vite` after the installation.
-
-- <kbd>bundle exec vite install</kbd>
-
-  Automatic setup to start using Vite Rails in your application.
-
-- <kbd>bin/vite dev</kbd>
-
-  Starts the Vite development server.
-
-- <kbd>bin/vite build</kbd>
-
-  Makes a production bundle with Vite using Rollup behind the scenes.
-
-- <kbd>bin/vite info</kbd>
-
-  Provide information on _Vite Ruby_ and related libraries.
-
-::: tip Environment-aware
-
-All these commands are aware of the environment. When running them locally in
-development you can provide `RAILS_ENV=production` to simulate a production build.
-:::
 
 ## Rake Tasks ⚙️
 
@@ -83,12 +52,12 @@ The following rake tasks are available:
 
 - <kbd>vite:info</kbd>
 
-  Provide information on _Vite Rails_ and related libraries.
+  Provide information on _Vite Ruby_ and related libraries.
 
 ::: tip Environment-aware
 
 All these tasks are aware of the environment. When running them locally in
-development you can provide `RAILS_ENV=production` to simulate a production build.
+development you can provide `RACK_ENV=production` to simulate a production build.
 :::
 
 <hr/>

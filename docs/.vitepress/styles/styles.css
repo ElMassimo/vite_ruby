@@ -18,6 +18,15 @@
   --docsearch-primary-color: var(--c-brand);
 }
 
+.home-hero .image.image {
+  max-height: 220px;
+}
+
+.nav-bar .logo {
+  height: 30px;
+  margin-right: 2px;
+}
+
 @media (min-width: 720px) {
   .nav-links.nav-links.nav-links {
     padding-top: 2px;

@@ -38,7 +38,7 @@
 [vite_rails]: https://github.com/ElMassimo/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
-[config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
+[config file]: https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc

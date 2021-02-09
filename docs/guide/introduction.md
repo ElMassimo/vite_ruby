@@ -1,5 +1,6 @@
 [library]: https://github.com/ElMassimo/vite_rails
-[plugin]: https://github.com/ElMassimo/vite_rails/tree/main/package
+[vite_rails]: https://github.com/ElMassimo/vite_rails/tree/main/vite_rails
+[plugin]: https://github.com/ElMassimo/vite_rails/tree/main/vite-plugin-ruby
 [vite]: https://vitejs.dev/
 [webpacker]: https://github.com/rails/webpacker
 [webpack]: https://github.com/webpack/webpack
@@ -11,17 +12,17 @@
 
 # Introduction
 
-[__Vite Rails__][library] is a library that provides full [Vite] integration in Rails.
+[__Vite Ruby__][library] is a library that provides full [Vite] integration in Ruby web apps.
 
-It aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can easily configure Vite as needed.
+<kbd>[vite_rails]</kbd> is an extension that aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can easily configure Vite as needed.
 
 Check [this video comparison](https://github.com/ElMassimo/pingcrm-vite/pull/1).
 
 ## Why 🤔
 
-[Vite] is great on its own, but configuring it correctly to work for a Rails app structure requires knowledge of its internals.
+[Vite] is great on its own, but configuring it correctly to work for a Ruby app structure requires knowledge of its internals.
 
-By following existing Rails conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features.
+By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features.
 
 ## Features ⚡️
 

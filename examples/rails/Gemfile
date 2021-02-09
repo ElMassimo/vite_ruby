@@ -23,7 +23,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'vite_rails', '~> 1.0.12'
+gem 'vite_rails', path: '../../vite_rails'
+gem 'vite_ruby', path: '../../vite_ruby'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
