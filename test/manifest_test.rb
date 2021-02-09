@@ -20,7 +20,7 @@ class ManifestTest < ViteRuby::Test
       path_for(asset_file)
     end
 
-    assert_match "Vite Rails can't find #{ asset_file } in #{ manifest_path }", error.message
+    assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
   end
 
   def test_lookup_with_type_exception!
@@ -30,7 +30,7 @@ class ManifestTest < ViteRuby::Test
       path_for(asset_file, type: :javascript)
     end
 
-    assert_match "Vite Rails can't find #{ asset_file }.js in #{ manifest_path }", error.message
+    assert_match "Vite Ruby can't find #{ asset_file }.js in #{ manifest_path }", error.message
   end
 
   def test_lookup_success!
@@ -85,7 +85,7 @@ private
   def assert_raises_manifest_missing_entry_error(&block)
     error = nil
     ViteRuby.config.stub :auto_build, false do
-      error = assert_raises ViteRuby::Manifest::MissingEntryError, &block
+      error = assert_raises(ViteRuby::Manifest::MissingEntryError, &block)
     end
     error
   end

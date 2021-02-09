@@ -53,7 +53,7 @@ class HelperTest < ActionView::TestCase
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
       link(href: '/vite-production/assets/application.f510c1e9.css'),
-    ].join, vite_javascript_tag('application')
+    ].join.tr("\n", ''), vite_javascript_tag('application').tr("\n", '')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
     assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')

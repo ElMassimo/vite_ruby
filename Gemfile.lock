@@ -71,6 +71,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    ansi (1.5.0)
     ast (2.4.2)
     builder (3.2.4)
     byebug (11.1.3)
@@ -101,6 +102,11 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
+    minitest-reporters (1.4.3)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -191,6 +197,7 @@ PLATFORMS
 DEPENDENCIES
   m
   minitest (~> 5.0)
+  minitest-reporters
   pry-byebug
   rack-proxy
   rails

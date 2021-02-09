@@ -6,12 +6,17 @@ SimpleCov.start {
 }
 
 require 'minitest/autorun'
+require 'minitest/reporters'
+
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: !ENV['CI'])]
+
 require 'rails'
 require 'rails/test_help'
 require 'pry-byebug'
 
 require_relative 'test_app/config/environment'
 Rails.env = 'production'
+ViteRuby.reload_with({})
 
 module ViteRubyTestHelpers
   def refresh_config(env_variables = ViteRuby.load_env_variables)
@@ -44,17 +49,9 @@ private
 
   def assert_run_command(*argv, flags: [])
     Dir.chdir(test_app_path) {
-      klass = ViteRuby::Runner
-      instance = klass.new(argv)
       mock = Minitest::Mock.new
       mock.expect(:call, nil, [ViteRuby.config.to_env, *%w[npx nr vite], *argv, *flags])
-
-      klass.stub(:new, instance) do
-        instance.stub(:executable_exists?, !use_yarn) do
-          Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
-        end
-      end
-
+      Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
       mock.verify
     }
   end

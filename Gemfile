@@ -12,6 +12,7 @@ gem 'vite_ruby', path: './vite_ruby'
 group :development, :test do
   gem 'm'
   gem 'minitest', '~> 5.0'
+  gem 'minitest-reporters'
   gem 'pry-byebug'
   gem 'rubocop'
   gem 'rubocop-performance'
