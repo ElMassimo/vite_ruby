@@ -59,6 +59,7 @@ class EngineRakeTasksTest < Minitest::Test
 
   def test_cli_commands
     within_mounted_app_root { ViteRuby::CLI::Install.new.call }
+    within_mounted_app_root { ViteRuby.commands.verify_install }
     within_mounted_app_root { ViteRuby::CLI::Version.new.call }
     within_mounted_app_root {
       stub_runner(expect: ['--debug']) {
