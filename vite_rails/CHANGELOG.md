@@ -1,3 +1,9 @@
+## Vite Rails 2.0.0  (2020-02-09)
+
+- Extracted core functionality to `vite_ruby`.
+- User-facing API hasn't really changed, but internal classes have been renamed.
+- Installation script now injects tags to `application.html.erb` if it exists.
+
 ## Vite Rails 1.0.12  (2020-01-29)
 
 - Add support for Vite 2.0.0-beta.56, which modified the manifest to output a `css` field in the manifest.

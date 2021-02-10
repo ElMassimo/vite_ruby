@@ -1,14 +1,14 @@
 PATH
   remote: vite_rails
   specs:
-    vite_rails (1.0.12)
+    vite_rails (2.0.0)
       railties (>= 5.1)
       vite_ruby
 
 PATH
   remote: vite_ruby
   specs:
-    vite_ruby (0.1.0)
+    vite_ruby (1.0.0)
       dry-cli (~> 0.6)
       rack-proxy (>= 0.6.1)
       zeitwerk
