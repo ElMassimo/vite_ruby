@@ -20,6 +20,14 @@ Rails.env = 'production'
 ViteRuby.reload_with({})
 
 module ViteRubyTestHelpers
+  def setup
+    refresh_config
+  end
+
+  def teardown
+    refresh_config
+  end
+
   def refresh_config(env_variables = ViteRuby.load_env_variables)
     ViteRuby.env.tap(&:clear)
     ViteRuby.reload_with(env_variables)

@@ -4,11 +4,13 @@ require 'test_helper'
 
 class ManifestTest < ViteRuby::Test
   def setup
+    super
     ViteRuby::Manifest.instance_eval { public :lookup, :lookup! }
   end
 
   def teardown
     ViteRuby::Manifest.instance_eval { private :lookup, :lookup! }
+    super
   end
 
   delegate :path_for, :lookup, :lookup!, to: 'ViteRuby.instance.manifest'

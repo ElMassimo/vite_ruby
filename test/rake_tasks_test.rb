@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class RakeTasksTest < Minitest::Test
+class RakeTasksTest < ViteRuby::Test
   def test_rake_tasks
     assert ViteRuby.install_tasks
     output = Dir.chdir(test_app_path) { `rake -T` }

@@ -20,6 +20,7 @@ class ConfigTest < ViteRuby::Test
   end
 
   def setup
+    super
     @config = resolve_config
   end
 

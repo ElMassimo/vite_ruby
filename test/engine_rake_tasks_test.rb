@@ -4,11 +4,13 @@ require 'test_helper'
 
 class EngineRakeTasksTest < ViteRuby::Test
   def setup
+    super
     remove_vite_files
   end
 
   def teardown
     remove_vite_files
+    super
   end
 
   def test_tasks_mounted

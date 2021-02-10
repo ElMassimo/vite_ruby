@@ -14,5 +14,7 @@ class DevServerTest < ViteRuby::Test
     refresh_config('VITE_RUBY_MODE' => 'development')
     ViteRuby.instance.instance_variable_set('@running_at', Time.now)
     assert ViteRuby.instance.dev_server_running?
+  ensure
+    ViteRuby.instance.remove_instance_variable('@running_at')
   end
 end

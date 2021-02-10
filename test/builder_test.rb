@@ -6,7 +6,7 @@ class BuilderTest < ViteRuby::Test
   delegate :builder, to: 'ViteRuby.instance'
 
   def setup
-    refresh_config
+    super
     builder.send(:files_digest_path).tap do |path|
       path.delete if path.exist?
     end
@@ -29,10 +29,6 @@ class BuilderTest < ViteRuby::Test
   def test_freshness
     assert builder.stale?
     assert !builder.fresh?
-  end
-
-  def test_build
-    assert !builder.build
   end
 
   def test_freshness_on_build_success

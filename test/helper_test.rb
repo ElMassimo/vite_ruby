@@ -10,6 +10,7 @@ class HelperTest < ActionView::TestCase
   attr_reader :request
 
   def setup
+    super
     @request = Class.new do
       def send_early_hints(links) end
 
