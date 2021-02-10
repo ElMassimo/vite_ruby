@@ -77,6 +77,8 @@ module.exports = {
             { text: 'Introduction', link: '/guide/introduction' },
             { text: 'Getting Started', link: '/guide/' },
             { text: 'Development', link: '/guide/development' },
+            { text: 'Development in Rails', link: '/guide/rails' },
+            { text: 'Development in Hanami', link: '/guide/hanami' },
             { text: 'Deployment', link: '/guide/deployment' },
             { text: 'Migration', link: '/guide/migration' },
           ],

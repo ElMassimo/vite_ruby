@@ -8,7 +8,7 @@
 [deployment]: /guide/deployment
 [rake tasks]: /guide/deployment.html#rake-tasks-⚙%EF%B8%8F
 [recompile assets]: /guide/development.html#auto-build-🤖
-[tag helpers]: /guide/development.html#tag-helpers-🏷
+[tag helpers]: /guide/rails.html#tag-helpers-🏷
 
 # Introduction
 

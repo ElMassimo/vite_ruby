@@ -1,4 +1,4 @@
-[tag helpers]: /guide/development.html#tag-helpers-%F0%9F%8F%B7
+[tag helpers]: /guide/rails.html#tag-helpers-%F0%9F%8F%B7
 [discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker

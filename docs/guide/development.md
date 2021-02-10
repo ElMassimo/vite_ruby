@@ -1,4 +1,4 @@
-[tag helpers]: /guide/development.html#tag-helpers-%F0%9F%8F%B7
+[tag helpers]: /guide/rails.html#tag-helpers-%F0%9F%8F%B7
 [discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
@@ -70,72 +70,6 @@ These files will be automatically detected and passed on to Vite, all [configura
 for you.
 
 You can add them to your HTML layouts or views using the provided [tag helpers].
-
-## Tag Helpers 🏷
-
-In order to link the JavaScript and CSS managed by Vite in your Rails layouts or
-templates, you can by using the following helpers:
-
-- <kbd>[vite_client_tag]</kbd>: Renders the Vite client to enable Hot Module Reload.
-- <kbd>[vite_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
-- <kbd>[vite_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
-- <kbd>[vite_stylesheet_tag]</kbd>: Render a `<link>` tag referencing a CSS file.
-
-You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd>stylesheet_link_tag</kbd>.
-
-```erb
-<head>
-  <title>Example</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= vite_client_tag %>
-
-  <%= vite_javascript_tag 'application' %>
-  <%= vite_stylesheet_tag 'typography', media: 'print' %>
-</head>
-```
-
-For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the resulting URI to the appropriate tag helper.
-
-```erb
-<img src="<%= vite_asset_path 'images/logo.svg' %>" />
-<link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
-```
-
-### Smart Output ✨
-
-For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
-
-```erb
-<%= vite_javascript_tag 'application' %>
-```
-
-Example output:
-```erb
-<script src="/vite/assets/application.a0ba047e.js" type="module" crossorigin="anonymous"/>
-<link rel="preload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
-<link rel="stylesheet" media="screen" href="/vite/assets/application.cccfef34.css">
-```
-
-When running the development server, these tags are omitted, as Vite will load the dependencies.
-
-```erb
-<script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
-```
-
-#### Opting Out ⚙️
-
-For cases where tags need be managed manually, it's possible to opt out by using the options:
-
-- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="preload">` tags.
-- <kbd>skip_style_tags</kbd>: Set to false to avoid rendering `<link rel="stylesheet">` tags.
-
-When rendering styles and preload manually, it's important to avoid rendering when the Vite development server is running, since the files don't exist yet:
-
-```erb
-<%= vite_typescript_tag 'application', skip_style_tags: true %>
-<%= vite_stylesheet_tag 'application' unless ViteRuby.dev_server_running? %>
-```
 
 ## Import Aliases 👉
 
