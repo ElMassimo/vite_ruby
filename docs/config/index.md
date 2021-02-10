@@ -10,11 +10,11 @@
 [publicDir]: /config/#publicdir
 [root]: /config/#root
 
-# Configuring Vite Rails
+# Configuring Vite Ruby
 
-The following section is an overview of basic configuration for _Vite Rails_.
+The following section is an overview of basic configuration for _Vite Ruby_.
 
-Most of the options discussed are specific to _Vite Rails_, for the rest of the
+Most of the options discussed are specific to _Vite Ruby_, for the rest of the
 available configuration options please check Vite's [config reference].
 
 ## Configuring Vite ⚡
@@ -43,7 +43,7 @@ You can customize this file as needed, check Vite's [plugins] and [config refere
 
 ## Shared Configuration File 📄
 
-_Vite Rails_ leverages a simple `config/vite.json` configuration file, which is
+_Vite Ruby_ leverages a simple `config/vite.json` configuration file, which is
 read both from Ruby and JavaScript, and allows you to easily configure options
 such as the host and port of the Vite development server.
 
@@ -80,7 +80,7 @@ overriden with environment variables.
 
   By default, the generated config enables it for the <kbd>test</kbd> and <kbd>development</kbd> environments.
 
-  When enabled, Vite Rails will automatically track changes to <kbd>[sourceCodeDir]</kbd>,
+  When enabled, Vite Ruby will automatically track changes to <kbd>[sourceCodeDir]</kbd>,
   and trigger a Vite build on demand if files have changed.
 
   This is very convenient when running integration tests, or when a developer
@@ -156,7 +156,7 @@ You can customize this behavior using the following options.
 
   Specify the directory where your source code will be defined (relative to <kbd>[root]</kbd>).
 
-  Vite Rails will alias this directory as `~/` allowing you to make absolute imports, which are more convenient.
+  Vite Ruby will alias this directory as `~/` and `@/`, allowing you to make absolute imports which are more convenient.
 
   It be watched for changes when using <kbd>[autoBuild]</kbd>, you can add aditional paths
   to keep track of using <kbd>[watchAdditionalPaths]</kbd>.
@@ -185,6 +185,15 @@ You can customize this behavior using the following options.
   Specify where the [JSON config] file is located (relative to <kbd>[root]</kbd>).
 
   Not supported in the JSON file.
+
+### devServerConnectTimeout
+
+- **Default:** `0.01`
+
+  Timeout when attempting to connect to the dev server (in seconds).
+
+  You can increase this timeout if the fallback compilation is being triggered
+  even though the dev server is running.
 
 ### hideBuildConsoleOutput
 

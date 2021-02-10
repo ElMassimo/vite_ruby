@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class RakeTasksTest < Minitest::Test
+class RakeTasksTest < ViteRuby::Test
   def test_rake_tasks
+    assert ViteRuby.install_tasks
     output = Dir.chdir(test_app_path) { `rake -T` }
     assert_includes output, 'vite:build'
     assert_includes output, 'vite:clean'
     assert_includes output, 'vite:clobber'
-    assert_includes output, 'vite:install'
     assert_includes output, 'vite:install_dependencies'
     assert_includes output, 'vite:verify_install'
   end
@@ -21,7 +21,7 @@ class RakeTasksTest < Minitest::Test
   def test_rake_vite_install_dependencies_in_non_production_environments
     assert_includes test_app_dev_dependencies, 'right-pad'
 
-    ViteRails.commands.send(:with_node_env, 'test') do
+    ViteRuby.commands.send(:with_node_env, 'test') do
       Dir.chdir(test_app_path) do
         `bundle exec rake vite:install_dependencies`
       end
@@ -32,7 +32,7 @@ class RakeTasksTest < Minitest::Test
   end
 
   def test_rake_vite_install_dependencies_in_production_environment
-    ViteRails.commands.send(:with_node_env, 'production') do
+    ViteRuby.commands.send(:with_node_env, 'production') do
       Dir.chdir(test_app_path) do
         `bundle exec rake vite:install_dependencies`
       end

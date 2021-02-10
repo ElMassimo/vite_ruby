@@ -2,6 +2,9 @@
 
 require 'action_controller/railtie'
 require 'action_view/railtie'
+
+class Rails::Console; end
+
 require 'vite_rails'
 
 module TestApp

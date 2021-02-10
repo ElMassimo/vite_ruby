@@ -3,29 +3,41 @@
 require 'simplecov'
 SimpleCov.start {
   add_filter '/test/'
+  add_filter '/vite_ruby/lib/tasks'
 }
 
 require 'minitest/autorun'
+require 'minitest/reporters'
+
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: !ENV['CI'])]
+
 require 'rails'
 require 'rails/test_help'
 require 'pry-byebug'
 
 require_relative 'test_app/config/environment'
-
 Rails.env = 'production'
+ViteRuby.reload_with({})
 
-ViteRails.instance = ViteRails.new
+module ViteRubyTestHelpers
+  def setup
+    refresh_config
+  end
 
-module ViteRailsTestHelpers
-  def refresh_config(env_variables = ViteRails.load_env_variables)
-    ViteRails.env = env_variables
-    (ViteRails.instance = ViteRails.new).config
+  def teardown
+    refresh_config
+  end
+
+  def refresh_config(env_variables = ViteRuby.load_env_variables)
+    ViteRuby.env.tap(&:clear)
+    ViteRuby.reload_with(env_variables)
   end
 
   def with_rails_env(env)
     original = Rails.env
     Rails.env = ActiveSupport::StringInquirer.new(env)
-    yield(refresh_config)
+    refresh_config
+    yield(ViteRuby.config)
   ensure
     Rails.env = ActiveSupport::StringInquirer.new(original)
     refresh_config
@@ -36,33 +48,21 @@ module ViteRailsTestHelpers
   end
 
   def with_dev_server_running(&block)
-    ViteRails.instance.stub(:dev_server_running?, true, &block)
+    ViteRuby.instance.stub(:dev_server_running?, true, &block)
   end
 end
 
-class ViteRails::Test < Minitest::Test
-  include ViteRailsTestHelpers
+class ViteRuby::Test < Minitest::Test
+  include ViteRubyTestHelpers
 
 private
 
-  def assert_run_command(*argv, use_yarn: false, flags: [])
-    command = use_yarn ? %w[yarn vite] : ["#{ test_app_path }/node_modules/.bin/vite"]
-    cwd = Dir.pwd
-    Dir.chdir(test_app_path)
-
-    klass = ViteRails::Runner
-    instance = klass.new(argv)
-    mock = Minitest::Mock.new
-    mock.expect(:call, nil, [ViteRails.config.to_env, *command, *argv, *flags])
-
-    klass.stub(:new, instance) do
-      instance.stub(:executable_exists?, !use_yarn) do
-        Kernel.stub(:exec, mock) { ViteRails.run(argv) }
-      end
-    end
-
-    mock.verify
-  ensure
-    Dir.chdir(cwd)
+  def assert_run_command(*argv, flags: [])
+    Dir.chdir(test_app_path) {
+      mock = Minitest::Mock.new
+      mock.expect(:call, nil, [ViteRuby.config.to_env, 'npx', 'vite', *argv, *flags])
+      Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
+      mock.verify
+    }
   end
 end

@@ -2,36 +2,36 @@
 
 require 'test_helper'
 
-class CommandsTest < ViteRails::Test
-  def stub_builder(stale:, build_with_vite:)
-    ViteRails.builder.stub :stale?, stale do
-      ViteRails.builder.stub :build_with_vite, build_with_vite do
-        yield
-      end
+class CommandsTest < ViteRuby::Test
+  def stub_builder(stale:, build_with_vite:, &block)
+    ViteRuby.instance.builder.stub :stale?, stale do
+      ViteRuby.instance.builder.stub :build_with_vite, build_with_vite, &block
     end
   end
 
   def test_bootstrap
-    assert ViteRails.bootstrap
+    assert ViteRuby.bootstrap
   end
+
+  delegate :build, :build_from_task, :clean, :clean_from_task, :clobber, to: 'ViteRuby.commands'
 
   def test_build_returns_success_status_when_stale
     stub_builder(stale: true, build_with_vite: true) {
-      assert_equal true, ViteRails.build
-      assert_equal true, ViteRails.build_from_rake
+      assert_equal true, build
+      assert_equal true, build_from_task
     }
   end
 
   def test_build_returns_success_status_when_fresh
     stub_builder(stale: false, build_with_vite: true) {
-      assert_equal true, ViteRails.build
-      assert_equal true, ViteRails.build_from_rake
+      assert_equal true, build
+      assert_equal true, build_from_task
     }
   end
 
   def test_build_returns_failure_status_when_stale
     stub_builder(stale: true, build_with_vite: false) {
-      assert_equal false, ViteRails.build
+      assert_equal false, build
     }
   end
 
@@ -41,15 +41,15 @@ class CommandsTest < ViteRails::Test
 
       # Should not clean, the manifest does not exist.
       config.build_output_dir.mkdir unless config.build_output_dir.exist?
-      refute ViteRails.clean
+      refute clean
 
       # Should not clean, the file is recent.
       manifest.write('{}')
-      assert ViteRails.clean_from_rake(OpenStruct.new)
+      assert clean_from_task(OpenStruct.new)
       assert manifest.exist?
 
       # Should clean if we remove age restrictions.
-      assert ViteRails.clean(keep_up_to: 0, age_in_seconds: 0)
+      assert clean(keep_up_to: 0, age_in_seconds: 0)
       assert config.build_output_dir.exist?
       refute manifest.exist?
     }
@@ -60,7 +60,7 @@ class CommandsTest < ViteRails::Test
       config.build_output_dir.mkdir unless config.build_output_dir.exist?
       config.build_output_dir.join('manifest.json').write('{}')
       assert config.build_output_dir.exist?
-      ViteRails.clobber
+      clobber
       refute config.build_output_dir.exist?
     }
   end

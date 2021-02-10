@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vite ⚡️ Ruby</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= vite_client_tag %>
+
+    <link rel="icon" type="image/png" href="<%= vite_asset_path('images/logo.png') %>">
+
+    <%= vite_stylesheet_tag 'styles' %>
+    <%= vite_typescript_tag 'application' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

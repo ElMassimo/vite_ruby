@@ -1,0 +1,37 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.5;
+}
+
+body {
+  font-family: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+header {
+  display: grid;
+  height: 100vh;
+  margin: 0 auto;
+  padding-bottom: 20vh;
+  place-content: center;
+}
+
+.logo {
+  height: 0;
+  opacity: 0;
+}
+
+.hero {
+  box-sizing: border-box;
+  font-size: clamp(4rem, 10vw, 4.5rem);
+  line-height: 1;
+  font-weight: 800;
+  height: 128px;
+  margin: 0;
+  text-align: center;
+}

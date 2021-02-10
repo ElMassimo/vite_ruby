@@ -2,6 +2,8 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "ci": "^2.0.0",
+    "ni": "^0.0.2",
     "vite": "^2.0.0-beta.65",
     "vite-plugin-ruby": "^1.0.8"
   }

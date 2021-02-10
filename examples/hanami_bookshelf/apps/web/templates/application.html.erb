@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web</title>
+    <%= favicon %>
+    <%= vite_client %>
+
+    <%= vite_stylesheet 'styles' %>
+    <%= vite_typescript 'application' %>
+
+    <link rel="icon" type="image/png" href="<%= vite_asset_path('images/logo.png') %>">
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

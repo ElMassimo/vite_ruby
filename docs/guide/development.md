@@ -22,18 +22,18 @@
 
 # Developing with Vite
 
-In this section, we'll cover the basics to get started with Vite on Rails.
+In this section, we'll cover the basics to get started with Vite in Ruby web apps.
 
 ## Development Server 💻
 
-Run <kbd>bin/vite</kbd> to start a Vite development server.
+Run <kbd>bin/vite dev</kbd> to start a Vite development server.
 
 It will read your [`config/vite.json`][json config] configuration, which can be
 used to configure the `host` and `port`, as well as [other options][dev options].
 
 ## Auto-Build 🤖
 
-Even when not running the Vite development server, _Vite Rails_ can detect if
+Even when not running the Vite development server, _Vite Ruby_ can detect if
 any assets have changed in [`sourceCodeDir`][sourceCodeDir], and trigger a build
 automatically when the asset is requested.
 
@@ -134,7 +134,7 @@ When rendering styles and preload manually, it's important to avoid rendering wh
 
 ```erb
 <%= vite_typescript_tag 'application', skip_style_tags: true %>
-<%= vite_stylesheet_tag 'application' unless ViteRails.dev_server_running? %>
+<%= vite_stylesheet_tag 'application' unless ViteRuby.dev_server_running? %>
 ```
 
 ## Import Aliases 👉
@@ -146,3 +146,25 @@ you to use absolute paths:
 import App from '~/components/App.vue'
 import '~/channels'
 ```
+
+## CLI Commands ⌨️
+
+A CLI tool is provided, you can run it using `bundle exec vite`, or `bin/vite` after installation.
+
+- <kbd>bundle exec vite install</kbd>:
+  Install configuration files and sample setup for your web app
+
+- <kbd>bin/vite dev</kbd>:
+  Starts the Vite development server
+
+- <kbd>bin/vite build</kbd>:
+  Makes a production bundle with Vite using Rollup behind the scenes
+
+- <kbd>bin/vite info</kbd>:
+  Provide information on _Vite Ruby_ and related libraries
+
+::: tip Environment-aware
+
+All these commands are aware of the environment. When running them locally in
+development you can provide `RACK_ENV=production` to simulate a production build.
+:::

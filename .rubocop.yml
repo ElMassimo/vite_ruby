@@ -3,12 +3,18 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Exclude:
     - "public/**/*"
-    - "package/**/*"
+    - "vite-plugin-ruby/**/*"
     - "examples/**/*"
     - "vendor/bundle"
     - "tmp/**/*"
 
+Style/RescueModifier:
+  Enabled: false
+
 Style/DoubleNegation:
+  Enabled: false
+
+Style/GuardClause:
   Enabled: false
 
 Style/MultilineBlockChain:

@@ -1,12 +1,12 @@
 <h1 align="center">
   <a href="https://vite-rails.netlify.app/">
-    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="120px"/>
+    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="200px"/>
   </a>
 
   <br>
 
   <a href="https://vite-rails.netlify.app/">
-    Vite Rails
+    Vite Ruby
   </a>
 
   <br>
@@ -20,9 +20,6 @@
     </a>
     <a href="https://codeclimate.com/github/ElMassimo/vite_rails">
       <img alt="Test Coverage" src="https://codeclimate.com/github/ElMassimo/vite_rails/badges/coverage.svg"/>
-    </a>
-    <a href="https://rubygems.org/gems/vite_rails">
-      <img alt="Gem Version" src="https://img.shields.io/gem/v/vite_rails.svg?colorB=e9573f"/>
     </a>
     <a href="https://github.com/ElMassimo/vite_rails/blob/master/LICENSE.txt">
       <img alt="License" src="https://img.shields.io/badge/license-MIT-428F7E.svg"/>
@@ -38,17 +35,17 @@
 [vite_rails]: https://github.com/ElMassimo/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
-[config file]: https://github.com/ElMassimo/vite_rails/blob/main/package/default.vite.json
+[config file]: https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [Discussions]: https://github.com/ElMassimo/vite_rails/discussions
 
-[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
-Check [this video comparison with webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1), or an [example app] running on [Heroku].
+This repo contains libraries that will allow you to easily integrate Vite in
+your favourite Ruby framework.
 
 ## Features ⚡️
 
@@ -67,14 +64,14 @@ Visit the [documentation website][website] to check out the [guides] and searcha
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'vite_rails'
+gem 'vite_rails' # vite_hanami for Hanami apps, vite_ruby for Rack apps
 ```
 
 Then, run:
 
 ```bash
 bundle install
-bin/rake vite:install
+bundle exec vite install
 ```
 
 This will generate configuration files and a sample setup.
@@ -83,16 +80,9 @@ Additional installation instructions are available in the [documentation website
 
 ## Getting Started 💻
 
-Restart your Rails server, and then run <kbd>bin/vite</kbd> to start the Vite development server.
+Restart your web server, and then run <kbd>bin/vite dev</kbd> to start the Vite development server.
 
-Add the following your `views/layouts/application.html.erb`:
-
-```erb
-<%= vite_client_tag %>
-<%= vite_javascript_tag 'application' %>
-```
-
-Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
+Visit any page and you should see a printed console output: `Vite ⚡️ Ruby`.
 
 For more [guides] and a full [configuration reference], check the [documentation website][website].
 

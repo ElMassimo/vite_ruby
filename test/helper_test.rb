@@ -3,13 +3,14 @@
 require 'test_helper'
 
 class HelperTest < ActionView::TestCase
-  include ViteRailsTestHelpers
+  include ViteRubyTestHelpers
 
-  tests ViteRails::Helper
+  tests ViteRails::TagHelpers
 
   attr_reader :request
 
   def setup
+    super
     @request = Class.new do
       def send_early_hints(links) end
 
@@ -32,6 +33,7 @@ class HelperTest < ActionView::TestCase
     with_dev_server_running {
       assert_equal '/vite-production/application.ts', vite_asset_path('application.ts')
       assert_equal '/vite-production/styles.css', vite_asset_path('styles.css')
+      assert_equal '/vite-production/image/logo.png', vite_asset_path('image/logo', type: :png)
     }
   end
 
@@ -53,7 +55,7 @@ class HelperTest < ActionView::TestCase
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
       link(href: '/vite-production/assets/application.f510c1e9.css'),
-    ].join, vite_javascript_tag('application')
+    ].join.tr("\n", ''), vite_javascript_tag('application').tr("\n", '')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
     assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')
@@ -69,7 +71,7 @@ class HelperTest < ActionView::TestCase
 
   def link(href:, rel: 'stylesheet', media: 'screen')
     attrs = [%(media="#{ media }"), %(href="#{ href }")]
-    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.1.1')
+    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.1.2')
     %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
   end
 end

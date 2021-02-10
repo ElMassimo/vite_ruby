@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ConfigTest < ViteRails::Test
+class ConfigTest < ViteRuby::Test
   def expand_path(path)
     File.expand_path(Pathname.new(__dir__).join(path).to_s)
   end
@@ -16,11 +16,17 @@ class ConfigTest < ViteRails::Test
   end
 
   def resolve_config(mode: 'production', root: test_app_path, **attrs)
-    ViteRails::Config.resolve_config(mode: mode, root: root, **attrs)
+    ViteRuby::Config.resolve_config(mode: mode, root: root, **attrs)
   end
 
   def setup
+    super
     @config = resolve_config
+  end
+
+  def test_matching_default_config_json
+    root = Pathname.new(__dir__).join('..')
+    assert_equal root.join('vite-plugin-ruby/default.vite.json').read, root.join('vite_ruby/default.vite.json').read
   end
 
   def test_source_code_dir
@@ -97,7 +103,7 @@ class ConfigTest < ViteRails::Test
   end
 
   def test_environment_vars
-    ViteRails.env = {
+    ViteRuby.env.tap(&:clear).merge!(
       'VITE_RUBY_AUTO_BUILD' => 'true',
       'VITE_RUBY_HOST' => 'example.com',
       'VITE_RUBY_PORT' => '1920',
@@ -110,7 +116,7 @@ class ConfigTest < ViteRails::Test
       'VITE_RUBY_SOURCE_CODE_DIR' => 'app',
       'VITE_RUBY_ENTRYPOINTS_DIR' => 'frontend/entrypoints',
       'VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT' => 'true',
-    }
+    )
     @config = resolve_config
     assert_equal true, @config.auto_build
     assert_equal 'example.com', @config.host
@@ -128,6 +134,6 @@ class ConfigTest < ViteRails::Test
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
     assert_equal true, @config.hide_build_console_output
   ensure
-    ViteRails.env = {}
+    ViteRuby.env.clear
   end
 end

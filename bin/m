@@ -26,4 +26,8 @@ end
 require 'rubygems'
 require 'bundler/setup'
 
+ARGV.each_with_index do |arg, index|
+  ARGV[index] = arg.sub(File.expand_path(Dir.pwd), '')
+end
+
 load Gem.bin_path('m', 'm')

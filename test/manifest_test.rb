@@ -2,25 +2,37 @@
 
 require 'test_helper'
 
-class ManifestTest < ViteRails::Test
+class ManifestTest < ViteRuby::Test
+  def setup
+    super
+    ViteRuby::Manifest.instance_eval { public :lookup, :lookup! }
+  end
+
+  def teardown
+    ViteRuby::Manifest.instance_eval { private :lookup, :lookup! }
+    super
+  end
+
+  delegate :path_for, :lookup, :lookup!, to: 'ViteRuby.instance.manifest'
+
   def test_lookup_exception!
     asset_file = 'calendar.js'
 
     error = assert_raises_manifest_missing_entry_error do
-      ViteRails.manifest.lookup!(asset_file)
+      path_for(asset_file)
     end
 
-    assert_match "Vite Rails can't find #{ asset_file } in #{ manifest_path }", error.message
+    assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
   end
 
   def test_lookup_with_type_exception!
     asset_file = 'calendar'
 
     error = assert_raises_manifest_missing_entry_error do
-      ViteRails.manifest.lookup!(asset_file, type: :javascript)
+      path_for(asset_file, type: :javascript)
     end
 
-    assert_match "Vite Rails can't find #{ asset_file }.js in #{ manifest_path }", error.message
+    assert_match "Vite Ruby can't find #{ asset_file }.js in #{ manifest_path }", error.message
   end
 
   def test_lookup_success!
@@ -36,36 +48,37 @@ class ManifestTest < ViteRails::Test
         '/vite-production/assets/application.f510c1e9.css',
       ],
     }
-    assert_equal entry, ViteRails.manifest.lookup!('application.js', type: :javascript)
-    assert_equal entry.merge('src' => 'application.ts'), ViteRails.manifest.lookup!('application', type: :typescript)
+    assert_equal entry['file'], path_for('application.js', type: :javascript)
+    assert_equal entry, lookup!('application.js', type: :javascript)
+    assert_equal entry.merge('src' => 'application.ts'), lookup!('application', type: :typescript)
   end
 
   def test_lookup_success_with_dev_server_running!
     entry = { 'file' => '/vite-production/application.js' }
     with_dev_server_running {
-      assert_equal entry, ViteRails.manifest.lookup!('application.js')
+      assert_equal entry, lookup!('application.js')
     }
     entry = { 'file' => '/vite-production/application.ts' }
     with_dev_server_running {
-      assert_equal entry, ViteRails.manifest.lookup!('application', type: :typescript)
+      assert_equal entry, lookup!('application', type: :typescript)
     }
   end
 
   def test_lookup_nil
-    assert_nil ViteRails.manifest.lookup('foo.js')
+    assert_nil lookup('foo.js')
   end
 
   def test_lookup_success
     entry = { 'file' => '/vite-production/assets/styles.0e53e684.css', 'src' => 'styles.css' }
-    assert_equal entry, ViteRails.manifest.lookup('styles.css')
-    assert_equal entry, ViteRails.manifest.lookup('styles.css', type: :stylesheet)
-    assert_equal entry, ViteRails.manifest.lookup('styles', type: :stylesheet)
+    assert_equal entry, lookup('styles.css')
+    assert_equal entry, lookup('styles.css', type: :stylesheet)
+    assert_equal entry, lookup('styles', type: :stylesheet)
   end
 
   def test_lookup_success_with_dev_server_running
     entry = { 'file' => '/vite-production/styles.css' }
     with_dev_server_running {
-      assert_equal entry, ViteRails.manifest.lookup('styles', type: :stylesheet)
+      assert_equal entry, lookup('styles', type: :stylesheet)
     }
   end
 
@@ -73,8 +86,8 @@ private
 
   def assert_raises_manifest_missing_entry_error(&block)
     error = nil
-    ViteRails.config.stub :auto_build, false do
-      error = assert_raises ViteRails::Manifest::MissingEntryError, &block
+    ViteRuby.config.stub :auto_build, false do
+      error = assert_raises(ViteRuby::Manifest::MissingEntryError, &block)
     end
     error
   end

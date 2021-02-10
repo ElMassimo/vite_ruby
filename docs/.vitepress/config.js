@@ -1,6 +1,6 @@
 // @ts-check
 
-const title = 'Vite ⚡ Rails'
+const title = 'Vite ⚡ Ruby'
 const description = 'Bringing joy to your frontend experience'
 const image = 'http://vite-rails.netlify.app/social.png'
 
@@ -8,6 +8,8 @@ const head = [
   ['style', {}, 'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }'],
   ['meta', { name: 'author', content: 'Máximo Mussini' }],
   ['meta', { name: 'keywords', content: 'rails, vitejs, vue, react, vite, ruby' }],
+
+  ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
 
   ['meta', { name: 'HandheldFriendly', content: 'True' }],
   ['meta', { name: 'MobileOptimized', content: '320' }],
@@ -34,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
  * @type {import('vitepress').UserConfig}
  */
 module.exports = {
-  title,
+  title: 'Vite Ruby',
   description,
   head,
   themeConfig: {
@@ -44,6 +46,7 @@ module.exports = {
       indexName: 'vite_rails',
     },
     repo: 'ElMassimo/vite_rails',
+    logo: '/logo.svg',
     docsDir: 'docs',
     docsBranch: 'main',
     editLinks: true,
@@ -55,7 +58,7 @@ module.exports = {
       { text: 'Vite', link: 'https://vitejs.dev/' },
       {
         text: 'Changelog',
-        link: 'https://github.com/ElMassimo/vite_rails/blob/main/CHANGELOG.md',
+        link: 'https://github.com/ElMassimo/vite_rails/blob/main/vite_ruby/CHANGELOG.md',
       },
     ],
 
