@@ -34,7 +34,7 @@ module ViteHanami::TagHelpers
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_typescript(*names, **options)
-    vite_javascript(*names, asset_type: :typescript, extname: false, **options)
+    vite_javascript(*names, asset_type: :typescript, **options)
   end
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
@@ -57,7 +57,7 @@ private
 
   # Internal: Renders a modulepreload link tag.
   def vite_modulepreload(*sources, crossorigin:)
-    _safe_tags(*sources) { |href|
+    _safe_tags(*sources) { |source|
       href = asset_path(source)
       _push_promise(href, as: :script)
       html.link(rel: 'modulepreload', href: href, as: :script, crossorigin: crossorigin)

@@ -37,8 +37,8 @@ module ViteRails::Installation
 
     if (layout_file = root.join('app/views/layouts/application.html.erb')).exist?
       inject_line_before layout_file, '</head>', <<-HTML
-      <%= vite_client_tag %>
-      <%= vite_javascript_tag 'application' %>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application' %>
       HTML
     end
   end

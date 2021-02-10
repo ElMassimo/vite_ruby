@@ -33,6 +33,7 @@ private
     uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject { |str| str.to_s.strip.empty? }.join('?') }
       .sub(vite_asset_url_prefix, '/')
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
+      .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
     env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 

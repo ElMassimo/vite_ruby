@@ -1,14 +1,12 @@
 /.bundle
 /pkg
-/test/mounted_app/test/dummy/log
-/test/test_app/log
+log
+tmp
 node_modules
 .byebug_history
-/test/test_app/tmp
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
-/log
 gemfiles/*.lock
 .DS_Store
 
@@ -16,6 +14,7 @@ gemfiles/*.lock
 /public/vite
 /public/vite-dev
 /public/vite-test
+test/test_app/public/vite-production
 node_modules
 *.local
 .DS_Store
