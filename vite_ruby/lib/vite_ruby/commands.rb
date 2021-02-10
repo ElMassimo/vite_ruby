@@ -91,8 +91,9 @@ class ViteRuby::Commands
       $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
 
       $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"
-      ViteRuby.framework_libraries.each do |library|
+      ViteRuby.framework_libraries.each do |framework, library|
         $stdout.puts "#{ library.name }: #{ library.version }"
+        $stdout.puts "#{ framework }: #{ Gem.loaded_specs[framework]&.version }"
       end
 
       $stdout.puts "node: #{ `node --version` }"

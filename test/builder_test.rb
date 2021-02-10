@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
+require 'open3'
 
 class BuilderTest < ViteRuby::Test
   delegate :builder, to: 'ViteRuby.instance'

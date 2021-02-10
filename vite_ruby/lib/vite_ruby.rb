@@ -68,7 +68,11 @@ class ViteRuby
     # Internal: Detects if the application has installed a framework-specific
     # variant of Vite Ruby.
     def framework_libraries
-      SUPPORTED_FRAMEWORKS.map { |framework| Gem.loaded_specs["vite_#{ framework }"] }.compact
+      SUPPORTED_FRAMEWORKS.map { |framework|
+        if library = Gem.loaded_specs["vite_#{ framework }"]
+          [framework, library]
+        end
+      }.compact
     end
   end
 
@@ -82,7 +86,7 @@ class ViteRuby
   # NOTE: Checks only once every second since every lookup calls this method.
   def dev_server_running?
     return false unless run_proxy?
-    return true if @running_at && Time.now - @running_at < 1
+    return true if defined?(@running_at) && @running_at && Time.now - @running_at < 1
 
     Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
     @running_at = Time.now

@@ -75,7 +75,9 @@ private
     write(package_json, '{}') unless package_json.exist?
     Dir.chdir(root) do
       deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
-      say(*Open3.capture3({ 'CI' => 'true' }, "npx ni -D #{ deps }"))
+      stdout, stderr, status = Open3.capture3({ 'CI' => 'true' }, "npx ni -D #{ deps }")
+      stdout, stderr, status = Open3.capture3({}, "yarn add -D #{ deps }") unless status.success?
+      say(stdout, "\n", stderr)
     end
   end
 
@@ -115,6 +117,6 @@ private
 end
 
 # NOTE: This allows framework-specific variants to extend the installation.
-ViteRuby.framework_libraries.each do |library|
+ViteRuby.framework_libraries.each do |_framework, library|
   require "#{ library.name }/installation"
 end
