@@ -306,9 +306,11 @@ module Web
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network
         #
-        # scheme 'https'
-        # host   'cdn.example.org'
-        # port   443
+        if asset_host = ENV['ASSET_HOST']
+          scheme 'https'
+          host asset_host
+          port 443
+        end
 
         # Subresource Integrity
         #

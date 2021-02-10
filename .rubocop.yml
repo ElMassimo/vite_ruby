@@ -6,6 +6,7 @@ require:
 
 AllCops:
   Exclude:
+    - "node_modules/**/*"
     - "public/**/*"
     - "vite-plugin-ruby/**/*"
     - "examples/**/*"

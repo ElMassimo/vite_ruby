@@ -1,7 +1,11 @@
 {
+  "name": "vite-hanami-demo",
+  "private": true,
+  "engines": {
+    "node": "15.x",
+    "yarn": "1.x"
+  },
   "devDependencies": {
-    "ci": "^2.0.0",
-    "ni": "^0.0.2",
     "vite": "^2.0.0-beta.65",
     "vite-plugin-ruby": "^1.0.8"
   }

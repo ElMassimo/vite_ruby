@@ -71,7 +71,7 @@ class HelperTest < ActionView::TestCase
 
   def link(href:, rel: 'stylesheet', media: 'screen')
     attrs = [%(media="#{ media }"), %(href="#{ href }")]
-    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.1.2')
+    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.1.3')
     %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
   end
 end
