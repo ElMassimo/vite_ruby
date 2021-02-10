@@ -24,12 +24,12 @@ class BuilderTest < ViteRuby::Test
   def test_custom_environment_variables
     assert_nil vite_env['FOO']
     ViteRuby.env['FOO'] = 'BAR'
-    assert vite_env['FOO'] == 'BAR'
+    assert_equal vite_env['FOO'], 'BAR'
   end
 
   def test_freshness
     assert builder.stale?
-    assert !builder.fresh?
+    refute builder.fresh?
   end
 
   def test_freshness_on_build_success
@@ -45,7 +45,7 @@ class BuilderTest < ViteRuby::Test
     assert builder.stale?
     status = OpenStruct.new(success?: false)
     Open3.stub :capture3, [:sterr, :stdout, status] do
-      assert !builder.build
+      refute builder.build
       assert builder.fresh?
     end
   end

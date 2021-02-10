@@ -118,10 +118,10 @@ class ConfigTest < ViteRuby::Test
       'VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT' => 'true',
     )
     @config = resolve_config
-    assert_equal true, @config.auto_build
+    assert @config.auto_build
     assert_equal 'example.com', @config.host
     assert_equal 1920, @config.port
-    assert_equal true, @config.https
+    assert @config.https
     assert_equal 'https', @config.protocol
     assert_equal 'config/vite_additional_paths.json', @config.config_path
     assert_pathname 'tmp/vitebuild', @config.build_cache_dir
@@ -132,7 +132,7 @@ class ConfigTest < ViteRuby::Test
     assert_equal 'app', @config.source_code_dir
     assert_equal 'frontend/entrypoints', @config.entrypoints_dir
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
-    assert_equal true, @config.hide_build_console_output
+    assert @config.hide_build_console_output
   ensure
     ViteRuby.env.clear
   end

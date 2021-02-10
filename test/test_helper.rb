@@ -9,7 +9,7 @@ SimpleCov.start {
 require 'minitest/autorun'
 require 'minitest/reporters'
 
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: !ENV['CI'])]
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: true)]
 
 require 'rails'
 require 'rails/test_help'

@@ -51,8 +51,8 @@ private
   def_delegators 'ViteRuby', :config
 
   %i[append cp inject_line_after inject_line_after_last inject_line_before write].each do |util|
-    define_method(util) { |*args, **opts, &block|
-      Dry::CLI::Utils::Files.send(util, *args, **opts, &block) rescue nil
+    define_method(util) { |*args|
+      Dry::CLI::Utils::Files.send(util, *args) rescue nil
     }
   end
 

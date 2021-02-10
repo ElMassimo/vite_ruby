@@ -17,21 +17,21 @@ class CommandsTest < ViteRuby::Test
 
   def test_build_returns_success_status_when_stale
     stub_builder(stale: true, build_with_vite: true) {
-      assert_equal true, build
-      assert_equal true, build_from_task
+      assert build
+      assert build_from_task
     }
   end
 
   def test_build_returns_success_status_when_fresh
     stub_builder(stale: false, build_with_vite: true) {
-      assert_equal true, build
-      assert_equal true, build_from_task
+      assert build
+      assert build_from_task
     }
   end
 
   def test_build_returns_failure_status_when_stale
     stub_builder(stale: true, build_with_vite: false) {
-      assert_equal false, build
+      refute build
     }
   end
 
@@ -46,12 +46,12 @@ class CommandsTest < ViteRuby::Test
       # Should not clean, the file is recent.
       manifest.write('{}')
       assert clean_from_task(OpenStruct.new)
-      assert manifest.exist?
+      assert_path_exists manifest
 
       # Should clean if we remove age restrictions.
       assert clean(keep_up_to: 0, age_in_seconds: 0)
-      assert config.build_output_dir.exist?
-      refute manifest.exist?
+      assert_path_exists config.build_output_dir
+      refute_path_exists manifest
     }
   end
 
@@ -59,9 +59,9 @@ class CommandsTest < ViteRuby::Test
     with_rails_env('test') { |config|
       config.build_output_dir.mkdir unless config.build_output_dir.exist?
       config.build_output_dir.join('manifest.json').write('{}')
-      assert config.build_output_dir.exist?
+      assert_path_exists config.build_output_dir
       clobber
-      refute config.build_output_dir.exist?
+      refute_path_exists config.build_output_dir
     }
   end
 end

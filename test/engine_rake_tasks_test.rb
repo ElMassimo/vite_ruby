@@ -20,43 +20,39 @@ class EngineRakeTasksTest < ViteRuby::Test
 
   def test_rake_tasks
     within_mounted_app { `bundle exec rake app:vite:binstubs` }
-    assert vite_binstub_path.exist?
+    assert_path_exists vite_binstub_path
 
     within_mounted_app_root { `bin/vite install` }
-    assert vite_config_ts_path.exist?
-    assert app_frontend_dir.exist?
+    assert_path_exists vite_config_ts_path
+    assert_path_exists app_frontend_dir
 
     within_mounted_app { `bundle exec rake app:vite:build` }
-    assert app_public_dir.exist?
-    assert app_public_dir.join('manifest.json').exist?
-    assert app_public_dir.join('assets').exist?
+    assert_path_exists app_public_dir
+    assert_path_exists app_public_dir.join('manifest.json')
+    assert_path_exists app_public_dir.join('assets')
 
     within_mounted_app { `bundle exec rake app:vite:clean` }
-    assert app_public_dir.join('manifest.json').exist? # Still fresh
+    assert_path_exists app_public_dir.join('manifest.json') # Still fresh
 
     within_mounted_app { `bundle exec rake app:vite:clean[0,0]` }
-    refute app_public_dir.join('manifest.json').exist?
+    refute_path_exists app_public_dir.join('manifest.json')
 
     within_mounted_app { `bundle exec rake app:vite:clobber` }
-    refute app_public_dir.exist?
-  rescue Minitest::Assertion => error
-    raise error, [error.message, @command_results.join("\n\n")].join("\n")
+    refute_path_exists app_public_dir
   end
 
   def test_cli
-    # within_mounted_app_root { `bundle exec vite install` }
-    # assert vite_binstub_path.exist?
-    # assert vite_config_ts_path.exist?
-    # assert app_frontend_dir.exist?
+    within_mounted_app_root { `bundle exec vite install` }
+    assert_path_exists vite_binstub_path
+    assert_path_exists vite_config_ts_path
+    assert_path_exists app_frontend_dir
 
-    # within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }
+    within_mounted_app_root { `bin/vite build --mode development` }
+    assert_path_exists app_public_dir
+    assert_path_exists app_public_dir.join('manifest.json')
+    assert_path_exists app_public_dir.join('assets')
 
-    # within_mounted_app_root { `bin/vite build` }
-    # assert app_public_dir.exist?
-    # assert app_public_dir.join('manifest.json').exist?
-    # assert app_public_dir.join('assets').exist?
-  rescue Minitest::Assertion => error
-    raise error, [error.message, @command_results.join("\n\n")].join("\n")
+    within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }
   end
 
   def test_cli_commands
@@ -66,8 +62,11 @@ class EngineRakeTasksTest < ViteRuby::Test
       ViteRuby::CLI::Install.new.call
       ViteRuby.commands.verify_install
       ViteRuby::CLI::Version.new.call
-      stub_runner(expect: ['--wat']) {
-        assert_equal 'run', ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
+      stub_runner('build', capture: true) {
+        assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
+      }
+      stub_runner('--wat') {
+        assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
     }
   end
@@ -82,9 +81,12 @@ private
     Dir.chdir(mounted_app_path.join('test/dummy'), &block).tap { |result| @command_results << result }
   end
 
-  def stub_runner(expect:, &block)
+  def stub_runner(*args, **opts, &block)
     mock = Minitest::Mock.new
-    mock.expect(:call, 'run', [expect])
+    status = OpenStruct.new(success?: true)
+    mock.expect(:call, [:stdout, :stderr, status]) do |*argv, **options|
+      assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
+    end
     ViteRuby.stub(:run, mock, &block)
     mock.verify
   end
