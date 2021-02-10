@@ -20,6 +20,10 @@ module ViteHanami::Installation
           .sub('connect-src', "connect-src ws://\#{ ViteRuby.config.host_with_port }")
       )
     CSP
+    append root.join('Rakefile'), <<~RAKE
+    require 'vite_hanami'
+    ViteRuby.install_tasks
+    RAKE
   end
 
   # Override: Inject the vite client and sample script to the default HTML template.
