@@ -12,23 +12,39 @@
 [heroku2]: https://vite-rails-demo.herokuapp.com/
 [build options]: /config/#build-options
 [configuration reference]: /config/
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[json]: /config/#shared-configuration-file-📄
+[publicOutputDir]: /config/#publicoutputdir
 
 # Deployment 🚀
 
-Deploying a Rails app using _Vite Ruby_ should be straightforward.
+Deploying a Ruby web app using _Vite Ruby_ should be quite straightforward.
 
-_Vite Ruby_ hooks up a new <kbd>vite:build</kbd> task to <kbd>assets:precompile</kbd>, which will run whenever you precompile assets.
+The <kbd>assets:precompile</kbd> is a standard for Ruby web apps, and is
+typically run automatically for you upon deployment if you are using a PaaS such
+as [Heroku][heroku1], or added in Capistrano scripts.
 
-::: tip Aliased
-If not using Sprockets, <kbd>vite:build</kbd> is automatically aliased to <kbd>assets:precompile</kbd>.
+_Vite Ruby_ will trigger a Vite build whenever <kbd>assets:precompile</kbd> is run,
+and the resulting assets will be placed [inside][publicOutputDir] the `public` folder.
+
+::: tip CDN Support
+Both <kbd>[vite_rails]</kbd> and <kbd>[vite_hanami]</kbd> will honor your CDN configuration, and tag helpers will render the appropriate URLs.
 :::
 
-Vite will take `RACK_ENV` and `RAILS_ENV` into account, using the appropriate configuration for
-the current environment as specified in `config/vite.json`.
-
-Check the [configuration reference] to learn more about the [build options].
+Vite will take `RACK_ENV` and `RAILS_ENV` into account in commands and rake tasks,
+using the appropriate [configuration][configuration reference] for the environment as specified in [`config/vite.json`][json].
 
 ## Rake Tasks ⚙️
+
+In Rails, they are installed automatically, so you can simply use them.
+
+In other apps, you can add them manually in your `Rakefile`:
+
+```ruby
+require 'vite_ruby'
+ViteRuby.install_tasks
+```
 
 The following rake tasks are available:
 
@@ -54,10 +70,10 @@ The following rake tasks are available:
 
   Provide information on _Vite Ruby_ and related libraries.
 
+
 ::: tip Environment-aware
 
-All these tasks are aware of the environment. When running them locally in
-development you can provide `RACK_ENV=production` to simulate a production build.
+You can provide `RACK_ENV=production` to simulate a production build.
 :::
 
 <hr/>
