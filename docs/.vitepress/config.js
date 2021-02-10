@@ -1,8 +1,11 @@
 // @ts-check
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const title = 'Vite ⚡ Ruby'
 const description = 'Bringing joy to your frontend experience'
-const image = 'http://vite-rails.netlify.app/social.png'
+const site = isProd ? 'https://vite-ruby.netlify.app' : 'http://localhost:3000'
+const image = `${site}/banner.png`
 
 const head = [
   ['style', {}, 'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }'],
@@ -15,20 +18,22 @@ const head = [
   ['meta', { name: 'MobileOptimized', content: '320' }],
   ['meta', { name: 'theme-color', content: '#cc0000' }],
 
+  ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+  ['meta', { name: 'twitter:site', content: site }],
+  ['meta', { name: 'twitter:title', value: title }],
+  ['meta', { name: 'twitter:description', value: description }],
+  ['meta', { name: 'twitter:image', content: image }],
+
   ['meta', { property: 'og:type', content: 'website' }],
   ['meta', { property: 'og:locale', content: 'en_US' }],
+  ['meta', { property: 'og:site', content: site }],
   ['meta', { property: 'og:site_name', content: title }],
   ['meta', { property: 'og:title', content: title }],
   ['meta', { property: 'og:image', content: image }],
   ['meta', { property: 'og:description', content: description }],
-
-  ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-  ['meta', { name: 'twitter:title', value: title }],
-  ['meta', { name: 'twitter:description', value: description }],
-  ['meta', { name: 'twitter:image', content: image }],
 ]
 
-if (process.env.NODE_ENV === 'production') {
+if (isProd) {
   head.push(['script', { src: 'https://unpkg.com/thesemetrics@latest', async: '' }])
 }
 
