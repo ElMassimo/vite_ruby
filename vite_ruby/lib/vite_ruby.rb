@@ -28,7 +28,6 @@ class ViteRuby
 
     def_delegators :instance, :config, :commands, :run_proxy?
     def_delegators :config, :mode
-    def_delegators :commands, :build
     def_delegators 'ViteRuby::Runner.new', :run
 
     def instance
@@ -75,6 +74,9 @@ class ViteRuby
       }.compact
     end
   end
+
+  extend Forwardable
+  def_delegators :builder, :build
 
   attr_writer :logger
 
