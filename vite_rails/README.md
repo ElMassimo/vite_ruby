@@ -83,16 +83,9 @@ Additional installation instructions are available in the [documentation website
 
 ## Getting Started 💻
 
-Restart your Rails server, and then run <kbd>bin/vite</kbd> to start the Vite development server.
+Restart your Rails server, and then run <kbd>bin/vite dev</kbd> to start the Vite development server.
 
-Add the following your `views/layouts/application.html.erb`:
-
-```erb
-<%= vite_client_tag %>
-<%= vite_javascript_tag 'application' %>
-```
-
-Visit any page and you should see a printed console output: `Vite ⚡️ Rails`.
+Visit any page and you should see a printed console output: `Vite ⚡️ Ruby`.
 
 For more [guides] and a full [configuration reference], check the [documentation website][website].
 

@@ -13,13 +13,17 @@
 
 <br>
 
-[vite_rails]: https://github.com/ElMassimo/vite_rails
+[vite_rails]: https://github.com/ElMassimo/vite_rails/tree/main/vite_rails
+[vite_ruby]: https://github.com/ElMassimo/vite_rails/tree/main/vite_ruby
+[vite_hanami]: https://github.com/ElMassimo/vite_rails/tree/main/vite_hanami
 [configuration options]: https://github.com/ElMassimo/vite_rails
 
 ## Installation 💿
 
-If you are using Rails, you should instead check out [<kbd>vite_rails</kbd>][vite_rails],
-which uses this plugin and will configure it for you.
+Normally you wouldn't need to install it manually, instead follow the instructions
+of [<kbd>vite_rails</kbd>][vite_rails], [<kbd>vite_hanami</kbd>][vite_hanami], or [<kbd>vite_ruby</kbd>][vite_ruby], which will install this plugin for you.
+
+Else:
 
 ```bash
 npm i vite-plugin-ruby # yarn add vite-plugin-ruby

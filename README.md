@@ -1,12 +1,12 @@
 <h1 align="center">
   <a href="https://vite-rails.netlify.app/">
-    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="120px"/>
+    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="200px"/>
   </a>
 
   <br>
 
   <a href="https://vite-rails.netlify.app/">
-    Vite in Ruby
+    Vite Ruby
   </a>
 
   <br>
@@ -81,13 +81,6 @@ Additional installation instructions are available in the [documentation website
 ## Getting Started 💻
 
 Restart your web server, and then run <kbd>bin/vite dev</kbd> to start the Vite development server.
-
-The installation script should have added the following to your `views/layouts/application.html.erb`:
-
-```erb
-<%= vite_client_tag %>
-<%= vite_javascript_tag 'application' %>
-```
 
 Visit any page and you should see a printed console output: `Vite ⚡️ Ruby`.
 
