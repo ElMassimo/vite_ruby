@@ -21,7 +21,7 @@
 [vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
 [development]: /guide/development
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
-[installed_example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
+[installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 
 # Development in Rails
 
