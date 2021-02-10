@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="120px"/>
   </a>
 
   <br>
 
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     Vite Ruby
   </a>
 
@@ -30,11 +30,11 @@
   </p>
 </h1>
 
-[website]: https://vite-rails.netlify.app/
-[configuration reference]: https://vite-rails.netlify.app/config/
-[features]: https://vite-rails.netlify.app/guide/introduction.html
-[guides]: https://vite-rails.netlify.app/guide/
-[config]: https://vite-rails.netlify.app/config/
+[website]: https://vite-ruby.netlify.app/
+[configuration reference]: https://vite-ruby.netlify.app/config/
+[features]: https://vite-ruby.netlify.app/guide/introduction.html
+[guides]: https://vite-ruby.netlify.app/guide/
+[config]: https://vite-ruby.netlify.app/config/
 [vite_rails]: https://github.com/ElMassimo/vite_ruby
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/

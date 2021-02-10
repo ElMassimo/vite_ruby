@@ -5,11 +5,11 @@ title: ''
 
 heroText: Vite Ruby
 
-actionText: Get Started
-actionLink: /guide/
+altActionText: Get Started
+altActionLink: /guide/
 
-altActionText: Learn More
-altActionLink: /guide/introduction
+actionText: Learn More
+actionLink: /guide/introduction
 
 heroImage: /logo.svg
 heroAlt: Vite Ruby Logo by Maximo Mussini

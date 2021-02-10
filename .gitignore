@@ -45,3 +45,5 @@ selenium-server.log
 # Hanami
 .env.local
 .env.*.local
+
+docs/pnpm-lock.yaml

@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="120px"/>
   </a>
 
   <br>
 
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     Vite Hanami
   </a>
 
@@ -30,11 +30,11 @@
   </p>
 </h1>
 
-[website]: https://vite-rails.netlify.app/
-[configuration reference]: https://vite-rails.netlify.app/config/
-[features]: https://vite-rails.netlify.app/guide/introduction.html
-[guides]: https://vite-rails.netlify.app/guide/
-[config]: https://vite-rails.netlify.app/config/
+[website]: https://vite-ruby.netlify.app/
+[configuration reference]: https://vite-ruby.netlify.app/config/
+[features]: https://vite-ruby.netlify.app/guide/introduction.html
+[guides]: https://vite-ruby.netlify.app/guide/
+[config]: https://vite-ruby.netlify.app/config/
 [vite_rails]: https://github.com/ElMassimo/vite_ruby
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
@@ -46,11 +46,20 @@
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
-
+[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
+[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
-This library provides specific installation scripts for Hanami, as well as idiomatic tag helpers.
+[__Vite Hanami__][vite_hanami] provides easy setup for Hanami web apps, as well as idiomatic tag helpers.
+
+## Why Vite? 🤔
+
+Vite [does not bundle your code during development][no bundling], which means the
+dev server is extremely __fast to start__, and your changes will be __updated instantly__.
+
+In production, Vite [bundles your code][bundling]
+with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
 
 ## Features ⚡️
 

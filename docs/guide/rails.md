@@ -19,20 +19,20 @@
 [vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
 [vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
 [vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
-[development]: /development
+[development]: /guide/development
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[installed_example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 
 # Development in Rails
 
-If not using <kbd>[vite_rails]</kbd> gem, skip this section.
+If not using [Rails], skip this section.
 
-As we saw in the [development] section, [entrypoints] will be [automatically
-detected][entrypoints].
-
-Once you have installed the <kbd>[vite_rails]</kbd> gem, and run <kbd>bundle exec vite install</kbd>,
-you should have an installed example.
+Once you have installed the <kbd>[vite_rails]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
+you should have an [installed example].
 
 ## Tag Helpers 🏷
+
+As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
 
 In order to link the JavaScript and CSS managed by Vite in your Rails layouts or
 templates, you can using the following helpers:
@@ -74,7 +74,7 @@ For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags
 Example output:
 ```erb
 <script src="/vite/assets/application.a0ba047e.js" type="module" crossorigin="anonymous"/>
-<link rel="preload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="modulepreload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
 <link rel="stylesheet" media="screen" href="/vite/assets/application.cccfef34.css">
 ```
 
@@ -88,7 +88,7 @@ When running the development server, these tags are omitted, as Vite will load t
 
 For cases where tags need be managed manually, it's possible to opt out by using the options:
 
-- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="preload">` tags.
+- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="modulepreload">` tags.
 - <kbd>skip_style_tags</kbd>: Set to false to avoid rendering `<link rel="stylesheet">` tags.
 
 When rendering styles and preload manually, it's important to avoid rendering when the Vite development server is running, since the files don't exist yet:

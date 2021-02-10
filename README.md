@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="200px"/>
   </a>
 
   <br>
 
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     Vite Ruby
   </a>
 
@@ -27,12 +27,11 @@
   </p>
 </h1>
 
-[website]: https://vite-rails.netlify.app/
-[configuration reference]: https://vite-rails.netlify.app/config/
-[features]: https://vite-rails.netlify.app/guide/introduction.html
-[guides]: https://vite-rails.netlify.app/guide/
-[config]: https://vite-rails.netlify.app/config/
-[vite_rails]: https://github.com/ElMassimo/vite_ruby
+[website]: https://vite-ruby.netlify.app/
+[configuration reference]: https://vite-ruby.netlify.app/config/
+[features]: https://vite-ruby.netlify.app/guide/introduction.html
+[guides]: https://vite-ruby.netlify.app/guide/
+[config]: https://vite-ruby.netlify.app/config/
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
 [config file]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/default.vite.json
@@ -40,12 +39,24 @@
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
-
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
+[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
 This repo contains libraries that will allow you to easily integrate Vite in
-your favourite Ruby framework.
+your favourite Ruby framework, such as [Rails][vite_rails] or [Hanami][vite_hanami].
+
+## Why Vite? 🤔
+
+Vite [does not bundle your code during development][no bundling], which means the
+dev server is extremely __fast to start__, and your changes will be __updated instantly__.
+
+In production, Vite [bundles your code][bundling]
+with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
 
 ## Features ⚡️
 

@@ -1,5 +1,6 @@
 [library]: https://github.com/ElMassimo/vite_ruby
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
 [plugin]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite]: https://vitejs.dev/
 [webpacker]: https://github.com/rails/webpacker
@@ -9,24 +10,43 @@
 [rake tasks]: /guide/deployment.html#rake-tasks-⚙%EF%B8%8F
 [recompile assets]: /guide/development.html#auto-build-🤖
 [tag helpers]: /guide/rails.html#tag-helpers-🏷
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
+[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
 
 # Introduction
 
-[__Vite Ruby__][library] is a library that provides full [Vite] integration in Ruby web apps.
+[__Vite Ruby__][library] is an umbrella project that library that provides full [Vite.js][vite] integration in Ruby web apps.
 
-<kbd>[vite_rails]</kbd> is an extension that aims to provide similar functionality as [webpacker] does for [webpack], but gets out of your way so that you can easily configure Vite as needed.
+- <kbd>[vite_rails]</kbd> provides similar functionality as [webpacker] does for [webpack], without all the configuration overhead and dependencies.
 
-Check [this video comparison](https://github.com/ElMassimo/pingcrm-vite/pull/1).
+- <kbd>[vite_hanami]</kbd> gets Vite up and running in Hanami web apps, including samples and tag helpers.
 
-## Why 🤔
+- <kbd>[vite_ruby]</kbd> can be used in plain Rack apps, and is all you need when using HTML entrypoints.
+
+
+## Why Vite? 🤔
+
+Vite [does not bundle your code during development][no bundling], which means the
+dev server is extremely __fast to start__, and your changes will be __updated instantly__.
+
+In production, Vite [bundles your code][bundling]
+with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
+
+Check [this video comparison with webpack](https://github.com/ElMassimo/pingcrm-vite/pull/1)
+which demonstrates the difference in speed during development.
+
+## Why Vite Ruby? 🤔
 
 [Vite] is great on its own, but configuring it correctly to work for a Ruby app structure requires knowledge of its internals.
 
-By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features.
+By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features!
 
 ## Features ⚡️
 
-[Anything Vite can do](https://vitejs.dev/guide/features.html), plus:
+[Everything Vite provides](https://vitejs.dev/guide/features.html), plus:
 
 #### 🤖 Automatic entrypoint detection
 

@@ -19,20 +19,21 @@
 [vite_typescript]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_hanami/lib/vite_hanami/tag_helpers.rb
 [vite_stylesheet]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_hanami/lib/vite_hanami/tag_helpers.rb
 [vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_hanami/lib/vite_hanami/tag_helpers.rb
-[development]: /development
+[development]: /guide/development
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[hanami]: https://hanamirb.org/
+[installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/hanami_bookshelf
 
 # Development in Hanami
 
-If not using <kbd>[vite_hanami]</kbd> gem, skip this section.
+If not using [Hanami], skip this section.
 
-As we saw in the [development] section, [entrypoints] will be [automatically
-detected][entrypoints].
-
-Once you have installed the <kbd>[vite_hanami]</kbd> gem, and run <kbd>bundle exec vite install</kbd>,
-you should have an installed example.
+Once you have installed the <kbd>[vite_hanami]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
+you should have an [installed example].
 
 ## Tag Helpers 🏷
+
+As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
 
 In order to link the JavaScript and CSS managed by Vite in your Hanami vies or
 templates, you can use the following helpers:
@@ -73,7 +74,7 @@ For convenience, <kbd>[vite_javascript]</kbd> will automatically inject tags for
 Example output:
 ```erb
 <script src="/vite/assets/application.a0ba047e.js" type="module" crossorigin="anonymous"/>
-<link rel="preload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="modulepreload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
 <link rel="stylesheet" media="screen" href="/vite/assets/application.cccfef34.css">
 ```
 
@@ -87,7 +88,7 @@ When running the development server, these tags are omitted, as Vite will load t
 
 For cases where tags need be managed manually, it's possible to opt out by using the options:
 
-- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="preload">` tags.
+- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="modulepreload">` tags.
 - <kbd>skip_style_tags</kbd>: Set to false to avoid rendering `<link rel="stylesheet">` tags.
 
 When rendering styles and preload manually, it's important to avoid rendering when the Vite development server is running, since the files don't exist yet:

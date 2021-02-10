@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="120px"/>
   </a>
 
   <br>
 
-  <a href="https://vite-rails.netlify.app/">
+  <a href="https://vite-ruby.netlify.app/">
     Vite Rails
   </a>
 
@@ -30,12 +30,12 @@
   </p>
 </h1>
 
-[website]: https://vite-rails.netlify.app/
-[configuration reference]: https://vite-rails.netlify.app/config/
-[features]: https://vite-rails.netlify.app/guide/introduction.html
-[guides]: https://vite-rails.netlify.app/guide/
-[config]: https://vite-rails.netlify.app/config/
-[vite_rails]: https://github.com/ElMassimo/vite_ruby
+[website]: https://vite-ruby.netlify.app/
+[configuration reference]: https://vite-ruby.netlify.app/config/
+[features]: https://vite-ruby.netlify.app/guide/introduction.html
+[guides]: https://vite-ruby.netlify.app/guide/
+[config]: https://vite-ruby.netlify.app/config/
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
 [config file]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/default.vite.json
@@ -43,12 +43,24 @@
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
-
-[__Vite Rails__][vite_rails] allows you to use [Vite] to power the frontend of your Rails app.
+[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
+[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
-Check [this video comparison with webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1), or an [example app] running on [Heroku].
+[__Vite Rails__][vite_rails] provides a complete setup for Rails applications,
+allowing you to leverage [Vite] to power the frontend of your Rails app.
+
+## Why Vite? 🤔
+
+Vite [does not bundle your code during development][no bundling], which means the
+dev server is extremely __fast to start__, and your changes will be __updated instantly__.
+
+In production, Vite [bundles your code][bundling]
+with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
+
+Check [this video comparison with webpack](https://github.com/ElMassimo/pingcrm-vite/pull/1)
+which demonstrates the difference in speed during development.
 
 ## Features ⚡️
 

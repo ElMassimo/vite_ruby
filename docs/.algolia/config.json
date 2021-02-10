@@ -2,23 +2,23 @@
   "index_name": "vite_rails",
   "start_urls": [
     {
-      "url": "https://vite-rails.netlify.app/config/",
+      "url": "https://vite-ruby.netlify.app/config/",
       "selectors_key": "config",
       "tags": ["config"],
       "page_rank": 3
     },
     {
-      "url": "https://vite-rails.netlify.app/guide/",
+      "url": "https://vite-ruby.netlify.app/guide/",
       "tags": ["guide"],
       "page_rank": 1
     }
   ],
   "stop_urls": [
-    "https://vite-rails.netlify.app/config/index.html",
-    "https://vite-rails.netlify.app/guide/development.html",
-    "https://vite-rails.netlify.app/guide/deployment.html",
-    "https://vite-rails.netlify.app/guide/index.html",
-    "https://vite-rails.netlify.app/guide/introduction.html"
+    "https://vite-ruby.netlify.app/config/index.html",
+    "https://vite-ruby.netlify.app/guide/development.html",
+    "https://vite-ruby.netlify.app/guide/deployment.html",
+    "https://vite-ruby.netlify.app/guide/index.html",
+    "https://vite-ruby.netlify.app/guide/introduction.html"
   ],
   "selectors": {
     "default": {
