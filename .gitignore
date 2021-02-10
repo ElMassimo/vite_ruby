@@ -1,5 +1,5 @@
 /.bundle
-/pkg
+pkg
 log
 tmp
 node_modules
