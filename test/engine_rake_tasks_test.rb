@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class EngineRakeTasksTest < Minitest::Test
+class EngineRakeTasksTest < ViteRuby::Test
   def setup
     remove_vite_files
   end
@@ -58,10 +58,11 @@ class EngineRakeTasksTest < Minitest::Test
   end
 
   def test_cli_commands
-    within_mounted_app_root { ViteRuby::CLI::Install.new.call }
-    within_mounted_app_root { ViteRuby.commands.verify_install }
-    within_mounted_app_root { ViteRuby::CLI::Version.new.call }
     within_mounted_app_root {
+      refresh_config
+      ViteRuby::CLI::Install.new.call
+      ViteRuby.commands.verify_install
+      ViteRuby::CLI::Version.new.call
       stub_runner(expect: ['--debug']) {
         assert_equal 'run', ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--debug'])
       }
