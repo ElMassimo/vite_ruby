@@ -21,8 +21,8 @@ module ViteHanami::Installation
       )
     CSP
     append root.join('Rakefile'), <<~RAKE
-    require 'vite_hanami'
-    ViteRuby.install_tasks
+      require 'vite_hanami'
+      ViteRuby.install_tasks
     RAKE
   end
 

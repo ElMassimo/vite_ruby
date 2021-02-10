@@ -148,7 +148,7 @@ GEM
     transproc (1.1.1)
     url_mount (0.2.1)
       rack
-    vite_hanami (0.5.0)
+    vite_hanami (0.5.1)
       vite_ruby
     vite_ruby (1.0.2)
       dry-cli (~> 0.6)
@@ -171,7 +171,7 @@ DEPENDENCIES
   rake
   rspec
   shotgun
-  vite_hanami (= 0.5.0)
+  vite_hanami (= 0.5.1)
 
 RUBY VERSION
    ruby 2.7.2p137
