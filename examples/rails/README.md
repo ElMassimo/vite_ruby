@@ -2,7 +2,7 @@
   Vite ⚡️ Rails
 </h1>
 
-[vite_rails]: https://github.com/ElMassimo/vite_rails
+[vite_rails]: https://github.com/ElMassimo/vite_ruby
 [heroku]: https://vite-rails-demo.herokuapp.com/
 [live demo]: https://vite-rails-demo.herokuapp.com/
 

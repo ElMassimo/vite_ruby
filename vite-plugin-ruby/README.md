@@ -6,17 +6,17 @@
   <a href='https://www.npmjs.com/package/vite-plugin-ruby'>
     <img src='https://img.shields.io/npm/v/vite-plugin-ruby?color=222&style=flat-square'>
   </a>
-  <a href='https://github.com/ElMassimo/vite_rails/blob/master/LICENSE.txt'>
+  <a href='https://github.com/ElMassimo/vite_ruby/blob/master/LICENSE.txt'>
     <img src='https://img.shields.io/badge/license-MIT-blue.svg'>
   </a>
 </p>
 
 <br>
 
-[vite_rails]: https://github.com/ElMassimo/vite_rails/tree/main/vite_rails
-[vite_ruby]: https://github.com/ElMassimo/vite_rails/tree/main/vite_ruby
-[vite_hanami]: https://github.com/ElMassimo/vite_rails/tree/main/vite_hanami
-[configuration options]: https://github.com/ElMassimo/vite_rails
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[configuration options]: https://github.com/ElMassimo/vite_ruby
 
 ## Installation 💿
 

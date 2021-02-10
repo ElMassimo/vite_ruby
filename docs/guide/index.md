@@ -1,22 +1,22 @@
-[discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite rails]: https://github.com/ElMassimo/vite_rails
+[vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
-[vite_hanami]: https://github.com/ElMassimo/vite_rails/tree/main/vite_hanami
-[vite_ruby]: https://github.com/ElMassimo/vite_rails/tree/main/vite_ruby
+[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [commands]: /guide/development.html#cli-commands-⌨%EF%B8%8F
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
-[simple app]: https://github.com/ElMassimo/vite_rails/tree/main/examples/rails
+[simple app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [dev options]: /config/#development-options
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
-[GitHub Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
-[GitHub Discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[GitHub Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
+[GitHub Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 
 # Getting Started
 

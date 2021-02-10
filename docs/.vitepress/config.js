@@ -45,7 +45,7 @@ module.exports = {
       apiKey: 'cdb4a3df8ecf73fadf6bde873fc1b0d2',
       indexName: 'vite_rails',
     },
-    repo: 'ElMassimo/vite_rails',
+    repo: 'ElMassimo/vite_ruby',
     logo: '/logo.svg',
     docsDir: 'docs',
     docsBranch: 'main',
@@ -58,7 +58,7 @@ module.exports = {
       { text: 'Vite', link: 'https://vitejs.dev/' },
       {
         text: 'Changelog',
-        link: 'https://github.com/ElMassimo/vite_rails/blob/main/vite_ruby/CHANGELOG.md',
+        link: 'https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/CHANGELOG.md',
       },
     ],
 

@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
   s.authors  = ['Máximo Mussini']
   s.email    = ['maximomussini@gmail.com']
   s.summary  = 'Use Vite in Ruby and bring joy to your JavaScript experience'
-  s.homepage = 'https://github.com/ElMassimo/vite_rails'
+  s.homepage = 'https://github.com/ElMassimo/vite_ruby'
   s.license  = 'MIT'
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_rails/tree/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_rails/blob/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby/CHANGELOG.md",
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')

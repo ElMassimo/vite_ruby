@@ -1,8 +1,8 @@
 [tag helpers]: /guide/development.html#tag-helpers-%F0%9F%8F%B7
-[discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite rails]: https://github.com/ElMassimo/vite_rails
+[vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
@@ -14,11 +14,11 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
 [entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
-[vite_client_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L13-L17
-[vite_javascript_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L28-L51
-[vite_typescript_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L57-L59
-[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L62-L64
-[vite_asset_path]: https://github.com/ElMassimo/vite_rails/blob/main/lib/vite_rails/helper.rb#L23-L25
+[vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L13-L17
+[vite_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L28-L51
+[vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L57-L59
+[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L62-L64
+[vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L23-L25
 
 # Developing with Vite
 

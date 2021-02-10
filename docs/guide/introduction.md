@@ -1,6 +1,6 @@
-[library]: https://github.com/ElMassimo/vite_rails
-[vite_rails]: https://github.com/ElMassimo/vite_rails/tree/main/vite_rails
-[plugin]: https://github.com/ElMassimo/vite_rails/tree/main/vite-plugin-ruby
+[library]: https://github.com/ElMassimo/vite_ruby
+[vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
+[plugin]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite]: https://vitejs.dev/
 [webpacker]: https://github.com/rails/webpacker
 [webpack]: https://github.com/webpack/webpack

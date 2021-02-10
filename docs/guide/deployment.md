@@ -1,14 +1,14 @@
-[discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite rails]: https://github.com/ElMassimo/vite_rails
+[vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
 [example1]: https://github.com/ElMassimo/pingcrm-vite
 [heroku1]: https://pingcrm-vite.herokuapp.com/
-[example2]: https://github.com/ElMassimo/vite_rails/tree/main/examples/rails
+[example2]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 [heroku2]: https://vite-rails-demo.herokuapp.com/
 [build options]: /config/#build-options
 [configuration reference]: /config/

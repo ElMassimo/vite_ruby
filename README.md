@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://vite-rails.netlify.app/">
-    <img src="https://raw.githubusercontent.com/ElMassimo/vite_rails/main/docs/public/logo.svg" width="200px"/>
+    <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="200px"/>
   </a>
 
   <br>
@@ -12,16 +12,16 @@
   <br>
 
   <p align="center">
-    <a href="https://github.com/ElMassimo/vite_rails/actions">
-      <img alt="Build Status" src="https://github.com/ElMassimo/vite_rails/workflows/build/badge.svg"/>
+    <a href="https://github.com/ElMassimo/vite_ruby/actions">
+      <img alt="Build Status" src="https://github.com/ElMassimo/vite_ruby/workflows/build/badge.svg"/>
     </a>
-    <a href="https://codeclimate.com/github/ElMassimo/vite_rails">
-      <img alt="Maintainability" src="https://codeclimate.com/github/ElMassimo/vite_rails/badges/gpa.svg"/>
+    <a href="https://codeclimate.com/github/ElMassimo/vite_ruby">
+      <img alt="Maintainability" src="https://codeclimate.com/github/ElMassimo/vite_ruby/badges/gpa.svg"/>
     </a>
-    <a href="https://codeclimate.com/github/ElMassimo/vite_rails">
-      <img alt="Test Coverage" src="https://codeclimate.com/github/ElMassimo/vite_rails/badges/coverage.svg"/>
+    <a href="https://codeclimate.com/github/ElMassimo/vite_ruby">
+      <img alt="Test Coverage" src="https://codeclimate.com/github/ElMassimo/vite_ruby/badges/coverage.svg"/>
     </a>
-    <a href="https://github.com/ElMassimo/vite_rails/blob/master/LICENSE.txt">
+    <a href="https://github.com/ElMassimo/vite_ruby/blob/master/LICENSE.txt">
       <img alt="License" src="https://img.shields.io/badge/license-MIT-428F7E.svg"/>
     </a>
   </p>
@@ -32,14 +32,14 @@
 [features]: https://vite-rails.netlify.app/guide/introduction.html
 [guides]: https://vite-rails.netlify.app/guide/
 [config]: https://vite-rails.netlify.app/config/
-[vite_rails]: https://github.com/ElMassimo/vite_rails
+[vite_rails]: https://github.com/ElMassimo/vite_ruby
 [webpacker]: https://github.com/rails/webpacker
 [vite]: http://vitejs.dev/
-[config file]: https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby/default.vite.json
+[config file]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
-[Issues]: https://github.com/ElMassimo/vite_rails/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
-[Discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
+[Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍

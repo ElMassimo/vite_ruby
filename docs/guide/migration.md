@@ -1,8 +1,8 @@
 [tag helpers]: /guide/development.html#tag-helpers-%F0%9F%8F%B7
-[discussions]: https://github.com/ElMassimo/vite_rails/discussions
+[discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite rails]: https://github.com/ElMassimo/vite_rails
+[vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
 [rollup]: https://rollupjs.org/guide/en/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
