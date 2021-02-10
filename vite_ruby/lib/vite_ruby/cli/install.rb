@@ -74,7 +74,7 @@ private
     package_json = root.join('package.json')
     write(package_json, '{}') unless package_json.exist?
     Dir.chdir(root) do
-      deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION } ni ci"
+      deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
       say(*Open3.capture3({ 'CI' => 'true' }, "npx ni -D #{ deps }"))
     end
   end

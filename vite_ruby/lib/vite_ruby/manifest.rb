@@ -74,7 +74,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :builder, :dev_server_running?
+  def_delegators :@vite_ruby, :config, :build, :dev_server_running?
 
   # NOTE: Auto compilation is convenient when running tests, when the developer
   # won't focus on the frontend, or when running the Vite server is not desired.
@@ -89,11 +89,6 @@ private
     else
       manifest[name.to_s]
     end
-  end
-
-  # Internal: Performs a Vite build.
-  def build
-    builder.build
   end
 
   # Internal: The parsed data from manifest.json.

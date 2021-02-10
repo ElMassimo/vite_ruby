@@ -61,6 +61,7 @@ class EngineRakeTasksTest < ViteRuby::Test
 
   def test_cli_commands
     within_mounted_app_root {
+      ViteRuby.commands.verify_install
       refresh_config('VITE_RUBY_ROOT' => Dir.pwd)
       ViteRuby::CLI::Install.new.call
       ViteRuby.commands.verify_install
