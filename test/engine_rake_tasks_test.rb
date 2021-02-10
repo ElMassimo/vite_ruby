@@ -119,6 +119,7 @@ private
     vite_config_ts_path.delete if vite_config_ts_path.exist?
     app_frontend_dir.rmtree if app_frontend_dir.exist?
     app_public_dir.rmtree if app_public_dir.exist?
+    root_dir.join('app/views/layouts/application.html.erb').write(Pathname.new(test_app_path).join('app/views/layouts/application.html.erb').read)
     gitignore_path.write('')
     @command_results = []
   end

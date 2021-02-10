@@ -48,9 +48,13 @@ private
 
   extend Forwardable
 
-  file_utils = %i[append cp inject_line_after inject_line_after_last inject_line_before write]
-  def_delegators 'Dry::CLI::Utils::Files', *file_utils
   def_delegators 'ViteRuby', :config
+
+  %i[append cp inject_line_after inject_line_after_last inject_line_before write].each do |util|
+    define_method(util) { |*args, **opts, &block|
+      Dry::CLI::Utils::Files.send(util, *args, **opts, &block) rescue nil
+    }
+  end
 
   TEMPLATES_PATH = Pathname.new(File.expand_path('../../../templates', __dir__))
 
