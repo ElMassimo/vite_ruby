@@ -12,8 +12,8 @@ module ViteHanami::TagHelpers
   # Public: Resolves the path for the specified Vite asset.
   #
   # Example:
-  #   <%= vite_asset 'calendar.css' %> # => "/vite/assets/calendar-1016838bab065ae1e122.css"
-  def vite_asset(name, **options)
+  #   <%= vite_asset_path 'calendar.css' %> # => "/vite/assets/calendar-1016838bab065ae1e122.css"
+  def vite_asset_path(name, **options)
     asset_path vite_manifest.path_for(name, **options)
   end
 
@@ -39,7 +39,7 @@ module ViteHanami::TagHelpers
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
   def vite_stylesheet(*names, **options)
-    style_paths = names.map { |name| vite_asset(name, type: :stylesheet) }
+    style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet) }
     stylesheet(*style_paths, **options)
   end
 
@@ -70,7 +70,7 @@ private
     if self.class.assets_configuration.cdn || !source.to_s.start_with?(vite_assets_prefix)
       self.class.assets_configuration.asset_path(source)
     else
-      Hanami::Utils::PathPrefix.new('/').join(source)
+      Hanami::Utils::PathPrefix.new('/').join(source).to_s
     end
   end
 end

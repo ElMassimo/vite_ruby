@@ -52,6 +52,6 @@ private
   # Internal: Resolves to an executable for Vite.
   def vite_executable(cmd)
     npx = cmd.include?('node') ? `which npx`.chomp("\n") : 'npx' rescue 'npx'
-    [npx, 'nr', 'vite']
+    [npx, 'vite']
   end
 end
