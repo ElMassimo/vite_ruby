@@ -1,4 +1,8 @@
-## Vite Rails 2.0.0  (2020-02-09)
+## Vite Rails 2.0.1  (2020-02-11)
+
+- Add the CSP rules commented out when installing, in case the user hasn't uncommented them yet.
+
+## Vite Rails 2.0.0  (2020-02-10)
 
 - Extracted core functionality to `vite_ruby`.
 - User-facing API hasn't really changed, but internal classes have been renamed.

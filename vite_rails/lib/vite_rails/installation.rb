@@ -17,17 +17,17 @@ module ViteRails::Installation
   def setup_content_security_policy(csp_file)
     return unless csp_file.exist?
 
-    inject_line_after csp_file, 'policy.script_src', <<-CSP
-    # You may need to enable this in production as well depending on your setup.
-    policy.script_src *policy.script_src, :blob if Rails.env.test?
+    inject_line_after csp_file, 'policy.script_src', <<~CSP
+          # You may need to enable this in production as well depending on your setup.
+      #    policy.script_src *policy.script_src, :blob if Rails.env.test?
     CSP
-    inject_line_after csp_file, 'policy.connect_src', <<-CSP
-    # Allow @vite/client to hot reload changes in development
-    policy.connect_src *policy.connect_src, "ws://\#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+    inject_line_after csp_file, 'policy.connect_src', <<~CSP
+          # Allow @vite/client to hot reload changes in development
+      #    policy.connect_src *policy.connect_src, "ws://\#{ ViteRuby.config.host_with_port }" if Rails.env.development?
     CSP
-    inject_line_after csp_file, 'policy.script_src', <<-CSP
-    # Allow @vite/client to hot reload changes in development
-    policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+    inject_line_after csp_file, 'policy.script_src', <<~CSP
+          # Allow @vite/client to hot reload changes in development
+      #    policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
     CSP
   end
 
