@@ -14,6 +14,9 @@ AllCops:
     - "tmp/**/*"
   TargetRubyVersion: 2.5
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Style/RescueModifier:
   Enabled: false
 
