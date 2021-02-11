@@ -72,6 +72,7 @@ For convenience, <kbd>[vite_javascript]</kbd> will automatically inject tags for
 ```
 
 Example output:
+
 ```erb
 <script src="/vite/assets/application.a0ba047e.js" type="module" crossorigin="anonymous"/>
 <link rel="modulepreload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
@@ -82,18 +83,4 @@ When running the development server, these tags are omitted, as Vite will load t
 
 ```erb
 <script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
-```
-
-#### Opting Out ⚙️
-
-For cases where tags need be managed manually, it's possible to opt out by using the options:
-
-- <kbd>skip_preload_tags</kbd>: Set to false to avoid rendering `<link rel="modulepreload">` tags.
-- <kbd>skip_style_tags</kbd>: Set to false to avoid rendering `<link rel="stylesheet">` tags.
-
-When rendering styles and preload manually, it's important to avoid rendering when the Vite development server is running, since the files don't exist yet:
-
-```erb
-<%= vite_typescript 'application', skip_style_tags: true %>
-<%= vite_stylesheet 'application' unless ViteRuby.dev_server_running? %>
 ```
