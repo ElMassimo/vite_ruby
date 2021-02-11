@@ -1,3 +1,7 @@
+## Vite Rails 2.0.2  (2020-02-11)
+
+- Automatically infer `app/javascript` as the `sourceCodeDir` if it exists.
+
 ## Vite Rails 2.0.1  (2020-02-11)
 
 - Add the CSP rules commented out when installing, in case the user hasn't uncommented them yet.

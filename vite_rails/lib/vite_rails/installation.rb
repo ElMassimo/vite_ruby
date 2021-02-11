@@ -10,6 +10,9 @@ module ViteRails::Installation
   # Override: Setup a typical apps/web Hanami app to use Vite.
   def setup_app_files
     cp RAILS_TEMPLATES.join('config/rails-vite.json'), config.config_path
+    if root.join('app/javascript').exist?
+      Dry::CLI::Utils::Files.replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "app/javascript",)
+    end
     setup_content_security_policy root.join('config/initializers/content_security_policy.rb')
   end
 
@@ -33,7 +36,9 @@ module ViteRails::Installation
 
   # Override: Create a sample JS file and attempt to inject it in an HTML template.
   def install_sample_files
-    cp RAILS_TEMPLATES.join('entrypoints/application.js'), config.resolved_entrypoints_dir.join('application.js')
+    unless config.resolved_entrypoints_dir.join('application.js').exist?
+      cp RAILS_TEMPLATES.join('entrypoints/application.js'), config.resolved_entrypoints_dir.join('application.js')
+    end
 
     if (layout_file = root.join('app/views/layouts/application.html.erb')).exist?
       inject_line_before layout_file, '</head>', <<-HTML
