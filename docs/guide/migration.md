@@ -8,6 +8,8 @@
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [guide]: /guide/
 [configuration reference]: /config/
+[sourceCodeDir]: /config/#sourcecodedir
+[entrypointsDir]: /config/#entrypointsdir
 
 # Migrating to Vite
 
@@ -21,7 +23,9 @@ styles, and other assets.
 
 ## Webpacker 📦
 
-When migrating from [Webpacker], assuming you were placing your packs in `app/javascript/packs`, it might be convenient to change <kbd>sourceCodeDir</kbd> in your `config/vite.json`.
+When migrating from [Webpacker], the installation script will detect if the
+`app/javascript` directory exists, and use that in your `config/vite.json`
+instead of the [default][sourceCodeDir].
 
 ```json
 {
@@ -31,7 +35,7 @@ When migrating from [Webpacker], assuming you were placing your packs in `app/ja
 ```
 
 That way you don't have to move code around, and can proceed to copying your
-[entries][entrypoints] in `app/javascript/packs` to `app/javascript/entrypoints`.
+[entries][entrypoints] in `app/javascript/packs` to [`app/javascript/entrypoints`][entrypointsDir].
 
 You might also need to:
 

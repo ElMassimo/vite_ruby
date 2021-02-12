@@ -46,3 +46,8 @@ kbd {
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 #d1d5da;
 }
+
+code kbd {
+  font-size: 0.7rem;
+  padding: 2px 5px;
+}

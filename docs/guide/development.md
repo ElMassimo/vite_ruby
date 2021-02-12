@@ -19,6 +19,9 @@
 [vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L57-L59
 [vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L62-L64
 [vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L23-L25
+[sourceCodeDir]: /config/#sourcecodedir
+[entrypointsDir]: /config/#entrypointsdir
+[aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
 
 # Developing with Vite
 
@@ -34,7 +37,7 @@ used to configure the `host` and `port`, as well as [other options][dev options]
 ## Auto-Build 🤖
 
 Even when not running the Vite development server, _Vite Ruby_ can detect if
-any assets have changed in [`sourceCodeDir`][sourceCodeDir], and trigger a build
+any assets have changed in <kbd>[sourceCodeDir]</kbd>, and trigger a build
 automatically when the asset is requested.
 
 This is very convenient when running integration tests, or when a developer
@@ -46,12 +49,13 @@ By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test<
 
 ## Entrypoints ⤵️
 
-Drawing inspiration from [webpacker], any files in [`app/frontend/entrypoints`][build]
+Drawing inspiration from [webpacker], any files inside your <kbd>[entrypointsDir]</kbd>
 will be considered [entries][entrypoints] to your application (SPAs or pages).
 
-```
-app/frontend:
-  ├── entrypoints:
+<div class="language-">
+  <pre>
+<code>app/frontend: <kbd><a href="/config/#sourcecodedir">sourceCodeDir</a></kbd>
+  ├── entrypoints: <kbd><a href="/config/#entrypointsdir">entrypointsDir</a></kbd>
   │   # only Vite entry files here
   │   └── application.js
   │   └── typography.css
@@ -63,8 +67,9 @@ app/frontend:
   └── stylesheets:
   │   └── my_styles.css
   └── images:
-      └── logo.svg
-```
+      └── logo.svg</code>
+</pre>
+</div>
 
 These files will be automatically detected and passed on to Vite, all [configuration][entrypoints] is done
 for you.
@@ -73,12 +78,12 @@ You can add them to your HTML layouts or views using the provided [tag helpers].
 
 ## Import Aliases 👉
 
-For convenience, a `~/` import alias is configured to `app/frontend`, allowing
-you to use absolute paths:
+For convenience, `~/` and `@/` are [aliased] to your <kbd>[sourceCodeDir]</kbd>,
+allowing you to use absolute paths:
 
 ```js
 import App from '~/components/App.vue'
-import '~/channels'
+import '@/channels'
 ```
 
 ## CLI Commands ⌨️
