@@ -32,8 +32,28 @@
 
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
+[website]: https://vite-rails.netlify.app/
 
 __Vite Rails Legacy__ is [__Vite Rails__][vite_rails], modified to support Rails 4.
+
+## Installation 💿
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'vite_rails_legacy'
+```
+
+Then, run:
+
+```bash
+bundle install
+bundle exec vite install
+```
+
+This will generate configuration files and a sample setup.
+
+Additional installation instructions are available in the [documentation website][website].
 
 ## Why a separate library? 🤔
 
