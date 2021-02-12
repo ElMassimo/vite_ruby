@@ -70,7 +70,7 @@ allowing you to use absolute paths:
 
 ```js
 import App from '~/components/App.vue'
-import '@/channels'
+import '@/channels/index.js'
 ```
 
 ## Auto-Build 🤖
