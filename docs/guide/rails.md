@@ -22,6 +22,7 @@
 [development]: /guide/development
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
+[jumpstart]: https://github.com/ElMassimo/jumpstart-vite
 
 # Development in Rails
 
@@ -29,6 +30,8 @@ If not using [Rails], skip this section.
 
 Once you have installed the <kbd>[vite_rails]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
 you should have an [installed example].
+
+As an alternative, you could also use [this template][jumpstart] to [jumpstart] your app.
 
 ## Tag Helpers 🏷
 
