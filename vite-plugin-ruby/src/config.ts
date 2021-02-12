@@ -1,5 +1,4 @@
 import { join, relative, resolve } from 'path'
-import { ConfigEnv } from 'vite'
 import glob from 'fast-glob'
 
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'

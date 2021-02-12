@@ -7,13 +7,9 @@
     "docs:build": "npm -C docs run docs:build",
     "docs:search": "npm -C docs run docs:search",
     "docs:lint": "npm -C docs run lint",
-    "build": "rm -rf package/dist && npm -C package run prerelease",
-    "release": "rm -rf package/dist && npm -C package run release",
-    "lint": "npm -C package run lint",
-    "test": "npm -C package run test"
-  },
-  "dependencies": {
-    "vite": "^2.0.0-beta.65",
-    "vite-plugin-ruby": "^1.0.8"
+    "build": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby run prerelease",
+    "release": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby publish",
+    "lint": "npm -C vite-plugin-ruby run lint",
+    "test": "npm -C vite-plugin-ruby run test"
   }
 }
