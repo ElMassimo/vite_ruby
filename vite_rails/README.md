@@ -80,7 +80,7 @@ Visit the [documentation website][website] to check out the [guides] and searcha
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'vite_rails'
+gem 'vite_rails' # vite_rails_legacy if using Rails 4
 ```
 
 Then, run:
