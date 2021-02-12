@@ -1,3 +1,8 @@
+## vite-plugin-ruby 1.0.11 (2020-02-12)
+
+- Move `alias` to `resolve.alias` as per the deprecation in [beta-68](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#200-beta68-2021-02-11).
+- Start using `env.mode` if available, introduced in [beta-69](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#200-beta69-2021-02-11).
+
 ## vite-plugin-ruby 1.0.10 (2020-02-09)
 
 - Move `debug` from external to dependency.

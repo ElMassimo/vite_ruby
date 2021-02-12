@@ -1,5 +1,5 @@
 import { resolve, join } from 'path'
-import type { Plugin, UserConfig, ViteDevServer } from 'vite'
+import type { ConfigEnv, Plugin, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
@@ -31,8 +31,9 @@ const debug = createDebugger('vite-plugin-ruby:config')
 
 // Internal: Resolves the configuration from environment variables and a JSON
 // config file, and configures the entrypoints and manifest generation.
-function config(config: UserConfig): UserConfig {
-  const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(config, projectRoot)
+function config(config: UserConfig, env: ConfigEnv | undefined): UserConfig {
+  const viteMode = env?.mode || config.mode || 'development' // Fallback just in case someone is using < beta.69
+  const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(viteMode, projectRoot)
 
   const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
 
@@ -51,11 +52,11 @@ function config(config: UserConfig): UserConfig {
 
   codeRoot = resolve(join(projectRoot, sourceCodeDir!))
 
+  const alias = { '~/': `${codeRoot}/`, '@/': `${codeRoot}/` }
+
   return cleanConfig({
-    alias: {
-      '~/': `${codeRoot}/`,
-      '@/': `${codeRoot}/`,
-    },
+    alias, // Fallback just in case someone is using < beta.68
+    resolve: { alias },
     base,
     root,
     server,

@@ -1,5 +1,5 @@
 // Internal: Inferred mode, since Vite doesn't yet expose it to its plugins.
-export const APP_ENV = process.env.RAILS_ENV || process.env.RACK_ENV || process.env.APP_ENV || 'development'
+export const APP_ENV = process.env.RAILS_ENV || process.env.RACK_ENV || process.env.APP_ENV
 
 // Internal: Prefix used for environment variables that modify the configuration.
 export const ENV_PREFIX = 'VITE_RUBY'

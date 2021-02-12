@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path'
-import { UserConfig } from 'vite'
+import { ConfigEnv } from 'vite'
 import glob from 'fast-glob'
 
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
@@ -42,9 +42,9 @@ function configFromEnv(): Config {
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration(currentConfig: UserConfig, projectRoot: string): UnifiedConfig {
+export function loadConfiguration(viteMode: string, projectRoot: string): UnifiedConfig {
   const envConfig = configFromEnv()
-  const mode = envConfig.mode || currentConfig.mode || APP_ENV
+  const mode = envConfig.mode || APP_ENV || viteMode
   const filePath = join(projectRoot, envConfig.configPath || (defaultConfig.configPath as string))
   const multiEnvConfig = loadJsonConfig<MultiEnvConfig>(filePath)
   const fileConfig: Config = { ...multiEnvConfig[ALL_ENVS_KEY], ...multiEnvConfig[mode] }

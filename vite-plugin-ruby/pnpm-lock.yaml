@@ -15,7 +15,7 @@ importers:
       standard-version: 9.1.0
       tsup: 3.11.0_typescript@4.1.3
       typescript: 4.1.3
-      vite: 2.0.0-beta.65
+      vite: 2.0.0-beta.69
     specifiers:
       '@antfu/eslint-config': ^0.4.3
       '@types/debug': ^4.1.5
@@ -30,14 +30,14 @@ importers:
       standard-version: ^9.1.0
       tsup: ^3.11.0
       typescript: ^4.1.3
-      vite: ^2.0.0-beta.65
+      vite: ^2.0.0-beta.69
   example:
     devDependencies:
       '@vitejs/plugin-vue': 1.1.2_@vue+compiler-sfc@3.0.5
       '@vue/compiler-sfc': 3.0.5_vue@3.0.5
       cross-env: 7.0.3
       typescript: 4.1.3
-      vite: 2.0.0-beta.65
+      vite: 2.0.0-beta.69
       vite-plugin-ruby: 'link:..'
       vue: 3.0.5
     specifiers:
@@ -45,7 +45,7 @@ importers:
       '@vue/compiler-sfc': ^3.0.5
       cross-env: ^7.0.3
       typescript: ^4.1.3
-      vite: ^2.0.0-beta.65
+      vite: ^2.0.0-beta.69
       vite-plugin-ruby: 'workspace:*'
       vue: ^3.0.0
 lockfileVersion: 5.2
@@ -5786,6 +5786,15 @@ packages:
       fsevents: 2.1.3
     resolution:
       integrity: sha512-qjjiuJKb+/8n0EZyQYVW+gFU4bNRBcZaXVzUgSVrGw0HlQBlK2aWyaOMMs1Ufic1jV69b9kW3u3i9B+hISDm3A==
+  /rollup/2.38.5:
+    dev: true
+    engines:
+      node: '>=10.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.1
+    resolution:
+      integrity: sha512-VoWt8DysFGDVRGWuHTqZzT02J0ASgjVq/hPs9QcBOGMd7B+jfTr/iqMVEyOi901rE3xq+Deq66GzIT1yt7sGwQ==
   /rsvp/4.8.5:
     dev: true
     engines:
@@ -6716,20 +6725,20 @@ packages:
       '0': node >=0.6.0
     resolution:
       integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=
-  /vite/2.0.0-beta.65:
+  /vite/2.0.0-beta.69:
     dependencies:
       esbuild: 0.8.43
       postcss: 8.2.4
       resolve: 1.19.0
-      rollup: 2.36.2
+      rollup: 2.38.5
     dev: true
     engines:
       node: '>=12.0.0'
     hasBin: true
     optionalDependencies:
-      fsevents: 2.1.3
+      fsevents: 2.3.1
     resolution:
-      integrity: sha512-mdHNTP6fGeb8m8lWAM3UbSPw1+un1lUv0i4MQJcNiK2/P01RHIY02VjQeXBv3NemkExkgLji88LN9ySFMUQpIw==
+      integrity: sha512-Wf4bWOK/b6Q+06Wyk7uJIBy/LiENGx26do6tn9gOMRRZLEuLizN/cDzGqnQkGVVevbb18xdilyxhnTes0lFjZg==
   /vue-eslint-parser/7.3.0_eslint@7.18.0:
     dependencies:
       debug: 4.3.1
