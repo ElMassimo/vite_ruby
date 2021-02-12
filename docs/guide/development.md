@@ -34,19 +34,6 @@ Run <kbd>bin/vite dev</kbd> to start a Vite development server.
 It will read your [`config/vite.json`][json config] configuration, which can be
 used to configure the `host` and `port`, as well as [other options][dev options].
 
-## Auto-Build 🤖
-
-Even when not running the Vite development server, _Vite Ruby_ can detect if
-any assets have changed in <kbd>[sourceCodeDir]</kbd>, and trigger a build
-automatically when the asset is requested.
-
-This is very convenient when running integration tests, or when a developer
-does not want to start the Vite development server (at the expense of a slower feedback loop).
-
-::: tip Enabled locally
-By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test</kbd> and <kbd>development</kbd> environments.
-:::
-
 ## Entrypoints ⤵️
 
 Drawing inspiration from [webpacker], any files inside your <kbd>[entrypointsDir]</kbd>
@@ -85,6 +72,19 @@ allowing you to use absolute paths:
 import App from '~/components/App.vue'
 import '@/channels'
 ```
+
+## Auto-Build 🤖
+
+Even when not running the Vite development server, _Vite Ruby_ can detect if
+any assets have changed in <kbd>[sourceCodeDir]</kbd>, and trigger a build
+automatically when the asset is requested.
+
+This is very convenient when running integration tests, or when a developer
+does not want to start the Vite development server (at the expense of a slower feedback loop).
+
+::: tip Enabled locally
+By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test</kbd> and <kbd>development</kbd> environments.
+:::
 
 ## CLI Commands ⌨️
 
