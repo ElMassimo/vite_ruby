@@ -6,7 +6,7 @@ module ViteRailsLegacy::TagHelpers
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
 
-    "<script#{tag_options({ src: src, type: 'module' }, escape: true)}></script>".html_safe
+    "<script#{ tag_options({ src: src, type: 'module' }, escape: true) }></script>".html_safe
   end
 
   # Public: Resolves the path for the specified Vite asset.
