@@ -1,3 +1,7 @@
+## vite-plugin-ruby 1.0.12 (2020-02-15)
+
+- Fix the repo URLs in the package metadata. Thanks @davidrunger!
+
 ## vite-plugin-ruby 1.0.11 (2020-02-12)
 
 - Move `alias` to `resolve.alias` as per the deprecation in [beta-68](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#200-beta68-2021-02-11).
