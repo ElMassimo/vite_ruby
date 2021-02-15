@@ -9,10 +9,10 @@
   "author": "Máximo Mussini <maximomussini@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ElMasssimo/vite_rails/blob/master/vite-plugin-ruby"
+    "url": "https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby"
   },
-  "homepage": "https://github.com/ElMasssimo/vite_rails/blob/master/vite-plugin-ruby",
-  "bugs": "https://github.com/ElMasssimo/vite_rails/issues",
+  "homepage": "https://github.com/ElMassimo/vite_rails/blob/main/vite-plugin-ruby",
+  "bugs": "https://github.com/ElMassimo/vite_rails/issues",
   "files": [
     "dist",
     "default.vite.json"
