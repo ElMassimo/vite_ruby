@@ -23,6 +23,8 @@
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 [jumpstart]: https://github.com/ElMassimo/jumpstart-vite
+[vite-plugin-stimulus-hmr]: https://github.com/ElMassimo/vite-plugin-stimulus-hmr
+[stimulus]: https://stimulus.hotwire.dev/
 
 # Development in Rails
 
@@ -87,3 +89,11 @@ When running the development server, these tags are omitted, as Vite will load t
 ```erb
 <script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
 ```
+
+### Stimulus HMR 🔥
+
+If you are using [Stimulus], check out <kbd>[vite-plugin-stimulus-hmr]</kbd>, which provides HMR for Stimulus controllers.
+
+You will no longer need to refresh the page when tweaking your controllers 😃
+
+Comes installed by default in [this template][jumpstart].

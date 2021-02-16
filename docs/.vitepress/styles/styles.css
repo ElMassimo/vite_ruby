@@ -1,13 +1,14 @@
 :root {
   --c-brand: #cc0000;
   --c-brand-light: #d53f3f;
+  --c-contrast-light: #00c7cc;
 
   --bg-colored-light: #f3f7f7;
 }
 
 .custom-block.custom-block.tip {
   background-color: var(--bg-colored-light);
-  border-color: #00c7cc;
+  border-color: var(--c-contrast-light);
 }
 
 .custom-block.custom-block.tip a {
@@ -50,4 +51,8 @@ kbd {
 code kbd {
   font-size: 0.7rem;
   padding: 2px 5px;
+}
+
+code .token.inserted.token.inserted {
+  color: var(--c-contrast-light);
 }
