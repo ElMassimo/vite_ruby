@@ -12,7 +12,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "postcss": "8.2.4",
-    "vite": "^2.0.0-beta.67",
+    "vite": "^2.0.0",
     "vite-plugin-ruby": "^1.0.10",
     "webpack-dev-server": "^3.11.2"
   }

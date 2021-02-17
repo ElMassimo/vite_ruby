@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-ruby",
   "description": "Convention over configuration for using Vite in Ruby apps",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -43,7 +43,7 @@
     "standard-version": "^9.1.0",
     "tsup": "^3.11.0",
     "typescript": "^4.1.3",
-    "vite": "^2.0.0-beta.69"
+    "vite": "^2.0.0"
   },
   "jest": {
     "testRegex": "(/__tests__/.*|(\\.|/))\\.jsx?$",

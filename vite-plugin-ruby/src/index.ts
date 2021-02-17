@@ -55,7 +55,6 @@ function config(config: UserConfig, env: ConfigEnv | undefined): UserConfig {
   const alias = { '~/': `${codeRoot}/`, '@/': `${codeRoot}/` }
 
   return cleanConfig({
-    alias, // Fallback just in case someone is using < beta.68
     resolve: { alias },
     base,
     root,

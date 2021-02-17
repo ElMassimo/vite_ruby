@@ -1,3 +1,7 @@
+## vite-plugin-ruby 1.0.13 (2020-02-16)
+
+- Remove old `alias` fallback now that Vite is officially in 2.0! Thanks Konnor!
+
 ## vite-plugin-ruby 1.0.12 (2020-02-15)
 
 - Fix the repo URLs in the package metadata. Thanks @davidrunger!
