@@ -4,6 +4,14 @@ PATH
     vite_padrino (0.5.0)
       vite_ruby
 
+PATH
+  remote: ../../vite_ruby
+  specs:
+    vite_ruby (1.0.3)
+      dry-cli (~> 0.6)
+      rack-proxy (>= 0.6.1)
+      zeitwerk
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -79,10 +87,6 @@ GEM
     temple (0.8.2)
     thor (0.20.3)
     tilt (2.0.10)
-    vite_ruby (1.0.3)
-      dry-cli (~> 0.6)
-      rack-proxy (>= 0.6.1)
-      zeitwerk
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -94,6 +98,7 @@ DEPENDENCIES
   pry-byebug
   rake
   vite_padrino!
+  vite_ruby!
 
 BUNDLED WITH
    2.1.4
