@@ -39,6 +39,7 @@ private
 
   def forward_to_vite_dev_server(env)
     rewrite_uri_for_vite(env)
+    env['QUERY_STRING'] ||= ''
     env['HTTP_HOST'] = env['HTTP_X_FORWARDED_HOST'] = config.host
     env['HTTP_X_FORWARDED_SERVER'] = config.host_with_port
     env['HTTP_PORT'] = env['HTTP_X_FORWARDED_PORT'] = config.port.to_s

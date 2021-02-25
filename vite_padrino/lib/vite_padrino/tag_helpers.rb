@@ -14,7 +14,7 @@ module VitePadrino::TagHelpers
   # Example:
   #   <%= vite_asset_path 'calendar.css' %> # => "/vite/assets/calendar-1016838bab065ae1e122.css"
   def vite_asset_path(name, **options)
-    path_to_asset vite_manifest.path_for(name, **options)
+    asset_path vite_manifest.path_for(name, **options)
   end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
@@ -53,7 +53,7 @@ private
   # Internal: Renders a modulepreload link tag.
   def vite_preload_tag(*sources, crossorigin:)
     sources.map { |source|
-      href = path_to_asset(source)
+      href = asset_path(source)
       try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
       tag(:link, rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin)
     }.join("\n").html_safe

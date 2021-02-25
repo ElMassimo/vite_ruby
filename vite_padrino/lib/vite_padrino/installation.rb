@@ -5,11 +5,11 @@ require 'vite_padrino'
 # Internal: Extends the base installation script from Vite Ruby to work for a
 # typical Padrino app.
 module VitePadrino::Installation
-  HANAMI_TEMPLATES = Pathname.new(File.expand_path('../../templates', __dir__))
+  PADRINO_TEMPLATES = Pathname.new(File.expand_path('../../templates', __dir__))
 
   # Override: Setup a typical apps/web Padrino app to use Vite.
   def setup_app_files
-    cp HANAMI_TEMPLATES.join('config/padrino-vite.json'), config.config_path
+    cp PADRINO_TEMPLATES.join('config/padrino-vite.json'), config.config_path
     inject_line_after root.join('app/app.rb'), 'register', '    register VitePadrino'
     append root.join('Rakefile'), <<~RAKE
       require 'vite_padrino'
