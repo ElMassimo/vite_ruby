@@ -1,0 +1,23 @@
+!!! Strict
+%html
+  %head
+    %title= "Padrino Sample Blog"
+  %body
+    %nav.navbar
+      %div.container
+        .navbar-brand
+          %a.navbar-item{:href => "/"}
+            %img{:alt => "Logo of Padrino blog", :src => "http://padrinorb.com/images/logo-6475397a.svg"}/
+          %span.navbar-burger.burger{"data-target" => "navbarMenu"}
+            %span
+            %span
+            %span
+        #navbarMenu.navbar-menu
+          .navbar-end
+    %section.hero.is-info.is-medium.is-bold
+      .hero-body
+        .container.has-text-centered
+          %h1.title
+            Vite Padrino
+    %div.container
+      #main= yield

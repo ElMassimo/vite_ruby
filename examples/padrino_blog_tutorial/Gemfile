@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'haml'
+gem 'padrino', '0.15.0'
+gem 'vite_padrino', path: '../../vite_padrino'
+gem 'pry-byebug'

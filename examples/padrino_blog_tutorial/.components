@@ -1,0 +1,10 @@
+---
+:orm: none
+:test: rspec
+:mock: none
+:script: none
+:renderer: haml
+:stylesheet: none
+:namespace: BlogTutorial
+:migration_format: number
+:admin_renderer: none
