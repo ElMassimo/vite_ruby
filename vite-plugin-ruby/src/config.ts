@@ -9,14 +9,14 @@ import { Config, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 const defaultConfig: Config = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
 
 // Internal: Returns all files defined in the entrypoints directory.
-function resolveEntrypointFiles(entrypointsDir: string): Entrypoints {
+function resolveEntrypointFiles (entrypointsDir: string): Entrypoints {
   return glob.sync(`${entrypointsDir}/**/*`, { onlyFiles: true })
     .map(filename => [relative(entrypointsDir, filename), filename])
 }
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
-export function resolveEntrypointsForRollup(entrypointsDir: string): Entrypoints {
+export function resolveEntrypointsForRollup (entrypointsDir: string): Entrypoints {
   return resolveEntrypointFiles(entrypointsDir)
     .filter(([_name, filename]) => ENTRYPOINT_TYPES_REGEX.test(filename))
     .map(([name, filename]) => [withoutExtension(name), filename])
@@ -24,13 +24,13 @@ export function resolveEntrypointsForRollup(entrypointsDir: string): Entrypoints
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
-export function resolveEntrypointAssets(entrypointsDir: string): Entrypoints {
+export function resolveEntrypointAssets (entrypointsDir: string): Entrypoints {
   return resolveEntrypointFiles(entrypointsDir)
     .filter(([_name, filename]) => !ENTRYPOINT_TYPES_REGEX.test(filename))
 }
 
 // Internal: Loads configuration options provided through env variables.
-function configFromEnv(): Config {
+function configFromEnv (): Config {
   const envConfig: Record<string, any> = {}
   Object.keys(defaultConfig).forEach((optionName) => {
     const envValue = configOptionFromEnv(optionName)
@@ -41,7 +41,7 @@ function configFromEnv(): Config {
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration(viteMode: string, projectRoot: string): UnifiedConfig {
+export function loadConfiguration (viteMode: string, projectRoot: string): UnifiedConfig {
   const envConfig = configFromEnv()
   const mode = envConfig.mode || APP_ENV || viteMode
   const filePath = join(projectRoot, envConfig.configPath || (defaultConfig.configPath as string))
@@ -53,7 +53,7 @@ export function loadConfiguration(viteMode: string, projectRoot: string): Unifie
 }
 
 // Internal: Coerces the configuration values and deals with relative paths.
-function coerceConfigurationValues(config: UnifiedConfig, projectRoot: string): UnifiedConfig {
+function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string): UnifiedConfig {
   // Coerce the values to the expected types.
   config.port = parseInt(config.port as unknown as string)
   config.https = booleanOption(config.https)

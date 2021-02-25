@@ -1,4 +1,3 @@
-import path from 'path'
 import { UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import ViteRuby from 'vite-plugin-ruby'

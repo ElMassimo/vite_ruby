@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/order */
 const args = require('minimist')(process.argv.slice(2))
 const msgPath = args._[0]
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()

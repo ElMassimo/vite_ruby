@@ -17,18 +17,18 @@ interface AssetsManifestChunk {
 
 type AssetsManifest = Map<string, AssetsManifestChunk>
 
-function getAssetHash(content: Buffer) {
+function getAssetHash (content: Buffer) {
   return createHash('sha256').update(content).digest('hex').slice(0, 8)
 }
 
 // Internal: Writes a manifest file that allows to map an entrypoint asset file
 // name to the corresponding output file name.
-export function assetsManifestPlugin(): Plugin {
+export function assetsManifestPlugin (): Plugin {
   let config: ResolvedConfig
 
   // Internal: For stylesheets Vite does not output the result to the manifest,
   // so we extract the file name of the processed asset from the bundle.
-  function extractChunkAssets(bundle: OutputBundle, manifest: AssetsManifest) {
+  function extractChunkAssets (bundle: OutputBundle, manifest: AssetsManifest) {
     const entrypointFiles = Object.values(config.build.rollupOptions.input as Record<string, string>)
     const assetFiles = new Set(entrypointFiles.map(file => path.relative(config.root, file)))
 
@@ -38,7 +38,7 @@ export function assetsManifestPlugin(): Plugin {
 
   // Internal: Vite ignores some entrypoint assets, so we need to manually
   // fingerprint the files and move them to the output directory.
-  async function fingerprintRemainingAssets(ctx: PluginContext, manifest: AssetsManifest) {
+  async function fingerprintRemainingAssets (ctx: PluginContext, manifest: AssetsManifest) {
     const remainingAssets = resolveEntrypointAssets(config.root)
 
     for (const [filename, absoluteFilename] of remainingAssets) {
@@ -58,10 +58,10 @@ export function assetsManifestPlugin(): Plugin {
     name: 'vite-plugin-ruby:assets-manifest',
     apply: 'build',
     enforce: 'post',
-    configResolved(resolvedConfig: ResolvedConfig) {
+    configResolved (resolvedConfig: ResolvedConfig) {
       config = resolvedConfig
     },
-    async generateBundle(_options, bundle) {
+    async generateBundle (_options, bundle) {
       const manifest: AssetsManifest = new Map()
       extractChunkAssets(bundle, manifest)
       await fingerprintRemainingAssets(this, manifest)
