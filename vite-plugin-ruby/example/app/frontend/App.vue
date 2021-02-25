@@ -6,7 +6,7 @@ export default defineComponent({
   name: 'App',
   components: {
     HelloWorld,
-  }
+  },
 })
 </script>
 
@@ -22,6 +22,6 @@ export default defineComponent({
 </style>
 
 <template>
-  <img alt="Vue logo" src="./entrypoints/logo.svg" />
-  <HelloWorld class="strange" msg="Hello Vue 3 + Vite" />
+  <img alt="Vue logo" src="./entrypoints/logo.svg">
+  <HelloWorld class="strange" msg="Hello Vue 3 + Vite"/>
 </template>

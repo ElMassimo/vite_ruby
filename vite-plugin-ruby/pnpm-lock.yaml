@@ -31,7 +31,7 @@ importers:
       '@vue/compiler-sfc': 3.0.5_vue@3.0.5
       cross-env: 7.0.3
       typescript: 4.1.3
-      vite: 2.0.0
+      vite: 2.0.3
       vite-plugin-ruby: 'link:..'
       vue: 3.0.5
     specifiers:
@@ -39,7 +39,7 @@ importers:
       '@vue/compiler-sfc': ^3.0.5
       cross-env: ^7.0.3
       typescript: ^4.1.3
-      vite: ^2.0.0
+      vite: ^2.0.3
       vite-plugin-ruby: 'workspace:*'
       vue: ^3.0.0
 lockfileVersion: 5.2
@@ -1826,6 +1826,12 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-ZVE2CpootS4jtnfV0bbtJdgRsHEXcMP0P7ZXGfTmNzzhBr2e5ag7Vp3ry0jmw8zduJz4iHzxg4m5jtPxWERz1w==
+  /esbuild/0.8.52:
+    dev: true
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-b5KzFweLLXoXQwdC/e2+Z80c8uo2M5MgP7yQEEebkFw6In4T9CvYcNoM2ElvJt8ByO04zAZUV0fZkXmXoi2s9A==
   /escape-string-regexp/1.0.5:
     dev: true
     engines:
@@ -5547,6 +5553,20 @@ packages:
       fsevents: 2.3.1
     resolution:
       integrity: sha512-rNli5g0DaQ6+btlRqkmaR06neWaJGApmt40gocqrYDNi2XoEXYQgKiHSWzMeUgc1Cdva2HduqazaE+RaKjBpdQ==
+  /vite/2.0.3:
+    dependencies:
+      esbuild: 0.8.52
+      postcss: 8.2.4
+      resolve: 1.19.0
+      rollup: 2.38.5
+    dev: true
+    engines:
+      node: '>=12.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.1
+    resolution:
+      integrity: sha512-4CUm3FVUHyTSSSK6vHWkj3SVkP+GGNNzwYcFsHOjjc8xQ3BPjJa1JDDmFlYxpxR29ANa+7RWptYPoyHyJ29Nhw==
   /vue/3.0.5:
     dependencies:
       '@vue/compiler-dom': 3.0.5
