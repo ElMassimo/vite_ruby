@@ -1,0 +1,22 @@
+!!! Strict
+%html
+  %head
+    %title= "Padrino Sample Blog"
+    = vite_client_tag
+    = vite_stylesheet_tag 'styles'
+    = vite_javascript_tag 'application'
+
+  %body
+    %nav.navbar
+      %div.container
+        .navbar-brand
+          %a.navbar-item{:href => "/"}
+            %img{:alt => "Logo of Padrino blog", :src => "http://padrinorb.com/images/logo-6475397a.svg"}/
+          %span.navbar-burger.burger{"data-target" => "navbarMenu"}
+            %span
+            %span
+            %span
+        #navbarMenu.navbar-menu
+          .navbar-end
+    %div.container
+      #main= yield

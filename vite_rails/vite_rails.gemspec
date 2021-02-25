@@ -27,6 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-minitest'
   s.add_development_dependency 'rubocop-performance'
 
-  s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.txt]
+  s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md LICENSE.txt]
   s.test_files = `git ls-files -- test/*`.split("\n")
 end

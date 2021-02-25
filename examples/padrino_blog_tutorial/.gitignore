@@ -1,0 +1,17 @@
+.DS_Store
+log/**/*
+tmp/**/*
+vendor/gems/*
+!vendor/gems/cache/
+.sass-cache/*
+db/*.db
+.*.sw*
+
+# Vite Ruby
+/public/vite
+/public/vite-dev
+/public/vite-test
+node_modules
+*.local
+.DS_Store
+

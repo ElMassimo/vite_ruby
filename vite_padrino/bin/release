@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cd .. && nr release vite_padrino "$@"

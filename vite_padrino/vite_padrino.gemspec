@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.push File.expand_path('./lib', __dir__)
-require 'vite_hanami/version'
+require 'vite_padrino/version'
 
 Gem::Specification.new do |s|
-  s.name     = 'vite_hanami'
-  s.version  = ViteHanami::VERSION
+  s.name     = 'vite_padrino'
+  s.version  = VitePadrino::VERSION
   s.authors  = ['Máximo Mussini']
   s.email    = ['maximomussini@gmail.com']
-  s.summary  = 'Use Vite in Hanami and bring joy to your JavaScript experience'
+  s.summary  = 'Use Vite in Padrino and bring joy to your JavaScript experience'
   s.homepage = 'https://github.com/ElMassimo/vite_ruby'
   s.license  = 'MIT'
 
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_hanami@#{ ViteHanami::VERSION }/vite_hanami",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_hanami@#{ ViteHanami::VERSION }/vite_hanami/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_padrino@#{ VitePadrino::VERSION }/vite_padrino",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_padrino@#{ VitePadrino::VERSION }/vite_padrino/CHANGELOG.md",
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
