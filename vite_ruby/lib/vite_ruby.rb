@@ -17,11 +17,11 @@ class ViteRuby
   ENV_PREFIX = 'VITE_RUBY'
 
   # Internal: Versions used by default when running `vite install`.
-  DEFAULT_VITE_VERSION = '^2.0.0-beta.65'
-  DEFAULT_PLUGIN_VERSION = '^1.0.8'
+  DEFAULT_VITE_VERSION = '^2.0.3'
+  DEFAULT_PLUGIN_VERSION = '^1.0.13'
 
   # Internal: Ruby Frameworks that have a companion library for Vite Ruby.
-  SUPPORTED_FRAMEWORKS = %w[rails hanami roda].freeze
+  SUPPORTED_FRAMEWORKS = %w[rails hanami roda padrino sinatra].freeze
 
   class << self
     extend Forwardable
