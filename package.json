@@ -1,15 +1,44 @@
 {
-  "name": "only-for-workflows",
-  "version": "unknown",
+  "name": "vite_ruby_monorepo",
+  "version": "1.0.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "docs": "npm -C docs run docs",
     "docs:build": "npm -C docs run docs:build",
     "docs:search": "npm -C docs run docs:search",
-    "docs:lint": "npm -C docs run lint",
     "build": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby run prerelease",
     "release": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby publish",
-    "lint": "npm -C vite-plugin-ruby run lint",
-    "test": "npm -C vite-plugin-ruby run test"
-  }
+    "lint": "lint-staged",
+    "postinstall": "husky install",
+    "changelog": "node scripts/changelog"
+  },
+  "devDependencies": {
+    "@mussi/eslint-config": "^0.5.0",
+    "@types/node": "^14.14.31",
+    "chalk": "^4.1.0",
+    "conventional-changelog-cli": "^2.1.1",
+    "eslint": "^7.17.0",
+    "execa": "^5.0.0",
+    "husky": "^5.1.1",
+    "lint-staged": "^10.5.4",
+    "minimist": "^1.2.5",
+    "typescript": "^4.0.5"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ],
+    "*.rb": [
+      "bin/rubocop -A"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElMassimo/vite_ruby"
+  },
+  "homepage": "https://github.com/ElMassimo/vite_ruby"
 }

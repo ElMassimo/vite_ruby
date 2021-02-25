@@ -25,8 +25,7 @@ jobs:
         with:
           version: 5.13.6
           run_install: |
-            - cwd: vite-plugin-ruby
+            - recursive: false
 
       - name: Lint
         run: pnpm lint
-        working-directory: vite-plugin-ruby
