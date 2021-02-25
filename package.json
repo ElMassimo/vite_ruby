@@ -5,10 +5,8 @@
   "license": "MIT",
   "scripts": {
     "docs": "npm -C docs run docs",
-    "docs:build": "npm -C docs run docs:build",
     "docs:search": "npm -C docs run docs:search",
-    "build": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby run prerelease",
-    "release": "rm -rf vite-plugin-ruby/dist && npm -C vite-plugin-ruby publish",
+    "release": "node scripts/release",
     "lint": "lint-staged",
     "postinstall": "husky install",
     "changelog": "node scripts/changelog"
@@ -18,11 +16,13 @@
     "@types/node": "^14.14.31",
     "chalk": "^4.1.0",
     "conventional-changelog-cli": "^2.1.1",
+    "enquirer": "^2.3.6",
     "eslint": "^7.17.0",
     "execa": "^5.0.0",
     "husky": "^5.1.1",
     "lint-staged": "^10.5.4",
     "minimist": "^1.2.5",
+    "semver": "^7.3.4",
     "typescript": "^4.0.5"
   },
   "lint-staged": {

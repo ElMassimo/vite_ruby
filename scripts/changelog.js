@@ -23,11 +23,6 @@ const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: 'inherit', ...opts })
 
 /**
- * @param {string} msg
- */
-const step = msg => console.log(chalk.cyan(msg))
-
-/**
  * @param {string} paths
  */
 const resolve = paths => path.resolve(__dirname, `../${name}/${paths}`)
@@ -48,21 +43,11 @@ function writePackageJson (name) {
 }
 
 async function main () {
-  if (isRubyPackage) {
-    step('\nExtracting version number...')
-    writePackageJson(name)
-  }
+  if (isRubyPackage) writePackageJson(name)
 
-  step('\nGenerating changelog...')
   await run('npx', ['conventional-changelog', `-p angular -i ${name}/CHANGELOG.md -s -t ${name}@ --pkg ./${name}/package.json --commit-path ./${name}`])
 
-  if (isRubyPackage) {
-    step('\nDeleting temporary package.json...')
-    fs.rmSync(resolve('package.json'))
-  }
-
-  console.log(chalk.green(`\nCHANGELOG for ${name} was successfully updated!`))
-  console.log()
+  if (isRubyPackage) fs.rmSync(resolve('package.json'))
 }
 
 main().catch((err) => {
