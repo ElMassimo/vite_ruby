@@ -1,0 +1,6 @@
+dist/
+coverage/
+build/
+examples/
+public/
+node_modules/

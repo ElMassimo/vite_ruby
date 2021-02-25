@@ -14,15 +14,6 @@
   "devDependencies": {
     "@docsearch/css": "^1.0.0-alpha.28",
     "@docsearch/js": "^1.0.0-alpha.28",
-    "@typescript-eslint/eslint-plugin": "^4.8.1",
-    "@typescript-eslint/parser": "^4.8.1",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "eslint": "^7.17.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-config-vuepress": "^3.0.1",
-    "eslint-formatter-friendly": "^7.0.0",
-    "eslint-plugin-standard": "^4.1.0",
-    "eslint-plugin-vue": "^7.1.0",
     "vitepress": "^0.11.4",
     "typescript": "^4.0.5"
   }
