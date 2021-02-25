@@ -3,6 +3,7 @@
   %head
     %title= "Padrino Sample Blog"
     = vite_client_tag
+    = vite_stylesheet_tag 'styles'
     = vite_javascript_tag 'application'
 
   %body
@@ -17,10 +18,5 @@
             %span
         #navbarMenu.navbar-menu
           .navbar-end
-    %section.hero.is-info.is-medium.is-bold
-      .hero-body
-        .container.has-text-centered
-          %h1.title
-            Vite Padrino
     %div.container
       #main= yield

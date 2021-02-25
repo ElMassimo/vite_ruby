@@ -1,0 +1,25 @@
+.banner > span {
+  transition: all 0.3s ease;
+  letter-spacing: -0.025em;
+  text-shadow: 1px 1px 2px #00000063;
+}
+
+.logo.logo {
+  transition: all 0.3s ease;
+  opacity: 1;
+  height: clamp(6rem, 20vw, 8rem);
+  margin: 0 auto 1.5rem;
+}
+
+.logo.logo-padrino {
+  height: clamp(5rem, 15vw, 7rem);
+}
+
+.padrino {
+  color: black;
+}
+
+.vite {
+  color: #ffac33;
+}
+

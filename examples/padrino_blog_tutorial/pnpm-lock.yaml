@@ -1,3 +1,5 @@
+dependencies:
+  bulma: 0.9.2
 devDependencies:
   vite: 2.0.3
   vite-plugin-ruby: 1.0.13
@@ -35,6 +37,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
+  /bulma/0.9.2:
+    dev: false
+    resolution:
+      integrity: sha512-e14EF+3VSZ488yL/lJH0tR8mFWiEQVCMi/BQUMi2TGMBOk+zrDg4wryuwm/+dRSHJw0gMawp2tsW7X1JYUCE3A==
   /colorette/1.2.2:
     dev: true
     resolution:
@@ -255,5 +261,6 @@ packages:
     resolution:
       integrity: sha512-4CUm3FVUHyTSSSK6vHWkj3SVkP+GGNNzwYcFsHOjjc8xQ3BPjJa1JDDmFlYxpxR29ANa+7RWptYPoyHyJ29Nhw==
 specifiers:
+  bulma: ^0.9.2
   vite: ^2.0.3
   vite-plugin-ruby: ^1.0.13

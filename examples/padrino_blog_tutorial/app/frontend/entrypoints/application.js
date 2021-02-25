@@ -1,8 +1,5 @@
-// To see this message, follow the instructions for your Ruby framework.
-//
-// When using a plain API, perhaps it's better to generate an HTML entrypoint
-// and link to the scripts and stylesheets, and let Vite transform it.
-console.log('Vite ⚡️ Ruby')
+import 'bulma/css/bulma.min.css'
 
-// Example: Import a stylesheet in <sourceCodeDir>/index.css
-// import '~/index.css'
+import '~/styles/theme.css'
+
+console.log('Vite ⚡️ Padrino')
