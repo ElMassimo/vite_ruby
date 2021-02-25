@@ -197,13 +197,11 @@ async function main () {
 
   step(`\nPublishing ${pkg.type}...`)
   if (isRubyLibrary)
-    await publishGem(targetVersion, runIfNotDry)
+    await publishGem(targetVersion)
   else
     await publishPackage(targetVersion, runIfNotDry)
 
   step('\nPushing to GitHub...')
-  await runIfNotDry('git', ['tag', tag])
-  await runIfNotDry('git', ['push', 'origin', `refs/tags/${tag}`])
   await runIfNotDry('git', ['push'])
 
   if (isDryRun)
@@ -216,11 +214,11 @@ async function main () {
  * @param {string} version
  * @param {Function} runIfNotDry
  */
-async function publishGem (version, runIfNotDry) {
+async function publishGem (version) {
   try {
-    await runIfNotDry('bundle', ['exec rake release', '--otp', args.otp], {
-      stdio: 'pipe',
-      shell: true,
+    const runIfNotDry = isDryRun ? dryRun : execa.commandSync
+    await runIfNotDry('bundle exec rake release', {
+      stdio: 'inherit',
       cwd: resolve('.'),
     })
     console.log(chalk.green(`Successfully published ${name}@${version}`))
