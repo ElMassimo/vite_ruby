@@ -5,6 +5,7 @@
 [vite]: https://vitejs.dev/
 [vite_rails_legacy]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails_legacy
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[vite_padrino]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_padrino
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [commands]: /guide/development.html#cli-commands-⌨%EF%B8%8F
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
@@ -44,6 +45,7 @@ And then run:
     $ bundle install
 
 - If using Hanami, install the <kbd>[vite_hanami]</kbd> gem instead.
+- If using Padrino, install the <kbd>[vite_padrino]</kbd> gem instead.
 - If using other Ruby web frameworks, install the <kbd>[vite_ruby]</kbd> gem.
 - If using Rails 4, install the <kbd>[vite_rails_legacy]</kbd> gem.
 

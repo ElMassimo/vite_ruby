@@ -19,8 +19,12 @@
   --docsearch-primary-color: var(--c-brand);
 }
 
+.home-hero figure.figure {
+  padding: 0;
+}
+
 .home-hero .image.image {
-  max-height: 220px;
+  height: 220px;
 }
 
 .nav-bar .logo {

@@ -79,6 +79,7 @@ module.exports = {
             { text: 'Development', link: '/guide/development' },
             { text: 'Development in Rails', link: '/guide/rails' },
             { text: 'Development in Hanami', link: '/guide/hanami' },
+            { text: 'Development in Padrino', link: '/guide/padrino' },
             { text: 'Deployment', link: '/guide/deployment' },
             { text: 'Migration', link: '/guide/migration' },
           ],

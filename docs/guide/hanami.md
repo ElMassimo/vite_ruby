@@ -35,7 +35,7 @@ you should have an [installed example].
 
 As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
 
-In order to link the JavaScript and CSS managed by Vite in your Hanami vies or
+In order to link the JavaScript and CSS managed by Vite in your Hanami views or
 templates, you can use the following helpers:
 
 - <kbd>[vite_client]</kbd>: Renders the Vite client to enable Hot Module Reload.

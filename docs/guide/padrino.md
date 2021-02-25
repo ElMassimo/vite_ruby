@@ -1,0 +1,84 @@
+[tag helpers]: /guide/rails.html#tag-helpers-%F0%9F%8F%B7
+[discussions]: https://github.com/ElMassimo/vite_ruby/discussions
+[rails]: https://rubyonrails.org/
+[webpacker]: https://github.com/rails/webpacker
+[vite rails]: https://github.com/ElMassimo/vite_ruby
+[vite]: https://vitejs.dev/
+[vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
+[plugins]: https://vitejs.dev/plugins/
+[configuration reference]: /config/
+[build]: /config/#build-options
+[dev options]: /config/#development-options
+[json config]: /config/#shared-configuration-file-%F0%9F%93%84
+[vite config]: /config/#configuring-vite-%E2%9A%A1
+[sourceCodeDir]: /config/#sourcecodedir
+[autoBuild]: /config/#autobuild
+[entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
+[vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[vite_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[development]: /guide/development
+[vite_padrino]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_padrino
+[padrino]: https://padrinorb.com/
+[installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/padrino_blog_tutorial
+
+# Development in Padrino
+
+If not using [Padrino], skip this section.
+
+Once you have installed the <kbd>[vite_padrino]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
+you should have an [installed example].
+
+## Tag Helpers 🏷
+
+As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
+
+In order to link the JavaScript and CSS managed by Vite in your Padrino views or
+templates, you can use the following helpers:
+
+- <kbd>[vite_client_tag]</kbd>: Renders the Vite client to enable Hot Module Reload.
+- <kbd>[vite_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
+- <kbd>[vite_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
+- <kbd>[vite_stylesheet_tag]</kbd>: Render a `<link>` tag referencing a CSS file.
+
+You can pass any options supported by <kbd>javascript</kbd> and <kbd>stylesheet</kbd>.
+
+```haml
+%head
+  %title Example
+  = vite_client_tag
+
+  = vite_stylesheet_tag 'styles'
+  = vite_typescript_tag 'application'
+```
+
+For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the resulting URI to the appropriate tag helper.
+
+```haml
+%img{ src: vite_asset_path('images/logo.svg') }
+%link{ rel: 'prefetch', href: vite_asset_path('typography.css') }
+```
+
+### Smart Output ✨
+
+For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
+
+```haml
+= vite_javascript_tag 'application'
+```
+
+Example output:
+
+```html
+<script src="/vite/assets/application.a0ba047e.js" type="module" crossorigin="anonymous"/>
+<link rel="modulepreload" href="/vite/assets/example_import.8e1fddc0.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="stylesheet" media="screen" href="/vite/assets/application.cccfef34.css">
+```
+
+When running the development server, these tags are omitted, as Vite will load the dependencies.
+
+```html
+<script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
+```

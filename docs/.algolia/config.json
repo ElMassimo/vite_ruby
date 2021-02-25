@@ -14,13 +14,7 @@
     }
   ],
   "stop_urls": [
-    "https://vite-ruby.netlify.app/config/index.html",
-    "https://vite-ruby.netlify.app/guide/development.html",
-    "https://vite-ruby.netlify.app/guide/deployment.html",
-    "https://vite-ruby.netlify.app/guide/rails.html",
-    "https://vite-ruby.netlify.app/guide/hanami.html",
-    "https://vite-ruby.netlify.app/guide/index.html",
-    "https://vite-ruby.netlify.app/guide/introduction.html"
+    ".html$"
   ],
   "selectors": {
     "default": {

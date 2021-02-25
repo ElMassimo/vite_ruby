@@ -1,6 +1,5 @@
 [library]: https://github.com/ElMassimo/vite_ruby
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
-[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
 [plugin]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite]: https://vitejs.dev/
 [webpacker]: https://github.com/rails/webpacker
@@ -12,7 +11,8 @@
 [tag helpers]: /guide/rails.html#tag-helpers-🏷
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
-[vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
+[vite_hanami]: /guide/hanami
+[vite_padrino]: /guide/padrino
 [no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
 [bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
 
@@ -22,10 +22,9 @@
 
 - <kbd>[vite_rails]</kbd> provides similar functionality as [webpacker] does for [webpack], without all the configuration overhead and dependencies.
 
-- <kbd>[vite_hanami]</kbd> gets Vite up and running in Hanami web apps, including samples and tag helpers.
-
 - <kbd>[vite_ruby]</kbd> can be used in plain Rack apps, and is all you need when using HTML entrypoints.
 
+- There are also integrations for [Hanami][vite_hanami] and [Padrino][vite_padrino].
 
 ## Why Vite? 🤔
 
