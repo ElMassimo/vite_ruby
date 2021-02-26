@@ -24,9 +24,7 @@
 [hanami]: https://hanamirb.org/
 [installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/hanami_bookshelf
 
-# Development in Hanami
-
-If not using [Hanami], skip this section.
+# Hanami Integration
 
 Once you have installed the <kbd>[vite_hanami]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
 you should have an [installed example].

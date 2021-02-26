@@ -24,9 +24,7 @@
 [padrino]: https://padrinorb.com/
 [installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/padrino_blog_tutorial
 
-# Development in Padrino
-
-If not using [Padrino], skip this section.
+# Padrino Integration
 
 Once you have installed the <kbd>[vite_padrino]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
 you should have an [installed example].

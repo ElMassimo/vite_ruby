@@ -33,9 +33,8 @@ const head = [
   ['meta', { property: 'og:description', content: description }],
 ]
 
-if (isProd) {
+if (isProd)
   head.push(['script', { src: 'https://unpkg.com/thesemetrics@latest', async: '' }])
-}
 
 /**
  * @type {import('vitepress').UserConfig}
@@ -77,12 +76,21 @@ module.exports = {
             { text: 'Introduction', link: '/guide/introduction' },
             { text: 'Getting Started', link: '/guide/' },
             { text: 'Development', link: '/guide/development' },
-            { text: 'Development in Rails', link: '/guide/rails' },
-            { text: 'Development in Hanami', link: '/guide/hanami' },
-            { text: 'Development in Padrino', link: '/guide/padrino' },
             { text: 'Deployment', link: '/guide/deployment' },
             { text: 'Migration', link: '/guide/migration' },
           ],
+        },
+        {
+          text: 'Integrations',
+          children: [
+            { text: 'Rails', link: '/guide/rails' },
+            { text: 'Hanami', link: '/guide/hanami' },
+            { text: 'Padrino', link: '/guide/padrino' },
+          ],
+        },
+        {
+          text: 'Config',
+          link: '/config/',
         },
       ],
     },

@@ -107,3 +107,11 @@ A CLI tool is provided, you can run it using `bundle exec vite`, or `bin/vite` a
 All these commands are aware of the environment. When running them locally in
 development you can provide `RACK_ENV=production` to simulate a production build.
 :::
+
+## Tag Helpers 🏷
+
+Tag helpers are provided in the framework-specific integrations:
+
+  - [Rails](/guide/rails)
+  - [Hanami](/guide/hanami)
+  - [Padrino](/guide/padrino)

@@ -154,7 +154,7 @@ You can customize this behavior using the following options.
 - **Default:** `app/frontend`
 - **Env Var:** `VITE_RUBY_SOURCE_CODE_DIR`
 
-  Specify the directory where your source code will be defined (relative to <kbd>[root]</kbd>).
+  Specify the directory where your source code will be located (relative to <kbd>[root]</kbd>).
 
   Vite Ruby will alias this directory as `~/` and `@/`, allowing you to make absolute imports which are more convenient.
 
@@ -166,7 +166,7 @@ You can customize this behavior using the following options.
 - **Default:** `entrypoints`
 - **Env Var:** `VITE_RUBY_ENTRYPOINTS_DIR`
 
-  Specify the directory where the [entrypoints] will be defined (relative to <kbd>[sourceCodeDir]</kbd>).
+  Specify the directory where the [entrypoints] will be located (relative to <kbd>[sourceCodeDir]</kbd>).
 
 ## Other Options
 

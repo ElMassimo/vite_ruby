@@ -26,9 +26,7 @@
 [vite-plugin-stimulus-hmr]: https://github.com/ElMassimo/vite-plugin-stimulus-hmr
 [stimulus]: https://stimulus.hotwire.dev/
 
-# Development in Rails
-
-If not using [Rails], skip this section.
+# Rails Integration
 
 Once you have installed the <kbd>[vite_rails]</kbd> gem, and have run <kbd>bundle exec vite install</kbd>,
 you should have an [installed example].

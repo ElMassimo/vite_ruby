@@ -17,9 +17,8 @@ If you would like to add a note about Sprockets, pull requests are welcome!
 
 ## Starting Fresh ☀️
 
-When starting a new project, follow the [guide], and you should have a basic
-structure setup under [`app/frontend`][sourceCodeDir] where you can place your
-JavaScript, styles, and other assets.
+When starting a new project, follow the [guide], and you should have a [basic setup][sourceCodeDir]
+where you can place your JavaScript, stylesheets, and other assets.
 
 ## Webpacker 📦
 
@@ -79,11 +78,3 @@ Before migrating from [Webpacker], make sure that you are not using any loaders
 that don't have a counterpart in [Vite], which uses [Rollup] when bundling for production.
 :::
 
-<br>
-<hr>
-<br>
-
-If you are looking for configuration options, check out the [configuration reference].
-
-Would you like to learn more about it? Visit the [discussions] for the library,
-so that I can get some feedback about the library and which guides to add next.
