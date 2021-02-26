@@ -5,12 +5,30 @@
       "url": "https://vite-ruby.netlify.app/config/",
       "selectors_key": "config",
       "tags": ["config"],
+      "page_rank": 5
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/guide/padrino",
+      "selectors_key": "integration",
+      "tags": ["integration"],
+      "page_rank": 1
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/guide/hanami",
+      "selectors_key": "integration",
+      "tags": ["integration"],
+      "page_rank": 2
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/guide/rails",
+      "selectors_key": "integration",
+      "tags": ["integration"],
       "page_rank": 3
     },
     {
       "url": "https://vite-ruby.netlify.app/guide/",
       "tags": ["guide"],
-      "page_rank": 1
+      "page_rank": 4
     }
   ],
   "stop_urls": [
@@ -22,6 +40,24 @@
         "selector": "p.sidebar-heading.open",
         "global": true,
         "default_value": "Guide"
+      },
+      "lvl1": ".content h1",
+      "lvl2": ".content h2",
+      "lvl3": ".content h3, .content li kbd",
+      "lvl4": ".content h4",
+      "lvl5": ".content h5",
+      "text": ".content p, .content li",
+      "lang": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "integration": {
+      "lvl0": {
+        "selector": ".sidebar-link-item.active",
+        "global": true,
+        "default_value": "Integrations"
       },
       "lvl1": ".content h1",
       "lvl2": ".content h2",
