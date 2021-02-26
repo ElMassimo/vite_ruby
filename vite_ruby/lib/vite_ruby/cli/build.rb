@@ -5,7 +5,7 @@ class ViteRuby::CLI::Build < Dry::CLI::Command
   DEFAULT_ENV = CURRENT_ENV || 'production'
 
   def self.shared_options
-    option(:mode, default: self::DEFAULT_ENV, values: %w[development production], aliases: ['m'], desc: 'The build mode for Vite.')
+    option(:mode, default: self::DEFAULT_ENV, values: %w[development production], aliases: ['m'], desc: 'The build mode for Vite')
   end
 
   desc 'Bundle all entrypoints using Vite.'
