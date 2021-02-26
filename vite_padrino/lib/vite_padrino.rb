@@ -10,6 +10,7 @@ module VitePadrino
     if RACK_ENV != 'production' && ViteRuby.run_proxy?
       app.use(ViteRuby::DevServerProxy, ssl_verify_none: true)
     end
+    ViteRuby.instance.logger = app.logger
     included(app)
   end
 

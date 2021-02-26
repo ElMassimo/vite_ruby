@@ -6,7 +6,7 @@ module VitePadrino::TagHelpers
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
 
-    tag(:scripk, src: src, type: 'module')
+    content_tag(:script, nil, src: src, type: 'module')
   end
 
   # Public: Resolves the path for the specified Vite asset.

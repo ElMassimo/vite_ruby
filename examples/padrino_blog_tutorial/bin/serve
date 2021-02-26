@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bin/padrino s "$@"

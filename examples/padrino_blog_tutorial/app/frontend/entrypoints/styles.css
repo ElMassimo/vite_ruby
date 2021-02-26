@@ -17,7 +17,7 @@ header {
   display: grid;
   height: 100vh;
   margin: 0 auto;
-  padding-bottom: 40vh;
+  padding-top: 20vh;
   place-content: center;
 }
 
@@ -38,4 +38,3 @@ header {
   margin: 0;
   text-align: center;
 }
-
