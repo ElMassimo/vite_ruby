@@ -72,6 +72,10 @@ You can now start writing modern JavaScript apps with Vite! 😃
 
 Check an [example app] running on [Heroku].
 
+::: tip Troubleshooting
+Verify that `vite` and `vite-plugin-ruby` have been added to your development dependencies by running `npx vite`.
+:::
+
 ### Further Configuration 🧩
 
 When working with a framework such as Vue or React, refer to [vite][plugins] to see which [plugins] to add.
