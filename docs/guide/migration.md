@@ -10,6 +10,7 @@
 [configuration reference]: /config/
 [sourceCodeDir]: /config/#sourcecodedir
 [entrypointsDir]: /config/#entrypointsdir
+[watchAdditionalPaths]: /config/#watchadditionalpaths
 
 # Migrating to Vite
 
@@ -40,6 +41,8 @@ That way you don't have to move code around, and can proceed to copying your
 
 You may perform the following steps when replacing Webpacker, but do have in
 mind that they are compatible, and you could do a gradual migration instead.
+
+- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression](https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb#L97) in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
 
 - Explicitly add a file extension to any non-JS imports.
 
@@ -73,7 +76,7 @@ mind that they are compatible, and you could do a gradual migration instead.
 
 Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1) as an example.
 
-::: tip Compatibily Note
+::: tip Compatibility Note
 Before migrating from [Webpacker], make sure that you are not using any loaders
 that don't have a counterpart in [Vite], which uses [Rollup] when bundling for production.
 :::
