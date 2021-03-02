@@ -70,11 +70,11 @@ Vite ⚡️ Ruby
 
 You can now start writing modern JavaScript apps with Vite! 😃
 
-Check an [example app] running on [Heroku].
-
 ::: tip Troubleshooting
-Verify that `vite` and `vite-plugin-ruby` have been added to your development dependencies by running `npx vite`.
+Verify that `vite` and `vite-plugin-ruby` have been added to your development dependencies by running `npx vite --no-install`.
 :::
+
+Check an [example app] running on [Heroku].
 
 ### Further Configuration 🧩
 
