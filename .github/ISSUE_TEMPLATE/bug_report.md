@@ -6,6 +6,10 @@ labels: 'bug: pending triage'
 assignees: ''
 ---
 
+[troubleshooting section]: https://vite-ruby.netlify.app/guide/troubleshooting.html
+
+- [ ] I have read the __[troubleshooting section]__ before opening an issue.
+
 ### Description 📖
 
 _Provide a clear and concise description of what the bug is._

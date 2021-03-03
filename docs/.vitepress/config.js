@@ -89,6 +89,12 @@ module.exports = {
           ],
         },
         {
+          text: 'FAQs',
+          children: [
+            { text: 'Troubleshooting', link: '/guide/troubleshooting' },
+          ],
+        },
+        {
           text: 'Config',
           link: '/config/',
         },

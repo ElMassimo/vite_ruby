@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Troubleshooting & FAQs
+    url: https://vite-ruby.netlify.app/guide/troubleshooting.html
+    about: 'Please check the most common configuration problems before opening an issue'
   - name: Discord Chat
     url: https://chat.vitejs.dev
     about: 'Ask questions and discuss with other users in real time in the #rails channel'

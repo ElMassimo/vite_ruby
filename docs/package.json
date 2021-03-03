@@ -3,7 +3,7 @@
   "version": "unknown",
   "license": "MIT",
   "scripts": {
-    "docs": "vitepress dev",
+    "docs": "vitepress dev --open",
     "docs:build": "vitepress build",
     "docs:search": "docker run -it --env-file=.algolia/.env -e \"CONFIG=$(cat .algolia/config.json | jq -r tostring)\" algolia/docsearch-scraper",
     "lint": "eslint --ignore-pattern '!.vitepress' .vitepress --ext .js,.vue --format node_modules/eslint-formatter-friendly"

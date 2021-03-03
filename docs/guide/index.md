@@ -19,6 +19,7 @@
 [vite config]: /config/#configuring-vite-%E2%9A%A1
 [GitHub Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [GitHub Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
+[Troubleshooting]: /guide/troubleshooting
 
 # Getting Started
 
@@ -70,11 +71,11 @@ Vite ⚡️ Ruby
 
 You can now start writing modern JavaScript apps with Vite! 😃
 
-::: tip Troubleshooting
-Verify that `vite` and `vite-plugin-ruby` have been added to your development dependencies by running `npx vite --no-install`.
-:::
-
 Check an [example app] running on [Heroku].
+
+::: tip Not seeing anything?
+Check the _[Troubleshooting]_ section for common gotchas.
+:::
 
 ### Further Configuration 🧩
 

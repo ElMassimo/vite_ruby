@@ -188,7 +188,7 @@ You can customize this behavior using the following options.
 
 ### devServerConnectTimeout
 
-- **Default:** `0.01`
+- **Default:** `0.01` (seconds)
 
   Timeout when attempting to connect to the dev server (in seconds).
 
@@ -214,6 +214,8 @@ You can customize this behavior using the following options.
 - **Default:** `[]`
 
   Specify which other paths should be tracked for changes when using <kbd>[autoBuild]</kbd>.
+
+  You may provide globs such as `["app/components/**/*"]`, paths should be relative to <kbd>[root]</kbd>.
 
   The <kbd>[sourceCodeDir]</kbd> is included by default.
 
