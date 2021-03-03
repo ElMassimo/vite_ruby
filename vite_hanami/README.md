@@ -106,6 +106,7 @@ Please use [Issues] to report bugs you find, and [Discussions] to make feature r
 
 Don't hesitate to _⭐️ star the project_ if you find it useful!
 
+Using it in production? Always love to hear about it! 😃
 
 ## Special Thanks 🙏
 

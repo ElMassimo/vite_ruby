@@ -88,3 +88,5 @@ If you would like to contribute a framework-specific template, reach out and we 
 Please visit [GitHub Issues] to report bugs you find, and [GitHub Discussions] to make feature requests, or to get help.
 
 Don't hesitate to [⭐️ star the project][vite rails] if you find it useful!
+
+Using it in production? Always love to hear about it! 😃
