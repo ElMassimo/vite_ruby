@@ -6,11 +6,12 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "author": "Máximo Mussini <maximomussini@gmail.com>",
+  "author": "Máximo Mussini <maximomussini@gmail.com> (https://maximomussini.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/ElMassimo/vite_ruby"
   },
+  "keywords": ["vitejs", "ruby", "vite", "rails", "plugin"],
   "homepage": "https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby",
   "bugs": "https://github.com/ElMassimo/vite_ruby/issues",
   "files": [
@@ -30,6 +31,9 @@
   "dependencies": {
     "debug": "^4.3.1",
     "fast-glob": "^3.2.4"
+  },
+  "peerDependencies": {
+    "vite": ">=2.0.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
