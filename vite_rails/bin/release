@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cd .. && nr release vite_rails "$@"
+cd .. && pnpm release vite_rails "$@"
