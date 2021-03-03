@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-ruby",
   "description": "Convention over configuration for using Vite in Ruby apps",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,7 +11,13 @@
     "type": "git",
     "url": "https://github.com/ElMassimo/vite_ruby"
   },
-  "keywords": ["vitejs", "ruby", "vite", "rails", "plugin"],
+  "keywords": [
+    "vitejs",
+    "ruby",
+    "vite",
+    "rails",
+    "plugin"
+  ],
   "homepage": "https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby",
   "bugs": "https://github.com/ElMassimo/vite_ruby/issues",
   "files": [
