@@ -29,7 +29,7 @@ a {
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
   </p>
 
-  <p>
+  <p class="hidden">
     Recommended setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
     +
@@ -43,7 +43,7 @@ a {
       target="_blank"
     >Vue DX</a>
   </p>
-  <p>
+  <p class="hidden">
     Make sure to use workspace version of TypeScript to get improved support via
     <a
       href="https://github.com/znck/vue-developer-experience"

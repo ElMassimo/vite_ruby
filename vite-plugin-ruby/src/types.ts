@@ -10,6 +10,7 @@ export interface Config {
   https?: boolean
   port?: number
   publicOutputDir?: string
+  watchAdditionalPaths?: string[]
 }
 
 export interface PluginOptions {

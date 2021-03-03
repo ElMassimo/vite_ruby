@@ -14,6 +14,9 @@ export const projectRoot = configOptionFromEnv('root') || process.cwd()
 // Internal: The resolved source code dir.
 let codeRoot: string
 
+// Internal: Additional paths to watch.
+let watchAdditionalPaths: string[] = []
+
 // Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
 // a shared JSON configuration file that can be read from Ruby.
 export default function ViteRubyPlugin (): Plugin[] {
@@ -31,9 +34,9 @@ const debug = createDebugger('vite-plugin-ruby:config')
 
 // Internal: Resolves the configuration from environment variables and a JSON
 // config file, and configures the entrypoints and manifest generation.
-function config (config: UserConfig, env: ConfigEnv | undefined): UserConfig {
-  const viteMode = env?.mode || config.mode || 'development' // Fallback just in case someone is using < beta.69
-  const { assetsDir, base, outDir, mode, host, https, port, root, sourceCodeDir } = loadConfiguration(viteMode, projectRoot)
+function config (_viteConfig: UserConfig, env: ConfigEnv): UserConfig {
+  const config = loadConfiguration(env.mode, projectRoot)
+  const { assetsDir, base, outDir, host, https, port, root } = config
 
   const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
 
@@ -45,12 +48,13 @@ function config (config: UserConfig, env: ConfigEnv | undefined): UserConfig {
     outDir,
     manifest: true,
     rollupOptions: { input: entrypoints },
-    sourcemap: mode !== 'development',
+    sourcemap: config.mode !== 'development',
   }
 
   debug({ base, build, root, server, entrypoints })
 
-  codeRoot = resolve(join(projectRoot, sourceCodeDir!))
+  codeRoot = resolve(join(projectRoot, config.sourceCodeDir!))
+  watchAdditionalPaths = (config.watchAdditionalPaths || []).map(glob => resolve(projectRoot, glob))
 
   const alias = { '~/': `${codeRoot}/`, '@/': `${codeRoot}/` }
 
@@ -70,4 +74,5 @@ function config (config: UserConfig, env: ConfigEnv | undefined): UserConfig {
 // which is the root for Vite.
 function configureServer (server: ViteDevServer) {
   server.watcher.add(`${codeRoot}/**/*`)
+  server.watcher.add(watchAdditionalPaths)
 }

@@ -1,4 +1,9 @@
 {
+  "all": {
+    "watchAdditionalPaths": [
+      "app/assets/**/*"
+    ]
+  },
   "development": {
     "autoBuild": true,
     "publicOutputDir": "vite-dev",
