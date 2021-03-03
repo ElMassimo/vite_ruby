@@ -30,7 +30,7 @@ If that doesn't work, verify that the [host] and [port] configuration is correct
 
 [See above](/guide/troubleshooting.html#build-is-triggered-when-the-dev-server-is-running), it could be related to the <kbd>[devServerConnectTimeout]</kbd>.
 
-### Changes are not taken into account when building
+### Changes are not taken into account, build is skipped
 
 Usually happens when importing code outside the <kbd>[sourceCodeDir]</kbd>.
 
