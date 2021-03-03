@@ -84,7 +84,9 @@ private
       logger.info(stdout) unless config.hide_build_console_output
     else
       non_empty_streams = [stdout, stderr].delete_if(&:empty?)
-      logger.error "Build with Vite failed:\n#{ non_empty_streams.join("\n\n") }"
+      errors = non_empty_streams.join("\n\n")
+      errors += "\n❌ Check that vite and vite-plugin-ruby are in devDependencies and have been installed. " if errors.include?('ERR! canceled')
+      logger.error "Build with Vite failed:\n#{ errors }"
     end
   end
 

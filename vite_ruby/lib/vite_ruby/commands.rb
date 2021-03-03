@@ -69,6 +69,7 @@ class ViteRuby::Commands
   def verify_install
     unless File.exist?(config.root.join('bin/vite'))
       warn <<~WARN
+
         vite binstub not found.
         Have you run `bundle binstub vite`?
         Make sure the bin directory and bin/vite are not included in .gitignore
@@ -78,6 +79,7 @@ class ViteRuby::Commands
     config_path = config.root.join(config.config_path)
     unless config_path.exist?
       warn <<~WARN
+
         Configuration #{ config_path } file for vite-plugin-ruby not found.
         Make sure `bundle exec vite install` has run successfully before running dependent tasks.
       WARN
@@ -88,7 +90,7 @@ class ViteRuby::Commands
   # Internal: Prints information about ViteRuby's environment.
   def print_info
     Dir.chdir(config.root) do
-      $stdout.puts "Is bin/vite present?: #{ File.exist? 'bin/vite' }"
+      $stdout.puts "bin/vite present?: #{ File.exist? 'bin/vite' }"
 
       $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"
       ViteRuby.framework_libraries.each do |framework, library|
@@ -98,11 +100,14 @@ class ViteRuby::Commands
 
       $stdout.puts "node: #{ `node --version` }"
       $stdout.puts "npm: #{ `npm --version` }"
-      $stdout.puts "yarn: #{ `yarn --version` }"
+      $stdout.puts "yarn: #{ `yarn --version` rescue nil }"
+      $stdout.puts "pnpm: #{ `pnpm --version` rescue nil }"
       $stdout.puts "ruby: #{ `ruby --version` }"
 
       $stdout.puts "\n"
-      $stdout.puts "vite-plugin-ruby: \n#{ `npm list vite-plugin-ruby version` }"
+      packages = `npm ls vite vite-plugin-ruby`
+      packages_msg = packages.include?('vite@') ? "installed packages:\n#{ packages }" : '❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed.'
+      $stdout.puts packages_msg
     end
   end
 
