@@ -38,11 +38,15 @@ Add a file path or dir glob in <kbd>[watchAdditionalPaths]</kbd> to ensure chang
 
 ### `bin/vite dev` does not start the server
 
-Make sure you are using [`vite_ruby@1.0.14`](https://github.com/ElMassimo/vite_ruby/pull/23) or higher.
+Make sure that both `vite` and `vite-plugin-ruby` are in `devDependencies` in your `package.json`, and have been installed.
+
+You can verify that they are installed by running <kbd>bin/vite info</kbd>.
 
 ### `vite` and `vite-plugin-ruby` were not installed
 
-Make sure you are using [`vite_ruby@1.0.14`](https://github.com/ElMassimo/vite_ruby/pull/23) or higher.
+If you have run <kbd>bundle exec vite install</kbd>, check the output for errors.
+
+A bug prior to [`vite_ruby@1.0.14`](https://github.com/ElMassimo/vite_ruby/pull/23) caused these packages not be added during installation.
 
 ### Images only load if placed on `entrypoints`
 
