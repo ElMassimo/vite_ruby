@@ -1,3 +1,12 @@
+## [1.0.14](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.13...vite-plugin-ruby@1.0.14) (2021-03-03)
+
+
+### Features
+
+* Add paths in watchAdditionalPaths to configureServer (close [#21](https://github.com/ElMassimo/vite_ruby/issues/21)) ([#24](https://github.com/ElMassimo/vite_ruby/issues/24)) ([405d748](https://github.com/ElMassimo/vite_ruby/commit/405d7482c7285a3d067c137d01e321f42d4df1c5))
+
+
+
 ## vite-plugin-ruby 1.0.13 (2020-02-16)
 
 - Remove old `alias` fallback now that Vite is officially in 2.0! Thanks Konnor!

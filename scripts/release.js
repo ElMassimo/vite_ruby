@@ -236,18 +236,9 @@ async function publishGem (version) {
  * @param {Function} runIfNotDry
  */
 async function publishPackage (version, runIfNotDry) {
-  const publicArgs = [
-    'publish',
-    '--no-git-tag-version',
-    '--new-version',
-    version,
-    '--access',
-    'public',
-  ]
-
   try {
-    await runIfNotDry('pnpm', publicArgs, {
-      stdio: 'pipe',
+    await runIfNotDry('pnpm', ['publish'], {
+      stdio: 'inherit',
       cwd: resolve('.'),
     })
     console.log(chalk.green(`Successfully published ${name}@${version}`))

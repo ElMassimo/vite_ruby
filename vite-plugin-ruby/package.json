@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-ruby",
   "description": "Convention over configuration for using Vite in Ruby apps",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -25,7 +25,7 @@
     "example:build": "npm -C example run build",
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "prepublishOnly": "npm run build",
-    "postpublish" : "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag vite-plugin-ruby@$PACKAGE_VERSION && git push --tags"
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag vite-plugin-ruby@$PACKAGE_VERSION && git push --tags"
   },
   "dependencies": {
     "debug": "^4.3.1",
