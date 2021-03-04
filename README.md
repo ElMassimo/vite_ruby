@@ -58,6 +58,8 @@ dev server is extremely __fast to start__, and your changes will be __updated in
 In production, Vite [bundles your code][bundling]
 with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
 
+It also provides great defaults, and is easier to configure than similar tools like webpack.
+
 ## Features ⚡️
 
 - 💡 Instant server start

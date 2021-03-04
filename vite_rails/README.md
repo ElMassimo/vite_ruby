@@ -59,6 +59,8 @@ dev server is extremely __fast to start__, and your changes will be __updated in
 In production, Vite [bundles your code][bundling]
 with tree-shaking, lazy-loading, and common chunk splitting out of the box, to achieve optimal loading performance.
 
+It also provides great defaults, and is easier to configure than similar tools like webpack.
+
 Check [this video comparison with webpack](https://github.com/ElMassimo/jumpstart-vite)
 which demonstrates the difference in boot time, or [this one](https://github.com/ElMassimo/pingcrm-vite/pull/1)
 with the difference in speed during development.
