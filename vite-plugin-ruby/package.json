@@ -12,11 +12,12 @@
     "url": "https://github.com/ElMassimo/vite_ruby"
   },
   "keywords": [
-    "vitejs",
+    "plugin",
+    "rails",
     "ruby",
     "vite",
-    "rails",
-    "plugin"
+    "vite-plugin",
+    "vitejs"
   ],
   "homepage": "https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby",
   "bugs": "https://github.com/ElMassimo/vite_ruby/issues",
