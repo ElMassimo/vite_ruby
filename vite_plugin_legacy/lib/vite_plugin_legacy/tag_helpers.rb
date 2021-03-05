@@ -9,7 +9,7 @@ module VitePluginLegacy::TagHelpers
 
     legacy_name = name.sub(/\.|$/, '-legacy\1')
     id = "vite-#{ legacy_name.tr(' .\'', '-') }-entry"
-    import_tag = content_tag(:script, nomodule: false, id: id, 'data-src': vite_asset_path(legacy_name, type: asset_type)) {
+    import_tag = content_tag(:script, nomodule: true, id: id, 'data-src': vite_asset_path(legacy_name, type: asset_type)) {
       "System.import(document.getElementById('#{ id }').getAttribute('data-src'))".html_safe
     }
 
@@ -23,6 +23,6 @@ module VitePluginLegacy::TagHelpers
 
     name = vite_manifest.send(:manifest).keys.find { |file| file.include?('legacy-polyfills') } ||
            raise(ArgumentError, 'Vite legacy polyfill not found in manifest.json')
-    content_tag(:script, nil, nomodule: false, src: vite_asset_path(name))
+    content_tag(:script, nil, nomodule: true, src: vite_asset_path(name))
   end
 end
