@@ -86,6 +86,7 @@ module.exports = {
             { text: 'Rails', link: '/guide/rails' },
             { text: 'Hanami', link: '/guide/hanami' },
             { text: 'Padrino', link: '/guide/padrino' },
+            { text: 'Plugin Legacy', link: '/guide/plugin-legacy' },
           ],
         },
         {

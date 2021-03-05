@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'vite_rails', path: '../../vite_rails'
+gem 'vite_plugin_legacy', path: '../../vite_plugin_legacy'
 # gem 'vite_ruby', path: '../../vite_ruby'
 # gem 'vite_rails', '2.0.0'
 

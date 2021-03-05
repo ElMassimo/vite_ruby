@@ -32,26 +32,6 @@ module ViteRails::TagHelpers
     tags
   end
 
-  # Public: Renders the vite-legacy-polyfill to enable code splitting in
-  # browsers that do not support modules.
-  def vite_legacy_polyfills_tag
-    unless vite_manifest.dev_server_running?
-      name = vite_manifest.send(:manifest).keys.find { |file| file.include?('legacy-polyfills') } ||
-             raise(ArgumentError, 'Vite legacy polyfill not found in manifest')
-      tag.script(nomodule: true, src: vite_asset_path(name))
-    end
-  end
-
-  # Public: Renders a <script> tag for the specified Vite entrypoints when using
-  # @vitejs/plugin-legacy, which injects polyfills.
-  def vite_legacy_javascript_tag(name, asset_type: :javascript)
-    legacy_name = name.sub(/\.|$/, '-legacy\1')
-    id = "vite-#{ legacy_name.tr(' .\'', '-') }-entry"
-    tag.script(nomodule: true, id: id, 'data-src': vite_asset_path(legacy_name, type: asset_type)) {
-      "System.import(document.getElementById('#{ id }').getAttribute('data-src'))".html_safe
-    }
-  end
-
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_typescript_tag(*names, **options)
     vite_javascript_tag(*names, asset_type: :typescript, extname: false, **options)
