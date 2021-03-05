@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.0...vite_plugin_legacy@0.5.1) (2021-03-05)
+
+
+### Bug Fixes
+
+* Testing leftovers accidentally disabled nomodules ([39f66f4](https://github.com/ElMassimo/vite_ruby/commit/39f66f413237cb1fe063f767f645c1c1be43653c))
+
+
+
 # 0.5.0 (2021-03-05)
 
 
