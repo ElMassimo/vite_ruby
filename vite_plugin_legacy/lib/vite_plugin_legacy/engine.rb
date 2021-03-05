@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'vite_rails'
 require 'rails/railtie'
 
 class VitePluginLegacy::Engine < Rails::Engine
