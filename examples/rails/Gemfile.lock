@@ -1,3 +1,16 @@
+PATH
+  remote: ../../vite_plugin_legacy
+  specs:
+    vite_plugin_legacy (0.5.0)
+      vite_ruby
+
+PATH
+  remote: ../../vite_rails
+  specs:
+    vite_rails (2.0.2)
+      railties (>= 5.1)
+      vite_ruby
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -209,10 +222,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_rails (2.0.0)
-      railties (>= 5.1)
-      vite_ruby
-    vite_ruby (1.0.3)
+    vite_ruby (1.0.5)
       dry-cli (~> 0.6)
       rack-proxy (>= 0.6.1)
       zeitwerk
@@ -256,7 +266,8 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
-  vite_rails (= 2.0.0)
+  vite_plugin_legacy!
+  vite_rails!
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)

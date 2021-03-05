@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import ViteRuby from 'vite-plugin-ruby'
+import ViteLegacy from '@vitejs/plugin-legacy'
 
 const config: UserConfig = {
   resolve: {
@@ -12,6 +13,9 @@ const config: UserConfig = {
   plugins: [
     Vue(),
     ViteRuby(),
+    ViteLegacy({
+      targets: ['defaults', 'not IE 11'],
+    }),
   ],
 }
 
