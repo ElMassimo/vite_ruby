@@ -1,3 +1,12 @@
+## [0.5.2](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.1...vite_plugin_legacy@0.5.2) (2021-03-05)
+
+
+### Bug Fixes
+
+* Don't require `vite_rails` to enable usage with any framework. ([b7461e1](https://github.com/ElMassimo/vite_ruby/commit/b7461e14aefbbb736e282a615874accc24d69bcf))
+
+
+
 ## [0.5.1](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.0...vite_plugin_legacy@0.5.1) (2021-03-05)
 
 
