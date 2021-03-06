@@ -144,25 +144,20 @@ private
     file_name = with_file_extension(name, type)
     raise ViteRuby::Manifest::MissingEntryError, <<~MSG
       Vite Ruby can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
-
-      Possible causes:
-      #{ missing_entry_causes.map { |cause| "\t- #{ cause }" }.join("\n") }
+      #{ config.auto_build && MISSING_ENTRY_POSSIBLE_CAUSES }
+      Last build in #{ config.mode } mode:
+      #{ JSON.pretty_generate(builder.last_build || 'no build found') }
 
       Content in your manifests:
       #{ JSON.pretty_generate(@manifest) }
     MSG
   end
 
-  def missing_entry_causes
-    local = config.auto_build
-    [
-      (dev_server_running? && 'Vite has not yet re-built your latest changes.'),
-      (local && !dev_server_running? && "\"autoBuild\": false in your #{ config.mode } configuration."),
-      (local && !dev_server_running? && 'The Vite development server has crashed or is no longer available.'),
-      'You have misconfigured config/vite.json file.',
-      (!local && 'Assets have not been precompiled'),
-    ].select(&:itself)
-  rescue StandardError
-    []
-  end
+  MISSING_ENTRY_POSSIBLE_CAUSES = <<~MSG
+
+    Possible causes:
+      - You have not run `bin/vite dev` to start Vite, it has crashed, or is running in a different port.
+      - "autoBuild" is set to `false` in your config/vite.json for this environment.
+      - The last build was not successful.
+  MSG
 end

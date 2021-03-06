@@ -34,24 +34,26 @@ class BuilderTest < ViteRuby::Test
 
   def test_freshness_on_build_success
     assert builder.stale?
-    status = OpenStruct.new(success?: true)
-    Open3.stub :capture3, [:sterr, :stdout, status] do
+    stub_runner(success: true) {
       assert builder.build
       assert builder.fresh?
-    end
+      assert builder.last_build['digest']
+      assert builder.last_build['success']
+    }
   end
 
   def test_freshness_on_build_fail
     assert builder.stale?
-    status = OpenStruct.new(success?: false)
-    Open3.stub :capture3, [:sterr, :stdout, status] do
+    stub_runner(success: false) {
       refute builder.build
       assert builder.fresh?
-    end
+      assert builder.last_build['digest']
+      refute builder.last_build['success']
+    }
   end
 
   def test_files_digest_path
-    assert_equal builder.send(:files_digest_path).basename.to_s, "last-compilation-digest-#{ ViteRuby.config.mode }"
+    assert_equal builder.send(:files_digest_path).basename.to_s, "last-compilation-#{ ViteRuby.config.mode }"
   end
 
   def test_watched_files_digest
@@ -73,5 +75,12 @@ class BuilderTest < ViteRuby::Test
     ENV.delete('VITE_RUBY_MODE')
     ENV.delete('VITE_RUBY_ROOT')
     refresh_config
+  end
+
+private
+
+  def stub_runner(success:, &block)
+    args = [:sterr, :stdout, OpenStruct.new(success?: success)]
+    ViteRuby::Runner.stub_any_instance(:capture3_with_output, args, &block)
   end
 end
