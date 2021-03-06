@@ -9,7 +9,7 @@ class ViteRuby::DevServerProxy < Rack::Proxy
 
   def initialize(app = nil, options = {})
     @vite_ruby = options.delete(:vite_ruby) || ViteRuby.instance
-    options[:streaming] = false if ViteRuby.mode == 'test' && !options.key?(:streaming)
+    options[:streaming] = false if config.mode == 'test' && !options.key?(:streaming)
     super
   end
 

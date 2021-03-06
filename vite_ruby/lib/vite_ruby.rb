@@ -28,7 +28,6 @@ class ViteRuby
 
     def_delegators :instance, :config, :commands, :run_proxy?
     def_delegators :config, :mode
-    def_delegators 'ViteRuby::Runner.new', :run
 
     def instance
       @instance ||= ViteRuby.new
@@ -50,6 +49,11 @@ class ViteRuby
     # Internal: Loads all available rake tasks.
     def install_tasks
       load File.expand_path('tasks/vite.rake', __dir__)
+    end
+
+    # Internal: Executes the vite binary.
+    def run(argv, **options)
+      ViteRuby::Runner.new(instance).run(argv, **options)
     end
 
     # Internal: Refreshes the config after setting the env vars.
@@ -74,9 +78,6 @@ class ViteRuby
       }.compact
     end
   end
-
-  extend Forwardable
-  def_delegators :builder, :build
 
   attr_writer :logger
 
