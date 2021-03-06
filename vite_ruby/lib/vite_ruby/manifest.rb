@@ -65,7 +65,7 @@ protected
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, type: nil)
-    build if should_build?
+    builder.build if should_build?
 
     find_manifest_entry(with_file_extension(name, type))
   end
@@ -74,7 +74,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :build, :dev_server_running?
+  def_delegators :@vite_ruby, :config, :builder, :dev_server_running?
 
   # NOTE: Auto compilation is convenient when running tests, when the developer
   # won't focus on the frontend, or when running the Vite server is not desired.
