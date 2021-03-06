@@ -15,6 +15,7 @@ class ViteRuby::Manifest
 
   def initialize(vite_ruby)
     @vite_ruby = vite_ruby
+    @build_mutex = Mutex.new if config.auto_build
   end
 
   # Public: Returns the path for the specified Vite entrypoint file.
@@ -65,7 +66,7 @@ protected
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, type: nil)
-    builder.build if should_build?
+    @build_mutex.synchronize { builder.build } if should_build?
 
     find_manifest_entry(with_file_extension(name, type))
   end
