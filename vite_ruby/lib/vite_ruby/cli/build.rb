@@ -11,8 +11,8 @@ class ViteRuby::CLI::Build < Dry::CLI::Command
   desc 'Bundle all entrypoints using Vite.'
   shared_options
 
-  def call(mode:)
+  def call(mode:, args: [])
     ViteRuby.env['VITE_RUBY_MODE'] = mode
-    block_given? ? yield(mode) : ViteRuby.commands.build_from_task
+    block_given? ? yield(mode) : ViteRuby.commands.build_from_task(*args)
   end
 end

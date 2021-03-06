@@ -8,17 +8,17 @@ class ViteRuby::Commands
   end
 
   # Public: Defaults to production, and exits if the build fails.
-  def build_from_task
+  def build_from_task(*args)
     with_node_env(ENV.fetch('NODE_ENV', 'production')) {
       ensure_log_goes_to_stdout {
-        build || exit!
+        build(*args) || exit!
       }
     }
   end
 
   # Public: Builds all assets that are managed by Vite, from the entrypoints.
-  def build
-    builder.build.tap { manifest.refresh }
+  def build(*args)
+    builder.build(*args).tap { manifest.refresh }
   end
 
   # Public: Removes all build cache and previously compiled assets.
