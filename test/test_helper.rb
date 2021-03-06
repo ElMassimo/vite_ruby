@@ -8,6 +8,7 @@ SimpleCov.start {
 
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'minitest/stub_any_instance'
 
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: true)]
 
