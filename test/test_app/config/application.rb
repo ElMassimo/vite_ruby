@@ -5,6 +5,9 @@ require 'action_view/railtie'
 
 class Rails::Console; end
 
+require 'spring/configuration'
+Spring.application_root = File.expand_path('..', __dir__)
+
 require 'vite_rails'
 
 module TestApp

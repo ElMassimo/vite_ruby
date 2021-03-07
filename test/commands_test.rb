@@ -3,14 +3,6 @@
 require 'test_helper'
 
 class CommandsTest < ViteRuby::Test
-  def stub_builder(stale:, build_with_vite:, &block)
-    ViteRuby::Build.stub_any_instance(:success, build_with_vite) {
-      ViteRuby::Build.stub_any_instance(:stale?, stale) {
-        ViteRuby::Builder.stub_any_instance(:build_with_vite, build_with_vite, &block)
-      }
-    }
-  end
-
   def test_bootstrap
     assert ViteRuby.bootstrap
   end
@@ -18,21 +10,27 @@ class CommandsTest < ViteRuby::Test
   delegate :build, :build_from_task, :clean, :clean_from_task, :clobber, to: 'ViteRuby.commands'
 
   def test_build_returns_success_status_when_stale
-    stub_builder(stale: true, build_with_vite: true) {
+    stub_builder(stale: true, build_successful: true) {
       assert build
       assert build_from_task
     }
   end
 
   def test_build_returns_success_status_when_fresh
-    stub_builder(stale: false, build_with_vite: true) {
+    stub_builder(stale: false, build_successful: true) {
       assert build
       assert build_from_task
     }
   end
 
+  def test_build_returns_failure_status_when_fresh
+    stub_builder(stale: false, build_successful: false) {
+      refute build
+    }
+  end
+
   def test_build_returns_failure_status_when_stale
-    stub_builder(stale: true, build_with_vite: false) {
+    stub_builder(stale: true, build_successful: false) {
       refute build
     }
   end

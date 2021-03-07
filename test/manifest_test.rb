@@ -16,13 +16,42 @@ class ManifestTest < ViteRuby::Test
   delegate :path_for, :lookup, :lookup!, to: 'ViteRuby.instance.manifest'
 
   def test_lookup_exception!
-    asset_file = 'calendar.js'
+    stub_builder(build_successful: true) {
+      asset_file = 'calendar.js'
 
-    error = assert_raises_manifest_missing_entry_error do
-      path_for(asset_file)
-    end
+      error = assert_raises_manifest_missing_entry_error do
+        path_for(asset_file)
+      end
 
-    assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
+      assert_match '"autoBuild" is set to `false`', error.message
+    }
+  end
+
+  def test_lookup_exception_when_auto_build
+    stub_builder(build_successful: true) {
+      asset_file = 'calendar.js'
+
+      error = assert_raises_manifest_missing_entry_error(auto_build: true) do
+        path_for(asset_file)
+      end
+
+      assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
+      assert_match 'The file path is incorrect.', error.message
+    }
+  end
+
+  def test_lookup_exception_when_build_failed
+    stub_builder(build_successful: false) {
+      asset_file = 'calendar.js'
+
+      error = assert_raises_manifest_missing_entry_error do
+        path_for(asset_file)
+      end
+
+      assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
+      assert_match 'The last build failed.', error.message
+    }
   end
 
   def test_lookup_with_type_exception!
@@ -84,9 +113,9 @@ class ManifestTest < ViteRuby::Test
 
 private
 
-  def assert_raises_manifest_missing_entry_error(&block)
+  def assert_raises_manifest_missing_entry_error(auto_build: false, &block)
     error = nil
-    ViteRuby.config.stub :auto_build, false do
+    ViteRuby.config.stub :auto_build, auto_build do
       error = assert_raises(ViteRuby::Manifest::MissingEntryError, &block)
     end
     error
