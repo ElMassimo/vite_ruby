@@ -107,6 +107,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    minitest-stub_any_instance (1.0.2)
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -201,6 +202,7 @@ DEPENDENCIES
   m (~> 1.5)
   minitest (~> 5.0)
   minitest-reporters (~> 1.4)
+  minitest-stub_any_instance (~> 1.0)
   pry-byebug (~> 3.9)
   rails
   rake (~> 13.0)

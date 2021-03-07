@@ -93,6 +93,6 @@ private
   end
 
   def manifest_path
-    File.expand_path File.join(File.dirname(__FILE__), 'test_app/public/vite-production', 'manifest.json').to_s
+    'public/vite-production/manifest.json'
   end
 end
