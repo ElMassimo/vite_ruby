@@ -6,9 +6,13 @@ require 'open3'
 class BuilderTest < ViteRuby::Test
   delegate :builder, to: 'ViteRuby.instance'
 
+  def last_build
+    builder.last_build_metadata
+  end
+
   def setup
     super
-    builder.send(:files_digest_path).tap do |path|
+    builder.send(:last_build_path).tap do |path|
       path.delete if path.exist?
     end
   end
@@ -28,32 +32,34 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_freshness
-    assert builder.stale?
-    refute builder.fresh?
+    assert last_build.stale?
+    refute last_build.fresh?
   end
 
   def test_freshness_on_build_success
-    assert builder.stale?
+    assert last_build.stale?
     stub_runner(success: true) {
       assert builder.build
-      assert builder.fresh?
-      assert builder.last_build['digest']
-      assert builder.last_build['success']
+      assert last_build.success
+      assert last_build.fresh?
+      assert last_build.digest
+      assert last_build.timestamp
     }
   end
 
   def test_freshness_on_build_fail
-    assert builder.stale?
+    assert last_build.stale?
     stub_runner(success: false) {
       refute builder.build
-      assert builder.fresh?
-      assert builder.last_build['digest']
-      refute builder.last_build['success']
+      refute last_build.success
+      assert last_build.fresh?
+      assert last_build.digest
+      assert last_build.timestamp
     }
   end
 
-  def test_files_digest_path
-    assert_equal builder.send(:files_digest_path).basename.to_s, "last-compilation-#{ ViteRuby.config.mode }"
+  def test_last_build_path
+    assert_equal builder.send(:last_build_path).basename.to_s, "last-build-#{ ViteRuby.config.mode }.json"
   end
 
   def test_watched_files_digest

@@ -45,7 +45,7 @@ private
   def command_for(args)
     [config.to_env].tap do |cmd|
       cmd.append('node', '--inspect-brk') if args.delete('--inspect')
-      cmd.append('node', '--trace-deprecation') if args.delete('--trace-deprecation')
+      cmd.append('node', '--trace-deprecation') if args.delete('--trace_deprecation')
       cmd.append(*vite_executable(cmd))
       cmd.append(*args)
       cmd.append('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')

@@ -5,8 +5,9 @@ class ViteRuby::CLI::Dev < ViteRuby::CLI::Build
 
   desc 'Start the Vite development server.'
   shared_options
+  option(:force, desc: 'Force Vite to re-bundle dependencies', type: :boolean)
 
-  def call(mode:, args: [])
-    super(mode: mode) { ViteRuby.run(args) }
+  def call(**options)
+    super { |args| ViteRuby.run(args) }
   end
 end
