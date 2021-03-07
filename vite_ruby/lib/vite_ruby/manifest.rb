@@ -149,11 +149,10 @@ private
 
       Possible causes:
       #{ possible_causes(last_build) }
-
       Visit the Troubleshooting guide for more information:
         https://vite-ruby.netlify.app/guide/troubleshooting.html#troubleshooting
-      #{ last_build.success && "\nContent in your manifests:\n#{ JSON.pretty_generate(@manifest) }\n" }
-      #{ !last_build.success.nil? && "\nLast build in #{ config.mode } mode:\n#{ last_build.to_json }\n" }
+      #{ "\nContent in your manifests:\n#{ JSON.pretty_generate(@manifest) }\n" if last_build.success }
+      #{ "\nLast build in #{ config.mode } mode:\n#{ last_build.to_json }\n" unless last_build.success.nil? }
     MSG
   end
 
