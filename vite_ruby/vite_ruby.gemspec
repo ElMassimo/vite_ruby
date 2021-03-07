@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'm', '~> 1.5'
   s.add_development_dependency 'minitest', '~> 5.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.4'
+  s.add_development_dependency 'minitest-stub_any_instance', '~> 1.0'
   s.add_development_dependency 'pry-byebug', '~> 3.9'
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'rubocop', '~> 1.9'
