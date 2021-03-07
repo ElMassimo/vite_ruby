@@ -143,22 +143,42 @@ private
   # Internal: Raises a detailed message when an entry is missing in the manifest.
   def missing_entry_error(name, type: nil, **_options)
     file_name = with_file_extension(name, type)
+    last_build = builder.last_build_metadata
     raise ViteRuby::Manifest::MissingEntryError, <<~MSG
-      Vite Ruby can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
-      #{ config.auto_build && MISSING_ENTRY_POSSIBLE_CAUSES }
-      Last build in #{ config.mode } mode:
-      #{ builder.last_build_metadata.to_json }
+      Vite Ruby can't find #{ file_name } in #{ config.manifest_path.relative_path_from(config.root) } or #{ config.assets_manifest_path.relative_path_from(config.root) }.
+
+      Possible causes:
+      #{ possible_causes(last_build) }
+      Visit the Troubleshooting guide for more information:
+        https://vite-ruby.netlify.app/guide/troubleshooting.html#troubleshooting
 
       Content in your manifests:
       #{ JSON.pretty_generate(@manifest) }
+
+      Last build in #{ config.mode } mode:
+      #{ last_build.to_json }
     MSG
   end
 
-  MISSING_ENTRY_POSSIBLE_CAUSES = <<~MSG
+  def possible_causes(last_build)
+    return FAILED_BUILD_CAUSES if last_build.success == false
+    return AUTO_BUILD_CAUSES if config.auto_build
 
-    Possible causes:
-      - You have not run `bin/vite dev` to start Vite, it has crashed, or is running in a different port.
-      - "autoBuild" is set to `false` in your config/vite.json for this environment.
-      - The last build was not successful.
+    AUTO_BUILD_CAUSES + POSSIBLE_CAUSES
+  end
+
+  FAILED_BUILD_CAUSES = <<-MSG
+  - The last build failed. Try running `bin/vite build --force` manually and check for errors.
+  MSG
+
+  AUTO_BUILD_CAUSES = <<-MSG
+  - The file path is incorrect.
+  - The file is not in the entrypoints directory.
+  - Some files are outside the sourceCodeDir, and have not been added to watchAdditionalPaths.
+  MSG
+
+  POSSIBLE_CAUSES = <<-MSG
+  - You have not run `bin/vite dev` to start Vite, or the dev server is not reachable.
+  - "autoBuild" is set to `false` in your config/vite.json for this environment.
   MSG
 end
