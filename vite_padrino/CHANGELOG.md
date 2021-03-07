@@ -1,6 +1,6 @@
 ## [0.5.2](https://github.com/ElMassimo/vite_ruby/compare/vite_padrino@0.5.1...vite_padrino@0.5.2) (2021-03-07)
 
-
+- Add a bounded requirement to `vite_ruby` dependency.
 
 ## [0.5.1](https://github.com/ElMassimo/vite_ruby/compare/vite_padrino@0.5.0...vite_padrino@0.5.1) (2021-02-26)
 
