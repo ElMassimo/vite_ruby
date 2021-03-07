@@ -19,12 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
-  s.add_dependency 'vite_ruby'
-
-  s.add_development_dependency 'bundler', '>= 1.3.0'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rubocop-minitest'
-  s.add_development_dependency 'rubocop-performance'
+  s.add_dependency 'vite_ruby', '~> 1.0'
 
   s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md LICENSE.txt]
   s.test_files = `git ls-files -- test/*`.split("\n")
