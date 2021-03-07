@@ -7,11 +7,6 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :digest, :current_digest) do
     new(attrs['success'], attrs['timestamp'] || 'never', attrs['digest'] || 'none', current_digest)
   end
 
-  # Internal: Returns a build object by parsing the information in the file.
-  def self.from(success:, timestamp:, digest:)
-    new(success, timestamp, digest)
-  end
-
   # Internal: Returns true if watched files have changed since the last build.
   def stale?
     digest != current_digest

@@ -149,10 +149,12 @@ private
   end
 
   def ensure_log_goes_to_stdout
-    old_logger = logger
+    old_logger, original_sync = logger, $stdout.sync
+
+    $stdout.sync = true
     self.logger = Logger.new($stdout, formatter: proc { |_, _, progname, msg| progname == 'vite' ? msg : "#{ msg }\n" })
     yield
   ensure
-    self.logger = old_logger
+    self.logger, $stdout.sync = old_logger, original_sync
   end
 end

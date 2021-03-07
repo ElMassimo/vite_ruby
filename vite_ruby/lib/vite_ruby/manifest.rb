@@ -149,35 +149,32 @@ private
 
       Possible causes:
       #{ possible_causes(last_build) }
+
       Visit the Troubleshooting guide for more information:
         https://vite-ruby.netlify.app/guide/troubleshooting.html#troubleshooting
-
-      Content in your manifests:
-      #{ JSON.pretty_generate(@manifest) }
-
-      Last build in #{ config.mode } mode:
-      #{ last_build.to_json }
+      #{ last_build.success && "\nContent in your manifests:\n#{ JSON.pretty_generate(@manifest) }\n" }
+      #{ !last_build.success.nil? && "\nLast build in #{ config.mode } mode:\n#{ last_build.to_json }\n" }
     MSG
   end
 
   def possible_causes(last_build)
     return FAILED_BUILD_CAUSES if last_build.success == false
-    return AUTO_BUILD_CAUSES if config.auto_build
+    return DEFAULT_CAUSES if config.auto_build
 
-    AUTO_BUILD_CAUSES + POSSIBLE_CAUSES
+    DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
   end
 
   FAILED_BUILD_CAUSES = <<-MSG
   - The last build failed. Try running `bin/vite build --force` manually and check for errors.
   MSG
 
-  AUTO_BUILD_CAUSES = <<-MSG
+  DEFAULT_CAUSES = <<-MSG
   - The file path is incorrect.
   - The file is not in the entrypoints directory.
   - Some files are outside the sourceCodeDir, and have not been added to watchAdditionalPaths.
   MSG
 
-  POSSIBLE_CAUSES = <<-MSG
+  NO_AUTO_BUILD_CAUSES = <<-MSG
   - You have not run `bin/vite dev` to start Vite, or the dev server is not reachable.
   - "autoBuild" is set to `false` in your config/vite.json for this environment.
   MSG

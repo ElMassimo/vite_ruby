@@ -58,6 +58,14 @@ class ViteRuby::Test < Minitest::Test
 
 private
 
+  def stub_builder(build_successful:, stale: false, &block)
+    ViteRuby::Build.stub_any_instance(:success, build_successful) {
+      ViteRuby::Build.stub_any_instance(:stale?, stale) {
+        ViteRuby::Builder.stub_any_instance(:build_with_vite, build_successful, &block)
+      }
+    }
+  end
+
   def assert_run_command(*argv, flags: [])
     Dir.chdir(test_app_path) {
       mock = Minitest::Mock.new
