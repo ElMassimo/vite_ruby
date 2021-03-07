@@ -1,6 +1,6 @@
 ## [0.5.3](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.2...vite_plugin_legacy@0.5.3) (2021-03-07)
 
-
+- Add a bounded requirement to `vite_ruby` dependency.
 
 ## [0.5.2](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.1...vite_plugin_legacy@0.5.2) (2021-03-05)
 

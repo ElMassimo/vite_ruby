@@ -1,3 +1,7 @@
+## [2.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.2...vite_rails@2.0.3) (2021-03-07)
+
+- Add a bounded requirement to `vite_ruby` dependency.
+
 ## Vite Rails 2.0.2  (2020-02-11)
 
 - Automatically infer `app/javascript` as the `sourceCodeDir` if it exists.
