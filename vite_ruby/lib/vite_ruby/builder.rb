@@ -12,32 +12,21 @@ class ViteRuby::Builder
   # Public: Checks if the watched files have changed since the last compilation,
   # and triggers a Vite build if any files have changed.
   def build(*args)
-    if fresh?(build = last_build)
-      if build['success']
-        logger.debug "Skipping vite build. Watched files have not changed since the last build at #{ build['timestamp'] }"
-      else
-        logger.error "Build with vite failed! Watched files have not changed since #{ build['timestamp'] } ❌"
-      end
+    last_build = last_build_metadata
+    if args.delete('--force') || last_build.stale?
+      build_with_vite(*args).tap { |success| record_build_metadata(success, last_build) }
+    elsif last_build.success
+      logger.debug "Skipping vite build. Watched files have not changed since the last build at #{ last_build.timestamp }"
       true
     else
-      build_with_vite(*args).tap { |success| record_files_digest(success) }
+      logger.error "Skipping vite build. Watched files have not changed since the build failed at #{ last_build.timestamp } ❌"
+      false
     end
   end
 
-  # Public: Returns true if all the assets built by Vite are up to date.
-  def fresh?(build = last_build)
-    build && build['digest'] == watched_files_digest
-  end
-
-  # Public: Returns true if any of the assets built by Vite is out of date.
-  def stale?
-    !fresh?
-  end
-
   # Internal: Reads the result of the last compilation from disk.
-  def last_build
-    JSON.parse(files_digest_path.read.to_s) if files_digest_path.exist?
-  rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
+  def last_build_metadata
+    ViteRuby::Build.from_previous(last_build_attrs, watched_files_digest)
   end
 
 private
@@ -46,16 +35,22 @@ private
 
   def_delegators :@vite_ruby, :config, :logger
 
-  # Internal: Writes a digest of the watched files to disk for future checks.
-  def record_files_digest(success)
-    config.build_cache_dir.mkpath
-    build = { success: success, timestamp: Time.now.strftime('%F %T'), digest: watched_files_digest }
-    files_digest_path.write(build.to_json)
+  # Internal: Reads metadata recorded on the last build, if it exists.
+  def last_build_attrs
+    last_build_path.exist? ? JSON.parse(last_build_path.read.to_s) : {}
+  rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
+    {}
   end
 
-  # Internal: The path of where a digest of the watched files is stored.
-  def files_digest_path
-    config.build_cache_dir.join("last-compilation-#{ config.mode }")
+  # Internal: Writes a digest of the watched files to disk for future checks.
+  def record_build_metadata(success, build)
+    config.build_cache_dir.mkpath
+    last_build_path.write build.with_result(success).to_json
+  end
+
+  # Internal: The file path where metadata of the last build is stored.
+  def last_build_path
+    config.build_cache_dir.join("last-build-#{ config.mode }.json")
   end
 
   # Internal: Returns a digest of all the watched files, allowing to detect
@@ -102,7 +97,11 @@ private
       *config.watch_additional_paths,
       "#{ config.source_code_dir }/**/*",
       'yarn.lock',
+      'package-lock.json',
+      'pnpm-lock.yaml',
       'package.json',
+      'vite.config.ts',
+      'vite.config.js',
       config.config_path,
     ].freeze
   end

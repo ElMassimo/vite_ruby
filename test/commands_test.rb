@@ -4,9 +4,11 @@ require 'test_helper'
 
 class CommandsTest < ViteRuby::Test
   def stub_builder(stale:, build_with_vite:, &block)
-    ViteRuby.instance.builder.stub :stale?, stale do
-      ViteRuby.instance.builder.stub :build_with_vite, build_with_vite, &block
-    end
+    ViteRuby::Build.stub_any_instance(:success, build_with_vite) {
+      ViteRuby::Build.stub_any_instance(:stale?, stale) {
+        ViteRuby::Builder.stub_any_instance(:build_with_vite, build_with_vite, &block)
+      }
+    }
   end
 
   def test_bootstrap

@@ -119,11 +119,16 @@ private
     root_dir.join('public/vite-dev')
   end
 
+  def tmp_dir
+    root_dir.join('tmp')
+  end
+
   def remove_vite_files
     vite_binstub_path.delete if vite_binstub_path.exist?
     vite_config_ts_path.delete if vite_config_ts_path.exist?
     app_frontend_dir.rmtree if app_frontend_dir.exist?
     app_public_dir.rmtree if app_public_dir.exist?
+    tmp_dir.rmtree if tmp_dir.exist?
     root_dir.join('app/views/layouts/application.html.erb').write(Pathname.new(test_app_path).join('app/views/layouts/application.html.erb').read)
     gitignore_path.write('')
     @command_results = []

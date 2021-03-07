@@ -147,7 +147,7 @@ private
       Vite Ruby can't find #{ file_name } in #{ config.manifest_path } or #{ config.assets_manifest_path }.
       #{ config.auto_build && MISSING_ENTRY_POSSIBLE_CAUSES }
       Last build in #{ config.mode } mode:
-      #{ JSON.pretty_generate(builder.last_build || 'no build found') }
+      #{ builder.last_build_metadata.to_json }
 
       Content in your manifests:
       #{ JSON.pretty_generate(@manifest) }
