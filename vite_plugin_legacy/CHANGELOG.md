@@ -1,3 +1,12 @@
+## [0.5.4](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.3...vite_plugin_legacy@0.5.4) (2021-03-08)
+
+
+### Features
+
+* Add `vite_legacy_typescript_tag` tag helper. ([3fb6a8b](https://github.com/ElMassimo/vite_ruby/commit/3fb6a8bcccc14c6596ecd2b30134d7001fd3bf50))
+
+
+
 ## [0.5.3](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.2...vite_plugin_legacy@0.5.3) (2021-03-07)
 
 - Add a bounded requirement to `vite_ruby` dependency.
