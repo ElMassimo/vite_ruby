@@ -6,12 +6,21 @@
 [devServerConnectTimeout]: /config/#devserverconnecttimeout
 [host]: /config/#host
 [port]: /config/#port
+[docker example]: https://github.com/ElMassimo/vite_rails_docker_example
 
 # Troubleshooting
 
 This section lists a few common gotchas, and bugs introduced in the past.
 
 Please skim through __before__ opening an [issue][GitHub Issues]. 
+
+### Making HMR work in Docker Compose
+
+Using Vite.js with Docker Compose requires configuring [`VITE_RUBY_HOST`][host] in the services.
+
+In the Rails service, it should match the [name of your Vite service](https://github.com/ElMassimo/vite_rails_docker_example/blob/main/docker-compose.yml#L13), and in the Vite service it should be [set to receive external requests](https://github.com/ElMassimo/vite_rails_docker_example/blob/main/docker-compose.yml#L27) (from the browser in the host) in order to perform HMR.
+
+Refer to this [Docker example] for a working setup.
 
 ### Build is triggered when the dev server is running
 
