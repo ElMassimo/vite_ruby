@@ -2,6 +2,7 @@
 [website]: https://vite-ruby.netlify.app/guide/plugin-legacy
 [plugin-legacy]: https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 [vite_legacy_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
+[vite_legacy_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
 [vite_legacy_polyfill_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
 
 # Plugin Legacy
@@ -26,6 +27,7 @@ And then run:
 In order to include the polyfills and script tags you can using the following helpers:
 
 - <kbd>[vite_legacy_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
+- <kbd>[vite_legacy_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
 - <kbd>[vite_legacy_polyfill_tag]</kbd>: Renders the polyfills necessary to enable code-splitting in legacy browsers.
 
 The polyfill is included by default when using <kbd>[vite_legacy_javascript_tag]</kbd>
@@ -45,5 +47,4 @@ The polyfill is included by default when using <kbd>[vite_legacy_javascript_tag]
 </body>
 ```
 
-Notice that it's necessary to still include the `module` tag with the default
-helper, which by default will also include the stylesheets.
+Notice that it's necessary to still use `vite_javascript_tag` in order to render `module` tags for modern browsers.

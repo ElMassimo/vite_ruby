@@ -209,7 +209,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_plugin_legacy (0.5.3)
+    vite_plugin_legacy (0.5.4)
       vite_ruby (~> 1.0)
     vite_rails (2.0.2)
       railties (>= 5.1)

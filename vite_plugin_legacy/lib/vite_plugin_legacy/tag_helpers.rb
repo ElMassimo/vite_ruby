@@ -16,6 +16,11 @@ module VitePluginLegacy::TagHelpers
     safe_join [vite_legacy_polyfill_tag, import_tag]
   end
 
+  # Public: Same as `vite_legacy_javascript_tag`, but for TypeScript entries.
+  def vite_legacy_typescript_tag(name)
+    vite_legacy_javascript_tag(name, asset_type: :typescript)
+  end
+
   # Internal: Renders the vite-legacy-polyfill to enable code splitting in
   # browsers that do not support modules.
   def vite_legacy_polyfill_tag
