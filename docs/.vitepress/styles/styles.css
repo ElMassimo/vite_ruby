@@ -1,8 +1,7 @@
 :root {
-  --c-brand: #cc0000;
+  --c-brand: #c00;
   --c-brand-light: #d53f3f;
   --c-contrast-light: #00c7cc;
-
   --bg-colored-light: #f3f7f7;
 }
 
@@ -32,13 +31,11 @@
   margin-right: 2px;
 }
 
-
 h2 .logo {
   height: 32px;
-  vertical-align: middle;
   margin-bottom: 4px;
+  vertical-align: middle;
 }
-
 
 @media (min-width: 720px) {
   .nav-links.nav-links.nav-links {
@@ -47,17 +44,17 @@ h2 .logo {
 }
 
 kbd {
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 5px;
-  font-size: 0.9rem;
-  line-height: 10px;
-  vertical-align: middle;
   background-color: #fafbfc;
-  border-bottom-color: #d1d5da;
   border: 1px solid #d1d5da;
+  border-bottom-color: #d1d5da;
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 #d1d5da;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 0.9rem;
+  line-height: 10px;
+  padding: 5px;
+  vertical-align: middle;
 }
 
 code kbd {

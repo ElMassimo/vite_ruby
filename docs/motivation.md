@@ -17,6 +17,7 @@
 [me]: https://maximomussini.com
 [connection]: https://vimeo.com/36579366
 [changes the game]: https://twitter.com/patak_js/status/1361383298052878342
+[Nick Cherry]: https://blog.coinbase.com/optimizing-react-native-7e7bf7ac3a34
 
 # Motivation
 
@@ -76,6 +77,8 @@ I hope that you find this project as useful as it has been for [me].
 This project wouldn't exist without [Vite.js].
 
 [Webpacker] broke ground in the Rails community by enabling everyone to use [webpack] and any modern framework, without struggling with the assets pipeline. It has been a major inspiration for this project.
+
+Thanks to [Nick Cherry] for sharing [this fantastic speech][connection] many years ago.
 
 ## Contact ✉️
 
