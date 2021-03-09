@@ -1,5 +1,18 @@
 [build]
   base = "docs/"
-  ignore = "git diff --quiet 'HEAD^' HEAD ."
   publish = ".vitepress/dist"
   command = "yarn run build"
+
+[[redirects]]
+  from = "/*"
+  to = "https://vite-ruby.netlify.app/:splat"
+  status = 301
+  force = true
+  headers = {X-From = "Rails"}
+
+[[redirects]]
+  from = "/"
+  to = "https://vite-ruby.netlify.app/"
+  status = 301
+  force = true
+  headers = {X-From = "Rails"}
