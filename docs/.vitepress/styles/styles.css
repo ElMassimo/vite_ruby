@@ -26,6 +26,12 @@
   height: 220px;
 }
 
+@media (min-width: 720px) {
+  .home-hero.home-hero.home-hero {
+    margin-top: 2rem;
+  }
+}
+
 .nav-bar .logo {
   height: 30px;
   margin-right: 2px;
