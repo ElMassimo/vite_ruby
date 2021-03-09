@@ -8,6 +8,7 @@ assignees: ''
 
 [troubleshooting section]: https://vite-ruby.netlify.app/guide/troubleshooting.html
 
+- [ ] I have tried upgrading by running `bundle update vite_ruby`.
 - [ ] I have read the __[troubleshooting section]__ before opening an issue.
 
 ### Description 📖

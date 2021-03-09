@@ -12,7 +12,7 @@
 
 This section lists a few common gotchas, and bugs introduced in the past.
 
-Please skim through __before__ opening an [issue][GitHub Issues]. 
+Please skim through __before__ opening an [issue][GitHub Issues].
 
 ### Making HMR work in Docker Compose
 
