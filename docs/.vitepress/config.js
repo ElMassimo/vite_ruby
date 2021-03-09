@@ -93,7 +93,7 @@ module.exports = {
           text: 'FAQs',
           children: [
             { text: 'Troubleshooting', link: '/guide/troubleshooting' },
-            { text: 'Motivation', link: '/guide/motivation' },
+            { text: 'Motivation', link: '/motivation' },
           ],
         },
         {

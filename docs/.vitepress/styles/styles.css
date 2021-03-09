@@ -32,6 +32,14 @@
   margin-right: 2px;
 }
 
+
+h2 .logo {
+  height: 32px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+
 @media (min-width: 720px) {
   .nav-links.nav-links.nav-links {
     padding-top: 2px;

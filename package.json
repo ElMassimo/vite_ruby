@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "docs": "npm -C docs run docs",
-    "docs:search": "npm -C docs run docs:search",
+    "docs": "npm -C docs run dev",
+    "docs:search": "npm -C docs run search",
     "release": "node scripts/release",
     "lint": "lint-staged",
     "postinstall": "husky install",
