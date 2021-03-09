@@ -1,3 +1,12 @@
+## [2.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.3...vite_rails@2.0.4) (2021-03-09)
+
+
+### Features
+
+* Detect installations of the latest version of Webpacker (app/packs) ([e9a3bc0](https://github.com/ElMassimo/vite_ruby/commit/e9a3bc02475dbadac77e58b3980a4af8df5aaa02))
+
+
+
 ## [2.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.2...vite_rails@2.0.3) (2021-03-07)
 
 - Add a bounded requirement to `vite_ruby` dependency.
