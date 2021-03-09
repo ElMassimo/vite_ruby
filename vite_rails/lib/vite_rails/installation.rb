@@ -10,8 +10,8 @@ module ViteRails::Installation
   # Override: Setup a typical apps/web Hanami app to use Vite.
   def setup_app_files
     cp RAILS_TEMPLATES.join('config/rails-vite.json'), config.config_path
-    if root.join('app/javascript').exist?
-      Dry::CLI::Utils::Files.replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "app/javascript",)
+    if dir = %w[app/javascript app/packs].find { |path| root.join(path).exist? }
+      Dry::CLI::Utils::Files.replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{ dir }",)
     end
     setup_content_security_policy root.join('config/initializers/content_security_policy.rb')
   end
