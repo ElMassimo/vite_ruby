@@ -64,7 +64,7 @@ Then, I chose to refine it, [document it][project], and [release it][github]. Th
 
 ## Vite Ruby <img class="logo" src="/logo.svg" alt="Logo"/>
 
-The design of [Vite Ruby][project] shares a common thread with that of [Vite.js].
+The design of [Vite Ruby][project] shares a common thread with the design of [Vite.js].
 
 I wanted to achieve a nice experience out of the box by providing [strong conventions][development], while at the same time allowing the user to opt-out or [tweak as needed][config].
 
