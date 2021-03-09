@@ -15,6 +15,7 @@
 [vite_padrino]: /guide/padrino
 [no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
 [bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
+[motivation]: /motivation
 
 # Introduction
 
@@ -45,6 +46,8 @@ with the difference in speed during development.
 [Vite] is great on its own, but configuring it correctly to work for a Ruby app structure requires knowledge of its internals.
 
 By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features!
+
+Interested in hearing more? [Read about __my personal motivation__][motivation].
 
 ## Features ⚡️
 
