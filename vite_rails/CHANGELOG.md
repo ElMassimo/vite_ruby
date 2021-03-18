@@ -1,6 +1,6 @@
 ## [2.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.5...vite_rails@2.0.6) (2021-03-18)
 
-
+* Add more help text in the example entrypoints  ([87d6f14](https://github.com/ElMassimo/vite_ruby/commit/87d6f14a59bba2667089bb952960dce059f36592))
 
 ## [2.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.4...vite_rails@2.0.5) (2021-03-18)
 
