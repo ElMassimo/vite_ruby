@@ -7476,6 +7476,11 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+vite-plugin-full-reload@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-full-reload/-/vite-plugin-full-reload-0.1.1.tgz#e1105153dcd8ff78b4e86f93405cea887db8b027"
+  integrity sha512-z+F4ZZzkFOfAMgKBtvmWiLOvj/oKC74oDNonG9+9hjK8gSMNN/tX4u5290sa2bu1nDFWDIXkTJIMiFtvkblyeg==
+
 vite-plugin-ruby@^1.0.13:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.13.tgz#d1a57916b090cf5b7aa22777458a3dd4efcf07c4"
