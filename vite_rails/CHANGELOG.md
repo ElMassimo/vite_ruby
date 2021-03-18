@@ -1,3 +1,12 @@
+## [2.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.4...vite_rails@2.0.5) (2021-03-18)
+
+
+### Bug Fixes
+
+* Using a .jsx extension in a tag helper in development ([a56491b](https://github.com/ElMassimo/vite_ruby/commit/a56491b96720ae537b6b6305aa7efa70cf19e4ee))
+
+
+
 ## [2.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.3...vite_rails@2.0.4) (2021-03-09)
 
 
