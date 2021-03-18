@@ -66,6 +66,12 @@ For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the
 <link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
 ```
 
+If using `.jsx`, `.tsx`, or any other extension, make sure to be explicit:
+
+```erb
+<%= vite_javascript_tag 'application.tsx' %>
+```
+
 ### Smart Output ✨
 
 For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
