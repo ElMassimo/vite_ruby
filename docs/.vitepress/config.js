@@ -20,15 +20,14 @@ const head = [
 
   ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
   ['meta', { name: 'twitter:site', content: site }],
-  ['meta', { name: 'twitter:title', value: title }],
   ['meta', { name: 'twitter:description', value: description }],
   ['meta', { name: 'twitter:image', content: image }],
+  ['meta', { name: 'twitter:creator', content: '@maximomussini' }],
 
   ['meta', { property: 'og:type', content: 'website' }],
   ['meta', { property: 'og:locale', content: 'en_US' }],
   ['meta', { property: 'og:site', content: site }],
   ['meta', { property: 'og:site_name', content: title }],
-  ['meta', { property: 'og:title', content: title }],
   ['meta', { property: 'og:image', content: image }],
   ['meta', { property: 'og:description', content: description }],
 ]

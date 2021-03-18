@@ -3,7 +3,6 @@ home: true
 
 title: ''
 
-heroText: Vite Ruby
 
 altActionText: Get Started
 altActionLink: /guide/
@@ -11,6 +10,15 @@ altActionLink: /guide/
 actionText: Learn More
 actionLink: /guide/introduction
 
+head:
+  - - meta
+    - name: twitter:title
+      content: Vite ⚡ Ruby
+  - - meta
+    - name: og:title
+      content: Vite ⚡ Ruby
+
+heroText: Vite Ruby
 heroImage: /logo.svg
 heroAlt: Vite Ruby Logo by Maximo Mussini
 
