@@ -1,3 +1,12 @@
+## [0.5.5](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.4...vite_plugin_legacy@0.5.5) (2021-03-18)
+
+
+### Bug Fixes
+
+* Passing a file with extension to vite_legacy_javascript_tag ([c54f3b3](https://github.com/ElMassimo/vite_ruby/commit/c54f3b3372e8e5c0f800c5f68bffbb6d0b7990c4))
+
+
+
 ## [0.5.4](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.3...vite_plugin_legacy@0.5.4) (2021-03-08)
 
 
