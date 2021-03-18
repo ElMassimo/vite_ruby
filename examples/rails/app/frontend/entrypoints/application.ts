@@ -15,3 +15,5 @@ import.meta.globEager('../channels/**/*_channel.js')
 
 Turbolinks.start()
 ActiveStorage.start()
+
+console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify.app/guide/rails')

@@ -47,3 +47,4 @@ selenium-server.log
 .env.*.local
 
 docs/pnpm-lock.yaml
+test/mounted_app/test/dummy/bin/vite

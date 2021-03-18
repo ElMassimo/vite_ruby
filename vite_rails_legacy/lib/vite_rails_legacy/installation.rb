@@ -25,6 +25,15 @@ module ViteRailsLegacy::Installation
       inject_line_before layout_file, '</head>', <<-HTML
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
+    <!--
+      If using a TypeScript entrypoint file:
+        vite_typescript_tag 'application'
+
+      If using a .jsx or .tsx entrypoint, add the extension:
+        vite_javascript_tag 'application.jsx'
+
+      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
+    -->
       HTML
     end
   end
