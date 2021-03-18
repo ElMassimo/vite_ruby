@@ -26,7 +26,7 @@ module VitePadrino::TagHelpers
                           crossorigin: 'anonymous',
                           **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
-    tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, **options)
+    tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
     tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
     tags << stylesheet_link_tag(*entries.fetch(:stylesheets)) unless skip_style_tags
     tags
@@ -34,7 +34,7 @@ module VitePadrino::TagHelpers
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_typescript_tag(*names, **options)
-    vite_javascript_tag(*names, asset_type: :typescript, extname: false, **options)
+    vite_javascript_tag(*names, asset_type: :typescript, **options)
   end
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
