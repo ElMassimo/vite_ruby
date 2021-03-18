@@ -3,6 +3,7 @@
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
+[vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
@@ -16,6 +17,9 @@
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
 [json]: /config/#shared-configuration-file-📄
 [publicOutputDir]: /config/#publicoutputdir
+[nodejs buildpack]: https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-nodejs
+[ruby buildpack]: https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-ruby
+[skip pruning]: https://devcenter.heroku.com/articles/nodejs-support#skip-pruning
 
 # Deployment 🚀
 
@@ -70,12 +74,35 @@ The following rake tasks are available:
 
   Provide information on _Vite Ruby_ and related libraries.
 
-
 ::: tip Environment-aware
 
-You can provide `RACK_ENV=production` to simulate a production build.
+You can provide `RACK_ENV=production` to simulate a production build locally.
 :::
 
-<hr/>
+## Using Heroku
+
+In order to deploy to Heroku, it's necessary to add the [nodejs][nodejs buildpack] and [ruby][ruby buildpack] buildpacks.
+
+Make sure that the ruby buildpack [appears last](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app#viewing-buildpacks) to ensure the proper defaults are applied.
+
+```sh
+$ heroku buildpacks
+=== pingcrm-vite Buildpack URLs
+1. heroku/nodejs
+2. heroku/ruby
+```
+
+If you are starting from scratch, you achieve that by running:
+
+```bash
+heroku buildpacks:set heroku/ruby
+heroku buildpacks:add --index 1 heroku/nodejs
+```
+
+When precompiling assets in Heroku, it's better to _[skip pruning]_ of dev dependencies by setting:
+```bash
+heroku config:set NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false
+```
+That will ensure that [vite] and [vite-plugin-ruby] are available, along with other build tools.
 
 If you are looking for example setups, check out this [Vue app][example1] and its [live demo][heroku1], or this very [simple app][example2] and its [live demo][heroku2].

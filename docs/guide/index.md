@@ -3,6 +3,7 @@
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
 [vite]: https://vitejs.dev/
+[vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite_rails_legacy]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails_legacy
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
 [vite_padrino]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_padrino
@@ -55,7 +56,7 @@ And then run:
 Run <kbd>bundle exec vite install</kbd>, which:
 
 - Adds the <kbd>bin/vite</kbd> executable to start the dev server and run other [commands]
-- Installs <kbd>vite</kbd> and <kbd>vite-plugin-ruby</kbd> (which is used to configure Vite)
+- Installs <kbd>[vite]</kbd> and <kbd>[vite-plugin-ruby]</kbd>
 - Adds [`vite.config.ts`][vite config] and [`config/vite.json`][json config] configuration files
 - Creates a sample `application.js` entrypoint in your web app
 

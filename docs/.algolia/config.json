@@ -29,6 +29,12 @@
       "url": "https://vite-ruby.netlify.app/guide/",
       "tags": ["guide"],
       "page_rank": 4
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/motivation",
+      "selectors_key": "faqs",
+      "tags": ["faqs"],
+      "page_rank": 1
     }
   ],
   "stop_urls": [
@@ -70,6 +76,15 @@
         "type": "xpath",
         "global": true
       }
+    },
+    "faqs": {
+      "lvl0": {
+        "selector": ".sidebar-link-item.active",
+        "global": true,
+        "default_value": "FAQs"
+      },
+      "lvl1": ".content h1",
+      "lvl2": ".content h2"
     },
     "config": {
       "lvl0": {
