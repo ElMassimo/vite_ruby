@@ -7,7 +7,8 @@ class ViteRuby::CLI::Clobber < Dry::CLI::Command
 
   option(:mode, default: current_env, values: %w[development production test], aliases: ['m'], desc: 'The mode to use')
 
-  def call(**)
+  def call(mode:, **)
+    ViteRuby.env['VITE_RUBY_MODE'] = mode
     ViteRuby.commands.clobber
   end
 end
