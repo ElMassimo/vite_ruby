@@ -5,7 +5,7 @@ class ViteRuby::CLI::Build < Dry::CLI::Command
   DEFAULT_ENV = CURRENT_ENV || 'production'
 
   def self.shared_options
-    option(:mode, default: self::DEFAULT_ENV, values: %w[development production], aliases: ['m'], desc: 'The build mode for Vite')
+    option(:mode, default: self::DEFAULT_ENV, values: %w[development production test], aliases: ['m'], desc: 'The build mode for Vite')
     option(:clobber, desc: 'Clear cache and previous builds', type: :boolean, aliases: %w[clean clear])
     option(:debug, desc: 'Run Vite in verbose mode, printing all debugging output', aliases: ['verbose'], type: :boolean)
     option(:inspect, desc: 'Run Vite in a debugging session with node --inspect-brk', aliases: ['inspect-brk'], type: :boolean)

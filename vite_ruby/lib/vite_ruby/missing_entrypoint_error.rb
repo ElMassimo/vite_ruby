@@ -29,7 +29,7 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
   end
 
   FAILED_BUILD_CAUSES = <<-MSG
-  - The last build failed. Try running `bin/vite build --force --mode=:mode:` manually and check for errors.
+  - The last build failed. Try running `bin/vite build --clear --mode=:mode:` manually and check for errors.
   MSG
 
   DEFAULT_CAUSES = <<-MSG

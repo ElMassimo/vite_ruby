@@ -88,7 +88,9 @@ By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test<
 
 ## CLI Commands ⌨️
 
-A CLI tool is provided, you can run it using `bundle exec vite`, or `bin/vite` after installation.
+A CLI tool is provided, you can run it using <kbd>bundle exec vite</kbd>, or <kbd>bin/vite</kbd> after installation.
+
+For information about the CLI options run <kbd>bin/vite <b>command</b> --help</kbd>.
 
 - <kbd>bundle exec vite install</kbd>:
   Install configuration files and sample setup for your web app
@@ -101,6 +103,11 @@ A CLI tool is provided, you can run it using `bundle exec vite`, or `bin/vite` a
 
 - <kbd>bin/vite info</kbd>:
   Provide information on _Vite Ruby_ and related libraries
+
+- <kbd>bin/vite clobber</kbd>:
+  Clears the Vite cache, temp files, and builds.
+
+  Also available through the `--clear` flag in the `dev` and `build` commands.
 
 ::: tip Environment-aware
 
