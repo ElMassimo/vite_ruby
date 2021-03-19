@@ -157,14 +157,14 @@ private
   end
 
   def possible_causes(last_build)
-    return FAILED_BUILD_CAUSES if last_build.success == false
+    return FAILED_BUILD_CAUSES.sub(':mode', ViteRuby.mode) if last_build.success == false
     return DEFAULT_CAUSES if config.auto_build
 
     DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
   end
 
   FAILED_BUILD_CAUSES = <<-MSG
-  - The last build failed. Try running `bin/vite build --force` manually and check for errors.
+  - The last build failed. Try running `RACK_ENV=:mode bin/vite build --force` manually and check for errors.
   MSG
 
   DEFAULT_CAUSES = <<-MSG
