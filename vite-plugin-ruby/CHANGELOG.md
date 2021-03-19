@@ -1,10 +1,17 @@
+## [1.0.17](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.16...vite-plugin-ruby@1.0.17) (2021-03-19)
+
+### Bug Fixes
+
+* Preserve custom server.https configuration (close [#42](https://github.com/ElMassimo/vite_ruby/issues/42)) ([#43](https://github.com/ElMassimo/vite_ruby/issues/43)) ([2ec0b50](https://github.com/ElMassimo/vite_ruby/commit/2ec0b503783e8890f179c384800a02c082cf8cc0))
+
+
 ## [1.0.16](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.15...vite-plugin-ruby@1.0.16) (2021-03-04)
 
-
+* Add `vite-plugin` keyword to `package.json`
 
 ## [1.0.15](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.14...vite-plugin-ruby@1.0.15) (2021-03-03)
 
-
+* Add keywords to `package.json`
 
 ## [1.0.14](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.13...vite-plugin-ruby@1.0.14) (2021-03-03)
 
