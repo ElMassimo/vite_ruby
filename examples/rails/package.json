@@ -16,6 +16,7 @@
     "vite": "^2.0.0",
     "vite-plugin-full-reload": "^0.1.1",
     "vite-plugin-ruby": "^1.0.13",
+    "vite-plugin-windicss": "^0.9.2",
     "webpack-dev-server": "^3.11.2"
   }
 }

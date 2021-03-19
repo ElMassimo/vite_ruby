@@ -4,6 +4,9 @@ import '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import * as ActiveStorage from '@rails/activestorage'
 
+// Enable Windi CSS styles and preflight
+import 'windi.css'
+
 // Example: Import a stylesheet in app/frontend/styles
 import '~/styles/theme.css'
 
