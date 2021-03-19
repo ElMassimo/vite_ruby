@@ -1,4 +1,8 @@
 #!/bin/sh
 
-npm install
-npx --no-install vite
+set -e
+
+bin/docker_gems
+yarn install
+
+bin/vite dev

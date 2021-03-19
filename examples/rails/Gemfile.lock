@@ -110,7 +110,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.3.3)
     nio4r (2.5.4)
-    nokogiri (1.11.1)
+    nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     pg (1.2.3)
@@ -178,16 +178,6 @@ GEM
       rspec-support (~> 3.10)
     rspec-support (3.10.1)
     rubyzip (2.3.0)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -203,18 +193,17 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.1.0)
-    tilt (2.0.10)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_plugin_legacy (0.5.4)
+    vite_plugin_legacy (0.5.5)
       vite_ruby (~> 1.0)
-    vite_rails (2.0.2)
-      railties (>= 5.1)
-      vite_ruby
-    vite_ruby (1.1.0)
+    vite_rails (2.0.7)
+      railties (>= 5.1, < 8)
+      vite_ruby (~> 1.0)
+    vite_ruby (1.1.2)
       dry-cli (~> 0.6)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -252,21 +241,20 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.1.1)
   rspec-rails
-  sass-rails (>= 6)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
   vite_plugin_legacy
-  vite_rails (~> 2.0.0)
-  vite_ruby (~> 1.1.0)
+  vite_rails (~> 2.0.6)
+  vite_ruby (~> 1.1.2)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3

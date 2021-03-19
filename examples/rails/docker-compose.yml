@@ -7,8 +7,10 @@ volumes:
 services:
   cache:
     image: busybox
+    tty: true
     volumes:
       - /bundler_cache
+      - /yarn_cache
 
   db:
     image: postgres:13
@@ -52,3 +54,5 @@ services:
       - '3036:3036'
     volumes:
       - .:/app
+    volumes_from:
+      - cache
