@@ -1,3 +1,12 @@
+## [2.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.6...vite_rails@2.0.7) (2021-03-19)
+
+
+### Bug Fixes
+
+* Typo typecript -> typescript in tag helpers ([#38](https://github.com/ElMassimo/vite_ruby/issues/38)) ([3d375df](https://github.com/ElMassimo/vite_ruby/commit/3d375df8553c8542966ac912a38fe70b7d59ba74))
+
+
+
 ## [2.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.5...vite_rails@2.0.6) (2021-03-18)
 
 * Add more help text in the example entrypoints  ([87d6f14](https://github.com/ElMassimo/vite_ruby/commit/87d6f14a59bba2667089bb952960dce059f36592))
