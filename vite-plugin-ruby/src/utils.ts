@@ -2,8 +2,6 @@ import { readFileSync } from 'fs'
 
 import { ENV_PREFIX } from './constants'
 
-import type { HttpsOption } from './types'
-
 // Internal: Returns true if the specified value is a plain JS object
 export function isObject (value: unknown): value is Record<string, any> {
   return Object.prototype.toString.call(value) === '[object Object]'
@@ -21,7 +19,7 @@ export function configOptionFromEnv (optionName: string) {
 }
 
 // Internal: Ensures it's easy to turn off a setting with env vars.
-export function booleanOption (value: 'true' | 'false' | boolean | any): boolean | any {
+export function booleanOption<T> (value: 'true' | 'false' | boolean | T): boolean | T {
   if (value === 'true') return true
   if (value === 'false') return false
   return value
