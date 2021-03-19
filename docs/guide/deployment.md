@@ -85,7 +85,7 @@ In order to deploy to Heroku, it's necessary to add the [nodejs][nodejs buildpac
 
 Make sure that the ruby buildpack [appears last](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app#viewing-buildpacks) to ensure the proper defaults are applied.
 
-```sh
+```
 $ heroku buildpacks
 === pingcrm-vite Buildpack URLs
 1. heroku/nodejs

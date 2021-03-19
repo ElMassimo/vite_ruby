@@ -15,7 +15,7 @@ head:
     - name: twitter:title
       content: Vite ⚡ Ruby
   - - meta
-    - name: og:title
+    - property: og:title
       content: Vite ⚡ Ruby
 
 heroText: Vite Ruby
