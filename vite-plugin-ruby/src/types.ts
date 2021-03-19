@@ -1,3 +1,7 @@
+import type { ServerOptions } from 'vite'
+
+export type HttpsOption = ServerOptions['https']
+
 export interface Config {
   assetHost?: string
   assetsDir?: string
@@ -7,7 +11,7 @@ export interface Config {
   entrypointsDir?: string
   sourceCodeDir?: string
   host?: string
-  https?: boolean
+  https?: HttpsOption
   port?: number
   publicOutputDir?: string
   watchAdditionalPaths?: string[]
