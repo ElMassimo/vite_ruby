@@ -83,6 +83,19 @@ class BuilderTest < ViteRuby::Test
     refresh_config
   end
 
+  def test_missing_executable
+    refresh_config('VITE_RUBY_VITE_BIN_PATH' => 'none/vite')
+
+    # It fails because we stub the File.exist? check, so the binary is missing.
+    error = assert_raises(ViteRuby::MissingExecutableError) {
+      File.stub(:exist?, true) { builder.build }
+    }
+    assert_match 'The vite binary is not available.', error.message
+
+    # The provided binary does not exist, so it uses the default strategy.
+    stub_runner(success: true) { assert builder.build }
+  end
+
 private
 
   def stub_runner(success:, &block)
