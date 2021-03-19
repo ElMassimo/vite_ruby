@@ -205,6 +205,13 @@ You can customize this behavior using the following options.
 
   Specify the project root.
 
+### viteBinPath
+
+- **Default:** `node_modules/.bin/vite`
+- **Env Var:** `VITE_RUBY_VITE_BIN_PATH`
+
+  The path where the Vite.js binary is installed. It will be used to execute the `dev` and `build` commands.
+
 ### watchAdditionalPaths
 
 - **Default:** `[]`

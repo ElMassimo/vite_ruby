@@ -22,7 +22,6 @@ namespace :vite do
   desc 'Remove the vite build output directory'
   task clobber: :'vite:verify_install' do
     ViteRuby.commands.clobber
-    $stdout.puts "Removed vite build output directory #{ ViteRuby.config.build_output_dir }"
   end
 
   desc 'Verifies if ViteRuby is properly installed in this application'
