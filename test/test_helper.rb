@@ -69,7 +69,7 @@ private
   def assert_run_command(*argv, flags: [])
     Dir.chdir(test_app_path) {
       mock = Minitest::Mock.new
-      mock.expect(:call, nil, [ViteRuby.config.to_env, 'npx', '--no-install', '--', 'vite', *argv, *flags])
+      mock.expect(:call, nil, [ViteRuby.config.to_env, './node_modules/bin/vite', *argv, *flags])
       Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
       mock.verify
     }

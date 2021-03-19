@@ -10,9 +10,6 @@
 # NOTE: Using "autoBuild": true` in `config/vite.json` file will trigger a build
 # on demand as needed, before performing any lookup.
 class ViteRuby::Manifest
-  class MissingEntryError < StandardError
-  end
-
   def initialize(vite_ruby)
     @vite_ruby = vite_ruby
     @build_mutex = Mutex.new if config.auto_build
@@ -142,39 +139,11 @@ private
 
   # Internal: Raises a detailed message when an entry is missing in the manifest.
   def missing_entry_error(name, type: nil, **_options)
-    file_name = with_file_extension(name, type)
-    last_build = builder.last_build_metadata
-    raise ViteRuby::Manifest::MissingEntryError, <<~MSG
-      Vite Ruby can't find #{ file_name } in #{ config.manifest_path.relative_path_from(config.root) } or #{ config.assets_manifest_path.relative_path_from(config.root) }.
-
-      Possible causes:
-      #{ possible_causes(last_build) }
-      Visit the Troubleshooting guide for more information:
-        https://vite-ruby.netlify.app/guide/troubleshooting.html#troubleshooting
-      #{ "\nContent in your manifests:\n#{ JSON.pretty_generate(@manifest) }\n" if last_build.success }
-      #{ "\nLast build in #{ config.mode } mode:\n#{ last_build.to_json }\n" unless last_build.success.nil? }
-    MSG
+    raise ViteRuby::MissingEntrypointError, OpenStruct.new(
+      file_name: with_file_extension(name, type),
+      last_build: builder.last_build_metadata,
+      manifest: @manifest,
+      config: config,
+    )
   end
-
-  def possible_causes(last_build)
-    return FAILED_BUILD_CAUSES.sub(':mode', config.mode) if last_build.success == false
-    return DEFAULT_CAUSES if config.auto_build
-
-    DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
-  end
-
-  FAILED_BUILD_CAUSES = <<-MSG
-  - The last build failed. Try running `RACK_ENV=:mode bin/vite build --force` manually and check for errors.
-  MSG
-
-  DEFAULT_CAUSES = <<-MSG
-  - The file path is incorrect.
-  - The file is not in the entrypoints directory.
-  - Some files are outside the sourceCodeDir, and have not been added to watchAdditionalPaths.
-  MSG
-
-  NO_AUTO_BUILD_CAUSES = <<-MSG
-  - You have not run `bin/vite dev` to start Vite, or the dev server is not reachable.
-  - "autoBuild" is set to `false` in your config/vite.json for this environment.
-  MSG
 end

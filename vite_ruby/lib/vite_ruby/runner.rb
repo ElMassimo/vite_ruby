@@ -10,11 +10,12 @@ class ViteRuby::Runner
 
   # Public: Executes Vite with the specified arguments.
   def run(argv, capture: false)
-    if capture
-      capture3_with_output(*command_for(argv), chdir: config.root)
-    else
-      Dir.chdir(config.root) { Kernel.exec(*command_for(argv)) }
-    end
+    Dir.chdir(config.root) {
+      cmd = command_for(argv)
+      capture ? capture3_with_output(*cmd, chdir: config.root) : Kernel.exec(*cmd)
+    }
+  rescue Errno::ENOENT => error
+    raise ViteRuby::MissingExecutableError, error
   end
 
 private
@@ -29,15 +30,16 @@ private
       args = args.clone
       cmd.append('node', '--inspect-brk') if args.delete('--inspect')
       cmd.append('node', '--trace-deprecation') if args.delete('--trace_deprecation')
-      cmd.append(*vite_executable(cmd))
+      cmd.append(vite_executable)
       cmd.append(*args)
       cmd.append('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
 
   # Internal: Resolves to an executable for Vite.
-  def vite_executable(cmd)
-    cmd.include?('node') ? ['./node_modules/.bin/vite'] : ['npx', '--no-install', '--', 'vite']
+  def vite_executable
+    bin_path = config.vite_bin_path
+    File.exist?(bin_path) ? bin_path : "#{ `npm bin`.chomp }/vite"
   end
 
   # Internal: A modified version of capture3 that continuosly prints stdout.

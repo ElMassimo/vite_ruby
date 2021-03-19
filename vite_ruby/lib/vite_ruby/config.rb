@@ -91,7 +91,7 @@ private
     }
 
     # Internal: Default values for a Ruby application.
-    def config_defaults(asset_host: nil, mode: ENV.fetch('RACK_ENV', 'production'), root: Dir.pwd)
+    def config_defaults(asset_host: nil, mode: ENV.fetch('RACK_ENV', 'development'), root: Dir.pwd)
       {
         'asset_host' => option_from_env('asset_host') || asset_host,
         'config_path' => option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'),
