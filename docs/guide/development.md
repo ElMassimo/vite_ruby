@@ -112,7 +112,7 @@ For information about the CLI options run <kbd>bin/vite <b>command</b> --help</k
 ::: tip Environment-aware
 
 All these commands are aware of the environment. When running them locally in
-development you can provide `RACK_ENV=production` to simulate a production build.
+development you can pass `--mode production` to simulate a production build.
 :::
 
 ## Tag Helpers 🏷

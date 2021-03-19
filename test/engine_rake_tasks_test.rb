@@ -68,7 +68,7 @@ class EngineRakeTasksTest < ViteRuby::Test
       stub_runner('--wat') {
         assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
-      ViteRuby::CLI::Clobber.new.call
+      ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)
     }
   end
 
