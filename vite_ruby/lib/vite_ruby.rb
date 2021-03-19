@@ -94,7 +94,7 @@ class ViteRuby
     Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
     @running_at = Time.now
     true
-  rescue SystemCallError
+  rescue
     @running_at = false
   end
 
