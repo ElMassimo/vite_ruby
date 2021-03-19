@@ -8,6 +8,7 @@ class ViteRuby::CLI
   extend Dry::CLI::Registry
 
   register 'build', Build, aliases: ['b']
+  register 'clobber', Clobber, aliases: %w[clean clear]
   register 'dev', Dev, aliases: %w[d serve]
   register 'install', Install, aliases: %w[setup init]
   register 'version', Version, aliases: ['v', '-v', '--version', 'info']
