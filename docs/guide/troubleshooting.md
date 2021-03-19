@@ -11,7 +11,7 @@
 [viteBinPath]: /config/#vitebinpath
 [docker example]: https://github.com/ElMassimo/vite_rails_docker_example
 [Using Heroku]: /guide/deployment#using-heroku
-[example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
+[example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
 
 # Troubleshooting
 
@@ -74,9 +74,9 @@ Make sure you are using [`vite@2.0.5`](https://github.com/vitejs/vite/pull/2309)
 
 ### Tailwind CSS is slow to load
 
-A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/), and it's used in the [example app].
+A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/).
 
-A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison.
+A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison. Check the [example app] for a sample setup.
 
 The creator of Tailwind CSS was impressed by the performance achieved by Windi CSS, and is currently implementing [something similar](https://twitter.com/adamwathan/status/1363638620209446921).
 
