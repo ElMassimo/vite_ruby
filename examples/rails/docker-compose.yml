@@ -1,0 +1,58 @@
+version: '3.9'
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+  cache:
+    image: busybox
+    tty: true
+    volumes:
+      - /bundler_cache
+      - /yarn_cache
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - dbdata:/var/lib/postgresql/data/pgdata
+
+  rails:
+    build: .
+    depends_on:
+      - db
+      - vite
+    entrypoint: ./docker-rails.sh
+    environment:
+      RAILS_ENV: development
+      VITE_RUBY_HOST: vite
+      DB_HOST: db
+      DB_PASSWORD: password
+      DB_USER: postgres
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    volumes_from:
+      - cache
+
+  vite:
+    build: .
+    entrypoint: ./docker-vite.sh
+    environment:
+      DEBUG: '*vite*'
+      RAILS_ENV: development
+      VITE_RUBY_HOST: 0.0.0.0
+    ports:
+      - '3036:3036'
+    volumes:
+      - .:/app
+    volumes_from:
+      - cache

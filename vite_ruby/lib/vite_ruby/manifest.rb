@@ -157,7 +157,7 @@ private
   end
 
   def possible_causes(last_build)
-    return FAILED_BUILD_CAUSES.sub(':mode', ViteRuby.mode) if last_build.success == false
+    return FAILED_BUILD_CAUSES.sub(':mode', config.mode) if last_build.success == false
     return DEFAULT_CAUSES if config.auto_build
 
     DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
