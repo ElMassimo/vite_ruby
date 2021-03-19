@@ -1,6 +1,7 @@
 import { join, relative, resolve } from 'path'
 import glob from 'fast-glob'
 
+import type { UserConfig } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
 import { booleanOption, loadJsonConfig, configOptionFromEnv, withoutExtension } from './utils'
 import { Config, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
@@ -41,7 +42,7 @@ function configFromEnv (): Config {
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration (viteMode: string, projectRoot: string): UnifiedConfig {
+export function loadConfiguration (viteMode: string, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
   const envConfig = configFromEnv()
   const mode = envConfig.mode || APP_ENV || viteMode
   const filePath = join(projectRoot, envConfig.configPath || (defaultConfig.configPath as string))
@@ -49,14 +50,14 @@ export function loadConfiguration (viteMode: string, projectRoot: string): Unifi
   const fileConfig: Config = { ...multiEnvConfig[ALL_ENVS_KEY], ...multiEnvConfig[mode] }
 
   // Combine the three possible sources: env > json file > defaults.
-  return coerceConfigurationValues({ ...defaultConfig, ...fileConfig, ...envConfig, mode }, projectRoot)
+  return coerceConfigurationValues({ ...defaultConfig, ...fileConfig, ...envConfig, mode }, projectRoot, userConfig)
 }
 
 // Internal: Coerces the configuration values and deals with relative paths.
-function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string): UnifiedConfig {
+function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
   // Coerce the values to the expected types.
   config.port = parseInt(config.port as unknown as string)
-  config.https = booleanOption(config.https)
+  config.https = userConfig.server?.https || booleanOption(config.https)
 
   // Ensure Vite places HTML files in public with the proper dir structure.
   const buildOutputDir = join(config.publicDir!, config.publicOutputDir!)

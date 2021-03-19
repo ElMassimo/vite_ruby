@@ -34,8 +34,8 @@ const debug = createDebugger('vite-plugin-ruby:config')
 
 // Internal: Resolves the configuration from environment variables and a JSON
 // config file, and configures the entrypoints and manifest generation.
-function config (_viteConfig: UserConfig, env: ConfigEnv): UserConfig {
-  const config = loadConfiguration(env.mode, projectRoot)
+function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
+  const config = loadConfiguration(env.mode, projectRoot, userConfig)
   const { assetsDir, base, outDir, host, https, port, root } = config
 
   const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
