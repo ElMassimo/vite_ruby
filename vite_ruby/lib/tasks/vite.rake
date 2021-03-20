@@ -48,3 +48,9 @@ if Rake::Task.task_defined?('assets:precompile')
 else
   Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build'])
 end
+
+# Any prerequisite task that installs packages should also install build dependencies.
+if ARGV.include?('assets:precompile')
+  ENV['NPM_CONFIG_PRODUCTION'] = 'false'
+  ENV['YARN_PRODUCTION'] = 'false'
+end
