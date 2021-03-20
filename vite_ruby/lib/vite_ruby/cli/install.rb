@@ -75,7 +75,7 @@ private
     write(package_json, '{}') unless package_json.exist?
     Dir.chdir(root) do
       deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
-      stdout, stderr, status = Open3.capture3({ 'CI' => 'true' }, "npx --package @antfu/ni -- ni -D #{ deps }")
+      stdout, stderr, status = Open3.capture3({}, "npx --yes --package @antfu/ni -- ni -D #{ deps }")
       stdout, stderr, = Open3.capture3({}, "yarn add -D #{ deps }") unless status.success?
       say(stdout, "\n", stderr)
     end

@@ -29,9 +29,9 @@ namespace :vite do
     ViteRuby.commands.verify_install
   end
 
-  desc 'Install all JavaScript dependencies'
+  desc 'Ensures build dependencies like Vite are installed when compiling assets'
   task :install_dependencies do
-    system({ 'NODE_ENV' => 'development' }, 'npx ci')
+    system({ 'NODE_ENV' => 'development' }, 'npx --yes ci')
   end
 
   desc "Provide information on ViteRuby's environment"
