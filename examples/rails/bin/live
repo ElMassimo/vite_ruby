@@ -1,5 +1,5 @@
 #!/bin/bash
 
-RAILS_ENV=production bin/rake assets:clobber
+bin/vite clobber --mode=production
 bin/assets
 bin/serve
