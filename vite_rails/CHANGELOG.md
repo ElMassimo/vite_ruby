@@ -1,3 +1,12 @@
+## [2.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.7...vite_rails@2.0.8) (2021-03-20)
+
+
+### Bug Fixes
+
+* Simplify installation of build dependencies by using package manager flags ([5c8bb62](https://github.com/ElMassimo/vite_ruby/commit/5c8bb625926f2ab1788a3e3a22aeafd7104984cb))
+
+
+
 ## [2.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.6...vite_rails@2.0.7) (2021-03-19)
 
 
