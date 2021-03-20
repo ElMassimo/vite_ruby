@@ -1,3 +1,13 @@
+## [1.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.1...vite_ruby@1.2.2) (2021-03-20)
+
+
+### Bug Fixes
+
+* Avoid prompts when using npx outside a CI ([ed7ccd7](https://github.com/ElMassimo/vite_ruby/commit/ed7ccd7d32c079ab78555ecd36dcb68ad2da331e))
+* Simplify installation of build dependencies by using package manager flags ([5c8bb62](https://github.com/ElMassimo/vite_ruby/commit/5c8bb625926f2ab1788a3e3a22aeafd7104984cb))
+
+
+
 ## [1.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.0...vite_ruby@1.2.1) (2021-03-19)
 
 
