@@ -11,6 +11,7 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [entrypointsDir]: /config/#entrypointsdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
+[glob]: https://vitejs.dev/guide/features.html#glob-import
 
 # Migrating to Vite
 
@@ -67,7 +68,7 @@ mind that they are compatible, and you could do a gradual migration instead.
   + <img src="<%= vite_asset_path('favicon.png') %>">
   ```
 
-- Replace `require.context` with [`import.meta.glob`](https://vitejs.dev/guide/features.html#glob-import).
+- Replace `require.context` with [`import.meta.glob`][glob] or [`import.meta.globEager`][glob].
 
   ```diff
   - const context = require.context("./controllers", true, /\.js$/)

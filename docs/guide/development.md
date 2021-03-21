@@ -31,7 +31,7 @@ In this section, we'll cover the basics to get started with Vite in Ruby web app
 
 Run <kbd>bin/vite dev</kbd> to start a Vite development server.
 
-It will read your [`config/vite.json`][json config] configuration, which can be
+It will use your [`config/vite.json`][json config] configuration, which can be
 used to configure the `host` and `port`, as well as [other options][dev options].
 
 ## Entrypoints ⤵️
@@ -66,7 +66,7 @@ You can add them to your HTML layouts or views using the provided [tag helpers].
 ## Import Aliases 👉
 
 For convenience, `~/` and `@/` are [aliased] to your <kbd>[sourceCodeDir]</kbd>,
-allowing you to use absolute paths:
+which simplifies imports:
 
 ```js
 import App from '~/components/App.vue'
@@ -83,7 +83,7 @@ This is very convenient when running integration tests, or when a developer
 does not want to start the Vite development server (at the expense of a slower feedback loop).
 
 ::: tip Enabled locally
-By [default][json config], [`autoBuild`][autoBuild] is enabled in the <kbd>test</kbd> and <kbd>development</kbd> environments.
+By [default][json config], <kbd>[autoBuild]</kbd> is enabled in the `test` and `development` environments.
 :::
 
 ## CLI Commands ⌨️
@@ -122,3 +122,4 @@ Tag helpers are provided in the framework-specific integrations:
   - [Rails](/guide/rails)
   - [Hanami](/guide/hanami)
   - [Padrino](/guide/padrino)
+  - [Plugin Legacy](/guide/plugin-legacy)

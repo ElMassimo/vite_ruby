@@ -25,11 +25,11 @@
 
 Deploying a Ruby web app using _Vite Ruby_ should be quite straightforward.
 
-The <kbd>assets:precompile</kbd> is a standard for Ruby web apps, and is
-typically run automatically for you upon deployment if you are using a PaaS such
-as [Heroku][heroku1], or added in Capistrano scripts.
+<kbd>assets:precompile</kbd> is a standard for Ruby web apps, and is typically
+run automatically for you upon deployment if you are using a PaaS such as
+[Heroku][heroku1], or added in Capistrano scripts.
 
-_Vite Ruby_ will trigger a Vite build whenever <kbd>assets:precompile</kbd> is run,
+<kbd>vite:build</kbd> will be executed whenever <kbd>assets:precompile</kbd> is run,
 and the resulting assets will be placed [inside][publicOutputDir] the `public` folder.
 
 ::: tip CDN Support

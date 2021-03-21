@@ -14,6 +14,12 @@
       "page_rank": 1
     },
     {
+      "url": "https://vite-ruby.netlify.app/guide/plugin-legacy",
+      "selectors_key": "integration",
+      "tags": ["integration"],
+      "page_rank": 1
+    },
+    {
       "url": "https://vite-ruby.netlify.app/guide/hanami",
       "selectors_key": "integration",
       "tags": ["integration"],
@@ -24,6 +30,12 @@
       "selectors_key": "integration",
       "tags": ["integration"],
       "page_rank": 3
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/guide/debugging",
+      "selectors_key": "faqs",
+      "tags": ["faqs"],
+      "page_rank": 1
     },
     {
       "url": "https://vite-ruby.netlify.app/guide/",
@@ -84,7 +96,8 @@
         "default_value": "FAQs"
       },
       "lvl1": ".content h1",
-      "lvl2": ".content h2"
+      "lvl2": ".content h2",
+      "text": ".content p, .content li"
     },
     "config": {
       "lvl0": {

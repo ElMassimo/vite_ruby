@@ -1,5 +1,4 @@
 [vite_plugin_legacy]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_plugin_legacy
-[website]: https://vite-ruby.netlify.app/guide/plugin-legacy
 [plugin-legacy]: https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 [vite_legacy_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
 [vite_legacy_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb

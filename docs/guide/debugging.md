@@ -48,11 +48,11 @@ You can provide use globs to filter specific commands:
 
 ## Debugging with DevTools 🎯
 
-[Commands] in [Vite Ruby] can also receive the `--inspect-brk` flag to start a [debugging session].
+[Commands] in [Vite Ruby] can also receive the `--inspect` flag to start a [debugging session].
 
 You may use the [Node Inspector Manager][nim] browser extension to attach automatically to the session.
 
-![debug with --inspect-brk](/debugging/nim.svg)
+![debug with --inspect](/debugging/nim.svg)
 
 Set breakpoints in Dev Tools, or use the `debugger` keyword in the code to break execution.
 

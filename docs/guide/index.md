@@ -29,12 +29,6 @@ If you are interested to learn more about Vite Ruby before trying it, check out 
 
 If you are looking for configuration options, check out the [configuration reference].
 
-::: tip Compatibility Note
-[Vite] requires [Node.js](https://nodejs.org/en/) version >= 12.0.0.
-
-If using [Vite Rails], it requires [Rails] version > 5.1.
-:::
-
 ## Installation 💿
 
 Add this line to your application's Gemfile:
@@ -65,7 +59,7 @@ Run <kbd>bundle exec vite install</kbd>, which:
 
 Run <kbd>bin/vite dev</kbd> to start the Vite development server.
 
-When using Rails or Hanami, restart your web server before visiting any page, and you should see a printed console output:
+Restart your Rails or Rack web server before visiting any page, and you should see a printed console output:
 
 ```
 Vite ⚡️ Ruby
@@ -76,7 +70,7 @@ You can now start writing modern JavaScript apps with Vite! 😃
 Check an [example app] running on [Heroku].
 
 ::: tip Not seeing anything?
-Check the _[Troubleshooting]_ section for common gotchas.
+Check the _[Troubleshooting]_ section for common problems.
 :::
 
 ### Further Configuration 🧩
