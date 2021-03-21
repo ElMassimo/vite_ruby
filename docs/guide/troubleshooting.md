@@ -33,7 +33,9 @@ In the Rails service, it should match the [name of your Vite service](https://gi
 
 Refer to this [Docker example] for a working setup.
 
-### Build not working in Heroku
+### Build not working in CI or Heroku
+
+Make sure `devDependencies` are installed when precompiling assets in a CI.
 
 Refer to the _[Using Heroku]_ section.
 
@@ -77,8 +79,6 @@ Make sure you are using [`vite@2.0.5`](https://github.com/vitejs/vite/pull/2309)
 A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/).
 
 A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison. Check the [example app] for a sample setup.
-
-The creator of Tailwind CSS was impressed by the performance achieved by Windi CSS, and is currently implementing [something similar](https://twitter.com/adamwathan/status/1363638620209446921).
 
 ### esbuild: cannot execute binary file
 

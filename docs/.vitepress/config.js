@@ -79,6 +79,7 @@ module.exports = {
             { text: 'Development', link: '/guide/development' },
             { text: 'Deployment', link: '/guide/deployment' },
             { text: 'Migration', link: '/guide/migration' },
+            { text: 'Plugins', link: '/guide/plugins' },
           ],
         },
         {

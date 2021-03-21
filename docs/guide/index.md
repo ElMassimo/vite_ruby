@@ -21,6 +21,7 @@
 [GitHub Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [GitHub Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [Troubleshooting]: /guide/troubleshooting
+[Recommended Plugins]: /guide/plugins
 
 # Getting Started
 
@@ -80,9 +81,12 @@ Check the _[Troubleshooting]_ section for common gotchas.
 
 ### Further Configuration 🧩
 
-When working with a framework such as Vue or React, refer to [vite][plugins] to see which [plugins] to add.
+Check the _[Recommended Plugins]_ section for more information about [plugins] and useful libraries.
 
-If you would like to contribute a framework-specific template, reach out and we might consider adding it to the installation script.
+::: tip Official Vite.js Plugins
+
+When using Vue, React, or Svelte, check out [Vite][plugins]'s __[official plugins][plugins]__.
+:::
 
 ### Contact ✉️
 
