@@ -12,7 +12,7 @@ export default defineConfig({
       targets: ['defaults', 'not IE 11'],
     }),
     WindiCSS({
-      root: process.cwd(),
+      root: __dirname,
       scan: {
         fileExtensions: ['erb', 'html', 'vue', 'jsx', 'tsx'], // and maybe haml
         dirs: ['app/views', 'app/frontend'], // or app/javascript

@@ -11,6 +11,7 @@
 [stimulus-vite-helpers]: https://github.com/ElMassimo/stimulus-vite-helpers
 [glob import]: https://vitejs.dev/guide/features.html#glob-import
 [plugins]: https://vitejs.dev/plugins/
+[sourceCodeDir]: /config/#sourcecodedir
 
 # Recommended Plugins
 
@@ -76,13 +77,19 @@ Use <kbd>[vite-plugin-windicss]</kbd> to get an [insanely faster](https://twitte
 
 This configuration will detect utility classes in components and server-rendered templates:
 
+  - <kbd>root</kbd> should match the project root which is usually where `vite.config.ts` is located
+  - Scans `erb` and `haml` files to detect classes in server templates
+  - Scans the <kbd>[sourceCodeDir]</kbd> to detect classes in components
+
 ```ts
 plugins: [
   WindiCSS({
-    root: process.cwd(),
+    root: __dirname,
     scan: {
       fileExtensions: ['erb', 'haml', 'html', 'vue', 'js', 'ts', 'jsx', 'tsx'],
       dirs: ['app/views', 'app/frontend'], // or app/javascript, or app/packs
     },
   }),
 ```
+
+Add <kbd>[vite-plugin-full-reload](/guide/plugins.html#full-reload)</kbd> to have the page refresh when making changes to the templates.

@@ -12,6 +12,7 @@
 [docker example]: https://github.com/ElMassimo/vite_rails_docker_example
 [Using Heroku]: /guide/deployment#using-heroku
 [example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
+[windi]: /guide/plugins.html#windi-css
 
 # Troubleshooting
 
@@ -78,24 +79,15 @@ Make sure you are using [`vite@2.0.5`](https://github.com/vitejs/vite/pull/2309)
 
 A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/).
 
-A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison. Check the [example app] for a sample setup.
+A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison.
 
-To enable Windi CSS to work with vite-ruby you'll need to tell it to process .erb files and watch the appropriate directories.
+Check the [_Recommended Plugins_][windi] section for more information.
 
-  ```js
-  WindiCSS({
-      root: process.cwd(),
-      scan: {
-        fileExtensions: ['erb', 'html', 'vue', 'rb', 'jsx', 'tsx'],
-        dirs: ['app/views', 'app/helpers', 'app/javascript'],
-      },
-    }),
- ```
- You should specify the root to match your Rails root.
- 
-It's suggested that you use this in conjunction with a plugin like [vite-plugin-full-reload](https://github.com/ElMassimo/vite-plugin-full-reload) if you're adding classes to server templates.
+### Windi CSS does not detect changes to server templates
 
-Ensure you're using version 0.9.5 and above of Windi CSS and version 0.2.0 of vite-plugin-full-reload if you want classes to recompile after the initial boot. 
+Ensure you're using `vite-plugin-windicss@0.9.5` or higher.
+
+Check the [_Recommended Plugins_][windi] section for more information.
 
 ### esbuild: cannot execute binary file
 

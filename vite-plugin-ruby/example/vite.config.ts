@@ -7,7 +7,7 @@ import ViteLegacy from '@vitejs/plugin-legacy'
 const config: UserConfig = {
   resolve: {
     alias: {
-      '@assets/': `${resolve(process.cwd(), 'app/assets')}/`,
+      '@assets/': `${resolve(__dirname, 'app/assets')}/`,
     },
   },
   plugins: [
