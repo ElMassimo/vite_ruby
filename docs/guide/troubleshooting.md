@@ -80,6 +80,23 @@ A project called [Windi CSS](https://github.com/windicss/windicss) addresses thi
 
 A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison. Check the [example app] for a sample setup.
 
+To enable Windi CSS to work with vite-ruby you'll need to tell it to process .erb files and watch the appropriate directories.
+
+  ```js
+  WindiCSS({
+      root: process.cwd(),
+      scan: {
+        fileExtensions: ['erb', 'html', 'vue', 'rb', 'jsx', 'tsx'],
+        dirs: ['app/views', 'app/helpers', 'app/javascript'],
+      },
+    }),
+ ```
+ You should specify the root to match your Rails root.
+ 
+It's suggested that you use this in conjunction with a plugin like [vite-plugin-full-reload](https://github.com/ElMassimo/vite-plugin-full-reload) if you're adding classes to server templates.
+
+Ensure you're using version 0.9.5 and above of Windi CSS and version 0.2.0 of vite-plugin-full-reload if you want classes to recompile after the initial boot. 
+
 ### esbuild: cannot execute binary file
 
 This can happen when using mounted volumes in Docker, and attempting to run Vite from the host.
