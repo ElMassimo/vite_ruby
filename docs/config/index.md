@@ -9,6 +9,8 @@
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [publicDir]: /config/#publicdir
 [root]: /config/#root
+[alignment with Rails defaults]: https://github.com/rails/webpacker/issues/769
+[source maps]: https://vitejs.dev/config/#build-sourcemap
 
 # Configuring Vite Ruby
 
@@ -66,6 +68,19 @@ The `all` section is applied to all environments, including production. You can 
 
 The following options can all be specified in your `config/vite.json` file, or
 overriden with environment variables.
+
+## Source Maps 🗺
+
+The only notable difference with Vite.js config defaults, is that [source maps]
+are enabled in production to be in [alignment with Rails defaults].
+
+You may skip source map generation by explicitly configuring <kbd>[sourcemap][source maps]</kbd>:
+
+```js
+// vite.config.ts
+export default defineConfig({
+  build: { sourcemap: false },
+```
 
 ## Development Options
 
