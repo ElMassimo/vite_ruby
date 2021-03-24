@@ -1,3 +1,13 @@
+## [1.0.18](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.17...vite-plugin-ruby@1.0.18) (2021-03-24)
+
+
+### Bug Fixes
+
+* Allow overriding `sourcemap` and `emptyOutDir` build options (close [#49](https://github.com/ElMassimo/vite_ruby/issues/49)) ([f9a2379](https://github.com/ElMassimo/vite_ruby/commit/f9a237907726d9d1d44eca9fb671df3c4333905c))
+* Improve error messages when the Vite executable is missing ([#41](https://github.com/ElMassimo/vite_ruby/issues/41)) ([a79edc6](https://github.com/ElMassimo/vite_ruby/commit/a79edc6cc603c1094ede9e899226e98f734e7bbe))
+
+
+
 ## [1.0.17](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.16...vite-plugin-ruby@1.0.17) (2021-03-19)
 
 ### Bug Fixes
