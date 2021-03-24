@@ -43,12 +43,13 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const server = { host, https, port, strictPort: true }
 
   const build = {
-    assetsDir,
-    emptyOutDir: false,
-    outDir,
-    manifest: true,
-    rollupOptions: { input: entrypoints },
+    emptyOutDir: true,
     sourcemap: config.mode !== 'development',
+    ...userConfig.build,
+    assetsDir,
+    manifest: true,
+    outDir,
+    rollupOptions: { input: entrypoints },
   }
 
   debug({ base, build, root, server, entrypoints })
