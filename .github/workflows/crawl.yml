@@ -1,0 +1,19 @@
+name: crawl
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    if: ${{ startsWith(github.event.head_commit.message, 'docs') }}
+    name: crawl
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: darrenjennings/algolia-docsearch-action@master
+        with:
+          algolia_application_id: 'GERZE019PN'
+          algolia_api_key: ${{secrets.ALGOLIA_API_KEY}}
+          file: 'docs/.algolia/config.json'
