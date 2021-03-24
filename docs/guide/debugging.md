@@ -38,11 +38,11 @@ You can achieve that by passing the `--debug` flag to the [commands].
 
 To see output from other plugins, you can set the <kbd>[DEBUG]</kbd> environment variable.
 
-You can provide use globs to filter specific commands:
+You can use globs to filter specific commands:
 
-- <kbd>DEBUG=*</kbd>: Print all debug output
-- <kbd>DEBUG=\*vite\*</kbd>: Print debug output from all vite plugins
-- <kbd>DEBUG=vite-plugin-ruby:*</kbd>: Print debug output from <kbd>[vite-plugin-ruby]</kbd>
+- <kbd>DEBUG=*</kbd>: Enable all debug output
+- <kbd>DEBUG=vite:\*</kbd>: Enable output from core plugins
+- <kbd>DEBUG=vite-plugin-ruby:*</kbd>: Enable output from <kbd>[vite-plugin-ruby]</kbd>
 
 ![debug with env](/debugging/debug-env.svg)
 
