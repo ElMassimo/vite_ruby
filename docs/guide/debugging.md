@@ -13,18 +13,17 @@
 [npm link]: https://docs.npmjs.com/cli/v7/commands/npm-link
 [pry-byebug]: https://github.com/deivid-rodriguez/pry-byebug
 [byebug]: https://github.com/deivid-rodriguez/byebug
+[this blog post]: https://maximomussini.com/posts/debugging-javascript-libraries/
 
 # Debugging 🔎
 
 This section contains some useful tips for debugging [Vite.js] and [Vite Ruby].
 
-Starting with the easiest, to the more time consuming options.
-
-The techniques are general, and could be applied to debug any library.
-
 ::: tip Before we start
 Debugging can be time-consuming, please check the __[Troubleshooting]__ section first.
 :::
+
+<small>If you are using the vite JS executable directly, please refer to [this blog post] instead.</small>
 
 ## Getting more output from Vite 📜
 
