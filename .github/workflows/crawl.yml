@@ -9,11 +9,14 @@ jobs:
   build:
     if: ${{ startsWith(github.event.head_commit.message, 'docs') }}
     name: crawl
+    env:
+      API_KEY: ${{secrets.ALGOLIA_API_KEY}}
+      APPLICATION_ID: GERZE019PN
     runs-on: ubuntu-latest
+    container: algolia/docsearch-scraper
     steps:
       - uses: actions/checkout@v2
-      - uses: darrenjennings/algolia-docsearch-action@master
-        with:
-          algolia_application_id: 'GERZE019PN'
-          algolia_api_key: ${{secrets.ALGOLIA_API_KEY}}
-          file: 'docs/.algolia/config.json'
+      - run: 'sudo apt-get install -y jq'
+      - run: 'echo "CONFIG=$(cat docs/.algolia/config.json | jq -r tostring)" >> $GITHUB_ENV'
+      - run: "cd /root && pipenv install"
+      - run: "cd /root && pipenv run python -m src.index"
