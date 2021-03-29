@@ -91,11 +91,11 @@ Check the [_Recommended Plugins_][windi] section for more information.
 
 ### esbuild: cannot execute binary file
 
-This can happen when using mounted volumes in Docker, and attempting to run Vite from the host.
+This can happen when using mounted volumes in Docker, and attempting to run Vite from the host, or installing dependencies in the host and then trying to run Vite in the container.
 
 Since `esbuild` relies on a `postinstall` script, and the architecture of the host usually does not match the architecture of the image, this means the binaries are not compatible.
 
-Try reinstalling `esbuild` in the host.
+Try reinstalling `esbuild` in the host or container—depending on where you intend to run it—to ensure it's built for the corresponding system architecture.
 
 ## Contact ✉️
 

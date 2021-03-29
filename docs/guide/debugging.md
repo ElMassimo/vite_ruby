@@ -121,7 +121,7 @@ When fixing a bug, a nice flow is to __clone__ the library, and then _point to y
 
 Just as in the previous section, it's important to __restart the dev servers__ after changes.
 
-::: tip Why is it neccessary to restart? 🤔
+::: tip Why is it necessary to restart? 🤔
 
 Most processes will load the required libraries into memory, and then use these cached versions during their entire running time.
 
