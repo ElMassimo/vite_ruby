@@ -42,8 +42,8 @@
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
-[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
-[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
+[no bundling]: https://vitejs.dev/guide/why.html#the-problems
+[bundling]: https://vitejs.dev/guide/why.html#slow-updates
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
