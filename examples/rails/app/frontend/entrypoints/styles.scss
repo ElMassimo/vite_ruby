@@ -1,14 +1,11 @@
+@import '../styles/logo.scss';
+
 header {
   display: grid;
   height: 100vh;
   margin: 0 auto;
   padding-bottom: 20vh;
   place-content: center;
-}
-
-.logo {
-  height: 0;
-  opacity: 0;
 }
 
 .hero {
