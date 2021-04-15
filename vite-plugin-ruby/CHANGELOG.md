@@ -1,3 +1,12 @@
+# [2.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.18...vite-plugin-ruby@2.0.0) (2021-04-15)
+
+
+### Features
+
+* Add support for .scss, .less, and .styl entrypoints (close [#50](https://github.com/ElMassimo/vite_ruby/issues/50)) ([bb1d295](https://github.com/ElMassimo/vite_ruby/commit/bb1d2953b3a8c5862d26cdfcd5edc5cc918d1c5a))
+
+
+
 ## [1.0.18](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.17...vite-plugin-ruby@1.0.18) (2021-03-24)
 
 
