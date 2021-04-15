@@ -19,7 +19,7 @@
     "stylus": "^0.54.8",
     "vite": "^2.1",
     "vite-plugin-full-reload": "^0.2",
-    "vite-plugin-ruby": "^1.0",
+    "vite-plugin-ruby": "^2.0",
     "vite-plugin-windicss": "^0.9"
   }
 }
