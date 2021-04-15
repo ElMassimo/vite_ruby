@@ -2,7 +2,7 @@ import { join, relative, resolve } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
-import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
+import { APP_ENV, ALL_ENVS_KEY, CSS_EXTENSIONS_REGEX, ENTRYPOINT_TYPES_REGEX } from './constants'
 import { booleanOption, loadJsonConfig, configOptionFromEnv, withoutExtension } from './utils'
 import { Config, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
@@ -17,10 +17,13 @@ function resolveEntrypointFiles (entrypointsDir: string): Entrypoints {
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
+//
+// NOTE: For stylesheets the original extension is preserved in the name so that
+// the resulting file can be accurately matched later in `extractChunkStylesheets`.
 export function resolveEntrypointsForRollup (entrypointsDir: string): Entrypoints {
   return resolveEntrypointFiles(entrypointsDir)
     .filter(([_name, filename]) => ENTRYPOINT_TYPES_REGEX.test(filename))
-    .map(([name, filename]) => [withoutExtension(name), filename])
+    .map(([name, filename]) => [CSS_EXTENSIONS_REGEX.test(name) ? name : withoutExtension(name), filename])
 }
 
 // Internal: Returns the files defined in the entrypoints directory that should

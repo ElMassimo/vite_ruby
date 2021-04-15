@@ -7,6 +7,8 @@ import type { Plugin, ResolvedConfig } from 'vite'
 
 import { OutputBundle, PluginContext } from 'rollup'
 import { resolveEntrypointAssets } from './config'
+import { CSS_EXTENSIONS_REGEX } from './constants'
+import { withoutExtension } from './utils'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
 
@@ -27,13 +29,21 @@ export function assetsManifestPlugin (): Plugin {
   let config: ResolvedConfig
 
   // Internal: For stylesheets Vite does not output the result to the manifest,
-  // so we extract the file name of the processed asset from the bundle.
-  function extractChunkAssets (bundle: OutputBundle, manifest: AssetsManifest) {
-    const entrypointFiles = Object.values(config.build.rollupOptions.input as Record<string, string>)
-    const assetFiles = new Set(entrypointFiles.map(file => path.relative(config.root, file)))
+  // so we extract the file name of the processed asset from the Rollup bundle.
+  function extractChunkStylesheets (bundle: OutputBundle, manifest: AssetsManifest) {
+    const cssFiles = new Set(
+      Object.values(config.build.rollupOptions.input as Record<string, string>)
+        .filter(file => CSS_EXTENSIONS_REGEX.test(file))
+        .map(file => path.relative(config.root, file)),
+    )
 
-    Object.values(bundle).filter(chunk => chunk.type === 'asset' && assetFiles.has(chunk.name!))
-      .forEach((chunk) => { manifest.set(chunk.name!, { file: chunk.fileName, src: chunk.name }) })
+    Object.values(bundle).filter(chunk => chunk.type === 'asset')
+      .forEach((chunk) => {
+        // NOTE: Rollup appends `.css` to the file so it's removed before matching.
+        // See `resolveEntrypointsForRollup`.
+        const src = withoutExtension(chunk.name!)
+        if (cssFiles.has(src)) manifest.set(src, { file: chunk.fileName, src })
+      })
   }
 
   // Internal: Vite ignores some entrypoint assets, so we need to manually
@@ -63,7 +73,7 @@ export function assetsManifestPlugin (): Plugin {
     },
     async generateBundle (_options, bundle) {
       const manifest: AssetsManifest = new Map()
-      extractChunkAssets(bundle, manifest)
+      extractChunkStylesheets(bundle, manifest)
       await fingerprintRemainingAssets(this, manifest)
       debug({ manifest })
 

@@ -25,7 +25,7 @@ export function booleanOption<T> (value: 'true' | 'false' | boolean | T): boolea
   return value
 }
 
-// Internal: Returns the filename without the extension.
+// Internal: Returns the filename without the last extension.
 export function withoutExtension (filename: string) {
   return filename.substr(0, filename.lastIndexOf('.'))
 }

@@ -34,6 +34,7 @@ private
       .sub(vite_asset_url_prefix, '/')
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
       .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
+      .sub(/(\.\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.
     env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 
