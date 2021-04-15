@@ -54,7 +54,7 @@ class HelperTest < ActionView::TestCase
       %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
-      link(href: '/vite-production/assets/application.f510c1e9.css'),
+      link(href: '/vite-production/assets/application.f510c1e9.css', crossorigin: 'anonymous'),
     ].join.tr("\n", ''), vite_javascript_tag('application').tr("\n", '')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
@@ -69,8 +69,9 @@ class HelperTest < ActionView::TestCase
     }
   end
 
-  def link(href:, rel: 'stylesheet', media: 'screen')
-    attrs = [%(media="#{ media }"), %(href="#{ href }")]
+  def link(href:, rel: 'stylesheet', media: 'screen', crossorigin: nil)
+    attrs = [%(media="#{ media }"), %(href="#{ href }"), (%(crossorigin="#{ crossorigin }") if crossorigin)].compact
+    attrs[1], attrs[2] = attrs[2], attrs[1] if Rails.gem_version > Gem::Version.new('6.1') && Rails.gem_version < Gem::Version.new('6.2') && attrs[2]
     attrs.reverse! if Rails.gem_version > Gem::Version.new('6.2')
     %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
   end

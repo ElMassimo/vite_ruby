@@ -24,11 +24,12 @@ module ViteRails::TagHelpers
                           skip_preload_tags: false,
                           skip_style_tags: false,
                           crossorigin: 'anonymous',
+                          media: 'screen',
                           **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
-    tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
-    tags << stylesheet_link_tag(*entries.fetch(:stylesheets)) unless skip_style_tags
+    tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin, **options) unless skip_preload_tags
+    tags << stylesheet_link_tag(*entries.fetch(:stylesheets), media: media, crossorigin: crossorigin, **options) unless skip_style_tags
     tags
   end
 
@@ -51,11 +52,11 @@ private
   end
 
   # Internal: Renders a modulepreload link tag.
-  def vite_preload_tag(*sources, crossorigin:)
+  def vite_preload_tag(*sources, crossorigin:, **options)
     sources.map { |source|
       href = path_to_asset(source)
       try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
-      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin)
+      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
     }.join("\n").html_safe
   end
 end
