@@ -1,3 +1,12 @@
+## [1.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.2...vite_ruby@1.2.3) (2021-04-15)
+
+
+### Features
+
+* Add support for .scss, .less, and .styl entrypoints (close [#50](https://github.com/ElMassimo/vite_ruby/issues/50)) ([bb1d295](https://github.com/ElMassimo/vite_ruby/commit/bb1d2953b3a8c5862d26cdfcd5edc5cc918d1c5a))
+
+
+
 ## [1.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.1...vite_ruby@1.2.2) (2021-03-20)
 
 
