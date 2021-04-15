@@ -12,6 +12,9 @@
 [entrypointsDir]: /config/#entrypointsdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [glob]: https://vitejs.dev/guide/features.html#glob-import
+[clear rake]: https://www.rubydoc.info/gems/rake/Rake%2FTask:clear
+[vite:install_dependencies]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/tasks/vite.rake#L32-L35
+[npx]: https://docs.npmjs.com/cli/v7/commands/npx
 
 # Migrating to Vite
 
@@ -74,6 +77,8 @@ mind that they are compatible, and you could do a gradual migration instead.
   - const context = require.context("./controllers", true, /\.js$/)
   + const controllers = import.meta.globEager('./**/*_controller.js')
   ```
+
+- Make sure <kbd>[npx]</kbd> is available (comes by default in most node.js installations), or [clear][clear rake] the <kbd>[vite:install_dependencies]</kbd> rake task and provide your own implementation.
 
 Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1) as an example.
 
