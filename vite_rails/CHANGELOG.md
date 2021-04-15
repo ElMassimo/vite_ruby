@@ -1,3 +1,12 @@
+## [2.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.8...vite_rails@2.0.9) (2021-04-15)
+
+
+### Bug Fixes
+
+* Allow passing additional attributes to scripts and stylesheets. ([edf6019](https://github.com/ElMassimo/vite_ruby/commit/edf6019fa83646e413f36d289eac89bb2f8042a5))
+
+
+
 ## [2.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.7...vite_rails@2.0.8) (2021-03-20)
 
 
