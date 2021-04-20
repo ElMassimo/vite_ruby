@@ -108,9 +108,7 @@ private
         else
           [env, config]
         end
-      end.to_h.tap do |config|
-        config.transform_keys(&SNAKE_CASE)
-      end
+      end.to_h.transform_keys(&SNAKE_CASE)
     end
 
     # Internal: Retrieves a configuration option from environment variables.
