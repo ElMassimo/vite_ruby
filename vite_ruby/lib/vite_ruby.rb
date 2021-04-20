@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'backports/2.5.0/hash/transform_keys'
+require 'backports/2.5.0/array/append'
 
 require 'logger'
 require 'forwardable'
