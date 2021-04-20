@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'dry-cli', '~> 0.6'
   s.add_dependency 'rack-proxy', '~> 0.6', '>= 0.6.1'
   s.add_dependency 'zeitwerk', '~> 2.2'
-  s.add_dependency 'backports', '~> 3.21'
+  s.add_dependency 'backports', '~> 3.20'
 
   s.add_development_dependency 'm', '~> 1.5'
   s.add_development_dependency 'minitest', '~> 5.0'
