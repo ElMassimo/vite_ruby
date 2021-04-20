@@ -102,10 +102,14 @@ private
 
     # Internal: Used to load a JSON file from the specified path.
     def load_json(path)
-      JSON.parse(File.read(File.expand_path(path))).each do |_env, config|
-        config.transform_keys!(&SNAKE_CASE) if config.is_a?(Hash)
-      end.tap do |config|
-        config.transform_keys!(&SNAKE_CASE)
+      JSON.parse(File.read(File.expand_path(path))).map do |env, config|
+        if config.is_a?(Hash)
+          [env, config.transform_keys(&SNAKE_CASE)]
+        else
+          [env, config]
+        end
+      end.to_h.tap do |config|
+        config.transform_keys(&SNAKE_CASE)
       end
     end
 
