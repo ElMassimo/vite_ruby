@@ -1,3 +1,12 @@
+## [2.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.9...vite_rails@2.0.10) (2021-04-21)
+
+
+### Features
+
+* Add helpers to enable HMR when using @vitejs/plugin-react-refresh ([a80f286](https://github.com/ElMassimo/vite_ruby/commit/a80f286d4305bbae29ea7cea42a4329a530f43fa))
+
+
+
 ## [2.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.8...vite_rails@2.0.9) (2021-04-15)
 
 
