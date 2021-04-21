@@ -1,3 +1,12 @@
+## [1.2.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.3...vite_ruby@1.2.4) (2021-04-21)
+
+
+### Bug Fixes
+
+* Avoid removing `base` from proxied requests to avoid confusion. ([25f79a9](https://github.com/ElMassimo/vite_ruby/commit/25f79a9848df3e6c2ffbeb9bd4fbc44f73e4c68a))
+
+
+
 ## [1.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.2...vite_ruby@1.2.3) (2021-04-15)
 
 
