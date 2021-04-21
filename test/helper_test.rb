@@ -27,6 +27,21 @@ class HelperTest < ActionView::TestCase
     }
   end
 
+  def test_vite_react_refresh_tag
+    assert_nil vite_react_refresh_tag
+    with_dev_server_running {
+      assert_equal <<~HTML, vite_react_refresh_tag
+        <script type="module">
+          import RefreshRuntime from '/vite-production/@react-refresh'
+          RefreshRuntime.injectIntoGlobalHook(window)
+          window.$RefreshReg$ = () => {}
+          window.$RefreshSig$ = () => (type) => type
+          window.__vite_plugin_react_preamble_installed__ = true
+        </script>
+      HTML
+    }
+  end
+
   def test_vite_asset_path
     assert_equal '/vite-production/assets/application.d9514acc.js', vite_asset_path('application.ts')
     assert_equal '/vite-production/assets/styles.0e53e684.css', vite_asset_path('styles.css')

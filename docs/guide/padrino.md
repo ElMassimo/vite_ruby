@@ -14,11 +14,7 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
-[vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
-[vite_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
-[vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
-[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
-[vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
+[helpers]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_padrino/lib/vite_padrino/tag_helpers.rb
 [development]: /guide/development
 [vite_padrino]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_padrino
 [padrino]: https://padrinorb.com/
@@ -36,10 +32,9 @@ As we saw in the [development] section, [entrypoints] will be [automatically det
 In order to link the JavaScript and CSS managed by Vite in your Padrino views or
 templates, you can use the following helpers:
 
-- <kbd>[vite_client_tag]</kbd>: Renders the Vite client to enable Hot Module Reload.
-- <kbd>[vite_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
-- <kbd>[vite_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
-- <kbd>[vite_stylesheet_tag]</kbd>: Render a `<link>` tag referencing a CSS file.
+- <kbd>[vite_javascript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a JavaScript file
+- <kbd>[vite_typescript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a TypeScript file
+- <kbd>[vite_stylesheet_tag][helpers]</kbd>: Renders a `<link>` tag referencing a CSS file
 
 You can pass any options supported by <kbd>javascript</kbd> and <kbd>stylesheet</kbd>.
 
@@ -52,16 +47,25 @@ You can pass any options supported by <kbd>javascript</kbd> and <kbd>stylesheet<
   = vite_typescript_tag 'application'
 ```
 
-For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the resulting URI to the appropriate tag helper.
+For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
 
 ```haml
 %img{ src: vite_asset_path('images/logo.svg') }
 %link{ rel: 'prefetch', href: vite_asset_path('typography.css') }
 ```
 
+### Enabling Hot Module Reload 🔥
+
+Use the following helpers to enable HMR in development:
+
+- <kbd>[vite_client_tag][helpers]</kbd>: Renders the Vite client to enable Hot Module Reload
+- <kbd>[vite_react_refresh_tag][helpers]</kbd>: Only when using `@vitejs/plugin-react-refresh`
+
+They will only render if the dev server is running.
+
 ### Smart Output ✨
 
-For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
+For convenience, <kbd>[vite_javascript_tag][helpers]</kbd> will automatically inject tags for styles or entries imported within a script.
 
 ```haml
 = vite_javascript_tag 'application'

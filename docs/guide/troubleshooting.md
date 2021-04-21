@@ -13,6 +13,8 @@
 [Using Heroku]: /guide/deployment#using-heroku
 [example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
 [windi]: /guide/plugins.html#windi-css
+[@vitejs/plugin-react-refresh]: https://www.npmjs.com/package/@vitejs/plugin-react-refresh
+[tag helpers]: /guide/development.html#tag-helpers-🏷
 
 # Troubleshooting
 
@@ -25,6 +27,19 @@ Please skim through __before__ opening an [issue][GitHub Issues].
 Verify that both <kbd>[vite]</kbd> and <kbd>[vite-plugin-ruby]</kbd> are in `devDependencies` in your `package.json` and have been installed by running <kbd>bin/vite info</kbd>.
 
 If you are using a non-standard setup, try configuring <kbd>[viteBinPath]</kbd>.
+
+### Hot Module Refresh does not work for React
+
+When using <kbd>[@vitejs/plugin-react-refresh]</kbd> in non-HTML entrypoints,
+you must explicitly [register the HMR plugin](https://github.com/vitejs/vite/issues/1984#issuecomment-778289660).
+
+A [<kbd>vite_react_refresh_tag</kbd> helper][tag helpers] is provided for your convenience:
+
+```erb
+  <%= vite_client_tag %>
+  <%= vite_react_refresh_tag %>
+  <%= vite_javascript_tag 'application' %>
+```
 
 ### Making HMR work in Docker Compose
 

@@ -14,11 +14,7 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
-[vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
-[vite_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
-[vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
-[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
-[vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
+[helpers]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
 [development]: /guide/development
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [installed example]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
@@ -40,10 +36,9 @@ As we saw in the [development] section, [entrypoints] will be [automatically det
 In order to link the JavaScript and CSS managed by Vite in your Rails layouts or
 templates, you can using the following helpers:
 
-- <kbd>[vite_client_tag]</kbd>: Renders the Vite client to enable Hot Module Reload.
-- <kbd>[vite_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
-- <kbd>[vite_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
-- <kbd>[vite_stylesheet_tag]</kbd>: Render a `<link>` tag referencing a CSS file.
+- <kbd>[vite_javascript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a JavaScript file
+- <kbd>[vite_typescript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a TypeScript file
+- <kbd>[vite_stylesheet_tag][helpers]</kbd>: Renders a `<link>` tag referencing a CSS file
 
 You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd>stylesheet_link_tag</kbd>.
 
@@ -59,7 +54,7 @@ You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd
 </head>
 ```
 
-For other types of assets, you can use <kbd>[vite_asset_path]</kbd> and pass the resulting URI to the appropriate tag helper.
+For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
 
 ```erb
 <img src="<%= vite_asset_path 'images/logo.svg' %>" />
@@ -72,9 +67,26 @@ If using `.jsx`, `.tsx`, or any other extension, make sure to be explicit:
 <%= vite_javascript_tag 'application.tsx' %>
 ```
 
+### Enabling Hot Module Reload 🔥
+
+Use the following helpers to enable HMR in development:
+
+- <kbd>[vite_client_tag][helpers]</kbd>: Renders the Vite client to enable Hot Module Reload
+- <kbd>[vite_react_refresh_tag][helpers]</kbd>: Only when using `@vitejs/plugin-react-refresh`
+
+They will only render if the dev server is running.
+
+#### Hot Reload for Stimulus Controllers
+
+If you are using [Stimulus], check out <kbd>[vite-plugin-stimulus-hmr]</kbd>.
+
+You will no longer need to refresh the page when tweaking your controllers 😃
+
+Comes installed by default in [this template][jumpstart].
+
 ### Smart Output ✨
 
-For convenience, <kbd>[vite_javascript_tag]</kbd> will automatically inject tags for styles or entries imported within a script.
+For convenience, <kbd>[vite_javascript_tag][helpers]</kbd> will automatically inject tags for styles or entries imported within a script.
 
 ```erb
 <%= vite_javascript_tag 'application' %>
@@ -93,11 +105,3 @@ When running the development server, these tags are omitted, as Vite will load t
 ```erb
 <script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
 ```
-
-### Stimulus HMR 🔥
-
-If you are using [Stimulus], check out <kbd>[vite-plugin-stimulus-hmr]</kbd>, which provides HMR for Stimulus controllers.
-
-You will no longer need to refresh the page when tweaking your controllers 😃
-
-Comes installed by default in [this template][jumpstart].

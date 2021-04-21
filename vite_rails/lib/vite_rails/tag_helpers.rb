@@ -9,6 +9,11 @@ module ViteRails::TagHelpers
     tag.script(src: src, type: 'module')
   end
 
+  # Public: Renders a script tag to enable HMR with React Refresh.
+  def vite_react_refresh_tag
+    vite_manifest.react_refresh_preamble&.html_safe
+  end
+
   # Public: Resolves the path for the specified Vite asset.
   #
   # Example:

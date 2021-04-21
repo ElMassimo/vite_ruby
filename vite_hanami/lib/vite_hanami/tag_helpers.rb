@@ -9,6 +9,12 @@ module ViteHanami::TagHelpers
     html.script(src: src, type: 'module')
   end
 
+  # Public: Renders a script tag to enable HMR with React Refresh.
+  def vite_react_refresh
+    tag = vite_manifest.react_refresh_preamble
+    raw(tag) if tag
+  end
+
   # Public: Resolves the path for the specified Vite asset.
   #
   # Example:

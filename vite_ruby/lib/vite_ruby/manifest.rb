@@ -46,6 +46,21 @@ class ViteRuby::Manifest
     prefix_vite_asset('@vite/client') if dev_server_running?
   end
 
+  # Public: The content of the preamble needed by the React Refresh plugin.
+  def react_refresh_preamble
+    if dev_server_running?
+      <<~REACT_REFRESH
+        <script type="module">
+          import RefreshRuntime from '#{ prefix_vite_asset('@react-refresh') }'
+          RefreshRuntime.injectIntoGlobalHook(window)
+          window.$RefreshReg$ = () => {}
+          window.$RefreshSig$ = () => (type) => type
+          window.__vite_plugin_react_preamble_installed__ = true
+        </script>
+      REACT_REFRESH
+    end
+  end
+
 protected
 
   # Internal: Strict version of lookup.

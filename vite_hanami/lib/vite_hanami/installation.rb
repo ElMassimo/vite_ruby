@@ -16,7 +16,7 @@ module ViteHanami::Installation
       # Allow @vite/client to hot reload changes in development
       security.content_security_policy(
         security.content_security_policy
-          .sub('script-src', "script-src 'unsafe-eval'")
+          .sub('script-src', "script-src 'unsafe-eval' 'unsafe-inline'")
           .sub('connect-src', "connect-src ws://\#{ ViteRuby.config.host_with_port }")
       )
     CSP
