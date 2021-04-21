@@ -1,3 +1,12 @@
+## [2.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.0...vite-plugin-ruby@2.0.1) (2021-04-21)
+
+
+### Bug Fixes
+
+* Fix error in manifest generation and avoid duplicate files (close [#55](https://github.com/ElMassimo/vite_ruby/issues/55)) ([1eb1307](https://github.com/ElMassimo/vite_ruby/commit/1eb1307ea183a9bcbe3ea38fe215c88ba3ed6e8f))
+
+
+
 # [2.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@1.0.18...vite-plugin-ruby@2.0.0) (2021-04-15)
 
 ### Features
