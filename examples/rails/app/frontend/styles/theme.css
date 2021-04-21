@@ -21,3 +21,6 @@
   color: #ffac33;
 }
 
+.logo-bg {
+  background-image: url("~/entrypoints/images/logo.png");
+}
