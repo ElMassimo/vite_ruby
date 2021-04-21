@@ -31,7 +31,6 @@ private
 
   def rewrite_uri_for_vite(env)
     uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject { |str| str.to_s.strip.empty? }.join('?') }
-      .sub(vite_asset_url_prefix, '/')
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
       .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
       .sub(/(\.\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.

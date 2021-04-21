@@ -29,7 +29,7 @@ class DevServerProxyTest < ViteRuby::Test
 
   def test_vite_asset
     get_with_dev_server_running '/vite-production/application.js'
-    assert_forwarded to: '/application.js'
+    assert_forwarded to: '/vite-production/application.js'
   end
 
   def test_vite_client
