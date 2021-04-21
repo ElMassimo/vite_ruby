@@ -37,7 +37,7 @@ export function assetsManifestPlugin (): Plugin {
         .map(file => path.relative(config.root, file)),
     )
 
-    Object.values(bundle).filter(chunk => chunk.type === 'asset')
+    Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)
       .forEach((chunk) => {
         // NOTE: Rollup appends `.css` to the file so it's removed before matching.
         // See `resolveEntrypointsForRollup`.
@@ -48,7 +48,7 @@ export function assetsManifestPlugin (): Plugin {
 
   // Internal: Vite ignores some entrypoint assets, so we need to manually
   // fingerprint the files and move them to the output directory.
-  async function fingerprintRemainingAssets (ctx: PluginContext, manifest: AssetsManifest) {
+  async function fingerprintRemainingAssets (ctx: PluginContext, bundle: OutputBundle, manifest: AssetsManifest) {
     const remainingAssets = resolveEntrypointAssets(config.root)
 
     for (const [filename, absoluteFilename] of remainingAssets) {
@@ -57,10 +57,13 @@ export function assetsManifestPlugin (): Plugin {
 
       const ext = path.extname(filename)
       const filenameWithoutExt = filename.slice(0, -ext.length)
-      const hashedFilename = path.posix.join(config.build.assetsDir, `${filenameWithoutExt}.${hash}${ext}`)
+      const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}.${hash}${ext}`)
 
       manifest.set(filename, { file: hashedFilename, src: filename })
-      ctx.emitFile({ fileName: hashedFilename, type: 'asset', source: content })
+
+      // Avoid duplicates if the file was referenced in a different entrypoint.
+      if (!bundle[hashedFilename])
+        ctx.emitFile({ name: filename, fileName: hashedFilename, type: 'asset', source: content })
     }
   }
 
@@ -74,7 +77,7 @@ export function assetsManifestPlugin (): Plugin {
     async generateBundle (_options, bundle) {
       const manifest: AssetsManifest = new Map()
       extractChunkStylesheets(bundle, manifest)
-      await fingerprintRemainingAssets(this, manifest)
+      await fingerprintRemainingAssets(this, bundle, manifest)
       debug({ manifest })
 
       this.emitFile({
