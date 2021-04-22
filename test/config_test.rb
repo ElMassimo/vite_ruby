@@ -57,7 +57,7 @@ class ConfigTest < ViteRuby::Test
   end
 
   def test_watch_additional_paths
-    assert_equal [], @config.watch_additional_paths
+    assert_empty @config.watch_additional_paths
     @config = resolve_config(config_path: 'config/vite_additional_paths.json')
     assert_equal ['config/*'], @config.watch_additional_paths
   end
