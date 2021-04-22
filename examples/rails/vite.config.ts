@@ -1,6 +1,5 @@
-import path from 'path'
 import { defineConfig } from 'vite'
-import RubyPlugin, { projectRoot } from 'vite-plugin-ruby'
+import RubyPlugin from 'vite-plugin-ruby'
 import ViteLegacy from '@vitejs/plugin-legacy'
 import ViteReact from '@vitejs/plugin-react-refresh'
 import FullReload from 'vite-plugin-full-reload'
@@ -17,15 +16,6 @@ const bugsnagOptions = {
 export default defineConfig({
   define: {
     'process.env.BUGSNAG_API_KEY': JSON.stringify(process.env.BUGSNAG_API_KEY),
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        sourcemapPathTransform: (relativeSourcePath, sourcemapPath) => {
-          return path.relative(projectRoot, path.resolve(path.dirname(sourcemapPath), relativeSourcePath))
-        },
-      },
-    },
   },
   plugins: [
     isDistEnv && BugsnagBuildReporterPlugin({ ...bugsnagOptions, releaseStage: process.env.RAILS_ENV }),
