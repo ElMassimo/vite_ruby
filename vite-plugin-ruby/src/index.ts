@@ -1,4 +1,4 @@
-import { resolve, join } from 'path'
+import { relative, dirname, resolve, join } from 'path'
 import type { ConfigEnv, Plugin, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
@@ -49,7 +49,15 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     assetsDir,
     manifest: true,
     outDir,
-    rollupOptions: { input: entrypoints },
+    rollupOptions: {
+      input: entrypoints,
+      output: {
+        sourcemapPathTransform (relativeSourcePath: string, sourcemapPath: string) {
+          return relative(projectRoot, resolve(dirname(sourcemapPath), relativeSourcePath))
+        },
+        ...userConfig.build?.rollupOptions?.output,
+      },
+    },
   }
 
   debug({ base, build, root, server, entrypoints })
