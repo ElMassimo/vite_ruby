@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
 import ViteLegacy from '@vitejs/plugin-legacy'
+import ViteReact from '@vitejs/plugin-react-refresh'
 import FullReload from 'vite-plugin-full-reload'
 import WindiCSS from 'vite-plugin-windicss'
 
@@ -11,6 +12,7 @@ export default defineConfig({
     ViteLegacy({
       targets: ['defaults', 'not IE 11'],
     }),
+    ViteReact(),
     WindiCSS({
       root: __dirname,
       scan: {
