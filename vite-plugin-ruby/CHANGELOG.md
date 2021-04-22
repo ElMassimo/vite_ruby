@@ -1,3 +1,12 @@
+## [2.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.1...vite-plugin-ruby@2.0.2) (2021-04-22)
+
+
+### Features
+
+* Improve sourcemap paths to be relative to the project root ([a4c661c](https://github.com/ElMassimo/vite_ruby/commit/a4c661c1b51becafde66c5ff3e4e195534d63c67))
+
+
+
 ## [2.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.0...vite-plugin-ruby@2.0.1) (2021-04-21)
 
 
