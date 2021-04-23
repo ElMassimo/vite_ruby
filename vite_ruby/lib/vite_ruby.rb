@@ -18,7 +18,7 @@ class ViteRuby
 
   # Internal: Versions used by default when running `vite install`.
   DEFAULT_VITE_VERSION = '^2.0.3'
-  DEFAULT_PLUGIN_VERSION = '^1.0.13'
+  DEFAULT_PLUGIN_VERSION = '^2.0.2'
 
   # Internal: Ruby Frameworks that have a companion library for Vite Ruby.
   SUPPORTED_FRAMEWORKS = %w[rails hanami roda padrino sinatra].freeze
