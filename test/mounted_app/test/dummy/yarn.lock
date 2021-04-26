@@ -604,10 +604,10 @@ uid2@0.0.3:
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
   integrity sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I=
 
-vite-plugin-ruby@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-1.0.13.tgz#d1a57916b090cf5b7aa22777458a3dd4efcf07c4"
-  integrity sha512-dmb4sztIVEi30a+Ss53EP7dkkGqnaap+BTUUiFGZnpN/j6P/8xqbukLXNQKB4WHDfmkv4HQLjuKtT3VNpmBndQ==
+vite-plugin-ruby@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.nlark.com/vite-plugin-ruby/download/vite-plugin-ruby-2.0.2.tgz#291ca6411bad8dbac33f3716befdb45b01f3e566"
+  integrity sha1-KRymQRutjbrDPzcWvv20WwHz5WY=
   dependencies:
     debug "^4.3.1"
     fast-glob "^3.2.4"
