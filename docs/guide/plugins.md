@@ -39,7 +39,7 @@ plugins: [
 
 ::: tip
 Use it only when it's not possible or desirable to [prefix variables with `VITE_`][meta env],
-or when using [`import.meta.env`][import meta env] in the client code is not an option.
+or if using [`import.meta.env`][import meta env] in the client code is not an option.
 :::
 
 ## [Full Reload](https://github.com/ElMassimo/vite-plugin-full-reload)
