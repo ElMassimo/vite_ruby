@@ -1,3 +1,13 @@
+## [2.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.2...vite-plugin-ruby@2.0.3) (2021-04-26)
+
+
+### Features
+
+* Add support for .pcss extension for PostCSS ([512790e](https://github.com/ElMassimo/vite_ruby/commit/512790e7254f6073571695a977744369854dbfa7))
+* Update plugin types to use PluginOption[] instead of Plugin[] ([1ffdbc6](https://github.com/ElMassimo/vite_ruby/commit/1ffdbc6369f0d6f87d050b1d7fa10f5ce8934758))
+
+
+
 ## [2.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.1...vite-plugin-ruby@2.0.2) (2021-04-22)
 
 
