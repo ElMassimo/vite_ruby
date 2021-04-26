@@ -74,6 +74,7 @@ jobs:
         run: bundle exec rake test
 
       - name: Upload code coverage to Code Climate
+        if: contains(github.ref, "main")
         run: |
           export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
           ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}}
