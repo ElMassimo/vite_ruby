@@ -1,3 +1,12 @@
+## [1.2.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.5...vite_ruby@1.2.6) (2021-04-26)
+
+
+### Bug Fixes
+
+* Update installation to use the latest version of the plugin ([#67](https://github.com/ElMassimo/vite_ruby/issues/67)) ([7e10636](https://github.com/ElMassimo/vite_ruby/commit/7e10636f5396f496bd099a03e069cf8572b9585b))
+
+
+
 ## [1.2.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.4...vite_ruby@1.2.5) (2021-04-21)
 
 
