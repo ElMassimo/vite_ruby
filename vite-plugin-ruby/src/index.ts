@@ -1,5 +1,5 @@
 import { relative, dirname, resolve, join } from 'path'
-import type { ConfigEnv, Plugin, UserConfig, ViteDevServer } from 'vite'
+import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
@@ -17,9 +17,8 @@ let codeRoot: string
 // Internal: Additional paths to watch.
 let watchAdditionalPaths: string[] = []
 
-// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load
-// a shared JSON configuration file that can be read from Ruby.
-export default function ViteRubyPlugin (): Plugin[] {
+// Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load a shared JSON configuration file that can be read from Ruby.
+export default function ViteRubyPlugin (): PluginOption[] {
   return [
     {
       name: 'vite-plugin-ruby',
