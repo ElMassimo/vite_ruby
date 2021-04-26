@@ -1934,6 +1934,11 @@ vite-plugin-bugsnag@^1.0.2:
     fast-glob "^3.2.5"
     p-limit "^3.1.0"
 
+vite-plugin-environment@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-environment/-/vite-plugin-environment-1.0.0.tgz#42289cef509c1bef9105040d628c82a7dcef2d6b"
+  integrity sha512-Uk07C4Y3yQT872Z+ehlda3IRHsqWFGsDM6ahqTNjTand9ddrNyIm7XlmI6qrem+gkAJjSrRLqAWc6vcn9ZU0Jg==
+
 vite-plugin-full-reload@^0.2:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vite-plugin-full-reload/-/vite-plugin-full-reload-0.2.1.tgz#19e2586d066e46dafadbffa831ce2cc0f2605ed7"

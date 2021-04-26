@@ -12,6 +12,9 @@
 [glob import]: https://vitejs.dev/guide/features.html#glob-import
 [plugins]: https://vitejs.dev/plugins/
 [sourceCodeDir]: /config/#sourcecodedir
+[import meta env]: https://vitejs.dev/guide/env-and-mode.html#env-variables
+[meta env]: https://vitejs.dev/guide/env-and-mode.html#env-files
+[vite-plugin-environment]: https://github.com/ElMassimo/vite-plugin-environment
 
 # Recommended Plugins
 
@@ -22,6 +25,21 @@ Check the [example app] for a sample setup with most of them.
 ::: tip Official Vite.js Plugins
 
 When using Vue, React, or Svelte, check out [Vite][plugins]'s __[official plugins][plugins]__.
+:::
+
+## [Environment](https://github.com/ElMassimo/vite-plugin-environment)
+
+Use <kbd>[vite-plugin-environment]</kbd> to expose environment variables to your
+client code.  
+
+```ts
+plugins: [
+  Environment(['NODE_ENV', 'API_KEY', 'APP_VERSION']),
+```
+
+::: tip
+Use it only when it's not possible or desirable to [prefix variables with `VITE_`][meta env],
+or when using [`import.meta.env`][import meta env] in the client code is not an option.
 :::
 
 ## [Full Reload](https://github.com/ElMassimo/vite-plugin-full-reload)

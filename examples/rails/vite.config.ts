@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
 import ViteLegacy from '@vitejs/plugin-legacy'
 import ViteReact from '@vitejs/plugin-react-refresh'
+import Environment from 'vite-plugin-environment'
 import FullReload from 'vite-plugin-full-reload'
 import WindiCSS from 'vite-plugin-windicss'
 import { BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin } from 'vite-plugin-bugsnag'
@@ -20,6 +21,11 @@ export default defineConfig({
   plugins: [
     isDistEnv && BugsnagBuildReporterPlugin({ ...bugsnagOptions, releaseStage: process.env.RAILS_ENV }),
     isDistEnv && BugsnagSourceMapUploaderPlugin({ ...bugsnagOptions, overwrite: true }),
+    Environment({
+      BUGSNAG_API_KEY: null,
+      HEROKU_RELEASE_VERSION: 'development',
+      HEROKU_SLUG_COMMIT: 'main',
+    }),
     RubyPlugin(),
     FullReload(['config/routes.rb', 'app/views/**/*'], { delay: 200 }),
     ViteLegacy({
