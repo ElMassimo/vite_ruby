@@ -15,6 +15,7 @@ export const KNOWN_CSS_EXTENSIONS = [
   'scss',
   'styl',
   'stylus',
+  'pcss',
   'postcss',
 ]
 
