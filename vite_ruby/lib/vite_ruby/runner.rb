@@ -28,11 +28,11 @@ private
   def command_for(args)
     [config.to_env].tap do |cmd|
       args = args.clone
-      cmd.append('node', '--inspect-brk') if args.delete('--inspect')
-      cmd.append('node', '--trace-deprecation') if args.delete('--trace_deprecation')
-      cmd.append(vite_executable)
-      cmd.append(*args)
-      cmd.append('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
+      cmd.push('node', '--inspect-brk') if args.delete('--inspect')
+      cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
+      cmd.push(vite_executable)
+      cmd.push(*args)
+      cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
 
