@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* Support Rails 5.1 by avoiding monkeypatched `Array#append` ([1b59551](https://github.com/ElMassimo/vite_ruby/commit/1b5955170b33a528a2b13d7e7e308e8493d97a91)), closes [/github.com/rails/rails/blob/5-1-stable/activesupport/lib/active_support/core_ext/array/prepend_and_append.rb#L2-L3](https://github.com//github.com/rails/rails/blob/5-1-stable/activesupport/lib/active_support/core_ext/array/prepend_and_append.rb/issues/L2-L3)
+* Support Rails 5.1 by avoiding [incorrectly monkeypatched](https://github.com//github.com/rails/rails/blob/5-1-stable/activesupport/lib/active_support/core_ext/array/prepend_and_append.rb/issues/L2-L3) `Array#append` ([1b59551](https://github.com/ElMassimo/vite_ruby/commit/1b5955170b33a528a2b13d7e7e308e8493d97a91))
 
 
 
