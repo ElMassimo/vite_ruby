@@ -1,3 +1,12 @@
+## [1.2.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.7...vite_ruby@1.2.8) (2021-04-29)
+
+
+### Bug Fixes
+
+* Don't modify url for minified css when proxying a request ([#71](https://github.com/ElMassimo/vite_ruby/issues/71)) ([d30a577](https://github.com/ElMassimo/vite_ruby/commit/d30a577a8436c4987d7c2e08e7eae68e589eb2a7))
+
+
+
 ## [1.2.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.6...vite_ruby@1.2.7) (2021-04-28)
 
 

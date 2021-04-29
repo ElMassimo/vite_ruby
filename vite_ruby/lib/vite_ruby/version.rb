@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class ViteRuby
-  VERSION = '1.2.7'
+  VERSION = '1.2.8'
 end
