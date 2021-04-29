@@ -58,6 +58,16 @@ class DevServerProxyTest < ViteRuby::Test
     assert_forwarded to: '/example_import.js'
   end
 
+  def test_scss_with_extra_css
+    get_with_dev_server_running '/vite-production/colored.scss.css'
+    assert_forwarded to: '/vite-production/colored.scss'
+  end
+
+  def test_min_css
+    get_with_dev_server_running '/vite-production/colored.min.css'
+    assert_forwarded to: '/vite-production/colored.min.css'
+  end
+
   def test_without_dev_server_running
     get '/vite-production/application.js'
     assert_not_forwarded
