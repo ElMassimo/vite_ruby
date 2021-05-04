@@ -8,6 +8,6 @@ class ViteRuby::CLI::Dev < ViteRuby::CLI::Build
   option(:force, desc: 'Force Vite to re-bundle dependencies', type: :boolean)
 
   def call(**options)
-    super { |args| ViteRuby.run(args) }
+    super { |args| ViteRuby.run(args, exec: true) }
   end
 end

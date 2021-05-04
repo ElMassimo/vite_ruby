@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'open3'
-
 # Public: Executes Vite commands, providing conveniences for debugging.
 class ViteRuby::Runner
   def initialize(vite_ruby)
@@ -9,10 +7,13 @@ class ViteRuby::Runner
   end
 
   # Public: Executes Vite with the specified arguments.
-  def run(argv, capture: false)
+  def run(argv, exec: false)
     Dir.chdir(config.root) {
       cmd = command_for(argv)
-      capture ? capture3_with_output(*cmd, chdir: config.root) : Kernel.exec(*cmd)
+      return Kernel.exec(*cmd) if exec
+
+      log_or_noop = ->(line) { logger.info('vite') { line } } unless config.hide_build_console_output
+      ViteRuby::IO.capture(*cmd, chdir: config.root, with_output: log_or_noop)
     }
   rescue Errno::ENOENT => error
     raise ViteRuby::MissingExecutableError, error
@@ -40,27 +41,5 @@ private
   def vite_executable
     bin_path = config.vite_bin_path
     File.exist?(bin_path) ? bin_path : "#{ `npm bin`.chomp }/vite"
-  end
-
-  # Internal: A modified version of capture3 that continuosly prints stdout.
-  # NOTE: This improves the experience of running bin/vite build.
-  def capture3_with_output(*cmd, **opts)
-    return Open3.capture3(*cmd, opts) if config.hide_build_console_output
-
-    Open3.popen3(*cmd, opts) { |_stdin, stdout, stderr, wait_threads|
-      out = Thread.new { read_lines(stdout) { |l| logger.info('vite') { l } } }
-      err = Thread.new { stderr.read }
-      [out.value, err.value, wait_threads.value]
-    }
-  end
-
-  # Internal: Reads and yield every line in the stream. Returns the full content.
-  def read_lines(io)
-    buffer = +''
-    while line = io.gets
-      buffer << line
-      yield line
-    end
-    buffer
   end
 end

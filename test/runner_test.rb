@@ -23,7 +23,7 @@ class RunnerTest < ViteRuby::Test
 
   def test_command_capture
     ViteRuby::Runner.stub_any_instance(:vite_executable, 'echo') {
-      stdout, stderr, status = ViteRuby.run(['"Hello"'], capture: true)
+      stdout, stderr, status = ViteRuby.run(['"Hello"'])
       assert_equal %("Hello" --mode production\n), stdout
       assert_equal '', stderr
       assert status.success?
