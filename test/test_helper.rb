@@ -70,7 +70,7 @@ private
     Dir.chdir(test_app_path) {
       mock = Minitest::Mock.new
       mock.expect(:call, nil, [ViteRuby.config.to_env, %r{node_modules/.bin/vite}, *argv, *flags])
-      Kernel.stub(:exec, mock) { ViteRuby.run(argv) }
+      Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
       mock.verify
     }
   end

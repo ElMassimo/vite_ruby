@@ -2,7 +2,6 @@
 
 require 'dry/cli/utils/files'
 require 'stringio'
-require 'open3'
 
 class ViteRuby::CLI::Install < Dry::CLI::Command
   desc 'Performs the initial configuration setup to get started with Vite Ruby.'
@@ -73,11 +72,12 @@ private
   def install_js_dependencies
     package_json = root.join('package.json')
     write(package_json, '{}') unless package_json.exist?
+
     Dir.chdir(root) do
       deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
-      stdout, stderr, status = Open3.capture3({}, "npx --yes --package @antfu/ni -- ni -D #{ deps }")
-      stdout, stderr, = Open3.capture3({}, "yarn add -D #{ deps }") unless status.success?
-      say(stdout, "\n", stderr)
+      _, stderr, status = ViteRuby::IO.capture("npx --package @antfu/ni -- ni -D #{ deps }", stdin_data: "\n")
+      _, stderr, = ViteRuby::IO.capture("yarn add -D #{ deps }") unless status.success?
+      say("Could not install JS dependencies.\n", stderr) unless stderr.to_s.empty?
     end
   end
 

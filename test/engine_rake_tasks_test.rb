@@ -62,10 +62,10 @@ class EngineRakeTasksTest < ViteRuby::Test
       ViteRuby::CLI::Install.new.call
       ViteRuby.commands.verify_install
       ViteRuby::CLI::Version.new.call
-      stub_runner('build', capture: true) {
+      stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
-      stub_runner('--wat') {
+      stub_runner('--wat', exec: true) {
         assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
       ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)

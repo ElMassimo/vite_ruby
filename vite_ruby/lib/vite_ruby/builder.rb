@@ -69,7 +69,7 @@ private
   def build_with_vite(*args)
     logger.info 'Building with Vite ⚡️'
 
-    stdout, stderr, status = ViteRuby.run(['build', *args], capture: true)
+    stdout, stderr, status = ViteRuby.run(['build', *args])
     log_build_result(stdout, stderr.to_s, status)
 
     status.success?

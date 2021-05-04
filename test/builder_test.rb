@@ -100,6 +100,6 @@ private
 
   def stub_runner(success:, &block)
     args = [:sterr, :stdout, OpenStruct.new(success?: success)]
-    ViteRuby::Runner.stub_any_instance(:capture3_with_output, args, &block)
+    ViteRuby::IO.stub(:capture, args, &block)
   end
 end
