@@ -1,3 +1,12 @@
+## [1.2.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.8...vite_ruby@1.2.9) (2021-05-04)
+
+
+### Bug Fixes
+
+* Stream output during installation and don't skip installation of npm packages when no lockfile is detected ([#73](https://github.com/ElMassimo/vite_ruby/issues/73)) ([028a5ba](https://github.com/ElMassimo/vite_ruby/commit/028a5bae359085a36aa942d2ad63c23616a00ffb))
+
+
+
 ## [1.2.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.7...vite_ruby@1.2.8) (2021-04-29)
 
 
