@@ -15,6 +15,8 @@
 [clear rake]: https://www.rubydoc.info/gems/rake/Rake%2FTask:clear
 [vite:install_dependencies]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/tasks/vite.rake#L32-L35
 [npx]: https://docs.npmjs.com/cli/v7/commands/npx
+[vite-plugin-erb]: https://github.com/ElMassimo/vite-plugin-erb
+[rails-erb-loader]: https://github.com/usabilityhub/rails-erb-loader
 
 # Migrating to Vite
 
@@ -77,6 +79,8 @@ mind that they are compatible, and you could do a gradual migration instead.
   - const context = require.context("./controllers", true, /\.js$/)
   + const controllers = import.meta.globEager('./**/*_controller.js')
   ```
+
+- If you were using <kbd>[rails-erb-loader]</kbd>, you might want to check <kbd>[vite-plugin-erb]</kbd> to ease the transition, but it's better to avoid mixing ERB in frontend assets.
 
 - Make sure <kbd>[npx]</kbd> is available (comes by default in most node.js installations), or [clear][clear rake] the <kbd>[vite:install_dependencies]</kbd> rake task and provide your own implementation.
 
