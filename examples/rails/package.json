@@ -5,6 +5,8 @@
   "dependencies": {
     "@bugsnag/js": "^7.9.2",
     "@bugsnag/plugin-react": "^7.9.2",
+    "@honeybadger-io/js": "^3.2.0",
+    "@honeybadger-io/react": "^1.0.1",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",

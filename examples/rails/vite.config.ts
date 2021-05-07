@@ -23,6 +23,7 @@ export default defineConfig({
     isDistEnv && BugsnagSourceMapUploaderPlugin({ ...bugsnagOptions, overwrite: true }),
     Environment({
       BUGSNAG_API_KEY: null,
+      HONEYBADGER_API_KEY: null,
       HEROKU_RELEASE_VERSION: 'development',
       HEROKU_SLUG_COMMIT: 'main',
     }),

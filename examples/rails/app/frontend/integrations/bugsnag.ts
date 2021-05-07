@@ -9,3 +9,5 @@ if (process.env.BUGSNAG_API_KEY) {
 
   Bugsnag.notify(new Error('Test Error'))
 }
+
+export default Bugsnag
