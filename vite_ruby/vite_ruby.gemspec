@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
-  s.add_dependency 'dry-cli', '~> 0.6'
+  s.add_dependency 'dry-cli', '~> 0.6.0'
   s.add_dependency 'rack-proxy', '~> 0.6', '>= 0.6.1'
   s.add_dependency 'zeitwerk', '~> 2.2'
 
