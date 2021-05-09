@@ -1,3 +1,12 @@
+## [1.2.10](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.9...vite_ruby@1.2.10) (2021-05-09)
+
+
+### Bug Fixes
+
+* Lock dry-cli to 0.6 since 0.7 has breaking changes (close [#76](https://github.com/ElMassimo/vite_ruby/issues/76)) ([9883458](https://github.com/ElMassimo/vite_ruby/commit/9883458443cb0047cd4cceaf02de2a86066d624e))
+
+
+
 ## [1.2.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.8...vite_ruby@1.2.9) (2021-05-04)
 
 
