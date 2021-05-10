@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ViteRuby::CLI::Dev < ViteRuby::CLI::Build
+class ViteRuby::CLI::Dev < ViteRuby::CLI::Vite
   DEFAULT_ENV = CURRENT_ENV || 'development'
 
   desc 'Start the Vite development server.'

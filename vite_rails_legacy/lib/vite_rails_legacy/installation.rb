@@ -11,7 +11,7 @@ module ViteRailsLegacy::Installation
   def setup_app_files
     cp RAILS_TEMPLATES.join('config/rails-vite.json'), config.config_path
     if root.join('app/javascript').exist?
-      Dry::CLI::Utils::Files.replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "app/javascript",)
+      replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "app/javascript",)
     end
   end
 

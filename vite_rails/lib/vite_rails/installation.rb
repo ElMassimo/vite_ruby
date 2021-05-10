@@ -11,7 +11,7 @@ module ViteRails::Installation
   def setup_app_files
     cp RAILS_TEMPLATES.join('config/rails-vite.json'), config.config_path
     if dir = %w[app/javascript app/packs].find { |path| root.join(path).exist? }
-      Dry::CLI::Utils::Files.replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{ dir }",)
+      replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{ dir }",)
     end
     setup_content_security_policy root.join('config/initializers/content_security_policy.rb')
   end
