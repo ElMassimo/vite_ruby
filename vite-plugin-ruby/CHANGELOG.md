@@ -1,3 +1,12 @@
+## [2.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.3...vite-plugin-ruby@2.0.4) (2021-05-10)
+
+
+### Bug Fixes
+
+* Explicitly set the project root to prepare for changes in upcoming Vite (> 2.2.4) ([4e00780](https://github.com/ElMassimo/vite_ruby/commit/4e00780309242ac8bb801cd30c345d91796ed684))
+
+
+
 ## [2.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.2...vite-plugin-ruby@2.0.3) (2021-04-26)
 
 
