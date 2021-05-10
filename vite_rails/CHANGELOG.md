@@ -1,3 +1,7 @@
+## [2.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.10...vite_rails@2.0.11) (2021-05-10)
+
+
+
 ## [2.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.9...vite_rails@2.0.10) (2021-04-21)
 
 
