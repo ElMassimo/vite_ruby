@@ -39,7 +39,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
 
-  const server = { host, https, port, strictPort: true }
+  const server = { host, https, port, strictPort: true, fsServe: { root: projectRoot } }
 
   const build = {
     emptyOutDir: true,
