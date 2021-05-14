@@ -13,8 +13,8 @@
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [vite_hanami]: /guide/hanami
 [vite_padrino]: /guide/padrino
-[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
-[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
+[no bundling]: https://vitejs.dev/guide/why.html#the-problems
+[bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
 [motivation]: /motivation
 
 # Introduction

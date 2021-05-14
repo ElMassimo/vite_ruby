@@ -43,8 +43,8 @@
 [heroku]: https://pingcrm-vite.herokuapp.com/
 [Issues]: https://github.com/ElMassimo/vite_ruby/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
 [Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
-[no bundling]: https://vitejs.dev/guide/introduction.html#the-problem
-[bundling]: https://vitejs.dev/guide/introduction.html#why-bundle-for-production
+[no bundling]: https://vitejs.dev/guide/why.html#the-problems
+[bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 
