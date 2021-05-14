@@ -21,6 +21,7 @@
 [vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L23-L25
 [sourceCodeDir]: /config/#sourcecodedir
 [entrypointsDir]: /config/#entrypointsdir
+[watchAdditionalPaths]: /config/#watchadditionalpaths
 [aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
 
 # Developing with Vite
@@ -72,6 +73,9 @@ which simplifies imports:
 import App from '~/components/App.vue'
 import '@/channels/index.js'
 ```
+
+When importing files _outside_ your <kbd>[sourceCodeDir]</kbd>, make sure to check <kbd>[watchAdditionalPaths]</kbd>.
+
 
 ## Auto-Build 🤖
 

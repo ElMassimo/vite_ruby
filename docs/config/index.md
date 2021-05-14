@@ -11,6 +11,9 @@
 [root]: /config/#root
 [alignment with Rails defaults]: https://github.com/rails/webpacker/issues/769
 [source maps]: https://vitejs.dev/config/#build-sourcemap
+[import aliases]: /guide/development.html#import-aliases-👉
+[reference these files]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/example/app/frontend/entrypoints/main.ts#L4
+[resolve.alias]: https://vitejs.dev/config/#resolve-alias
 
 # Configuring Vite Ruby
 
@@ -238,6 +241,22 @@ You can customize this behavior using the following options.
 
   The <kbd>[sourceCodeDir]</kbd> is included by default.
 
+  <hr/>
+
+  In order to [reference these files] it's highly recommended to [define][resolve.alias] your own [import aliases]:
+
+  ```js{7}
+  import { resolve } from 'path'
+  import { defineConfig } from 'vite'
+
+  export default defineConfig({
+    resolve: {
+      alias: {
+        '@assets': resolve(__dirname, 'app/assets'),
+      },
+    },
+  })
+  ```
 <br>
 <br>
 <br>
