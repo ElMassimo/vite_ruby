@@ -1,3 +1,12 @@
+## [2.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.11...vite_rails@2.0.12) (2021-05-24)
+
+
+### Bug Fixes
+
+* Fix typo in comment in example entrypoint in Rails ([78b3104](https://github.com/ElMassimo/vite_ruby/commit/78b3104bc687a79aebd4e0538b8b7c34562cb4eb))
+
+
+
 ## [2.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.10...vite_rails@2.0.11) (2021-05-10)
 
 
