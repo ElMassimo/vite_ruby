@@ -10,6 +10,10 @@
 ## [2.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@2.0.9...vite_rails_legacy@2.0.10) (2021-05-10)
 
 
+### Refactor
+
+* Avoid reference to `dry-cli` during installation, use internal APIs instead ([f5b87e](https://github.com/ElMassimo/vite_ruby/commit/f5b87e69790e48397d15e609b44118e399c9493d))
+
 
 ## [2.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@2.0.8...vite_rails_legacy@2.0.9) (2021-04-21)
 

@@ -1,5 +1,8 @@
 ## [1.2.11](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.10...vite_ruby@1.2.11) (2021-05-10)
 
+### Refactor
+
+* Upgrade to dry-cli 0.7 while avoiding dependency on `dry-files` ([f5b87e](https://github.com/ElMassimo/vite_ruby/commit/f5b87e69790e48397d15e609b44118e399c9493d))
 
 
 ## [1.2.10](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.9...vite_ruby@1.2.10) (2021-05-09)
