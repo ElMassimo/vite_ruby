@@ -15,6 +15,7 @@
 [windi]: /guide/plugins.html#windi-css
 [@vitejs/plugin-react-refresh]: https://www.npmjs.com/package/@vitejs/plugin-react-refresh
 [tag helpers]: /guide/development.html#tag-helpers-🏷
+[ulimit]: https://wilsonmar.github.io/maximum-limits/
 
 # Troubleshooting
 
@@ -68,9 +69,17 @@ In systems with constrained resources the [default timeout][devServerConnectTime
 
 If that doesn't work, verify that the [host] and [port] configuration is correct.
 
-### Requests to vite sporadically return a 404
+### Requests to vite sporadically return a 404 error response
 
 [See above](/guide/troubleshooting.html#build-is-triggered-when-the-dev-server-is-running), it could be related to the <kbd>[devServerConnectTimeout]</kbd>.
+
+### Requests to vite sporadically return a 500 error response
+
+Check your `ulimit -n` to make sure the limit of file descriptors is not [too low][ulimit].
+
+This is probably the case if you are seeing errors such as `#<Errno::EMFILE: Too many open files` along with `#<SocketError: Failed to open TCP connection`.
+
+Follow [this article][ulimit] for information on how to increase the limit of file descriptors in your OS.
 
 ### Changes are not taken into account, build is skipped
 
