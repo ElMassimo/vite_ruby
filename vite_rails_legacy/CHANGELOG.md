@@ -1,3 +1,12 @@
+## [2.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@2.0.11...vite_rails_legacy@2.0.12) (2021-06-08)
+
+
+### Features
+
+* Support Ruby 2.4 ([#87](https://github.com/ElMassimo/vite_ruby/issues/87)) ([8fc4d49](https://github.com/ElMassimo/vite_ruby/commit/8fc4d49c82817623df81d6f9f94654ea726eb050))
+
+
+
 ## [2.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@2.0.10...vite_rails_legacy@2.0.11) (2021-05-24)
 
 
