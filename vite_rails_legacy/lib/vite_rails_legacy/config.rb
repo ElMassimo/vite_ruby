@@ -12,4 +12,5 @@ module ViteRailsLegacy::Config
   end
 end
 
+require 'active_support/core_ext/hash'
 ViteRuby::Config.singleton_class.prepend(ViteRailsLegacy::Config)

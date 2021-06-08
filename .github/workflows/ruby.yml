@@ -14,6 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
+        bundler: ["2.1.4"]
         ruby: [
           2.5,
           2.7,
@@ -31,11 +32,18 @@ jobs:
           - ruby: "3.0"
             gemfile: gemfiles/Gemfile-rails.5.2.x
         include:
+          - ruby: "2.4"
+            bundler: "1.17.3"
+            os: ubuntu-latest
+            gemfile: gemfiles/Gemfile-rails.4.2.x
+            experimental: true
           - ruby: "2.7"
+            bundler: "2.1.4"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
           - ruby: "3.0"
+            bundler: "2.1.4"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
@@ -59,10 +67,10 @@ jobs:
 
       - name: Bundle install
         run: |
-          gem install bundler -v 2.1.4
-          bundle config path /home/runner/bundle
-          bundle config --global gemfile ${{ matrix.gemfile }}
-          bundle install --jobs 4 --retry 3
+          gem install bundler -v ${{ matrix.bundler }}
+          bundle _${{ matrix.bundler }}_ config path /home/runner/bundle
+          bundle _${{ matrix.bundler }}_ config --global gemfile ${{ matrix.gemfile }}
+          bundle _${{ matrix.bundler }}_ install # --jobs 4 --retry 3
 
       - name: Setup Code Climate test-reporter
         run: |
@@ -71,7 +79,7 @@ jobs:
           ./cc-test-reporter before-build
 
       - name: Ruby specs
-        run: bundle exec rake test
+        run: bundle _${{ matrix.bundler }}_ exec rake test
 
       - name: Upload code coverage to Code Climate
         if: ${{ contains(github.ref, 'main') }}

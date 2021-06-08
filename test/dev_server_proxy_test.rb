@@ -11,8 +11,13 @@ class DevServerProxyTest < ViteRuby::Test
       [200, { 'Content-Type' => 'application/json' }, env.to_json]
     })
     # Avoid actually using the proxy.
-    Rack::Proxy.remove_method(:perform_request)
-    Rack::Proxy.define_method(:perform_request) { |env| capture_app.call(env) }
+    if RUBY_VERSION.start_with?('2.4')
+      Rack::Proxy.send(:remove_method, :perform_request) if Rack::Proxy.method_defined?(:perform_request)
+      Rack::Proxy.send(:define_method, :perform_request) { |env| capture_app.call(env) }
+    else
+      Rack::Proxy.remove_method(:perform_request)
+      Rack::Proxy.define_method(:perform_request) { |env| capture_app.call(env) }
+    end
 
     ViteRuby::DevServerProxy.new(capture_app)
   end

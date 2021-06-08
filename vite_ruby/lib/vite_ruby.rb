@@ -73,7 +73,7 @@ class ViteRuby
     # variant of Vite Ruby.
     def framework_libraries
       SUPPORTED_FRAMEWORKS.map { |framework|
-        if library = Gem.loaded_specs["vite_#{ framework }"]
+        if library = (Gem.loaded_specs["vite_#{ framework }"] || Gem.loaded_specs["vite_#{ framework }_legacy"])
           [framework, library]
         end
       }.compact
