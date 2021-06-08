@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby/CHANGELOG.md",
   }
 
-  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
   s.add_dependency 'dry-cli', '~> 0.7.0'
   s.add_dependency 'rack-proxy', '~> 0.6', '>= 0.6.1'
@@ -28,9 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest-stub_any_instance', '~> 1.0'
   s.add_development_dependency 'pry-byebug', '~> 3.9'
   s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'rubocop', '~> 1.9'
-  s.add_development_dependency 'rubocop-minitest', '~> 0.10'
-  s.add_development_dependency 'rubocop-performance', '~> 1.9'
   s.add_development_dependency 'simplecov', '< 0.18'
 
   s.files = Dir.glob('{lib,exe,templates}/**/*') + %w[default.vite.json README.md CHANGELOG.md LICENSE.txt]

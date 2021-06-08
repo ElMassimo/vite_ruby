@@ -53,24 +53,24 @@ class HelperTest < ActionView::TestCase
   end
 
   def test_vite_stylesheet_tag
-    assert_equal link(href: '/vite-production/assets/styles.0e53e684.css'), vite_stylesheet_tag('styles')
+    assert_similar link(href: '/vite-production/assets/styles.0e53e684.css'), vite_stylesheet_tag('styles')
 
     assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
 
     with_dev_server_running {
-      assert_equal link(href: '/vite-production/styles.css'), vite_stylesheet_tag('styles')
+      assert_similar link(href: '/vite-production/styles.css'), vite_stylesheet_tag('styles')
 
       assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
     }
   end
 
   def test_vite_javascript_tag
-    assert_equal [
+    assert_similar [
       %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
       link(href: '/vite-production/assets/application.f510c1e9.css', crossorigin: 'anonymous'),
-    ].join.tr("\n", ''), vite_javascript_tag('application').tr("\n", '')
+    ].join, vite_javascript_tag('application')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
     assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')
@@ -89,5 +89,13 @@ class HelperTest < ActionView::TestCase
     attrs[1], attrs[2] = attrs[2], attrs[1] if Rails.gem_version > Gem::Version.new('6.1') && Rails.gem_version < Gem::Version.new('6.2') && attrs[2]
     attrs.reverse! if Rails.gem_version > Gem::Version.new('6.2')
     %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
+  end
+
+  def assert_similar(*args)
+    assert_equal(*args.map { |str|
+      return str.tr("\n", '').gsub('" />', '">').gsub('"/>', '">') if RUBY_VERSION.start_with?('2.4')
+
+      str.tr("\n", '')
+    })
   end
 end

@@ -5,10 +5,14 @@ require 'action_view/railtie'
 
 class Rails::Console; end
 
-require 'spring/configuration'
-Spring.application_root = File.expand_path('..', __dir__)
-
-require 'vite_rails'
+if RUBY_VERSION.start_with?('2.4')
+  require 'vite_rails_legacy'
+  ViteRails = ViteRailsLegacy
+else
+  require 'spring/configuration'
+  Spring.application_root = File.expand_path('..', __dir__)
+  require 'vite_rails'
+end
 
 module TestApp
   class Application < ::Rails::Application
