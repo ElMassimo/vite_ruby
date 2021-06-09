@@ -69,6 +69,16 @@ In systems with constrained resources the [default timeout][devServerConnectTime
 
 If that doesn't work, verify that the [host] and [port] configuration is correct.
 
+### Requests to vite refuse to connect for `::1`
+
+In systems where `localhost` [defaults to `::1`](https://github.com/ElMassimo/vite_ruby/discussions/89?converting=1#discussioncomment-843021) it might be necessary to configure <kbd>[host]</kbd> to explicitly use `127.0.0.1`, since that's what [Vite uses by default](https://github.com/vitejs/vite/pull/2977/files#diff-35ba301b85014a4bfaa9cad2d8e7eafa41c4e8c2ddd5c193182241d9a1542082R45-R47).
+
+```json
+  "development": {
+    "host": "127.0.0.1",
+    "port": 3036,
+```
+
 ### Requests to vite sporadically return a 404 error response
 
 [See above](/guide/troubleshooting.html#build-is-triggered-when-the-dev-server-is-running), it could be related to the <kbd>[devServerConnectTimeout]</kbd>.
