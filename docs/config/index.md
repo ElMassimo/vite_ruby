@@ -90,13 +90,11 @@ export default defineConfig({
 
 ### autoBuild
 
-- **Default:** `false`
+- **Default:** `false` in <kbd>production</kbd>, `true` in <kbd>test</kbd> and <kbd>development</kbd>
 - **Env Var:** `VITE_RUBY_AUTO_BUILD`
 
-  By default, the generated config enables it for the <kbd>test</kbd> and <kbd>development</kbd> environments.
-
-  When enabled, Vite Ruby will automatically track changes to <kbd>[sourceCodeDir]</kbd>,
-  and trigger a Vite build on demand if files have changed.
+  When enabled, Vite Ruby will track changes to <kbd>[sourceCodeDir]</kbd>,
+  and trigger a Vite build on demand if files have changed. Additional files can be specified with <kbd>[watchAdditionalPaths]</kbd>.
 
   This is very convenient when running integration tests, or when a developer
   does not want to start the Vite development server (although it's highly recommended).
@@ -173,8 +171,7 @@ You can customize this behavior using the following options.
 
   Vite Ruby will alias this directory as `~/` and `@/`, allowing you to make absolute imports which are more convenient.
 
-  It be watched for changes when using <kbd>[autoBuild]</kbd>, you can add aditional paths
-  to keep track of using <kbd>[watchAdditionalPaths]</kbd>.
+  Files in this directory will be tracked for changes when using <kbd>[autoBuild]</kbd>.
 
 ### entrypointsDir
 
@@ -257,6 +254,7 @@ You can customize this behavior using the following options.
     },
   })
   ```
+
 <br>
 <br>
 <br>

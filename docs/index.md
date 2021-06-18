@@ -2,7 +2,7 @@
 home: true
 
 title: ''
-
+tagline: Bringing joy to your frontend experience
 
 altActionText: Get Started
 altActionLink: /guide/
@@ -29,5 +29,5 @@ features:
     details: Updates with HMR stay fast as your app grows thanks to Vite.
   - title: 🚀 Zero-Config Deploys
     details: Integrates with Rake asset management tasks.
-footer: MIT Licensed | Copyright © 2020 Máximo Mussini
+footer: MIT Licensed | Copyright © 2021 Máximo Mussini
 ---
