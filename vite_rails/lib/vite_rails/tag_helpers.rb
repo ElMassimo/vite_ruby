@@ -45,7 +45,11 @@ module ViteRails::TagHelpers
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
   def vite_stylesheet_tag(*names, **options)
-    style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet) }
+    force_build = options.delete(:force_build)
+    style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet, force_build: force_build) }
+    if force_build
+      style_paths.map! { |path| path + "?force_build=true" }
+    end
     stylesheet_link_tag(*style_paths, **options)
   end
 

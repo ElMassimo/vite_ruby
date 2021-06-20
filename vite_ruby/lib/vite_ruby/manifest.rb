@@ -77,10 +77,10 @@ protected
   # Example:
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
-  def lookup(name, type: nil)
-    @build_mutex.synchronize { builder.build } if should_build?
+  def lookup(name, type: nil, force_build: false)
+    @build_mutex.synchronize { builder.build } if force_build || should_build?
 
-    find_manifest_entry(with_file_extension(name, type))
+    find_manifest_entry(with_file_extension(name, type), force_build: force_build)
   end
 
 private
@@ -96,8 +96,8 @@ private
   end
 
   # Internal: Finds the specified entry in the manifest.
-  def find_manifest_entry(name)
-    if dev_server_running?
+  def find_manifest_entry(name, force_build: false)
+    if dev_server_running? && !force_build
       { 'file' => prefix_vite_asset(name.to_s) }
     else
       manifest[name.to_s]

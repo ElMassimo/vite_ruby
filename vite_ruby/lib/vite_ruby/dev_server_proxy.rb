@@ -50,6 +50,8 @@ private
 
   def vite_should_handle?(env)
     path, query, referer = env['PATH_INFO'], env['QUERY_STRING'], env['HTTP_REFERER']
+    return false if query&.include?('force_build=true')
+
     return true if path.start_with?(vite_asset_url_prefix) # Vite asset
     return true if path.start_with?(VITE_DEPENDENCY_PREFIX) # Packages and imports
     return true if query&.start_with?('t=') # Hot Reload for a stylesheet
