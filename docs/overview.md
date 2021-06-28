@@ -20,6 +20,7 @@
 [commands]: /guide/development.html#cli-commands-⌨%EF%B8%8F
 [development]: /guide/development
 [assetHost]: /config/#assethost
+[vite_client_tag]: /guide/rails.html#enabling-hot-module-reload-🔥
 
 # Overview
 
@@ -64,10 +65,12 @@ allowing files to be processed and served **on demand**.
 
 No files are written to the `public` directory.
 
-When using <kbd>[vite_client_tag][tag helpers]</kbd>, the browser will establish
+:::tip Instant Updates ⚡️
+When using <kbd>[vite_client_tag]</kbd>, the browser will establish
 a WebSocket connection with the Vite development server in order to
 receive notifications whenever a module has been invalidated and should be
 re-fetched (usually when the user edits the source code).
+:::
 
 ### In Production
 
