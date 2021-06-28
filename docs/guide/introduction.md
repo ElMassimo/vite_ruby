@@ -16,6 +16,7 @@
 [no bundling]: https://vitejs.dev/guide/why.html#the-problems
 [bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
 [motivation]: /motivation
+[overview]: /overview
 
 # Introduction
 
@@ -47,7 +48,7 @@ with the difference in speed during development.
 
 By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features!
 
-Interested in hearing more? [Read about __my personal motivation__][motivation].
+Interested in hearing more? [Read about __my personal motivation__][motivation], or [learn __how it works__][overview].
 
 ## Features ⚡️
 

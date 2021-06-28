@@ -18,6 +18,7 @@
 [connection]: https://vimeo.com/36579366
 [changes the game]: https://twitter.com/patak_js/status/1361383298052878342
 [Nick Cherry]: https://blog.coinbase.com/optimizing-react-native-7e7bf7ac3a34
+[overview]: /overview
 
 # Motivation
 
@@ -64,7 +65,7 @@ Then, I chose to refine it, [document it][project], and [release it][github]. Th
 
 ## Vite Ruby <img class="logo" src="/logo.svg" alt="Logo"/>
 
-The design of [Vite Ruby][project] shares a common thread with the design of [Vite.js].
+The [design of Vite Ruby][overview] shares a common thread with the design of [Vite.js].
 
 I wanted to achieve a nice experience out of the box by providing [strong conventions][development], while at the same time allowing the user to opt-out or [tweak as needed][config].
 

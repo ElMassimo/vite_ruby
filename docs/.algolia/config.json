@@ -47,6 +47,12 @@
       "selectors_key": "faqs",
       "tags": ["faqs"],
       "page_rank": 1
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/overview",
+      "selectors_key": "faqs",
+      "tags": ["faqs"],
+      "page_rank": 1
     }
   ],
   "stop_urls": [

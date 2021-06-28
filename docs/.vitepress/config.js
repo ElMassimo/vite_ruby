@@ -96,6 +96,7 @@ module.exports = {
           children: [
             { text: 'Troubleshooting', link: '/guide/troubleshooting' },
             { text: 'Motivation', link: '/motivation' },
+            { text: 'Overview', link: '/overview' },
             { text: 'Debugging', link: '/guide/debugging' },
           ],
         },
