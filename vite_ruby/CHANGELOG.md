@@ -1,3 +1,12 @@
+## [1.2.13](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.12...vite_ruby@1.2.13) (2021-06-30)
+
+
+### Features
+
+* Improve the error message when npm packages are missing ([9159557](https://github.com/ElMassimo/vite_ruby/commit/9159557e5152547554cfe519fae8dbefe26686fb))
+
+
+
 ## [1.2.12](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.11...vite_ruby@1.2.12) (2021-06-08)
 
 
