@@ -4,7 +4,7 @@
 class ViteRuby::MissingExecutableError < ViteRuby::Error
   def initialize(error = nil)
     super <<~MSG
-      ❌ The vite binary is not available. Have you installed Vite?
+      ❌ The vite binary is not available. Have you installed the npm packages?
 
       :troubleshooting:
       #{ error }
