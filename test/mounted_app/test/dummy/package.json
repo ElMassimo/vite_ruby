@@ -4,7 +4,7 @@
   "devDependencies": {
     "ci": "^2.0.0",
     "ni": "^0.0.2",
-    "vite": "^2.2.3",
-    "vite-plugin-ruby": "^2.0.2"
+    "vite": "^2.3.8",
+    "vite-plugin-ruby": "^2.0.4"
   }
 }
