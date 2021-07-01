@@ -1,3 +1,12 @@
+## [1.2.14](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.13...vite_ruby@1.2.14) (2021-07-01)
+
+
+### Features
+
+* Add support for Jekyll installer ([7b942ec](https://github.com/ElMassimo/vite_ruby/commit/7b942ec745eb28092d684056b02df675ad6ececa))
+
+
+
 ## [1.2.13](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.12...vite_ruby@1.2.13) (2021-06-30)
 
 
