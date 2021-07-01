@@ -28,6 +28,14 @@ class ViteRuby::CLI::Install < Dry::CLI::Command
 
 protected
 
+  # Internal: The JS packages that should be added to the app.
+  def js_dependencies
+    [
+      "vite@#{ ViteRuby::DEFAULT_VITE_VERSION }",
+      "vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }",
+    ]
+  end
+
   # Internal: Setup for a plain Rack application.
   def setup_app_files
     copy_template 'config/vite.json', to: config.config_path
@@ -73,7 +81,7 @@ private
     write(package_json, '{}') unless package_json.exist?
 
     Dir.chdir(root) do
-      deps = "vite@#{ ViteRuby::DEFAULT_VITE_VERSION } vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }"
+      deps = js_dependencies.join(' ')
       _, stderr, status = ViteRuby::IO.capture("npx --package @antfu/ni -- ni -D #{ deps }", stdin_data: "\n")
       _, stderr, = ViteRuby::IO.capture("yarn add -D #{ deps }") unless status.success?
       say("Could not install JS dependencies.\n", stderr) unless stderr.to_s.empty?
@@ -117,5 +125,5 @@ end
 
 # NOTE: This allows framework-specific variants to extend the installation.
 ViteRuby.framework_libraries.each do |_framework, library|
-  require "#{ library.name }/installation"
+  require "#{ library.name.tr('-', '/') }/installation"
 end

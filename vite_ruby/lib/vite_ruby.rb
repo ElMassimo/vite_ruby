@@ -21,8 +21,16 @@ class ViteRuby
   DEFAULT_VITE_VERSION = '^2.2.3'
   DEFAULT_PLUGIN_VERSION = '^2.0.2'
 
-  # Internal: Ruby Frameworks that have a companion library for Vite Ruby.
-  SUPPORTED_FRAMEWORKS = %w[rails hanami roda padrino sinatra].freeze
+  # Internal: Companion libraries for Vite Ruby, and their target framework.
+  COMPANION_LIBRARIES = {
+    'vite_rails' => 'rails',
+    'vite_hanami' => 'hanami',
+    'vite_roda' => 'roda',
+    'vite_padrino' => 'padrino',
+    'vite_sinatra' => 'sinatra',
+    'jekyll-vite' => 'jekyll',
+    'vite_rails_legacy' => 'rails',
+  }
 
   class << self
     extend Forwardable
@@ -72,8 +80,8 @@ class ViteRuby
     # Internal: Detects if the application has installed a framework-specific
     # variant of Vite Ruby.
     def framework_libraries
-      SUPPORTED_FRAMEWORKS.map { |framework|
-        if library = (Gem.loaded_specs["vite_#{ framework }"] || Gem.loaded_specs["vite_#{ framework }_legacy"])
+      COMPANION_LIBRARIES.map { |name, framework|
+        if library = Gem.loaded_specs[name]
           [framework, library]
         end
       }.compact
