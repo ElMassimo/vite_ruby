@@ -22,6 +22,7 @@
 [GitHub Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [Troubleshooting]: /guide/troubleshooting
 [Recommended Plugins]: /guide/plugins
+[jekyll-vite]: https://github.com/ElMassimo/jekyll-vite
 
 # Getting Started
 
@@ -41,6 +42,7 @@ And then run:
 
     $ bundle install
 
+- If using Jekyll, install the <kbd>[jekyll-vite]</kbd> gem instead.
 - If using Hanami, install the <kbd>[vite_hanami]</kbd> gem instead.
 - If using Padrino, install the <kbd>[vite_padrino]</kbd> gem instead.
 - If using other Ruby web frameworks, install the <kbd>[vite_ruby]</kbd> gem.

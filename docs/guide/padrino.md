@@ -36,7 +36,7 @@ templates, you can use the following helpers:
 - <kbd>[vite_typescript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a TypeScript file
 - <kbd>[vite_stylesheet_tag][helpers]</kbd>: Renders a `<link>` tag referencing a CSS file
 
-You can pass any options supported by <kbd>javascript</kbd> and <kbd>stylesheet</kbd>.
+You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd>stylesheet_link_tag</kbd>.
 
 ```haml
 %head

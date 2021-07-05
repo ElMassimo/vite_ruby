@@ -23,6 +23,7 @@
 [entrypointsDir]: /config/#entrypointsdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
+[jekyll-vite]: https://jekyll-vite.netlify.app/posts/tag-helpers/
 
 # Developing with Vite
 
@@ -124,6 +125,7 @@ development you can pass `--mode production` to simulate a production build.
 Tag helpers are provided in the framework-specific integrations:
 
   - [Rails](/guide/rails)
+  - [Jekyll][jekyll-vite]
   - [Hanami](/guide/hanami)
   - [Padrino](/guide/padrino)
   - [Plugin Legacy](/guide/plugin-legacy)

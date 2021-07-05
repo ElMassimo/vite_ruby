@@ -17,6 +17,7 @@
 [bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
 [motivation]: /motivation
 [overview]: /overview
+[jekyll-vite]: https://github.com/ElMassimo/jekyll-vite
 
 # Introduction
 
@@ -26,7 +27,7 @@
 
 - <kbd>[vite_ruby]</kbd> can be used in plain Rack apps, and is all you need when using HTML entrypoints.
 
-- There are also integrations for [Hanami][vite_hanami] and [Padrino][vite_padrino].
+- There are also integrations for [Jekyll][jekyll-vite], [Hanami][vite_hanami], and [Padrino][vite_padrino].
 
 ## Why Vite? 🤔
 
