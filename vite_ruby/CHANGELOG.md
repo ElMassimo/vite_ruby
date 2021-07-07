@@ -1,3 +1,9 @@
+## <small>1.2.16 (2021-07-07)</small>
+
+* feat: Enable usage in engines by using `run` from the current instance ([023a61d](https://github.com/ElMassimo/vite_ruby/commit/023a61d))
+
+
+
 ## [1.2.15](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.14...vite_ruby@1.2.15) (2021-07-01)
 
 
