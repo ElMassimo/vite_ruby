@@ -28,6 +28,9 @@ gem 'vite_rails'
 # gem 'vite_plugin_legacy', path: '../../vite_plugin_legacy'
 gem 'vite_plugin_legacy'
 
+# Example on a Rails engine that uses Vite Ruby.
+gem 'administrator', path: '../example_engine'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
