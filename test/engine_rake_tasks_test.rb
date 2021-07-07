@@ -58,7 +58,10 @@ class EngineRakeTasksTest < ViteRuby::Test
   def test_cli_commands
     within_mounted_app_root {
       ViteRuby.commands.verify_install
-      refresh_config('VITE_RUBY_ROOT' => Dir.pwd)
+
+      ENV['VITE_RUBY_ROOT'] = Dir.pwd
+      refresh_config
+
       ViteRuby::CLI::Install.new.call
       ViteRuby.commands.verify_install
       ViteRuby::CLI::Version.new.call
@@ -70,6 +73,9 @@ class EngineRakeTasksTest < ViteRuby::Test
       }
       ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)
     }
+  ensure
+    ENV.delete('VITE_RUBY_ROOT')
+    refresh_config
   end
 
 private
@@ -88,7 +94,7 @@ private
     mock.expect(:call, [:stdout, :stderr, status]) do |*argv, **options|
       assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
     end
-    ViteRuby.stub(:run, mock, &block)
+    ViteRuby.stub_any_instance(:run, ->(*stub_args, **stub_opts) { mock.call(*stub_args, **stub_opts) }, &block)
     mock.verify
   end
 

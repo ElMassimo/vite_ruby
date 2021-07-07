@@ -84,7 +84,7 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_missing_executable
-    refresh_config('VITE_RUBY_VITE_BIN_PATH' => 'none/vite')
+    refresh_config(vite_bin_path: 'none/vite')
 
     # It fails because we stub the File.exist? check, so the binary is missing.
     error = assert_raises(ViteRuby::MissingExecutableError) {

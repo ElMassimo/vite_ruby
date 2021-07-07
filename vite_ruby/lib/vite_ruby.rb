@@ -35,19 +35,11 @@ class ViteRuby
   class << self
     extend Forwardable
 
-    def_delegators :instance, :config, :commands, :run_proxy?
+    def_delegators :instance, :config, :commands, :env, :run, :run_proxy?
     def_delegators :config, :mode
 
     def instance
-      @instance ||= ViteRuby.new
-    end
-
-    # Public: Additional environment variables to pass to Vite.
-    #
-    # Example:
-    #   ViteRuby.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
-    def env
-      @env ||= load_env_variables
+      @instance ||= new
     end
 
     # Internal: Refreshes the manifest.
@@ -60,21 +52,9 @@ class ViteRuby
       load File.expand_path('tasks/vite.rake', __dir__)
     end
 
-    # Internal: Executes the vite binary.
-    def run(argv, **options)
-      ViteRuby::Runner.new(instance).run(argv, **options)
-    end
-
-    # Internal: Refreshes the config after setting the env vars.
-    def reload_with(env_vars)
-      env.update(env_vars)
-      @instance = nil
-      config
-    end
-
-    # Internal: Allows to obtain any env variables for configuration options.
-    def load_env_variables
-      ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
+    # Internal: Creates a new instance with the specified options.
+    def reload_with(**config_options)
+      @instance = new(**config_options)
     end
 
     # Internal: Detects if the application has installed a framework-specific
@@ -89,6 +69,10 @@ class ViteRuby
   end
 
   attr_writer :logger
+
+  def initialize(**config_options)
+    @config_options = config_options
+  end
 
   def logger
     @logger ||= Logger.new($stdout)
@@ -107,12 +91,25 @@ class ViteRuby
     @running_at = false
   end
 
+  # Public: Additional environment variables to pass to Vite.
+  #
+  # Example:
+  #   ViteRuby.env['VITE_RUBY_CONFIG_PATH'] = 'config/alternate_vite.json'
+  def env
+    @env ||= ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
+  end
+
   # Public: The proxy for assets should only run in development mode.
   def run_proxy?
     config.mode == 'development'
   rescue StandardError => error
     logger.error("Failed to check mode for Vite: #{ error.message }")
     false
+  end
+
+  # Internal: Executes the vite binary.
+  def run(argv, **options)
+    (@runner ||= ViteRuby::Runner.new(self)).run(argv, **options)
   end
 
   # Public: Keeps track of watched files and triggers builds as needed.
@@ -127,7 +124,7 @@ class ViteRuby
 
   # Public: Current instance configuration for Vite.
   def config
-    @config ||= ViteRuby::Config.resolve_config
+    @config ||= ViteRuby::Config.resolve_config(**@config_options)
   end
 
   # Public: Enables looking up assets managed by Vite using name and type.

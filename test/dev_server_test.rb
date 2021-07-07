@@ -6,12 +6,12 @@ class DevServerTest < ViteRuby::Test
   def test_not_running
     refute ViteRuby.instance.dev_server_running?
 
-    refresh_config('VITE_RUBY_MODE' => 'development')
+    refresh_config(mode: 'development')
     refute ViteRuby.instance.dev_server_running?
   end
 
   def test_running
-    refresh_config('VITE_RUBY_MODE' => 'development')
+    refresh_config(mode: 'development')
     ViteRuby.instance.instance_variable_set('@running_at', Time.now)
     assert ViteRuby.instance.dev_server_running?
   ensure

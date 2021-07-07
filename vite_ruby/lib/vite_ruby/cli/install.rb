@@ -72,7 +72,7 @@ private
   def create_configuration_files
     copy_template 'config/vite.config.ts', to: root.join('vite.config.ts')
     setup_app_files
-    ViteRuby.reload_with('VITE_RUBY_CONFIG_PATH' => config.config_path)
+    ViteRuby.reload_with(config_path: config.config_path)
   end
 
   # Internal: Installs vite and vite-plugin-ruby at the project level.

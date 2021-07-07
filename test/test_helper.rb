@@ -29,9 +29,8 @@ module ViteRubyTestHelpers
     refresh_config
   end
 
-  def refresh_config(env_variables = ViteRuby.load_env_variables)
-    ViteRuby.env.tap(&:clear)
-    ViteRuby.reload_with(env_variables)
+  def refresh_config(**options)
+    ViteRuby.reload_with(**options).config
   end
 
   def with_rails_env(env)

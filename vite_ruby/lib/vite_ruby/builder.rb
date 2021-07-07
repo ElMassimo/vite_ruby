@@ -33,7 +33,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :logger
+  def_delegators :@vite_ruby, :config, :logger, :run
 
   # Internal: Reads metadata recorded on the last build, if it exists.
   def last_build_attrs
@@ -69,7 +69,7 @@ private
   def build_with_vite(*args)
     logger.info 'Building with Vite ⚡️'
 
-    stdout, stderr, status = ViteRuby.run(['build', *args])
+    stdout, stderr, status = run(['build', *args])
     log_build_result(stdout, stderr.to_s, status)
 
     status.success?
