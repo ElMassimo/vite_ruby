@@ -18,7 +18,7 @@ require 'pry-byebug'
 
 require_relative 'test_app/config/environment'
 Rails.env = 'production'
-ViteRuby.reload_with({})
+ViteRuby.reload_with
 
 module ViteRubyTestHelpers
   def setup

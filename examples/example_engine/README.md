@@ -1,28 +1,29 @@
-# Administrator
-Short description and motivation.
+# Vite Ruby ➕ Rails Engine
 
-## Usage
-How to use my plugin.
+An example on how to configure a Rails engine to use Vite Ruby.
 
-## Installation
-Add this line to your application's Gemfile:
+## Configuration ⚙️
 
-```ruby
-gem 'administrator'
-```
+- Add `vite_rails` as a dependency in the engine `gemspec`
+- Run `bundle install` and `bundle exec vite install` in the engine directory
+- Check that the following files were added and configure them:
+  - `config/vite.json`: Use a different `publicOutputDir` and `development.port` than the parent application to avoid conflicts
+  - `vite.config.ts`: Should be using `vite-plugin-ruby`
 
-And then execute:
-```bash
-$ bundle
-```
+See `engine.rb` and ` application_helper.rb` in this example to add the rest
+of the setup.
 
-Or install it yourself as:
-```bash
-$ gem install administrator
-```
+The `vite_manifest` must be overriden in the engine view helpers.
 
-## Contributing
-Contribution directions go here.
+## Development 💻
 
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+In order to enable HMR for assets inside the engine, run `bin/vite` inside the
+engine directory, and make sure you are rendering `vite_client_tag` in your
+engine views.
+
+Use a different `development.port` to prevent connecting to the same Vite dev
+server as the parent app.
+
+## Deployment 🚀
+
+Run `bin/vite build` inside the engine directory to precompile assets.

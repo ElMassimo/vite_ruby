@@ -6,9 +6,9 @@
 .byebug_history
 
 # Vite Ruby
-/public/vite
-/public/vite-dev
-/public/vite-test
+/public/administrator-vite
+/public/administrator-vite-dev
+/public/administrator-vite-test
 node_modules
 *.local
 .DS_Store

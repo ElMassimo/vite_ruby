@@ -3,3 +3,10 @@ require "bundler/setup"
 load "rails/tasks/statistics.rake"
 
 require "bundler/gem_tasks"
+require "vite_ruby"
+
+ViteRuby.install_tasks
+ViteRuby.config.root # Ensure the engine is set as the root.
+
+APP_RAKEFILE = File.expand_path('../rails/Rakefile', __dir__)
+load 'rails/tasks/engine.rake'

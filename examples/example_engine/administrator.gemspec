@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 6.1.3"
   spec.add_dependency "vite_rails"
+  spec.add_dependency "bootsnap"
 end
