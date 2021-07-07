@@ -57,7 +57,10 @@ You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd
 For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
 
 ```erb
+<!-- <entrypoints-dir>/images/logo.svg -->
 <img src="<%= vite_asset_path 'images/logo.svg' %>" />
+
+<!-- <entrypoints-dir>/typography.css -->
 <link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
 ```
 
