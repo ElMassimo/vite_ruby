@@ -101,14 +101,6 @@ Add a file path or dir glob in <kbd>[watchAdditionalPaths]</kbd> to ensure chang
 
 If you have run <kbd>bundle exec vite install</kbd>, check the output for errors.
 
-A bug prior to [`vite_ruby@1.0.14`](https://github.com/ElMassimo/vite_ruby/pull/23) caused these packages not be added during installation.
-
-### Images only load if placed on `entrypoints`
-
-This is a bug affecting how static files are served, introduced in [`vite@2.0.4`](https://github.com/vitejs/vite/pull/2201). 
-
-Make sure you are using [`vite@2.0.5`](https://github.com/vitejs/vite/pull/2309) or higher.
-
 ### Tailwind CSS is slow to load
 
 A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/).
