@@ -33,7 +33,7 @@ private
     uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject { |str| str.to_s.strip.empty? }.join('?') }
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
       .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
-      .sub(/(\.(?!min)\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.
+      .sub(/(\.(?!min|module)\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.
     env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 

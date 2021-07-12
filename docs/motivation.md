@@ -42,7 +42,7 @@ If you have worked on a large frontend application, you have probably experience
 
 It gets worse when HMR or incremental compilation starts to slide from under one second, to one, two, three seconds, or more! _Should I refresh the page?_
 
-<Quote author="Bret Victor, Inventing on Principle" href="https://vimeo.com/36579366">Creators need an <em><b>immediate</b></em> connection to what they're creating.</Quote>
+<Quote v-once author="Bret Victor, Inventing on Principle" href="https://vimeo.com/36579366">Creators need an <em><b>immediate</b></em> connection to what they're creating.</Quote>
 
 ## Vite—no bundling in development
 
