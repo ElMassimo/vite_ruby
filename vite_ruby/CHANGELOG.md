@@ -1,10 +1,10 @@
-## <small>1.2.17 (2021-07-12)</small>
+## [1.2.17](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.16...vite_ruby@1.2.17) (2021-07-12)
 
 * fix: Proxy CSS Modules requests to Vite.js with the correct extension (close #98) ([8976872](https://github.com/ElMassimo/vite_ruby/commit/8976872)), closes [#98](https://github.com/ElMassimo/vite_ruby/issues/98)
 
 
 
-## <small>1.2.16 (2021-07-07)</small>
+## [1.2.16](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.15...vite_ruby@1.2.16) (2021-07-07)
 
 * feat: Enable usage in engines by using `run` from the current instance ([023a61d](https://github.com/ElMassimo/vite_ruby/commit/023a61d))
 
