@@ -49,12 +49,16 @@ private
   end
 
   def vite_should_handle?(env)
-    path, query, referer = env['PATH_INFO'], env['QUERY_STRING'], env['HTTP_REFERER']
+    path = env['PATH_INFO']
     return true if path.start_with?(vite_asset_url_prefix) # Vite asset
     return true if path.start_with?(VITE_DEPENDENCY_PREFIX) # Packages and imports
-    return true if query&.start_with?('t=') # Hot Reload for a stylesheet
-    return true if query&.start_with?('import&') # Hot Reload for an imported entrypoint
-    return true if referer && URI.parse(referer).path.start_with?(vite_asset_url_prefix) # Entry imported from another entry.
+    return true if vite_entrypoint?(path) # HMR for entrypoint stylesheets and imports does not include the prefix
+  end
+
+  # Internal: We want to avoid checking the filesystem if possible
+  def vite_entrypoint?(path)
+    path.include?('.') &&
+      config.resolved_entrypoints_dir.join(path.delete_prefix('/')).file?
   end
 
   def vite_asset_url_prefix
