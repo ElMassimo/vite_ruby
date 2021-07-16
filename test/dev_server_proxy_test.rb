@@ -28,7 +28,7 @@ class DevServerProxyTest < ViteRuby::Test
   end
 
   def test_non_vite_asset
-    get_with_dev_server_running '/example_import.js'
+    get_with_dev_server_running '/fake_import.js'
     assert_not_forwarded
   end
 
