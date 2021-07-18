@@ -79,6 +79,16 @@ The following rake tasks are available:
 You can provide `RACK_ENV=production` to simulate a production build locally.
 :::
 
+## Compressing Assets 📦
+
+Most CDN and edge service providers will automatically serve compressed assets,
+which is why Vite does not create compressed copies of each file.
+
+If your hosting service or server setup does not handle compression, you can
+use a Rollup plugin such as [`rollup-plugin-gzip`](https://github.com/kryops/rollup-plugin-gzip) to output gzip and brotli versions of each asset.
+
+Check [this discussion](https://github.com/ElMassimo/vite_ruby/discussions/101#discussioncomment-1019222) for an example setup.
+
 ## Using Heroku
 
 In order to deploy to Heroku, it's necessary to add the [nodejs][nodejs buildpack] and [ruby][ruby buildpack] buildpacks.
