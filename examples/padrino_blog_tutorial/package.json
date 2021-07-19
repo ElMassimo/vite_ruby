@@ -1,1 +1,9 @@
-{"devDependencies":{"vite":"^2.0.3","vite-plugin-ruby":"^1.0.13"},"dependencies":{"bulma":"^0.9.2"}}
+{
+  "devDependencies": {
+    "vite": "^2.4",
+    "vite-plugin-ruby":"^2.0"
+  },
+  "dependencies": {
+    "bulma": "^0.9.2"
+  }
+}

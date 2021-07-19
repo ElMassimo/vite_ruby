@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'hanami/helpers'
 require 'hanami/assets'
 
@@ -18,9 +20,9 @@ module Web
       #
       # When you add new directories, remember to add them here.
       #
-      load_paths << [
-        'controllers',
-        'views'
+      load_paths << %w[
+        controllers
+        views
       ]
 
       # Handle exceptions with HTTP statuses (true) or don't catch them (false).
@@ -143,7 +145,7 @@ module Web
         # Specify sources for assets
         #
         sources << [
-          'assets'
+          'assets',
         ]
       end
 
@@ -220,7 +222,7 @@ module Web
       #
       #  * https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives
       #
-      security.content_security_policy %{
+      security.content_security_policy %(
         form-action 'self';
         frame-ancestors 'self';
         base-uri 'self';
@@ -231,11 +233,10 @@ module Web
         style-src 'self' 'unsafe-inline' https:;
         font-src 'self';
         object-src 'none';
-        plugin-types application/pdf;
         child-src 'self';
         frame-src 'self';
         media-src 'self'
-      }
+      )
 
       ##
       # FRAMEWORKS
@@ -269,7 +270,7 @@ module Web
       security.content_security_policy(
         security.content_security_policy
           .sub('script-src', "script-src 'unsafe-eval'")
-          .sub('connect-src', "connect-src ws://#{ ViteRuby.config.host_with_port }")
+          .sub('connect-src', "connect-src ws://#{ ViteRuby.config.host_with_port }"),
       )
       # Don't handle exceptions, render the stack trace
       handle_exceptions false
