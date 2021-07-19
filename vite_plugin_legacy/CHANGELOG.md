@@ -1,3 +1,9 @@
+## <small>0.5.6 (2021-07-19)</small>
+
+* feat: Simplify implementation of legacy tag helper ([70bfac1](https://github.com/ElMassimo/vite_ruby/commit/70bfac1))
+
+
+
 ## [0.5.5](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.4...vite_plugin_legacy@0.5.5) (2021-03-18)
 
 
