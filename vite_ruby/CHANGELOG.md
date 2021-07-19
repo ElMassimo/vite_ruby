@@ -1,3 +1,12 @@
+## <small>1.2.18 (2021-07-19)</small>
+
+* chore: Avoid inline regex in dev server proxy ([77728aa](https://github.com/ElMassimo/vite_ruby/commit/77728aa))
+* test: Update after experimental proxy changes ([1d2e3c7](https://github.com/ElMassimo/vite_ruby/commit/1d2e3c7))
+* release: vite_ruby@1.2.18-rc1 ([be92933](https://github.com/ElMassimo/vite_ruby/commit/be92933))
+* fix: Proxy entrypoint HMR requests only after verifying the file exists (close #102) ([67c22ec](https://github.com/ElMassimo/vite_ruby/commit/67c22ec)), closes [#102](https://github.com/ElMassimo/vite_ruby/issues/102)
+
+
+
 ## [1.2.17](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.16...vite_ruby@1.2.17) (2021-07-12)
 
 * fix: Proxy CSS Modules requests to Vite.js with the correct extension (close #98) ([8976872](https://github.com/ElMassimo/vite_ruby/commit/8976872)), closes [#98](https://github.com/ElMassimo/vite_ruby/issues/98)
