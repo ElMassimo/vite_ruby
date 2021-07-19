@@ -8,6 +8,7 @@ gemspec path: './vite_ruby'
 gemspec path: './vite_rails'
 
 group :development, :test do
+  gem 'benchmark-ips'
   gem 'rubocop', '~> 1.9'
   gem 'rubocop-minitest', '~> 0.10'
   gem 'rubocop-performance', '~> 1.9'

@@ -58,7 +58,7 @@ private
   # Internal: We want to avoid checking the filesystem if possible
   def vite_entrypoint?(path)
     path.include?('.') &&
-      config.resolved_entrypoints_dir.join(path.sub(%r{^/}, '')).file?
+      config.resolved_entrypoints_dir.join(path.start_with?('/') ? path[1..-1] : path).file?
   end
 
   def vite_asset_url_prefix
