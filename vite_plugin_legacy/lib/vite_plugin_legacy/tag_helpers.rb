@@ -8,9 +8,8 @@ module VitePluginLegacy::TagHelpers
     return if ViteRuby.instance.dev_server_running?
 
     legacy_name = name.sub(/(\..+)|$/, '-legacy\1')
-    id = "vite-#{ legacy_name.tr(' .\'', '-') }-entry"
-    import_tag = content_tag(:script, nomodule: true, id: id, 'data-src': vite_asset_path(legacy_name, type: asset_type)) {
-      "System.import(document.getElementById('#{ id }').getAttribute('data-src'))".html_safe
+    import_tag = content_tag(:script, nomodule: true) {
+      "System.import('#{ vite_asset_path(legacy_name, type: asset_type) }')".html_safe
     }
 
     safe_join [vite_legacy_polyfill_tag, import_tag]

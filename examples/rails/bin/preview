@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Starts the Rails server in production mode.
+RAILS_SERVE_STATIC_FILES=true RAILS_ENV=production bin/rails s "$@"
