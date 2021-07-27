@@ -1,3 +1,12 @@
+## [2.0.13](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.12...vite_rails@2.0.13) (2021-07-27)
+
+
+### Features
+
+* Set config.javascript_path so that zeitwerk ignores frontend files ([bab359f](https://github.com/ElMassimo/vite_ruby/commit/bab359f66a5942904e91e2a1a51b440072ba44af))
+
+
+
 ## [2.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@2.0.11...vite_rails@2.0.12) (2021-05-24)
 
 

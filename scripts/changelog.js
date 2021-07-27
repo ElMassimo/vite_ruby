@@ -19,8 +19,7 @@ const isRubyPackage = name !== 'vite-plugin-ruby'
  * @param {string[]} args
  * @param {object} opts
  */
-const run = (bin, args, opts = {}) =>
-  execa(bin, args, { stdio: 'inherit', ...opts })
+const run = async (bin, args, opts = {}) => await execa(bin, args, { stdio: 'inherit', ...opts })
 
 /**
  * @param {string} paths
@@ -45,7 +44,15 @@ function writePackageJson (name) {
 async function main () {
   if (isRubyPackage) writePackageJson(name)
 
-  await run('npx', ['conventional-changelog', `-p angular -i ${name}/CHANGELOG.md -s -t ${name}@ --pkg ./${name}/package.json --commit-path ./${name}`])
+  await run('npx', [
+    'conventional-changelog',
+    '-p', 'angular',
+    '-i', `${name}/CHANGELOG.md`,
+    '-s',
+    '-t', `${name}@`,
+    '--pkg', `./${name}/package.json`,
+    '--commit-path', `./${name}`,
+  ])
 
   if (isRubyPackage) fs.rmSync(resolve('package.json'))
 }
