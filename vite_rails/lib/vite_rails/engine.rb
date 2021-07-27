@@ -33,4 +33,9 @@ class ViteRails::Engine < Rails::Engine
       end
     end
   end
+
+  initializer 'vite_rails.set_source' do |app|
+    source_dir = ViteRuby.config.root.join(ViteRuby.config.source_code_dir)
+    app.config.javascript_path = source_dir.relative_path_from(Rails.root.join('app')).to_s
+  end
 end
