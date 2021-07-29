@@ -39,6 +39,10 @@ export function assetsManifestPlugin (): Plugin {
 
     Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)
       .forEach((chunk) => {
+        // Vite will output a single CSS chunk named style.css
+        if (!config.build.cssCodeSplit && chunk.name === 'style.css')
+          return manifest.set(chunk.name, { file: chunk.fileName, src: chunk.name })
+
         // NOTE: Rollup appends `.css` to the file so it's removed before matching.
         // See `resolveEntrypointsForRollup`.
         const src = withoutExtension(chunk.name!)
