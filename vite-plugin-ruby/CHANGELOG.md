@@ -1,3 +1,12 @@
+## [2.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.4...vite-plugin-ruby@2.0.5) (2021-07-29)
+
+
+### Bug Fixes
+
+* add style.css to the manifest when using build.cssCodeSplit: false (close [#109](https://github.com/ElMassimo/vite_ruby/issues/109)) ([9f07ac9](https://github.com/ElMassimo/vite_ruby/commit/9f07ac9db301c5189daaaa16204b469a453f15e5))
+
+
+
 ## [2.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.3...vite-plugin-ruby@2.0.4) (2021-05-10)
 
 
