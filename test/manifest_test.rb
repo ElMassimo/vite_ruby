@@ -93,6 +93,14 @@ class ManifestTest < ViteRuby::Test
     }
   end
 
+  def test_lookup_success_with_asset_host_and_dev_server
+    entry = { 'file' => 'http://example.com/vite-production/application.js' }
+    refresh_config(asset_host: 'http://example.com')
+    with_dev_server_running {
+      assert_equal entry, lookup!('application.js')
+    }
+  end
+
   def test_lookup_nil
     assert_nil lookup('foo.js')
   end

@@ -122,7 +122,7 @@ private
 
   # Internal: Scopes an asset to the output folder in public, as a path.
   def prefix_vite_asset(path)
-    File.join("/#{ config.public_output_dir }", path)
+    File.join(config.asset_host || '/', config.public_output_dir, path)
   end
 
   # Internal: Resolves the paths that reference a manifest entry.
