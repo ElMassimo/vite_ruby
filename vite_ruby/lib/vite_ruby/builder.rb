@@ -102,6 +102,7 @@ private
       'package.json',
       'vite.config.ts',
       'vite.config.js',
+      'windi.config.ts',
       config.config_path,
     ].freeze
   end
