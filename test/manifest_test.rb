@@ -13,7 +13,7 @@ class ManifestTest < ViteRuby::Test
     super
   end
 
-  delegate :path_for, :lookup, :lookup!, to: 'ViteRuby.instance.manifest'
+  delegate :path_for, :lookup, :lookup!, :vite_client_src, to: 'ViteRuby.instance.manifest'
 
   def test_lookup_exception!
     stub_builder(build_successful: true) {
@@ -90,6 +90,19 @@ class ManifestTest < ViteRuby::Test
     entry = { 'file' => '/vite-production/application.ts' }
     with_dev_server_running {
       assert_equal entry, lookup!('application', type: :typescript)
+    }
+  end
+
+  def test_vite_client_src
+    assert_nil vite_client_src
+
+    with_dev_server_running {
+      assert_equal '/vite-production/@vite/client', vite_client_src
+    }
+
+    refresh_config(asset_host: 'http://example.com')
+    with_dev_server_running {
+      assert_equal 'http://example.com/vite-production/@vite/client', vite_client_src
     }
   end
 

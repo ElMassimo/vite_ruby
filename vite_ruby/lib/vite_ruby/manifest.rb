@@ -43,7 +43,7 @@ class ViteRuby::Manifest
 
   # Public: The path from where the browser can download the Vite HMR client.
   def vite_client_src
-    prefix_vite_asset('@vite/client') if dev_server_running?
+    prefix_asset_with_host('@vite/client') if dev_server_running?
   end
 
   # Public: The content of the preamble needed by the React Refresh plugin.
@@ -51,7 +51,7 @@ class ViteRuby::Manifest
     if dev_server_running?
       <<~REACT_REFRESH
         <script type="module">
-          import RefreshRuntime from '#{ prefix_vite_asset('@react-refresh') }'
+          import RefreshRuntime from '#{ prefix_asset_with_host('@react-refresh') }'
           RefreshRuntime.injectIntoGlobalHook(window)
           window.$RefreshReg$ = () => {}
           window.$RefreshSig$ = () => (type) => type
@@ -123,6 +123,12 @@ private
   # Internal: Scopes an asset to the output folder in public, as a path.
   def prefix_vite_asset(path)
     File.join("/#{ config.public_output_dir }", path)
+  end
+
+  # Internal: Prefixes an asset with the `asset_host` for tags that do not use
+  # the framework tag helpers.
+  def prefix_asset_with_host(path)
+    File.join(config.asset_host || '/', config.public_output_dir, path)
   end
 
   # Internal: Resolves the paths that reference a manifest entry.
