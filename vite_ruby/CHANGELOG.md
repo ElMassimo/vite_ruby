@@ -1,3 +1,13 @@
+## [1.2.20](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.18...vite_ruby@1.2.20) (2021-07-30)
+
+
+### Features
+
+* use `asset_host` for Vite client if set during development ([89a338c](https://github.com/ElMassimo/vite_ruby/commit/89a338c2f23e6b43af9dadfd937fe29c82a08b10))
+* Watch Windi CSS config file by default if it exists ([842c5eb](https://github.com/ElMassimo/vite_ruby/commit/842c5eb46cd12887f28ed62cb656d81645c7239c))
+
+
+
 ## [1.2.18](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.17...vite_ruby@1.2.18) (2021-07-19)
 
 * fix: Proxy entrypoint HMR requests only after verifying the file exists (close #102) ([67c22ec](https://github.com/ElMassimo/vite_ruby/commit/67c22ec)), closes [#102](https://github.com/ElMassimo/vite_ruby/issues/102)
