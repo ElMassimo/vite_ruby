@@ -1,5 +1,6 @@
 {
   "all": {
+    "additionalInputGlobs": ["{assets,fonts,icons,images}/**/*", "index.html"],
     "watchAdditionalPaths": [
       "app/assets/**/*"
     ]
