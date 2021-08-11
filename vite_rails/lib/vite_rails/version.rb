@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module ViteRails
-  VERSION = '2.0.13'
+  VERSION = '3.0.0.beta.1'
 end
