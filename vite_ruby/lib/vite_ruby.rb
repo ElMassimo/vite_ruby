@@ -18,8 +18,8 @@ class ViteRuby
   ENV_PREFIX = 'VITE_RUBY'
 
   # Internal: Versions used by default when running `vite install`.
-  DEFAULT_VITE_VERSION = '^2.3.8'
-  DEFAULT_PLUGIN_VERSION = '^2.0.4'
+  DEFAULT_VITE_VERSION = '^2.5.0-beta.2'
+  DEFAULT_PLUGIN_VERSION = '^3.0.0-beta.1'
 
   # Internal: Companion libraries for Vite Ruby, and their target framework.
   COMPANION_LIBRARIES = {
