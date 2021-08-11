@@ -3,7 +3,7 @@ import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
-import { loadConfiguration, resolveEntrypointsForRollup } from './config'
+import { loadConfiguration, filterEntrypointsForRollup } from './config'
 import { assetsManifestPlugin } from './manifest'
 
 export * from './types'
@@ -35,11 +35,10 @@ const debug = createDebugger('vite-plugin-ruby:config')
 // config file, and configures the entrypoints and manifest generation.
 function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const config = loadConfiguration(env.mode, projectRoot, userConfig)
-  const { assetsDir, base, outDir, host, https, port, root } = config
+  const { assetsDir, base, outDir, host, https, port, root, entrypoints } = config
 
-  const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
-
-  const server = { host, https, port, strictPort: true, fsServe: { root: projectRoot } }
+  const fs = { allow: [projectRoot], strict: true }
+  const server = { host, https, port, strictPort: true, fs }
 
   const build = {
     emptyOutDir: true,
@@ -49,7 +48,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     manifest: true,
     outDir,
     rollupOptions: {
-      input: entrypoints,
+      input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
       output: {
         sourcemapPathTransform (relativeSourcePath: string, sourcemapPath: string) {
           return relative(projectRoot, resolve(dirname(sourcemapPath), relativeSourcePath))
@@ -59,7 +58,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     },
   }
 
-  debug({ base, build, root, server, entrypoints })
+  debug({ base, build, root, server, entrypoints: Object.fromEntries(entrypoints) })
 
   codeRoot = resolve(join(projectRoot, config.sourceCodeDir!))
   watchAdditionalPaths = (config.watchAdditionalPaths || []).map(glob => resolve(projectRoot, glob))
@@ -72,9 +71,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     root,
     server,
     build,
-    optimizeDeps: {
-      exclude: ['vite-plugin-ruby'],
-    },
+    viteRuby: config,
   })
 }
 
