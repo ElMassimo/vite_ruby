@@ -1,19 +1,4 @@
 PATH
-  remote: ../../vite_rails
-  specs:
-    vite_rails (2.0.13)
-      railties (>= 5.1, < 8)
-      vite_ruby (~> 1.0)
-
-PATH
-  remote: ../../vite_ruby
-  specs:
-    vite_ruby (1.2.20)
-      dry-cli (~> 0.7.0)
-      rack-proxy (~> 0.6, >= 0.6.1)
-      zeitwerk (~> 2.2)
-
-PATH
   remote: example_engine
   specs:
     administrator (0.1.0)
@@ -118,7 +103,7 @@ GEM
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.10.0)
+    loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -126,12 +111,12 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.3)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.7)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.3)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.13.1)
@@ -175,7 +160,7 @@ GEM
       method_source
       rake (>= 0.13)
       thor (~> 1.0)
-    rake (13.0.4)
+    rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -218,8 +203,15 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_plugin_legacy (0.5.5)
-      vite_ruby (~> 1.0)
+    vite_plugin_legacy (1.0.0.beta.1)
+      vite_ruby (~> 2.0.0.beta.1)
+    vite_rails (3.0.0.beta.1)
+      railties (>= 5.1, < 8)
+      vite_ruby (~> 2.0.0.beta.1)
+    vite_ruby (2.0.0.beta.1)
+      dry-cli (~> 0.7.0)
+      rack-proxy (~> 0.6, >= 0.6.1)
+      zeitwerk (~> 2.2)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -256,9 +248,9 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
-  vite_plugin_legacy
-  vite_rails!
-  vite_ruby!
+  vite_plugin_legacy (~> 1.0.0.beta.1)
+  vite_rails (~> 3.0.0.beta.1)
+  vite_ruby (~> 2.0.0.beta.1)
   web-console (>= 3.3.0)
   webdrivers
 
