@@ -27,38 +27,24 @@ class HelperTest < ActionView::TestCase
     }
   end
 
-  def test_vite_react_refresh_tag
-    assert_nil vite_react_refresh_tag
-    with_dev_server_running {
-      assert_equal <<~HTML, vite_react_refresh_tag
-        <script type="module">
-          import RefreshRuntime from '/vite-production/@react-refresh'
-          RefreshRuntime.injectIntoGlobalHook(window)
-          window.$RefreshReg$ = () => {}
-          window.$RefreshSig$ = () => (type) => type
-          window.__vite_plugin_react_preamble_installed__ = true
-        </script>
-      HTML
-    }
-  end
-
   def test_vite_asset_path
-    assert_equal '/vite-production/assets/application.d9514acc.js', vite_asset_path('application.ts')
-    assert_equal '/vite-production/assets/styles.0e53e684.css', vite_asset_path('styles.css')
+    assert_equal '/vite-production/assets/entrypoints/application.d9514acc.js', vite_asset_path('application.ts')
+    assert_equal '/vite-production/assets/entrypoints/styles.0e53e684.css', vite_asset_path('styles.css')
+    assert_equal '/vite-production/assets/logo.490fa4f8.svg', vite_asset_path('images/logo.svg')
     with_dev_server_running {
-      assert_equal '/vite-production/application.ts', vite_asset_path('application.ts')
-      assert_equal '/vite-production/styles.css', vite_asset_path('styles.css')
-      assert_equal '/vite-production/image/logo.png', vite_asset_path('image/logo', type: :png)
+      assert_equal '/vite-production/entrypoints/application.ts', vite_asset_path('application.ts')
+      assert_equal '/vite-production/entrypoints/styles.css', vite_asset_path('styles.css')
+      assert_equal '/vite-production/images/logo.png', vite_asset_path('images/logo.png')
     }
   end
 
   def test_vite_stylesheet_tag
-    assert_similar link(href: '/vite-production/assets/styles.0e53e684.css'), vite_stylesheet_tag('styles')
+    assert_similar link(href: '/vite-production/assets/entrypoints/styles.0e53e684.css'), vite_stylesheet_tag('styles')
 
     assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
 
     with_dev_server_running {
-      assert_similar link(href: '/vite-production/styles.css'), vite_stylesheet_tag('styles')
+      assert_similar link(href: '/vite-production/entrypoints/styles.css'), vite_stylesheet_tag('styles')
 
       assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
     }
@@ -66,20 +52,20 @@ class HelperTest < ActionView::TestCase
 
   def test_vite_javascript_tag
     assert_similar [
-      %(<script src="/vite-production/assets/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
+      %(<script src="/vite-production/assets/entrypoints/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
-      link(href: '/vite-production/assets/application.f510c1e9.css', crossorigin: 'anonymous'),
+      %(<link rel="modulepreload" href="/vite-production/assets/entrypoints/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
+      link(href: '/vite-production/assets/entrypoints/application.f510c1e9.css', crossorigin: 'anonymous'),
     ].join, vite_javascript_tag('application')
 
     assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
     assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')
 
     with_dev_server_running {
-      assert_equal %(<script src="/vite-production/application.js" crossorigin="anonymous" type="module"></script>),
+      assert_equal %(<script src="/vite-production/entrypoints/application.js" crossorigin="anonymous" type="module"></script>),
         vite_javascript_tag('application')
 
-      assert_equal %(<script src="/vite-production/application.ts" crossorigin="anonymous" type="module"></script>),
+      assert_equal %(<script src="/vite-production/entrypoints/application.ts" crossorigin="anonymous" type="module"></script>),
         vite_typescript_tag('application')
     }
   end
@@ -97,5 +83,20 @@ class HelperTest < ActionView::TestCase
 
       str.tr("\n", '')
     })
+  end
+
+  def test_vite_react_refresh_tag
+    assert_nil vite_react_refresh_tag
+    with_dev_server_running {
+      assert_equal <<~HTML, vite_react_refresh_tag
+        <script type="module">
+          import RefreshRuntime from '/vite-production/@react-refresh'
+          RefreshRuntime.injectIntoGlobalHook(window)
+          window.$RefreshReg$ = () => {}
+          window.$RefreshSig$ = () => (type) => type
+          window.__vite_plugin_react_preamble_installed__ = true
+        </script>
+      HTML
+    }
   end
 end

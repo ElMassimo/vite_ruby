@@ -1,36 +1,36 @@
 {
-  "application.js": {
-    "file": "assets/application.d9514acc.js",
-    "src": "application.js",
+  "entrypoints/application.js": {
+    "file": "assets/entrypoints/application.d9514acc.js",
+    "src": "entrypoints/application.js",
     "isEntry": true,
     "imports": [
       "_vendor.880705da.js",
-      "example_import.js"
+      "entrypoints/example_import.js"
     ],
     "css": [
-      "assets/application.f510c1e9.css"
+      "assets/entrypoints/application.f510c1e9.css"
     ]
   },
-  "application.ts": {
-    "file": "assets/application.d9514acc.js",
-    "src": "application.ts",
+  "entrypoints/application.ts": {
+    "file": "assets/entrypoints/application.d9514acc.js",
+    "src": "entrypoints/application.ts",
     "isEntry": true,
     "imports": [
       "_vendor.880705da.js",
-      "example_import.js"
+      "entrypoints/example_import.js"
     ],
     "css": [
-      "assets/application.f510c1e9.css"
+      "assets/entrypoints/application.f510c1e9.css"
     ]
   },
-  "example_import.js": {
-    "file": "assets/example_import.8e1fddc0.js",
-    "src": "example_import.js",
+  "entrypoints/example_import.js": {
+    "file": "assets/entrypoints/example_import.8e1fddc0.js",
+    "src": "entrypoints/example_import.js",
     "isEntry": true
   },
-  "logo.svg": {
-    "file": "assets/logo.f1745d22.js",
-    "src": "logo.svg",
+  "entrypoints/nested/application.js": {
+    "file": "assets/entrypoints/nested/application.0e53e684.js",
+    "src": "entrypoints/nested/application.js",
     "isEntry": true
   },
   "_vendor.880705da.js": {
