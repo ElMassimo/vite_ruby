@@ -27,7 +27,8 @@ export function booleanOption<T> (value: 'true' | 'false' | boolean | T): boolea
 
 // Internal: Returns the filename without the last extension.
 export function withoutExtension (filename: string) {
-  return filename.substr(0, filename.lastIndexOf('.'))
+  const lastIndex = filename.lastIndexOf('.')
+  return lastIndex > -1 ? filename.substr(0, lastIndex) : filename
 }
 
 // Internal: Loads a json configuration file.

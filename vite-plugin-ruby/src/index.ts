@@ -1,18 +1,16 @@
-import { relative, dirname, resolve, join } from 'path'
+import { basename, posix, resolve } from 'path'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { loadConfiguration, filterEntrypointsForRollup } from './config'
 import { assetsManifestPlugin } from './manifest'
+import { UnifiedConfig } from './types'
 
 export * from './types'
 
 // Public: The resolved project root.
 export const projectRoot = configOptionFromEnv('root') || process.cwd()
-
-// Internal: The resolved source code dir.
-let codeRoot: string
 
 // Internal: Additional paths to watch.
 let watchAdditionalPaths: string[] = []
@@ -50,9 +48,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     rollupOptions: {
       input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
       output: {
-        sourcemapPathTransform (relativeSourcePath: string, sourcemapPath: string) {
-          return relative(projectRoot, resolve(dirname(sourcemapPath), relativeSourcePath))
-        },
+        ...outputOptions(config),
         ...userConfig.build?.rollupOptions?.output,
       },
     },
@@ -60,10 +56,9 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   debug({ base, build, root, server, entrypoints: Object.fromEntries(entrypoints) })
 
-  codeRoot = resolve(join(projectRoot, config.sourceCodeDir!))
   watchAdditionalPaths = (config.watchAdditionalPaths || []).map(glob => resolve(projectRoot, glob))
 
-  const alias = { '~/': `${codeRoot}/`, '@/': `${codeRoot}/` }
+  const alias = { '~/': `${root}/`, '@/': `${root}/` }
 
   return cleanConfig({
     resolve: { alias },
@@ -75,9 +70,21 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   })
 }
 
-// Internal: Allows to watch the entire source code dir, not just entrypoints
-// which is the root for Vite.
+// Internal: Allows to watch additional paths outside the source code dir.
 function configureServer (server: ViteDevServer) {
-  server.watcher.add(`${codeRoot}/**/*`)
   server.watcher.add(watchAdditionalPaths)
+}
+
+function outputOptions ({ assetsDir, entrypointsDir }: UnifiedConfig) {
+  // Internal: Avoid nesting entrypoints unnecessarily.
+  const outputFileName = (ext: string) => ({ name }: { name: string }) => {
+    const shortName = basename(name).split('.')[0]
+    return posix.join(assetsDir, `${shortName}.[hash].${ext}`)
+  }
+
+  return {
+    entryFileNames: outputFileName('js'),
+    chunkFileNames: outputFileName('js'),
+    assetFileNames: outputFileName('[ext]'),
+  }
 }
