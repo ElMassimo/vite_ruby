@@ -17,10 +17,6 @@ class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
 
-  # Internal: Versions used by default when running `vite install`.
-  DEFAULT_VITE_VERSION = '^2.5.0-beta.2'
-  DEFAULT_PLUGIN_VERSION = '^3.0.0-beta.3'
-
   # Internal: Companion libraries for Vite Ruby, and their target framework.
   COMPANION_LIBRARIES = {
     'vite_rails' => 'rails',
