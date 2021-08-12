@@ -37,6 +37,10 @@ class ConfigTest < ViteRuby::Test
     assert_path 'test_app/app/frontend/entrypoints', @config.resolved_entrypoints_dir
   end
 
+  def test_vite_root_dir
+    assert_path 'test_app/app/frontend', @config.vite_root_dir
+  end
+
   def test_public_dir
     assert_equal 'public', @config.public_dir
   end
@@ -131,6 +135,7 @@ class ConfigTest < ViteRuby::Test
     assert_equal 'as', @config.assets_dir
     assert_equal 'app', @config.source_code_dir
     assert_equal 'frontend/entrypoints', @config.entrypoints_dir
+    assert_pathname 'app', @config.vite_root_dir
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
     assert @config.hide_build_console_output
   ensure

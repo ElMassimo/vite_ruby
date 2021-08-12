@@ -30,12 +30,17 @@ class ViteRuby::Config
 
   # Public: The directory where the entries are located.
   def resolved_entrypoints_dir
-    root.join(source_code_dir, entrypoints_dir)
+    vite_root_dir.join(entrypoints_dir)
   end
 
   # Internal: The directory where Vite stores its processing cache.
   def vite_cache_dir
     root.join('node_modules/.vite')
+  end
+
+  # Public: The directory that Vite uses as root.
+  def vite_root_dir
+    root.join(source_code_dir)
   end
 
   # Public: Sets additional environment variables for vite-plugin-ruby.
