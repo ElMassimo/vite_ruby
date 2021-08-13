@@ -23,50 +23,57 @@ class HelperTest < ActionView::TestCase
   def test_vite_client_tag
     assert_nil vite_client_tag
     with_dev_server_running {
-      assert_equal '<script src="/vite-production/@vite/client" type="module"></script>', vite_client_tag
+      assert_equal '<script src="/vite-dev/@vite/client" type="module"></script>', vite_client_tag
     }
   end
 
   def test_vite_asset_path
-    assert_equal '/vite-production/assets/entrypoints/application.d9514acc.js', vite_asset_path('application.ts')
-    assert_equal '/vite-production/assets/entrypoints/styles.0e53e684.css', vite_asset_path('styles.css')
-    assert_equal '/vite-production/assets/logo.490fa4f8.svg', vite_asset_path('images/logo.svg')
+    assert_equal '/vite-production/assets/main.54e77d73.js', vite_asset_path('main.ts')
+    assert_equal '/vite-production/assets/app.517bf154.css', vite_asset_path('app.css')
+    assert_equal '/vite-production/assets/logo.322aae0c.svg', vite_asset_path('images/logo.svg')
+    assert_equal '/vite-production/assets/theme.e6d9734b.css', vite_asset_path('/app/assets/theme.css')
     with_dev_server_running {
-      assert_equal '/vite-production/entrypoints/application.ts', vite_asset_path('application.ts')
-      assert_equal '/vite-production/entrypoints/styles.css', vite_asset_path('styles.css')
-      assert_equal '/vite-production/images/logo.png', vite_asset_path('images/logo.png')
+      assert_equal '/vite-dev/entrypoints/main.ts', vite_asset_path('main.ts')
+      assert_equal '/vite-dev/entrypoints/app.css', vite_asset_path('app.css')
+      assert_equal '/vite-dev/images/logo.png', vite_asset_path('images/logo.png')
     }
   end
 
   def test_vite_stylesheet_tag
-    assert_similar link(href: '/vite-production/assets/entrypoints/styles.0e53e684.css'), vite_stylesheet_tag('styles')
-
-    assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
+    assert_similar link(href: '/vite-production/assets/app.517bf154.css'), vite_stylesheet_tag('app')
+    assert_equal vite_stylesheet_tag('app'), vite_stylesheet_tag('app.css')
+    assert_similar link(href: '/vite-production/assets/sassy.3560956f.css'), vite_stylesheet_tag('sassy.scss')
 
     with_dev_server_running {
-      assert_similar link(href: '/vite-production/entrypoints/styles.css'), vite_stylesheet_tag('styles')
-
-      assert_equal vite_stylesheet_tag('styles'), vite_stylesheet_tag('styles.css')
+      assert_similar link(href: '/vite-dev/entrypoints/app.css'), vite_stylesheet_tag('app')
+      assert_equal vite_stylesheet_tag('app'), vite_stylesheet_tag('app.css')
+      assert_similar link(href: '/vite-dev/entrypoints/sassy.scss.css'), vite_stylesheet_tag('sassy.scss')
     }
   end
 
   def test_vite_javascript_tag
     assert_similar [
-      %(<script src="/vite-production/assets/entrypoints/application.d9514acc.js" crossorigin="anonymous" type="module"></script>),
-      %(<link rel="modulepreload" href="/vite-production/assets/vendor.880705da.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/entrypoints/example_import.8e1fddc0.js" as="script" crossorigin="anonymous">),
-      link(href: '/vite-production/assets/entrypoints/application.f510c1e9.css', crossorigin: 'anonymous'),
-    ].join, vite_javascript_tag('application')
+      %(<script src="/vite-production/assets/main.54e77d73.js" crossorigin="anonymous" type="module"></script>),
+      %(<link rel="modulepreload" href="/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vue.56de8b08.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vendor.1f6d821b.js" as="script" crossorigin="anonymous">),
+      link(href: '/vite-production/assets/app.517bf154.css', crossorigin: 'anonymous'),
+      link(href: '/vite-production/assets/theme.e6d9734b.css', crossorigin: 'anonymous'),
+      link(href: '/vite-production/assets/vue.ec0a97cc.css', crossorigin: 'anonymous'),
+    ].join, vite_typescript_tag('main')
 
-    assert_equal vite_javascript_tag('application'), vite_javascript_tag('application.js')
-    assert_equal vite_javascript_tag('application'), vite_typescript_tag('application')
+    assert_equal vite_javascript_tag('main.ts'),
+      vite_typescript_tag('main')
+
+    assert_equal vite_javascript_tag('entrypoints/frameworks/vue'),
+      vite_javascript_tag('~/entrypoints/frameworks/vue.js')
 
     with_dev_server_running {
-      assert_equal %(<script src="/vite-production/entrypoints/application.js" crossorigin="anonymous" type="module"></script>),
-        vite_javascript_tag('application')
+      assert_equal %(<script src="/vite-dev/entrypoints/frameworks/vue.js" crossorigin="anonymous" type="module"></script>),
+        vite_javascript_tag('entrypoints/frameworks/vue')
 
-      assert_equal %(<script src="/vite-production/entrypoints/application.ts" crossorigin="anonymous" type="module"></script>),
-        vite_typescript_tag('application')
+      assert_equal %(<script src="/vite-dev/entrypoints/main.ts" crossorigin="anonymous" type="module"></script>),
+        vite_typescript_tag('main')
     }
   end
 
@@ -85,12 +92,17 @@ class HelperTest < ActionView::TestCase
     })
   end
 
+  def with_dev_server_running(&block)
+    refresh_config(mode: 'development')
+    super(&block)
+  end
+
   def test_vite_react_refresh_tag
     assert_nil vite_react_refresh_tag
     with_dev_server_running {
       assert_equal <<~HTML, vite_react_refresh_tag
         <script type="module">
-          import RefreshRuntime from '/vite-production/@react-refresh'
+          import RefreshRuntime from '/vite-dev/@react-refresh'
           RefreshRuntime.injectIntoGlobalHook(window)
           window.$RefreshReg$ = () => {}
           window.$RefreshSig$ = () => (type) => type

@@ -1,10 +1,22 @@
 {
-  "images/logo.svg": {
-    "file": "assets/logo.490fa4f8.svg",
-    "src": "images/logo.svg"
+  "entrypoints/sassy.scss": {
+    "file": "assets/sassy.3560956f.css",
+    "src": "entrypoints/sassy.scss"
   },
-  "entrypoints/styles.css": {
-    "file": "assets/entrypoints/styles.0e53e684.css",
-    "src": "entrypoints/styles.css"
+  "entrypoints/app.css": {
+    "file": "assets/app.517bf154.css",
+    "src": "entrypoints/app.css"
+  },
+  "app/assets/theme.css": {
+    "file": "assets/theme.e6d9734b.css",
+    "src": "app/assets/theme.css"
+  },
+  "images/logo.png": {
+    "file": "assets/logo.f42fb7ea.png",
+    "src": "images/logo.png"
+  },
+  "images/logo.svg": {
+    "file": "assets/logo.322aae0c.svg",
+    "src": "images/logo.svg"
   }
 }

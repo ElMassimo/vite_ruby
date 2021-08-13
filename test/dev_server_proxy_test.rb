@@ -64,8 +64,8 @@ class DevServerProxyTest < ViteRuby::Test
   end
 
   def test_scss_with_extra_css
-    get_with_dev_server_running '/vite-production/colored.scss.css'
-    assert_forwarded to: '/vite-production/colored.scss'
+    get_with_dev_server_running '/vite-production/entrypoints/sassy.scss.css'
+    assert_forwarded to: '/vite-production/entrypoints/sassy.scss'
   end
 
   def test_min_css

@@ -3,7 +3,7 @@
     "autoBuild": true,
     "port": "3535",
     "https": true,
-    "publicOutputDir": "vite-development"
+    "publicOutputDir": "vite-dev"
   },
   "test": {
     "autoBuild": true,
