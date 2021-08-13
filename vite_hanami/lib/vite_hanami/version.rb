@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module ViteHanami
-  VERSION = '0.5.3'
+  VERSION = '3.0.0.beta.1'
 end

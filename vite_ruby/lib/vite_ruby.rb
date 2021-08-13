@@ -23,9 +23,7 @@ class ViteRuby
   COMPANION_LIBRARIES = {
     'vite_rails' => 'rails',
     'vite_hanami' => 'hanami',
-    'vite_roda' => 'roda',
     'vite_padrino' => 'padrino',
-    'vite_sinatra' => 'sinatra',
     'jekyll-vite' => 'jekyll',
     'vite_rails_legacy' => 'rails',
   }
