@@ -24,7 +24,7 @@ module ViteRuby::CLI::FileUtils
     # @api private
     def cp(source, destination)
       mkdir_p(destination)
-      FileUtils.cp(source, destination)
+      FileUtils.cp(source, destination) unless File.exist?(destination)
     end
 
     # Adds a new line at the bottom of the file.
@@ -32,10 +32,10 @@ module ViteRuby::CLI::FileUtils
     # @since 1.2.11
     # @api private
     def append(path, contents)
-      mkdir_p(path)
+      content = read_lines(path)
+      return if content.join.include?(contents)
 
-      content = File.readlines(path)
-      content << "\n" unless content.last.end_with?("\n")
+      content << "\n" unless content.last&.end_with?("\n")
       content << "#{ contents }\n"
 
       write(path, content)
@@ -46,7 +46,7 @@ module ViteRuby::CLI::FileUtils
     # @since 1.2.11
     # @api private
     def replace_first_line(path, target, replacement)
-      content = File.readlines(path)
+      content = read_lines(path)
       content[index(content, path, target)] = "#{ replacement }\n"
 
       write(path, content)
@@ -86,6 +86,11 @@ module ViteRuby::CLI::FileUtils
       Pathname.new(path).dirname.mkpath
     end
 
+    # Returns an array with lines in the specified file, empty if it doesn't exist.
+    def read_lines(path)
+      File.exist?(path) ? File.readlines(path) : []
+    end
+
     # @since 1.2.11
     # @api private
     def index(content, path, target)
@@ -103,7 +108,9 @@ module ViteRuby::CLI::FileUtils
     # @since 1.2.11
     # @api private
     def _inject_line_before(path, target, contents, finder)
-      content = File.readlines(path)
+      content = read_lines(path)
+      return if content.join.include?(contents)
+
       i = finder.call(content, path, target)
 
       content.insert(i, "#{ contents }\n")
@@ -113,7 +120,9 @@ module ViteRuby::CLI::FileUtils
     # @since 1.2.11
     # @api private
     def _inject_line_after(path, target, contents, finder)
-      content = File.readlines(path)
+      content = read_lines(path)
+      return if content.join.include?(contents)
+
       i = finder.call(content, path, target)
 
       content.insert(i + 1, "#{ contents }\n")

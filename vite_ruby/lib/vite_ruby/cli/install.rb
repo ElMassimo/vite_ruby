@@ -71,6 +71,7 @@ private
   # Internal: Creates the Vite and vite-plugin-ruby configuration files.
   def create_configuration_files
     copy_template 'config/vite.config.ts', to: root.join('vite.config.ts')
+    append root.join('Procfile.dev'), 'vite: bin/vite dev'
     setup_app_files
     ViteRuby.reload_with(config_path: config.config_path)
   end
