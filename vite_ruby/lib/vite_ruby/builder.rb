@@ -96,13 +96,15 @@ private
     [
       *config.watch_additional_paths,
       "#{ config.source_code_dir }/**/*",
-      'yarn.lock',
       'package-lock.json',
-      'pnpm-lock.yaml',
       'package.json',
-      'vite.config.ts',
+      'pnpm-lock.yaml',
+      'postcss.config.js',
+      'tailwind.config.js',
       'vite.config.js',
+      'vite.config.ts',
       'windi.config.ts',
+      'yarn.lock',
       config.config_path,
     ].freeze
   end
