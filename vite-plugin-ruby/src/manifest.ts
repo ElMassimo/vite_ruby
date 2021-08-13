@@ -7,9 +7,10 @@ import type { Plugin, ResolvedConfig } from 'vite'
 
 import { OutputBundle, PluginContext } from 'rollup'
 import { UnifiedConfig } from '../dist'
-import { filterEntrypointAssets } from './config'
+import { filterEntrypointAssets, resolveEntryName } from './config'
 import { CSS_EXTENSIONS_REGEX } from './constants'
 import { withoutExtension } from './utils'
+import { projectRoot } from './index'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
 
@@ -36,7 +37,7 @@ export function assetsManifestPlugin (): Plugin {
     const cssFiles = new Set(
       Object.values(config.build.rollupOptions.input as Record<string, string>)
         .filter(file => CSS_EXTENSIONS_REGEX.test(file))
-        .map(file => path.relative(config.root, file)),
+        .map(file => resolveEntryName(projectRoot, config.root, file)),
     )
 
     Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)

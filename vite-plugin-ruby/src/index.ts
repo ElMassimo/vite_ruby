@@ -3,7 +3,7 @@ import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
-import { loadConfiguration, filterEntrypointsForRollup } from './config'
+import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
 import { UnifiedConfig } from './types'
 
@@ -56,7 +56,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   debug({ base, build, root, server, entrypoints: Object.fromEntries(entrypoints) })
 
-  watchAdditionalPaths = (config.watchAdditionalPaths || []).map(glob => resolve(projectRoot, glob))
+  watchAdditionalPaths = resolveGlobs(projectRoot, root, config.watchAdditionalPaths || [])
 
   const alias = { '~/': `${root}/`, '@/': `${root}/` }
 

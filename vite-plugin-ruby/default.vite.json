@@ -1,5 +1,5 @@
 {
-  "additionalInputGlobs": ["{assets,fonts,icons,images}/**/*"],
+  "additionalInputGlobs": ["~/{assets,fonts,icons,images}/**/*"],
   "assetHost": null,
   "assetsDir": "assets",
   "autoBuild": false,

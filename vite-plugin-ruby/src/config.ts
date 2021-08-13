@@ -1,4 +1,4 @@
-import { join, relative, resolve } from 'path'
+import { join, relative, resolve, isAbsolute } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
@@ -26,12 +26,38 @@ export function filterEntrypointAssets (entrypoints: Entrypoints): Entrypoints {
     .filter(([_name, filename]) => !ENTRYPOINT_TYPES_REGEX.test(filename))
 }
 
-// Internal: Returns all files defined in the entrypoints directory.
-function resolveEntrypointFiles (root: string, entrypointsDir: string, additionalInputGlobs: string[]): Entrypoints {
-  const globs = [`${entrypointsDir}/**/*`, ...additionalInputGlobs]
-    .map(pattern => resolve(root, pattern))
+// Internal: Checks if the specified path is inside the specified dir.
+function isInside (file: string, dir: string) {
+  const path = relative(dir, file)
+  return path && !path.startsWith('..') && !isAbsolute(path)
+}
 
-  return glob.sync(globs).map(filename => [relative(root, filename), filename])
+// Internal: Returns all files defined in the entrypoints directory.
+function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalInputGlobs }: ResolvedConfig): Entrypoints {
+  const inputGlobs = [`~/${entrypointsDir}/**/*`, ...additionalInputGlobs]
+  const resolvedGlobs = resolveGlobs(projectRoot, sourceCodeDir, inputGlobs)
+  console.log({ resolvedGlobs })
+  return glob.sync(resolvedGlobs).map(filename => [
+    resolveEntryName(projectRoot, sourceCodeDir, filename),
+    filename,
+  ])
+}
+
+// Internal: All entry names are relative to the sourceCodeDir if inside it, or
+// to the project root if outside.
+
+// NOTE: Collisions may happen if the same file and dir structure occur inside
+// and outside the sourceCodeDir, and the user registers both as entrypoints,
+// which is rare making this a good tradeoff.
+export function resolveEntryName (projectRoot: string, sourceCodeDir: string, file: string) {
+  return relative(isInside(file, sourceCodeDir) ? sourceCodeDir : projectRoot, file)
+}
+
+// Internal: Allows to use the `~` shorthand in the config globs.
+export function resolveGlobs (projectRoot: string, sourceCodeDir: string, patterns: string[]) {
+  return patterns.map(pattern =>
+    resolve(projectRoot, pattern.replace(/^~\//, `${sourceCodeDir}/`)),
+  )
 }
 
 // Internal: Loads configuration options provided through env variables.
@@ -75,6 +101,6 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
   const base = `${assetHostWithProtocol}/${config.publicOutputDir}/`
 
-  const entrypoints = resolveEntrypointFiles(root, config.entrypointsDir, config.additionalInputGlobs)
+  const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
   return { ...config, root, outDir, base, entrypoints }
 }
