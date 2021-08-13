@@ -10,6 +10,8 @@ class ViteRuby::CLI
   register 'build', Build, aliases: ['b']
   register 'clobber', Clobber, aliases: %w[clean clear]
   register 'dev', Dev, aliases: %w[d serve]
-  register 'install', Install, aliases: %w[setup init]
+  register 'install', Install
   register 'version', Version, aliases: ['v', '-v', '--version', 'info']
+  register 'upgrade', Upgrade, aliases: ['update']
+  register 'upgrade_packages', UpgradePackages, aliases: ['update_packages']
 end

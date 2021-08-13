@@ -106,6 +106,9 @@ For information about the CLI options run <kbd>bin/vite <b>command</b> --help</k
 - <kbd>bin/vite build</kbd>:
   Makes a production bundle with Vite using Rollup behind the scenes
 
+- <kbd>bin/vite upgrade</kbd>:
+  Updates Vite Ruby gems and npm packages to compatible versions
+
 - <kbd>bin/vite info</kbd>:
   Provide information on _Vite Ruby_ and related libraries
 

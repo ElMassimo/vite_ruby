@@ -113,6 +113,11 @@ private
     $stdout.puts(*args)
   end
 
+  def run_with_capture(*args, **options)
+    _, stderr, status = ViteRuby::IO.capture(*args, **options)
+    say(err) unless status.success? || stderr.to_s.empty?
+  end
+
   # Internal: Avoid printing warning about missing vite.json, we will create one.
   def silent_warnings
     old_stderr = $stderr
