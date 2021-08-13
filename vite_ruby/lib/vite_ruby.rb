@@ -13,6 +13,8 @@ loader.inflector.inflect('cli' => 'CLI')
 loader.inflector.inflect('io' => 'IO')
 loader.setup
 
+require 'vite_ruby/version'
+
 class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
