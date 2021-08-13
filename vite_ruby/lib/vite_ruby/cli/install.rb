@@ -80,13 +80,8 @@ private
   def install_js_dependencies
     package_json = root.join('package.json')
     write(package_json, '{}') unless package_json.exist?
-
-    Dir.chdir(root) do
-      deps = js_dependencies.join(' ')
-      _, stderr, status = ViteRuby::IO.capture("npx --package @antfu/ni -- ni -D #{ deps }", stdin_data: "\n")
-      _, stderr, = ViteRuby::IO.capture("yarn add -D #{ deps }") unless status.success?
-      say("Could not install JS dependencies.\n", stderr) unless stderr.to_s.empty?
-    end
+    deps = js_dependencies.join(' ')
+    run_with_capture("#{ npm_install } -D #{ deps }", stdin_data: "\n")
   end
 
   # Internal: Adds compilation output dirs to git ignore.
@@ -115,8 +110,18 @@ private
   end
 
   def run_with_capture(*args, **options)
-    _, stderr, status = ViteRuby::IO.capture(*args, **options)
-    say(err) unless status.success? || stderr.to_s.empty?
+    Dir.chdir(root) do
+      _, stderr, status = ViteRuby::IO.capture(*args, **options)
+      say(stderr) unless status.success? || stderr.to_s.empty?
+    end
+  end
+
+  # Internal: Support all popular package managers.
+  def npm_install
+    return 'yarn add' if root.join('yarn.lock').exist?
+    return 'pnpm install' if root.join('pnpm-lock.yaml').exist?
+
+    'npm install'
   end
 
   # Internal: Avoid printing warning about missing vite.json, we will create one.
