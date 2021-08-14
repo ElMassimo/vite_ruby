@@ -5,6 +5,7 @@
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
+[entrypointsDir]: /config/#entrypointsDir
 [publicOutputDir]: /config/#publicoutputdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [publicDir]: /config/#publicdir
@@ -14,6 +15,7 @@
 [import aliases]: /guide/development.html#import-aliases-👉
 [reference these files]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/example/app/frontend/entrypoints/main.ts#L4
 [resolve.alias]: https://vitejs.dev/config/#resolve-alias
+[tag helpers]: /guide/development.html#tag-helpers-🏷
 
 # Configuring Vite Ruby
 
@@ -182,6 +184,15 @@ You can customize this behavior using the following options.
 
 ## Other Options
 
+### additionalInputGlobs
+
+- **Default:** `["~/{assets,fonts,icons,images}/**/*"]`
+
+  Specify additional [entrypoints], which can be referenced using the [tag helpers].
+  These are added in addition to files inside <kbd>[entrypointsDir]</kbd>.
+
+  You may provide globs such as `["app/components/**/*.js"]`—in which case paths will be relative to <kbd>[root]</kbd>—or use `~/` to reference files inside the <kbd>[sourceCodeDir]</kbd>, as in `["~/{fonts,images}/**/*"]`.
+
 ### assetHost
 
 - **Default:** `Rails.application.config.action_controller.asset_host`
@@ -220,6 +231,17 @@ You can customize this behavior using the following options.
 - **Env Var:** `VITE_RUBY_ROOT`
 
   Specify the project root.
+
+### skipSanityCheck
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_SANITY_CHECK`
+
+  The version of `vite-plugin-ruby` is checked on initialization to fail-fast if
+  an incompatible version is suspected, as it could lead to hard-to-debug errors
+  such as missing entries in the manifest.
+
+  This setting allows to skip that check. Use it responsibly.
 
 ### viteBinPath
 
