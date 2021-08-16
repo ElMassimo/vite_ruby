@@ -16,7 +16,7 @@ require 'rails'
 require 'rails/test_help'
 require 'pry-byebug'
 
-ENV['VITE_RUBY_SKIP_SANITY_CHECK'] = 'true'
+ENV['VITE_RUBY_SKIP_COMPATIBILITY_CHECK'] = 'true'
 require_relative 'test_app/config/environment'
 Rails.env = 'production'
 ViteRuby.reload_with

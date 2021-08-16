@@ -7,7 +7,7 @@ require 'json'
 #
 # This helps to prevent more subtle runtime errors if there is a mismatch in the
 # manifest schema.
-module ViteRuby::SanityCheck
+module ViteRuby::CompatibilityCheck
   class << self
     # Public: Attempt to verify that the vite-plugin-ruby version is compatible.
     def verify_plugin_version(root)
@@ -24,7 +24,7 @@ module ViteRuby::SanityCheck
         raise ArgumentError, <<~ERROR
           vite-plugin-ruby@#{ npm_req } might not be compatible with vite_ruby-#{ ViteRuby::VERSION }
 
-          You may disable this check if needed: https://vite-ruby.netlify.app/config/#skipsanitycheck
+          You may disable this check if needed: https://vite-ruby.netlify.app/config/#skipCompatibilityCheck
 
           You may upgrade both by running:
 

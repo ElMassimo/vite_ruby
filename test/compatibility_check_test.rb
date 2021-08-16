@@ -2,12 +2,12 @@
 
 require 'test_helper'
 
-class SanityCheckTest < ViteRuby::Test
-  delegate :verify_plugin_version, :raise_unless_satisfied, :compatible_plugin?, to: 'ViteRuby::SanityCheck'
+class CompatibilityCheckTest < ViteRuby::Test
+  delegate :verify_plugin_version, :raise_unless_satisfied, :compatible_plugin?, to: 'ViteRuby::CompatibilityCheck'
 
   def test_verify_plugin_version
-    refresh_config(skip_sanity_check: true)
-    assert_raises { refresh_config(skip_sanity_check: false) }
+    refresh_config(skip_compatibility_check: true)
+    assert_raises { refresh_config(skip_compatibility_check: false) }
   end
 
   def test_compatible_plugin

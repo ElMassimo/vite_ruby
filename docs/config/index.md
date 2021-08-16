@@ -191,7 +191,9 @@ You can customize this behavior using the following options.
   Specify additional [entrypoints], which can be referenced using the [tag helpers].
   These are added in addition to files inside <kbd>[entrypointsDir]</kbd>.
 
-  You may provide globs such as `["app/components/**/*.js"]`—in which case paths will be relative to <kbd>[root]</kbd>—or use `~/` to reference files inside the <kbd>[sourceCodeDir]</kbd>, as in `["~/{fonts,images}/**/*"]`.
+  You may provide globs relative to <kbd>[root]</kbd>, such as `["app/components/**/*.js"]`.
+
+  Use `~/` to reference files inside the <kbd>[sourceCodeDir]</kbd>, as in `["~/{fonts,images}/**/*"]`.
 
 ### assetHost
 
@@ -232,12 +234,12 @@ You can customize this behavior using the following options.
 
   Specify the project root.
 
-### skipSanityCheck
+### skipCompatibilityCheck
 
 - **Default:** `false`
-- **Env Var:** `VITE_RUBY_SKIP_SANITY_CHECK`
+- **Env Var:** `VITE_RUBY_SKIP_COMPATIBILITY_CHECK`
 
-  The version of `vite-plugin-ruby` is checked on initialization to fail-fast if
+  The version of `vite-plugin-ruby` is checked on initialization to fail early if
   an incompatible version is suspected, as it could lead to hard-to-debug errors
   such as missing entries in the manifest.
 

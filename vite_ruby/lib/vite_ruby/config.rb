@@ -61,7 +61,7 @@ private
     config['port'] = config['port'].to_i
     config['root'] = Pathname.new(config['root'])
     config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
-    coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https', 'skip_sanity_check')
+    coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https', 'skip_compatibility_check')
   end
 
   # Internal: Coerces configuration options to boolean.
@@ -71,7 +71,7 @@ private
 
   def initialize(attrs)
     @config = attrs.tap { |config| coerce_values(config) }.freeze
-    ViteRuby::SanityCheck.verify_plugin_version(root) unless skip_sanity_check
+    ViteRuby::CompatibilityCheck.verify_plugin_version(root) unless skip_compatibility_check
   end
 
   class << self
@@ -147,7 +147,7 @@ private
   NOT_CONFIGURABLE_WITH_ENV = %w[additional_entrypoints watch_additional_paths].freeze
 
   # Internal: Configuration options that can be provided as env vars.
-  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root skip_sanity_check] - NOT_CONFIGURABLE_WITH_ENV).freeze
+  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root skip_compatibility_check] - NOT_CONFIGURABLE_WITH_ENV).freeze
 
 public
 
