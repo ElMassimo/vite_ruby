@@ -3,6 +3,7 @@
 [GitHub Discussions]: https://github.com/ElMassimo/vite_ruby/discussions
 [sourceCodeDir]: /config/#sourcecodedir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
+[entrypointsDir]: /config/#entrypointsDir
 [devServerConnectTimeout]: /config/#devserverconnecttimeout
 [host]: /config/#host
 [port]: /config/#port
@@ -16,12 +17,27 @@
 [@vitejs/plugin-react-refresh]: https://www.npmjs.com/package/@vitejs/plugin-react-refresh
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [ulimit]: https://wilsonmar.github.io/maximum-limits/
+[additionalEntrypoints]: /config/#additionalentrypoints
+[advanced usage]: /guide/advanced
 
 # Troubleshooting
 
 This section lists a few common gotchas, and bugs introduced in the past.
 
 Please skim through __before__ opening an [issue][GitHub Issues].
+
+### Upgrading to v3 and now assets are failing to resolve
+
+It's likely that you have a nested directory structure under <kbd>[entrypointsDir]</kbd>.
+
+See the _[Migrating from v2](/guide/migrating-from-v2.html#nested-entrypoints-paths-must-be-explicit)_ section for more information.
+
+### Assets inside sourceCodeDir are being bundled
+
+This is the default behavior in v3, which simplifies referencing images and icons
+using [tag helpers].
+
+You can opt out by configuring <kbd>[additionalEntrypoints]</kbd>, see _[Advanced Usage]_.
 
 ### Missing executable error
 

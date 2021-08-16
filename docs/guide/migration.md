@@ -69,8 +69,8 @@ mind that they are compatible, and you could do a gradual migration instead.
   - <%= stylesheet_pack_tag 'mobile' %>
   + <%= vite_stylesheet_tag 'mobile' %>
 
-  - <img src="<%= asset_pack_path('favicon.png') %>">
-  + <img src="<%= vite_asset_path('favicon.png') %>">
+  - <img src="<%= asset_pack_path('images/logo.svg') %>">
+  + <img src="<%= vite_asset_path('images/logo.svg') %>">
   ```
 
 - Replace `require.context` with [`import.meta.glob`][glob] or [`import.meta.globEager`][glob].
@@ -90,4 +90,3 @@ Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/
 Before migrating from [Webpacker], make sure that you are not using any loaders
 that don't have a counterpart in [Vite], which uses [Rollup] when bundling for production.
 :::
-

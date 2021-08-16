@@ -7,6 +7,7 @@
 [autoBuild]: /config/#autobuild
 [entrypointsDir]: /config/#entrypointsDir
 [publicOutputDir]: /config/#publicoutputdir
+[additionalEntrypoints]: /config/#additionalentrypoints
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [publicDir]: /config/#publicdir
 [root]: /config/#root
@@ -187,14 +188,23 @@ You can customize this behavior using the following options.
 
 ### additionalEntrypoints
 
+- **Version Added:** `3.0.0`
 - **Default:** `["~/{assets,fonts,icons,images}/**/*"]`
 
-  Specify additional [entrypoints], which can be referenced using the [tag helpers].
-  These are added in addition to files inside <kbd>[entrypointsDir]</kbd>.
+  Specify additional [entrypoints], which can be referenced using [tag helpers]
+  without having to place them inside <kbd>[entrypointsDir]</kbd>.
 
-  You may provide globs relative to <kbd>[root]</kbd>, such as `["app/components/**/*.js"]`.
+  `~/` is an alias for the <kbd>[sourceCodeDir]</kbd>, `["~/images/**/*"]`:
 
-  Use `~/` to reference files inside the <kbd>[sourceCodeDir]</kbd>, as in `["~/{fonts,images}/**/*"]`.
+  ```ruby
+  vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg
+  ```
+
+  Otherwise, globs are relative to <kbd>[root]</kbd>, such as `["app/components/**/*.js"]`.
+
+  ```ruby
+  vite_asset_path '/app/components/header.js' # leading slash is required
+  ```
 
 ### assetHost
 
@@ -237,6 +247,7 @@ You can customize this behavior using the following options.
 
 ### skipCompatibilityCheck
 
+- **Version Added:** `3.0.0`
 - **Default:** `false`
 - **Env Var:** `VITE_RUBY_SKIP_COMPATIBILITY_CHECK`
 
@@ -264,7 +275,7 @@ You can customize this behavior using the following options.
 
   You may provide globs such as `["app/components/**/*"]`, paths should be relative to <kbd>[root]</kbd>.
 
-  The <kbd>[sourceCodeDir]</kbd> is included by default.
+  The <kbd>[sourceCodeDir]</kbd> and any <kbd>[additionalEntrypoints]</kbd> are included by default.
 
   <hr/>
 

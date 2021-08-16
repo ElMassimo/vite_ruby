@@ -12,6 +12,7 @@
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
 [sourceCodeDir]: /config/#sourcecodedir
+[additionalEntrypoints]: /config/#additionalentrypoints
 [autoBuild]: /config/#autobuild
 [entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
 [vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L13-L17
@@ -24,6 +25,7 @@
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
 [jekyll-vite]: https://jekyll-vite.netlify.app/posts/tag-helpers/
+[Advanced Usage]: /guide/advanced
 
 # Developing with Vite
 
@@ -60,10 +62,13 @@ will be considered [entries][entrypoints] to your application (SPAs or pages).
 </pre>
 </div>
 
-These files will be automatically detected and passed on to Vite, all [configuration][entrypoints] is done
-for you.
+These files will be automatically detected and passed on to Vite, all [configuration][entrypoints] is done for you.
 
 You can add them to your HTML layouts or views using the provided [tag helpers].
+
+:::tip New in v3
+<kbd>[additionalEntrypoints]</kbd> allows to configure entrypoints. See _[Advanced Usage]_.
+:::
 
 ## Import Aliases 👉
 
