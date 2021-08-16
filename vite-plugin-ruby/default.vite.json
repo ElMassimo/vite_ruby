@@ -10,6 +10,7 @@
   "publicDir": "public",
   "entrypointsDir": "entrypoints",
   "sourceCodeDir": "app/frontend",
+  "skipCompatibilityCheck": false,
   "host": "localhost",
   "https": null,
   "port": 3036,

@@ -159,7 +159,7 @@ private
   NOT_CONFIGURABLE_WITH_ENV = %w[additional_entrypoints watch_additional_paths].freeze
 
   # Internal: Configuration options that can be provided as env vars.
-  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root skip_compatibility_check] - NOT_CONFIGURABLE_WITH_ENV).freeze
+  CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root] - NOT_CONFIGURABLE_WITH_ENV).freeze
 
   # Internal: If any of these files is modified the build won't be skipped.
   DEFAULT_WATCHED_PATHS = %w[
