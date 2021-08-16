@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class HelperTest < ActionView::TestCase
-  include ViteRubyTestHelpers
+require 'vite_plugin_legacy'
 
-  tests ViteRails::TagHelpers
+class HelperTestCase < ActionView::TestCase
+  include ViteRubyTestHelpers
 
   attr_reader :request
 
@@ -20,6 +20,45 @@ class HelperTest < ActionView::TestCase
     end.new
   end
 
+protected
+
+  def link(href:, rel: 'stylesheet', media: 'screen', crossorigin: nil)
+    attrs = [%(media="#{ media }"), %(href="#{ href }"), (%(crossorigin="#{ crossorigin }") if crossorigin)].compact
+    attrs[1], attrs[2] = attrs[2], attrs[1] if Rails.gem_version > Gem::Version.new('6.1') && Rails.gem_version < Gem::Version.new('6.2') && attrs[2]
+    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.2')
+    %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
+  end
+
+  def assert_similar(*args)
+    assert_equal(*args.map { |str|
+      return str.tr("\n", '').gsub('" />', '">').gsub('"/>', '">') if RUBY_VERSION.start_with?('2.4')
+
+      str.tr("\n", '')
+    })
+  end
+
+  def with_dev_server_running(&block)
+    refresh_config(mode: 'development')
+    super(&block)
+  end
+end
+
+class LegacyHelperTest < HelperTestCase
+  tests(Module.new {
+    include ViteRails::TagHelpers
+    include VitePluginLegacy::TagHelpers
+  })
+
+  def test_plugin_legacy
+    assert_includes vite_legacy_javascript_tag('/app/assets/external'), '/vite-production/assets/external.a35ee0db-legacy.js'
+    assert_includes vite_legacy_typescript_tag('main.ts'), '/vite-production/assets/main.20bbd3a5-legacy.js'
+    assert_includes vite_legacy_polyfill_tag, '/vite-production/assets/polyfills-legacy.07477394.js'
+  end
+end
+
+class HelperTest < HelperTestCase
+  tests ViteRails::TagHelpers
+
   def test_vite_client_tag
     assert_nil vite_client_tag
     with_dev_server_running {
@@ -28,7 +67,7 @@ class HelperTest < ActionView::TestCase
   end
 
   def test_vite_asset_path
-    assert_equal '/vite-production/assets/main.54e77d73.js', vite_asset_path('main.ts')
+    assert_equal '/vite-production/assets/main.9dcad042.js', vite_asset_path('main.ts')
     assert_equal '/vite-production/assets/app.517bf154.css', vite_asset_path('app.css')
     assert_equal '/vite-production/assets/logo.322aae0c.svg', vite_asset_path('images/logo.svg')
     assert_equal '/vite-production/assets/theme.e6d9734b.css', vite_asset_path('/app/assets/theme.css')
@@ -53,10 +92,10 @@ class HelperTest < ActionView::TestCase
 
   def test_vite_javascript_tag
     assert_similar [
-      %(<script src="/vite-production/assets/main.54e77d73.js" crossorigin="anonymous" type="module"></script>),
+      %(<script src="/vite-production/assets/main.9dcad042.js" crossorigin="anonymous" type="module"></script>),
       %(<link rel="modulepreload" href="/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/vue.56de8b08.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/vendor.1f6d821b.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="anonymous">),
       link(href: '/vite-production/assets/app.517bf154.css', crossorigin: 'anonymous'),
       link(href: '/vite-production/assets/theme.e6d9734b.css', crossorigin: 'anonymous'),
       link(href: '/vite-production/assets/vue.ec0a97cc.css', crossorigin: 'anonymous'),
@@ -75,26 +114,6 @@ class HelperTest < ActionView::TestCase
       assert_equal %(<script src="/vite-dev/entrypoints/main.ts" crossorigin="anonymous" type="module"></script>),
         vite_typescript_tag('main')
     }
-  end
-
-  def link(href:, rel: 'stylesheet', media: 'screen', crossorigin: nil)
-    attrs = [%(media="#{ media }"), %(href="#{ href }"), (%(crossorigin="#{ crossorigin }") if crossorigin)].compact
-    attrs[1], attrs[2] = attrs[2], attrs[1] if Rails.gem_version > Gem::Version.new('6.1') && Rails.gem_version < Gem::Version.new('6.2') && attrs[2]
-    attrs.reverse! if Rails.gem_version > Gem::Version.new('6.2')
-    %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
-  end
-
-  def assert_similar(*args)
-    assert_equal(*args.map { |str|
-      return str.tr("\n", '').gsub('" />', '">').gsub('"/>', '">') if RUBY_VERSION.start_with?('2.4')
-
-      str.tr("\n", '')
-    })
-  end
-
-  def with_dev_server_running(&block)
-    refresh_config(mode: 'development')
-    super(&block)
   end
 
   def test_vite_react_refresh_tag

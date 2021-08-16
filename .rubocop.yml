@@ -13,6 +13,7 @@ AllCops:
     - "examples/**/*"
     - "vendor/bundle"
     - "tmp/**/*"
+    - "test/mounted_app/test/dummy/bin/*"
   TargetRubyVersion: 2.5
 
 Style/IfUnlessModifier:

@@ -149,18 +149,26 @@ private
   def resolve_entry_name(name, type: nil)
     name = with_file_extension(name.to_s, type)
 
-    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
+    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.') && !name.include?('legacy-polyfills')
 
     # Explicit path, relative to the source_code_dir.
     name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
 
     # Explicit path, relative to the project root.
-    name.sub(%r{^/(.+)$}) {
-      return dev_server_running? ? File.join(FS_PREFIX, config.root, Regexp.last_match(1)) : Regexp.last_match(1)
-    }
+    name.sub(%r{^/(.+)$}) { return resolve_absolute_entry(Regexp.last_match(1)) }
 
     # Sugar: Prefix with the entrypoints dir if the path is not nested.
     name.include?('/') ? name : File.join(config.entrypoints_dir, name)
+  end
+
+  # Internal: Entry names in the manifest are relative to the Vite.js.
+  # During develoment, files outside the root must be requested explicitly.
+  def resolve_absolute_entry(name)
+    if dev_server_running?
+      File.join(FS_PREFIX, config.root, name)
+    else
+      config.root.join(name).relative_path_from(config.vite_root_dir).to_s
+    end
   end
 
   # Internal: Adds a file extension to the file name, unless it already has one.

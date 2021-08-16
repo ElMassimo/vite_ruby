@@ -3,7 +3,7 @@
     "additionalEntrypoints": [
       "~/{assets,fonts,icons,images}/**/*",
       "~/index.html",
-      "app/assets/*.css"
+      "app/assets/*.{css,js,png}"
     ],
     "watchAdditionalPaths": [
       "app/assets/**/*"

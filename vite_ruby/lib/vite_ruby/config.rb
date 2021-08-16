@@ -147,7 +147,7 @@ private
       multi_env_config.fetch('all', {})
         .merge(multi_env_config.fetch(mode, {}))
     rescue Errno::ENOENT => error
-      warn "Check that your vite.json configuration file is available in the load path:\n\n\t#{ error.message }\n\n"
+      $stderr << "Check that your vite.json configuration file is available in the load path:\n\n\t#{ error.message }\n\n"
       {}
     end
   end

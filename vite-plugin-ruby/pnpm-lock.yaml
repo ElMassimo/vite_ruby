@@ -14,7 +14,7 @@ importers:
       standard-version: ^9.1.0
       tsup: ^3.11.0
       typescript: ^4.1.3
-      vite: ^2.5.0-beta.2
+      vite: ^2.5.0
     dependencies:
       debug: 4.3.1
       fast-glob: 3.2.5
@@ -27,7 +27,7 @@ importers:
       standard-version: 9.1.0
       tsup: 3.11.0_typescript@4.1.3
       typescript: 4.1.3
-      vite: 2.5.0-beta.2
+      vite: 2.5.0
 
   example:
     specifiers:
@@ -37,17 +37,17 @@ importers:
       cross-env: ^7.0.3
       sass: ^1.37.5
       typescript: ^4.3.5
-      vite: file:../../../vite/packages/vite
+      vite: ^2.5.0
       vite-plugin-ruby: workspace:*
       vue: ^3.2.2
     devDependencies:
-      '@vitejs/plugin-legacy': 1.5.1
+      '@vitejs/plugin-legacy': 1.5.1_vite@2.5.0
       '@vitejs/plugin-vue': 1.4.0_@vue+compiler-sfc@3.2.2
       '@vue/compiler-sfc': 3.2.2
       cross-env: 7.0.3
       sass: 1.37.5
       typescript: 4.3.5
-      vite: link:../../../vite/packages/vite
+      vite: 2.5.0
       vite-plugin-ruby: link:..
       vue: 3.2.2
 
@@ -700,7 +700,7 @@ packages:
       '@types/yargs-parser': 20.2.0
     dev: true
 
-  /@vitejs/plugin-legacy/1.5.1:
+  /@vitejs/plugin-legacy/1.5.1_vite@2.5.0:
     resolution: {integrity: sha512-g+0iy0X3NJRUSKZK+OCeSxNWnCuuE/6lsmr2WLWPOEt1vp6LdfHuNCYRooCm6s0ccTZ/SiumVk8vt9DWSYs+8A==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -711,6 +711,7 @@ packages:
       magic-string: 0.25.7
       regenerator-runtime: 0.13.9
       systemjs: 6.10.2
+      vite: 2.5.0
     dev: true
 
   /@vitejs/plugin-vue/1.4.0_@vue+compiler-sfc@3.2.2:
@@ -5293,8 +5294,8 @@ packages:
       extsprintf: 1.3.0
     dev: true
 
-  /vite/2.5.0-beta.2:
-    resolution: {integrity: sha512-PgPOlTg7w6VGDx1HCUHfDoXeQ6cWKCO2tHz3om27VLjfu/92T1kyhuJf/VM6sa+orPOkTLUZWaHI9bPQjgtLrA==}
+  /vite/2.5.0:
+    resolution: {integrity: sha512-Dn4B+g54PJsMG5WCc4QeFy1ygMXRdTtFrUPegqfk4+vzVQcbF/DqqmI/1bxezArzbujBJg/67QeT5wz8edfJVQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     dependencies:

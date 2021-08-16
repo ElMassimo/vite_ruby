@@ -31,9 +31,9 @@ class ManifestTest < ViteRuby::Test
     assert_equal 'images/logo.svg', resolve_entry_name('images/logo.svg')
     assert_equal 'images/logo.svg', resolve_entry_name('~/images/logo.svg')
     assert_equal 'favicon.ico', resolve_entry_name('~/favicon.ico')
-    assert_equal 'package.json', resolve_entry_name('/package.json')
-    assert_equal 'images/logo.svg', resolve_entry_name('/images/logo.svg')
-    assert_equal 'app/assets/theme.css', resolve_entry_name('/app/assets/theme.css')
+    assert_equal '../../package.json', resolve_entry_name('/package.json')
+    assert_equal '../../images/logo.svg', resolve_entry_name('/images/logo.svg')
+    assert_equal '../assets/theme.css', resolve_entry_name('/app/assets/theme.css')
 
     with_dev_server_running {
       assert_equal 'entrypoints/logo.svg', resolve_entry_name('logo.svg')
@@ -61,7 +61,7 @@ class ManifestTest < ViteRuby::Test
 
       asset_file = '/app/styles/theme.css'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find app/styles/theme.css in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find ../styles/theme.css in #{ manifest_path }", error.message
 
       asset_file = '~/favicon.ico'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
@@ -107,17 +107,17 @@ class ManifestTest < ViteRuby::Test
 
   def test_lookup_success!
     entry = {
-      'file' => prefixed('main.54e77d73.js'),
+      'file' => prefixed('main.9dcad042.js'),
       'src' => 'entrypoints/main.ts',
       'isEntry' => true,
       'imports' => [
         { 'file' => prefixed('log.818edfb8.js') },
         {
-          'file' => prefixed('vue.56de8b08.js'),
+          'file' => prefixed('vue.3002ada6.js'),
           'src' => 'entrypoints/frameworks/vue.js',
           'isEntry' => true,
           'imports' => [
-            { 'file' => prefixed('vendor.1f6d821b.js') },
+            { 'file' => prefixed('vendor.0f7c0ec3.js') },
           ],
           'css' => [
             prefixed('vue.ec0a97cc.css'),
@@ -126,7 +126,7 @@ class ManifestTest < ViteRuby::Test
             prefixed('logo.322aae0c.svg'),
           ],
         },
-        { 'file' => prefixed('vendor.1f6d821b.js') },
+        { 'file' => prefixed('vendor.0f7c0ec3.js') },
       ],
       'css' => [
         prefixed('app.517bf154.css'),
@@ -187,7 +187,7 @@ class ManifestTest < ViteRuby::Test
     # be explicitly disambiguated.
     assert_nil lookup('frameworks/vue.js')
 
-    file = prefixed('vue.56de8b08.js')
+    file = prefixed('vue.3002ada6.js')
     assert_equal file, path_for('entrypoints/frameworks/vue.js')
     assert_equal file, path_for('~/entrypoints/frameworks/vue.js')
     assert_equal lookup('~/entrypoints/frameworks/vue', type: :javascript), lookup('entrypoints/frameworks/vue.js')
@@ -196,6 +196,9 @@ class ManifestTest < ViteRuby::Test
   def test_path_for_assets
     assert_equal prefixed('logo.f42fb7ea.png'), path_for('images/logo.png')
     assert_equal prefixed('logo.f42fb7ea.png'), path_for('~/images/logo.png')
+
+    assert_equal prefixed('external.d1ae13f1.js'), path_for('/app/assets/external', type: :javascript)
+    assert_equal prefixed('logo.03d6d6da.png'), path_for('/app/assets/logo.png')
     assert_equal prefixed('theme.e6d9734b.css'), path_for('/app/assets/theme', type: :stylesheet)
   end
 

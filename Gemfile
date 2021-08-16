@@ -6,6 +6,7 @@ gem 'rails'
 
 gemspec path: './vite_ruby'
 gemspec path: './vite_rails'
+gemspec path: './vite_plugin_legacy'
 
 group :development, :test do
   gem 'benchmark-ips'

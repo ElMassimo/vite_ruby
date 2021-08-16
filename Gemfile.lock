@@ -1,4 +1,10 @@
 PATH
+  remote: vite_plugin_legacy
+  specs:
+    vite_plugin_legacy (3.0.0.beta.1)
+      vite_ruby (~> 3.0.0.beta.1)
+
+PATH
   remote: vite_rails
   specs:
     vite_rails (3.0.0.beta.2)
@@ -215,6 +221,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.9)
   simplecov (< 0.18)
   spring (~> 2.1)
+  vite_plugin_legacy!
   vite_rails!
   vite_ruby!
 

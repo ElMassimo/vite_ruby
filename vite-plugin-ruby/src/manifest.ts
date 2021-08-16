@@ -7,10 +7,8 @@ import type { Plugin, ResolvedConfig } from 'vite'
 
 import { OutputBundle, PluginContext } from 'rollup'
 import { UnifiedConfig } from '../dist'
-import { filterEntrypointAssets, resolveEntryName } from './config'
-import { CSS_EXTENSIONS_REGEX } from './constants'
+import { filterEntrypointAssets, filterStylesheetAssets } from './config'
 import { withoutExtension } from './utils'
-import { projectRoot } from './index'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
 
@@ -34,11 +32,7 @@ export function assetsManifestPlugin (): Plugin {
   // Internal: For stylesheets Vite does not output the result to the manifest,
   // so we extract the file name of the processed asset from the Rollup bundle.
   function extractChunkStylesheets (bundle: OutputBundle, manifest: AssetsManifest) {
-    const cssFiles = new Set(
-      Object.values(config.build.rollupOptions.input as Record<string, string>)
-        .filter(file => CSS_EXTENSIONS_REGEX.test(file))
-        .map(file => resolveEntryName(projectRoot, config.root, file)),
-    )
+    const cssFiles = Object.fromEntries(filterStylesheetAssets(viteRubyConfig.entrypoints))
 
     Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)
       .forEach((chunk) => {
@@ -49,7 +43,9 @@ export function assetsManifestPlugin (): Plugin {
         // NOTE: Rollup appends `.css` to the file so it's removed before matching.
         // See `filterEntrypointsForRollup`.
         const src = withoutExtension(chunk.name!)
-        if (cssFiles.has(src)) manifest.set(src, { file: chunk.fileName, src })
+        const absoluteFileName = cssFiles[src]
+        if (absoluteFileName)
+          manifest.set(path.relative(config.root, absoluteFileName), { file: chunk.fileName, src })
       })
   }
 
@@ -66,7 +62,7 @@ export function assetsManifestPlugin (): Plugin {
       const filenameWithoutExt = filename.slice(0, -ext.length)
       const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}.${hash}${ext}`)
 
-      manifest.set(filename, { file: hashedFilename, src: filename })
+      manifest.set(path.relative(config.root, absoluteFilename), { file: hashedFilename, src: filename })
 
       // Avoid duplicates if the file was referenced in a different entrypoint.
       if (!bundle[hashedFilename])
@@ -85,6 +81,7 @@ export function assetsManifestPlugin (): Plugin {
     async generateBundle (_options, bundle) {
       const manifest: AssetsManifest = new Map()
       extractChunkStylesheets(bundle, manifest)
+
       await fingerprintRemainingAssets(this, bundle, manifest)
       debug({ manifest })
 

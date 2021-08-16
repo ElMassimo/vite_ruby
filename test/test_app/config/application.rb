@@ -14,6 +14,8 @@ else
   require 'vite_rails'
 end
 
+require 'vite_plugin_legacy'
+
 module TestApp
   class Application < ::Rails::Application
     config.secret_key_base = 'abcdef'
