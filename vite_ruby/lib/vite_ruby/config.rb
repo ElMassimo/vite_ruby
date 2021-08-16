@@ -52,6 +52,18 @@ class ViteRuby::Config
     end.merge(ViteRuby.env)
   end
 
+  # Internal: Files and directories that should be watched for changes.
+  def watched_paths
+    [
+      *(watch_additional_paths + additional_entrypoints).reject { |dir|
+        dir.start_with?('~/') || dir.start_with?(source_code_dir)
+      },
+      "#{ source_code_dir }/**/*",
+      config_path,
+      *DEFAULT_WATCHED_PATHS,
+    ].freeze
+  end
+
 private
 
   # Internal: Coerces all the configuration values, in case they were passed
@@ -148,6 +160,19 @@ private
 
   # Internal: Configuration options that can be provided as env vars.
   CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root skip_compatibility_check] - NOT_CONFIGURABLE_WITH_ENV).freeze
+
+  # Internal: If any of these files is modified the build won't be skipped.
+  DEFAULT_WATCHED_PATHS = %w[
+    package-lock.json
+    package.json
+    pnpm-lock.yaml
+    postcss.config.js
+    tailwind.config.js
+    vite.config.js
+    vite.config.ts
+    windi.config.ts
+    yarn.lock
+  ].freeze
 
 public
 

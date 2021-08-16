@@ -16,6 +16,7 @@
 [reference these files]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/example/app/frontend/entrypoints/main.ts#L4
 [resolve.alias]: https://vitejs.dev/config/#resolve-alias
 [tag helpers]: /guide/development.html#tag-helpers-🏷
+[vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 
 # Configuring Vite Ruby
 
@@ -239,11 +240,14 @@ You can customize this behavior using the following options.
 - **Default:** `false`
 - **Env Var:** `VITE_RUBY_SKIP_COMPATIBILITY_CHECK`
 
-  The version of `vite-plugin-ruby` is checked on initialization to fail early if
-  an incompatible version is suspected, as it could lead to hard-to-debug errors
-  such as missing entries in the manifest.
+  The version of <kbd>[vite-plugin-ruby]</kbd> is checked on initialization to
+  fail early if an incompatible version is suspected, as it could lead to
+  hard-to-debug errors such as missing entrypoints in the build.
 
-  This setting allows to skip that check. Use it responsibly.
+  Running <kbd>bin/vite upgrade</kbd> will install a compatible
+  version, which should resolve this error.
+
+  Otherwise, this setting allows to skip that check. Use it responsibly.
 
 ### viteBinPath
 

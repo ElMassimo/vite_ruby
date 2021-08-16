@@ -57,7 +57,7 @@ private
   # changes, and skip Vite builds if no files have changed.
   def watched_files_digest
     Dir.chdir File.expand_path(config.root) do
-      files = Dir[*watched_paths].reject { |f| File.directory?(f) }
+      files = Dir[*config.watched_paths].reject { |f| File.directory?(f) }
       file_ids = files.sort.map { |f| "#{ File.basename(f) }/#{ Digest::SHA1.file(f).hexdigest }" }
       Digest::SHA1.hexdigest(file_ids.join('/'))
     end
@@ -87,25 +87,5 @@ private
       logger.error 'Build with Vite failed! ❌'
       logger.error '❌ Check that vite and vite-plugin-ruby are in devDependencies and have been installed. ' if stderr.include?('ERR! canceled')
     end
-  end
-
-  # Internal: Files and directories that should be watched for changes.
-  #
-  # NOTE: You can specify additional ones in vite.json using "watchAdditionalPaths": [...]
-  def watched_paths
-    [
-      *config.watch_additional_paths,
-      "#{ config.source_code_dir }/**/*",
-      'package-lock.json',
-      'package.json',
-      'pnpm-lock.yaml',
-      'postcss.config.js',
-      'tailwind.config.js',
-      'vite.config.js',
-      'vite.config.ts',
-      'windi.config.ts',
-      'yarn.lock',
-      config.config_path,
-    ].freeze
   end
 end

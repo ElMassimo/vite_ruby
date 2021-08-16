@@ -120,6 +120,7 @@ class ConfigTest < ViteRuby::Test
       'VITE_RUBY_SOURCE_CODE_DIR' => 'app',
       'VITE_RUBY_ENTRYPOINTS_DIR' => 'frontend/entrypoints',
       'VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT' => 'true',
+      'VITE_RUBY_SKIP_COMPATIBILITY_CHECK' => 'true',
     )
     @config = resolve_config
     assert @config.auto_build
@@ -134,11 +135,22 @@ class ConfigTest < ViteRuby::Test
     assert_pathname 'pb/ft', @config.build_output_dir
     assert_equal 'as', @config.assets_dir
     assert_equal 'app', @config.source_code_dir
+    assert @config.skip_compatibility_check
     assert_equal 'frontend/entrypoints', @config.entrypoints_dir
     assert_pathname 'app', @config.vite_root_dir
     assert_pathname 'app/frontend/entrypoints', @config.resolved_entrypoints_dir
     assert @config.hide_build_console_output
   ensure
     ViteRuby.env.clear
+  end
+
+  def test_watched_paths
+    assert_equal 'app/frontend', @config.source_code_dir
+    assert_equal ['~/{assets,fonts,icons,images}/**/*'], @config.additional_entrypoints
+    assert_equal [
+      'app/frontend/**/*',
+      'config/vite.json',
+      *ViteRuby::Config::DEFAULT_WATCHED_PATHS,
+    ], @config.watched_paths
   end
 end
