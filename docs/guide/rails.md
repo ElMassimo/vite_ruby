@@ -108,3 +108,7 @@ When running the development server, these tags are omitted, as Vite will load t
 ```erb
 <script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
 ```
+
+### Conditional Compilation 📦
+
+If you want to disable the Rake hook for `assets:precompile` as you integrate `vite_rails` into your application, set the environment variable `SKIP_VITE_COMPILE` to `true`. This will keep your current `assets:precompile` step working without `vite_rails` automagically attaching itself as an action.

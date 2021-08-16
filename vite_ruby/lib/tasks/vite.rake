@@ -40,13 +40,15 @@ namespace :vite do
   end
 end
 
-if Rake::Task.task_defined?('assets:precompile')
-  Rake::Task['assets:precompile'].enhance do |task|
-    prefix = task.name.split(/#|assets:precompile/).first
-    Rake::Task["#{ prefix }vite:build"].invoke
+unless ENV['SKIP_VITE_COMPILE'] == 'true'
+  if Rake::Task.task_defined?('assets:precompile')
+    Rake::Task['assets:precompile'].enhance do |task|
+      prefix = task.name.split(/#|assets:precompile/).first
+      Rake::Task["#{ prefix }vite:build"].invoke
+    end
+  else
+    Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build'])
   end
-else
-  Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build'])
 end
 
 # Any prerequisite task that installs packages should also install build dependencies.
