@@ -3,7 +3,7 @@ import type { ServerOptions } from 'vite'
 export type HttpsOption = ServerOptions['https']
 
 export interface ResolvedConfig {
-  additionalInputGlobs: string[]
+  additionalEntrypoints: string[]
   assetHost: string
   assetsDir: string
   configPath: string

@@ -1,6 +1,6 @@
 {
   "all": {
-    "additionalInputGlobs": [
+    "additionalEntrypoints": [
       "~/{assets,fonts,icons,images}/**/*",
       "~/index.html",
       "app/assets/*.css"

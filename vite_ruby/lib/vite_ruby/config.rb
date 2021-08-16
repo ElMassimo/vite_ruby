@@ -144,7 +144,7 @@ private
   DEFAULT_CONFIG = load_json("#{ __dir__ }/../../default.vite.json").freeze
 
   # Internal: Configuration options that can not be provided as env vars.
-  NOT_CONFIGURABLE_WITH_ENV = %w[additional_input_globs watch_additional_paths].freeze
+  NOT_CONFIGURABLE_WITH_ENV = %w[additional_entrypoints watch_additional_paths].freeze
 
   # Internal: Configuration options that can be provided as env vars.
   CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root skip_sanity_check] - NOT_CONFIGURABLE_WITH_ENV).freeze

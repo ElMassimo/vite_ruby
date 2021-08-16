@@ -33,8 +33,8 @@ function isInside (file: string, dir: string) {
 }
 
 // Internal: Returns all files defined in the entrypoints directory.
-function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalInputGlobs }: ResolvedConfig): Entrypoints {
-  const inputGlobs = [`~/${entrypointsDir}/**/*`, ...additionalInputGlobs]
+function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalEntrypoints }: ResolvedConfig): Entrypoints {
+  const inputGlobs = [`~/${entrypointsDir}/**/*`, ...additionalEntrypoints]
   const resolvedGlobs = resolveGlobs(projectRoot, sourceCodeDir, inputGlobs)
   console.log({ resolvedGlobs })
   return glob.sync(resolvedGlobs).map(filename => [

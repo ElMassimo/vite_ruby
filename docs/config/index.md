@@ -184,7 +184,7 @@ You can customize this behavior using the following options.
 
 ## Other Options
 
-### additionalInputGlobs
+### additionalEntrypoints
 
 - **Default:** `["~/{assets,fonts,icons,images}/**/*"]`
 
