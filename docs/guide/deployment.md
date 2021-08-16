@@ -79,6 +79,14 @@ The following rake tasks are available:
 You can provide `RACK_ENV=production` to simulate a production build locally.
 :::
 
+## Disabling extension of the `assets:precompile` task
+
+During complex migrations, it might be convenient that `vite:build` is not run
+along the `assets:precompile` rake task.
+
+You can disable the extension of the `assets:precompile` rake task by setting
+the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` to `true`.
+
 ## Compressing Assets 📦
 
 Most CDN and edge service providers will automatically serve compressed assets,
