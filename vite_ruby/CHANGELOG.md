@@ -1,3 +1,7 @@
+# [3.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.20...vite_ruby@3.0.0) (2021-08-16)
+
+See https://github.com/ElMassimo/vite_ruby/pull/116 for features and breaking changes.
+
 ## [1.2.20](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.18...vite_ruby@1.2.20) (2021-07-30)
 
 

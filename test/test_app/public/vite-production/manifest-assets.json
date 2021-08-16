@@ -1,11 +1,11 @@
 {
-  "../assets/theme.css": {
-    "file": "assets/theme.e6d9734b.css",
-    "src": "app/assets/theme.css"
-  },
   "entrypoints/sassy.scss": {
     "file": "assets/sassy.3560956f.css",
     "src": "entrypoints/sassy.scss"
+  },
+  "../assets/theme.css": {
+    "file": "assets/theme.e6d9734b.css",
+    "src": "app/assets/theme.css"
   },
   "entrypoints/app.css": {
     "file": "assets/app.517bf154.css",
