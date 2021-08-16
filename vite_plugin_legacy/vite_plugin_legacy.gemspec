@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_plugin_legacy@#{ VitePluginLegacy::VERSION }/vite_plugin_legacy/CHANGELOG.md",
   }
 
-  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
   s.add_dependency 'vite_ruby', '~> 3.0.0.beta.1'
 
