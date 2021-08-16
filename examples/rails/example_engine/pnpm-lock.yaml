@@ -2,11 +2,11 @@ lockfileVersion: 5.3
 
 specifiers:
   vite: ^2.5.0
-  vite-plugin-ruby: ^3.0.0-beta.4
+  vite-plugin-ruby: ^3.0.0
 
 devDependencies:
   vite: 2.5.0
-  vite-plugin-ruby: 3.0.0-beta.4_vite@2.5.0
+  vite-plugin-ruby: 3.0.0_vite@2.5.0
 
 packages:
 
@@ -215,8 +215,8 @@ packages:
       is-number: 7.0.0
     dev: true
 
-  /vite-plugin-ruby/3.0.0-beta.4_vite@2.5.0:
-    resolution: {integrity: sha512-cus0VokUX+N8JNqO7bQ4eyhaiE+39CbeW94Pe/RYYGs6l1Cdsr3Sg34TKVzzsCp7nspv8k0NEX39G5c7rBKsGw==}
+  /vite-plugin-ruby/3.0.0_vite@2.5.0:
+    resolution: {integrity: sha512-Jrb+H6n72el+uJQM7o6THK4SpBId4719U7r/2+3burYR4WCUAmlUhZaYSP1Xnb8kc+JU2ojkvjnMZS07u0dM5A==}
     peerDependencies:
       vite: '>=2.5.0'
     dependencies:
