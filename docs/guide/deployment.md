@@ -85,7 +85,7 @@ During complex migrations, it might be convenient that `vite:build` is not run
 along the `assets:precompile` rake task.
 
 You can disable the extension of the `assets:precompile` rake task by setting
-the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` to `true`.
+the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` environment variable to `true`.
 
 ## Compressing Assets 📦
 
