@@ -48,24 +48,24 @@ class DevServerProxyTest < ViteRuby::Test
   end
 
   def test_hmr_for_stylesheet
-    get_with_dev_server_running '/colored.css?t=1611322562923'
-    assert_forwarded to: '/colored.css?t=1611322562923'
+    get_with_dev_server_running '/entrypoints/colored.css?t=1611322562923'
+    assert_forwarded to: '/entrypoints/colored.css?t=1611322562923'
   end
 
   def test_hmr_for_imported_entrypoint
-    get_with_dev_server_running '/colored.css?import&t=1611322562923'
-    assert_forwarded to: '/colored.css?import&t=1611322562923'
+    get_with_dev_server_running '/entrypoints/colored.css?import&t=1611322562923'
+    assert_forwarded to: '/entrypoints/colored.css?import&t=1611322562923'
   end
 
   def test_entrypoint_imported_from_entrypoint
     header 'Referer', 'http://localhost:3000/vite-production/application.js'
-    get_with_dev_server_running '/example_import.js'
-    assert_forwarded to: '/example_import.js'
+    get_with_dev_server_running '/entrypoints/example_import.js'
+    assert_forwarded to: '/entrypoints/example_import.js'
   end
 
   def test_scss_with_extra_css
-    get_with_dev_server_running '/vite-production/colored.scss.css'
-    assert_forwarded to: '/vite-production/colored.scss'
+    get_with_dev_server_running '/vite-production/entrypoints/sassy.scss.css'
+    assert_forwarded to: '/vite-production/entrypoints/sassy.scss'
   end
 
   def test_min_css
@@ -82,11 +82,11 @@ class DevServerProxyTest < ViteRuby::Test
     get '/vite-production/application.js'
     assert_not_forwarded
 
-    get '/colored.css?import&t=1611322562923'
+    get '/entrypoints/colored.css?import&t=1611322562923'
     assert_not_forwarded
 
     header 'Referer', 'http://localhost:3000/vite-production/application.js'
-    get '/example_import.js'
+    get '/entrypoints/example_import.js'
     assert_not_forwarded
   end
 

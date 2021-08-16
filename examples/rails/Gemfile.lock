@@ -4,7 +4,7 @@ PATH
     administrator (0.1.0)
       bootsnap
       rails (~> 6.1.3)
-      vite_rails
+      vite_rails (~> 3.0.0.beta.2)
 
 GEM
   remote: https://rubygems.org/
@@ -71,7 +71,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     bindex (0.8.1)
-    bootsnap (1.7.5)
+    bootsnap (1.7.7)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -94,16 +94,16 @@ GEM
     dry-cli (0.7.0)
     erubi (1.10.0)
     ffi (1.15.3)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (0.5.2)
+      activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
-    listen (3.5.1)
+    listen (3.6.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.10.0)
+    loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -111,12 +111,12 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.3)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
-    nio4r (2.5.7)
-    nokogiri (1.11.7)
-      mini_portile2 (~> 2.5.0)
+    nio4r (2.5.8)
+    nokogiri (1.12.3)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.13.1)
@@ -160,7 +160,7 @@ GEM
       method_source
       rake (>= 0.13)
       thor (~> 1.0)
-    rake (13.0.4)
+    rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -203,12 +203,12 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_plugin_legacy (0.5.5)
-      vite_ruby (~> 1.0)
-    vite_rails (2.0.12)
+    vite_plugin_legacy (3.0.0.beta.1)
+      vite_ruby (~> 3.0.0.beta.1)
+    vite_rails (3.0.0.beta.2)
       railties (>= 5.1, < 8)
-      vite_ruby (~> 1.0)
-    vite_ruby (1.2.16)
+      vite_ruby (~> 3.0.0.beta.1)
+    vite_ruby (3.0.0.beta.3)
       dry-cli (~> 0.7.0)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -248,9 +248,9 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
-  vite_plugin_legacy
-  vite_rails
-  vite_ruby
+  vite_plugin_legacy (~> 3.0.0.beta.1)
+  vite_rails (~> 3.0.0.beta.2)
+  vite_ruby (~> 3.0.0.beta.3)
   web-console (>= 3.3.0)
   webdrivers
 

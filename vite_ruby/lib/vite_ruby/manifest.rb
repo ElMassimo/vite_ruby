@@ -66,8 +66,8 @@ protected
   # Internal: Strict version of lookup.
   #
   # Returns a relative path for the asset, or raises an error if not found.
-  def lookup!(*args, **options)
-    lookup(*args, **options) || missing_entry_error(*args, **options)
+  def lookup!(name, **options)
+    lookup(name, **options) || missing_entry_error(name, **options)
   end
 
   # Internal: Computes the path for a given Vite asset using manifest.json.
@@ -77,13 +77,16 @@ protected
   # Example:
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
-  def lookup(name, type: nil)
+  def lookup(name, **options)
     @build_mutex.synchronize { builder.build } if should_build?
 
-    find_manifest_entry(with_file_extension(name, type))
+    find_manifest_entry resolve_entry_name(name, **options)
   end
 
 private
+
+  # Internal: The prefix used by Vite.js to request files with an absolute path.
+  FS_PREFIX = '/@fs/'
 
   extend Forwardable
 
@@ -98,9 +101,9 @@ private
   # Internal: Finds the specified entry in the manifest.
   def find_manifest_entry(name)
     if dev_server_running?
-      { 'file' => prefix_vite_asset(name.to_s) }
+      { 'file' => prefix_vite_asset(name) }
     else
-      manifest[name.to_s]
+      manifest[name]
     end
   end
 
@@ -135,17 +138,46 @@ private
   def resolve_references(manifest)
     manifest.each_value do |entry|
       entry['file'] = prefix_vite_asset(entry['file'])
-      entry['css'] = entry['css'].map { |path| prefix_vite_asset(path) } if entry['css']
+      %w[css assets].each do |key|
+        entry[key] = entry[key].map { |path| prefix_vite_asset(path) } if entry[key]
+      end
       entry['imports']&.map! { |name| manifest.fetch(name) }
+    end
+  end
+
+  # Internal: Resolves the manifest entry name for the specified resource.
+  def resolve_entry_name(name, type: nil)
+    name = with_file_extension(name.to_s, type)
+
+    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.') && !name.include?('legacy-polyfills')
+
+    # Explicit path, relative to the source_code_dir.
+    name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
+
+    # Explicit path, relative to the project root.
+    name.sub(%r{^/(.+)$}) { return resolve_absolute_entry(Regexp.last_match(1)) }
+
+    # Sugar: Prefix with the entrypoints dir if the path is not nested.
+    name.include?('/') ? name : File.join(config.entrypoints_dir, name)
+  end
+
+  # Internal: Entry names in the manifest are relative to the Vite.js.
+  # During develoment, files outside the root must be requested explicitly.
+  def resolve_absolute_entry(name)
+    if dev_server_running?
+      File.join(FS_PREFIX, config.root, name)
+    else
+      config.root.join(name).relative_path_from(config.vite_root_dir).to_s
     end
   end
 
   # Internal: Adds a file extension to the file name, unless it already has one.
   def with_file_extension(name, entry_type)
-    return name unless File.extname(name.to_s).empty?
-
-    extension = extension_for_type(entry_type)
-    extension ? "#{ name }.#{ extension }" : name
+    if File.extname(name).empty? && (ext = extension_for_type(entry_type))
+      "#{ name }.#{ ext }"
+    else
+      name
+    end
   end
 
   # Internal: Allows to receive :javascript and :stylesheet as :type in helpers.
@@ -159,9 +191,9 @@ private
   end
 
   # Internal: Raises a detailed message when an entry is missing in the manifest.
-  def missing_entry_error(name, type: nil, **_options)
+  def missing_entry_error(name, **options)
     raise ViteRuby::MissingEntrypointError, OpenStruct.new(
-      file_name: with_file_extension(name, type),
+      file_name: resolve_entry_name(name, **options),
       last_build: builder.last_build_metadata,
       manifest: @manifest,
       config: config,

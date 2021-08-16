@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd vite-plugin-ruby
+
+pnpm install
+pnpm build
+pnpm example:build
+
+rm -Rf ../test/test_app/public/vite-production
+cp -R example/public/vite ../test/test_app/public/vite-production

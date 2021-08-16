@@ -6,8 +6,8 @@ import createDebugger from 'debug'
 import type { Plugin, ResolvedConfig } from 'vite'
 
 import { OutputBundle, PluginContext } from 'rollup'
-import { resolveEntrypointAssets } from './config'
-import { CSS_EXTENSIONS_REGEX } from './constants'
+import { UnifiedConfig } from '../dist'
+import { filterEntrypointAssets, filterStylesheetAssets } from './config'
 import { withoutExtension } from './utils'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
@@ -27,15 +27,12 @@ function getAssetHash (content: Buffer) {
 // name to the corresponding output file name.
 export function assetsManifestPlugin (): Plugin {
   let config: ResolvedConfig
+  let viteRubyConfig: UnifiedConfig
 
   // Internal: For stylesheets Vite does not output the result to the manifest,
   // so we extract the file name of the processed asset from the Rollup bundle.
   function extractChunkStylesheets (bundle: OutputBundle, manifest: AssetsManifest) {
-    const cssFiles = new Set(
-      Object.values(config.build.rollupOptions.input as Record<string, string>)
-        .filter(file => CSS_EXTENSIONS_REGEX.test(file))
-        .map(file => path.relative(config.root, file)),
-    )
+    const cssFiles = Object.fromEntries(filterStylesheetAssets(viteRubyConfig.entrypoints))
 
     Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)
       .forEach((chunk) => {
@@ -44,16 +41,18 @@ export function assetsManifestPlugin (): Plugin {
           return manifest.set(chunk.name, { file: chunk.fileName, src: chunk.name })
 
         // NOTE: Rollup appends `.css` to the file so it's removed before matching.
-        // See `resolveEntrypointsForRollup`.
+        // See `filterEntrypointsForRollup`.
         const src = withoutExtension(chunk.name!)
-        if (cssFiles.has(src)) manifest.set(src, { file: chunk.fileName, src })
+        const absoluteFileName = cssFiles[src]
+        if (absoluteFileName)
+          manifest.set(path.relative(config.root, absoluteFileName), { file: chunk.fileName, src })
       })
   }
 
   // Internal: Vite ignores some entrypoint assets, so we need to manually
   // fingerprint the files and move them to the output directory.
   async function fingerprintRemainingAssets (ctx: PluginContext, bundle: OutputBundle, manifest: AssetsManifest) {
-    const remainingAssets = resolveEntrypointAssets(config.root)
+    const remainingAssets = filterEntrypointAssets(viteRubyConfig.entrypoints)
 
     for (const [filename, absoluteFilename] of remainingAssets) {
       const content = await fsp.readFile(absoluteFilename)
@@ -63,7 +62,7 @@ export function assetsManifestPlugin (): Plugin {
       const filenameWithoutExt = filename.slice(0, -ext.length)
       const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}.${hash}${ext}`)
 
-      manifest.set(filename, { file: hashedFilename, src: filename })
+      manifest.set(path.relative(config.root, absoluteFilename), { file: hashedFilename, src: filename })
 
       // Avoid duplicates if the file was referenced in a different entrypoint.
       if (!bundle[hashedFilename])
@@ -77,10 +76,12 @@ export function assetsManifestPlugin (): Plugin {
     enforce: 'post',
     configResolved (resolvedConfig: ResolvedConfig) {
       config = resolvedConfig
+      viteRubyConfig = (config as any).viteRuby
     },
     async generateBundle (_options, bundle) {
       const manifest: AssetsManifest = new Map()
       extractChunkStylesheets(bundle, manifest)
+
       await fingerprintRemainingAssets(this, bundle, manifest)
       debug({ manifest })
 

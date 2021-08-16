@@ -12,6 +12,7 @@
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
 [sourceCodeDir]: /config/#sourcecodedir
+[entrypointsDir]: /config/#entrypointsdir
 [autoBuild]: /config/#autobuild
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [helpers]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/tag_helpers.rb
@@ -54,20 +55,28 @@ You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd
 </head>
 ```
 
-For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
-
-```erb
-<!-- <entrypoints-dir>/images/logo.svg -->
-<img src="<%= vite_asset_path 'images/logo.svg' %>" />
-
-<!-- <entrypoints-dir>/typography.css -->
-<link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
-```
-
-If using `.jsx`, `.tsx`, or any other extension, make sure to be explicit:
+If using `.jsx` or any pre-processor, make sure to be explicit:
 
 ```erb
 <%= vite_javascript_tag 'application.tsx' %>
+<%= vite_stylesheet_tag 'theme.scss' %>
+```
+
+
+For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
+
+```erb
+<img src="<%= vite_asset_path 'images/logo.svg' %>" />
+<link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
+```
+
+All helpers resolve names to the <kbd>[entrypointsDir]</kbd>
+unless the path includes a directory:
+
+```ruby
+vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg
+vite_asset_path 'typography.css'  # app/frontend/entrypoints/typography.css
+vite_asset_path 'logo.svg'        # app/frontend/entrypoints/logo.svg
 ```
 
 ### Enabling Hot Module Reload 🔥

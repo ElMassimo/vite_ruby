@@ -14,6 +14,7 @@ module ViteRails::Installation
       replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{ dir }",)
     end
     setup_content_security_policy root.join('config/initializers/content_security_policy.rb')
+    append root.join('Procfile.dev'), 'web: bin/rails s'
   end
 
   # Internal: Configure CSP rules that allow to load @vite/client correctly.
@@ -30,7 +31,7 @@ module ViteRails::Installation
     CSP
     inject_line_after csp_file, 'policy.script_src', <<~CSP
           # Allow @vite/client to hot reload changes in development
-      #    policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+      #    policy.script_src *policy.script_src, :unsafe_eval, "http://\#{ ViteRuby.config.host_with_port }" if Rails.env.development?
     CSP
   end
 

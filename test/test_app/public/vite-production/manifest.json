@@ -1,39 +1,103 @@
 {
-  "application.js": {
-    "file": "assets/application.d9514acc.js",
-    "src": "application.js",
+  "index-legacy.html": {
+    "file": "assets/index.c5583f4b-legacy.js",
+    "src": "index-legacy.html",
     "isEntry": true,
     "imports": [
-      "_vendor.880705da.js",
-      "example_import.js"
-    ],
-    "css": [
-      "assets/application.f510c1e9.css"
+      "_log.d31acc25-legacy.js",
+      "entrypoints/frameworks/vue-legacy.js",
+      "_vendor.6a486966-legacy.js"
     ]
   },
-  "application.ts": {
-    "file": "assets/application.d9514acc.js",
-    "src": "application.ts",
+  "entrypoints/frameworks/vue-legacy.js": {
+    "file": "assets/vue.5813ee33-legacy.js",
+    "src": "entrypoints/frameworks/vue-legacy.js",
     "isEntry": true,
     "imports": [
-      "_vendor.880705da.js",
-      "example_import.js"
+      "_vendor.6a486966-legacy.js"
     ],
-    "css": [
-      "assets/application.f510c1e9.css"
+    "assets": [
+      "assets/logo.322aae0c.svg"
     ]
   },
-  "example_import.js": {
-    "file": "assets/example_import.8e1fddc0.js",
-    "src": "example_import.js",
+  "entrypoints/main-legacy.ts": {
+    "file": "assets/main.20bbd3a5-legacy.js",
+    "src": "entrypoints/main-legacy.ts",
+    "isEntry": true,
+    "imports": [
+      "_log.d31acc25-legacy.js",
+      "entrypoints/frameworks/vue-legacy.js",
+      "_vendor.6a486966-legacy.js"
+    ]
+  },
+  "../assets/external-legacy.js": {
+    "file": "assets/external.a35ee0db-legacy.js",
+    "src": "../assets/external-legacy.js",
     "isEntry": true
   },
-  "logo.svg": {
-    "file": "assets/logo.f1745d22.js",
-    "src": "logo.svg",
+  "_vendor.6a486966-legacy.js": {
+    "file": "assets/vendor.6a486966-legacy.js"
+  },
+  "_log.d31acc25-legacy.js": {
+    "file": "assets/log.d31acc25-legacy.js"
+  },
+  "../../vite/legacy-polyfills": {
+    "file": "assets/polyfills-legacy.07477394.js",
+    "src": "../../vite/legacy-polyfills",
     "isEntry": true
   },
-  "_vendor.880705da.js": {
-    "file": "assets/vendor.880705da.js"
+  "index.html": {
+    "file": "assets/index.1a0febdc.js",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_log.818edfb8.js",
+      "entrypoints/frameworks/vue.js",
+      "_vendor.0f7c0ec3.js"
+    ],
+    "css": [
+      "assets/sassy.3560956f.css",
+      "assets/app.517bf154.css",
+      "assets/theme.e6d9734b.css"
+    ]
+  },
+  "entrypoints/frameworks/vue.js": {
+    "file": "assets/vue.3002ada6.js",
+    "src": "entrypoints/frameworks/vue.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.0f7c0ec3.js"
+    ],
+    "css": [
+      "assets/vue.ec0a97cc.css"
+    ],
+    "assets": [
+      "assets/logo.322aae0c.svg"
+    ]
+  },
+  "entrypoints/main.ts": {
+    "file": "assets/main.9dcad042.js",
+    "src": "entrypoints/main.ts",
+    "isEntry": true,
+    "imports": [
+      "_log.818edfb8.js",
+      "entrypoints/frameworks/vue.js",
+      "_vendor.0f7c0ec3.js"
+    ],
+    "css": [
+      "assets/app.517bf154.css",
+      "assets/theme.e6d9734b.css"
+    ]
+  },
+  "../assets/external.js": {
+    "file": "assets/external.d1ae13f1.js",
+    "src": "../assets/external.js",
+    "isEntry": true
+  },
+  "_vendor.0f7c0ec3.js": {
+    "file": "assets/vendor.0f7c0ec3.js"
+  },
+  "_log.818edfb8.js": {
+    "file": "assets/log.818edfb8.js"
   }
 }

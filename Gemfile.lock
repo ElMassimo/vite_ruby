@@ -1,14 +1,20 @@
 PATH
+  remote: vite_plugin_legacy
+  specs:
+    vite_plugin_legacy (3.0.0.beta.1)
+      vite_ruby (~> 3.0.0.beta.1)
+
+PATH
   remote: vite_rails
   specs:
-    vite_rails (2.0.13)
+    vite_rails (3.0.0.beta.2)
       railties (>= 5.1, < 8)
-      vite_ruby (~> 1.0)
+      vite_ruby (~> 3.0.0.beta.1)
 
 PATH
   remote: vite_ruby
   specs:
-    vite_ruby (1.2.20)
+    vite_ruby (3.0.0.beta.3)
       dry-cli (~> 0.7.0)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -81,7 +87,7 @@ GEM
     builder (3.2.4)
     byebug (11.1.3)
     coderay (1.1.3)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     crass (1.0.6)
     docile (1.3.5)
     dry-cli (0.7.0)
@@ -91,7 +97,7 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     json (2.5.1)
-    loofah (2.9.1)
+    loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     m (1.5.1)
@@ -102,7 +108,7 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.0.3)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     minitest-reporters (1.4.3)
       ansi
@@ -111,8 +117,8 @@ GEM
       ruby-progressbar
     minitest-stub_any_instance (1.0.2)
     nio4r (2.5.7)
-    nokogiri (1.11.3)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.3)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     parallel (1.20.1)
     parser (3.0.1.0)
@@ -156,7 +162,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 1.0)
     rainbow (3.0.0)
-    rake (13.0.3)
+    rake (13.0.6)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rubocop (1.13.0)
@@ -215,6 +221,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.9)
   simplecov (< 0.18)
   spring (~> 2.1)
+  vite_plugin_legacy!
   vite_rails!
   vite_ruby!
 

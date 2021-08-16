@@ -13,21 +13,17 @@ loader.inflector.inflect('cli' => 'CLI')
 loader.inflector.inflect('io' => 'IO')
 loader.setup
 
+require 'vite_ruby/version'
+
 class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
-
-  # Internal: Versions used by default when running `vite install`.
-  DEFAULT_VITE_VERSION = '^2.3.8'
-  DEFAULT_PLUGIN_VERSION = '^2.0.4'
 
   # Internal: Companion libraries for Vite Ruby, and their target framework.
   COMPANION_LIBRARIES = {
     'vite_rails' => 'rails',
     'vite_hanami' => 'hanami',
-    'vite_roda' => 'roda',
     'vite_padrino' => 'padrino',
-    'vite_sinatra' => 'sinatra',
     'jekyll-vite' => 'jekyll',
     'vite_rails_legacy' => 'rails',
   }

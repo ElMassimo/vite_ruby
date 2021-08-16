@@ -24,6 +24,7 @@ class EngineRakeTasksTest < ViteRuby::Test
 
     within_mounted_app_root { `bin/vite install` }
     assert_path_exists vite_config_ts_path
+    assert_path_exists procfile_dev
     assert_path_exists app_frontend_dir
 
     within_mounted_app { `bundle exec rake app:vite:build` }
@@ -45,6 +46,7 @@ class EngineRakeTasksTest < ViteRuby::Test
     within_mounted_app_root { `bundle exec vite install` }
     assert_path_exists vite_binstub_path
     assert_path_exists vite_config_ts_path
+    assert_path_exists procfile_dev
     assert_path_exists app_frontend_dir
 
     within_mounted_app_root { `bin/vite build --mode development` }
@@ -65,6 +67,10 @@ class EngineRakeTasksTest < ViteRuby::Test
       ViteRuby::CLI::Install.new.call
       ViteRuby.commands.verify_install
       ViteRuby::CLI::Version.new.call
+      stub_kernel_exec('bundle exec vite upgrade_packages') {
+        ViteRuby::CLI::Upgrade.new.call
+      }
+      ViteRuby::CLI::UpgradePackages.new.call
       stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
@@ -98,6 +104,13 @@ private
     mock.verify
   end
 
+  def stub_kernel_exec(command, &block)
+    mock = Minitest::Mock.new
+    mock.expect(:call, nil, [command])
+    Kernel.stub(:exec, mock, &block)
+    mock.verify
+  end
+
   def mounted_app_path
     Pathname.new(File.expand_path(__dir__)).join('mounted_app')
   end
@@ -118,6 +131,10 @@ private
     root_dir.join('vite.config.ts')
   end
 
+  def procfile_dev
+    root_dir.join('Procfile.dev')
+  end
+
   def app_frontend_dir
     root_dir.join('app/frontend')
   end
@@ -133,6 +150,7 @@ private
   def remove_vite_files
     vite_binstub_path.delete if vite_binstub_path.exist?
     vite_config_ts_path.delete if vite_config_ts_path.exist?
+    procfile_dev.delete if procfile_dev.exist?
     app_frontend_dir.rmtree if app_frontend_dir.exist?
     app_public_dir.rmtree if app_public_dir.exist?
     tmp_dir.rmtree if tmp_dir.exist?

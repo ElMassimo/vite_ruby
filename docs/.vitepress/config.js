@@ -80,6 +80,7 @@ module.exports = {
             { text: 'Deployment', link: '/guide/deployment' },
             { text: 'Migration', link: '/guide/migration' },
             { text: 'Plugins', link: '/guide/plugins' },
+            { text: 'Advanced', link: '/guide/advanced' },
           ],
         },
         {

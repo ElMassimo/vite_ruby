@@ -52,13 +52,12 @@ private
     path = env['PATH_INFO']
     return true if path.start_with?(vite_asset_url_prefix) # Vite asset
     return true if path.start_with?(VITE_DEPENDENCY_PREFIX) # Packages and imports
-    return true if vite_entrypoint?(path) # HMR for entrypoint stylesheets and imports does not include the prefix
+    return true if file_in_vite_root?(path) # Fallback if Vite can serve the file
   end
 
-  # Internal: We want to avoid checking the filesystem if possible
-  def vite_entrypoint?(path)
-    path.include?('.') &&
-      config.resolved_entrypoints_dir.join(path.start_with?('/') ? path[1..-1] : path).file?
+  def file_in_vite_root?(path)
+    path.include?('.') && # Check for extension, avoid filesystem if possible.
+      config.vite_root_dir.join(path.start_with?('/') ? path[1..-1] : path).file?
   end
 
   def vite_asset_url_prefix

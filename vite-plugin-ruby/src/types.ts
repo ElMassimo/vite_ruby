@@ -2,30 +2,33 @@ import type { ServerOptions } from 'vite'
 
 export type HttpsOption = ServerOptions['https']
 
-export interface Config {
-  assetHost?: string
-  assetsDir?: string
-  configPath?: string
-  publicDir?: string
-  mode?: string
-  entrypointsDir?: string
-  sourceCodeDir?: string
-  host?: string
-  https?: HttpsOption
-  port?: number
-  publicOutputDir?: string
-  watchAdditionalPaths?: string[]
+export interface ResolvedConfig {
+  additionalEntrypoints: string[]
+  assetHost: string
+  assetsDir: string
+  configPath: string
+  publicDir: string
+  mode: string
+  entrypointsDir: string
+  sourceCodeDir: string
+  host: string
+  https: HttpsOption
+  port: number
+  publicOutputDir: string
+  watchAdditionalPaths: string[]
 }
+
+export type Config = Partial<ResolvedConfig>
 
 export interface PluginOptions {
-  root?: string
-  outDir?: string
-  base?: string
+  root: string
+  outDir: string
+  base: string
 }
 
-export type UnifiedConfig = Config & PluginOptions
+export type Entrypoints = Array<[string, string]>
+
+export type UnifiedConfig = ResolvedConfig & PluginOptions & { entrypoints: Entrypoints }
 
 // Public: Such as a vite.json configuration file.
 export type MultiEnvConfig = Record<string, Config | undefined>
-
-export type Entrypoints = Array<[string, string]>

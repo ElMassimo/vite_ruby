@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module VitePadrino
-  VERSION = '0.5.4'
+  VERSION = '3.0.0.beta.1'
 end

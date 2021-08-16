@@ -1,3 +1,21 @@
+# [3.0.0-beta.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.0-beta.1...vite-plugin-ruby@3.0.0-beta.2) (2021-08-12)
+
+
+### Features
+
+* Avoid unnecessary nesting in output files ([76e04c6](https://github.com/ElMassimo/vite_ruby/commit/76e04c6543200ffa0bebcd8128b33a91fa988124))
+
+
+
+# [3.0.0-beta.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.0-beta.1...vite-plugin-ruby@3.0.0-beta.2) (2021-08-12)
+
+
+### Features
+
+* Avoid unnecessary nesting in output files ([76e04c6](https://github.com/ElMassimo/vite_ruby/commit/76e04c6543200ffa0bebcd8128b33a91fa988124))
+
+
+
 ## [2.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.4...vite-plugin-ruby@2.0.5) (2021-07-29)
 
 

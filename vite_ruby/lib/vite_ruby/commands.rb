@@ -108,6 +108,8 @@ class ViteRuby::Commands
       packages = `npm ls vite vite-plugin-ruby`
       packages_msg = packages.include?('vite@') ? "installed packages:\n#{ packages }" : '❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed.'
       $stdout.puts packages_msg
+
+      ViteRuby::CompatibilityCheck.verify_plugin_version(config.root)
     end
   end
 

@@ -1,36 +1,65 @@
-import { join, relative, resolve } from 'path'
+import { join, relative, resolve, isAbsolute } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, CSS_EXTENSIONS_REGEX, ENTRYPOINT_TYPES_REGEX } from './constants'
-import { booleanOption, loadJsonConfig, configOptionFromEnv, withoutExtension } from './utils'
-import { Config, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
+import { booleanOption, loadJsonConfig, configOptionFromEnv } from './utils'
+import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
 // Internal: Default configuration that is also read from Ruby.
-const defaultConfig: Config = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
-
-// Internal: Returns all files defined in the entrypoints directory.
-function resolveEntrypointFiles (entrypointsDir: string): Entrypoints {
-  return glob.sync(`${entrypointsDir}/**/*`, { onlyFiles: true })
-    .map(filename => [relative(entrypointsDir, filename), filename])
-}
+const defaultConfig: ResolvedConfig = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
 //
 // NOTE: For stylesheets the original extension is preserved in the name so that
 // the resulting file can be accurately matched later in `extractChunkStylesheets`.
-export function resolveEntrypointsForRollup (entrypointsDir: string): Entrypoints {
-  return resolveEntrypointFiles(entrypointsDir)
+export function filterEntrypointsForRollup (entrypoints: Entrypoints): Entrypoints {
+  return entrypoints
     .filter(([_name, filename]) => ENTRYPOINT_TYPES_REGEX.test(filename))
-    .map(([name, filename]) => [CSS_EXTENSIONS_REGEX.test(name) ? name : withoutExtension(name), filename])
 }
 
-// Internal: Returns the files defined in the entrypoints directory that should
-// be processed by rollup.
-export function resolveEntrypointAssets (entrypointsDir: string): Entrypoints {
-  return resolveEntrypointFiles(entrypointsDir)
+// Internal: Returns the files defined in the entrypoints directory that are not
+// processed by Rollup and should be manually fingerprinted and copied over.
+export function filterEntrypointAssets (entrypoints: Entrypoints): Entrypoints {
+  return entrypoints
     .filter(([_name, filename]) => !ENTRYPOINT_TYPES_REGEX.test(filename))
+}
+
+// Internal: Returns the style files defined in the entrypoints directory that
+// are processed by Rollup but not included in the Vite.js manifest.
+export function filterStylesheetAssets (entrypoints: Entrypoints): Entrypoints {
+  return entrypoints
+    .filter(([_name, filename]) => CSS_EXTENSIONS_REGEX.test(filename))
+}
+
+// Internal: Checks if the specified path is inside the specified dir.
+function isInside (file: string, dir: string) {
+  const path = relative(dir, file)
+  return path && !path.startsWith('..') && !isAbsolute(path)
+}
+
+// Internal: Returns all files defined in the entrypoints directory.
+function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalEntrypoints }: ResolvedConfig): Entrypoints {
+  const inputGlobs = [`~/${entrypointsDir}/**/*`, ...additionalEntrypoints]
+  const resolvedGlobs = resolveGlobs(projectRoot, sourceCodeDir, inputGlobs)
+  return glob.sync(resolvedGlobs).map(filename => [
+    resolveEntryName(projectRoot, sourceCodeDir, filename),
+    filename,
+  ])
+}
+
+// Internal: All entry names are relative to the sourceCodeDir if inside it, or
+// to the project root if outside.
+export function resolveEntryName (projectRoot: string, sourceCodeDir: string, file: string) {
+  return relative(isInside(file, sourceCodeDir) ? sourceCodeDir : projectRoot, file)
+}
+
+// Internal: Allows to use the `~` shorthand in the config globs.
+export function resolveGlobs (projectRoot: string, sourceCodeDir: string, patterns: string[]) {
+  return patterns.map(pattern =>
+    resolve(projectRoot, pattern.replace(/^~\//, `${sourceCodeDir}/`)),
+  )
 }
 
 // Internal: Loads configuration options provided through env variables.
@@ -57,20 +86,23 @@ export function loadConfiguration (viteMode: string, projectRoot: string, userCo
 }
 
 // Internal: Coerces the configuration values and deals with relative paths.
-function coerceConfigurationValues (config: UnifiedConfig, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
+function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
   // Coerce the values to the expected types.
   config.port = parseInt(config.port as unknown as string)
   config.https = userConfig.server?.https || booleanOption(config.https)
 
-  // Ensure Vite places HTML files in public with the proper dir structure.
-  const buildOutputDir = join(config.publicDir!, config.publicOutputDir!)
-  config.root = join(projectRoot, config.sourceCodeDir!, config.entrypointsDir!)
-  config.outDir = relative(config.root!, buildOutputDir) // Vite expects it to be relative
+  // Use the sourceCodeDir as the Vite.js root.
+  const root = join(projectRoot, config.sourceCodeDir)
+
+  // Vite expects the outDir to be relative to the root.
+  const buildOutputDir = join(config.publicDir, config.publicOutputDir)
+  const outDir = relative(root, buildOutputDir) // Vite expects it to be relative
 
   // Add the asset host to enable usage of a CDN.
   const assetHost = config.assetHost || ''
   const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
-  config.base = `${assetHostWithProtocol}/${config.publicOutputDir!}/`
+  const base = `${assetHostWithProtocol}/${config.publicOutputDir}/`
 
-  return config
+  const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
+  return { ...config, root, outDir, base, entrypoints }
 }

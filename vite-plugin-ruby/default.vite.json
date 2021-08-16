@@ -1,4 +1,5 @@
 {
+  "additionalEntrypoints": ["~/{assets,fonts,icons,images}/**/*"],
   "assetHost": null,
   "assetsDir": "assets",
   "autoBuild": false,
@@ -9,6 +10,7 @@
   "publicDir": "public",
   "entrypointsDir": "entrypoints",
   "sourceCodeDir": "app/frontend",
+  "skipCompatibilityCheck": false,
   "host": "localhost",
   "https": null,
   "port": 3036,

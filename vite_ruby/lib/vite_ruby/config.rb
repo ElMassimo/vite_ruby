@@ -30,12 +30,17 @@ class ViteRuby::Config
 
   # Public: The directory where the entries are located.
   def resolved_entrypoints_dir
-    root.join(source_code_dir, entrypoints_dir)
+    vite_root_dir.join(entrypoints_dir)
   end
 
   # Internal: The directory where Vite stores its processing cache.
   def vite_cache_dir
     root.join('node_modules/.vite')
+  end
+
+  # Public: The directory that Vite uses as root.
+  def vite_root_dir
+    root.join(source_code_dir)
   end
 
   # Public: Sets additional environment variables for vite-plugin-ruby.
@@ -47,6 +52,18 @@ class ViteRuby::Config
     end.merge(ViteRuby.env)
   end
 
+  # Internal: Files and directories that should be watched for changes.
+  def watched_paths
+    [
+      *(watch_additional_paths + additional_entrypoints).reject { |dir|
+        dir.start_with?('~/') || dir.start_with?(source_code_dir)
+      },
+      "#{ source_code_dir }/**/*",
+      config_path,
+      *DEFAULT_WATCHED_PATHS,
+    ].freeze
+  end
+
 private
 
   # Internal: Coerces all the configuration values, in case they were passed
@@ -56,7 +73,7 @@ private
     config['port'] = config['port'].to_i
     config['root'] = Pathname.new(config['root'])
     config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
-    coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https')
+    coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https', 'skip_compatibility_check')
   end
 
   # Internal: Coerces configuration options to boolean.
@@ -66,6 +83,7 @@ private
 
   def initialize(attrs)
     @config = attrs.tap { |config| coerce_values(config) }.freeze
+    ViteRuby::CompatibilityCheck.verify_plugin_version(root) unless skip_compatibility_check
   end
 
   class << self
@@ -129,7 +147,7 @@ private
       multi_env_config.fetch('all', {})
         .merge(multi_env_config.fetch(mode, {}))
     rescue Errno::ENOENT => error
-      warn "Check that your vite.json configuration file is available in the load path:\n\n\t#{ error.message }\n\n"
+      $stderr << "Check that your vite.json configuration file is available in the load path:\n\n\t#{ error.message }\n\n"
       {}
     end
   end
@@ -138,10 +156,23 @@ private
   DEFAULT_CONFIG = load_json("#{ __dir__ }/../../default.vite.json").freeze
 
   # Internal: Configuration options that can not be provided as env vars.
-  NOT_CONFIGURABLE_WITH_ENV = %w[watch_additional_paths].freeze
+  NOT_CONFIGURABLE_WITH_ENV = %w[additional_entrypoints watch_additional_paths].freeze
 
   # Internal: Configuration options that can be provided as env vars.
   CONFIGURABLE_WITH_ENV = (DEFAULT_CONFIG.keys + %w[mode root] - NOT_CONFIGURABLE_WITH_ENV).freeze
+
+  # Internal: If any of these files is modified the build won't be skipped.
+  DEFAULT_WATCHED_PATHS = %w[
+    package-lock.json
+    package.json
+    pnpm-lock.yaml
+    postcss.config.js
+    tailwind.config.js
+    vite.config.js
+    vite.config.ts
+    windi.config.ts
+    yarn.lock
+  ].freeze
 
 public
 

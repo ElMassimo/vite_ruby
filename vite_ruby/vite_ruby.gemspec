@@ -34,4 +34,6 @@ Gem::Specification.new do |s|
   s.test_files = `git ls-files -- spec/*`.split("\n")
   s.bindir = 'exe'
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
+
+  s.post_install_message = "Thanks for installing Vite Ruby!\n\nIf you upgraded the gem manually, please run:\n\tbundle exec vite upgrade"
 end

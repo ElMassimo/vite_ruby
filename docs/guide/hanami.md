@@ -56,6 +56,14 @@ For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and
 <link rel="prefetch" href="<%= vite_asset_path 'typography.css' %>" />
 ```
 
+All helpers resolve names to the <kbd>[entrypointsDir]</kbd>
+unless the path includes a directory:
+
+```ruby
+vite_asset_path 'logo.svg'        # app/frontend/entrypoints/logo.svg
+vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg
+```
+
 ### Enabling Hot Module Reload 🔥
 
 Use the following helpers to enable HMR in development:

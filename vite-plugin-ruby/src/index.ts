@@ -1,18 +1,16 @@
-import { relative, dirname, resolve, join } from 'path'
+import { basename, posix, resolve } from 'path'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
-import { loadConfiguration, resolveEntrypointsForRollup } from './config'
+import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
+import { UnifiedConfig } from './types'
 
 export * from './types'
 
 // Public: The resolved project root.
 export const projectRoot = configOptionFromEnv('root') || process.cwd()
-
-// Internal: The resolved source code dir.
-let codeRoot: string
 
 // Internal: Additional paths to watch.
 let watchAdditionalPaths: string[] = []
@@ -35,11 +33,10 @@ const debug = createDebugger('vite-plugin-ruby:config')
 // config file, and configures the entrypoints and manifest generation.
 function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const config = loadConfiguration(env.mode, projectRoot, userConfig)
-  const { assetsDir, base, outDir, host, https, port, root } = config
+  const { assetsDir, base, outDir, host, https, port, root, entrypoints } = config
 
-  const entrypoints = Object.fromEntries(resolveEntrypointsForRollup(root!))
-
-  const server = { host, https, port, strictPort: true, fsServe: { root: projectRoot } }
+  const fs = { allow: [projectRoot], strict: true }
+  const server = { host, https, port, strictPort: true, fs }
 
   const build = {
     emptyOutDir: true,
@@ -49,22 +46,19 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     manifest: true,
     outDir,
     rollupOptions: {
-      input: entrypoints,
+      input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
       output: {
-        sourcemapPathTransform (relativeSourcePath: string, sourcemapPath: string) {
-          return relative(projectRoot, resolve(dirname(sourcemapPath), relativeSourcePath))
-        },
+        ...outputOptions(assetsDir),
         ...userConfig.build?.rollupOptions?.output,
       },
     },
   }
 
-  debug({ base, build, root, server, entrypoints })
+  debug({ base, build, root, server, entrypoints: Object.fromEntries(entrypoints) })
 
-  codeRoot = resolve(join(projectRoot, config.sourceCodeDir!))
-  watchAdditionalPaths = (config.watchAdditionalPaths || []).map(glob => resolve(projectRoot, glob))
+  watchAdditionalPaths = resolveGlobs(projectRoot, root, config.watchAdditionalPaths || [])
 
-  const alias = { '~/': `${codeRoot}/`, '@/': `${codeRoot}/` }
+  const alias = { '~/': `${root}/`, '@/': `${root}/` }
 
   return cleanConfig({
     resolve: { alias },
@@ -72,15 +66,25 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     root,
     server,
     build,
-    optimizeDeps: {
-      exclude: ['vite-plugin-ruby'],
-    },
+    viteRuby: config,
   })
 }
 
-// Internal: Allows to watch the entire source code dir, not just entrypoints
-// which is the root for Vite.
+// Internal: Allows to watch additional paths outside the source code dir.
 function configureServer (server: ViteDevServer) {
-  server.watcher.add(`${codeRoot}/**/*`)
   server.watcher.add(watchAdditionalPaths)
+}
+
+function outputOptions (assetsDir: string) {
+  // Internal: Avoid nesting entrypoints unnecessarily.
+  const outputFileName = (ext: string) => ({ name }: { name: string }) => {
+    const shortName = basename(name).split('.')[0]
+    return posix.join(assetsDir, `${shortName}.[hash].${ext}`)
+  }
+
+  return {
+    entryFileNames: outputFileName('js'),
+    chunkFileNames: outputFileName('js'),
+    assetFileNames: outputFileName('[ext]'),
+  }
 }
