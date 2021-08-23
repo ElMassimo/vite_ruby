@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.0...vite-plugin-ruby@3.0.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* pass hmr host explicitly by default ([#119](https://github.com/ElMassimo/vite_ruby/issues/119)) ([07d3237](https://github.com/ElMassimo/vite_ruby/commit/07d3237bcfe2c744b0b0b3a14b11b6321de5f05e))
+
+
+
 # [3.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@2.0.5...vite-plugin-ruby@3.0.0) (2021-08-16)
 
 See https://github.com/ElMassimo/vite_ruby/pull/116 for features and breaking changes.
