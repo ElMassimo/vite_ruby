@@ -8,7 +8,7 @@
 [CLI Command]: /guide/development.html#cli-commands-⌨%EF%B8%8F
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [config.json]: /config/#shared-configuration-file-📄
-[sidecar assets]: https://viewcomponent.org/guide/sidecar_assets.html
+[sidecar assets]: https://viewcomponent.org/guide/javascript_and_css.html
 [viewcomponent]: https://viewcomponent.org/
 [glob imports]: https://vitejs.dev/guide/features.html#glob-import
 
