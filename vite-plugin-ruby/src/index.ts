@@ -36,7 +36,8 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const { assetsDir, base, outDir, host, https, port, root, entrypoints } = config
 
   const fs = { allow: [projectRoot], strict: true }
-  const server = { host, https, port, strictPort: true, fs }
+  const hmr = userConfig.server?.hmr ?? { host, port }
+  const server = { host, https, port, strictPort: true, fs, hmr }
 
   const build = {
     emptyOutDir: true,
