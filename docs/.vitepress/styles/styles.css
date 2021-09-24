@@ -3,6 +3,56 @@
   --c-brand-light: #d53f3f;
   --c-contrast-light: #00c7cc;
   --bg-colored-light: #f3f7f7;
+  --kbd-border: #d1d5da;
+}
+
+@media(prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #222;
+    --c-text: #EEE;
+    --c-text-light: #E9E5E5;
+    --c-text-light-2: #C9C5C5;
+    --c-text-light-3: #A9A5A5;
+    --kbd-border: var(--c-text-light-2);
+    --bg-colored-light: #323030;
+    --c-divider-light: rgba(60, 60, 67, 0.8);
+  }
+
+  p {
+    --code-inline-bg-color: #ffcaca0d;
+  }
+
+  .DocSearch.DocSearch {
+    --docsearch-key-gradient: transparent;
+    --docsearch-key-shadow: transparent;
+    --docsearch-searchbox-shadow: transparent;
+    --docsearch-searchbox-background: var(--c-bg);
+    --docsearch-searchbox-focus-background: var(--c-bg);
+    --docsearch-container-background: rgba(12, 12, 12, 0.9);
+    --docsearch-key-gradient: transparent;
+    --docsearch-key-shadow: none;
+    --docsearch-hit-color: var(--c-text);
+    --docsearch-modal-background: var(--c-bg);
+    --docsearch-modal-shadow: var(--c-bg);
+    --docsearch-footer-shadow: rgba(125, 125, 125, 0.1);
+    --docsearch-hit-background: rgba(125, 125, 125, 0.1);
+    --docsearch-hit-shadow: none;
+    --docsearch-footer-background: transparent;
+  }
+
+  .page .content {
+    --c-brand: var(--c-text);
+  }
+
+  kbd {
+    background-color: #333;
+    box-shadow: none;
+  }
+
+  kbd a {
+    color: var(--c-text);
+    font-weight: 500;
+  }
 }
 
 .custom-block.custom-block.tip {
@@ -11,7 +61,7 @@
 }
 
 .custom-block.custom-block.tip a {
-  color: #007d80;
+  color: var(--c-text-light-2);
 }
 
 .DocSearch.DocSearch {
@@ -51,10 +101,9 @@ h2 .logo {
 
 kbd {
   background-color: #fafbfc;
-  border: 1px solid #d1d5da;
-  border-bottom-color: #d1d5da;
+  border: 1px solid var(--kbd-border);
   border-radius: 6px;
-  box-shadow: inset 0 -1px 0 #d1d5da;
+  box-shadow: inset 0 -1px 0 var(--kbd-border);
   box-sizing: border-box;
   display: inline-block;
   font-size: 0.9rem;

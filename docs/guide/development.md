@@ -48,14 +48,14 @@ will be considered [entries][entrypoints] to your application (SPAs or pages).
 <code>app/frontend: <kbd><a href="/config/#sourcecodedir">sourceCodeDir</a></kbd>
   ├── entrypoints: <kbd><a href="/config/#entrypointsdir">entrypointsDir</a></kbd>
   │   # only Vite entry files here
-  │   └── application.js
+  │   │── application.js
   │   └── typography.css
-  └── components:
+  │── components:
   │   └── App.vue
-  └── channels:
+  │── channels:
   │   │── index.js
   │   └── chat.js
-  └── stylesheets:
+  │── stylesheets:
   │   └── my_styles.css
   └── images:
       └── logo.svg</code>
