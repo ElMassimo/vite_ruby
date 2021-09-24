@@ -67,7 +67,7 @@ vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg
 Use the following helpers to enable HMR in development:
 
 - <kbd>[vite_client_tag][helpers]</kbd>: Renders the Vite client to enable Hot Module Reload
-- <kbd>[vite_react_refresh_tag][helpers]</kbd>: Only when using `@vitejs/plugin-react-refresh`
+- <kbd>[vite_react_refresh_tag][helpers]</kbd>: Only when using `@vitejs/plugin-react`
 
 They will only render if the dev server is running.
 

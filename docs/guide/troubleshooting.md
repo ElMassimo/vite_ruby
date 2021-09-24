@@ -14,7 +14,7 @@
 [Using Heroku]: /guide/deployment#using-heroku
 [example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
 [windi]: /guide/plugins.html#windi-css
-[@vitejs/plugin-react-refresh]: https://www.npmjs.com/package/@vitejs/plugin-react-refresh
+[@vitejs/plugin-react]: https://www.npmjs.com/package/@vitejs/plugin-react
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [ulimit]: https://wilsonmar.github.io/maximum-limits/
 [additionalEntrypoints]: /config/#additionalentrypoints
@@ -47,7 +47,7 @@ If you are using a non-standard setup, try configuring <kbd>[viteBinPath]</kbd>.
 
 ### Hot Module Refresh does not work for React
 
-When using <kbd>[@vitejs/plugin-react-refresh]</kbd> in non-HTML entrypoints,
+When using <kbd>[@vitejs/plugin-react]</kbd> in non-HTML entrypoints,
 you must explicitly [register the HMR plugin](https://github.com/vitejs/vite/issues/1984#issuecomment-778289660).
 
 A [<kbd>vite_react_refresh_tag</kbd> helper][tag helpers] is provided for your convenience:
