@@ -1,5 +1,11 @@
 @import '../styles/logo.scss';
 
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: black;
+  }
+}
+
 header {
   display: grid;
   height: 100vh;

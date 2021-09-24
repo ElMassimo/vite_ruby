@@ -250,7 +250,6 @@ DEPENDENCIES
   tzinfo-data
   vite_plugin_legacy
   vite_rails
-  vite_ruby
   web-console (>= 3.3.0)
   webdrivers
 

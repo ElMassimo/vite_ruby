@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
 import ViteLegacy from '@vitejs/plugin-legacy'
-import ViteReact from '@vitejs/plugin-react-refresh'
+import ViteReact from '@vitejs/plugin-react'
 import Environment from 'vite-plugin-environment'
 import FullReload from 'vite-plugin-full-reload'
 import WindiCSS from 'vite-plugin-windicss'

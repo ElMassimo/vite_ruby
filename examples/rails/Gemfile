@@ -20,8 +20,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # gem 'vite_ruby', path: '../../vite_ruby'
-gem 'vite_ruby'
-
 # gem 'vite_rails', path: '../../vite_rails'
 gem 'vite_rails'
 
