@@ -135,7 +135,7 @@ code kbd {
 }
 
 code .token.inserted.token.inserted {
-  color: var(--c-contrast-light);
+  color: #00f9ff;
 }
 
 [class*='language-'] pre {
