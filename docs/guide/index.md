@@ -23,6 +23,7 @@
 [Troubleshooting]: /guide/troubleshooting
 [Recommended Plugins]: /guide/plugins
 [jekyll-vite]: https://github.com/ElMassimo/jekyll-vite
+[tag helpers]: https://vite-ruby.netlify.app/guide/development.html#tag-helpers-%F0%9F%8F%B7
 
 # Getting Started
 
@@ -56,6 +57,11 @@ Run <kbd>bundle exec vite install</kbd>, which:
 - Installs <kbd>[vite]</kbd> and <kbd>[vite-plugin-ruby]</kbd>
 - Adds [`vite.config.ts`][vite config] and [`config/vite.json`][json config] configuration files
 - Creates a sample `application.js` entrypoint in your web app
+- Injects [tag helpers] in the default `application.html.erb` view layout
+
+:::tip Tag Helpers
+If you are using a different layout file, follow the _[Tag Helpers]_ section to add them manually.
+:::
 
 ### Running your first example 🏃‍♂️
 
