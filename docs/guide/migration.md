@@ -17,6 +17,8 @@
 [npx]: https://docs.npmjs.com/cli/v7/commands/npx
 [vite-plugin-erb]: https://github.com/ElMassimo/vite-plugin-erb
 [rails-erb-loader]: https://github.com/usabilityhub/rails-erb-loader
+[tag helpers]: /guide/development.html#tag-helpers-🏷
+[Troubleshooting]: /guide/troubleshooting
 
 # Migrating to Vite
 
@@ -29,9 +31,10 @@ where you can place your JavaScript, stylesheets, and other assets.
 
 ## Webpacker 📦
 
-When migrating from [Webpacker], the installation script will detect if the
-`app/javascript` directory exists, and use that in your `config/vite.json`
-instead of the [default][sourceCodeDir].
+When migrating from [Webpacker], start by following the [guide] to get a [basic setup][sourceCodeDir] working before proceeding to migrate existing code.
+
+During installation, Vite Ruby detect if the `app/javascript` directory exists,
+and use that in your `config/vite.json` instead of the [default][sourceCodeDir].
 
 ```json
 {
@@ -40,15 +43,14 @@ instead of the [default][sourceCodeDir].
     ...
 ```
 
-That way you don't have to move code around, and can proceed to copying your
-[entries][entrypoints] in `app/javascript/packs` to [`app/javascript/entrypoints`][entrypointsDir].
+:::tip One entry at a time
+The recommended approach for medium-to-large-sized applications is to migrate
+one entrypoint at a time if possible. Gradually move each [file][entrypoints] in `app/javascript/packs` (managed by Webpacker) to [`app/javascript/entrypoints`][entrypointsDir] (managed by Vite Ruby).
 
-### Manual Steps
+Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1) as an example.
+:::
 
-You may perform the following steps when replacing Webpacker, but do have in
-mind that they are compatible, and you could do a gradual migration instead.
-
-- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression](https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb#L97) in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
+Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.js) by checking the _[Troubleshooting]_ section and the following __recommendations__:
 
 - Explicitly add a file extension to any non-JS imports.
 
@@ -57,7 +59,7 @@ mind that they are compatible, and you could do a gradual migration instead.
   + import TextInput from '@/components/TextInput.vue'
   ```
 
-- Replace usages of tag helpers.
+- Replace usages of [tag helpers] as you move the [entrypoints].
 
   ```diff
   + <%= vite_client_tag %>
@@ -80,11 +82,11 @@ mind that they are compatible, and you could do a gradual migration instead.
   + const controllers = import.meta.globEager('./**/*_controller.js')
   ```
 
+- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression](https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb#L97) in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
+
 - If you were using <kbd>[rails-erb-loader]</kbd>, you might want to check <kbd>[vite-plugin-erb]</kbd> to ease the transition, but it's better to avoid mixing ERB in frontend assets.
 
 - Make sure <kbd>[npx]</kbd> is available (comes by default in most node.js installations), or [clear][clear rake] the <kbd>[vite:install_dependencies]</kbd> rake task and provide your own implementation.
-
-Check [this migration from Webpacker](https://github.com/ElMassimo/pingcrm-vite/pull/1) as an example.
 
 ::: tip Compatibility Note
 Before migrating from [Webpacker], make sure that you are not using any loaders

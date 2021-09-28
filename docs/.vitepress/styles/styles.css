@@ -13,13 +13,24 @@
     --c-text-light: #E9E5E5;
     --c-text-light-2: #C9C5C5;
     --c-text-light-3: #A9A5A5;
-    --kbd-border: var(--c-text-light-2);
+    --kbd-border: #6c6a6a;
     --bg-colored-light: #323030;
     --c-divider-light: rgba(60, 60, 67, 0.8);
   }
 
   p {
     --code-inline-bg-color: #ffcaca0d;
+  }
+
+  .content a {
+    text-decoration: underline;
+    text-decoration-color: var(--c-text-light-2);
+  }
+
+  .content a:hover,
+  .content a:hover code {
+    color: white;
+    text-decoration-color: currentColor;
   }
 
   .DocSearch.DocSearch {
@@ -42,6 +53,12 @@
 
   .page .content {
     --c-brand: var(--c-text);
+  }
+
+  .nav-link.action:not(.alt) .item,
+  .nav-link.action .item.item:hover,
+  .custom-block.custom-block.tip a:hover {
+    color: white;
   }
 
   kbd {
