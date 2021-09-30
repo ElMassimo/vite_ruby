@@ -3,7 +3,7 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vitejs.dev/guide/using-plugins.html
 [rollup]: https://rollupjs.org/guide/en/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [guide]: /guide/
@@ -88,7 +88,16 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
 
 - Make sure <kbd>[npx]</kbd> is available (comes by default in most node.js installations), or [clear][clear rake] the <kbd>[vite:install_dependencies]</kbd> rake task and provide your own implementation.
 
-::: tip Compatibility Note
-Before migrating from [Webpacker], make sure that you are not using any loaders
-that don't have a counterpart in [Vite], which uses [Rollup] when bundling for production.
+::: tip Loaders to Plugins
+Vite provides many features [out of the box], which reduce the
+need for configuration.
+
+In complex setups, the app might depend on specific webpack loaders, which can't
+be used in Vite, which uses [Rollup] under the hood.
+
+Check [Vite Rollup Plugins] and [Awesome Vite] to find equivalent plugins.
 :::
+
+[Vite Rollup Plugins]: https://vite-rollup-plugins.patak.dev/
+[Awesome Vite]: https://github.com/vitejs/awesome-vite#plugins
+[out of the box]: https://vitejs.dev/guide/features.html
