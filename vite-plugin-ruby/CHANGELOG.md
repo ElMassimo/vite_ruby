@@ -1,3 +1,12 @@
+## [3.0.2-pre.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.1...vite-plugin-ruby@3.0.2-pre.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* use posix-style paths for globs to support windows (see [#129](https://github.com/ElMassimo/vite_ruby/issues/129)) ([ded65f7](https://github.com/ElMassimo/vite_ruby/commit/ded65f784285f79d1e781dfbad6385af6c5e0099))
+
+
+
 ## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.0...vite-plugin-ruby@3.0.1) (2021-08-23)
 
 
