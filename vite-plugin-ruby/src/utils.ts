@@ -2,6 +2,11 @@ import { readFileSync } from 'fs'
 
 import { ENV_PREFIX } from './constants'
 
+// Internal: Replace Windows-style separators with POSIX-style separators.
+export function slash (path: string): string {
+  return path.replace(/\\/g, '/')
+}
+
 // Internal: Returns true if the specified value is a plain JS object
 export function isObject (value: unknown): value is Record<string, any> {
   return Object.prototype.toString.call(value) === '[object Object]'

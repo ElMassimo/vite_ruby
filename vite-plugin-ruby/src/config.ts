@@ -1,9 +1,9 @@
-import { join, relative, resolve, isAbsolute } from 'path'
+import { join, posix, relative, resolve, isAbsolute } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, CSS_EXTENSIONS_REGEX, ENTRYPOINT_TYPES_REGEX } from './constants'
-import { booleanOption, loadJsonConfig, configOptionFromEnv } from './utils'
+import { booleanOption, loadJsonConfig, configOptionFromEnv, slash } from './utils'
 import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
 // Internal: Default configuration that is also read from Ruby.
@@ -58,7 +58,7 @@ export function resolveEntryName (projectRoot: string, sourceCodeDir: string, fi
 // Internal: Allows to use the `~` shorthand in the config globs.
 export function resolveGlobs (projectRoot: string, sourceCodeDir: string, patterns: string[]) {
   return patterns.map(pattern =>
-    resolve(projectRoot, pattern.replace(/^~\//, `${sourceCodeDir}/`)),
+    posix.resolve(slash(projectRoot), pattern.replace(/^~\//, `${sourceCodeDir}/`)),
   )
 }
 

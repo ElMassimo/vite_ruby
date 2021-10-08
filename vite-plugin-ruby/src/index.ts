@@ -1,11 +1,10 @@
-import { basename, posix, resolve } from 'path'
+import { basename, posix } from 'path'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
-import { UnifiedConfig } from './types'
 
 export * from './types'
 
