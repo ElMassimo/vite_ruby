@@ -1,4 +1,4 @@
-import { join, posix, relative, resolve, isAbsolute } from 'path'
+import { join, relative, resolve, isAbsolute } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
@@ -58,7 +58,7 @@ export function resolveEntryName (projectRoot: string, sourceCodeDir: string, fi
 // Internal: Allows to use the `~` shorthand in the config globs.
 export function resolveGlobs (projectRoot: string, sourceCodeDir: string, patterns: string[]) {
   return patterns.map(pattern =>
-    posix.resolve(slash(projectRoot), pattern.replace(/^~\//, `${sourceCodeDir}/`)),
+    slash(resolve(projectRoot, pattern.replace(/^~\//, `${sourceCodeDir}/`))),
   )
 }
 
