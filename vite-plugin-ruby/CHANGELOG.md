@@ -1,3 +1,12 @@
+## [3.0.2-pre.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.2-pre.1...vite-plugin-ruby@3.0.2-pre.2) (2021-10-08)
+
+
+### Bug Fixes
+
+* use slash after resolving, for windows compatibility ([c6ea9ac](https://github.com/ElMassimo/vite_ruby/commit/c6ea9acf6efbe2c126551cfdf06b9a07d2bfc817))
+
+
+
 ## [3.0.2-pre.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.1...vite-plugin-ruby@3.0.2-pre.1) (2021-10-08)
 
 
