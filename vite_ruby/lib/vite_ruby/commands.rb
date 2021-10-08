@@ -71,7 +71,7 @@ class ViteRuby::Commands
       warn <<~WARN
 
         vite binstub not found.
-        Have you run `bundle binstub vite`?
+        Have you run `bundle binstub vite_ruby`?
         Make sure the bin directory and bin/vite are not included in .gitignore
       WARN
     end
