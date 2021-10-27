@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.0...vite_ruby@3.0.1) (2021-10-27)
+
+
+### Features
+
+* expose the `--watch` flag for the build command ([4e20d0a](https://github.com/ElMassimo/vite_ruby/commit/4e20d0a7b697b535e13335dac5a75fb8a193a133))
+
+
+
 # [3.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@1.2.20...vite_ruby@3.0.0) (2021-08-16)
 
 See https://github.com/ElMassimo/vite_ruby/pull/116 for features and breaking changes.
