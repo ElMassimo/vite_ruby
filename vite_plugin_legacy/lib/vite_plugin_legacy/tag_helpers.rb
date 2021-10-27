@@ -9,10 +9,10 @@ module VitePluginLegacy::TagHelpers
 
     legacy_name = name.sub(/(\..+)|$/, '-legacy\1')
     import_tag = content_tag(:script, nomodule: true) {
-      "System.import('#{ vite_asset_path(legacy_name, type: asset_type) }')".html_safe
+      vite_legacy_import_body(name, asset_type: asset_type)
     }
 
-    safe_join [vite_legacy_polyfill_tag, import_tag]
+    import_tag
   end
 
   # Public: Same as `vite_legacy_javascript_tag`, but for TypeScript entries.
@@ -20,11 +20,27 @@ module VitePluginLegacy::TagHelpers
     vite_legacy_javascript_tag(name, asset_type: :typescript)
   end
 
-  # Internal: Renders the vite-legacy-polyfill to enable code splitting in
+  # Renders the vite-legacy-polyfill to enable code splitting in
   # browsers that do not support modules.
-  def vite_legacy_polyfill_tag
+  # Entrypoints in format: {"entrypoint_name" => asset_type }
+  # e.g.: { "application" => :typescript }
+  def vite_legacy_polyfill_tag(entrypoints)
     return if ViteRuby.instance.dev_server_running?
 
-    content_tag(:script, nil, nomodule: true, id: 'vite-legacy-polyfill', src: vite_asset_path('legacy-polyfills', type: :virtual))
+    tags = []
+    tags.push(content_tag(:script, nil, nomodule: true, id: 'vite-legacy-polyfill', src: vite_asset_path('legacy-polyfills', type: :virtual)))
+    entrypoints.each do |entrypoint, asset_type|
+      tags.push(content_tag(:script, nil, type: 'module') { vite_dynamic_fallback_inline_code(entrypoint, asset_type: asset_type) })
+    end
+    safe_join(tags, "\n")
+  end
+
+  def vite_dynamic_fallback_inline_code(name, asset_type: :javascript)
+    %Q{!function(){try{new Function("m","return import(m)")}catch(o){console.warn("vite: loading legacy build because dynamic import is unsupported, syntax error above should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){#{vite_legacy_import_body(name, asset_type: asset_type)}},document.body.appendChild(n)}}();}.html_safe
+  end
+
+  def vite_legacy_import_body(name, asset_type: :javascript)
+    legacy_name = name.sub(/(\..+)|$/, '-legacy\1')
+    "System.import('#{ vite_asset_path(legacy_name, type: asset_type) }')".html_safe
   end
 end
