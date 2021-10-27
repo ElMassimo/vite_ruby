@@ -25,6 +25,6 @@ module VitePluginLegacy::TagHelpers
   def vite_legacy_polyfill_tag
     return if ViteRuby.instance.dev_server_running?
 
-    content_tag(:script, nil, nomodule: true, src: vite_asset_path('legacy-polyfills', type: :virtual))
+    content_tag(:script, nil, nomodule: true, id: 'vite-legacy-polyfill', src: vite_asset_path('legacy-polyfills', type: :virtual))
   end
 end
