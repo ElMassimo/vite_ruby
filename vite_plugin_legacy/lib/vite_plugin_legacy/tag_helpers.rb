@@ -2,6 +2,9 @@
 
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
 module VitePluginLegacy::TagHelpers
+  VITE_SAFARI_NOMODULE_FIX = <<-JS.html_safe.freeze
+  !function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;console.log('preventing load',e.target);e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();
+  JS
   # Public: Renders a <script> tag for the specified Vite entrypoints when using
   # @vitejs/plugin-legacy, which injects polyfills.
   def vite_legacy_javascript_tag(name, asset_type: :javascript)
@@ -28,6 +31,7 @@ module VitePluginLegacy::TagHelpers
     return if ViteRuby.instance.dev_server_running?
 
     tags = []
+    tags.push(content_tag(:script, nil, nomodule: true) { VITE_SAFARI_NOMODULE_FIX })
     tags.push(content_tag(:script, nil, nomodule: true, id: 'vite-legacy-polyfill', src: vite_asset_path('legacy-polyfills', type: :virtual)))
     entrypoints.each do |entrypoint, asset_type|
       tags.push(content_tag(:script, nil, type: 'module') { vite_dynamic_fallback_inline_code(entrypoint, asset_type: asset_type) })
