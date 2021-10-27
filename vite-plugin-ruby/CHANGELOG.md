@@ -1,3 +1,7 @@
+## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.2-pre.2...vite-plugin-ruby@3.0.2) (2021-10-27)
+
+
+
 ## [3.0.2-pre.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.2-pre.1...vite-plugin-ruby@3.0.2-pre.2) (2021-10-08)
 
 
