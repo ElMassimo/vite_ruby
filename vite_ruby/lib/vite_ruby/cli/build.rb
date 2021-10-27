@@ -6,6 +6,7 @@ class ViteRuby::CLI::Build < ViteRuby::CLI::Vite
   desc 'Bundle all entrypoints using Vite.'
   shared_options
   option(:force, desc: 'Force the build even if assets have not changed', type: :boolean)
+  option(:watch, desc: 'Start the Rollup watcher and rebuild on files changes', type: :boolean)
 
   def call(**options)
     super { |args| ViteRuby.commands.build_from_task(*args) }
