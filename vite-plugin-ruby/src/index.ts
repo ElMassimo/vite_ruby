@@ -40,7 +40,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   const build = {
     emptyOutDir: true,
-    sourcemap: config.mode !== 'development',
+    sourcemap: config.mode === 'production',
     ...userConfig.build,
     assetsDir,
     manifest: true,
