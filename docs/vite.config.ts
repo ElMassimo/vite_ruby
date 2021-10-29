@@ -1,13 +1,10 @@
 import { defineConfig } from 'vite'
-import WindiCSS from 'vite-plugin-windicss'
+import unocss from 'unocss/vite'
 
 export default defineConfig({
   plugins: [
-    WindiCSS({
-      preflight: false,
-      scan: {
-        dirs: ['.vitepress/components'],
-      },
+    unocss({
+      include: [/\.vitepress\/components/],
     }),
   ],
 })

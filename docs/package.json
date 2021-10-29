@@ -11,18 +11,18 @@
     "css": "stylelint --ignore-pattern 'dist' '.vitepress/**/*.(vue|scss|css|postcss)'"
   },
   "dependencies": {
-    "vue": "^3.2.0"
+    "vue": "^3.2.20"
   },
   "devDependencies": {
     "@docsearch/css": "^1.0.0-alpha.28",
     "@docsearch/js": "^1.0.0-alpha.28",
-    "@vue/compiler-sfc": "^3.2.0",
+    "@vue/compiler-sfc": "^3.2.20",
     "stylelint": "^13.12.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
-    "typescript": "^4.2.3",
-    "vite": "^2.5.0",
-    "vite-plugin-windicss": "^0.6.11",
-    "vitepress": "^0.16.1"
+    "typescript": "^4.4.4",
+    "unocss": "^0.2.1",
+    "vite": "^2.6.12",
+    "vitepress": "^0.20.0"
   }
 }

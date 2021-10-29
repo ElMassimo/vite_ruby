@@ -1,6 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
-
 defineProps({
   author: { type: String, default: null },
   href: { type: String, default: null },

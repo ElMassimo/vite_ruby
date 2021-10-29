@@ -1,7 +1,7 @@
 import Theme from 'vitepress/theme'
 import Quote from '../components/Quote.vue'
 
-import 'windi.css'
+import '/@unocss-entry.css'
 import '../styles/styles.css'
 
 export default {
