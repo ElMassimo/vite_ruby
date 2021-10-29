@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.1...vite_ruby@3.0.2) (2021-10-29)
+
+
+### Features
+
+* enable hmr when running tests in development with vite dev server ([e253bba](https://github.com/ElMassimo/vite_ruby/commit/e253bba26d164aabc7a9526df504c207ad2cf6f9))
+
+
+
 ## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.0...vite_ruby@3.0.1) (2021-10-27)
 
 
