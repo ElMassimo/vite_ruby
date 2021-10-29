@@ -66,7 +66,8 @@ If you followed the [installation] section, it should look similar to:
   },
   "test": {
     "autoBuild": true,
-    "publicOutputDir": "vite-test"
+    "publicOutputDir": "vite-test",
+    "port": 3037
   }
 }
 ```

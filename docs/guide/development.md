@@ -137,3 +137,22 @@ Tag helpers are provided in the framework-specific integrations:
   - [Hanami](/guide/hanami)
   - [Padrino](/guide/padrino)
   - [Plugin Legacy](/guide/plugin-legacy)
+
+## HMR for Integration Tests ✅
+
+When iterating on integration tests locally, you can [avoid rebuilds] by starting
+an additional Vite dev server for tests with <kbd>bin/vite dev --mode=test</kbd>.
+
+To reuse the same Vite dev server from development, you can configure <kbd>[publicOutputDir]</kbd> and <kbd>[port]</kbd> in `test` to match the `development` config.
+
+::: tip Intended for quick iteration
+The trade-off is that your app might not even build correctly.
+
+It's safe if you are running tests in a CI as it will build in production mode.
+
+When running tests locally, you can test the production build by not starting the Vite dev server for tests, or by setting the `CI` environment varialbe.
+:::
+
+[avoid rebuilds]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/spec/features/home_spec.rb#15
+[publicOutputDir]: /config/#publicoutputdir
+[port]: /config/#port
