@@ -8,6 +8,8 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 
+ViteRuby.instance.logger = ActiveSupport::Logger.new($stdout)
+
 RSpec.configure do |config|
   config.expose_dsl_globally = false
   config.disable_monkey_patching!
