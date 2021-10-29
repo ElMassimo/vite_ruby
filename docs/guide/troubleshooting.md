@@ -26,6 +26,13 @@ This section lists a few common gotchas, and bugs introduced in the past.
 
 Please skim through __before__ opening an [issue][GitHub Issues].
 
+### No Vite Ruby output in tests even though it's building
+
+Vite Ruby uses the [Rails logger](https://github.com/ElMassimo/vite_ruby/blob/main/vite_rails/lib/vite_rails/engine.rb#L20-L24) when available, which in the `test`
+environment it's often configured to output to a `log/test.log` file.
+
+To see the output when running integration tests, you can [manually assign a logger](https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/spec/spec_helper.rb#L11) in `spec_helper.rb` or a similar file that is only loaded in the test environment.
+
 ### Upgrading to v3 and now assets are failing to resolve
 
 It's likely that you have a nested directory structure under <kbd>[entrypointsDir]</kbd>.
