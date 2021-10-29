@@ -21,7 +21,7 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
     "typescript": "^4.4.4",
-    "unocss": "^0.2.1",
+    "vite-plugin-windicss": "^0.6.11",
     "vite": "^2.6.12",
     "vitepress": "^0.20.0"
   }
