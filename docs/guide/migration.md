@@ -101,3 +101,68 @@ Check [Vite Rollup Plugins] and [Awesome Vite] to find equivalent plugins.
 [Vite Rollup Plugins]: https://vite-rollup-plugins.patak.dev/
 [Awesome Vite]: https://github.com/vitejs/awesome-vite#plugins
 [out of the box]: https://vitejs.dev/guide/features.html
+
+## Rails assets
+
+[Rails assets](https://guides.rubyonrails.org/asset_pipeline.html) exist within the `app/assets` directory by default. If you want these assets to be picked up by Vite, you will have to [add app/assets to the watchAdditionalPaths](https://vite-ruby.netlify.app/config/#watchadditionalpaths) in your `config/vite.json` file like the following:
+
+```json
+{
+  "all": {
+    "sourceCodeDir": "app/javascript",
+    "watchAdditionalPaths": [
+      "app/assets/**/*"
+    ]
+  }
+}
+```
+
+This will allow Vite to update whenever a file within the assets folder is changed. If you would like to programmatically access these assets, it is recommended to add a custom alias:
+
+```js
+// vite.config.js
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@assets': resolve(__dirname, 'app/assets'),
+    },
+  },
+},
+```
+
+If you have existing `.css` files that access these assets, you will need to update them so that Vite can find the assets:
+
+```css
+// before, from file: app/assets/fonts/OpenSans.woff2
+@font-face {
+  font-family: 'OpenSans';
+  src: font-url('OpenSans.woff2');
+}
+
+// after
+@font-face {
+  font-family: 'OpenSans';
+  src: url('@assets/fonts/OpenSans.woff2');
+}
+```
+
+You could alernatively move your assets directly within your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir) in `config/vite.json`, and you would not need to add to `watchAdditionalPaths` nor add an alias, but you would still need to change assets within the `.css` files such as the following:
+
+```css
+// before, from file: app/assets/fonts/OpenSans.woff2
+@font-face {
+  font-family: 'OpenSans';
+  src: font-url('OpenSans.woff2');
+}
+
+// after, from file: app/javascript/fonts/OpenSans.woff2
+@font-face {
+  font-family: 'OpenSans';
+  src: url('fonts/OpenSans.woff2');
+}
+```
+
+Where your `fonts` folder is a subdirectory of your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir).
