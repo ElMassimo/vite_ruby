@@ -3,6 +3,7 @@
 require 'logger'
 require 'forwardable'
 require 'pathname'
+require 'socket'
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem
