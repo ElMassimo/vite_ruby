@@ -149,7 +149,7 @@ If you have existing `.css` files that access these assets, you will need to upd
 }
 ```
 
-You could alernatively move your assets directly within your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir) in `config/vite.json`, and you would not need to add to `watchAdditionalPaths` nor add an alias, but you would still need to change assets within the `.css` files such as the following:
+You could alternatively move your assets directly within your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir) in `config/vite.json`, and you would not need to add to `watchAdditionalPaths` nor add an alias, but you would still need to change assets within the `.css` files such as the following:
 
 ```css
 // before, from file: app/assets/fonts/OpenSans.woff2
