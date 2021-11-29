@@ -19,6 +19,10 @@
 [rails-erb-loader]: https://github.com/usabilityhub/rails-erb-loader
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [Troubleshooting]: /guide/troubleshooting
+[import aliases]: /guide/development.html#import-aliases-👉
+[assets pipeline]: https://guides.rubyonrails.org/asset_pipeline.html
+[glob expression]: https://github.com/ElMassimo/vite_ruby/blob/eeccd3fc4e7db9524a2bd1075ca1282f3f53c029/vite-plugin-ruby/example/config/vite.json#L9
+[resolve.alias]: https://vitejs.dev/config/#resolve-alias
 
 # Migrating to Vite
 
@@ -82,7 +86,7 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
   + const controllers = import.meta.globEager('./**/*_controller.js')
   ```
 
-- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression](https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb#L97) in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
+- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression] in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
 
 - If you were using <kbd>[rails-erb-loader]</kbd>, you might want to check <kbd>[vite-plugin-erb]</kbd> to ease the transition, but it's better to avoid mixing ERB in frontend assets.
 
@@ -102,25 +106,20 @@ Check [Vite Rollup Plugins] and [Awesome Vite] to find equivalent plugins.
 [Awesome Vite]: https://github.com/vitejs/awesome-vite#plugins
 [out of the box]: https://vitejs.dev/guide/features.html
 
-## Rails assets
+## Assets 🎨
 
-[Rails assets](https://guides.rubyonrails.org/asset_pipeline.html) exist within the `app/assets` directory by default. If you want these assets to be picked up by Vite, you will have to [add app/assets to the watchAdditionalPaths](https://vite-ruby.netlify.app/config/#watchadditionalpaths) in your `config/vite.json` file like the following:
+It's recommended that you locate assets under the <kbd>[sourceCodeDir]</kbd>,
+which requires no additional configuration. You can use [import aliases] to
+easily reference them.
 
-```json
-{
-  "all": {
-    "sourceCodeDir": "app/javascript",
-    "watchAdditionalPaths": [
-      "app/assets/**/*"
-    ]
-  }
-}
-```
+However, during a migration it can be convenient to reference files that are
+still being used through the [assets pipeline], such as fonts in `app/assets`.
 
-This will allow Vite to update whenever a file within the assets folder is changed. If you would like to programmatically access these assets, it is recommended to add a custom alias:
+In that case, you should add [`app/assets/**/*`][glob expression] to <kbd>[watchAdditionalPaths]</kbd> to track changes to these files and trigger a rebuild when needed.
 
-```js
-// vite.config.js
+In order to reference these files it's highly recommended to [define][resolve.alias] your own [import aliases]:
+
+```js{7}
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
@@ -130,39 +129,26 @@ export default defineConfig({
       '@assets': resolve(__dirname, 'app/assets'),
     },
   },
-},
+})
 ```
 
-If you have existing `.css` files that access these assets, you will need to update them so that Vite can find the assets:
+Remember to update any references to these files, for example, in
+stylesheets processed by Vite:
 
-```css
-// before, from file: app/assets/fonts/OpenSans.woff2
+```diff
 @font-face {
   font-family: 'OpenSans';
-  src: font-url('OpenSans.woff2');
-}
-
-// after
-@font-face {
-  font-family: 'OpenSans';
-  src: url('@assets/fonts/OpenSans.woff2');
+- src: font-url('OpenSans.woff2');
++ src: url('@assets/fonts/OpenSans.woff2');
 }
 ```
 
-You could alternatively move your assets directly within your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir) in `config/vite.json`, and you would not need to add to `watchAdditionalPaths` nor add an alias, but you would still need to change assets within the `.css` files such as the following:
+Once you have finished the migration, you can move all assets under <kbd>[sourceCodeDir]</kbd>:
 
-```css
-// before, from file: app/assets/fonts/OpenSans.woff2
+```diff
 @font-face {
   font-family: 'OpenSans';
-  src: font-url('OpenSans.woff2');
-}
-
-// after, from file: app/javascript/fonts/OpenSans.woff2
-@font-face {
-  font-family: 'OpenSans';
-  src: url('fonts/OpenSans.woff2');
+- src: url('@assets/fonts/OpenSans.woff2');
++ src: url('@/fonts/OpenSans.woff2');
 }
 ```
-
-Where your `fonts` folder is a subdirectory of your [sourceCodeDir](https://vite-ruby.netlify.app/config/#sourcecodedir).
