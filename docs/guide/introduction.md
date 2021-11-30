@@ -18,6 +18,7 @@
 [motivation]: /motivation
 [overview]: /overview
 [jekyll-vite]: https://github.com/ElMassimo/jekyll-vite
+[blog post]: https://maximomussini.com/posts/a-rubyist-guide-to-vite-js/
 
 # Introduction
 
@@ -28,6 +29,8 @@
 - <kbd>[vite_ruby]</kbd> can be used in plain Rack apps, and is all you need when using HTML entrypoints.
 
 - There are also integrations for [Jekyll][jekyll-vite], [Hanami][vite_hanami], and [Padrino][vite_padrino].
+
+[Read an introduction __blog post__][blog post].
 
 ## Why Vite? 🤔
 
@@ -49,7 +52,7 @@ with the difference in speed during development.
 
 By following existing Rails and Rack conventions, and adding [a few of its own][plugin], it becomes possible for everyone to leverage [Vite] and its wonderful features!
 
-Interested in hearing more? [Read about __my personal motivation__][motivation], or [learn __how it works__][overview].
+Interested in hearing more? [Read an introduction __blog post__][blog post], [learn __how it works__][overview], or [read about __my personal motivation__][motivation].
 
 ## Features ⚡️
 
