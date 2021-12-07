@@ -150,7 +150,7 @@ The trade-off is that your app might not even build correctly.
 
 It's safe if you are running tests in a CI as it will build in production mode.
 
-When running tests locally, you can test the production build by not starting the Vite dev server for tests, or by setting the `CI` environment varialbe.
+When running tests locally, you can test the production build by not starting the Vite dev server for tests, or by setting the `CI` environment variable.
 :::
 
 [avoid rebuilds]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/spec/features/home_spec.rb#15
