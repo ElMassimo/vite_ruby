@@ -39,6 +39,18 @@ It's likely that you have a nested directory structure under <kbd>[entrypointsDi
 
 See the _[Migrating from v2](/guide/migrating-from-v2.html#nested-entrypoints-paths-must-be-explicit)_ section for more information.
 
+### Can't reference `style.css` when using `cssCodeSplit: false`
+
+As covered in the [tag helpers] section:
+
+> All helpers resolve names to the <kbd>[entrypointsDir]</kbd> unless the path includes a directory
+
+Use the `~/` alias to the <kbd>[sourceCodeDir]</kbd> to disambiguate the reference:
+
+```erb
+<%= vite_stylesheet_tag '~/style.css' unless ViteRuby.instance.dev_server_running? %>
+```
+
 ### Assets inside sourceCodeDir are being bundled
 
 This is the default behavior in v3, which simplifies referencing images and icons
