@@ -214,6 +214,17 @@ You can customize this behavior using the following options.
 
   Specify the asset host when using a CDN. Usually there's no need to explicitly configure it.
 
+### base
+
+- **Default:** `''`
+- **Env Var:** `VITE_RUBY_BASE`
+
+  Necessary when you are hosting your Ruby app in a nested path. Example:
+
+  ```json
+  "base": "/nested_path"
+  ```
+
 ### configPath
 
 - **Default:** `config/vite.json`
