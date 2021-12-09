@@ -1,3 +1,18 @@
+## [3.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.2...vite_ruby@3.0.3) (2021-12-09)
+
+
+### Bug Fixes
+
+* ensure bundler does not keep generating binstubs ([0dc133a](https://github.com/ElMassimo/vite_ruby/commit/0dc133a23f6caa5526fc071e0afd98f91fc1f9f6))
+* explicitly require socket to enable usage in bare ruby ([cf22165](https://github.com/ElMassimo/vite_ruby/commit/cf22165fa3cc58df4c52bed154372abef4f3eff1))
+
+
+### Features
+
+* add 'base' setting ([#152](https://github.com/ElMassimo/vite_ruby/issues/152)) ([fb7642f](https://github.com/ElMassimo/vite_ruby/commit/fb7642f849b7fe879c02e543962a72dcc1b1c48c))
+
+
+
 ## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.1...vite_ruby@3.0.2) (2021-10-29)
 
 
