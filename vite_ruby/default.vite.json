@@ -16,5 +16,6 @@
   "port": 3036,
   "hideBuildConsoleOutput": false,
   "viteBinPath": "node_modules/.bin/vite",
-  "watchAdditionalPaths": []
+  "watchAdditionalPaths": [],
+  "base": ""
 }

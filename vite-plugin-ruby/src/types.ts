@@ -16,6 +16,7 @@ export interface ResolvedConfig {
   port: number
   publicOutputDir: string
   watchAdditionalPaths: string[]
+  base: string
 }
 
 export type Config = Partial<ResolvedConfig>

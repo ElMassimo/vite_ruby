@@ -101,7 +101,7 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   // Add the asset host to enable usage of a CDN.
   const assetHost = config.assetHost || ''
   const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
-  const base = `${assetHostWithProtocol}/${config.publicOutputDir}/`
+  const base = `${assetHostWithProtocol || config.base}/${config.publicOutputDir}/`
 
   const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
   return { ...config, root, outDir, base, entrypoints }
