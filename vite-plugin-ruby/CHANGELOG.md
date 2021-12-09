@@ -1,3 +1,12 @@
+## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.3...vite-plugin-ruby@3.0.4) (2021-12-09)
+
+
+### Features
+
+* add 'base' setting ([#152](https://github.com/ElMassimo/vite_ruby/issues/152)) ([fb7642f](https://github.com/ElMassimo/vite_ruby/commit/fb7642f849b7fe879c02e543962a72dcc1b1c48c))
+
+
+
 ## [3.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.2...vite-plugin-ruby@3.0.3) (2021-10-29)
 
 
