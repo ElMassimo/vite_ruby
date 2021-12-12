@@ -1,3 +1,13 @@
+## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.1...vite_rails@3.0.2) (2021-12-12)
+
+
+### Bug Fixes
+
+* add variable declaration to import.meta.globEager (close [#154](https://github.com/ElMassimo/vite_ruby/issues/154)) ([#155](https://github.com/ElMassimo/vite_ruby/issues/155)) ([9ada2e8](https://github.com/ElMassimo/vite_ruby/commit/9ada2e87c68899e8e1bad368c875f8214036abcc))
+* comment back glob import ([943e7f1](https://github.com/ElMassimo/vite_ruby/commit/943e7f1ca23a8abdee09c1495dc9e96494bc6202))
+
+
+
 ## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.0...vite_rails@3.0.1) (2021-10-29)
 
 
