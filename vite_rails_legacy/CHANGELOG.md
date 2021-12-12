@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.1...vite_rails_legacy@3.0.2) (2021-12-12)
+
+
+### Bug Fixes
+
+* comment back glob import ([943e7f1](https://github.com/ElMassimo/vite_ruby/commit/943e7f1ca23a8abdee09c1495dc9e96494bc6202))
+
+
+
 ## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.0...vite_rails_legacy@3.0.1) (2021-10-29)
 
 
