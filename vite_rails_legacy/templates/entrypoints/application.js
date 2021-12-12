@@ -21,7 +21,7 @@ console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify
 // import ActiveStorage from '@rails/activestorage'
 //
 // // Import all channels.
-// import.meta.globEager('./**/*_channel.js')
+// const channels = import.meta.globEager('./**/*_channel.js')
 //
 // Turbolinks.start()
 // ActiveStorage.start()

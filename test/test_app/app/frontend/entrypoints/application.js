@@ -13,7 +13,7 @@ console.log('Vite ⚡️ Rails')
 // import ActiveStorage from '@rails/activestorage'
 //
 // // Import all channels.
-// import.meta.globEager('./**/*_channel.js')
+// const channels = import.meta.globEager('./**/*_channel.js')
 //
 // Turbolinks.start()
 // ActiveStorage.start()
