@@ -41,7 +41,7 @@
   "_log.d31acc25-legacy.js": {
     "file": "assets/log.d31acc25-legacy.js"
   },
-  "../../vite/legacy-polyfills": {
+  "../../\u0000vite/legacy-polyfills": {
     "file": "assets/polyfills-legacy.07477394.js",
     "src": "../../vite/legacy-polyfills",
     "isEntry": true
