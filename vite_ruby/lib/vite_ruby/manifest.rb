@@ -147,11 +147,10 @@ private
 
   # Internal: Resolves the manifest entry name for the specified resource.
   def resolve_entry_name(name, type: nil)
-    unless name.include?('legacy-polyfills')
-      name = with_file_extension(name.to_s, type)
+    return resolve_virtual_entry(name) if type == :virtual
 
-      raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
-    end
+    name = with_file_extension(name.to_s, type)
+    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
 
     # Explicit path, relative to the source_code_dir.
     name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
@@ -171,6 +170,11 @@ private
     else
       config.root.join(name).relative_path_from(config.vite_root_dir).to_s
     end
+  end
+
+  # Internal: Resolves a virtual entry by walking all the manifest keys.
+  def resolve_virtual_entry(name)
+    manifest.keys.find { |file| file.include?(name) } || name
   end
 
   # Internal: Adds a file extension to the file name, unless it already has one.

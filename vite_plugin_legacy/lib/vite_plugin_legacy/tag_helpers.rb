@@ -25,8 +25,6 @@ module VitePluginLegacy::TagHelpers
   def vite_legacy_polyfill_tag
     return if ViteRuby.instance.dev_server_running?
 
-    name = vite_manifest.send(:manifest).keys.find { |file| file.include?('legacy-polyfills') } ||
-           raise(ArgumentError, 'Vite legacy polyfill not found in manifest.json')
-    content_tag(:script, nil, nomodule: true, src: vite_asset_path(name))
+    content_tag(:script, nil, nomodule: true, src: vite_asset_path('legacy-polyfills', type: :virtual))
   end
 end
