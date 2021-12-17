@@ -1,3 +1,12 @@
+## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.4...vite_ruby@3.0.5) (2021-12-17)
+
+
+### Bug Fixes
+
+* ensure vite_plugin_legacy is upgraded by the upgrade command ([2f9437d](https://github.com/ElMassimo/vite_ruby/commit/2f9437d248e27aa03b5b8a1df3e3d6a52c791cd1))
+
+
+
 ## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.3...vite_ruby@3.0.4) (2021-12-17)
 
 ### BREAKING CHANGES
