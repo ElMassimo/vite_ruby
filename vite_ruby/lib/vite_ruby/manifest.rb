@@ -147,9 +147,11 @@ private
 
   # Internal: Resolves the manifest entry name for the specified resource.
   def resolve_entry_name(name, type: nil)
-    name = with_file_extension(name.to_s, type)
+    unless name.include?('legacy-polyfills')
+      name = with_file_extension(name.to_s, type)
 
-    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.') && !name.include?('legacy-polyfills')
+      raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
+    end
 
     # Explicit path, relative to the source_code_dir.
     name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
