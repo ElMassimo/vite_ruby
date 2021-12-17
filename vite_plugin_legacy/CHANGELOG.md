@@ -1,3 +1,7 @@
+## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@3.0.0...vite_plugin_legacy@3.0.1) (2021-12-17)
+
+
+
 # [3.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@0.5.6...vite_plugin_legacy@3.0.0) (2021-08-16)
 
 See https://github.com/ElMassimo/vite_ruby/pull/116 for features and breaking changes.

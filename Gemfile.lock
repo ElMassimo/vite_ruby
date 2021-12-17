@@ -1,8 +1,8 @@
 PATH
   remote: vite_plugin_legacy
   specs:
-    vite_plugin_legacy (3.0.0)
-      vite_ruby (~> 3.0)
+    vite_plugin_legacy (3.0.1)
+      vite_ruby (~> 3.0, >= 3.0.4)
 
 PATH
   remote: vite_rails
