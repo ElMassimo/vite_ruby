@@ -39,6 +39,13 @@ It's likely that you have a nested directory structure under <kbd>[entrypointsDi
 
 See the _[Migrating from v2](/guide/migrating-from-v2.html#nested-entrypoints-paths-must-be-explicit)_ section for more information.
 
+### Asset names can not be relative `../../vite/legacy-polyfills`
+
+Make sure to upgrade `vite_plugin_legacy` manually with a compatible version of
+`vite_ruby`.
+
+The `upgrade` command has now been fixed to also upgrade `vite_plugin_legacy`.
+
 ### Can't reference `style.css` when using `cssCodeSplit: false`
 
 As covered in the [tag helpers] section:
