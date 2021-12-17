@@ -27,6 +27,7 @@ class ViteRuby
     'vite_padrino' => 'padrino',
     'jekyll-vite' => 'jekyll',
     'vite_rails_legacy' => 'rails',
+    'vite_plugin_legacy' => 'rack',
   }
 
   class << self

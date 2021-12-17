@@ -1,10 +1,12 @@
 ## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.3...vite_ruby@3.0.4) (2021-12-17)
 
+### BREAKING CHANGES
+
+* if using `vite_plugin_legacy`, make sure to upgrade to 3.0.1
 
 ### Bug Fixes
 
 * handle new virtual legacy-polyfill name ([#157](https://github.com/ElMassimo/vite_ruby/issues/157)) ([a34e77f](https://github.com/ElMassimo/vite_ruby/commit/a34e77f3b342c9171adc50adfd5220b57bddb961))
-
 
 
 ## [3.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.2...vite_ruby@3.0.3) (2021-12-09)
