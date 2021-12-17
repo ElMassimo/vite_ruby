@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@3.0.1...vite_plugin_legacy@3.0.2) (2021-12-17)
+
+
+### Bug Fixes
+
+* ensure vite_plugin_legacy is upgraded by the upgrade command ([2f9437d](https://github.com/ElMassimo/vite_ruby/commit/2f9437d248e27aa03b5b8a1df3e3d6a52c791cd1))
+
+
+
 ## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_plugin_legacy@3.0.0...vite_plugin_legacy@3.0.1) (2021-12-17)
 
 - Support vite@2.7.0, which added a null character to the legacy polyfills entry name.
