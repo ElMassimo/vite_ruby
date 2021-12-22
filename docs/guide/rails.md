@@ -62,8 +62,13 @@ If using `.jsx` or any pre-processor, make sure to be explicit:
 <%= vite_stylesheet_tag 'theme.scss' %>
 ```
 
+For images you can use <kbd>[vite_image_tag][helpers]</kbd>:
+```erb
+# Assuming an image path of app/frontend/images/logo.jpg
+<%= vite_image_tag 'images/logo.jpg' %>
+```
 
-For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
+For other types of assets, you can just use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
 
 ```erb
 <img src="<%= vite_asset_path 'images/logo.svg' %>" />
