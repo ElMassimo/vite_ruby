@@ -132,17 +132,17 @@ class HelperTest < HelperTestCase
   end
 
   def test_vite_image_tag
-    assert_equal %(<img class="test" src="/vite-production/images/tag.as8d7a98.jpg" />),
-      vite_image_tag('images/tag.jpg', class: 'test')
+    assert_equal %(<img class="test" alt="Logo" src="/vite-production/assets/logo.f42fb7ea.png" />),
+      vite_image_tag('images/logo.png', class: 'test', alt: 'Logo')
 
-    assert_equal %(<img srcset="/vite-production/images/tag-2x.bs8d7a77.jpg 2x" src="/vite-production/images/tag.as8d7a98.jpg" />),
-      vite_image_tag('images/tag.jpg', srcset: { 'images/tag-2x.jpg' => '2x' })
+    assert_equal %(<img srcset="/vite-production/assets/logo-2x.bs8d7a77.png 2x" alt="Logo" src="/vite-production/assets/logo.f42fb7ea.png" />),
+      vite_image_tag('images/logo.png', srcset: { 'images/logo-2x.png' => '2x' }, alt: 'Logo')
 
     with_dev_server_running {
-      assert_equal %(<img src="/vite-dev/images/tag.jpg" />), vite_image_tag('images/tag.jpg')
+      assert_equal %(<img alt="Logo" src="/vite-dev/images/logo.png" />), vite_image_tag('images/logo.png', alt: 'Logo')
 
-      assert_equal %(<img srcset="/vite-dev/images/tag-2x.jpg 2x" src="/vite-dev/images/tag.jpg" />),
-        vite_image_tag('images/tag.jpg', srcset: { 'images/tag-2x.jpg' => '2x' })
+      assert_equal %(<img srcset="/vite-dev/images/logo-2x.png 2x" alt="Logo" src="/vite-dev/images/logo.png" />),
+        vite_image_tag('images/logo.png', srcset: { 'images/logo-2x.png' => '2x' }, alt: 'Logo')
     }
   end
 end

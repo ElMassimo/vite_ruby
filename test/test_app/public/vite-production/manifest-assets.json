@@ -15,6 +15,10 @@
     "file": "assets/logo.f42fb7ea.png",
     "src": "images/logo.png"
   },
+  "images/logo-2x.png": {
+    "file": "assets/logo-2x.bs8d7a77.png",
+    "src": "images/logo-2x.png"
+  },
   "images/logo.svg": {
     "file": "assets/logo.322aae0c.svg",
     "src": "images/logo.svg"
