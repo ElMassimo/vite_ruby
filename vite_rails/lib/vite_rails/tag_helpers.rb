@@ -49,6 +49,17 @@ module ViteRails::TagHelpers
     stylesheet_link_tag(*style_paths, **options)
   end
 
+  # Public: Renders an <img> tag for the specified Vite asset.
+  def vite_image_tag(name, **options)
+    if options[:srcset] && !options[:srcset].is_a?(String)
+      options[:srcset] = options[:srcset].map do |src_name, size|
+        "#{ vite_asset_path(src_name) } #{ size }"
+      end.join(', ')
+    end
+
+    image_tag(vite_asset_path(name), options)
+  end
+
 private
 
   # Internal: Returns the current manifest loaded by Vite Ruby.
