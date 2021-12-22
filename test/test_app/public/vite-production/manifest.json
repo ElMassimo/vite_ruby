@@ -99,5 +99,13 @@
   },
   "_log.818edfb8.js": {
     "file": "assets/log.818edfb8.js"
+  },
+  "images/tag.jpg": {
+    "file": "images/tag.as8d7a98.jpg",
+    "src": "images/tag.jpg"
+  },
+  "images/tag-2x.jpg": {
+    "file": "images/tag-2x.bs8d7a77.jpg",
+    "src": "images/tag-2x.jpg"
   }
 }

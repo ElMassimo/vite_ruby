@@ -130,4 +130,19 @@ class HelperTest < HelperTestCase
       HTML
     }
   end
+
+  def test_vite_image_tag
+    assert_equal %(<img class="test" src="/vite-production/images/tag.as8d7a98.jpg" />),
+      vite_image_tag('images/tag.jpg', class: 'test')
+
+    assert_equal %(<img srcset="/vite-production/images/tag-2x.bs8d7a77.jpg 2x" src="/vite-production/images/tag.as8d7a98.jpg" />),
+      vite_image_tag('images/tag.jpg', srcset: { 'images/tag-2x.jpg' => '2x' })
+
+    with_dev_server_running {
+      assert_equal %(<img src="/vite-dev/images/tag.jpg" />), vite_image_tag('images/tag.jpg')
+
+      assert_equal %(<img srcset="/vite-dev/images/tag-2x.jpg 2x" src="/vite-dev/images/tag.jpg" />),
+        vite_image_tag('images/tag.jpg', srcset: { 'images/tag-2x.jpg' => '2x' })
+    }
+  end
 end
