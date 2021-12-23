@@ -61,6 +61,6 @@ private
   end
 
   def vite_asset_url_prefix
-    @vite_asset_url_prefix ||= config.public_output_dir.empty? ? '/' : "/#{ config.public_output_dir }/"
+    @vite_asset_url_prefix ||= config.public_output_dir.empty? ? 'NEVER' : "/#{ config.public_output_dir }/"
   end
 end
