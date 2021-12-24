@@ -52,6 +52,13 @@ class ConfigTest < ViteRuby::Test
     assert_path 'public/vite', @config.build_output_dir
   end
 
+  def test_ruby_config_file
+    assert_nil @config.to_env['EXAMPLE_PATH']
+
+    refresh_config(config_path: 'config/vite_public_dir.json')
+    assert_equal ViteRuby.config.to_env['EXAMPLE_PATH'], Gem.loaded_specs['rails'].full_gem_path
+  end
+
   def test_manifest_path
     assert_path 'test_app/public/vite-production/manifest.json', @config.manifest_path
   end
@@ -149,7 +156,7 @@ class ConfigTest < ViteRuby::Test
     assert_equal ['~/{assets,fonts,icons,images}/**/*'], @config.additional_entrypoints
     assert_equal [
       'app/frontend/**/*',
-      'config/vite.json',
+      'config/vite.{rb,json}',
       *ViteRuby::Config::DEFAULT_WATCHED_PATHS,
     ], @config.watched_paths
   end

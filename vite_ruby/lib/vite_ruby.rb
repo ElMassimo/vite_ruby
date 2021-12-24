@@ -122,7 +122,12 @@ class ViteRuby
 
   # Public: Current instance configuration for Vite.
   def config
-    @config ||= ViteRuby::Config.resolve_config(**@config_options)
+    unless defined?(@config)
+      @config = ViteRuby::Config.resolve_config(**@config_options)
+      @config.load_ruby_config
+    end
+
+    @config
   end
 
   # Public: Enables looking up assets managed by Vite using name and type.

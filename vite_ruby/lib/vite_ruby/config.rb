@@ -43,6 +43,12 @@ class ViteRuby::Config
     root.join(source_code_dir)
   end
 
+  # Public: Loads an optional config/vite.rb file that can modify ViteRuby.env
+  def load_ruby_config
+    rb_config_path = File.expand_path(config_path.sub(/.json$/, '.rb'), root)
+    load rb_config_path if File.exist?(rb_config_path)
+  end
+
   # Public: Sets additional environment variables for vite-plugin-ruby.
   def to_env
     CONFIGURABLE_WITH_ENV.each_with_object({}) do |option, env|
@@ -59,7 +65,7 @@ class ViteRuby::Config
         dir.start_with?('~/') || dir.start_with?(source_code_dir)
       },
       "#{ source_code_dir }/**/*",
-      config_path,
+      config_path.sub(/.json$/, '.{rb,json}'),
       *DEFAULT_WATCHED_PATHS,
     ].freeze
   end
