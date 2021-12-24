@@ -18,6 +18,8 @@
 [resolve.alias]: https://vitejs.dev/config/#resolve-alias
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
+[Vite config file]: /config/#configuring-vite-⚡
+[runtime env var]: https://github.com/ElMassimo/vite_ruby/discussions/159#discussioncomment-1841817
 
 # Configuring Vite Ruby
 
@@ -76,6 +78,26 @@ The `all` section is applied to all environments, including production. You can 
 
 The following options can all be specified in your `config/vite.json` file, or
 overriden with environment variables.
+
+## Ruby Configuration File 💎
+
+To set environment variables that need to be resolved at [__runtime__][runtime env var], use `config/vite.rb`.
+
+This will be loaded once `ViteRuby.config` is resolved, and you may configure
+`ViteRuby.env` as needed or call `ViteRuby.reload_with(**options)` to override the configuration.
+
+```ruby
+# config/vite.rb
+ViteRuby.env['ADMINISTRATOR_ASSETS_PATH'] =
+  "#{ Gem.loaded_specs['administrator'].full_gem_path }/app/frontend"
+```
+
+Then, you can access those environment variables in `process.env` in the [Vite config file]:
+
+```js
+// vite.config.ts
+const adminAssetsPath = process.env.ADMINISTRATOR_ASSETS_PATH
+```
 
 ## Source Maps 🗺
 
