@@ -1,3 +1,12 @@
+## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.4...vite-plugin-ruby@3.0.5) (2021-12-24)
+
+
+### Bug Fixes
+
+* allow providing an empty public output dir (close [#161](https://github.com/ElMassimo/vite_ruby/issues/161)) ([#164](https://github.com/ElMassimo/vite_ruby/issues/164)) ([ef48c9b](https://github.com/ElMassimo/vite_ruby/commit/ef48c9b39084a96364a783fa670bd6ec68dfa289))
+
+
+
 ## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.3...vite-plugin-ruby@3.0.4) (2021-12-09)
 
 
