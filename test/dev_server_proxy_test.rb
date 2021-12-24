@@ -90,6 +90,18 @@ class DevServerProxyTest < ViteRuby::Test
     assert_not_forwarded
   end
 
+  def test_empty_public_output_dir
+    refresh_config(public_output_dir: '')
+    get_with_dev_server_running '/'
+    assert_not_forwarded
+
+    get_with_dev_server_running '/entrypoints/application.js'
+    assert_forwarded to: '/entrypoints/application.js'
+
+    get_with_dev_server_running '/entrypoints/sassy.scss.css'
+    assert_forwarded to: '/entrypoints/sassy.scss'
+  end
+
 private
 
   def get_with_dev_server_running(*args)

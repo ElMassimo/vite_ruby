@@ -31,10 +31,14 @@ private
 
   def rewrite_uri_for_vite(env)
     uri = env.fetch('REQUEST_URI') { [env['PATH_INFO'], env['QUERY_STRING']].reject { |str| str.to_s.strip.empty? }.join('?') }
+    env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = normalize_uri(uri)).split('?')
+  end
+
+  def normalize_uri(uri)
+    uri
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
       .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
       .sub(/(\.(?!min|module)\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.
-    env['PATH_INFO'], env['QUERY_STRING'] = (env['REQUEST_URI'] = uri).split('?')
   end
 
   def forward_to_vite_dev_server(env)
@@ -49,7 +53,7 @@ private
   end
 
   def vite_should_handle?(env)
-    path = env['PATH_INFO']
+    path = normalize_uri(env['PATH_INFO'])
     return true if path.start_with?(vite_asset_url_prefix) # Vite asset
     return true if path.start_with?(VITE_DEPENDENCY_PREFIX) # Packages and imports
     return true if file_in_vite_root?(path) # Fallback if Vite can serve the file
@@ -61,6 +65,6 @@ private
   end
 
   def vite_asset_url_prefix
-    @vite_asset_url_prefix ||= "/#{ config.public_output_dir }/"
+    @vite_asset_url_prefix ||= config.public_output_dir.empty? ? "\0" : "/#{ config.public_output_dir }/"
   end
 end
