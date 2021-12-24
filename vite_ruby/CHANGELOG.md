@@ -1,3 +1,17 @@
+## [3.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.5...vite_ruby@3.0.6) (2021-12-24)
+
+
+### Bug Fixes
+
+* allow providing an empty public output dir (close [#161](https://github.com/ElMassimo/vite_ruby/issues/161)) ([#164](https://github.com/ElMassimo/vite_ruby/issues/164)) ([ef48c9b](https://github.com/ElMassimo/vite_ruby/commit/ef48c9b39084a96364a783fa670bd6ec68dfa289))
+
+
+### Features
+
+* support ruby config file for advanced configuration (close [#162](https://github.com/ElMassimo/vite_ruby/issues/162)) ([34e63fd](https://github.com/ElMassimo/vite_ruby/commit/34e63fdd546078dfc94f2c546b096aa296a47d37))
+
+
+
 ## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.4...vite_ruby@3.0.5) (2021-12-17)
 
 
