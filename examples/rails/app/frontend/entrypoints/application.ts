@@ -13,6 +13,9 @@ import '~/styles/theme.css'
 import '~/entrypoints/example_import.js'
 import '~/outer_import.js'
 
+// Example: Import from an aliased path.
+import '@administrator/timer'
+
 // Import all channels.
 import.meta.globEager('../channels/**/*_channel.js')
 

@@ -41,4 +41,15 @@ export default defineConfig({
       },
     }),
   ],
+  // Example: Importing assets from arbitrary paths.
+  resolve: {
+    alias: {
+      '@administrator/': `${process.env.ADMINISTRATOR_ASSETS_PATH}/`,
+    },
+  },
+  server: {
+    fs: {
+      allow: [process.env.ADMINISTRATOR_ASSETS_PATH!],
+    },
+  },
 })
