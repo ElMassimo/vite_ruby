@@ -23,15 +23,23 @@
 [assets pipeline]: https://guides.rubyonrails.org/asset_pipeline.html
 [glob expression]: https://github.com/ElMassimo/vite_ruby/blob/eeccd3fc4e7db9524a2bd1075ca1282f3f53c029/vite-plugin-ruby/example/config/vite.json#L9
 [resolve.alias]: https://vitejs.dev/config/#resolve-alias
+[sprockets]: https://github.com/rails/sprockets-rails
+[sprockets example]: https://github.com/ElMassimo/vite_ruby/pull/165
 
 # Migrating to Vite
 
-If you would like to add a note about Sprockets, pull requests are welcome!
+If you would like to add a note about other setups, pull requests are welcome!
 
 ## Starting Fresh ☀️
 
 When starting a new project, follow the [guide], and you should have a [basic setup][sourceCodeDir]
 where you can place your JavaScript, stylesheets, and other assets.
+
+## Sprockets ⚙️
+
+If you would like to remove sprockets and use Vite Ruby alone, you can [follow this example][sprockets example].
+
+Have in mind that this is optional, as both approaches can coexist without issues.
 
 ## Webpacker 📦
 
