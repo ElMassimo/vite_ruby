@@ -16,9 +16,9 @@ jobs:
         os: [ubuntu-latest]
         bundler: ["2.1.4"]
         ruby: [
-          2.5,
-          2.7,
-          3.0
+          "2.5",
+          "2.7",
+          "3.0",
         ]
         gemfile: [
           "gemfiles/Gemfile-rails.5.2.x",
@@ -42,7 +42,7 @@ jobs:
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
-          - ruby: "3.0"
+          - ruby: "3.1"
             bundler: "2.1.4"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
