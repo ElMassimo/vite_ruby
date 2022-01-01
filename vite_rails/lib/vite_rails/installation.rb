@@ -30,8 +30,12 @@ module ViteRails::Installation
       #    policy.connect_src *policy.connect_src, "ws://\#{ ViteRuby.config.host_with_port }" if Rails.env.development?
     CSP
     inject_line_after csp_file, 'policy.script_src', <<~CSP
-          # Allow @vite/client to hot reload changes in development
+          # Allow @vite/client to hot reload javascript changes in development
       #    policy.script_src *policy.script_src, :unsafe_eval, "http://\#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+    CSP
+    inject_line_after csp_file, 'policy.style_src', <<~CSP
+          # Allow @vite/client to hot reload style changes in development
+      #    policy.style_src *policy.style_src, :unsafe_inline if Rails.env.development?
     CSP
   end
 

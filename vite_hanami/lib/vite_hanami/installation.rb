@@ -18,6 +18,7 @@ module ViteHanami::Installation
         security.content_security_policy
           .sub('script-src', "script-src 'unsafe-eval' 'unsafe-inline'")
           .sub('connect-src', "connect-src ws://\#{ ViteRuby.config.host_with_port }")
+          .sub('style-src', "style-src 'unsafe-inline'")
       )
     CSP
     append root.join('Rakefile'), <<~RAKE
