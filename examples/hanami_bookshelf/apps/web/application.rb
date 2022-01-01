@@ -270,7 +270,8 @@ module Web
       security.content_security_policy(
         security.content_security_policy
           .sub('script-src', "script-src 'unsafe-eval'")
-          .sub('connect-src', "connect-src ws://#{ ViteRuby.config.host_with_port }"),
+          .sub('connect-src', "connect-src ws://#{ ViteRuby.config.host_with_port }")
+          .sub('style-src', "style-src 'unsafe-inline'"),
       )
       # Don't handle exceptions, render the stack trace
       handle_exceptions false
