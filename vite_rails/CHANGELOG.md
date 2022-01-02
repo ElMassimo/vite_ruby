@@ -1,3 +1,12 @@
+## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.3...vite_rails@3.0.4) (2022-01-02)
+
+
+### Features
+
+* add style-src to suggestion Content Security Policy changes ([#169](https://github.com/ElMassimo/vite_ruby/issues/169)) ([ec7f4f7](https://github.com/ElMassimo/vite_ruby/commit/ec7f4f7a030a852115b38748dd3cdb22ec3b7e47))
+
+
+
 ## [3.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.2...vite_rails@3.0.3) (2021-12-22)
 
 
