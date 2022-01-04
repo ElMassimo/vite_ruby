@@ -1,3 +1,12 @@
+## [3.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.5...vite-plugin-ruby@3.0.6) (2022-01-04)
+
+
+### Bug Fixes
+
+* default export when app uses `"type": "module"` ([97cf854](https://github.com/ElMassimo/vite_ruby/commit/97cf854468956df318f379c6b017ba06bace06cd))
+
+
+
 ## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.4...vite-plugin-ruby@3.0.5) (2021-12-24)
 
 
