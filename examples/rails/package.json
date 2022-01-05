@@ -24,7 +24,7 @@
     "postcss-import": "^14.0",
     "sass": "^1.32.8",
     "stylus": "^0.54.8",
-    "vite": "^2.6.13",
+    "vite": "^2.7.7",
     "vite-plugin-bugsnag": "^1.0.2",
     "vite-plugin-environment": "^1.0.0",
     "vite-plugin-full-reload": "^0.2",
