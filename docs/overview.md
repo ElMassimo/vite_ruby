@@ -30,7 +30,7 @@ about the internals of the library.
 
 For usage instructions, please refer to [the guide][guide] instead.
 
-## Rack and Rails <img class="logo" src="https://rubyonrails.org/favicon.ico" alt="Logo"/>
+## Rack and Rails <img class="logo" src="https://rubyonrails.org/assets/images/favicon.ico" alt="Logo"/>
 
 The following conventions are common in [Rack]-based applications:
 
