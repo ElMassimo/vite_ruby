@@ -1,3 +1,12 @@
+## [3.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.6...vite-plugin-ruby@3.0.7) (2022-01-12)
+
+
+### Bug Fixes
+
+* **vite-plugin-ruby:** regression in assetHosts protocol ([#174](https://github.com/ElMassimo/vite_ruby/issues/174)) ([8337ec9](https://github.com/ElMassimo/vite_ruby/commit/8337ec912b2b6387a6729f4ae5d29ab7d07f0b4b))
+
+
+
 ## [3.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.5...vite-plugin-ruby@3.0.6) (2022-01-04)
 
 
