@@ -1,4 +1,4 @@
-name: JS lint
+name: JS Build & Test
 
 on: [push, pull_request]
 
@@ -25,6 +25,7 @@ jobs:
         with:
           version: 5.13.6
           run_install: |
+            - cwd: vite-plugin-ruby
             - recursive: false
 
       - name: Build
@@ -32,6 +33,3 @@ jobs:
 
       - name: Test
         run: pnpm -C vite-plugin-ruby test
-
-      - name: Lint
-        run: pnpm lint
