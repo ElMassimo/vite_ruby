@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: JS Lint
+    name: Vite Plugin Ruby
 
     strategy:
       matrix:
@@ -26,6 +26,12 @@ jobs:
           version: 5.13.6
           run_install: |
             - recursive: false
+
+      - name: Build
+        run: pnpm -C vite-plugin-ruby build
+
+      - name: Test
+        run: pnpm -C vite-plugin-ruby test
 
       - name: Lint
         run: pnpm lint
