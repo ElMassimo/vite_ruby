@@ -7,7 +7,7 @@ import { booleanOption, loadJsonConfig, configOptionFromEnv, slash } from './uti
 import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
 // Internal: Default configuration that is also read from Ruby.
-const defaultConfig: ResolvedConfig = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
+export const defaultConfig: ResolvedConfig = loadJsonConfig(resolve(__dirname, '../default.vite.json'))
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
@@ -98,13 +98,21 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   const buildOutputDir = join(config.publicDir, config.publicOutputDir)
   const outDir = relative(root, buildOutputDir) // Vite expects it to be relative
 
-  // Add the asset host to enable usage of a CDN.
-  const assetHost = config.assetHost || ''
-  const assetHostWithProtocol = assetHost && !assetHost.startsWith('http') ? `//${assetHost}` : assetHost
-  const host = assetHostWithProtocol || config.base || ''
-  const suffix = config.publicOutputDir ? `${slash(config.publicOutputDir)}/` : ''
-  const base = `${host}/${suffix}`
-
+  const base = resolveViteBase(config)
   const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
   return { ...config, root, outDir, base, entrypoints }
+}
+
+// Internal: Configures Vite's base according to the asset host and publicOutputDir.
+export function resolveViteBase ({ assetHost, base, publicOutputDir }: ResolvedConfig) {
+  if (assetHost && !assetHost.startsWith('http')) assetHost = `//${assetHost}`
+
+  return [
+    ensureTrailingSlash(assetHost || base || '/'),
+    publicOutputDir ? ensureTrailingSlash(slash(publicOutputDir)) : '',
+  ].join('')
+}
+
+function ensureTrailingSlash (path: string) {
+  return path.endsWith('/') ? path : `${path}/`
 }

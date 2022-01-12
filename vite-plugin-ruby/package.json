@@ -36,8 +36,9 @@
     "dev": "npm run build -- --watch",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "build": "rimraf -rf dist && tsup src/index.ts",
+    "build": "tsup src/index.ts",
     "prepublishOnly": "npm run build",
+    "test": "vitest",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag vite-plugin-ruby@$PACKAGE_VERSION && git push --tags"
   },
   "dependencies": {
@@ -50,11 +51,11 @@
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/node": "^14.18.5",
-    "rimraf": "^3.0.2",
     "rollup": "^2.63.0",
     "standard-version": "^9.3.2",
     "tsup": "^5.11.10",
     "typescript": "^4.5.4",
-    "vite": "^2.7.10"
+    "vite": "^2.7.10",
+    "vitest": "^0.0.141"
   }
 }
