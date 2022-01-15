@@ -95,8 +95,9 @@ private
       /public/vite-dev
       /public/vite-test
       node_modules
+      # Vite uses dotenv and suggests to ignore local-only env files. See
+      # https://vitejs.dev/guide/env-and-mode.html#env-files
       *.local
-      .DS_Store
     GITIGNORE
   end
 
