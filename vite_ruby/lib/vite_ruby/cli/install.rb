@@ -96,7 +96,6 @@ private
       /public/vite-test
       node_modules
       *.local
-      .DS_Store
     GITIGNORE
   end
 
