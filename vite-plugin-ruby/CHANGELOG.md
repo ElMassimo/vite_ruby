@@ -1,3 +1,13 @@
+## [3.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.7...vite-plugin-ruby@3.0.8) (2022-01-18)
+
+
+### Bug Fixes
+
+* disable emptyOutDir in production mode ([#177](https://github.com/ElMassimo/vite_ruby/issues/177)) ([#180](https://github.com/ElMassimo/vite_ruby/issues/180)) ([d9b6225](https://github.com/ElMassimo/vite_ruby/commit/d9b6225436fce0f7916ef96b5661af9eb404c04f))
+* Revert "pass hmr host explicitly by default ([#119](https://github.com/ElMassimo/vite_ruby/issues/119))" (close [#179](https://github.com/ElMassimo/vite_ruby/issues/179)) ([f629628](https://github.com/ElMassimo/vite_ruby/commit/f6296280065473354638a7337572ce50b338f8a5))
+
+
+
 ## [3.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.6...vite-plugin-ruby@3.0.7) (2022-01-12)
 
 
