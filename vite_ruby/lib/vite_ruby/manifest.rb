@@ -22,16 +22,15 @@ class ViteRuby::Manifest
     lookup!(name, **options).fetch('file')
   end
 
-  # Public: Returns scripts, imported modules, and stylesheets for the specified
+  # Public: Returns entries, imported modules, and stylesheets for the specified
   # entrypoint files.
   def resolve_entries(*names, **options)
     entries = names.map { |name| lookup!(name, **options) }
-    script_paths = entries.map { |entry| entry.fetch('file') }
 
     imports = dev_server_running? ? [] : entries.flat_map { |entry| entry['imports'] }.compact.uniq
     {
-      scripts: script_paths,
-      imports: imports.map { |entry| entry.fetch('file') }.uniq,
+      main: entries.map(&TO_ENTRY),
+      imports: imports.map(&TO_ENTRY).uniq,
       stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry['css'] }.compact.uniq,
     }
   end
@@ -62,6 +61,9 @@ class ViteRuby::Manifest
   end
 
 protected
+
+  # Internal: Returns a [src, attrs] entry.
+  TO_ENTRY = ->(entry) { [entry.fetch('file'), entry.slice('integrity').symbolize_keys] }
 
   # Internal: Strict version of lookup.
   #

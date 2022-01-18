@@ -26,15 +26,27 @@ module ViteRails::TagHelpers
   def vite_javascript_tag(*names,
                           type: 'module',
                           asset_type: :javascript,
+                          integrity: false,
                           skip_preload_tags: false,
                           skip_style_tags: false,
                           crossorigin: 'anonymous',
                           media: 'screen',
                           **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
-    tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
-    tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin, **options) unless skip_preload_tags
+    tags = ''.html_safe
+
+    entries.fetch(:main).each do |src, attrs|
+      tags << javascript_include_tag(src, crossorigin: crossorigin, type: type, extname: false, **attrs, **options)
+    end
+
+    unless skip_preload_tags
+      entries.fetch(:imports).each do |href, attrs|
+        tags << vite_preload_tag(href, crossorigin: crossorigin, **attrs, **options)
+      end
+    end
+
     tags << stylesheet_link_tag(*entries.fetch(:stylesheets), media: media, crossorigin: crossorigin, **options) unless skip_style_tags
+
     tags
   end
 
@@ -44,9 +56,12 @@ module ViteRails::TagHelpers
   end
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
-  def vite_stylesheet_tag(*names, **options)
-    style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet) }
-    stylesheet_link_tag(*style_paths, **options)
+  def vite_stylesheet_tag(*names, integrity: false, **options)
+    ''.html_safe.tap do |tags|
+      vite_manifest.resolve_entries(*names, type: :stylesheet).fetch(:main).each do |href, attrs|
+        tags << stylesheet_link_tag(href, **attrs, **options)
+      end
+    end
   end
 
   # Public: Renders an <img> tag for the specified Vite asset.
@@ -68,11 +83,13 @@ private
   end
 
   # Internal: Renders a modulepreload link tag.
-  def vite_preload_tag(*sources, crossorigin:, **options)
-    sources.map { |source|
-      href = path_to_asset(source)
-      try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
-      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
-    }.join("\n").html_safe
+  def vite_preload_tag(source, crossorigin:, **options)
+    href = path_to_asset(source)
+    try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }).tap { |hint|
+      if integrity = options[:integrity]
+        hint << "; integrity: #{ integrity }"
+      end
+    })
+    tag.link(rel: 'modulepreload', href: href, as: 'script', type: 'module', crossorigin: crossorigin, **options)
   end
 end
