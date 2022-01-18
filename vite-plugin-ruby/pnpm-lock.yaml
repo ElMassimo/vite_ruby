@@ -12,7 +12,7 @@ importers:
       standard-version: ^9.3.2
       tsup: ^5.11.10
       typescript: ^4.5.4
-      vite: ^2.7.10
+      vite: ^2.7.12
       vitest: ^0.0.141
     dependencies:
       debug: 4.3.3
@@ -24,26 +24,26 @@ importers:
       standard-version: 9.3.2
       tsup: 5.11.10_typescript@4.5.4
       typescript: 4.5.4
-      vite: 2.7.10
+      vite: 2.7.12
       vitest: 0.0.141
 
   example:
     specifiers:
-      '@vitejs/plugin-legacy': ^1.5
+      '@vitejs/plugin-legacy': ^1.6.4
       '@vitejs/plugin-vue': ^2.0
       cross-env: ^7.0.3
       sass: ^1.37
       typescript: ^4.5.3
-      vite: ^2.7.0
+      vite: ^2.7.12
       vite-plugin-ruby: workspace:*
       vue: ^3.2.13
     devDependencies:
-      '@vitejs/plugin-legacy': 1.5.1_vite@2.7.10
-      '@vitejs/plugin-vue': 2.0.1_vite@2.7.10+vue@3.2.26
+      '@vitejs/plugin-legacy': 1.6.4_vite@2.7.12
+      '@vitejs/plugin-vue': 2.0.1_vite@2.7.12+vue@3.2.26
       cross-env: 7.0.3
       sass: 1.37.5
       typescript: 4.5.4
-      vite: 2.7.10_sass@1.37.5
+      vite: 2.7.12_sass@1.37.5
       vite-plugin-ruby: link:..
       vue: 3.2.26
 
@@ -82,8 +82,8 @@ packages:
     hasBin: true
     dev: true
 
-  /@babel/standalone/7.15.3:
-    resolution: {integrity: sha512-Bst2YWEyQ2ROyO0+jxPVnnkSmUh44/x54+LSbe5M4N5LGfOkxpajEUKVE4ndXtIVrLlHCyuiqCPwv3eC1ItnCg==}
+  /@babel/standalone/7.16.9:
+    resolution: {integrity: sha512-2xC+uqniw1MNMTxzkfRUD8y0koEav+cGyWNCTVFAMC58Mb6HYfxqzQt+YtdMpSEcNqrDjvatthhyU0v18PNrnA==}
     engines: {node: '>=6.9.0'}
     dev: true
 
@@ -142,28 +142,28 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
-  /@vitejs/plugin-legacy/1.5.1_vite@2.7.10:
-    resolution: {integrity: sha512-g+0iy0X3NJRUSKZK+OCeSxNWnCuuE/6lsmr2WLWPOEt1vp6LdfHuNCYRooCm6s0ccTZ/SiumVk8vt9DWSYs+8A==}
+  /@vitejs/plugin-legacy/1.6.4_vite@2.7.12:
+    resolution: {integrity: sha512-geH2F3hTRN++E4n9NZ0JFumxIWUKqW4FA9PAgM7Q6RvUOUUYW4tlURhEmCBYfZSN24H/yX3mEolX+wFVErsAYQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.0.0
     dependencies:
-      '@babel/standalone': 7.15.3
-      core-js: 3.16.1
+      '@babel/standalone': 7.16.9
+      core-js: 3.20.3
       magic-string: 0.25.7
       regenerator-runtime: 0.13.9
-      systemjs: 6.10.2
-      vite: 2.7.10_sass@1.37.5
+      systemjs: 6.11.0
+      vite: 2.7.12_sass@1.37.5
     dev: true
 
-  /@vitejs/plugin-vue/2.0.1_vite@2.7.10+vue@3.2.26:
+  /@vitejs/plugin-vue/2.0.1_vite@2.7.12+vue@3.2.26:
     resolution: {integrity: sha512-wtdMnGVvys9K8tg+DxowU1ytTrdVveXr3LzdhaKakysgGXyrsfaeds2cDywtvujEASjWOwWL/OgWM+qoeM8Plg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.7.10_sass@1.37.5
+      vite: 2.7.12_sass@1.37.5
       vue: 3.2.26
     dev: true
 
@@ -624,8 +624,8 @@ packages:
       q: 1.5.1
     dev: true
 
-  /core-js/3.16.1:
-    resolution: {integrity: sha512-AAkP8i35EbefU+JddyWi12AWE9f2N/qr/pwnDtWz4nyUIBGMJPX99ANFFRSw6FefM374lDujdtLDyhN2A/btHw==}
+  /core-js/3.20.3:
+    resolution: {integrity: sha512-vVl8j8ph6tRS3B8qir40H7yw7voy17xL0piAjlbBUsH7WIfzoedL/ZOr1OV9FyZQLWXsayOJyV4tnRyXR85/ag==}
     requiresBuild: true
     dev: true
 
@@ -2121,8 +2121,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /systemjs/6.10.2:
-    resolution: {integrity: sha512-PwaC0Z6Y1E6gFekY2u38EC5+5w2M65jYVrD1aAcOptpHVhCwPIwPFJvYJyryQKUyeuQ5bKKI3PBHWNjdE9aizg==}
+  /systemjs/6.11.0:
+    resolution: {integrity: sha512-7YPIY44j+BoY+E6cGBSw0oCU8SNTTIHKZgftcBdwWkDzs/M86Fdlr21FrzAyph7Zo8r3CFGscyFe4rrBtixrBg==}
     dev: true
 
   /text-extensions/1.9.0:
@@ -2291,8 +2291,32 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/2.7.10_sass@1.37.5:
-    resolution: {integrity: sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==}
+  /vite/2.7.12:
+    resolution: {integrity: sha512-KvPYToRQWhRfBeVkyhkZ5hASuHQkqZUUdUcE3xyYtq5oYEPIJ0h9LWiWTO6v990glmSac2cEPeYeXzpX5Z6qKQ==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: 0.13.15
+      postcss: 8.4.5
+      resolve: 1.21.0
+      rollup: 2.63.0
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /vite/2.7.12_sass@1.37.5:
+    resolution: {integrity: sha512-KvPYToRQWhRfBeVkyhkZ5hASuHQkqZUUdUcE3xyYtq5oYEPIJ0h9LWiWTO6v990glmSac2cEPeYeXzpX5Z6qKQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
