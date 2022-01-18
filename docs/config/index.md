@@ -20,6 +20,7 @@
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [Vite config file]: /config/#configuring-vite-⚡
 [runtime env var]: https://github.com/ElMassimo/vite_ruby/discussions/159#discussioncomment-1841817
+[emptyOutDir]: https://vitejs.dev/config/#build-emptyoutdir
 
 # Configuring Vite Ruby
 
@@ -101,7 +102,7 @@ const adminAssetsPath = process.env.ADMINISTRATOR_ASSETS_PATH
 
 ## Source Maps 🗺
 
-The only notable difference with Vite.js config defaults, is that [source maps]
+One notable difference with Vite.js config defaults, is that [source maps]
 are enabled in production to be in [alignment with Rails defaults].
 
 You may skip source map generation by explicitly configuring <kbd>[sourcemap][source maps]</kbd>:
@@ -112,6 +113,19 @@ export default defineConfig({
   build: { sourcemap: false },
 ```
 
+## Emptying the Dist Dir 📦
+
+Another notable difference with Vite.js config defaults, is that <kbd>[emptyOutDir]</kbd>
+is disabled in production to provide better support for deployments that don't use a CDN,
+to preserve assets from previous builds upon deployment in order to avoid downtime.
+
+You may override this behavior manually:
+
+```js
+// vite.config.ts
+export default defineConfig({
+  build: { emptyOutDir: true },
+```
 
 ## Development Options
 

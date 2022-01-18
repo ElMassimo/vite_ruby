@@ -37,10 +37,12 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const fs = { allow: [projectRoot], strict: true }
   const hmr = userConfig.server?.hmr ?? { host, port }
   const server = { host, https, port, strictPort: true, fs, hmr }
+  
+  const isProduction = config.mode === 'production'
 
   const build = {
-    emptyOutDir: true,
-    sourcemap: config.mode === 'production',
+    emptyOutDir: userConfig.build?.emptyOutDir ?? !isProduction,
+    sourcemap: isProduction,
     ...userConfig.build,
     assetsDir,
     manifest: true,
