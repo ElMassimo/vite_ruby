@@ -1,3 +1,12 @@
+## [3.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.7...vite_ruby@3.0.8) (2022-01-18)
+
+
+### Bug Fixes
+
+* remove .DS_Store from installation .gitignore ([#178](https://github.com/ElMassimo/vite_ruby/issues/178)) ([5a0931d](https://github.com/ElMassimo/vite_ruby/commit/5a0931d63318ab5b1bf9ead680540c015afd471a))
+
+
+
 ## [3.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.6...vite_ruby@3.0.7) (2021-12-27)
 
 
