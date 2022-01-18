@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
-  s.add_dependency 'vite_ruby', '~> 3.0', '>= 3.0.4'
+  s.add_dependency 'vite_ruby', '~> 4.0.0.alpha1'
 
   s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md LICENSE.txt]
   s.test_files = `git ls-files -- test/*`.split("\n")
