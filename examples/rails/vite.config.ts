@@ -15,9 +15,6 @@ const bugsnagOptions = {
 }
 
 export default defineConfig({
-  define: {
-    'process.env.BUGSNAG_API_KEY': JSON.stringify(process.env.BUGSNAG_API_KEY),
-  },
   plugins: [
     isDistEnv && BugsnagBuildReporterPlugin({ ...bugsnagOptions, releaseStage: process.env.RAILS_ENV }),
     isDistEnv && BugsnagSourceMapUploaderPlugin({ ...bugsnagOptions, overwrite: true }),
