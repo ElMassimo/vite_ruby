@@ -8,15 +8,15 @@
     "@bugsnag/plugin-react": "^7.9.2",
     "@honeybadger-io/js": "^3.2.0",
     "@honeybadger-io/react": "^1.0.1",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
+    "@hotwired/turbo": "^7.1.0",
+    "@rails/actioncable": "^7.0",
+    "@rails/activestorage": "^7.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "turbolinks": "^5.2.0"
+    "react-dom": "^17.0.2"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@types/rails__activestorage": "^7.0.0",
     "@vitejs/plugin-legacy": "^1.6.4",
     "@vitejs/plugin-react": "^1.1.4",
     "less": "^4.1.1",
@@ -27,6 +27,7 @@
     "vite-plugin-bugsnag": "^2.0",
     "vite-plugin-environment": "^1.1",
     "vite-plugin-full-reload": "^1.0",
+    "vite-plugin-manifest-sri": "^0.1.0",
     "vite-plugin-ruby": "^3.0.5",
     "vite-plugin-windicss": "^1.6"
   }

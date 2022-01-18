@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "es2020",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "strict": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "~/*": ["./app/frontend/*"],
+      "@/*": ["./app/frontend/*"]
+    },
+  },
+  "exclude": [
+    "**/dist",
+    "**/node_modules",
+    "**/public"
+  ]
+}

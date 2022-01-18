@@ -19,6 +19,10 @@ AllCops:
 Style/IfUnlessModifier:
   Enabled: false
 
+Lint/UnusedMethodArgument:
+  Exclude:
+    - "vite_rails/lib/vite_rails/tag_helpers.rb"
+
 Style/RescueModifier:
   Enabled: false
 

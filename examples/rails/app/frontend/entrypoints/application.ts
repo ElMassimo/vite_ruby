@@ -1,7 +1,5 @@
 // Example: Load Rails libraries in Vite.
-import '@rails/ujs'
-
-import Turbolinks from 'turbolinks'
+import * as Turbo from '@hotwired/turbo'
 import * as ActiveStorage from '@rails/activestorage'
 
 // Enable Windi CSS styles and preflight
@@ -10,8 +8,8 @@ import 'windi.css'
 // Example: Import a stylesheet in app/frontend/styles
 import '~/styles/theme.css'
 
-import '~/entrypoints/example_import.js'
-import '~/outer_import.js'
+import '~/entrypoints/example_import'
+setTimeout(() => import('~/outer_import'), 5000)
 
 // Example: Import from an aliased path.
 import '@administrator/timer'
@@ -19,7 +17,7 @@ import '@administrator/timer'
 // Import all channels.
 import.meta.globEager('../channels/**/*_channel.js')
 
-Turbolinks.start()
+Turbo.start()
 ActiveStorage.start()
 
 console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify.app/guide/rails')
