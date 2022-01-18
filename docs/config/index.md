@@ -102,7 +102,7 @@ const adminAssetsPath = process.env.ADMINISTRATOR_ASSETS_PATH
 
 ## Source Maps 🗺
 
-One notable difference with Vite.js config defaults, is that [source maps]
+One notable difference with Vite's defaults, is that [source maps]
 are enabled in production to be in [alignment with Rails defaults].
 
 You may skip source map generation by explicitly configuring <kbd>[sourcemap][source maps]</kbd>:
@@ -113,11 +113,13 @@ export default defineConfig({
   build: { sourcemap: false },
 ```
 
-## Emptying the Dist Dir 📦
+## Emptying the Output Dir 📦
 
-Another notable difference with Vite.js config defaults, is that <kbd>[emptyOutDir]</kbd>
-is disabled in production to provide better support for deployments that don't use a CDN,
-to preserve assets from previous builds upon deployment in order to avoid downtime.
+Another difference with Vite's defaults, is that <kbd>[emptyOutDir]</kbd>
+is disabled in production mode to provide better support for deployments that
+don't use a CDN.
+
+Keeping assets from previous builds helps to prevent downtime when deploying in the same host.
 
 You may override this behavior manually:
 
