@@ -207,6 +207,15 @@ You can customize this behavior using the following options.
 
   Specify the directory where the [entrypoints] will be located (relative to <kbd>[sourceCodeDir]</kbd>).
 
+### emptyOutDir
+
+- **Default:** `env !== 'production'`
+- **Env Var:** `VITE_RUBY_EMPTY_OUT_DIR`
+
+  During (production) builds, Vite can empty the previous asset-directory. If
+  you are using traditional Capistrano-like deployments on the same host, you
+  should set it to false or leave it at the default value to avoid downtime.
+
 ## Other Options
 
 ### additionalEntrypoints

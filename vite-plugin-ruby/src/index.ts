@@ -39,7 +39,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const server = { host, https, port, strictPort: true, fs, hmr }
 
   const build = {
-    emptyOutDir: true,
+    emptyOutDir: userConfig.emptyOutDir ?? config.mode !== 'production',
     sourcemap: config.mode === 'production',
     ...userConfig.build,
     assetsDir,
