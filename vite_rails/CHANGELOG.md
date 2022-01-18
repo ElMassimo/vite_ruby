@@ -1,3 +1,12 @@
+## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.4...vite_rails@3.0.5) (2022-01-18)
+
+
+### Bug Fixes
+
+* update example setup from turbolinks to @hotwired/turbo ([e1750bf](https://github.com/ElMassimo/vite_ruby/commit/e1750bfb4b22a9a73a2b86950fb203d3e489ced6))
+
+
+
 ## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.3...vite_rails@3.0.4) (2022-01-02)
 
 
