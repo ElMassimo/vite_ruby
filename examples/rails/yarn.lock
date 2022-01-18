@@ -231,10 +231,10 @@
     "@babel/plugin-syntax-jsx" "^7.16.7"
     "@babel/types" "^7.16.7"
 
-"@babel/standalone@^7.15.7":
-  version "7.15.8"
-  resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.15.8.tgz#3cb40b81892a702968a3e0bba2bdd1115f034876"
-  integrity sha512-EF2uQLeuwflnPRGetWH2Z400ITOSK7YbkXIKxY91EWSiOJ8xsbupT3sx3sFRwVyQgjsHSILFDzLcSo/rGspLhQ==
+"@babel/standalone@^7.16.4":
+  version "7.16.9"
+  resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.16.9.tgz#4236f528bca7c5126678f2757ac14e24e10a53f8"
+  integrity sha512-2xC+uqniw1MNMTxzkfRUD8y0koEav+cGyWNCTVFAMC58Mb6HYfxqzQt+YtdMpSEcNqrDjvatthhyU0v18PNrnA==
 
 "@babel/template@^7.16.7":
   version "7.16.7"
@@ -473,16 +473,16 @@
   resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-2.1.0.tgz#1c3df624bfc4b62f992d3012b84c56d41eab3776"
   integrity sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==
 
-"@vitejs/plugin-legacy@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-legacy/-/plugin-legacy-1.6.2.tgz#638bfe74715bdba33a68b3de555f615e1b246cdb"
-  integrity sha512-p5Bv/827WUpVN2m95ZYXzmjE3AblFE4CHasVoZ7dIwOPlyNcpg70SehEi5AWqyC0E7C1rHD8Nju9rWoV9uBLiw==
+"@vitejs/plugin-legacy@^1.6.4":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-legacy/-/plugin-legacy-1.6.4.tgz#36cf0cc10bd1f32902719d62c8f23c9d433eb3a8"
+  integrity sha512-geH2F3hTRN++E4n9NZ0JFumxIWUKqW4FA9PAgM7Q6RvUOUUYW4tlURhEmCBYfZSN24H/yX3mEolX+wFVErsAYQ==
   dependencies:
-    "@babel/standalone" "^7.15.7"
-    core-js "^3.18.1"
+    "@babel/standalone" "^7.16.4"
+    core-js "^3.19.1"
     magic-string "^0.25.7"
     regenerator-runtime "^0.13.9"
-    systemjs "^6.10.3"
+    systemjs "^6.11.0"
 
 "@vitejs/plugin-react@^1.1.4":
   version "1.1.4"
@@ -745,10 +745,10 @@ copy-anything@^2.0.1:
   dependencies:
     is-what "^3.12.0"
 
-core-js@^3.18.1:
-  version "3.19.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.19.0.tgz#9e40098a9bc326c7e81b486abbd5e12b9d275176"
-  integrity sha512-L1TpFRWXZ76vH1yLM+z6KssLZrP8Z6GxxW4auoCj+XiViOzNPJCAuTIkn03BGdFe6Z5clX5t64wRIRypsZQrUg==
+core-js@^3.19.1:
+  version "3.20.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.3.tgz#c710d0a676e684522f3db4ee84e5e18a9d11d69a"
+  integrity sha512-vVl8j8ph6tRS3B8qir40H7yw7voy17xL0piAjlbBUsH7WIfzoedL/ZOr1OV9FyZQLWXsayOJyV4tnRyXR85/ag==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -1896,7 +1896,7 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-systemjs@^6.10.3:
+systemjs@^6.11.0:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-6.11.0.tgz#8df8e74fc05822e6c40170aa409b9ca64833315f"
   integrity sha512-7YPIY44j+BoY+E6cGBSw0oCU8SNTTIHKZgftcBdwWkDzs/M86Fdlr21FrzAyph7Zo8r3CFGscyFe4rrBtixrBg==
@@ -2042,10 +2042,10 @@ vite-plugin-windicss@^1.6:
     kolorist "^1.5.1"
     windicss "^3.4.0"
 
-vite@^2.7.7:
-  version "2.7.10"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.10.tgz#d12c4c10e56a0ecf7890cb529c15996c6111218f"
-  integrity sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==
+vite@^2.7.12:
+  version "2.7.12"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.12.tgz#7784ab19e7ff98f6a192d2d7d877480a8c2b7e7d"
+  integrity sha512-KvPYToRQWhRfBeVkyhkZ5hASuHQkqZUUdUcE3xyYtq5oYEPIJ0h9LWiWTO6v990glmSac2cEPeYeXzpX5Z6qKQ==
   dependencies:
     esbuild "^0.13.12"
     postcss "^8.4.5"
