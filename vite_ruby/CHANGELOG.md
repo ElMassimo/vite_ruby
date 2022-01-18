@@ -1,3 +1,12 @@
+# [](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.8...vite_ruby@) (2022-01-18)
+
+
+### Features
+
+* **experimental:** add support for Subresource Integrity via vite-plugin-manifest-sri ([0b3142c](https://github.com/ElMassimo/vite_ruby/commit/0b3142cd9d569a5f56821f53cdade337779bb0c1))
+
+
+
 ## [3.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.7...vite_ruby@3.0.8) (2022-01-18)
 
 
