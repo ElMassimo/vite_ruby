@@ -83,7 +83,7 @@ function resolve (paths) {
 }
 
 function rubyPackage () {
-  const versionRegex = /VERSION = '([\d.]+)'/
+  const versionRegex = /VERSION = '([\d.]+(?:[-.]\w+)?)'/
   const path = resolve(`lib/${name}/version.rb`)
   const content = fs.readFileSync(path, 'utf-8')
   const versionCaptures = content.match(versionRegex)
@@ -153,7 +153,7 @@ async function main () {
     }
   }
 
-  if (!semver.valid(targetVersion))
+  if (!semver.valid(targetVersion) && !isRubyLibrary)
     throw new Error(`invalid target version: ${targetVersion}`)
 
   const tag = `${name}@${targetVersion}`
