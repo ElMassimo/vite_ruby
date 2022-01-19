@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "rails"
-  spec.add_dependency "vite_rails"
+  spec.add_dependency "vite_rails", '~> 4.0.0.alpha1'
   spec.add_dependency "bootsnap"
 end

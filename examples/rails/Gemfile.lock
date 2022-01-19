@@ -4,7 +4,7 @@ PATH
     administrator (0.1.0)
       bootsnap
       rails
-      vite_rails
+      vite_rails (~> 4.0.0.alpha1)
 
 GEM
   remote: https://rubygems.org/
@@ -221,12 +221,12 @@ GEM
     timeout (0.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    vite_plugin_legacy (3.0.2)
-      vite_ruby (~> 3.0, >= 3.0.4)
-    vite_rails (3.0.4)
+    vite_plugin_legacy (4.0.0.alpha1)
+      vite_ruby (~> 4.0.0.alpha1)
+    vite_rails (4.0.0.alpha1)
       railties (>= 5.1, < 8)
-      vite_ruby (~> 3.0)
-    vite_ruby (3.0.7)
+      vite_ruby (~> 4.0.0.alpha1)
+    vite_ruby (4.0.0.alpha1)
       dry-cli (~> 0.7.0)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -264,8 +264,8 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   tzinfo-data
-  vite_plugin_legacy
-  vite_rails
+  vite_plugin_legacy (~> 4.0.0.alpha1)
+  vite_rails (~> 4.0.0.alpha1)
   web-console (>= 3.3.0)
   webdrivers
 
