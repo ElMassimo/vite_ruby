@@ -34,6 +34,7 @@ e2e/screenshots
 __build__
 playground_dist
 yarn-error.log
+*.log
 temp
 markdown
 explorations
