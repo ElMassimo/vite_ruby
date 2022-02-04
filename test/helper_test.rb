@@ -96,9 +96,9 @@ class HelperTest < HelperTestCase
       %(<link rel="modulepreload" href="/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="anonymous">),
       %(<link rel="modulepreload" href="/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="anonymous">),
-      link(href: '/vite-production/assets/app.517bf154.css', crossorigin: 'anonymous'),
-      link(href: '/vite-production/assets/theme.e6d9734b.css', crossorigin: 'anonymous'),
-      link(href: '/vite-production/assets/vue.ec0a97cc.css', crossorigin: 'anonymous'),
+      link(href: '/vite-production/assets/app.517bf154.css'),
+      link(href: '/vite-production/assets/theme.e6d9734b.css'),
+      link(href: '/vite-production/assets/vue.ec0a97cc.css'),
     ].join, vite_typescript_tag('main')
 
     assert_equal vite_javascript_tag('main.ts'),
