@@ -1,3 +1,12 @@
+## [3.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.5...vite_rails@3.0.6) (2022-02-04)
+
+
+### Bug Fixes
+
+* don't add crossorigin to included stylesheet tags (close [#189](https://github.com/ElMassimo/vite_ruby/issues/189)) ([#190](https://github.com/ElMassimo/vite_ruby/issues/190)) ([575c731](https://github.com/ElMassimo/vite_ruby/commit/575c73192fb485e8844f67b821c856d1a09db8f5))
+
+
+
 ## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.4...vite_rails@3.0.5) (2022-01-18)
 
 
