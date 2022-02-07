@@ -75,7 +75,7 @@ You can add <kbd>puts</kbd> or <kbd>console.log</kbd> as needed, or even change 
 
 In TypeScript packages (and some JS packages), make sure to edit the transpiled file instead of the sources. This is often `dist/index.js` but that depends on the library and target environment.
 
-::: tip Disclaimer ☢️
+::: warning Disclaimer
 This has many caveats: bugs that only happen in your local, or the opposite, code that only seems to work in your local. __*[Keep reading for a better approach][local version]*__. You have been warned!
 
 _(I use it all the time though, so convenient 😅)_

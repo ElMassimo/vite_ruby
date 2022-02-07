@@ -58,26 +58,26 @@ Interested in hearing more? [Read an introduction __blog post__][blog post], [le
 
 [Everything Vite provides](https://vitejs.dev/guide/features.html), plus:
 
-#### 🤖 Automatic entrypoint detection
+### 🤖 Automatic entrypoint detection
 
   Simply place your code under [`app/frontend/entrypoints`][entrypoints], and the [entrypoints]
   will be configured automatically.
 
-#### ⚡️ Lightning-fast hot reload
+### ⚡️ Lightning-fast hot reload
 
   Because it does not bundle your code in development, only the scripts and styles that are running need to be processed, which enables Vite to have significantly faster HMR than webpack.
 
-#### 🚀 Integrated with <kbd>assets:precompile</kbd>
+### 🚀 Integrated with <kbd>assets:precompile</kbd>
 
   [Rake tasks] for building and cleaning Vite assets are [automatically integrated][deployment]
   with <kbd>assets:precompile</kbd> and <kbd>assets:clean</kbd>, so deploying is straightforward.
 
-#### 🏗 Auto-build when not running Vite
+### 🏗 Auto-build when not running Vite
 
   When the development server is not running, it will automatically detect
   changes and [recompile assets] for you. Makes it seamless to run integration tests.
 
-#### 🏷 Smart tag helpers
+### 🏷 Smart tag helpers
 
   [Tag helpers] for <kbd>script</kbd> and <kbd>link</kbd> tags are provided, and
   will automatically output `preload` tags in production to optimize load time.

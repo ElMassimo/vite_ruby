@@ -3,10 +3,11 @@
   "scripts": {
     "dev": "vitepress dev --port 3005 --open",
     "build": "vitepress build",
-    "serve": "vitepress serve"
+    "preview": "vitepress serve --port 5050 --open",
+    "now": "npm run build && npm run preview"
   },
   "dependencies": {
-    "@vue/theme": "^1.0.0",
+    "@mussi/vitepress-theme": "^1.0.0",
     "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",
     "vue": "^3.2.29"

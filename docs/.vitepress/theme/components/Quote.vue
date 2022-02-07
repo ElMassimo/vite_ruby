@@ -15,3 +15,13 @@ defineProps({
     </p>
   </div>
 </template>
+
+<style scoped>
+.custom-block {
+  padding-left: 24px;
+}
+
+.custom-block:before {
+  content: none!important;
+}
+</style>

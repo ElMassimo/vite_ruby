@@ -1,33 +1,20 @@
 ---
-home: true
-
-title: ''
-tagline: Bringing joy to your frontend experience
-
-altActionText: Get Started
-altActionLink: /guide/
-
-actionText: Learn More
-actionLink: /guide/introduction
-
-head:
-  - - meta
-    - name: twitter:title
-      content: Vite ⚡ Ruby
-  - - meta
-    - property: og:title
-      content: Vite ⚡ Ruby
-
-heroText: Vite Ruby
-heroImage: /logo.svg
-heroAlt: Vite Ruby Logo by Maximo Mussini
-
+page: true
+sidebar: false
 features:
-  - title: 💡 Instant Server Start
+  - title: 🔥 Fast Server Start
     details: Unlike Webpacker, files are processed on demand!
+    link: /motivation.html#webpack—increasing-load-times
   - title: ⚡️ Instant Changes
-    details: Updates with HMR stay fast as your app grows thanks to Vite.
+    details: Fast updates thanks to HMR. Goodbye full-page reloads!
+    link: /guide/introduction.html#why-vite-🤔
   - title: 🚀 Zero-Config Deploys
     details: Integrates with Rake asset management tasks.
-footer: MIT Licensed | Copyright © 2021 Máximo Mussini
+    link: /guide/deployment.html
 ---
+
+<script setup>
+import Home from '/@theme/components/Home.vue'
+</script>
+
+<Home />

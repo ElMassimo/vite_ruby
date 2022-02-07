@@ -41,22 +41,33 @@ gem 'vite_rails'
 
 And then run:
 
-    $ bundle install
+```
+bundle install
+```
 
 - If using Jekyll, install the <kbd>[jekyll-vite]</kbd> gem instead.
+
 - If using Hanami, install the <kbd>[vite_hanami]</kbd> gem instead.
+
 - If using Padrino, install the <kbd>[vite_padrino]</kbd> gem instead.
+
 - If using other Ruby web frameworks, install the <kbd>[vite_ruby]</kbd> gem.
+
 - If using Rails 4, install the <kbd>[vite_rails_legacy]</kbd> gem.
 
 ### Setup 📦
 
 Run <kbd>bundle exec vite install</kbd>, which:
 
+
 - Adds the <kbd>bin/vite</kbd> executable to start the dev server and run other [commands]
+
 - Installs <kbd>[vite]</kbd> and <kbd>[vite-plugin-ruby]</kbd>
+
 - Adds [`vite.config.ts`][vite config] and [`config/vite.json`][json config] configuration files
+
 - Creates a sample `application.js` entrypoint in your web app
+
 - Injects [tag helpers] in the default `application.html.erb` view layout
 
 :::tip Tag Helpers

@@ -1,30 +1,29 @@
 :root {
-  --c-brand: #c00;
-  --c-brand-light: #d53f3f;
-  --c-contrast-light: #00c7cc;
+  --vt-c-brand: #c00;
+  --vt-c-brand-light: #d53f3f;
+  --vt-c-brand-dark: var(--vt-c-brand);
+  --vt-c-brand-highlight: var(--vt-c-brand-light);
+  --vt-c-contrast-light: #0ea5e9;
   --bg-colored-light: #f3f7f7;
   --kbd-border: #d1d5da;
+  --vt-c-tip: #0ea5e9;
 }
 
-@media(prefers-color-scheme: dark) {
-  :root {
-    --c-bg: #222;
-    --c-text: #EEE;
-    --c-text-light: #E9E5E5;
-    --c-text-light-2: #C9C5C5;
-    --c-text-light-3: #A9A5A5;
-    --kbd-border: #6c6a6a;
-    --bg-colored-light: #323030;
-    --c-divider-light: rgba(60, 60, 67, 0.8);
-  }
+html.dark {
+  --kbd-border: var(--vt-c-text-dark-3);
 
   p {
     --code-inline-bg-color: #ffcaca0d;
   }
 
-  .content a {
+  .vt-doc a {
+    color: var(--vt-c-text-dark-1);
     text-decoration: underline;
-    text-decoration-color: var(--c-text-light-2);
+    text-decoration-color: var(--vt-c-text-dark-2);
+  }
+
+  .vt-doc a > code {
+    --vt-c-brand-dark: var(--vt-c-text-dark-1);
   }
 
   .content a:hover,
@@ -37,14 +36,14 @@
     --docsearch-key-gradient: transparent;
     --docsearch-key-shadow: transparent;
     --docsearch-searchbox-shadow: transparent;
-    --docsearch-searchbox-background: var(--c-bg);
-    --docsearch-searchbox-focus-background: var(--c-bg);
+    --docsearch-searchbox-background: var(--vt-c-bg);
+    --docsearch-searchbox-focus-background: var(--vt-c-bg);
     --docsearch-container-background: rgba(12, 12, 12, 0.9);
     --docsearch-key-gradient: transparent;
     --docsearch-key-shadow: none;
-    --docsearch-hit-color: var(--c-text);
-    --docsearch-modal-background: var(--c-bg);
-    --docsearch-modal-shadow: var(--c-bg);
+    --docsearch-hit-color: var(--vt-c-text);
+    --docsearch-modal-background: var(--vt-c-bg);
+    --docsearch-modal-shadow: var(--vt-c-bg);
     --docsearch-footer-shadow: rgba(125, 125, 125, 0.1);
     --docsearch-hit-background: rgba(125, 125, 125, 0.1);
     --docsearch-hit-shadow: none;
@@ -52,7 +51,7 @@
   }
 
   .page .content {
-    --c-brand: var(--c-text);
+    --vt-c-brand: var(--vt-c-text);
   }
 
   .nav-link.action:not(.alt) .item,
@@ -67,30 +66,19 @@
   }
 
   kbd a {
-    color: var(--c-text);
+    color: var(--vt-c-text);
     font-weight: 500;
   }
 }
 
-.custom-block.custom-block.tip {
-  background-color: var(--bg-colored-light);
-  border-color: var(--c-contrast-light);
+.VPNavBarSearch {
+  justify-content: flex-end;
 }
 
-.custom-block.custom-block.tip a {
-  color: var(--c-text-light-2);
-}
-
-.DocSearch.DocSearch {
-  --docsearch-primary-color: var(--c-brand);
-}
-
-.home-hero figure.figure {
-  padding: 0;
-}
-
-.home-hero .image.image {
-  height: 220px;
+.vt-doc .custom-block.tip {
+  --vt-c-brand: var(--vt-c-text-1);
+  --vt-c-brand-dark: var(--vt-c-text-1);
+  --vt-c-brand-highlight: var(--vt-c-text-1);
 }
 
 @media (min-width: 720px) {
@@ -105,15 +93,11 @@
 }
 
 h2 .logo {
+  display: inline-block;
   height: 32px;
+  margin-left: 4px;
   margin-bottom: 4px;
   vertical-align: middle;
-}
-
-@media (min-width: 720px) {
-  .nav-links.nav-links.nav-links {
-    padding-top: 2px;
-  }
 }
 
 kbd {
@@ -134,10 +118,6 @@ code kbd {
   padding: 2px 5px;
 }
 
-code .token.inserted.token.inserted {
-  color: #00f9ff;
-}
-
-[class*='language-'] pre {
-  line-height: var(--code-line-height);
+html:not(.dark) .vt-doc [class*='language-'] code {
+  color: white;
 }
