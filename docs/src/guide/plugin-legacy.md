@@ -19,7 +19,9 @@ gem 'vite_plugin_legacy'
 
 And then run:
 
-    $ bundle install
+```
+bundle install
+```
 
 ## Tag Helpers 🏷
 

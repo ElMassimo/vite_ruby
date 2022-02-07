@@ -1,11 +1,11 @@
-import Theme from 'vitepress/theme'
-import Quote from '../components/Quote.vue'
+import { VPTheme } from '@mussi/vitepress-theme'
+import Quote from './components/Quote.vue'
 
 import 'windi.css'
-import '../styles/styles.css'
+import './styles/styles.css'
 
 export default {
-  ...Theme,
+  ...VPTheme,
   enhanceApp ({ app }) {
     app.component('Quote', Quote)
   },

@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import windicss from 'vite-plugin-windicss'
 
@@ -6,7 +7,7 @@ export default defineConfig({
     windicss({
       preflight: false,
       scan: {
-        dirs: ['.vitepress/components'],
+        dirs: [resolve(__dirname, '../.vitepress/theme/components')],
       },
     }),
   ],
