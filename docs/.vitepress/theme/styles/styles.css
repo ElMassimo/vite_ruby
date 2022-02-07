@@ -33,21 +33,7 @@ html.dark {
   }
 
   .DocSearch.DocSearch {
-    --docsearch-key-gradient: transparent;
-    --docsearch-key-shadow: transparent;
-    --docsearch-searchbox-shadow: transparent;
-    --docsearch-searchbox-background: var(--vt-c-bg);
-    --docsearch-searchbox-focus-background: var(--vt-c-bg);
-    --docsearch-container-background: rgba(12, 12, 12, 0.9);
-    --docsearch-key-gradient: transparent;
-    --docsearch-key-shadow: none;
-    --docsearch-hit-color: var(--vt-c-text);
-    --docsearch-modal-background: var(--vt-c-bg);
-    --docsearch-modal-shadow: var(--vt-c-bg);
-    --docsearch-footer-shadow: rgba(125, 125, 125, 0.1);
-    --docsearch-hit-background: rgba(125, 125, 125, 0.1);
-    --docsearch-hit-shadow: none;
-    --docsearch-footer-background: transparent;
+    --docsearch-container-background: rgba(12, 12, 12, 0.8);
   }
 
   .page .content {
