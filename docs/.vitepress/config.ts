@@ -1,13 +1,17 @@
-// @ts-check
+import baseConfig from '@vue/theme/config'
+
+import { defineConfigWithTheme, HeadConfig, UserConfig } from 'vitepress'
+import type { Config } from '@vue/theme'
+import { NavItem, SidebarConfig } from '@vue/theme/src/vitepress/config'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const title = 'Vite ⚡ Ruby'
 const description = 'Bringing joy to your frontend experience'
-const site = isProd ? 'https://vite-ruby.netlify.app' : 'http://localhost:3000'
+const site = isProd ? 'https://vite-ruby.netlify.app' : 'http://localhost:3005'
 const image = `${site}/banner.png`
 
-const head = [
+const head: HeadConfig = [
   ['style', {}, 'img { border-radius: 10px }' + 'h1.title { margin-left: 0.5em }'],
   ['meta', { name: 'author', content: 'Máximo Mussini' }],
   ['meta', { name: 'keywords', content: 'rails, vitejs, vue, react, vite, ruby' }],
@@ -35,13 +39,14 @@ const head = [
 if (isProd)
   head.push(['script', { src: 'https://unpkg.com/thesemetrics@latest', async: '' }])
 
-/**
- * @type {import('vitepress').UserConfig}
- */
-module.exports = {
+export default defineConfigWithTheme<Config>({
+  extends: baseConfig as () => UserConfig<Config>,
   title: 'Vite Ruby',
-  description,
   head,
+  description,
+  lang: 'en-US',
+  scrollOffset: 'header',
+  srcDir: 'src',
   themeConfig: {
     algolia: {
       appId: 'GERZE019PN',
@@ -106,4 +111,4 @@ module.exports = {
       ],
     },
   },
-}
+})
