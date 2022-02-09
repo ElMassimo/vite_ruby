@@ -1,3 +1,12 @@
+## [3.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.8...vite_ruby@3.0.9) (2022-02-09)
+
+
+### Bug Fixes
+
+* support older versions of npm (v6) that ship with node 12 and 14 ([0accc36](https://github.com/ElMassimo/vite_ruby/commit/0accc36e9ef82fa0923af4f94253433433c0b074))
+
+
+
 ## [3.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.7...vite_ruby@3.0.8) (2022-01-18)
 
 
