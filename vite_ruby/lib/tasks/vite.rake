@@ -31,7 +31,7 @@ namespace :vite do
 
   desc 'Ensures build dependencies like Vite are installed when compiling assets'
   task :install_dependencies do
-    system({ 'NODE_ENV' => 'development' }, 'npx --yes ci')
+    system({ 'NODE_ENV' => 'development' }, 'npx ci --yes')
   end
 
   desc "Provide information on ViteRuby's environment"
