@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://vite-ruby.netlify.app/">
-    <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/docs/public/logo.svg" width="200px"/>
+    <img src="https://raw.githubusercontent.com/ElMassimo/vite_ruby/main/logo.svg" width="200px"/>
   </a>
 
   <br>
