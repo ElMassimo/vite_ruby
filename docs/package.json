@@ -7,10 +7,10 @@
     "now": "npm run build && npm run preview"
   },
   "dependencies": {
-    "@mussi/vitepress-theme": "^1.0.0",
-    "vite-plugin-windicss": "^1.6.3",
-    "vitepress": "^0.21.6",
-    "vue": "^3.2.29"
+    "@mussi/vitepress-theme": "^1.0.1",
+    "vite-plugin-windicss": "^1.7.1",
+    "vitepress": "^0.22.2",
+    "vue": "^3.2.31"
   },
   "pnpm": {
     "peerDependencyRules": {

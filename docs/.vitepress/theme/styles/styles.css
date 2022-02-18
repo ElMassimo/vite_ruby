@@ -107,3 +107,11 @@ code kbd {
 html:not(.dark) .vt-doc [class*='language-'] code {
   color: white;
 }
+
+.DocSearch-Search-Icon.DocSearch-Search-Icon {
+  top: 0px;
+}
+
+.search-key {
+  vertical-align: 3px;
+}
