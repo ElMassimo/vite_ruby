@@ -1,3 +1,18 @@
+## [3.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.9...vite_ruby@3.0.10) (2022-03-17)
+
+
+### Bug Fixes
+
+* avoid proxying requests starting with @ ([93d071b](https://github.com/ElMassimo/vite_ruby/commit/93d071b2b807c2e09e24d5d7ea4228974b370960))
+* MissingExecutableError when deploying with Capistrano (close [#192](https://github.com/ElMassimo/vite_ruby/issues/192)) ([22e1691](https://github.com/ElMassimo/vite_ruby/commit/22e1691a0685b1fdeec3904657be5e69a57e6456))
+
+
+### Features
+
+* bump up default vite version to 2.8.6 ([fd53030](https://github.com/ElMassimo/vite_ruby/commit/fd5303017760dc176b3fb15908f08a16a175c22f))
+
+
+
 ## [3.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.8...vite_ruby@3.0.9) (2022-02-09)
 
 
