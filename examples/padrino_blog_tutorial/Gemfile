@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'haml'
+gem 'puma'
 gem 'padrino', '0.15.0'
 gem 'vite_padrino', path: '../../vite_padrino'
 gem 'vite_ruby', path: '../../vite_ruby'
