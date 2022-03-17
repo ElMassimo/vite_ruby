@@ -9,9 +9,8 @@
   },
   "devDependencies": {
     "ci": "^2.0.0",
-    "ni": "^0.0.2",
     "right-pad": "^1.0.1",
-    "vite": "^2.5.0-beta.2",
+    "vite": "^2.9.0-beta.3",
     "vite-plugin-ruby": "^1.0.8"
   }
 }
