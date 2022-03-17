@@ -54,17 +54,22 @@ private
 
   def vite_should_handle?(env)
     path = normalize_uri(env['PATH_INFO'])
-    return true if path.start_with?(vite_asset_url_prefix) # Vite asset
-    return true if path.start_with?(VITE_DEPENDENCY_PREFIX) # Packages and imports
+    return true if path.start_with?(vite_url_prefix) # Vite asset
     return true if file_in_vite_root?(path) # Fallback if Vite can serve the file
   end
 
+  # NOTE: When using an empty 'public_output_dir', we need to rely on a
+  # filesystem check to check whether Vite should serve the request.
   def file_in_vite_root?(path)
     path.include?('.') && # Check for extension, avoid filesystem if possible.
       config.vite_root_dir.join(path.start_with?('/') ? path[1..-1] : path).file?
   end
 
-  def vite_asset_url_prefix
-    @vite_asset_url_prefix ||= config.public_output_dir.empty? ? "\0" : "/#{ config.public_output_dir }/"
+  # NOTE: Vite is configured to use 'public_output_dir' as the base, which can
+  # be customized by the user in development to not match any of the routes.
+  #
+  # If the path starts with that prefix, it will be redirected to Vite.
+  def vite_url_prefix
+    @vite_url_prefix ||= config.public_output_dir.empty? ? VITE_DEPENDENCY_PREFIX : "/#{ config.public_output_dir }/"
   end
 end

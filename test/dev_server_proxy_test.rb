@@ -39,10 +39,22 @@ class DevServerProxyTest < ViteRuby::Test
 
   def test_vite_client
     get_with_dev_server_running '/@vite/client'
+    assert_not_forwarded
+  end
+
+  def test_vite_client_with_empty_prefix
+    refresh_config(public_output_dir: '')
+    get_with_dev_server_running '/@vite/client'
     assert_forwarded to: '/@vite/client'
   end
 
   def test_vite_import
+    get_with_dev_server_running '/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css'
+    assert_not_forwarded
+  end
+
+  def test_vite_import_with_empty_prefix
+    refresh_config(public_output_dir: '')
     get_with_dev_server_running '/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css'
     assert_forwarded to: '/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css'
   end
