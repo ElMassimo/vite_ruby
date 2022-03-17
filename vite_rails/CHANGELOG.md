@@ -1,3 +1,12 @@
+## [3.0.7](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.6...vite_rails@3.0.7) (2022-03-17)
+
+
+### Bug Fixes
+
+* load rails environment before rake tasks (close [#193](https://github.com/ElMassimo/vite_ruby/issues/193)) ([72afbc7](https://github.com/ElMassimo/vite_ruby/commit/72afbc7ab5ca33833e9330954499bcf460fd7669))
+
+
+
 ## [3.0.6](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.5...vite_rails@3.0.6) (2022-02-04)
 
 

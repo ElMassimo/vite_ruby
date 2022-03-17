@@ -7,7 +7,7 @@ PATH
 PATH
   remote: vite_rails
   specs:
-    vite_rails (3.0.6)
+    vite_rails (3.0.7)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0)
 
