@@ -15,17 +15,17 @@
 [additionalEntrypoints]: /config/#additionalentrypoints
 [autoBuild]: /config/#autobuild
 [entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
-[vite_client_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L13-L17
-[vite_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L28-L51
-[vite_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L57-L59
-[vite_stylesheet_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L62-L64
-[vite_asset_path]: https://github.com/ElMassimo/vite_ruby/blob/main/lib/vite_rails/helper.rb#L23-L25
+[Importing styles from JS]: https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/app/frontend/entrypoints/application.ts#L8-L9
+[layout]: https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/app/views/layouts/application.html.erb#L12
 [sourceCodeDir]: /config/#sourcecodedir
 [entrypointsDir]: /config/#entrypointsdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
 [jekyll-vite]: https://jekyll-vite.netlify.app/posts/tag-helpers/
 [Advanced Usage]: /guide/advanced
+[css]: https://vitejs.dev/guide/features.html#css
+[preprocessors]: https://vitejs.dev/guide/features.html#css-pre-processors
+[tag helper]: #tag-helpers-🏷
 
 # Developing with Vite
 
@@ -82,6 +82,24 @@ import '@/channels/index.js'
 
 When importing files _outside_ your <kbd>[sourceCodeDir]</kbd>, make sure to check <kbd>[watchAdditionalPaths]</kbd>.
 
+## Stylesheets 🎨
+
+Vite provides [great support for CSS][css], supporting PostCSS out of the box, and 
+[built-in support for preprocessors][preprocessors] like Sass.
+
+In _Vite Ruby_ the most common ways to add styles are:
+
+- [Importing styles from JS], which will automatically inject the CSS on load:
+
+  ```js
+  import '~/styles/theme.css'
+  ```
+
+- [Using `vite_stylesheet_tag`][layout] in the view templates:
+
+  ```erb
+  <%= vite_stylesheet_tag 'styles.scss' %> # app/frontend/entrypoints/styles.scss
+  ```
 
 ## Auto-Build 🤖
 
