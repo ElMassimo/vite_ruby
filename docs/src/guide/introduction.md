@@ -22,7 +22,7 @@
 
 # Introduction
 
-[__Vite Ruby__][library] is an umbrella project that library that provides full [Vite.js][vite] integration in Ruby web apps.
+[__Vite Ruby__][library] is an umbrella project that provides full [Vite.js][vite] integration in Ruby web apps.
 
 - <kbd>[vite_rails]</kbd> provides similar functionality as [webpacker] does for [webpack], without all the configuration overhead and dependencies.
 
