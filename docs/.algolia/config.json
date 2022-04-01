@@ -2,61 +2,75 @@
   "index_name": "vite_rails",
   "start_urls": [
     {
-      "url": "https://vite-ruby.netlify.app/config/",
+      "url": "https://vite-ruby.netlify.app/config/index.html",
       "selectors_key": "config",
       "tags": ["config"],
       "page_rank": 5
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/padrino",
+      "url": "https://vite-ruby.netlify.app/guide/padrino.html",
       "selectors_key": "integration",
       "tags": ["integration"],
       "page_rank": 1
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/plugin-legacy",
+      "url": "https://vite-ruby.netlify.app/guide/plugin-legacy.html",
       "selectors_key": "integration",
       "tags": ["integration"],
       "page_rank": 1
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/hanami",
+      "url": "https://vite-ruby.netlify.app/guide/hanami.html",
       "selectors_key": "integration",
       "tags": ["integration"],
       "page_rank": 2
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/rails",
+      "url": "https://vite-ruby.netlify.app/guide/rails.html",
       "selectors_key": "integration",
       "tags": ["integration"],
       "page_rank": 3
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/debugging",
+      "url": "https://vite-ruby.netlify.app/guide/debugging.html",
       "selectors_key": "faqs",
       "tags": ["faqs"],
       "page_rank": 1
     },
     {
-      "url": "https://vite-ruby.netlify.app/guide/",
+      "url": "https://vite-ruby.netlify.app/guide/(?P<page>.*?).html",
+      "variables": {
+        "page": [
+          "development",
+          "index",
+          "introduction",
+          "migration",
+          "plugins",
+          "deployment",
+          "advanced"
+        ]
+      },
       "tags": ["guide"],
       "page_rank": 4
     },
     {
-      "url": "https://vite-ruby.netlify.app/motivation",
+      "url": "https://vite-ruby.netlify.app/guide/troubleshooting.html",
+      "selectors_key": "troubleshooting",
+      "tags": ["guide", "troubleshooting"],
+      "page_rank": 3
+    },
+    {
+      "url": "https://vite-ruby.netlify.app/motivation.html",
       "selectors_key": "faqs",
       "tags": ["faqs"],
       "page_rank": 1
     },
     {
-      "url": "https://vite-ruby.netlify.app/overview",
+      "url": "https://vite-ruby.netlify.app/overview.html",
       "selectors_key": "faqs",
       "tags": ["faqs"],
       "page_rank": 1
     }
-  ],
-  "stop_urls": [
-    ".html$"
   ],
   "selectors": {
     "default": {
@@ -95,6 +109,16 @@
         "global": true
       }
     },
+    "troubleshooting": {
+      "lvl0": {
+        "selector": ".sidebar-link-item.active",
+        "global": true,
+        "default_value": "Troubleshooting"
+      },
+      "lvl1": ".content h2",
+      "lvl2": ".content h3",
+      "text": ".content p, .content li"
+    },
     "faqs": {
       "lvl0": {
         "selector": ".sidebar-link-item.active",
@@ -121,6 +145,7 @@
       }
     }
   },
+  "js_render": true,
   "scrape_start_urls": true,
   "strip_chars": " .,;:#",
   "custom_settings": {
