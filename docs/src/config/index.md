@@ -116,7 +116,7 @@ export default defineConfig({
 ## Emptying the Output Dir 📦
 
 Another difference with Vite's defaults, is that <kbd>[emptyOutDir]</kbd>
-is disabled in non-development mode to provide better support for deployments that
+is disabled in production to provide better support for deployments that
 don't use a CDN.
 
 Keeping assets from previous builds helps to prevent downtime when deploying in the same host.
