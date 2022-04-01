@@ -1,3 +1,17 @@
+## [3.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.8...vite-plugin-ruby@3.0.9) (2022-04-01)
+
+
+### Bug Fixes
+
+* disable emptyOutDir in non-development modes ([#199](https://github.com/ElMassimo/vite_ruby/issues/199)) ([94e75a3](https://github.com/ElMassimo/vite_ruby/commit/94e75a31ed4c6d49d1dc0cc5260c2ce8280e7279))
+
+
+### Features
+
+* bump up default vite version to 2.8.6 ([fd53030](https://github.com/ElMassimo/vite_ruby/commit/fd5303017760dc176b3fb15908f08a16a175c22f))
+
+
+
 ## [3.0.8](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.7...vite-plugin-ruby@3.0.8) (2022-01-18)
 
 
