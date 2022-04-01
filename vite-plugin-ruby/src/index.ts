@@ -37,11 +37,11 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const fs = { allow: [projectRoot], strict: true }
   const server = { host, https, port, strictPort: true, fs }
 
-  const isProduction = config.mode === 'production'
+  const isDevelopment = config.mode === 'development'
 
   const build = {
-    emptyOutDir: userConfig.build?.emptyOutDir ?? !isProduction,
-    sourcemap: isProduction,
+    emptyOutDir: userConfig.build?.emptyOutDir ?? isDevelopment,
+    sourcemap: !isDevelopment,
     ...userConfig.build,
     assetsDir,
     manifest: true,
