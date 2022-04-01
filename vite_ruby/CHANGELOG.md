@@ -1,3 +1,12 @@
+# [3.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.11...vite_ruby@3.1.0) (2022-04-01)
+
+
+### Features
+
+* improve capistrano-rails integration by extending asset tasks ([#200](https://github.com/ElMassimo/vite_ruby/issues/200)) ([d5704ab](https://github.com/ElMassimo/vite_ruby/commit/d5704ab55abf27cbdb5b00841bce3136147a0200))
+
+
+
 ## [3.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.10...vite_ruby@3.0.11) (2022-04-01)
 
 
