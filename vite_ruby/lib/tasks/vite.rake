@@ -50,6 +50,21 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
   else
     Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build'])
   end
+
+  unless Rake::Task.task_defined?('assets:clean')
+    Rake::Task.define_task('assets:clean', [:keep, :age])
+  end
+  Rake::Task['assets:clean'].enhance do |_, args|
+    Rake::Task['vite:clean'].invoke(*args.to_h.values)
+  end
+
+  if Rake::Task.task_defined?('assets:clobber')
+    Rake::Task['assets:clobber'].enhance do
+      Rake::Task['vite:clobber'].invoke
+    end
+  else
+    Rake::Task.define_task('assets:clobber' => 'vite:clobber')
+  end
 end
 
 # Any prerequisite task that installs packages should also install build dependencies.
