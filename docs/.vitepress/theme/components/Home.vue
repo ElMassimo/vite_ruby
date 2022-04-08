@@ -145,9 +145,13 @@ html:not(.dark) .accent,
 }
 
 @media (max-width: 768px) {
+  #highlights {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .highlight {
-    flex: 0 100%;
-    margin-bottom: 20px;
+    text-align: center;
   }
 }
 

@@ -48,7 +48,6 @@ selenium-server.log
 .env.*.local
 
 .pnpm-debug.log
-docs/pnpm-lock.yaml
 test/mounted_app/test/dummy/bin/vite
 test/mounted_app/test/dummy/bin/racc
 

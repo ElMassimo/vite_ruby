@@ -142,4 +142,9 @@ export default defineConfigWithTheme<Config>({
       copyright: 'Copyright © 2021-2022',
     },
   },
+  vite: {
+    optimizeDeps: {
+      exclude: ['@mussi/vitepress-theme'],
+    },
+  },
 })
