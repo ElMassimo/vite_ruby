@@ -121,7 +121,7 @@ private
         'config_path' => option_from_env('config_path') || DEFAULT_CONFIG.fetch('config_path'),
         'mode' => option_from_env('mode') || mode,
         'root' => option_from_env('root') || root,
-      }
+      }.select { |_, value| value }
     end
 
     # Internal: Used to load a JSON file from the specified path.
