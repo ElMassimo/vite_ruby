@@ -1,3 +1,13 @@
+## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.3...vite_rails_legacy@3.0.4) (2022-04-14)
+
+
+### Bug Fixes
+
+* prevent error when using a proc in asset_host (close [#202](https://github.com/ElMassimo/vite_ruby/issues/202)) ([#203](https://github.com/ElMassimo/vite_ruby/issues/203)) ([cb23a81](https://github.com/ElMassimo/vite_ruby/commit/cb23a81037651ac01d993935f68cc526ec2c844d))
+* update example setup from turbolinks to @hotwired/turbo ([e1750bf](https://github.com/ElMassimo/vite_ruby/commit/e1750bfb4b22a9a73a2b86950fb203d3e489ced6))
+
+
+
 ## [3.0.3](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.2...vite_rails_legacy@3.0.3) (2021-12-23)
 
 
