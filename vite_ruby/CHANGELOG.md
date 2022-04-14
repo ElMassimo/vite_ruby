@@ -1,3 +1,12 @@
+## [3.1.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.0...vite_ruby@3.1.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* prevent error when using a proc in asset_host (close [#202](https://github.com/ElMassimo/vite_ruby/issues/202)) ([#203](https://github.com/ElMassimo/vite_ruby/issues/203)) ([cb23a81](https://github.com/ElMassimo/vite_ruby/commit/cb23a81037651ac01d993935f68cc526ec2c844d))
+
+
+
 # [3.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.0.11...vite_ruby@3.1.0) (2022-04-01)
 
 
