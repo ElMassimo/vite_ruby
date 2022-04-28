@@ -21,14 +21,14 @@ module ViteRails::TagHelpers
   def vite_asset_path(name, **options)
     path_to_asset vite_manifest.path_for(name, **options)
   end
-  
+
   # Public: Resolves the url for the specified Vite asset.
   #
   # Example:
   #   <%= vite_asset_url 'calendar.css' %> # => "https://example.com/vite/assets/calendar-1016838bab065ae1e122.css"
   def vite_asset_url(name, **options)
     url_to_asset vite_manifest.path_for(name, **options)
-  end  
+  end
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_javascript_tag(*names,
