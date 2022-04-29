@@ -78,6 +78,13 @@ class HelperTest < HelperTestCase
     }
   end
 
+  def test_vite_asset_url
+    assert_equal 'https://example.com/vite-production/assets/main.9dcad042.js', vite_asset_url('main.ts')
+    with_dev_server_running {
+      assert_equal 'https://example.com/vite-dev/entrypoints/main.ts', vite_asset_url('main.ts')
+    }
+  end
+
   def test_vite_stylesheet_tag
     assert_similar link(href: '/vite-production/assets/app.517bf154.css'), vite_stylesheet_tag('app')
     assert_equal vite_stylesheet_tag('app'), vite_stylesheet_tag('app.css')
