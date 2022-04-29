@@ -1,3 +1,12 @@
+## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.4...vite_rails_legacy@3.0.5) (2022-04-29)
+
+
+### Features
+
+* add vite_asset_url helper ([#208](https://github.com/ElMassimo/vite_ruby/issues/208)) ([d269793](https://github.com/ElMassimo/vite_ruby/commit/d2697934b5a866ea5b14588b650a00dfe88454a3))
+
+
+
 ## [3.0.4](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.3...vite_rails_legacy@3.0.4) (2022-04-14)
 
 
