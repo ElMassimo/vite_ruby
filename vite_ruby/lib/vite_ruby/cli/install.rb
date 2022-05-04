@@ -91,9 +91,7 @@ private
     append(gitignore_file, <<~GITIGNORE)
 
       # Vite Ruby
-      /public/vite
-      /public/vite-dev
-      /public/vite-test
+      /public/vite*
       node_modules
       # Vite uses dotenv and suggests to ignore local-only env files. See
       # https://vitejs.dev/guide/env-and-mode.html#env-files

@@ -5,7 +5,5 @@ log
 test
 .envrc
 public/packs
-public/vite
-public/vite-dev
-public/vite-test
+public/vite*
 README.md
