@@ -40,10 +40,23 @@ function isInside (file: string, dir: string) {
 }
 
 // Internal: Returns all files defined in the entrypoints directory.
-function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalEntrypoints }: ResolvedConfig): Entrypoints {
-  const inputGlobs = [`~/${entrypointsDir}/**/*`, ...additionalEntrypoints]
-  const resolvedGlobs = resolveGlobs(projectRoot, sourceCodeDir, inputGlobs)
-  return glob.sync(resolvedGlobs).map(filename => [
+export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalEntrypoints }: ResolvedConfig, isSSR: string | boolean): Entrypoints {
+  const inputGlobs = isSSR
+    ? typeof isSSR === 'string' ? [] : ['~/ssr/ssr.{js,ts,jsx,tsx}'] // Let Vite handle string ssr entrypoints.
+    : [`~/${entrypointsDir}/**/*`, ...additionalEntrypoints]
+
+  const entrypointFiles = glob.sync(resolveGlobs(projectRoot, sourceCodeDir, inputGlobs))
+
+  if (isSSR) {
+    if (entrypointFiles.length === 0)
+      throw new Error(`No SSR entrypoint available, please create \`${sourceCodeDir}/ssr/ssr.{js,ts,jsx,tsx}\` to do an SSR build.`)
+    else if (entrypointFiles.length > 1)
+      throw new Error(`Expected a single SSR entrypoint, found: ${entrypointFiles}`)
+
+    return entrypointFiles.map(file => ['ssr', file])
+  }
+
+  return entrypointFiles.map(filename => [
     resolveEntryName(projectRoot, sourceCodeDir, filename),
     filename,
   ])
@@ -96,11 +109,16 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
 
   // Vite expects the outDir to be relative to the root.
   const buildOutputDir = join(config.publicDir, config.publicOutputDir)
-  const outDir = relative(root, buildOutputDir) // Vite expects it to be relative
+  let outDir = relative(root, buildOutputDir) // Vite expects it to be relative
+
+  // Handle SSR
+  const isSSR = userConfig.build?.ssr || false
+  if (isSSR) outDir += '-ssr' // Example: public/vite-ssr
 
   const base = resolveViteBase(config)
-  const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
-  return { ...config, root, outDir, base, entrypoints }
+  const entrypoints = resolveEntrypointFiles(projectRoot, root, config, isSSR)
+
+  return { ...config, root, outDir, base, entrypoints, isSSR }
 }
 
 // Internal: Configures Vite's base according to the asset host and publicOutputDir.

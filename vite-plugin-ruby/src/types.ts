@@ -25,6 +25,7 @@ export interface PluginOptions {
   root: string
   outDir: string
   base: string
+  isSSR: boolean | string
 }
 
 export type Entrypoints = Array<[string, string]>
