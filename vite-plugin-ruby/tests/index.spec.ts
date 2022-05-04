@@ -23,5 +23,9 @@ describe('config', () => {
     const testConfig = pluginConfig(defaultConfig, { mode: 'test' })
     expect(testConfig.build.emptyOutDir).toBe(true)
     expect(testConfig.build.sourcemap).toBe(false)
+
+    expect(() => {
+      pluginConfig({ ...defaultConfig, build: { ssr: true } }, { mode: 'production' })
+    }).toThrow('No SSR entrypoint available')
   })
 })

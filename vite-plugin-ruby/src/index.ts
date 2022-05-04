@@ -32,7 +32,7 @@ const debug = createDebugger('vite-plugin-ruby:config')
 // config file, and configures the entrypoints and manifest generation.
 function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const config = loadConfiguration(env.mode, projectRoot, userConfig)
-  const { assetsDir, base, outDir, host, https, port, root, entrypoints } = config
+  const { assetsDir, base, outDir, host, https, port, root, entrypoints, isSSR } = config
 
   const fs = { allow: [projectRoot], strict: true }
   const server = { host, https, port, strictPort: true, fs }
@@ -48,7 +48,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     outDir,
     rollupOptions: {
       input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
-      output: {
+      output: isSSR ? {} : {
         ...outputOptions(assetsDir),
         ...userConfig.build?.rollupOptions?.output,
       },
