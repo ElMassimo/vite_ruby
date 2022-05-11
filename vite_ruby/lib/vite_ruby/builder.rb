@@ -50,7 +50,7 @@ private
 
   # Internal: The file path where metadata of the last build is stored.
   def last_build_path
-    config.build_cache_dir.join("last-build-#{ config.mode }.json")
+    config.build_cache_dir.join("last-build-#{ config.mode }#{ config.ssr? && '-ssr' }.json")
   end
 
   # Internal: Returns a digest of all the watched files, allowing to detect

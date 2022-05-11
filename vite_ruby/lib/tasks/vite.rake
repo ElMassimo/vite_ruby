@@ -9,27 +9,27 @@ namespace :vite do
     ViteRuby.commands.install_binstubs
   end
 
-  desc 'Compile JavaScript packs using vite for production with digests'
+  desc 'Bundle frontend entrypoints using ViteRuby'
   task build: :'vite:verify_install' do
     ViteRuby.commands.build_from_task
   end
 
-  desc 'Remove old compiled vites'
+  desc 'Remove old bundles created by ViteRuby'
   task :clean, [:keep, :age] => :'vite:verify_install' do |_, args|
     ViteRuby.commands.clean_from_task(args)
   end
 
-  desc 'Remove the vite build output directory'
+  desc 'Remove the build output directory for ViteRuby'
   task clobber: :'vite:verify_install' do
     ViteRuby.commands.clobber
   end
 
-  desc 'Verifies if ViteRuby is properly installed in this application'
+  desc 'Verify if ViteRuby is properly installed in the app'
   task :verify_install do
     ViteRuby.commands.verify_install
   end
 
-  desc 'Ensures build dependencies like Vite are installed when compiling assets'
+  desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
     system({ 'NODE_ENV' => 'development' }, 'npx ci --yes')
   end

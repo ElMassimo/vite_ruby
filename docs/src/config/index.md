@@ -2,10 +2,10 @@
 [config reference]: https://vitejs.dev/config/
 [plugins]: https://vitejs.dev/plugins/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
-[json config]: /config/#shared-configuration-file-%F0%9F%93%84
+[json config]: /config/#shared-configuration-file-%f0%9f%93%84
 [sourceCodeDir]: /config/#sourcecodedir
 [autoBuild]: /config/#autobuild
-[entrypointsDir]: /config/#entrypointsDir
+[entrypointsDir]: /config/#entrypointsdir
 [publicOutputDir]: /config/#publicoutputdir
 [additionalEntrypoints]: /config/#additionalentrypoints
 [watchAdditionalPaths]: /config/#watchadditionalpaths
@@ -21,6 +21,7 @@
 [Vite config file]: /config/#configuring-vite-⚡
 [runtime env var]: https://github.com/ElMassimo/vite_ruby/discussions/159#discussioncomment-1841817
 [emptyOutDir]: https://vitejs.dev/config/#build-emptyoutdir
+[inertia-ssr]: https://github.com/ElMassimo/inertia-rails-ssr-template
 
 # Configuring Vite Ruby
 
@@ -343,6 +344,32 @@ You can customize this behavior using the following options.
     },
   })
   ```
+## SSR Options
+
+The purpose of SSR builds within _Vite Ruby_ is to support the creation of
+servers based on Node.js, which can be used in combination with Rails, such as
+when using [Inertia.js in SSR mode][inertia-ssr].
+
+### ssrBuildEnabled
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SSR_BUILD_ENABLED`
+
+  Whether to build an SSR entrypoint when precompiling assets.
+
+### ssrEntrypoint
+
+- **Default:** `~/ssr/ssr.{js,ts,jsx,tsx}`
+- **Env Var:** `VITE_RUBY_SSR_ENTRYPOINT`
+
+  A file glob specifying a pattern that matches the SSR entrypoint to build.
+
+### ssrOutputDir
+
+- **Default:** `public/ssr`
+- **Env Var:** `VITE_RUBY_SSR_OUTPUT_DIR`
+
+   * Specify the output directory for the SSR build (relative to <kbd>[root]</kbd>).
 
 <br>
 <br>

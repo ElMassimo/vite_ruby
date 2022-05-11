@@ -70,6 +70,10 @@ class ViteRuby::Config
     ].freeze
   end
 
+  def ssr?
+    ARGV.any? { |arg| arg.include?('--ssr') || arg.include?('[ssr]') }
+  end
+
 private
 
   # Internal: Coerces all the configuration values, in case they were passed

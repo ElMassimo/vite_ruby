@@ -24,7 +24,7 @@ module ViteRuby::CompatibilityCheck
         raise ArgumentError, <<~ERROR
           vite-plugin-ruby@#{ npm_req } might not be compatible with vite_ruby-#{ ViteRuby::VERSION }
 
-          You may disable this check if needed: https://vite-ruby.netlify.app/config/#skipCompatibilityCheck
+          You may disable this check if needed: https://vite-ruby.netlify.app/config/#skipcompatibilitycheck
 
           You may upgrade both by running:
 

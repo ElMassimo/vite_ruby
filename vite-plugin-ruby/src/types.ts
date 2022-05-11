@@ -17,6 +17,19 @@ export interface ResolvedConfig {
   publicOutputDir: string
   watchAdditionalPaths: string[]
   base: string
+  /**
+   * @private
+   * In the context of the internal code, whether an SSR build should be performed.
+   */
+  ssrBuild: boolean
+  /**
+   * A file glob specifying a pattern that matches the SSR entrypoint to build.
+   */
+  ssrEntrypoint: string
+  /**
+   * Specify the output directory for the SSR build (relative to the project root).
+   */
+  ssrOutputDir: string
 }
 
 export type Config = Partial<ResolvedConfig>
@@ -25,7 +38,6 @@ export interface PluginOptions {
   root: string
   outDir: string
   base: string
-  isSSR: boolean | string
 }
 
 export type Entrypoints = Array<[string, string]>
