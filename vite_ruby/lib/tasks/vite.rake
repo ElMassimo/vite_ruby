@@ -14,6 +14,17 @@ namespace :vite do
     ViteRuby.commands.build_from_task
   end
 
+  desc 'Bundle a Node.js app from the SSR entrypoint using ViteRuby'
+  task build_ssr: :'vite:verify_install' do
+    ViteRuby.commands.build_from_task('--ssr')
+  end
+
+  desc 'Bundle entrypoints using Vite Ruby (SSR only if enabled)'
+  task build_all: :'vite:verify_install' do
+    ViteRuby.commands.build_from_task
+    ViteRuby.commands.build_from_task('--ssr') if ViteRuby.config.ssr_build_enabled
+  end
+
   desc 'Remove old bundles created by ViteRuby'
   task :clean, [:keep, :age] => :'vite:verify_install' do |_, args|
     ViteRuby.commands.clean_from_task(args)
@@ -45,10 +56,10 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
     Rake::Task['assets:precompile'].enhance do |task|
       prefix = task.name.split(/#|assets:precompile/).first
       Rake::Task["#{ prefix }vite:install_dependencies"].invoke
-      Rake::Task["#{ prefix }vite:build"].invoke
+      Rake::Task["#{ prefix }vite:build_all"].invoke
     end
   else
-    Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build'])
+    Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build_all'])
   end
 
   unless Rake::Task.task_defined?('assets:clean')

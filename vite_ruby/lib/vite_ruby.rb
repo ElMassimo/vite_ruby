@@ -11,6 +11,7 @@ loader.ignore("#{ __dir__ }/install")
 loader.ignore("#{ __dir__ }/tasks")
 loader.ignore("#{ __dir__ }/exe")
 loader.inflector.inflect('cli' => 'CLI')
+loader.inflector.inflect('ssr' => 'SSR')
 loader.inflector.inflect('io' => 'IO')
 loader.setup
 

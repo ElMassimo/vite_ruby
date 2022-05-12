@@ -21,6 +21,9 @@
 [Vite config file]: /config/#configuring-vite-⚡
 [runtime env var]: https://github.com/ElMassimo/vite_ruby/discussions/159#discussioncomment-1841817
 [emptyOutDir]: https://vitejs.dev/config/#build-emptyoutdir
+[ssrEntrypoint]: /config/#ssrentrypoint
+[ssrOutputDir]: /config/#ssroutputdir
+[ssr mode]: https://vitejs.dev/guide/ssr.html#server-side-rendering
 [inertia-ssr]: https://github.com/ElMassimo/inertia-rails-ssr-template
 
 # Configuring Vite Ruby
@@ -346,30 +349,50 @@ You can customize this behavior using the following options.
   ```
 ## SSR Options
 
-The purpose of SSR builds within _Vite Ruby_ is to support the creation of
-servers based on Node.js, which can be used in combination with Rails, such as
-when using [Inertia.js in SSR mode][inertia-ssr].
+_Vite Ruby_ supports building your app in [SSR mode], obtaining a Node.js app
+that can be used in combination with Rails, such as when using [Inertia.js in SSR mode][inertia-ssr].
+
+When building in SSR mode, _Vite Ruby_ will use <kbd>[ssrEntrypoint]</kbd> as
+the single entrypoint, and output the resulting app in a <kbd>[ssrOutputDir]/ssr.js</kbd> script.
+
+:::tip Running the server
+The resulting Node.js script can be conveniently executed with <kbd>bin/vite ssr</kbd>.
+:::
+
+::: warning Experimental
+
+Until the API is stabilized, these options __do not follow semantic versioning__.
+
+Lock `vite_ruby` and `vite-plugin-ruby` down to patch releases to prevent breaking changes.
+:::
 
 ### ssrBuildEnabled
 
 - **Default:** `false`
 - **Env Var:** `VITE_RUBY_SSR_BUILD_ENABLED`
 
-  Whether to build an SSR entrypoint when precompiling assets.
+  When enabled, running <kbd>rake assets:precompile</kbd> will also run an SSR
+  build, simplifying the deployment setup.
+
+:::tip Manual SSR Builds
+You can build the app in SSR mode using <kbd>bin/vite build --ssr</kbd>.
+:::
 
 ### ssrEntrypoint
 
 - **Default:** `~/ssr/ssr.{js,ts,jsx,tsx}`
 - **Env Var:** `VITE_RUBY_SSR_ENTRYPOINT`
 
-  A file glob specifying a pattern that matches the SSR entrypoint to build.
+  A file glob pattern that matches the entrypoint file for SSR builds, for example: `app/frontend/ssr/ssr.ts`.
+
+  `~/` can be used in the glob pattern as an alias for the <kbd>[sourceCodeDir]</kbd>.
 
 ### ssrOutputDir
 
 - **Default:** `public/ssr`
 - **Env Var:** `VITE_RUBY_SSR_OUTPUT_DIR`
 
-   * Specify the output directory for the SSR build (relative to <kbd>[root]</kbd>).
+  Specify the output directory for the SSR build (relative to <kbd>[root]</kbd>).
 
 <br>
 <br>

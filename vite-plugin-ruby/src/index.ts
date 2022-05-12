@@ -40,7 +40,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const isLocal = config.mode === 'development' || config.mode === 'test'
 
   const build = {
-    emptyOutDir: userConfig.build?.emptyOutDir ?? isLocal,
+    emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
     sourcemap: !isLocal,
     ...userConfig.build,
     assetsDir,

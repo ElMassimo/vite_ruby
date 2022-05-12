@@ -23,7 +23,7 @@ class ViteRuby::Commands
 
   # Public: Removes all build cache and previously compiled assets.
   def clobber
-    dirs = [config.build_output_dir, config.build_cache_dir, config.vite_cache_dir]
+    dirs = [config.build_output_dir, config.ssr_output_dir, config.build_cache_dir, config.vite_cache_dir]
     dirs.each { |dir| dir.rmtree if dir.exist? }
     $stdout.puts "Removed vite cache and output dirs:\n\t#{ dirs.join("\n\t") }"
   end
