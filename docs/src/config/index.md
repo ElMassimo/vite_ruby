@@ -347,7 +347,7 @@ You can customize this behavior using the following options.
     },
   })
   ```
-## SSR Options
+## SSR Options (experimental)
 
 _Vite Ruby_ supports building your app in [SSR mode], obtaining a Node.js app
 that can be used in combination with Rails, such as when using [Inertia.js in SSR mode][inertia-ssr].
