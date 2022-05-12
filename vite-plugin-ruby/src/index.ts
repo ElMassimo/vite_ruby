@@ -44,7 +44,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     sourcemap: !isLocal,
     ...userConfig.build,
     assetsDir,
-    manifest: true,
+    manifest: !ssrBuild,
     outDir,
     rollupOptions: {
       input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),

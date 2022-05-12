@@ -97,6 +97,12 @@ class BuilderTest < ViteRuby::Test
     stub_runner(success: true) { assert builder.build }
   end
 
+  def test_build_cache
+    build = ViteRuby::Build.from_previous(Pathname.new(__FILE__), 'digest')
+    assert_equal build.timestamp, 'never'
+    assert_equal build.retry_failed?, true
+  end
+
 private
 
   def stub_runner(success:, &block)

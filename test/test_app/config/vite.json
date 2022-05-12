@@ -10,11 +10,9 @@
     "publicOutputDir": "vite-test"
   },
   "production": {
-    "ssrBuildEnabled": true,
     "publicOutputDir": "vite-production"
   },
   "staging": {
-    "ssrBuildEnabled": true,
     "publicOutputDir": "vite-staging"
   }
 }

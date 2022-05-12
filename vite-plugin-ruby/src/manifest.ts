@@ -6,7 +6,7 @@ import createDebugger from 'debug'
 import type { Plugin, ResolvedConfig } from 'vite'
 
 import { OutputBundle, PluginContext } from 'rollup'
-import { UnifiedConfig } from '../dist'
+import { UnifiedConfig } from './types'
 import { filterEntrypointAssets, filterStylesheetAssets } from './config'
 import { withoutExtension } from './utils'
 
@@ -79,6 +79,8 @@ export function assetsManifestPlugin (): Plugin {
       viteRubyConfig = (config as any).viteRuby
     },
     async generateBundle (_options, bundle) {
+      if (!config.build.manifest) return
+
       const manifest: AssetsManifest = new Map()
       extractChunkStylesheets(bundle, manifest)
 

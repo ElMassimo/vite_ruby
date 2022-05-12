@@ -7,6 +7,7 @@ class RakeTasksTest < ViteRuby::Test
     assert ViteRuby.install_tasks
     output = Dir.chdir(test_app_path) { `rake -T` }
     assert_includes output, 'vite:build'
+    assert_includes output, 'vite:build_ssr'
     assert_includes output, 'vite:clean'
     assert_includes output, 'vite:clobber'
     assert_includes output, 'vite:install_dependencies'
