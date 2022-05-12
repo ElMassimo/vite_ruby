@@ -34,7 +34,7 @@ class EngineRakeTasksTest < ViteRuby::Test
     refute_path_exists app_ssr_dir
 
     app_frontend_dir.join('ssr').mkdir
-    app_frontend_dir.join('ssr/ssr.js').write('console.log("something")')
+    app_frontend_dir.join('ssr/ssr.js').write(SSR_ENTRYPOINT)
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
     assert_path_exists app_ssr_dir.join('ssr.js')
@@ -174,4 +174,15 @@ private
     gitignore_path.write('')
     @command_results = []
   end
+
+  SSR_ENTRYPOINT = <<~SSR
+    import http from 'http'
+
+    const server = http.createServer((req, res) => {
+      res.writeHead(200)
+      res.end('Hello, World!!!')
+    })
+
+    server.listen(8080)
+  SSR
 end
