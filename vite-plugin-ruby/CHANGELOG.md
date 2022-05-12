@@ -1,3 +1,12 @@
+## [3.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.10...vite-plugin-ruby@3.0.11) (2022-05-12)
+
+
+### Features
+
+* add support for SSR builds (experimental) ([#212](https://github.com/ElMassimo/vite_ruby/issues/212)) ([4d6cd2b](https://github.com/ElMassimo/vite_ruby/commit/4d6cd2b84f670b1703e3bde7033e822be97bf505))
+
+
+
 ## [3.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.9...vite-plugin-ruby@3.0.10) (2022-05-04)
 
 
