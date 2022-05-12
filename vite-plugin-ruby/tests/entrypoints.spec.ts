@@ -3,12 +3,12 @@ import { describe, test, expect } from 'vitest'
 import { defaultConfig, resolveEntrypointFiles } from '@plugin/config'
 import type { ResolvedConfig } from '@plugin/types'
 
-const entrypointsFor = ({ isSSR = false, ...config }: Partial<ResolvedConfig> & { isSSR?: boolean }) => {
+const entrypointsFor = (config: Partial<ResolvedConfig>) => {
   config = { ...defaultConfig, ...config }
-  return resolveEntrypointFiles(resolve('example'), config.sourceCodeDir, config, isSSR)
+  return resolveEntrypointFiles(resolve('example'), config.sourceCodeDir, config)
 }
 
-const expectEntrypoints = (config: Partial<ResolvedConfig> & { isSSR?: boolean }) =>
+const expectEntrypoints = (config: Partial<ResolvedConfig>) =>
   expect(entrypointsFor(config))
 
 describe('resolveEntrypointFiles', () => {
@@ -24,14 +24,14 @@ describe('resolveEntrypointFiles', () => {
   })
 
   test('ssr build', () => {
-    expectEntrypoints({ isSSR: true }).toEqual([
+    expectEntrypoints({ ssrBuild: true }).toEqual([
       ['ssr', resolve('example/app/frontend/ssr/ssr.ts')],
     ])
 
-    expect(() => entrypointsFor({ sourceCodeDir: 'app/missing', isSSR: true }))
+    expect(() => entrypointsFor({ sourceCodeDir: 'app/missing', ssrBuild: true }))
       .toThrow('No SSR entrypoint available')
 
-    expect(() => entrypointsFor({ sourceCodeDir: 'app/incorrect', isSSR: true }))
+    expect(() => entrypointsFor({ sourceCodeDir: 'app/incorrect', ssrBuild: true }))
       .toThrow('Expected a single SSR entrypoint, found')
   })
 })

@@ -1,6 +1,7 @@
 {
   "all": {
     "sourceCodeDir": "app/frontend",
+    "ssrBuildEnabled": true,
     "watchAdditionalPaths": []
   },
   "development": {

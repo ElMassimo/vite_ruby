@@ -97,7 +97,7 @@ GEM
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     json (2.5.1)
-    loofah (2.15.0)
+    loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     m (1.5.1)
@@ -117,7 +117,7 @@ GEM
       ruby-progressbar
     minitest-stub_any_instance (1.0.2)
     nio4r (2.5.7)
-    nokogiri (1.13.3)
+    nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.21.0)

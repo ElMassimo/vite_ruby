@@ -40,16 +40,16 @@ function isInside (file: string, dir: string) {
 }
 
 // Internal: Returns all files defined in the entrypoints directory.
-export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, { entrypointsDir, additionalEntrypoints }: ResolvedConfig, isSSR: string | boolean): Entrypoints {
-  const inputGlobs = isSSR
-    ? typeof isSSR === 'string' ? [] : ['~/ssr/ssr.{js,ts,jsx,tsx}'] // Let Vite handle string ssr entrypoints.
-    : [`~/${entrypointsDir}/**/*`, ...additionalEntrypoints]
+export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: string, config: ResolvedConfig): Entrypoints {
+  const inputGlobs = config.ssrBuild
+    ? [config.ssrEntrypoint]
+    : [`~/${config.entrypointsDir}/**/*`, ...config.additionalEntrypoints]
 
   const entrypointFiles = glob.sync(resolveGlobs(projectRoot, sourceCodeDir, inputGlobs))
 
-  if (isSSR) {
+  if (config.ssrBuild) {
     if (entrypointFiles.length === 0)
-      throw new Error(`No SSR entrypoint available, please create \`${sourceCodeDir}/ssr/ssr.{js,ts,jsx,tsx}\` to do an SSR build.`)
+      throw new Error(`No SSR entrypoint available, please create \`${config.ssrEntrypoint}\` to do an SSR build.`)
     else if (entrypointFiles.length > 1)
       throw new Error(`Expected a single SSR entrypoint, found: ${entrypointFiles}`)
 
@@ -107,18 +107,21 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   // Use the sourceCodeDir as the Vite.js root.
   const root = join(projectRoot, config.sourceCodeDir)
 
-  // Vite expects the outDir to be relative to the root.
-  const buildOutputDir = join(config.publicDir, config.publicOutputDir)
-  let outDir = relative(root, buildOutputDir) // Vite expects it to be relative
+  // Detect SSR builds and entrypoint provided via the --ssr flag.
+  const ssrEntrypoint = userConfig.build?.ssr
+  config.ssrBuild = Boolean(ssrEntrypoint)
+  if (typeof ssrEntrypoint === 'string')
+    config.ssrEntrypoint = ssrEntrypoint
 
-  // Handle SSR
-  const isSSR = userConfig.build?.ssr || false
-  if (isSSR) outDir += '-ssr' // Example: public/vite-ssr
+  // Vite expects the outDir to be relative to the root.
+  const outDir = relative(root, config.ssrBuild
+    ? config.ssrOutputDir
+    : join(config.publicDir, config.publicOutputDir))
 
   const base = resolveViteBase(config)
-  const entrypoints = resolveEntrypointFiles(projectRoot, root, config, isSSR)
+  const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
 
-  return { ...config, root, outDir, base, entrypoints, isSSR }
+  return { ...config, root, outDir, base, entrypoints }
 }
 
 // Internal: Configures Vite's base according to the asset host and publicOutputDir.

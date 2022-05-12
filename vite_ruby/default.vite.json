@@ -17,5 +17,8 @@
   "hideBuildConsoleOutput": false,
   "viteBinPath": "node_modules/.bin/vite",
   "watchAdditionalPaths": [],
-  "base": ""
+  "base": "",
+  "ssrBuildEnabled": false,
+  "ssrEntrypoint": "~/ssr/ssr.{js,ts,jsx,tsx}",
+  "ssrOutputDir": "public/ssr"
 }

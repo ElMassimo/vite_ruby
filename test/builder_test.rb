@@ -12,7 +12,7 @@ class BuilderTest < ViteRuby::Test
 
   def setup
     super
-    builder.send(:last_build_path).tap do |path|
+    [builder.send(:last_build_path, ssr: true), builder.send(:last_build_path, ssr: false)].each do |path|
       path.delete if path.exist?
     end
   end
@@ -59,7 +59,8 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_last_build_path
-    assert_equal builder.send(:last_build_path).basename.to_s, "last-build-#{ ViteRuby.config.mode }.json"
+    assert_equal builder.send(:last_build_path, ssr: false).basename.to_s, "last-build-#{ ViteRuby.config.mode }.json"
+    assert_equal builder.send(:last_build_path, ssr: true).basename.to_s, "last-ssr-build-#{ ViteRuby.config.mode }.json"
   end
 
   def test_watched_files_digest
@@ -94,6 +95,12 @@ class BuilderTest < ViteRuby::Test
 
     # The provided binary does not exist, so it uses the default strategy.
     stub_runner(success: true) { assert builder.build }
+  end
+
+  def test_build_cache
+    build = ViteRuby::Build.from_previous(Pathname.new(__FILE__), 'digest')
+    assert_equal build.timestamp, 'never'
+    assert_equal build.retry_failed?, true
   end
 
 private

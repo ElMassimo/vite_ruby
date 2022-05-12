@@ -11,6 +11,7 @@ class ViteRuby::CLI
   register 'clobber', Clobber, aliases: %w[clean clear]
   register 'dev', Dev, aliases: %w[d serve]
   register 'install', Install
+  register 'ssr', SSR
   register 'version', Version, aliases: ['v', '-v', '--version', 'info']
   register 'upgrade', Upgrade, aliases: ['update']
   register 'upgrade_packages', UpgradePackages, aliases: ['update_packages']

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
 require 'digest/sha1'
 
 # Public: Keeps track of watched files and triggers builds as needed.
@@ -12,7 +11,8 @@ class ViteRuby::Builder
   # Public: Checks if the watched files have changed since the last compilation,
   # and triggers a Vite build if any files have changed.
   def build(*args)
-    last_build = last_build_metadata
+    last_build = last_build_metadata(ssr: args.include?('--ssr'))
+
     if args.delete('--force') || last_build.stale?
       build_with_vite(*args).tap { |success| record_build_metadata(success, last_build) }
     elsif last_build.success
@@ -25,8 +25,8 @@ class ViteRuby::Builder
   end
 
   # Internal: Reads the result of the last compilation from disk.
-  def last_build_metadata
-    ViteRuby::Build.from_previous(last_build_attrs, watched_files_digest)
+  def last_build_metadata(ssr: false)
+    ViteRuby::Build.from_previous(last_build_path(ssr: ssr), watched_files_digest)
   end
 
 private
@@ -35,22 +35,15 @@ private
 
   def_delegators :@vite_ruby, :config, :logger, :run
 
-  # Internal: Reads metadata recorded on the last build, if it exists.
-  def last_build_attrs
-    last_build_path.exist? ? JSON.parse(last_build_path.read.to_s) : {}
-  rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
-    {}
-  end
-
   # Internal: Writes a digest of the watched files to disk for future checks.
   def record_build_metadata(success, build)
     config.build_cache_dir.mkpath
-    last_build_path.write build.with_result(success).to_json
+    build.with_result(success).write_to_cache
   end
 
   # Internal: The file path where metadata of the last build is stored.
-  def last_build_path
-    config.build_cache_dir.join("last-build-#{ config.mode }.json")
+  def last_build_path(ssr:)
+    config.build_cache_dir.join("last#{ '-ssr' if ssr }-build-#{ config.mode }.json")
   end
 
   # Internal: Returns a digest of all the watched files, allowing to detect

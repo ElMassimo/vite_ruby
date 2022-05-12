@@ -31,6 +31,15 @@ class EngineRakeTasksTest < ViteRuby::Test
     assert_path_exists app_public_dir
     assert_path_exists app_public_dir.join('manifest.json')
     assert_path_exists app_public_dir.join('assets')
+    refute_path_exists app_ssr_dir
+
+    app_frontend_dir.join('ssr').mkdir
+    app_frontend_dir.join('ssr/ssr.js').write('console.log("something")')
+
+    within_mounted_app { `bundle exec rake app:vite:build_all` }
+    assert_path_exists app_ssr_dir.join('ssr.js')
+    refute_path_exists app_ssr_dir.join('manifest.json')
+    refute_path_exists app_ssr_dir.join('manifest-assets.json')
 
     within_mounted_app { `bundle exec rake app:vite:clean` }
     assert_path_exists app_public_dir.join('manifest.json') # Still fresh
@@ -74,6 +83,9 @@ class EngineRakeTasksTest < ViteRuby::Test
       stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
+      stub_kernel_exec('node', app_ssr_dir.join('ssr.js').to_s) {
+        ViteRuby::CLI::SSR.new.call(mode: ViteRuby.mode)
+      }
       stub_runner('--wat', exec: true) {
         assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
@@ -104,9 +116,9 @@ private
     mock.verify
   end
 
-  def stub_kernel_exec(command, &block)
+  def stub_kernel_exec(*command, &block)
     mock = Minitest::Mock.new
-    mock.expect(:call, nil, [command])
+    mock.expect(:call, nil, command)
     Kernel.stub(:exec, mock, &block)
     mock.verify
   end
@@ -143,17 +155,21 @@ private
     root_dir.join('public/vite-dev')
   end
 
+  def app_ssr_dir
+    root_dir.join('public/ssr')
+  end
+
   def tmp_dir
     root_dir.join('tmp')
   end
 
   def remove_vite_files
-    vite_binstub_path.delete if vite_binstub_path.exist?
-    vite_config_ts_path.delete if vite_config_ts_path.exist?
-    procfile_dev.delete if procfile_dev.exist?
-    app_frontend_dir.rmtree if app_frontend_dir.exist?
-    app_public_dir.rmtree if app_public_dir.exist?
-    tmp_dir.rmtree if tmp_dir.exist?
+    [vite_binstub_path, vite_config_ts_path, procfile_dev].each do |file|
+      file.delete if file.exist?
+    end
+    [app_frontend_dir, app_public_dir, app_ssr_dir, tmp_dir].each do |dir|
+      dir.rmtree if dir.exist?
+    end
     root_dir.join('app/views/layouts/application.html.erb').write(Pathname.new(test_app_path).join('app/views/layouts/application.html.erb').read)
     gitignore_path.write('')
     @command_results = []
