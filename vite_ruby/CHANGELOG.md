@@ -1,3 +1,12 @@
+## [3.1.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.3...vite_ruby@3.1.4) (2022-05-13)
+
+
+### Features
+
+* expose `ViteRuby.digest` to simplify asset versioning. ([ff92ce6](https://github.com/ElMassimo/vite_ruby/commit/ff92ce6011d857efa83987d3c20d48767111e700))
+
+
+
 ## [3.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.2...vite_ruby@3.1.3) (2022-05-13)
 
 
