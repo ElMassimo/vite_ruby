@@ -1,3 +1,12 @@
+## [3.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.2...vite_ruby@3.1.3) (2022-05-13)
+
+
+### Bug Fixes
+
+* change default for ssrOutputDir so it's ignored by default ([2f93b76](https://github.com/ElMassimo/vite_ruby/commit/2f93b762b29462cc619527ed47e6fa3cf8d3c8c9))
+
+
+
 ## [3.1.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.1...vite_ruby@3.1.2) (2022-05-12)
 
 
