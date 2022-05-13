@@ -389,7 +389,7 @@ You can build the app in SSR mode using <kbd>bin/vite build --ssr</kbd>.
 
 ### ssrOutputDir
 
-- **Default:** `public/ssr`
+- **Default:** `public/vite-ssr`
 - **Env Var:** `VITE_RUBY_SSR_OUTPUT_DIR`
 
   Specify the output directory for the SSR build (relative to <kbd>[root]</kbd>).

@@ -20,5 +20,5 @@
   "base": "",
   "ssrBuildEnabled": false,
   "ssrEntrypoint": "~/ssr/ssr.{js,ts,jsx,tsx}",
-  "ssrOutputDir": "public/ssr"
+  "ssrOutputDir": "public/vite-ssr"
 }

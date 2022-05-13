@@ -156,7 +156,7 @@ private
   end
 
   def app_ssr_dir
-    root_dir.join('public/ssr')
+    root_dir.join('public/vite-ssr')
   end
 
   def tmp_dir
