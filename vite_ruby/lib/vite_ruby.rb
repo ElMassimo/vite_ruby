@@ -34,7 +34,7 @@ class ViteRuby
   class << self
     extend Forwardable
 
-    def_delegators :instance, :config, :commands, :env, :run, :run_proxy?
+    def_delegators :instance, :config, :commands, :digest, :env, :run, :run_proxy?
     def_delegators :config, :mode
 
     def instance
@@ -75,6 +75,12 @@ class ViteRuby
 
   def logger
     @logger ||= Logger.new($stdout)
+  end
+
+  # Public: Returns a digest of all the watched files, allowing to detect
+  # changes. Useful to perform version checks in single-page applications.
+  def digest
+    builder.send(:watched_files_digest)
   end
 
   # Public: Returns true if the Vite development server is currently running.

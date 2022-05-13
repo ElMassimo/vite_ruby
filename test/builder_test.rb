@@ -64,9 +64,9 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_watched_files_digest
-    previous_digest = builder.send(:watched_files_digest)
+    previous_digest = ViteRuby.digest
     refresh_config
-    assert_equal previous_digest, builder.send(:watched_files_digest)
+    assert_equal previous_digest, ViteRuby.digest
   end
 
   def test_external_env_variables
