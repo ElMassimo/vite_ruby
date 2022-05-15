@@ -55,7 +55,9 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     },
   }
 
-  debug({ base, build, root, server, entrypoints: Object.fromEntries(entrypoints) })
+  const envDir = userConfig.envDir || projectRoot
+
+  debug({ base, build, envDir, root, server, entrypoints: Object.fromEntries(entrypoints) })
 
   watchAdditionalPaths = resolveGlobs(projectRoot, root, config.watchAdditionalPaths || [])
 
@@ -64,6 +66,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   return cleanConfig({
     resolve: { alias },
     base,
+    envDir,
     root,
     server,
     build,
