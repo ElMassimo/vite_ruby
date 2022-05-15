@@ -1,3 +1,13 @@
+## [3.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.11...vite-plugin-ruby@3.0.12) (2022-05-15)
+
+
+### Bug Fixes
+
+* change default for ssrOutputDir so it's ignored by default ([2f93b76](https://github.com/ElMassimo/vite_ruby/commit/2f93b762b29462cc619527ed47e6fa3cf8d3c8c9))
+* load .env files in the project root (close [#214](https://github.com/ElMassimo/vite_ruby/issues/214)) ([a8162e9](https://github.com/ElMassimo/vite_ruby/commit/a8162e9877b6b8f5a680095f6d424bd3117d9539))
+
+
+
 ## [3.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.10...vite-plugin-ruby@3.0.11) (2022-05-12)
 
 
