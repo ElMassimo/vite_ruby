@@ -98,7 +98,7 @@ GEM
       capybara
     childprocess (4.1.0)
     coderay (1.1.3)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     crass (1.0.6)
     diff-lcs (1.5.0)
     digest (3.1.0)
@@ -107,7 +107,7 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.8.11)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     io-wait (0.2.1)
     launchy (2.5.0)
@@ -115,7 +115,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.13.0)
+    loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -124,7 +124,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.7.1)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.4.2)
     net-imap (0.2.3)
@@ -143,8 +143,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.1)
-      mini_portile2 (~> 2.7.0)
+    nokogiri (1.13.6)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.13.1)
@@ -157,7 +157,7 @@ GEM
     puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
@@ -223,10 +223,10 @@ GEM
       concurrent-ruby (~> 1.0)
     vite_plugin_legacy (3.0.2)
       vite_ruby (~> 3.0, >= 3.0.4)
-    vite_rails (3.0.6)
+    vite_rails (3.0.9)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0)
-    vite_ruby (3.0.9)
+    vite_ruby (3.1.5)
       dry-cli (~> 0.7.0)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -244,7 +244,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
@@ -268,9 +268,6 @@ DEPENDENCIES
   vite_rails
   web-console (>= 3.3.0)
   webdrivers
-
-RUBY VERSION
-   ruby 3.1.1
 
 BUNDLED WITH
    2.3.7
