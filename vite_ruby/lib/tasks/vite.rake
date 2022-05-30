@@ -42,7 +42,8 @@ namespace :vite do
 
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
-    system({ 'NODE_ENV' => 'development' }, 'npx ci --yes')
+    cmd = `npm --version`.to_i < 7 ? 'npx ci --yes' : 'npx --yes ci'
+    system({ 'NODE_ENV' => 'development' }, cmd)
   end
 
   desc "Provide information on ViteRuby's environment"
