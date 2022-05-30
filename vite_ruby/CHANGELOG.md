@@ -1,3 +1,12 @@
+## [3.1.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.4...vite_ruby@3.1.5) (2022-05-30)
+
+
+### Bug Fixes
+
+* install dependencies without confirmation in modern versions of npm ([967fbf5](https://github.com/ElMassimo/vite_ruby/commit/967fbf52aac5e52e1a059bffda79c7472874775f)), closes [#216](https://github.com/ElMassimo/vite_ruby/issues/216)
+
+
+
 ## [3.1.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.3...vite_ruby@3.1.4) (2022-05-13)
 
 
