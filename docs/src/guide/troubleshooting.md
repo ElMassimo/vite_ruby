@@ -88,6 +88,14 @@ A [<kbd>vite_react_refresh_tag</kbd> helper][tag helpers] is provided for your c
   <%= vite_javascript_tag 'application' %>
 ```
 
+### Making HMR work with `puma-dev` in HTTPS apps
+
+When running the Ruby server in HTTPS mode, you'll want the Vite HMR client to also
+connect via HTTPS to avoid [_Mixed content_ errors](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content).
+
+You can configure `puma-dev` to run in HTTPS mode while keeping Vite running in
+plain HTTP mode. See [this discussion](https://github.com/ElMassimo/vite_ruby/discussions/215) for configuration steps.
+
 ### Making HMR work in Docker Compose
 
 Using Vite.js with Docker Compose requires configuring [`VITE_RUBY_HOST`][host] in the services.
