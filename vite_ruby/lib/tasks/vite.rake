@@ -42,7 +42,13 @@ namespace :vite do
 
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
-    cmd = `npm --version`.to_i < 7 ? 'npx ci --yes' : 'npx --yes ci'
+    cmd = begin
+            `npm --version`.to_i < 7 ? 'npx ci --yes' : 'npx --yes ci'
+          # rescue if npm command is not installed to fallback
+          rescue Errno::ENOENT
+            'npx --yes ci'
+          end
+
     system({ 'NODE_ENV' => 'development' }, cmd)
   end
 
