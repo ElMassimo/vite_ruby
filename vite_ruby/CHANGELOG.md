@@ -1,5 +1,8 @@
-## [3.1.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.5...vite_ruby@3.1.6) (2022-06-02)
+## [3.1.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.5...vite_ruby@3.1.6)  (2022-06-02)
 
+### Bug Fixes
+
+* Catch npm command not found, for folks who install deps with yarn ([7a0407b3211e682bc1da40d29225af58d3396cbd](https://github.com/ElMassimo/vite_ruby/commit/7a0407b3211e682bc1da40d29225af58d3396cbd))
 
 
 ## [3.1.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.4...vite_ruby@3.1.5) (2022-05-30)
