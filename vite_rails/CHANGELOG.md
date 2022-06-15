@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* symbol error on rake enhance call ([#218](https://github.com/ElMassimo/vite_ruby/issues/218)) ([5507156](https://github.com/ElMassimo/vite_ruby/commit/550715624ceb39e1ea5e845e73dcaf5557caa66f)), closes [/github.com/ruby/rake/blob/master/lib/rake/task.rb#L116](https://github.com//github.com/ruby/rake/blob/master/lib/rake/task.rb/issues/L116)
+* symbol error on rake enhance call ([#218](https://github.com/ElMassimo/vite_ruby/issues/218)) ([5507156](https://github.com/ElMassimo/vite_ruby/commit/550715624ceb39e1ea5e845e73dcaf5557caa66f))
 
 
 
