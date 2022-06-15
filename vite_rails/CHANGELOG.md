@@ -1,3 +1,12 @@
+## [3.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.9...vite_rails@3.0.10) (2022-06-15)
+
+
+### Bug Fixes
+
+* symbol error on rake enhance call ([#218](https://github.com/ElMassimo/vite_ruby/issues/218)) ([5507156](https://github.com/ElMassimo/vite_ruby/commit/550715624ceb39e1ea5e845e73dcaf5557caa66f)), closes [/github.com/ruby/rake/blob/master/lib/rake/task.rb#L116](https://github.com//github.com/ruby/rake/blob/master/lib/rake/task.rb/issues/L116)
+
+
+
 ## [3.0.9](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.8...vite_rails@3.0.9) (2022-04-29)
 
 
