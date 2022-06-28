@@ -102,7 +102,7 @@ Using Vite.js with Docker Compose requires configuring [`VITE_RUBY_HOST`][host] 
 
 In the Rails service, it should match the [name of your Vite service](https://github.com/ElMassimo/vite_rails_docker_example/blob/main/docker-compose.yml#L13), and in the Vite service it should be [set to receive external requests](https://github.com/ElMassimo/vite_rails_docker_example/blob/main/docker-compose.yml#L27) (from the browser in the host) in order to perform HMR.
 
-Refer to this [Docker example] for a working setup.
+Refer to this [Docker example] for a working setup, or [read this article](https://evilmartians.com/chronicles/vite-lizing-rails-get-live-reload-and-hot-replacement-with-vite-ruby) for a full walkthrough.
 
 ## Network Issues
 
