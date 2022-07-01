@@ -1,3 +1,12 @@
+# [](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.6...vite_ruby@) (2022-07-01)
+
+
+### Features
+
+* allow starting an ESM SSR server from a CJS app ([17c8926](https://github.com/ElMassimo/vite_ruby/commit/17c89265f2f5e291ed76784aad647c94e2915d96))
+
+
+
 ## [3.1.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.5...vite_ruby@3.1.6)  (2022-06-02)
 
 ### Bug Fixes
