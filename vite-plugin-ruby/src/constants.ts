@@ -27,10 +27,6 @@ export const KNOWN_ENTRYPOINT_TYPES = [
   ...KNOWN_CSS_EXTENSIONS,
 ]
 
-export const CSS_EXTENSIONS_REGEX = new RegExp(
-  `\\.(${KNOWN_CSS_EXTENSIONS.join('|')})$`,
-)
-
 export const ENTRYPOINT_TYPES_REGEX = new RegExp(
   `\\.(${KNOWN_ENTRYPOINT_TYPES.join('|')})(\\?.*)?$`,
 )

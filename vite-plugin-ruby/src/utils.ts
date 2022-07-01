@@ -30,12 +30,6 @@ export function booleanOption<T> (value: 'true' | 'false' | boolean | T): boolea
   return value
 }
 
-// Internal: Returns the filename without the last extension.
-export function withoutExtension (filename: string) {
-  const lastIndex = filename.lastIndexOf('.')
-  return lastIndex > -1 ? filename.substr(0, lastIndex) : filename
-}
-
 // Internal: Loads a json configuration file.
 export function loadJsonConfig<T> (filepath: string): T {
   return JSON.parse(readFileSync(filepath, { encoding: 'utf8', flag: 'r' })) as T

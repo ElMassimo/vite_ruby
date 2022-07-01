@@ -5,10 +5,9 @@ import createDebugger from 'debug'
 
 import type { Plugin, ResolvedConfig } from 'vite'
 
-import { OutputBundle, PluginContext } from 'rollup'
+import type { OutputBundle, PluginContext } from 'rollup'
 import { UnifiedConfig } from './types'
-import { filterEntrypointAssets, filterStylesheetAssets } from './config'
-import { withoutExtension } from './utils'
+import { filterEntrypointAssets } from './config'
 
 const debug = createDebugger('vite-plugin-ruby:assets-manifest')
 
@@ -28,26 +27,6 @@ function getAssetHash (content: Buffer) {
 export function assetsManifestPlugin (): Plugin {
   let config: ResolvedConfig
   let viteRubyConfig: UnifiedConfig
-
-  // Internal: For stylesheets Vite does not output the result to the manifest,
-  // so we extract the file name of the processed asset from the Rollup bundle.
-  function extractChunkStylesheets (bundle: OutputBundle, manifest: AssetsManifest) {
-    const cssFiles = Object.fromEntries(filterStylesheetAssets(viteRubyConfig.entrypoints))
-
-    Object.values(bundle).filter(chunk => chunk.type === 'asset' && chunk.name)
-      .forEach((chunk) => {
-        // Vite will output a single CSS chunk named style.css
-        if (!config.build.cssCodeSplit && chunk.name === 'style.css')
-          return manifest.set(chunk.name, { file: chunk.fileName, src: chunk.name })
-
-        // NOTE: Rollup appends `.css` to the file so it's removed before matching.
-        // See `filterEntrypointsForRollup`.
-        const src = withoutExtension(chunk.name!)
-        const absoluteFileName = cssFiles[src]
-        if (absoluteFileName)
-          manifest.set(path.relative(config.root, absoluteFileName), { file: chunk.fileName, src })
-      })
-  }
 
   // Internal: Vite ignores some entrypoint assets, so we need to manually
   // fingerprint the files and move them to the output directory.
@@ -82,8 +61,6 @@ export function assetsManifestPlugin (): Plugin {
       if (!config.build.manifest) return
 
       const manifest: AssetsManifest = new Map()
-      extractChunkStylesheets(bundle, manifest)
-
       await fingerprintRemainingAssets(this, bundle, manifest)
       debug({ manifest })
 
