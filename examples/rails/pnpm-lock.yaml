@@ -51,7 +51,7 @@ devDependencies:
   vite-plugin-environment: 1.1.0_vite@3.0.0-beta.5
   vite-plugin-full-reload: 1.0.0
   vite-plugin-manifest-sri: 0.1.0
-  vite-plugin-ruby: link:../../vite-plugin-ruby
+  vite-plugin-ruby: 3.0.12_vite@3.0.0-beta.5
   vite-plugin-windicss: 1.6.3_vite@3.0.0-beta.5
 
 packages:
@@ -2264,6 +2264,18 @@ packages:
 
   /vite-plugin-manifest-sri/0.1.0:
     resolution: {integrity: sha512-m4gcEXwcA1MfCVYTLVHYsB03Xsc6L4VYfhxXmcYcS+rN3kTjuWkXMaA8OuOV1gFdi1bMJFkLTJCPciYApvCm/g==}
+    dev: true
+
+  /vite-plugin-ruby/3.0.12_vite@3.0.0-beta.5:
+    resolution: {integrity: sha512-QosYDK6qOV1UeeFXlcH+A4pyoIs2lU9R2gWm+AJZ6gZ2yiiiLShYF6juYV8GeDsaXcOfVbPetkuPfnQCzE4mPQ==}
+    peerDependencies:
+      vite: '>=2.5.0'
+    dependencies:
+      debug: 4.3.3
+      fast-glob: 3.2.11
+      vite: 3.0.0-beta.5_5tx4ye7pwbrcwwulyqll3uh4a4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-windicss/1.6.3_vite@3.0.0-beta.5:

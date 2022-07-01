@@ -83,12 +83,21 @@ class EngineRakeTasksTest < ViteRuby::Test
       stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
-      stub_kernel_exec('node', app_ssr_dir.join('ssr.js').to_s) {
+      stub_runner('build', '--ssr') {
+        assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode, ssr: true)
+      }
+
+      app_ssr_dir.mkdir
+      ssr_path = app_ssr_dir.join('ssr.mjs')
+      ssr_path.write('')
+      stub_kernel_exec('node', ssr_path.to_s) {
         ViteRuby::CLI::SSR.new.call(mode: ViteRuby.mode)
       }
+
       stub_runner('--wat', exec: true) {
         assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
+
       ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)
     }
   ensure
