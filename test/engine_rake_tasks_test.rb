@@ -37,7 +37,7 @@ class EngineRakeTasksTest < ViteRuby::Test
     app_frontend_dir.join('ssr/ssr.js').write(SSR_ENTRYPOINT)
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
-    assert_path_exists app_ssr_dir.join('ssr.js')
+    assert_path_exists app_ssr_dir.join('ssr.mjs')
     refute_path_exists app_ssr_dir.join('manifest.json')
     refute_path_exists app_ssr_dir.join('manifest-assets.json')
 
