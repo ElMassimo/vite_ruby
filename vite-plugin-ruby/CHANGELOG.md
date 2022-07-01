@@ -1,3 +1,12 @@
+# [3.1.0-beta.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.12...vite-plugin-ruby@3.1.0-beta.0) (2022-07-01)
+
+
+### Features
+
+* simplify internals now that Vite adds CSS assets to the manifest ([aa9c2b3](https://github.com/ElMassimo/vite_ruby/commit/aa9c2b327c556766d955ab7a3bbf3eb029a858c8))
+
+
+
 ## [3.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.11...vite-plugin-ruby@3.0.12) (2022-05-15)
 
 
