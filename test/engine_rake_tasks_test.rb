@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
+require 'fileutils'
 
 class EngineRakeTasksTest < ViteRuby::Test
   def setup
@@ -87,7 +88,7 @@ class EngineRakeTasksTest < ViteRuby::Test
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode, ssr: true)
       }
 
-      app_ssr_dir.mkdir
+      FileUtils.mkdir_p(app_ssr_dir.to_s)
       ssr_path = app_ssr_dir.join('ssr.mjs')
       ssr_path.write('')
       stub_kernel_exec('node', ssr_path.to_s) {
