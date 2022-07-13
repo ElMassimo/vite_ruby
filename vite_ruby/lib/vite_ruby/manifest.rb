@@ -7,7 +7,7 @@
 #   lookup_entrypoint('calendar', type: :javascript)
 #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e314.js", "imports" => [] }
 #
-# NOTE: Using "autoBuild": true` in `config/vite.json` file will trigger a build
+# NOTE: Using `"autoBuild": true` in `config/vite.json` file will trigger a build
 # on demand as needed, before performing any lookup.
 class ViteRuby::Manifest
   def initialize(vite_ruby)

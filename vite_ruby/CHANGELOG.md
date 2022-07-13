@@ -1,10 +1,10 @@
+## [3.1.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.6...vite_ruby@3.1.7) (2022-07-13)
+
+
+### Bug Fixes
+
+* npm deprecation warning on assets:precompile ([#226](https://github.com/ElMassimo/vite_ruby/issues/226)) ([e4f4b75](https://github.com/ElMassimo/vite_ruby/commit/e4f4b7540ef34296f1a8a4d8f1d2838549ee8460)), closes [#220](https://github.com/ElMassimo/vite_ruby/issues/220)
 # [](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.6...vite_ruby@) (2022-07-01)
-
-
-### Features
-
-* allow starting an ESM SSR server from a CJS app ([17c8926](https://github.com/ElMassimo/vite_ruby/commit/17c89265f2f5e291ed76784aad647c94e2915d96))
-
 
 
 ## [3.1.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.5...vite_ruby@3.1.6)  (2022-06-02)

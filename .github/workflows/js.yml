@@ -9,24 +9,23 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14.x]
+        node: [14]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - uses: pnpm/action-setup@v2.2.2
         with:
+          version: 7.4.1
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
           node-version: ${{ matrix.node }}
 
-      - uses: pnpm/action-setup@v1.2.1
-        with:
-          version: 5.13.6
-          run_install: |
-            - cwd: vite-plugin-ruby
-            - recursive: false
+      - run: pnpm -C vite-plugin-ruby install --frozen-lockfile
 
       - name: Build
         run: pnpm -C vite-plugin-ruby build

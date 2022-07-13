@@ -25,6 +25,7 @@
 [resolve.alias]: https://vitejs.dev/config/#resolve-alias
 [sprockets]: https://github.com/rails/sprockets-rails
 [sprockets example]: https://github.com/ElMassimo/vite_ruby/pull/165
+[stimulus-vite-helpers]: https://github.com/ElMassimo/stimulus-vite-helpers
 
 # Migrating to Vite
 
@@ -71,6 +72,8 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
   + import TextInput from '@/components/TextInput.vue'
   ```
 
+  The same is true, when importing <kbd>.svelte</kbd> or <kbd>.scss</kbd> files from Javascript.
+
 - Replace usages of [tag helpers] as you move the [entrypoints].
 
   ```diff
@@ -94,15 +97,52 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
   + const controllers = import.meta.globEager('./**/*_controller.js')
   ```
 
-- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression] in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation. 
+  If you want to automatically register the Stimulus Controllers, have a look at <kbd>[stimulus-vite-helpers]</kbd> as a replacement for <kbd>@hotwired/stimulus-webpack-helpers</kbd>
+
+- If importing code that is located outside of the <kbd>[sourceCodeDir]</kbd>, make sure to add a [glob expression] in <kbd>[watchAdditionalPaths]</kbd>, so that changes to these files are detected, and trigger a recompilation.
 
 - If you were using <kbd>[rails-erb-loader]</kbd>, you might want to check <kbd>[vite-plugin-erb]</kbd> to ease the transition, but it's better to avoid mixing ERB in frontend assets.
 
 - Make sure <kbd>[npx]</kbd> is available (comes by default in most node.js installations), or [clear][clear rake] the <kbd>[vite:install_dependencies]</kbd> rake task and provide your own implementation.
 
+- If you are importing your own source code without absolute path prefix (such as ``@/`` or ``~/``) you can either prefix all imports with ``@/``:
+
+  ```diff
+
+  - import MyModule from "admin/components/MyModule.vue"
+  + import MyModule from "@/admin/components/MyModule.vue"
+  ```
+
+  Or you can define an <kbd>alias</kbd> for every folder under <kbd>[sourceCodeDir]</kbd> (``app/javascript``):
+
+  ```javascript
+  // vite.config.js
+  import path from 'path';
+  import fs from 'fs'
+
+  const sourceCodeDir = "app/javascript"
+  const items = fs.readdirSync(sourceCodeDir)
+  const directories = items.filter(item => fs.lstatSync(path.join(sourceCodeDir, item)).isDirectory())
+  const aliasesFromJavascriptRoot = {}
+  directories.forEach(directory => {
+    aliasesFromJavascriptRoot[directory] = path.resolve(__dirname, sourceCodeDir, directory)
+  })
+  export default defineConfig({
+    resolve: {
+      alias: {
+        ...aliasesFromJavascriptRoot,
+        // can add more aliases, as "old" images or "@assets", see below
+        images: path.resolve(__dirname, './app/assets/images'),
+      },
+    },
+  ```
+
+
 ::: tip Loaders to Plugins
 Vite provides many features [out of the box], which reduce the
-need for configuration.
+need for configuration. You may just need to install the required
+package, for example <kbd>sass</kbd>, <kbd>typescript</kbd>, <kbd>pug</kbd>
+just need to be available, so Vite can pick them up.
 
 In complex setups, the app might depend on specific webpack loaders, which can't
 be used in Vite, which uses [Rollup] under the hood.

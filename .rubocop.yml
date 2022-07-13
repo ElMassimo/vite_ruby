@@ -4,6 +4,10 @@ require:
   - rubocop-performance
   - rubocop-minitest
 
+inherit_mode:
+  merge:
+    - Exclude
+    
 AllCops:
   Exclude:
     - "node_modules/**/*"

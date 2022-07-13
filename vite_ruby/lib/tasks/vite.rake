@@ -42,8 +42,7 @@ namespace :vite do
 
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
-    legacy_flag = `npm --version`.to_i < 7 rescue false
-    cmd = legacy_flag ? 'npx ci --yes' : 'npx --yes ci'
+    cmd = ViteRuby.commands.legacy_npm_version? ? 'npx ci --yes' : 'npx --yes ci'
     system({ 'NODE_ENV' => 'development' }, cmd)
   end
 
@@ -82,6 +81,10 @@ end
 
 # Any prerequisite task that installs packages should also install build dependencies.
 if ARGV.include?('assets:precompile')
-  ENV['NPM_CONFIG_PRODUCTION'] = 'false'
+  if ViteRuby.commands.legacy_npm_version?
+    ENV['NPM_CONFIG_PRODUCTION'] = 'false'
+  else
+    ENV['NPM_CONFIG_INCLUDE'] = 'dev'
+  end
   ENV['YARN_PRODUCTION'] = 'false'
 end
