@@ -7,70 +7,38 @@ jobs:
     name: build
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' || matrix.experimental }}
-    env:
-      BUNDLE_JOBS: 4
-      BUNDLE_RETRY: 3
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        bundler: ["2.1.4"]
         ruby: [
-          "2.5",
           "2.7",
           "3.0",
+          "3.1",
         ]
         gemfile: [
-          "gemfiles/Gemfile-rails.5.2.x",
           "gemfiles/Gemfile-rails.6.0.x",
-          "gemfiles/Gemfile-rails.6.1.x"
+          "gemfiles/Gemfile-rails.6.1.x",
+          "gemfiles/Gemfile-rails.7.0.x"
         ]
         experimental: [false]
-        exclude:
-          - ruby: "2.5"
-            gemfile: gemfiles/Gemfile-rails-edge
-          - ruby: "3.0"
-            gemfile: gemfiles/Gemfile-rails.5.2.x
         include:
-          - ruby: "2.4"
-            bundler: "1.17.3"
-            os: ubuntu-latest
-            gemfile: gemfiles/Gemfile-rails.4.2.x
-            experimental: true
-          - ruby: "2.7"
-            bundler: "2.1.4"
-            os: ubuntu-latest
-            gemfile: gemfiles/Gemfile-rails-edge
-            experimental: true
           - ruby: "3.1"
-            bundler: "2.1.4"
             os: ubuntu-latest
             gemfile: gemfiles/Gemfile-rails-edge
             experimental: true
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: /home/runner/bundle
-          key: bundle-use-ruby-${{ matrix.ruby }}-${{ matrix.gemfile }}-gems-${{ hashFiles(matrix.gemfile) }}-${{ hashFiles('**/*.gemspec') }}
-          restore-keys: |
-            bundle-use-ruby-${{ matrix.ruby }}-${{ matrix.gemfile }}-gems-
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '15'
+          node-version: '16'
 
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-
-      - name: Bundle install
-        run: |
-          gem install bundler -v ${{ matrix.bundler }}
-          bundle _${{ matrix.bundler }}_ config path /home/runner/bundle
-          bundle _${{ matrix.bundler }}_ config --global gemfile ${{ matrix.gemfile }}
-          bundle _${{ matrix.bundler }}_ install # --jobs 4 --retry 3
+          bundler-cache: true
 
       - name: Setup Code Climate test-reporter
         run: |
@@ -78,8 +46,8 @@ jobs:
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
 
-      - name: Ruby specs
-        run: bundle _${{ matrix.bundler }}_ exec rake test
+      - name: Ruby Tests
+        run: bin/rake test
 
       - name: Upload code coverage to Code Climate
         if: ${{ contains(github.ref, 'main') }}
