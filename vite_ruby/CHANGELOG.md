@@ -1,3 +1,12 @@
+## [3.1.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.6...vite_ruby@3.1.7) (2022-07-13)
+
+
+### Bug Fixes
+
+* npm deprecation warning on assets:precompile ([#226](https://github.com/ElMassimo/vite_ruby/issues/226)) ([e4f4b75](https://github.com/ElMassimo/vite_ruby/commit/e4f4b7540ef34296f1a8a4d8f1d2838549ee8460)), closes [#220](https://github.com/ElMassimo/vite_ruby/issues/220)
+
+
+
 ## [3.1.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.5...vite_ruby@3.1.6)  (2022-06-02)
 
 ### Bug Fixes
