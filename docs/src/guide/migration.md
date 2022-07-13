@@ -113,36 +113,35 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
   + import MyModule from "@/admin/components/MyModule.vue"
   ```
 
-  Or you can define an <kbd>alias</kbd> for every folder under <kbd>[sourceCodeDir]</kbd> (``app/javascript``):
+  <details>
+    <summary>Or you can define an <kbd>alias</kbd> for every folder under <kbd>sourceCodeDir</kbd>:</summary>
 
-  ```javascript
-  // vite.config.js
-  import path from 'path';
-  import fs from 'fs'
+    ```javascript
+    // vite.config.js
+    import path from 'path';
+    import fs from 'fs'
 
-  const sourceCodeDir = "app/javascript"
-  const items = fs.readdirSync(sourceCodeDir)
-  const directories = items.filter(item => fs.lstatSync(path.join(sourceCodeDir, item)).isDirectory())
-  const aliasesFromJavascriptRoot = {}
-  directories.forEach(directory => {
-    aliasesFromJavascriptRoot[directory] = path.resolve(__dirname, sourceCodeDir, directory)
-  })
-  export default defineConfig({
-    resolve: {
-      alias: {
-        ...aliasesFromJavascriptRoot,
-        // can add more aliases, as "old" images or "@assets", see below
-        images: path.resolve(__dirname, './app/assets/images'),
+    const sourceCodeDir = "app/javascript"
+    const items = fs.readdirSync(sourceCodeDir)
+    const directories = items.filter(item => fs.lstatSync(path.join(sourceCodeDir, item)).isDirectory())
+    const aliasesFromJavascriptRoot = {}
+    directories.forEach(directory => {
+      aliasesFromJavascriptRoot[directory] = path.resolve(__dirname, sourceCodeDir, directory)
+    })
+    export default defineConfig({
+      resolve: {
+        alias: {
+          ...aliasesFromJavascriptRoot,
+          // can add more aliases, as "old" images or "@assets", see below
+          images: path.resolve(__dirname, './app/assets/images'),
+        },
       },
-    },
-  ```
-
+    ```
+  </details>
 
 ::: tip Loaders to Plugins
 Vite provides many features [out of the box], which reduce the
-need for configuration. You may just need to install the required
-package, for example <kbd>sass</kbd>, <kbd>typescript</kbd>, <kbd>pug</kbd>
-just need to be available, so Vite can pick them up.
+need for configuration. For example, to use SCSS just install <kbd>sass</kbd>, and Vite will detect the package and use it to process `.scss` files.
 
 In complex setups, the app might depend on specific webpack loaders, which can't
 be used in Vite, which uses [Rollup] under the hood.
