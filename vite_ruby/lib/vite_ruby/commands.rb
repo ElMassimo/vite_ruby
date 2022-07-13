@@ -66,6 +66,11 @@ class ViteRuby::Commands
     `bundle config --delete bin`
   end
 
+  # Internal: Checks if the npm version is 6 or lower.
+  def legacy_npm_version?
+    `npm --version`.to_i < 7 rescue false
+  end
+
   # Internal: Verifies if ViteRuby is properly installed.
   def verify_install
     unless File.exist?(config.root.join('bin/vite'))
