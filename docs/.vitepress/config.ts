@@ -97,6 +97,7 @@ const sidebar: SidebarConfig = {
         { text: 'Motivation', link: '/motivation' },
         { text: 'Overview', link: '/overview' },
         { text: 'Debugging', link: '/guide/debugging' },
+        { text: 'Migrating to Vite 3', link: '/guide/migrating-to-vite-3' },
       ],
     },
     {
