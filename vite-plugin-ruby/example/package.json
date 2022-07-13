@@ -19,7 +19,7 @@
     "sass": "^1.49.7",
     "terser": "^5.14.1",
     "typescript": "^4.7.4",
-    "vite": "^3.0.0-beta.5",
+    "vite": "^3.0.0",
     "vite-plugin-ruby": "workspace:*",
     "vue": "^3.2.37"
   }

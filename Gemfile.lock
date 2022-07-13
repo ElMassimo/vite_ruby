@@ -94,7 +94,7 @@ GEM
     erubi (1.10.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.10.0)
+    i18n (1.11.0)
       concurrent-ruby (~> 1.0)
     json (2.5.1)
     loofah (2.18.0)
@@ -109,7 +109,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.0.3)
     mini_portile2 (2.8.0)
-    minitest (5.16.1)
+    minitest (5.16.2)
     minitest-reporters (1.4.3)
       ansi
       builder
@@ -117,7 +117,7 @@ GEM
       ruby-progressbar
     minitest-stub_any_instance (1.0.2)
     nio4r (2.5.7)
-    nokogiri (1.13.6)
+    nokogiri (1.13.7)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.21.0)

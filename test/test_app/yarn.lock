@@ -347,10 +347,10 @@ vite-plugin-ruby@^1.0.8:
     debug "^4.3.1"
     fast-glob "^3.2.4"
 
-vite@^3.0.0-beta.5:
-  version "3.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.0-beta.5.tgz#708d5b732dee98d77877cb094b567f5596508b5b"
-  integrity sha512-SfesZuCME4fEmLy4hgsJAg55HRiTgDhH3oPM44XePrdKP5FqYvDkzpSWl6ldDOJYTskKWafGyyuYfXoxodv40Q==
+vite@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.0.tgz#b4675cb9ab83ec0803b9c952ffa6519bcce033a7"
+  integrity sha512-M7phQhY3+fRZa0H+1WzI6N+/onruwPTBTMvaj7TzgZ0v2TE+N2sdLKxJOfOv9CckDWt5C4HmyQP81xB4dwRKzA==
   dependencies:
     esbuild "^0.14.47"
     postcss "^8.4.14"
