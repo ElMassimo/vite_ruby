@@ -1,8 +1,8 @@
-import { join, relative, resolve, isAbsolute } from 'path'
+import { join, relative, resolve } from 'path'
 import glob from 'fast-glob'
 
 import type { UserConfig } from 'vite'
-import { APP_ENV, ALL_ENVS_KEY, CSS_EXTENSIONS_REGEX, ENTRYPOINT_TYPES_REGEX } from './constants'
+import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
 import { booleanOption, loadJsonConfig, configOptionFromEnv, slash } from './utils'
 import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
@@ -11,9 +11,6 @@ export const defaultConfig: ResolvedConfig = loadJsonConfig(resolve(__dirname, '
 
 // Internal: Returns the files defined in the entrypoints directory that should
 // be processed by rollup.
-//
-// NOTE: For stylesheets the original extension is preserved in the name so that
-// the resulting file can be accurately matched later in `extractChunkStylesheets`.
 export function filterEntrypointsForRollup (entrypoints: Entrypoints): Entrypoints {
   return entrypoints
     .filter(([_name, filename]) => ENTRYPOINT_TYPES_REGEX.test(filename))
@@ -24,19 +21,6 @@ export function filterEntrypointsForRollup (entrypoints: Entrypoints): Entrypoin
 export function filterEntrypointAssets (entrypoints: Entrypoints): Entrypoints {
   return entrypoints
     .filter(([_name, filename]) => !ENTRYPOINT_TYPES_REGEX.test(filename))
-}
-
-// Internal: Returns the style files defined in the entrypoints directory that
-// are processed by Rollup but not included in the Vite.js manifest.
-export function filterStylesheetAssets (entrypoints: Entrypoints): Entrypoints {
-  return entrypoints
-    .filter(([_name, filename]) => CSS_EXTENSIONS_REGEX.test(filename))
-}
-
-// Internal: Checks if the specified path is inside the specified dir.
-function isInside (file: string, dir: string) {
-  const path = relative(dir, file)
-  return path && !path.startsWith('..') && !isAbsolute(path)
 }
 
 // Internal: Returns all files defined in the entrypoints directory.
@@ -57,15 +41,9 @@ export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: stri
   }
 
   return entrypointFiles.map(filename => [
-    resolveEntryName(projectRoot, sourceCodeDir, filename),
+    relative(sourceCodeDir, filename),
     filename,
   ])
-}
-
-// Internal: All entry names are relative to the sourceCodeDir if inside it, or
-// to the project root if outside.
-export function resolveEntryName (projectRoot: string, sourceCodeDir: string, file: string) {
-  return relative(isInside(file, sourceCodeDir) ? sourceCodeDir : projectRoot, file)
 }
 
 // Internal: Allows to use the `~` shorthand in the config globs.

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
+require 'fileutils'
 
 class EngineRakeTasksTest < ViteRuby::Test
   def setup
@@ -37,7 +38,7 @@ class EngineRakeTasksTest < ViteRuby::Test
     app_frontend_dir.join('ssr/ssr.js').write(SSR_ENTRYPOINT)
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
-    assert_path_exists app_ssr_dir.join('ssr.js')
+    assert_path_exists app_ssr_dir.join('ssr.mjs')
     refute_path_exists app_ssr_dir.join('manifest.json')
     refute_path_exists app_ssr_dir.join('manifest-assets.json')
 
@@ -83,12 +84,21 @@ class EngineRakeTasksTest < ViteRuby::Test
       stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
-      stub_kernel_exec('node', app_ssr_dir.join('ssr.js').to_s) {
+      stub_runner('build', '--ssr') {
+        assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode, ssr: true)
+      }
+
+      FileUtils.mkdir_p(app_ssr_dir.to_s)
+      ssr_path = app_ssr_dir.join('ssr.mjs')
+      ssr_path.write('')
+      stub_kernel_exec('node', ssr_path.to_s) {
         ViteRuby::CLI::SSR.new.call(mode: ViteRuby.mode)
       }
+
       stub_runner('--wat', exec: true) {
         assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ['--wat'])
       }
+
       ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)
     }
   ensure
