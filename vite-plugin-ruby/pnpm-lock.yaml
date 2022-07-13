@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
@@ -42,8 +42,8 @@ importers:
       vite-plugin-ruby: workspace:*
       vue: ^3.2.29
     devDependencies:
-      '@inertiajs/inertia': 0.11.0_debug@4.3.3
-      '@inertiajs/inertia-vue3': 0.6.0_e3ffed2aa416bc887d70ced6f00a75a8
+      '@inertiajs/inertia': 0.11.0
+      '@inertiajs/inertia-vue3': 0.6.0_4p762kvec26iq7lqz3lpactvva
       '@inertiajs/server': 0.1.0_@inertiajs+inertia@0.11.0
       '@vitejs/plugin-legacy': 1.6.4_vite@2.8.6
       '@vitejs/plugin-vue': 2.1.0_vite@2.8.6+vue@3.2.29
@@ -75,6 +75,11 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
+  /@babel/helper-validator-identifier/7.18.6:
+    resolution: {integrity: sha512-MmetCkz9ej86nJQV+sFCxoGGrUbU3q02kgLciwkrt9QqEB7cP39oKEY0PakknEO0Gu20SskMRi+AYZ3b1TpN9g==}
+    engines: {node: '>=6.9.0'}
+    dev: true
+
   /@babel/highlight/7.16.10:
     resolution: {integrity: sha512-5FnTQLSLswEj6IkgVw5KusNUUFY9ZGqe/TRFnP/BKYHYgfh7tc+C7mwiy95/yNP7Dh9x580Vv8r7u7ZfTBFxdw==}
     engines: {node: '>=6.9.0'}
@@ -88,6 +93,8 @@ packages:
     resolution: {integrity: sha512-VKXSCQx5D8S04ej+Dqsr1CzYvvWgf20jIw2D+YhQCrIlr2UZGaDds23Y0xg75/skOxpLCRpUZvk/1EAVkGoDOw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.18.8
     dev: true
 
   /@babel/standalone/7.17.0:
@@ -95,27 +102,35 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
+  /@babel/types/7.18.8:
+    resolution: {integrity: sha512-qwpdsmraq0aJ3osLJRApsc2ouSJCdnMeZwB0DhbtHAtRpZNZCdlbRnHIgcRKzdE1g0iOGg644fzjOBcdOz9cPw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-validator-identifier': 7.18.6
+      to-fast-properties: 2.0.0
+    dev: true
+
   /@hutson/parse-repository-url/3.0.2:
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@inertiajs/inertia-vue3/0.6.0_e3ffed2aa416bc887d70ced6f00a75a8:
+  /@inertiajs/inertia-vue3/0.6.0_4p762kvec26iq7lqz3lpactvva:
     resolution: {integrity: sha512-qhPBtd/G0VS7vVVbYw1rrqKB6JqRusxqt+5ec2GLmK6t7fTlBBnZ3KsakmGZLSM1m1OGkNcfn4ifmCk3zfA8RQ==}
     peerDependencies:
       '@inertiajs/inertia': ^0.11.0
       vue: ^3.0.0
     dependencies:
-      '@inertiajs/inertia': 0.11.0_debug@4.3.3
+      '@inertiajs/inertia': 0.11.0
       lodash.clonedeep: 4.5.0
       lodash.isequal: 4.5.0
       vue: 3.2.29
     dev: true
 
-  /@inertiajs/inertia/0.11.0_debug@4.3.3:
+  /@inertiajs/inertia/0.11.0:
     resolution: {integrity: sha512-QF4hctgFC+B/t/WClCwfOla+WoDE9iTltQJ0u+DCfjl0KdGoCvIxYiNtuH8h8oM+RQMb8orjbpW3pHapjYI5Vw==}
     dependencies:
-      axios: 0.21.4_debug@4.3.3
+      axios: 0.21.4
       deepmerge: 4.2.2
       qs: 6.10.3
     transitivePeerDependencies:
@@ -127,7 +142,7 @@ packages:
     peerDependencies:
       '@inertiajs/inertia': ^0.11.0
     dependencies:
-      '@inertiajs/inertia': 0.11.0_debug@4.3.3
+      '@inertiajs/inertia': 0.11.0
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -386,10 +401,10 @@ packages:
     resolution: {integrity: sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==}
     dev: true
 
-  /axios/0.21.4_debug@4.3.3:
+  /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.0_debug@4.3.3
+      follow-redirects: 1.15.0
     transitivePeerDependencies:
       - debug
     dev: true
@@ -1317,7 +1332,7 @@ packages:
       path-exists: 4.0.0
     dev: true
 
-  /follow-redirects/1.15.0_debug@4.3.3:
+  /follow-redirects/1.15.0:
     resolution: {integrity: sha512-aExlJShTV4qOUOL7yF1U5tvLCB0xQuudbf6toyYA0E/acBNw71mvjFTnLaRp50aQaYocMR0a/RMMBIHeZnGyjQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -1325,8 +1340,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 4.3.3
     dev: true
 
   /fs-access/1.0.1:
@@ -2438,6 +2451,11 @@ packages:
   /tinyspy/0.2.10:
     resolution: {integrity: sha512-Qij6rGWCDjWIejxCXXVi6bNgvrYBp3PbqC4cBP/0fD6WHDOHCw09Zd13CsxrDqSR5PFq01WeqDws8t5lz5sH0A==}
     engines: {node: '>=14.0.0'}
+    dev: true
+
+  /to-fast-properties/2.0.0:
+    resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
+    engines: {node: '>=4'}
     dev: true
 
   /to-regex-range/5.0.1:
