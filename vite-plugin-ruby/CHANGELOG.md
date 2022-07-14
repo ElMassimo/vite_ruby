@@ -1,3 +1,12 @@
+## [3.1.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.0...vite-plugin-ruby@3.1.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* specify the client port explicitly ([3dd06db](https://github.com/ElMassimo/vite_ruby/commit/3dd06dbb85946a2645ab67607a8d6dabe77c5d73))
+
+
+
 # [3.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.0.12...vite-plugin-ruby@3.1.0) (2022-07-13)
 
 
