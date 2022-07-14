@@ -35,7 +35,12 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const { assetsDir, base, outDir, host, https, port, root, entrypoints, ssrBuild } = config
 
   const fs = { allow: [projectRoot], strict: true }
-  const server = { host, https, port, strictPort: true, fs }
+
+  // Connect directly to the Vite dev server, rack-proxy does not proxy websocket connections.
+  const hmr = userConfig.server?.hmr ?? {}
+  if (typeof hmr === 'object') hmr.clientPort = port
+
+  const server = { host, https, port, strictPort: true, fs, hmr }
 
   const isLocal = config.mode === 'development' || config.mode === 'test'
 
