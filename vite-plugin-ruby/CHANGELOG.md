@@ -1,3 +1,12 @@
+## [3.1.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.1...vite-plugin-ruby@3.1.2) (2022-07-15)
+
+
+### Bug Fixes
+
+* avoid overriding hmr.clientPort when specified by the user (close [#231](https://github.com/ElMassimo/vite_ruby/issues/231)) ([ea2d844](https://github.com/ElMassimo/vite_ruby/commit/ea2d8444c2e9700ef6f6887632c617190c2f8ced))
+
+
+
 ## [3.1.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.0...vite-plugin-ruby@3.1.1) (2022-07-14)
 
 
