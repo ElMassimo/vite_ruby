@@ -21,6 +21,11 @@ export interface ResolvedConfig {
    * @private
    * In the context of the internal code, whether an SSR build should be performed.
    */
+  server: ServerOptions
+  /**
+   * @private
+   * In the context of the internal code, whether an SSR build should be performed.
+   */
   ssrBuild: boolean
   /**
    * A file glob specifying a pattern that matches the SSR entrypoint to build.

@@ -12,7 +12,7 @@
     "jsx": "preserve",
     "types": ["vite/client", "vitest", "node"],
     "paths": {
-      "@plugin/*": ["src/*"]
+      "@plugin/*": ["../src/*"]
     },
   }
 }

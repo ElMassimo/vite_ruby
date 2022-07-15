@@ -1,7 +1,7 @@
 import { join, relative, resolve } from 'path'
 import glob from 'fast-glob'
 
-import type { UserConfig } from 'vite'
+import type { UserConfig, ServerOptions } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
 import { booleanOption, loadJsonConfig, configOptionFromEnv, slash } from './utils'
 import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
@@ -79,8 +79,19 @@ export function loadConfiguration (viteMode: string, projectRoot: string, userCo
 // Internal: Coerces the configuration values and deals with relative paths.
 function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
   // Coerce the values to the expected types.
-  config.port = parseInt(config.port as unknown as string)
-  config.https = userConfig.server?.https || booleanOption(config.https)
+  const port = config.port = parseInt(config.port as unknown as string)
+  const https = config.https = userConfig.server?.https || booleanOption(config.https)
+
+  const fs: ServerOptions['fs'] = { allow: [projectRoot], strict: userConfig.server?.fs?.strict ?? true }
+
+  const server: ServerOptions = { fs, host: config.host, https, port, strictPort: true }
+
+  // Connect directly to the Vite dev server, rack-proxy does not proxy websocket connections.
+  const hmr = userConfig.server?.hmr ?? {}
+  if (typeof hmr === 'object' && !hmr.hasOwnProperty('clientPort')) {
+    hmr.clientPort ||= port
+    server.hmr = hmr
+  }
 
   // Use the sourceCodeDir as the Vite.js root.
   const root = join(projectRoot, config.sourceCodeDir)
@@ -99,7 +110,7 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   const base = resolveViteBase(config)
   const entrypoints = resolveEntrypointFiles(projectRoot, root, config)
 
-  return { ...config, root, outDir, base, entrypoints }
+  return { ...config, server, root, outDir, base, entrypoints }
 }
 
 // Internal: Configures Vite's base according to the asset host and publicOutputDir.

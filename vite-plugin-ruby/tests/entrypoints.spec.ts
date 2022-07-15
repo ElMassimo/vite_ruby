@@ -5,7 +5,7 @@ import type { ResolvedConfig } from '@plugin/types'
 
 const entrypointsFor = (overrideConfig: Partial<ResolvedConfig>) => {
   const { sourceCodeDir = '', ...config } = { ...defaultConfig, ...overrideConfig }
-  return resolveEntrypointFiles(resolve('example'), resolve('example', sourceCodeDir), config)
+  return resolveEntrypointFiles(resolve('example'), resolve('example', sourceCodeDir), config as ResolvedConfig)
 }
 
 const expectEntrypoints = (config: Partial<ResolvedConfig>) =>
