@@ -46,6 +46,22 @@ generated for all gems with executables.
 As an alternative, try removing the check for the message in `bin/vite`, or run
 `bundle exec vite` instead.
 
+### Double installation on deployment
+
+Package managers like `npm`, `pnpm`, and `yarn` will quickly skip installation when
+packages have already been installed, so double installation would only happen
+in scenarios like:
+
+```bash
+npm ci
+# later
+NPM_CONFIG_INCLUDE="dev" npm ci
+```
+
+If you see a double installation in the deployment logs, check that you have
+configured your deployment to [avoid pruning](/guide/deployment.html#using-heroku)
+any [development dependencies](/guide/deployment.html#rake-tasks-⚙%EF%B8%8F) before compiling assets.
+
 ## Common Problems
 
 ### Changes are not taken into account, build is skipped

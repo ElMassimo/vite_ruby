@@ -17,10 +17,13 @@
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
 [json]: /config/#shared-configuration-file-📄
 [publicOutputDir]: /config/#publicoutputdir
+[installation]: /guide/#setup-%F0%9F%93%A6
 [nodejs buildpack]: https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-nodejs
 [ruby buildpack]: https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-ruby
 [skip pruning]: https://devcenter.heroku.com/articles/nodejs-support#skip-pruning
 [capistrano-rails]: https://github.com/capistrano/rails
+[installed automatically]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/tasks/vite.rake#L59-L63
+[dev dependencies]: /guide/deployment.html#development-dependencies-🔗
 
 # Deployment 🚀
 
@@ -80,6 +83,15 @@ The following rake tasks are available:
 You can provide `RACK_ENV=production` to simulate a production build locally.
 :::
 
+## Development Dependencies 🔗
+
+By default `vite` and `vite-plugin-ruby` will be [added][installation] as
+development dependencies, and they will be [installed automatically] when
+running `assets:precompile`.
+
+This allows you to skip installation in servers that won't precompile assets, or
+easily prune them after assets have been precompiled.
+
 ## Disabling extension of the `assets:precompile` task
 
 During complex migrations, it might be convenient that `vite:build` is not run
@@ -138,9 +150,10 @@ heroku buildpacks:set heroku/ruby
 heroku buildpacks:add --index 1 heroku/nodejs
 ```
 
-When precompiling assets in Heroku, it's better to _[skip pruning]_ of dev dependencies by setting:
+When precompiling assets in Heroku, it's better to _[skip pruning]_ of [dev dependencies] by setting:
 ```bash
-heroku config:set NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false
+heroku config:set NPM_CONFIG_INCLUDE='dev' YARN_PRODUCTION=false
+# or NPM_CONFIG_PRODUCTION=false in versions of npm < 7
 ```
 That will ensure that [vite] and [vite-plugin-ruby] are available, along with other build tools.
 
