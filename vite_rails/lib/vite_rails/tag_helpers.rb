@@ -6,7 +6,7 @@ module ViteRails::TagHelpers
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
 
-    tag.script(src: src, type: 'module')
+    javascript_include_tag(src, type: 'module', extname: false)
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
