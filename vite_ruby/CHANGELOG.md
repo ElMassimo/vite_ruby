@@ -1,3 +1,12 @@
+## [3.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.0...vite_ruby@3.2.1) (2022-08-11)
+
+
+### Bug Fixes
+
+* require the version after defining namespace (close [#239](https://github.com/ElMassimo/vite_ruby/issues/239)) ([7b92062](https://github.com/ElMassimo/vite_ruby/commit/7b920627f0f551166b3ab321e50b6cee746168c2))
+
+
+
 # [3.2.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.1.7...vite_ruby@3.2.0) (2022-07-13)
 
 

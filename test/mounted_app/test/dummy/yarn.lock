@@ -557,10 +557,10 @@ policyfile@0.0.4:
   resolved "https://registry.yarnpkg.com/policyfile/-/policyfile-0.0.4.tgz#d6b82ead98ae79ebe228e2daf5903311ec982e4d"
   integrity sha1-1rgurZiueeviKOLa9ZAzEeyYLk0=
 
-postcss@^8.4.14:
-  version "8.4.14"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.14.tgz#ee9274d5622b4858c1007a74d76e42e56fd21caf"
-  integrity sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==
+postcss@^8.4.16:
+  version "8.4.16"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
+  integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
@@ -737,21 +737,21 @@ uid2@0.0.3:
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
   integrity sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I=
 
-vite-plugin-ruby@^3.1.0-beta.0:
-  version "3.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-3.1.0-beta.0.tgz#031e5de8bfbeca70b495773b70ac747d073100ef"
-  integrity sha512-1u62n/6J7ba304T7jVjRBcKtv2M5QuKXSEbuQ3WQ7dISllEVkfDhlGFcelJ9r/aZjQ1oS2zx/9M+IgFhQLNgQg==
+vite-plugin-ruby@^3.1.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-ruby/-/vite-plugin-ruby-3.1.2.tgz#513297e64e3c9a2e2eace6c39856870f5aef0e90"
+  integrity sha512-Pp/NR79lV96wEOjp5MhVHuFxqUhEMNqc7L/02i+XXl1Mq1ab7s2j9kAgtiqp5QKxMd1jy8gV32PgWWVOmcd7/Q==
   dependencies:
     debug "^4.3.4"
     fast-glob "^3.2.11"
 
-vite@^3.0.0-beta.5:
-  version "3.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.0-beta.5.tgz#708d5b732dee98d77877cb094b567f5596508b5b"
-  integrity sha512-SfesZuCME4fEmLy4hgsJAg55HRiTgDhH3oPM44XePrdKP5FqYvDkzpSWl6ldDOJYTskKWafGyyuYfXoxodv40Q==
+vite@^3.0.0:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.5.tgz#56b8d52e00bbbd5f21d02f0868dc613b3246ecc6"
+  integrity sha512-bRvrt9Tw8EGW4jj64aYFTnVg134E8hgDxyl/eEHnxiGqYk7/pTPss6CWlurqPOUzqvEoZkZ58Ws+Iu8MB87iMA==
   dependencies:
     esbuild "^0.14.47"
-    postcss "^8.4.14"
+    postcss "^8.4.16"
     resolve "^1.22.1"
     rollup "^2.75.6"
   optionalDependencies:
