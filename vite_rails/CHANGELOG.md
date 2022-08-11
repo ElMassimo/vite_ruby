@@ -1,3 +1,12 @@
+## [3.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.10...vite_rails@3.0.11) (2022-08-11)
+
+
+### Bug Fixes
+
+* use javascript_include_tag in vite_client_tag ([#238](https://github.com/ElMassimo/vite_ruby/issues/238)) ([3d8b366](https://github.com/ElMassimo/vite_ruby/commit/3d8b3668b2f43dacbaf09127fa67a27767e03ffe))
+
+
+
 ## [3.0.10](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.9...vite_rails@3.0.10) (2022-06-15)
 
 
