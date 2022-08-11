@@ -15,8 +15,6 @@ loader.inflector.inflect('ssr' => 'SSR')
 loader.inflector.inflect('io' => 'IO')
 loader.setup
 
-require 'vite_ruby/version'
-
 class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
   ENV_PREFIX = 'VITE_RUBY'
@@ -142,3 +140,5 @@ class ViteRuby
     @manifest ||= ViteRuby::Manifest.new(self)
   end
 end
+
+require 'vite_ruby/version'
