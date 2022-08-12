@@ -2,9 +2,26 @@
 
 require 'vite_rails'
 
+module ViteRails::CLI
+end
+
+module ViteRails::CLI::Build
+  def call(**options)
+    ensure_rails_init
+    super
+  end
+
+  # Internal: Attempts to initialize the Rails application.
+  def ensure_rails_init
+    require File.expand_path('config/environment', Dir.pwd)
+  rescue StandardError, LoadError => error
+    $stderr << "Unable to initialize Rails application before Vite build:\n\n\t#{ error.message }\n\n"
+  end
+end
+
 # Internal: Extends the base installation script from Vite Ruby to work for a
 # typical Rails app.
-module ViteRails::Installation
+module ViteRails::CLI::Install
   RAILS_TEMPLATES = Pathname.new(File.expand_path('../../templates', __dir__))
 
   # Override: Setup a typical apps/web Hanami app to use Vite.
@@ -63,4 +80,5 @@ module ViteRails::Installation
   end
 end
 
-ViteRuby::CLI::Install.prepend(ViteRails::Installation)
+ViteRuby::CLI::Build.prepend(ViteRails::CLI::Build)
+ViteRuby::CLI::Install.prepend(ViteRails::CLI::Install)

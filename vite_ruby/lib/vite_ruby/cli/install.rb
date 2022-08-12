@@ -132,8 +132,3 @@ private
     $stderr = old_stderr
   end
 end
-
-# NOTE: This allows framework-specific variants to extend the installation.
-ViteRuby.framework_libraries.each do |_framework, library|
-  require "#{ library.name.tr('-', '/') }/installation"
-end

@@ -15,4 +15,16 @@ class ViteRuby::CLI
   register 'version', Version, aliases: ['v', '-v', '--version', 'info']
   register 'upgrade', Upgrade, aliases: ['update']
   register 'upgrade_packages', UpgradePackages, aliases: ['update_packages']
+
+  # Internal: Allows framework-specific variants to extend the CLI.
+  def self.require_framework_libraries(path = 'cli')
+    ViteRuby.framework_libraries.each do |_framework, library|
+      require [library.name.tr('-', '/').to_s, path].compact.join('/')
+    end
+  rescue LoadError
+    require_framework_libraries 'installation' unless path == 'installation'
+  end
 end
+
+# NOTE: This allows framework-specific variants to extend the CLI.
+ViteRuby::CLI.require_framework_libraries('cli')
