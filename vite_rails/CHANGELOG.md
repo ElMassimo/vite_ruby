@@ -1,3 +1,17 @@
+## [3.0.12](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.11...vite_rails@3.0.12) (2022-08-12)
+
+
+### Bug Fixes
+
+* ensure rails app is initialized before inferring config ([#240](https://github.com/ElMassimo/vite_ruby/issues/240)) ([3ddc2bc](https://github.com/ElMassimo/vite_ruby/commit/3ddc2bc7873f06b6dd8e58e7c6b4e8a7fd8833f1))
+
+
+### Features
+
+* allow framework-specific libraries to extend the CLI ([a0ed66f](https://github.com/ElMassimo/vite_ruby/commit/a0ed66fe64fb2549cecc358ccd60c82be44255aa))
+
+
+
 ## [3.0.11](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.10...vite_rails@3.0.11) (2022-08-11)
 
 
