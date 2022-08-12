@@ -1,3 +1,12 @@
+## [3.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.1...vite_ruby@3.2.2) (2022-08-12)
+
+
+### Features
+
+* allow framework-specific libraries to extend the CLI ([a0ed66f](https://github.com/ElMassimo/vite_ruby/commit/a0ed66fe64fb2549cecc358ccd60c82be44255aa))
+
+
+
 ## [3.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.0...vite_ruby@3.2.1) (2022-08-11)
 
 
