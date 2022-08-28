@@ -1,3 +1,12 @@
+## [3.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.2...vite_ruby@3.2.3) (2022-08-28)
+
+
+### Bug Fixes
+
+* prevent yarn 2+ error in `assets:precompile` ([#241](https://github.com/ElMassimo/vite_ruby/issues/241)) ([e7e857a](https://github.com/ElMassimo/vite_ruby/commit/e7e857ac763dd053a8bda4b27d26a2090269f6d8))
+
+
+
 ## [3.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.1...vite_ruby@3.2.2) (2022-08-12)
 
 
