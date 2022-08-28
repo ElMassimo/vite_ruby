@@ -71,8 +71,9 @@ class ViteRuby::Commands
     `npm --version`.to_i < 7 rescue false
   end
 
-  def next_yarn?
-    `yarn --version`.to_i >= 2 rescue false
+  # Internal: Checks if the yarn version is 1.x.
+  def legacy_yarn_version?
+    `yarn --version`.to_i < 2 rescue false
   end
 
   # Internal: Verifies if ViteRuby is properly installed.

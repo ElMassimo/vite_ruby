@@ -87,7 +87,7 @@ if ARGV.include?('assets:precompile')
     ENV['NPM_CONFIG_INCLUDE'] = 'dev'
   end
 
-  unless ViteRuby.commands.next_yarn?
+  if ViteRuby.commands.legacy_yarn_version?
     ENV['YARN_PRODUCTION'] = 'false'
   end
 end
