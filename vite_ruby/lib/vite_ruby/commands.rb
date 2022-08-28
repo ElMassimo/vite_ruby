@@ -71,6 +71,10 @@ class ViteRuby::Commands
     `npm --version`.to_i < 7 rescue false
   end
 
+  def next_yarn?
+    `yarn --version`.to_i >= 2 rescue false
+  end
+
   # Internal: Verifies if ViteRuby is properly installed.
   def verify_install
     unless File.exist?(config.root.join('bin/vite'))
