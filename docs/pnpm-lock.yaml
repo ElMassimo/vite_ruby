@@ -1,15 +1,15 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
   .:
     specifiers:
-      '@mussi/vitepress-theme': ^1.0.1
+      '@mussi/vitepress-theme': ^1.0.2
       vite-plugin-windicss: ^1.8.3
       vitepress: ^0.22.3
       vue: ^3.2.31
     dependencies:
-      '@mussi/vitepress-theme': 1.0.1_vue@3.2.31
+      '@mussi/vitepress-theme': 1.0.2_vue@3.2.31
       vite-plugin-windicss: 1.8.3
       vitepress: 0.22.3
       vue: 3.2.31
@@ -27,6 +27,9 @@ packages:
     peerDependencies:
       '@algolia/client-search': ^4.9.1
       algoliasearch: ^4.9.1
+    peerDependenciesMeta:
+      '@algolia/client-search':
+        optional: true
     dependencies:
       '@algolia/autocomplete-shared': 1.5.2
       algoliasearch: 4.13.0
@@ -130,10 +133,31 @@ packages:
     resolution: {integrity: sha512-MrAQ/MrPSxbh1bBrmwJjORfJymw4IqSHFBXqvxaga3ZdDM+/zokYF8DjyJpSjY2QmpmgQrajDUBJOWrYeARfzA==}
     dev: false
 
+  /@babel/helper-string-parser/7.18.10:
+    resolution: {integrity: sha512-XtIfWmeNY3i4t7t4D2t02q50HvqHybPqW2ki1kosnvWCwuCMeo81Jf0gwr85jy/neUdg5XDdeFE/80DXiO+njw==}
+    engines: {node: '>=6.9.0'}
+    dev: false
+
+  /@babel/helper-validator-identifier/7.18.6:
+    resolution: {integrity: sha512-MmetCkz9ej86nJQV+sFCxoGGrUbU3q02kgLciwkrt9QqEB7cP39oKEY0PakknEO0Gu20SskMRi+AYZ3b1TpN9g==}
+    engines: {node: '>=6.9.0'}
+    dev: false
+
   /@babel/parser/7.17.9:
     resolution: {integrity: sha512-vqUSBLP8dQHFPdPi9bc5GK9vRkYHJ49fsZdtoJ8EQ8ibpwk5rPKfvNIwChB0KVXcIjcepEBBd2VHC5r9Gy8ueg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.19.0
+    dev: false
+
+  /@babel/types/7.19.0:
+    resolution: {integrity: sha512-YuGopBq3ke25BVSiS6fgF49Ul9gH1x70Bcr6bqRLjWCkcX8Hre1/5+z+IiWOIerRMSSEfGZVB9z9kyq7wVs9YA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-string-parser': 7.18.10
+      '@babel/helper-validator-identifier': 7.18.6
+      to-fast-properties: 2.0.0
     dev: false
 
   /@docsearch/css/3.0.0:
@@ -158,6 +182,13 @@ packages:
       '@types/react': '>= 16.8.0 < 18.0.0'
       react: '>= 16.8.0 < 18.0.0'
       react-dom: '>= 16.8.0 < 18.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
     dependencies:
       '@algolia/autocomplete-core': 1.5.2
       '@algolia/autocomplete-preset-algolia': 1.5.2_algoliasearch@4.13.0
@@ -167,8 +198,8 @@ packages:
       - '@algolia/client-search'
     dev: false
 
-  /@mussi/vitepress-theme/1.0.1_vue@3.2.31:
-    resolution: {integrity: sha512-ovvErYhMHUXAVW3wDMaaryMo2s9W82jN3EV55TCHNhghvIa+Prdn5hG11v/yyPGU/4RtmWV2QVXbXkqwWsN/rQ==}
+  /@mussi/vitepress-theme/1.0.2_vue@3.2.31:
+    resolution: {integrity: sha512-/l1yDSLUBnOgsxyi15KKihKHntiopG6msqZn98VB5DqSrWfAeKvOUzASD5u/13VTlvItP3Zm+ApEl02IaQaGaQ==}
     dependencies:
       '@docsearch/css': 3.0.0
       '@docsearch/js': 3.0.0
@@ -820,6 +851,11 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+    dev: false
+
+  /to-fast-properties/2.0.0:
+    resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
+    engines: {node: '>=4'}
     dev: false
 
   /to-regex-range/5.0.1:

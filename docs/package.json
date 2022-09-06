@@ -7,7 +7,7 @@
     "now": "npm run build && npm run preview"
   },
   "dependencies": {
-    "@mussi/vitepress-theme": "^1.0.1",
+    "@mussi/vitepress-theme": "^1.0.2",
     "vite-plugin-windicss": "^1.8.3",
     "vitepress": "^0.22.3",
     "vue": "^3.2.31"
