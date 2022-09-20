@@ -19,6 +19,7 @@
 [ulimit]: https://wilsonmar.github.io/maximum-limits/
 [additionalEntrypoints]: /config/#additionalentrypoints
 [advanced usage]: /guide/advanced
+[smart output]: /guide/rails.html#smart-output-%E2%9C%A8
 
 # Troubleshooting
 
@@ -157,9 +158,11 @@ This is probably the case if you are seeing errors such as `#<Errno::EMFILE: Too
 
 Follow [this article][ulimit] for information on how to increase the limit of file descriptors in your OS.
 
-### CSS does not seem to reflect changes in dev
+### Safari does not reflect CSS changes in development
 
-Stylesheets are sent with [etags](https://en.wikipedia.org/wiki/HTTP_ETag) which allow a browser to cache the stylesheet until it changes. In development, a `Cache-Control: no-cache` header is also sent but unfortunately Safari does not respect the header and caches it anyways. The simplest way to work around the issue is to import the CSS directly into your javascript entry points. When the CSS is requested in this way it is requested with a query string that seems to break the cache.
+Safari [ignores](https://apple.stackexchange.com/questions/439451/safari-is-caching-hard-i-have-to-empty-for-each-change-in-my-css) the `Cache-Control: no-cache` header for CSS stylesheets, which is inconvenient in development as HMR for CSS does not work as expected, requiring the cache to be cleared manually in order to see changes.
+
+A workaround is to import the CSS from a [`vite_javascript_tag` entrypoint][smart output] instead of using `vite_stylesheet_tag`. When the CSS is requested in this way it becomes a JS request in development, avoiding the bug in Safari.
 
 ## Fixed Issues
 
