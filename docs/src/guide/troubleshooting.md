@@ -157,6 +157,10 @@ This is probably the case if you are seeing errors such as `#<Errno::EMFILE: Too
 
 Follow [this article][ulimit] for information on how to increase the limit of file descriptors in your OS.
 
+### CSS does not seem to reflect changes in dev
+
+Stylesheets are sent with [etags](https://en.wikipedia.org/wiki/HTTP_ETag) which allow a browser to cache the stylesheet until it changes. In development, a `Cache-Control: no-cache` header is also sent but unfortunately Safari does not respect the header and caches it anyways. The simplest way to work around the issue is to import the CSS directly into your javascript entry points. When the CSS is requested in this way it is requested with a query string that seems to break the cache.
+
 ## Fixed Issues
 
 ### Build not working in CI or Heroku
