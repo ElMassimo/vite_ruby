@@ -4,24 +4,32 @@ require 'json'
 require 'time'
 
 # Internal: Value object with information about the last build.
-ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current_digest, :last_build_path) do
-  # Internal: Combines information from a previous build with the current digest.
-  def self.from_previous(last_build_path, current_digest)
-    attrs = begin
-      # Reads metadata recorded on the last build, if it exists.
-      last_build_path.exist? ? JSON.parse(last_build_path.read.to_s) : {}
-    rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
-      {}
+ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current_digest, :last_build_path, :errors, keyword_init: true) do
+  class << self
+    # Internal: Combines information from a previous build with the current digest.
+    def from_previous(last_build_path, current_digest)
+      new(
+        **parse_metadata(last_build_path),
+        current_digest: current_digest,
+        last_build_path: last_build_path,
+      )
     end
 
-    new(
-      attrs['success'],
-      attrs['timestamp'] || 'never',
-      attrs['vite_ruby'] || 'unknown',
-      attrs['digest'] || 'none',
-      current_digest,
-      last_build_path,
-    )
+  private
+
+    # Internal: Reads metadata recorded on the last build, if it exists.
+    def parse_metadata(_path)
+      return default_metadata unless last_build_path.exist?
+
+      JSON.parse(last_build_path.read.to_s).transform_keys(&:to_sym)
+    rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
+      default_metadata
+    end
+
+    # Internal: To make it evident that there's no last build in error messages.
+    def default_metadata
+      { timestamp: 'never', digest: 'none' }
+    end
   end
 
   # Internal: A build is considered stale when watched files have changed since
@@ -45,14 +53,14 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
   end
 
   # Internal: Returns a new build with the specified result.
-  def with_result(success)
+  def with_result(**attrs)
     self.class.new(
-      success,
-      Time.now.strftime('%F %T'),
-      ViteRuby::VERSION,
-      current_digest,
-      current_digest,
-      last_build_path,
+      **attrs,
+      timestamp: Time.now.strftime('%F %T'),
+      vite_ruby: ViteRuby::VERSION,
+      digest: current_digest,
+      current_digest: current_digest,
+      last_build_path: last_build_path,
     )
   end
 
@@ -65,6 +73,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
   def to_json(*_args)
     JSON.pretty_generate(
       success: success,
+      errors: errors,
       timestamp: timestamp,
       vite_ruby: vite_ruby,
       digest: digest,
