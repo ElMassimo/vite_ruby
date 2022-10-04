@@ -78,7 +78,7 @@ protected
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, **options)
-    @build_mutex.synchronize { builder.build } if should_build?
+    @build_mutex.synchronize { builder.build || (return nil) } if should_build?
 
     find_manifest_entry resolve_entry_name(name, **options)
   end
