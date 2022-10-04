@@ -1,3 +1,12 @@
+## [3.2.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.3...vite_ruby@3.2.4) (2022-10-04)
+
+
+### Bug Fixes
+
+* **BREAKING CHANGE:** lookup now returns nil if auto-build fails ([#268](https://github.com/ElMassimo/vite_ruby/issues/268)) ([cf2dec1](https://github.com/ElMassimo/vite_ruby/commit/cf2dec1bfec2279179c1671e5b42479549fd11c4)), closes [#267](https://github.com/ElMassimo/vite_ruby/issues/267)
+
+
+
 ## [3.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.2...vite_ruby@3.2.3) (2022-08-28)
 
 
