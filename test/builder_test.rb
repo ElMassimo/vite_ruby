@@ -4,7 +4,7 @@ require 'test_helper'
 require 'open3'
 
 class BuilderTest < ViteRuby::Test
-  delegate :builder, to: 'ViteRuby.instance'
+  delegate :builder, :manifest, to: 'ViteRuby.instance'
 
   def last_build
     builder.last_build_metadata
@@ -44,6 +44,9 @@ class BuilderTest < ViteRuby::Test
       assert last_build.fresh?
       assert last_build.digest
       assert last_build.timestamp
+
+      refresh_config(auto_build: true)
+      refute_nil manifest.send(:lookup, 'app.css')
     }
   end
 
@@ -55,6 +58,9 @@ class BuilderTest < ViteRuby::Test
       assert last_build.fresh?
       assert last_build.digest
       assert last_build.timestamp
+
+      refresh_config(auto_build: true)
+      assert_nil manifest.send(:lookup, 'app.css')
     }
   end
 
