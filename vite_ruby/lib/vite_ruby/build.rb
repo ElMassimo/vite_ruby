@@ -4,7 +4,7 @@ require 'json'
 require 'time'
 
 # Internal: Value object with information about the last build.
-ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current_digest, :last_build_path) do
+ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current_digest, :last_build_path, :err_msg) do
   # Internal: Combines information from a previous build with the current digest.
   def self.from_previous(last_build_path, current_digest)
     attrs = begin
@@ -21,6 +21,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
       attrs['digest'] || 'none',
       current_digest,
       last_build_path,
+      attrs['err_msg'],
     )
   end
 
@@ -45,7 +46,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
   end
 
   # Internal: Returns a new build with the specified result.
-  def with_result(success)
+  def with_result(success, err_msg=nil)
     self.class.new(
       success,
       Time.now.strftime('%F %T'),
@@ -53,6 +54,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
       current_digest,
       current_digest,
       last_build_path,
+      err_msg,
     )
   end
 
@@ -68,6 +70,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
       timestamp: timestamp,
       vite_ruby: vite_ruby,
       digest: digest,
+      err_msg: err_msg,
     )
   end
 end

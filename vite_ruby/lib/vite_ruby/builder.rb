@@ -14,7 +14,10 @@ class ViteRuby::Builder
     last_build = last_build_metadata(ssr: args.include?('--ssr'))
 
     if args.delete('--force') || last_build.stale?
-      build_with_vite(*args).tap { |success| record_build_metadata(success, last_build) }
+      build_with_vite(*args).yield_self do |success, err_msg|
+        record_build_metadata(success, last_build, err_msg)
+        success
+      end
     elsif last_build.success
       logger.debug "Skipping vite build. Watched files have not changed since the last build at #{ last_build.timestamp }"
       true
@@ -36,9 +39,9 @@ private
   def_delegators :@vite_ruby, :config, :logger, :run
 
   # Internal: Writes a digest of the watched files to disk for future checks.
-  def record_build_metadata(success, build)
+  def record_build_metadata(success, build, err_msg)
     config.build_cache_dir.mkpath
-    build.with_result(success).write_to_cache
+    build.with_result(success, err_msg).write_to_cache
   end
 
   # Internal: The file path where metadata of the last build is stored.
@@ -58,14 +61,16 @@ private
 
   # Public: Initiates a Vite build command to generate assets.
   #
-  # Returns true if the build is successful, or false if it failed.
+  # Returns a pair of:
+  # * success: true if the build is successful, or false if it failed.
+  # * err_msg: string with vite build errors in case of failure
   def build_with_vite(*args)
     logger.info 'Building with Vite ⚡️'
 
     stdout, stderr, status = run(['build', *args])
     log_build_result(stdout, stderr.to_s, status)
 
-    status.success?
+    [status.success?, stderr]
   end
 
   # Internal: Outputs the build results.
