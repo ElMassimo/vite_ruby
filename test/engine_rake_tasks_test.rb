@@ -118,8 +118,8 @@ private
 
   def stub_runner(*args, **opts, &block)
     mock = Minitest::Mock.new
-    status = OpenStruct.new(success?: true)
-    mock.expect(:call, [:stdout, :stderr, status]) do |*argv, **options|
+    status = true
+    mock.expect(:call, ['stdout', 'stderr', status]) do |*argv, **options|
       assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
     end
     ViteRuby.stub_any_instance(:run, ->(*stub_args, **stub_opts) { mock.call(*stub_args, **stub_opts) }, &block)

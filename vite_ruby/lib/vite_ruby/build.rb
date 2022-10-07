@@ -18,10 +18,10 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
   private
 
     # Internal: Reads metadata recorded on the last build, if it exists.
-    def parse_metadata(_path)
-      return default_metadata unless last_build_path.exist?
+    def parse_metadata(pathname)
+      return default_metadata unless pathname.exist?
 
-      JSON.parse(last_build_path.read.to_s).transform_keys(&:to_sym)
+      JSON.parse(pathname.read.to_s).transform_keys(&:to_sym)
     rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
       default_metadata
     end

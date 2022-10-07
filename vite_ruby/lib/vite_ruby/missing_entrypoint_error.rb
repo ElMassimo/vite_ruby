@@ -17,19 +17,25 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
       #{ possible_causes(last_build) }
       :troubleshooting:
       #{ "\nContent in your manifests:\n#{ JSON.pretty_generate(manifest) }\n" if last_build.success }
-      #{ "Last build in #{ config.mode } mode:\n#{ last_build.to_json }\n" unless last_build.success.nil? }
+      #{ "Last build in #{ config.mode } mode:\n#{ last_build.to_json }\n" if last_build.success }
     MSG
   end
 
   def possible_causes(last_build)
-    return FAILED_BUILD_CAUSES.sub(':mode:', config.mode) if last_build.success == false
-    return DEFAULT_CAUSES if config.auto_build
-
-    DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
+    if last_build.success == false
+      FAILED_BUILD_CAUSES
+        .sub(':mode:', config.mode)
+        .sub(':errors:', last_build.errors.to_s.gsub(/^(?!$)/, '    '))
+    elsif config.auto_build
+      DEFAULT_CAUSES
+    else
+      DEFAULT_CAUSES + NO_AUTO_BUILD_CAUSES
+    end
   end
 
   FAILED_BUILD_CAUSES = <<-MSG
   - The last build failed. Try running `bin/vite build --clear --mode=:mode:` manually and check for errors.
+  :errors:
   MSG
 
   DEFAULT_CAUSES = <<-MSG

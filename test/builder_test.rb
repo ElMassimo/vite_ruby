@@ -112,7 +112,7 @@ class BuilderTest < ViteRuby::Test
 private
 
   def stub_runner(success:, &block)
-    args = [:sterr, :stdout, OpenStruct.new(success?: success)]
+    args = ['stderr', 'stdout', success]
     ViteRuby::IO.stub(:capture, args, &block)
   end
 end

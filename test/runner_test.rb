@@ -26,7 +26,7 @@ class RunnerTest < ViteRuby::Test
       stdout, stderr, status = ViteRuby.run(['"Hello"'])
       assert_equal %("Hello" --mode production\n), stdout
       assert_equal '', stderr
-      assert status.success?
+      assert status
     }
   end
 end
