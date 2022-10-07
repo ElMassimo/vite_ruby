@@ -41,6 +41,7 @@ class BuilderTest < ViteRuby::Test
     stub_runner(success: true) {
       assert builder.build
       assert last_build.success
+      assert_empty last_build.errors
       assert last_build.fresh?
       assert last_build.digest
       assert last_build.timestamp
@@ -52,9 +53,11 @@ class BuilderTest < ViteRuby::Test
 
   def test_freshness_on_build_fail
     assert last_build.stale?
-    stub_runner(success: false) {
+    error_message = 'SyntaxError: Hero.jsx: Unexpected token (6:6)'
+    stub_runner(errors: error_message) {
       refute builder.build
       refute last_build.success
+      assert_equal last_build.errors, error_message
       assert last_build.fresh?
       assert last_build.digest
       assert last_build.timestamp
@@ -111,8 +114,8 @@ class BuilderTest < ViteRuby::Test
 
 private
 
-  def stub_runner(success:, &block)
-    args = [:sterr, :stdout, OpenStruct.new(success?: success)]
+  def stub_runner(errors: '', success: errors.empty?, &block)
+    args = ['stdout', errors, success]
     ViteRuby::IO.stub(:capture, args, &block)
   end
 end

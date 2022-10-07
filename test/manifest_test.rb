@@ -83,7 +83,11 @@ class ManifestTest < ViteRuby::Test
   end
 
   def test_lookup_exception_when_build_failed
-    stub_builder(build_successful: false) {
+    error_lines = [
+      'SyntaxError: Hero.jsx: Unexpected token (6:6)',
+      '  4 |   return <>',
+    ]
+    stub_builder(build_successful: false, build_errors: error_lines.join("\n")) {
       asset_file = 'calendar.js'
 
       error = assert_raises_manifest_missing_entry_error do
@@ -92,6 +96,8 @@ class ManifestTest < ViteRuby::Test
 
       assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in #{ manifest_path }", error.message
       assert_match 'The last build failed.', error.message
+      assert_match "  #{ error_lines[0] }", error.message
+      assert_match "  #{ error_lines[1] }", error.message
     }
   end
 

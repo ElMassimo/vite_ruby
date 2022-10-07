@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby/CHANGELOG.md",
   }
 
-  s.required_ruby_version = Gem::Requirement.new('>= 2.4')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
   s.add_dependency 'dry-cli', '~> 0.7.0'
   s.add_dependency 'rack-proxy', '~> 0.6', '>= 0.6.1'

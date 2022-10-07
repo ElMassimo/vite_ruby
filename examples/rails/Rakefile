@@ -10,6 +10,6 @@ Rails.application.load_tasks
 Rake::Task['assets:precompile'].enhance do |task|
   Dir.chdir(Rails.root.join('example_engine')) {
     _, stderr, status = ViteRuby::IO.capture("VITE_RUBY_VITE_BIN_PATH=#{Rails.root.join(ViteRuby.config.vite_bin_path)} bin/vite build")
-    raise stderr unless status.success?
+    raise stderr unless status
   }
 end
