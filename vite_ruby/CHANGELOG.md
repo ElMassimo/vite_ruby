@@ -1,3 +1,12 @@
+## [3.2.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.5...vite_ruby@3.2.6) (2022-10-07)
+
+
+### Features
+
+* always trigger a build if the manifest is missing ([#275](https://github.com/ElMassimo/vite_ruby/issues/275)) ([53ffdb9](https://github.com/ElMassimo/vite_ruby/commit/53ffdb9559409cb813198b4fd8a7a5ccb0c3cd21))
+
+
+
 ## [3.2.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.4...vite_ruby@3.2.5) (2022-10-07)
 
 
