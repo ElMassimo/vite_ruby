@@ -1,3 +1,12 @@
+## [3.2.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.4...vite_ruby@3.2.5) (2022-10-07)
+
+
+### Features
+
+* display last build errors in MissingEntrypointError ([#274](https://github.com/ElMassimo/vite_ruby/issues/274)) ([107c980](https://github.com/ElMassimo/vite_ruby/commit/107c980449546ef73c527b88f1db11a7201e4438))
+
+
+
 ## [3.2.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.3...vite_ruby@3.2.4) (2022-10-04)
 
 
