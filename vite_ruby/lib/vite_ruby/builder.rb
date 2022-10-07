@@ -13,7 +13,7 @@ class ViteRuby::Builder
   def build(*args)
     last_build = last_build_metadata(ssr: args.include?('--ssr'))
 
-    if args.delete('--force') || last_build.stale?
+    if args.delete('--force') || last_build.stale? || config.manifest_paths.empty?
       stdout, stderr, success = build_with_vite(*args)
       log_build_result(stdout, stderr, success)
       record_build_metadata(last_build, errors: stderr, success: success)
