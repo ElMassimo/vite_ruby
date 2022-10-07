@@ -25,7 +25,7 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
     if last_build.success == false
       FAILED_BUILD_CAUSES
         .sub(':mode:', config.mode)
-        .sub(':errors:', last_build.errors.to_s.gsub(/^(?!$)/, '    '))
+        .sub(':errors:', last_build.errors.to_s.gsub(/^(?!$)/, '  '))
     elsif config.auto_build
       DEFAULT_CAUSES
     else
@@ -33,9 +33,11 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
     end
   end
 
-  FAILED_BUILD_CAUSES = <<-MSG
-  - The last build failed. Try running `bin/vite build --clear --mode=:mode:` manually and check for errors.
-  :errors:
+  FAILED_BUILD_CAUSES = <<~MSG
+      - The last build failed. Try running `bin/vite build --clear --mode=:mode:` manually and check for errors.
+
+    Errors:
+    :errors:
   MSG
 
   DEFAULT_CAUSES = <<-MSG
