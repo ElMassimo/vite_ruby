@@ -119,7 +119,7 @@ private
 
   # Internal: Loads and merges the manifest files, resolving the asset paths.
   def load_manifest
-    files = [config.manifest_path, config.assets_manifest_path].select(&:exist?)
+    files = config.manifest_paths
     files.map { |path| JSON.parse(path.read) }.inject({}, &:merge).tap(&method(:resolve_references))
   end
 
