@@ -21,7 +21,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
     def parse_metadata(pathname)
       return default_metadata unless pathname.exist?
 
-      JSON.parse(pathname.read.to_s).transform_keys(&:to_sym)
+      JSON.parse(pathname.read.to_s).transform_keys(&:to_sym).slice(*members)
     rescue JSON::JSONError, Errno::ENOENT, Errno::ENOTDIR
       default_metadata
     end
