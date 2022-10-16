@@ -71,9 +71,19 @@ class ViteRuby::Commands
     `npm --version`.to_i < 7 rescue false
   end
 
+  # Internal: Checks if the package manager is yarn.
+  def yarn?
+    config.root.join('yarn.lock').exist?
+  end
+
   # Internal: Checks if the yarn version is 1.x.
   def legacy_yarn_version?
     `yarn --version`.to_i < 2 rescue false
+  end
+
+  # Internal: Checks if the package manager is yarn and the version is berry.
+  def yarn_berry?
+    yarn? && !legacy_yarn_version?
   end
 
   # Internal: Verifies if ViteRuby is properly installed.

@@ -31,7 +31,11 @@ private
       args = args.clone
       cmd.push('node', '--inspect-brk') if args.delete('--inspect')
       cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
-      cmd.push(vite_executable)
+      if ViteRuby.commands.yarn_berry?
+        cmd.push('yarn', 'vite')
+      else
+        cmd.push(vite_executable)
+      end
       cmd.push(*args)
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
