@@ -1,3 +1,17 @@
+## [3.2.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.6...vite_ruby@3.2.7) (2022-10-19)
+
+
+### Bug Fixes
+
+* yarn berry pnp mode support ([#278](https://github.com/ElMassimo/vite_ruby/issues/278)) ([1890447](https://github.com/ElMassimo/vite_ruby/commit/189044746e536847cb33fb471cc7c42251a61072))
+
+
+### Features
+
+* create vite-plugin-rails, an opinionated version of `vite-plugin-ruby` ([#282](https://github.com/ElMassimo/vite_ruby/issues/282)) ([16375fb](https://github.com/ElMassimo/vite_ruby/commit/16375fb1f6f2bf86dff935ca3aaf91c333a796ff))
+
+
+
 ## [3.2.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.5...vite_ruby@3.2.6) (2022-10-07)
 
 
