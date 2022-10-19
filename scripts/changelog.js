@@ -12,7 +12,7 @@ if (!name) {
   process.exit(1)
 }
 
-const isRubyPackage = name !== 'vite-plugin-ruby'
+const isRubyPackage = name !== 'vite-plugin-ruby' && name !== 'vite-plugin-rails'
 
 /**
  * @param {string} bin

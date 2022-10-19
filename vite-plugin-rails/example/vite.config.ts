@@ -1,8 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import ViteRuby from 'vite-plugin-ruby'
-import ViteLegacy from '@vitejs/plugin-legacy'
+import ViteRails from 'vite-plugin-rails'
 
 export default defineConfig({
   resolve: {
@@ -12,9 +11,6 @@ export default defineConfig({
   },
   plugins: [
     Vue(),
-    ViteRuby(),
-    ViteLegacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
+    ViteRails({ fullReload: false }),
   ],
 })

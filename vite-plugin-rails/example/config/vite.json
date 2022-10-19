@@ -1,0 +1,25 @@
+{
+  "all": {
+    "additionalEntrypoints": [
+      "~/{assets,fonts,icons,images}/**/*",
+      "~/index.html",
+      "app/assets/*.{css,js,png}"
+    ],
+    "watchAdditionalPaths": [
+      "app/assets/**/*"
+    ]
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3037
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test",
+    "port": 3037
+  },
+  "production": {
+    "base": "/nested"
+  }
+}

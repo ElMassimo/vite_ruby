@@ -143,7 +143,7 @@ private
 
   def versions
     all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - [config.manifest_path] - current_version_files
+    entries = all_files - config.manifest_paths - current_version_files
     entries.reject { |file| File.directory?(file) }
       .group_by { |file| File.mtime(file).utc.to_i }
       .sort.reverse

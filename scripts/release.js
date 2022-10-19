@@ -18,7 +18,7 @@ if (!name) {
   process.exit(1)
 }
 
-const isRubyLibrary = name !== 'vite-plugin-ruby'
+const isRubyLibrary = name !== 'vite-plugin-ruby' && name !== 'vite-plugin-rails'
 const pkg = isRubyLibrary ? rubyPackage() : jsPackage()
 
 /**
