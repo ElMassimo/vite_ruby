@@ -1,0 +1,7 @@
+packages:
+  - vite-plugin-ruby/
+  - vite-plugin-ruby/example/
+  - vite-plugin-ruby/tests/
+  - vite-plugin-rails/
+  - vite-plugin-rails/example/
+  - vite-plugin-rails/tests/

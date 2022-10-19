@@ -1,0 +1,11 @@
+{
+  "name": "vite-plugin-rails-tests",
+  "private": true,
+  "devDependencies": {
+    "vite-plugin-rails": "workspace:*"
+  },
+  "dependencies": {
+    "execa": "^5.1.1",
+    "fast-glob": "^3.2.11"
+  }
+}

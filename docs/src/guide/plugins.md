@@ -27,6 +27,25 @@ Check the [example app] for a sample setup with most of them.
 When using Vue, React, or Svelte, check out [Vite][plugins]'s __[official plugins][plugins]__.
 :::
 
+## [Rails](https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-rails)
+
+Use <kbd>[vite-plugin-rails]</kbd> to pre-configure most of the recommended plugins in your application.
+
+In the future, `vite_rails` might install this plugin by default.
+
+```ts
+plugins: [
+  Rails({
+    envVars: { RAILS_ENV: 'development' },
+  }),
+],
+```
+
+::: tip
+You can opt-out and use `vite-plugin-ruby` instead, manually adding only the plugins you need.
+:::
+
+
 ## [Environment](https://github.com/ElMassimo/vite-plugin-environment)
 
 Use <kbd>[vite-plugin-environment]</kbd> to expose environment variables to your
