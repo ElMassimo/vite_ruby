@@ -22,6 +22,7 @@
 [jumpstart]: https://github.com/ElMassimo/jumpstart-vite
 [vite-plugin-stimulus-hmr]: https://github.com/ElMassimo/vite-plugin-stimulus-hmr
 [stimulus]: https://stimulus.hotwire.dev/
+[vite-plugin-rails]: /guide/plugins.html#rails
 
 # Rails Integration
 
@@ -29,6 +30,12 @@ Once you have installed the <kbd>[vite_rails]</kbd> gem, and have run <kbd>bundl
 you should have an [installed example].
 
 As an alternative, you could also use [this template][jumpstart] to [jumpstart] your app.
+
+## Batteries Included 🔋
+
+If you want a more opinionated setup, you can replace <kbd>vite-plugin-ruby</kbd> with <kbd>[vite-plugin-rails]</kbd>.
+
+It will include [additional plugins][vite-plugin-rails] that users typically add in Rails apps.
 
 ## Tag Helpers 🏷
 

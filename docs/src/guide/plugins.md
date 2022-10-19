@@ -15,6 +15,8 @@
 [import meta env]: https://vitejs.dev/guide/env-and-mode.html#env-variables
 [meta env]: https://vitejs.dev/guide/env-and-mode.html#env-files
 [vite-plugin-environment]: https://github.com/ElMassimo/vite-plugin-environment
+[vite-plugin-rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-rails
+[rollup-plugin-gzip]: https://github.com/kryops/rollup-plugin-gzip
 
 # Recommended Plugins
 
@@ -29,7 +31,13 @@ When using Vue, React, or Svelte, check out [Vite][plugins]'s __[official plugin
 
 ## [Rails](https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-rails)
 
-Use <kbd>[vite-plugin-rails]</kbd> to pre-configure most of the recommended plugins in your application.
+<kbd>[vite-plugin-rails]</kbd> provides a shortcut for installing and
+configuring the following plugins for a typical Rails application:
+
+- <kbd>[vite-plugin-environment]</kbd>
+- <kbd>[vite-plugin-full-reload]</kbd>
+- <kbd>[vite-plugin-stimulus-hmr]</kbd>
+- <kbd>[rollup-plugin-gzip]</kbd>: pre-configured to compress assets using `gzip` and `brotli`
 
 In the future, `vite_rails` might install this plugin by default.
 
@@ -44,7 +52,6 @@ plugins: [
 ::: tip
 You can opt-out and use `vite-plugin-ruby` instead, manually adding only the plugins you need.
 :::
-
 
 ## [Environment](https://github.com/ElMassimo/vite-plugin-environment)
 

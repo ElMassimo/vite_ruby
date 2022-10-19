@@ -24,6 +24,7 @@
 [capistrano-rails]: https://github.com/capistrano/rails
 [installed automatically]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/tasks/vite.rake#L59-L63
 [dev dependencies]: /guide/deployment.html#development-dependencies-🔗
+[vite-plugin-rails]: /guide/plugins.html#rails
 
 # Deployment 🚀
 
@@ -105,10 +106,11 @@ the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` environment variable to `true`.
 Most CDN and edge service providers will automatically serve compressed assets,
 which is why Vite does not create compressed copies of each file.
 
-If your hosting service or server setup does not handle compression, you can
-use a Rollup plugin such as [`rollup-plugin-gzip`](https://github.com/kryops/rollup-plugin-gzip) to output gzip and brotli versions of each asset.
+If you are not sure about whether your setup handles compression, consider using
+[`rollup-plugin-gzip`](https://github.com/kryops/rollup-plugin-gzip) to output
+[gzip and brotli copies](https://github.com/ElMassimo/vite_ruby/discussions/101#discussioncomment-1019222) of each asset.
 
-Check [this discussion](https://github.com/ElMassimo/vite_ruby/discussions/101#discussioncomment-1019222) for an example setup.
+If using <kbd>[vite-plugin-rails]</kbd>, assets will be compressed using gzip and brotli out of the box.
 
 ## Using Capistrano
 
