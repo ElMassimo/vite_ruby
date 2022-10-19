@@ -31,7 +31,7 @@ private
       args = args.clone
       cmd.push('node', '--inspect-brk') if args.delete('--inspect')
       cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
-      cmd.push(vite_executable)
+      cmd.push(*vite_executable)
       cmd.push(*args)
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
@@ -40,6 +40,12 @@ private
   # Internal: Resolves to an executable for Vite.
   def vite_executable
     bin_path = config.vite_bin_path
-    File.exist?(bin_path) ? bin_path : "#{ `npm bin`.chomp }/vite"
+    return [bin_path] if File.exist?(bin_path)
+
+    if config.root.join('yarn.lock').exist?
+      %w[yarn vite]
+    else
+      ["#{ `npm bin`.chomp }/vite"]
+    end
   end
 end

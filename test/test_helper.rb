@@ -71,10 +71,17 @@ private
 
   def assert_run_command(*argv, flags: [])
     Dir.chdir(test_app_path) {
-      mock = Minitest::Mock.new
-      mock.expect(:call, nil, [ViteRuby.config.to_env, %r{node_modules/.bin/vite}, *argv, *flags])
-      Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
-      mock.verify
+      begin
+        mock = Minitest::Mock.new
+        mock.expect(:call, nil, [ViteRuby.config.to_env, %r{node_modules/.bin/vite}, *argv, *flags])
+        Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
+        mock.verify
+      rescue ArgumentError => _error
+        mock = Minitest::Mock.new
+        mock.expect(:call, nil, [ViteRuby.config.to_env, 'yarn', 'vite', *argv, *flags])
+        Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
+        mock.verify
+      end
     }
   end
 end
