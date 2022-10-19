@@ -132,46 +132,43 @@ export default function ViteRubyPlugin (options: Options = {}): PluginOption[] {
       customCompression: content => brotliCompressSync(Buffer.from(content)),
       fileName: '.br',
     }) as PluginOption,
-
-    // Allows to detect duplicate plugins.
-    {
-      name: 'vite-plugin-rails:dup-detector',
-      configResolved (config) {
-        if (config.plugins) {
-          const pluginNames = [...originalPluginNames]
-
-          config.plugins.forEach(plugin => removeBy(pluginNames, plugin.name))
-
-          if (pluginNames.length) {
-            throw new Error(`
-              [vite-plugin-rails] Duplicate plugins detected: ${pluginNames.join(', ')}.
-
-              If migrating from vite-plugin-ruby, make sure to remove these manually added
-              plugins, and instead pass the options to vite-plugin-rails.
-            `)
-          }
-        }
-      },
-    },
   ]
 
   const plugins = (pluginOptions as Plugin[]).flat(Infinity).filter(plugin => plugin)
 
-  const originalPluginNames = plugins
-    .filter(plugin => plugin.name !== 'gzip') // Can have additional copies.
-    .map(plugin => plugin.name)
-
-  return plugins
+  return [...plugins, dupDetector(plugins.map(plugin => plugin.name))]
 }
 
 function wrapArray<T> (array: T | T[]): T[] {
   return Array.isArray(array) ? array : [array]
 }
 
-// Internal: Removes an element from the Array in-place using 'splice`.
-//
-// Returns the removed item, or undefined.
-export function removeBy<T> (array: T[], itemToFind: T): T | undefined {
-  const index = array.findIndex(item => item === itemToFind)
-  if (index !== -1) return array.splice(index, 1)[0]
+// Internal: Allows to detect duplicate plugins.
+function dupDetector (originalPluginNames: string[]): Plugin {
+  return {
+    name: 'vite-plugin-rails:dup-detector',
+    configResolved (config) {
+      if (config.plugins) {
+        const pluginNames = new Set(originalPluginNames)
+        pluginNames.delete('gzip') // Can have additional copies.
+
+        const pluginCounts: Record<string, number> = Object.create(null)
+        config.plugins.filter(plugin => pluginNames.has(plugin.name)).forEach((plugin) => {
+          pluginCounts[plugin.name] = (pluginCounts[plugin.name] || 0) + 1
+        })
+
+        const duplicates = Object.entries(pluginCounts)
+          .filter(([name, count]) => count > 1).map(([name, count]) => name)
+
+        if (duplicates.length) {
+          throw new Error(`
+            [vite-plugin-rails] Duplicate plugins detected: ${duplicates.join(', ')}.
+
+            If migrating from vite-plugin-ruby, make sure to remove these manually added
+            plugins, and instead pass the options to vite-plugin-rails.
+          `)
+        }
+      }
+    },
+  }
 }

@@ -1,9 +1,9 @@
 import { resolve } from 'path'
-import { type UserConfig } from 'vite'
+import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import ViteRails from 'vite-plugin-rails'
 
-const config: UserConfig = {
+export default defineConfig({
   resolve: {
     alias: {
       '@assets/': `${resolve(__dirname, 'app/assets')}/`,
@@ -11,8 +11,6 @@ const config: UserConfig = {
   },
   plugins: [
     Vue(),
-    ViteRails(),
+    ViteRails({ fullReload: false }),
   ],
-}
-
-export default config
+})

@@ -1,10 +1,10 @@
 import { resolve } from 'path'
-import { UserConfig } from 'vite'
+import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import ViteRuby from 'vite-plugin-ruby'
 import ViteLegacy from '@vitejs/plugin-legacy'
 
-const config: UserConfig = {
+export default defineConfig({
   resolve: {
     alias: {
       '@assets/': `${resolve(__dirname, 'app/assets')}/`,
@@ -17,6 +17,4 @@ const config: UserConfig = {
       targets: ['defaults', 'not IE 11'],
     }),
   ],
-}
-
-export default config
+})
