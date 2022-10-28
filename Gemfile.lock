@@ -117,7 +117,7 @@ GEM
       ruby-progressbar
     minitest-stub_any_instance (1.0.2)
     nio4r (2.5.7)
-    nokogiri (1.13.8)
+    nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.21.0)

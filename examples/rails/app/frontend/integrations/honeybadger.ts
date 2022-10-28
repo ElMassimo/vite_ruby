@@ -1,8 +1,8 @@
 import Honeybadger from '@honeybadger-io/js'
 
-if (process.env.HONEYBADGER_API_KEY) {
+if (import.meta.env.HONEYBADGER_API_KEY) {
   Honeybadger.configure({
-    apiKey: process.env.HONEYBADGER_API_KEY,
+    apiKey: import.meta.env.HONEYBADGER_API_KEY,
     environment: import.meta.env.MODE,
   })
 
