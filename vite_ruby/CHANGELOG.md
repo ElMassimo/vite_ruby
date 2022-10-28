@@ -1,3 +1,12 @@
+## [3.2.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.7...vite_ruby@3.2.8) (2022-10-28)
+
+
+### Features
+
+* default to vite@3.2.0 ([2ef83a5](https://github.com/ElMassimo/vite_ruby/commit/2ef83a52148f46534c4106015f3f54ec9ee807cb))
+
+
+
 ## [3.2.7](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.6...vite_ruby@3.2.7) (2022-10-19)
 
 
