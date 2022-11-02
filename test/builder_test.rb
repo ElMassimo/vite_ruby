@@ -21,14 +21,15 @@ class BuilderTest < ViteRuby::Test
     setup
   end
 
-  def vite_env
-    ViteRuby.config.to_env
+  def vite_env(vars = ViteRuby.env)
+    ViteRuby.config.to_env(vars)
   end
 
   def test_custom_environment_variables
     assert_nil vite_env['FOO']
     ViteRuby.env['FOO'] = 'BAR'
-    assert_equal vite_env['FOO'], 'BAR'
+    assert_equal 'BAR', vite_env['FOO']
+    assert_equal 'OTHER', vite_env('FOO' => 'OTHER')['FOO']
   end
 
   def test_freshness

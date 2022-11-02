@@ -23,11 +23,11 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :logger
+  def_delegators :@vite_ruby, :config, :logger, :env
 
   # Internal: Returns an Array with the command to run.
   def command_for(args)
-    [config.to_env].tap do |cmd|
+    [config.to_env(env)].tap do |cmd|
       args = args.clone
       cmd.push('node', '--inspect-brk') if args.delete('--inspect')
       cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')

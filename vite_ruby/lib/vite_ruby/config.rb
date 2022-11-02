@@ -55,12 +55,12 @@ class ViteRuby::Config
   end
 
   # Public: Sets additional environment variables for vite-plugin-ruby.
-  def to_env
+  def to_env(env_vars = {})
     CONFIGURABLE_WITH_ENV.each_with_object({}) do |option, env|
       unless (value = @config[option]).nil?
         env["#{ ViteRuby::ENV_PREFIX }_#{ option.upcase }"] = value.to_s
       end
-    end.merge(ViteRuby.env)
+    end.merge(env_vars)
   end
 
   # Internal: Files and directories that should be watched for changes.
