@@ -21,8 +21,8 @@ class BuilderTest < ViteRuby::Test
     setup
   end
 
-  def vite_env(vars = ViteRuby.env)
-    ViteRuby.config.to_env(vars)
+  def vite_env(*vars)
+    ViteRuby.config.to_env(*vars)
   end
 
   def test_custom_environment_variables
