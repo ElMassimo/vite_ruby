@@ -111,7 +111,7 @@ private
   def run_with_capture(*args, **options)
     Dir.chdir(root) do
       _, stderr, status = ViteRuby::IO.capture(*args, **options)
-      say(stderr) unless status || stderr.empty?
+      say(stderr) unless status.success? || stderr.empty?
     end
   end
 

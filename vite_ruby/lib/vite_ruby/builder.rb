@@ -14,10 +14,10 @@ class ViteRuby::Builder
     last_build = last_build_metadata(ssr: args.include?('--ssr'))
 
     if args.delete('--force') || last_build.stale? || config.manifest_paths.empty?
-      stdout, stderr, success = build_with_vite(*args)
-      log_build_result(stdout, stderr, success)
-      record_build_metadata(last_build, errors: stderr, success: success)
-      success
+      stdout, stderr, status = build_with_vite(*args)
+      log_build_result(stdout, stderr, status)
+      record_build_metadata(last_build, errors: stderr, success: status.success?)
+      status.success?
     elsif last_build.success
       logger.debug "Skipping vite build. Watched files have not changed since the last build at #{ last_build.timestamp }"
       true
@@ -70,11 +70,12 @@ private
   #
   # NOTE: By default it also outputs the manifest entries.
   def log_build_result(_stdout, stderr, status)
-    if status
+    if status.success?
       logger.info "Build with Vite complete: #{ config.build_output_dir }"
       logger.error stderr unless stderr.empty?
     else
       logger.error stderr
+      logger.error status
       logger.error 'Build with Vite failed! ❌'
       logger.error '❌ Check that vite and vite-plugin-ruby are in devDependencies and have been installed. ' if stderr.include?('ERR! canceled')
     end

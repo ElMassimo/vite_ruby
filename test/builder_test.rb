@@ -115,7 +115,7 @@ class BuilderTest < ViteRuby::Test
 private
 
   def stub_runner(errors: '', success: errors.empty?, &block)
-    args = ['stdout', errors, success]
+    args = ['stdout', errors, MockProcessStatus.new(success: success)]
     ViteRuby::IO.stub(:capture, args, &block)
   end
 end
