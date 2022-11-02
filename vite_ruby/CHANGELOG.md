@@ -1,3 +1,13 @@
+## [3.2.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.8...vite_ruby@3.2.9) (2022-11-02)
+
+
+### Features
+
+* allow different ViteRuby instances to set different env vars ([25628a7](https://github.com/ElMassimo/vite_ruby/commit/25628a752cbd4828547c1f454cc4cb2217a591e0))
+* output exit code when vite process fails ([#294](https://github.com/ElMassimo/vite_ruby/issues/294)) ([eb8f678](https://github.com/ElMassimo/vite_ruby/commit/eb8f678248a02b693fffe5a49309984fed92a051)), closes [#292](https://github.com/ElMassimo/vite_ruby/issues/292)
+
+
+
 ## [3.2.8](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.7...vite_ruby@3.2.8) (2022-10-28)
 
 
