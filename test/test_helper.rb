@@ -62,7 +62,7 @@ private
     ViteRuby::Build.stub_any_instance(:success, build_successful) {
       ViteRuby::Build.stub_any_instance(:stale?, stale) {
         ViteRuby::Build.stub_any_instance(:errors, build_errors) {
-          result = ['stdout', build_errors, build_successful]
+          result = ['stdout', build_errors, MockProcessStatus.new(success: build_successful)]
           ViteRuby::Builder.stub_any_instance(:build_with_vite, result, &block)
         }
       }
@@ -83,5 +83,15 @@ private
         mock.verify
       end
     }
+  end
+
+  class MockProcessStatus
+    def initialize(success: true)
+      @success = success
+    end
+
+    def success?
+      @success
+    end
   end
 end

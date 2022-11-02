@@ -118,7 +118,7 @@ private
 
   def stub_runner(*args, **opts, &block)
     mock = Minitest::Mock.new
-    status = true
+    status = MockProcessStatus.new
     mock.expect(:call, ['stdout', 'stderr', status]) do |*argv, **options|
       assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
     end
