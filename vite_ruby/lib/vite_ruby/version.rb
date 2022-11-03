@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ViteRuby
-  VERSION = '3.2.9'
+  VERSION = '3.2.10'
 
   # Internal: Versions used by default when running `vite install`.
   DEFAULT_VITE_VERSION = '^3.2.0'

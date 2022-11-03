@@ -1,3 +1,7 @@
+## [3.2.10](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.9...vite_ruby@3.2.10) (2022-11-03)
+
+
+
 ## [3.2.9](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.8...vite_ruby@3.2.9) (2022-11-02)
 
 
