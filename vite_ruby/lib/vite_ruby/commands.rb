@@ -100,7 +100,7 @@ class ViteRuby::Commands
 
   # Internal: Prints information about ViteRuby's environment.
   def print_info
-    Dir.chdir(config.root) do
+    config.within_root do
       $stdout.puts "bin/vite present?: #{ File.exist? 'bin/vite' }"
 
       $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"

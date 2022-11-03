@@ -8,7 +8,7 @@ class ViteRuby::Runner
 
   # Public: Executes Vite with the specified arguments.
   def run(argv, exec: false)
-    Dir.chdir(config.root) {
+    config.within_root {
       cmd = command_for(argv)
       return Kernel.exec(*cmd) if exec
 

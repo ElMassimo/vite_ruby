@@ -75,6 +75,11 @@ class ViteRuby::Config
     ].freeze
   end
 
+  # Internal: Changes the current directory to the root dir.
+  def within_root(&block)
+    Dir.chdir(File.expand_path(root), &block)
+  end
+
 private
 
   # Internal: Coerces all the configuration values, in case they were passed
