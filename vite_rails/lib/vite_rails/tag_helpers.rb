@@ -42,7 +42,11 @@ module ViteRails::TagHelpers
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
     tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin, **options) unless skip_preload_tags
+
+    options[:extname] = false if Rails::VERSION::MAJOR >= 7
+
     tags << stylesheet_link_tag(*entries.fetch(:stylesheets), media: media, **options) unless skip_style_tags
+
     tags
   end
 
@@ -54,6 +58,9 @@ module ViteRails::TagHelpers
   # Public: Renders a <link> tag for the specified Vite entrypoints.
   def vite_stylesheet_tag(*names, **options)
     style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet) }
+
+    options[:extname] = false if Rails::VERSION::MAJOR >= 7
+
     stylesheet_link_tag(*style_paths, **options)
   end
 

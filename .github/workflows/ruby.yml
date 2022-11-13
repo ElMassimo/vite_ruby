@@ -17,16 +17,19 @@ jobs:
           "3.1",
         ]
         gemfile: [
-          "gemfiles/Gemfile-rails.6.0.x",
-          "gemfiles/Gemfile-rails.6.1.x",
-          "gemfiles/Gemfile-rails.7.0.x"
+          "Gemfile-rails.6.0.x",
+          "Gemfile-rails.6.1.x",
+          "Gemfile-rails.7.0.x"
         ]
         experimental: [false]
         include:
           - ruby: "3.1"
             os: ubuntu-latest
-            gemfile: gemfiles/Gemfile-rails-edge
+            gemfile: Gemfile-rails-edge
             experimental: true
+
+    env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}
 
     steps:
       - uses: actions/checkout@v3

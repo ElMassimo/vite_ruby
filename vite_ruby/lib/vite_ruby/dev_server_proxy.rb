@@ -38,7 +38,7 @@ private
     uri
       .sub(HOST_WITH_PORT_REGEX, '/') # Hanami adds the host and port.
       .sub('.ts.js', '.ts') # Hanami's javascript helper always adds the extension.
-      .sub(/(\.(?!min|module)\w+)\.css$/, '\1') # Rails' stylesheet_link_tag always adds the extension.
+      .sub(/\.(sass|scss|styl|stylus|less|pcss|postcss)\.css$/, '.\1') # Rails' stylesheet_link_tag always adds the extension.
   end
 
   def forward_to_vite_dev_server(env)

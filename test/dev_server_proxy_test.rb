@@ -80,6 +80,11 @@ class DevServerProxyTest < ViteRuby::Test
     assert_forwarded to: '/vite-production/entrypoints/sassy.scss'
   end
 
+  def test_stylus_with_extra_css
+    get_with_dev_server_running '/vite-production/entrypoints/sassy.stylus.css'
+    assert_forwarded to: '/vite-production/entrypoints/sassy.stylus'
+  end
+
   def test_min_css
     get_with_dev_server_running '/vite-production/colored.min.css'
     assert_forwarded to: '/vite-production/colored.min.css'
@@ -88,6 +93,11 @@ class DevServerProxyTest < ViteRuby::Test
   def test_module_css
     get_with_dev_server_running '/vite-production/colored.module.css'
     assert_forwarded to: '/vite-production/colored.module.css'
+  end
+
+  def test_random_extension_css
+    get_with_dev_server_running '/vite-production/colored.bubble.css'
+    assert_forwarded to: '/vite-production/colored.bubble.css'
   end
 
   def test_without_dev_server_running

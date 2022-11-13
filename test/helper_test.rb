@@ -93,7 +93,11 @@ class HelperTest < HelperTestCase
     with_dev_server_running {
       assert_similar link(href: '/vite-dev/entrypoints/app.css'), vite_stylesheet_tag('app')
       assert_equal vite_stylesheet_tag('app'), vite_stylesheet_tag('app.css')
-      assert_similar link(href: '/vite-dev/entrypoints/sassy.scss.css'), vite_stylesheet_tag('sassy.scss')
+      if Rails::VERSION::MAJOR >= 7
+        assert_similar link(href: '/vite-dev/entrypoints/sassy.scss'), vite_stylesheet_tag('sassy.scss')
+      else
+        assert_similar link(href: '/vite-dev/entrypoints/sassy.scss.css'), vite_stylesheet_tag('sassy.scss')
+      end
     }
   end
 
