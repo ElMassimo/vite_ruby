@@ -1,3 +1,12 @@
+## [3.2.11](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.10...vite_ruby@3.2.11) (2022-11-13)
+
+
+### Bug Fixes
+
+* avoid removing double extension for non-preprocessor assets ([#301](https://github.com/ElMassimo/vite_ruby/issues/301)) ([2024f62](https://github.com/ElMassimo/vite_ruby/commit/2024f62af917cabcb817c32a5fbbe709d477c19f))
+
+
+
 ## [3.2.10](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.9...vite_ruby@3.2.10) (2022-11-03)
 
 
