@@ -19,11 +19,12 @@ explicitly.
 
 ## Additional Entrypoints
 
-The <kbd>[additionalEntrypoints]</kbd> setting added in `3.0.0` allows you to
-configure additional entries that are located outside the <kbd>[entrypointsDir]</kbd>.
+By default, any files inside the <kbd>[entrypointsDir]</kbd> will be considered [entries to be bundled][entrypoints], allowing them to be referenced in [tag helpers].
 
-By default, it's configured to: `["~/{assets,fonts,icons,images}/**/*"]`, which
-enables bundling and referencing these files with [tag helpers]:
+If you need to reference files outside <kbd>[entrypointsDir]</kbd>, you can use <kbd>[additionalEntrypoints]</kbd> to configure additional entries to be bundled by Vite.
+
+By default, it's configured to: `["~/{assets,fonts,icons,images}/**/*"]`, since
+it's common to reference these files in [tag helpers]:
 
 ```ruby
 vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg

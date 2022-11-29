@@ -23,6 +23,7 @@
 [vite-plugin-stimulus-hmr]: https://github.com/ElMassimo/vite-plugin-stimulus-hmr
 [stimulus]: https://stimulus.hotwire.dev/
 [vite-plugin-rails]: /guide/plugins.html#rails
+[additionalEntrypoints]: /guide/advanced.html#additional-entrypoints
 
 # Rails Integration
 
@@ -41,7 +42,7 @@ It will include [additional plugins][vite-plugin-rails] that users typically add
 
 As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
 
-In order to link the JavaScript and CSS managed by Vite in your Rails layouts or
+In order to link these JavaScript and CSS [entrypoints] managed by Vite in your Rails layouts or
 templates, you can using the following helpers:
 
 - <kbd>[vite_javascript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a JavaScript file
@@ -96,6 +97,12 @@ vite_asset_path 'images/logo.svg' # app/frontend/images/logo.svg
 vite_asset_path 'typography.css'  # app/frontend/entrypoints/typography.css
 vite_asset_path 'logo.svg'        # app/frontend/entrypoints/logo.svg
 ```
+
+:::warning Entrypoints Only
+Make sure any files that are being referenced in tag helpers are [entrypoints].
+
+Otherwise, Vite won't be [aware of these files][additionalEntrypoints] and won't bundle them.
+:::
 
 ### Enabling Hot Module Reload 🔥
 

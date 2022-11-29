@@ -12,7 +12,7 @@
 [json config]: /config/#shared-configuration-file-%F0%9F%93%84
 [vite config]: /config/#configuring-vite-%E2%9A%A1
 [sourceCodeDir]: /config/#sourcecodedir
-[additionalEntrypoints]: /config/#additionalentrypoints
+[additionalEntrypoints]: /guide/advanced.html#additional-entrypoints
 [autoBuild]: /config/#autobuild
 [entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
 [Importing styles from JS]: https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/app/frontend/entrypoints/application.ts#L8-L9
@@ -40,8 +40,7 @@ used to configure the `host` and `port`, as well as [other options][dev options]
 
 ## Entrypoints ⤵️
 
-Drawing inspiration from [webpacker], any files inside your <kbd>[entrypointsDir]</kbd>
-will be considered [entries][entrypoints] to your application (SPAs or pages).
+Any files inside your <kbd>[entrypointsDir]</kbd> will be considered [entries][entrypoints] to your application (SPAs or pages), and will be bundled by Vite.
 
 <div class="language-">
   <pre>
@@ -66,8 +65,11 @@ These files will be automatically detected and passed on to Vite, all [configura
 
 You can add them to your HTML layouts or views using the provided [tag helpers].
 
-:::tip New in v3
-<kbd>[additionalEntrypoints]</kbd> allows to configure entrypoints. See _[Advanced Usage]_.
+:::tip Additional Entrypoints
+By default, files inside `~/{assets,fonts,icons,images}/**/*assets` are also
+bundled as entrypoints, allowing you to reference them in [tag helpers].
+
+Use <kbd>[additionalEntrypoints]</kbd> to configure entrypoints manually.
 :::
 
 ## Import Aliases 👉

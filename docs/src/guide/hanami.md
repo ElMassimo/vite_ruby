@@ -29,7 +29,7 @@ you should have an [installed example].
 
 As we saw in the [development] section, [entrypoints] will be [automatically detected][entrypoints].
 
-In order to link the JavaScript and CSS managed by Vite in your Hanami views or
+In order to link these JavaScript and CSS [entrypoints] managed by Vite in your Hanami views or
 templates, you can use the following helpers:
 
 - <kbd>[vite_javascript][helpers]</kbd>: Renders a `<script>` tag referencing a JavaScript file
