@@ -1,3 +1,13 @@
+## [3.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.2...vite-plugin-ruby@3.1.3) (2022-12-02)
+
+
+### Features
+
+* add experimental `skipProxy` setting ([#315](https://github.com/ElMassimo/vite_ruby/issues/315)) ([e9285f6](https://github.com/ElMassimo/vite_ruby/commit/e9285f62c76cc0cbbc5dc99d977e8aef30d08b6f))
+* create vite-plugin-rails, an opinionated version of `vite-plugin-ruby` ([#282](https://github.com/ElMassimo/vite_ruby/issues/282)) ([16375fb](https://github.com/ElMassimo/vite_ruby/commit/16375fb1f6f2bf86dff935ca3aaf91c333a796ff))
+
+
+
 ## [3.1.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.1...vite-plugin-ruby@3.1.2) (2022-07-15)
 
 
