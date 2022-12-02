@@ -11,6 +11,7 @@
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [publicDir]: /config/#publicdir
 [root]: /config/#root
+[https]: /config/#https
 [alignment with Rails defaults]: https://github.com/rails/webpacker/issues/769
 [source maps]: https://vitejs.dev/config/#build-sourcemap
 [import aliases]: /guide/development.html#import-aliases-👉
@@ -313,6 +314,20 @@ You can customize this behavior using the following options.
   version, which should resolve this error.
 
   Otherwise, this setting allows to skip that check. Use it responsibly.
+
+### skipProxy (experimental)
+
+- **Version Added:** `3.2.12`
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_PROXY`
+
+  Whether to skip the [dev server proxy](/overview#in-development), and request assets to the Vite
+  development server directly.
+
+  Connecting to Vite directly allows assets to be served using HTTP2 when <kbd>[https]</kbd> is enabled.
+
+  Don't enable this option in Rails 6 or earlier if you are using `vite_stylesheet_tag` with assets that don't have a `.css` extension,
+  [or Vite will fail to serve them](https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/dev_server_proxy.rb#L41).
 
 ### viteBinPath
 

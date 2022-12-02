@@ -11,6 +11,7 @@
   "entrypointsDir": "entrypoints",
   "sourceCodeDir": "app/frontend",
   "skipCompatibilityCheck": false,
+  "skipProxy": false,
   "host": "localhost",
   "https": null,
   "port": 3036,

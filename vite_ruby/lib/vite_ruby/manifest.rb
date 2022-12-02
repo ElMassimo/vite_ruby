@@ -125,13 +125,18 @@ private
 
   # Internal: Scopes an asset to the output folder in public, as a path.
   def prefix_vite_asset(path)
-    File.join("/#{ config.public_output_dir }", path)
+    File.join(vite_asset_origin || '/', config.public_output_dir, path)
   end
 
   # Internal: Prefixes an asset with the `asset_host` for tags that do not use
   # the framework tag helpers.
   def prefix_asset_with_host(path)
-    File.join(config.asset_host || '/', config.public_output_dir, path)
+    File.join(vite_asset_origin || config.asset_host || '/', config.public_output_dir, path)
+  end
+
+  # Internal: The origin of assets managed by Vite.
+  def vite_asset_origin
+    config.origin if dev_server_running? && config.skip_proxy
   end
 
   # Internal: Resolves the paths that reference a manifest entry.
