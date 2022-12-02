@@ -17,6 +17,7 @@ export interface ResolvedConfig {
   publicOutputDir: string
   watchAdditionalPaths: string[]
   base: string
+  skipProxy: boolean
   /**
    * @private
    * In the context of the internal code, whether an SSR build should be performed.
