@@ -89,7 +89,7 @@ overriden with environment variables.
 To set environment variables that need to be resolved at [__runtime__][runtime env var], use `config/vite.rb`.
 
 This will be loaded once `ViteRuby.config` is resolved, and you may configure
-`ViteRuby.env` as needed or call `ViteRuby.reload_with(**options)` to override the configuration.
+`ViteRuby.env` as needed or call `ViteRuby.configure(**options)` to override the configuration.
 
 ```ruby
 # config/vite.rb

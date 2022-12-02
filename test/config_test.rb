@@ -56,6 +56,7 @@ class ConfigTest < ViteRuby::Test
     assert_nil @config.to_env['EXAMPLE_PATH']
 
     refresh_config(config_path: 'config/vite_public_dir.json')
+    assert_equal 'from_ruby', ViteRuby.config.public_output_dir
     assert_equal Gem.loaded_specs['rails'].full_gem_path, ViteRuby.config.to_env['EXAMPLE_PATH']
   end
 
