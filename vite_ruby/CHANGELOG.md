@@ -1,3 +1,18 @@
+## [3.2.12](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.11...vite_ruby@3.2.12) (2022-12-02)
+
+
+### Features
+
+* add experimental `skipProxy` setting ([#315](https://github.com/ElMassimo/vite_ruby/issues/315)) ([e9285f6](https://github.com/ElMassimo/vite_ruby/commit/e9285f62c76cc0cbbc5dc99d977e8aef30d08b6f))
+* add ViteRuby.instance.configure API to be used in config/vite.rb ([b5b8681](https://github.com/ElMassimo/vite_ruby/commit/b5b8681f85f5388a56d72c9b05dbfc95d5ba607b))
+
+
+### Performance Improvements
+
+* avoid calculating digest on each lookup ([#314](https://github.com/ElMassimo/vite_ruby/issues/314)) ([62df93a](https://github.com/ElMassimo/vite_ruby/commit/62df93a15c09c652a8b7496e26cf85d5d69acce7))
+
+
+
 ## [3.2.11](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.10...vite_ruby@3.2.11) (2022-11-13)
 
 
