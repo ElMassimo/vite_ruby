@@ -32,7 +32,7 @@ class ViteRuby
   class << self
     extend Forwardable
 
-    def_delegators :instance, :config, :commands, :digest, :env, :run, :run_proxy?
+    def_delegators :instance, :config, :configure, :commands, :digest, :env, :run, :run_proxy?
     def_delegators :config, :mode
 
     def instance
@@ -128,11 +128,16 @@ class ViteRuby
   # Public: Current instance configuration for Vite.
   def config
     unless defined?(@config)
-      @config = ViteRuby::Config.resolve_config(**@config_options)
+      configure
       @config.load_ruby_config
     end
 
     @config
+  end
+
+  # Public: Allows overriding the configuration for this instance.
+  def configure(**options)
+    @config = ViteRuby::Config.resolve_config(**@config_options, **options)
   end
 
   # Public: Enables looking up assets managed by Vite using name and type.
