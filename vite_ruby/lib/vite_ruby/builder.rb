@@ -52,10 +52,13 @@ private
   # Internal: Returns a digest of all the watched files, allowing to detect
   # changes, and skip Vite builds if no files have changed.
   def watched_files_digest
+    return @last_digest if @last_digest_at && Time.now - @last_digest_at < 1
+
     config.within_root do
       files = Dir[*config.watched_paths].reject { |f| File.directory?(f) }
       file_ids = files.sort.map { |f| "#{ File.basename(f) }/#{ Digest::SHA1.file(f).hexdigest }" }
-      Digest::SHA1.hexdigest(file_ids.join('/'))
+      @last_digest_at = Time.now
+      @last_digest = Digest::SHA1.hexdigest(file_ids.join('/'))
     end
   end
 
