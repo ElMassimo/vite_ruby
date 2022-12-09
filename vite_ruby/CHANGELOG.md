@@ -1,3 +1,12 @@
+## [3.2.13](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.12...vite_ruby@3.2.13) (2022-12-09)
+
+
+### Features
+
+* install vite 4 by default ([c1a2e16](https://github.com/ElMassimo/vite_ruby/commit/c1a2e16a5b47225c53ad73b4f6371f2108881850))
+
+
+
 ## [3.2.12](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.11...vite_ruby@3.2.12) (2022-12-02)
 
 
