@@ -15,7 +15,7 @@ PATH
   remote: vite_ruby
   specs:
     vite_ruby (3.2.13)
-      dry-cli (~> 1.0)
+      dry-cli (>= 0.7, < 2)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
 
