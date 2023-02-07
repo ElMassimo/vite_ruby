@@ -3,10 +3,10 @@
 # Public: Allows to render HTML tags for scripts and styles processed by Vite.
 module ViteRails::TagHelpers
   # Public: Renders a script tag for vite/client to enable HMR in development.
-  def vite_client_tag
+  def vite_client_tag(**options)
     return unless src = vite_manifest.vite_client_src
 
-    javascript_include_tag(src, type: 'module', extname: false)
+    javascript_include_tag(src, type: 'module', extname: false, **options)
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
