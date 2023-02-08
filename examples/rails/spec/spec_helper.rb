@@ -15,7 +15,7 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
-  config.filter_gems_from_backtrace 'spring', 'rspec-core', 'given_core', 'capybara', 'bootsnap', 'activesupport', 'selenium-webdriver'
+  config.filter_gems_from_backtrace 'spring', 'rspec-core', 'given_core', 'capybara', 'bootsnap', 'activesupport', 'cuprite', 'ferrum'
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

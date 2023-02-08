@@ -100,10 +100,18 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    cuprite (0.14.2)
+      capybara (~> 3.0)
+      ferrum (~> 0.12.0)
     diff-lcs (1.5.0)
     digest (3.1.0)
     dry-cli (0.7.0)
     erubi (1.11.0)
+    ferrum (0.12)
+      addressable (~> 2.5)
+      concurrent-ruby (~> 1.1)
+      webrick (~> 1.7)
+      websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -239,6 +247,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
+    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -255,6 +264,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   capybara-screenshot
   capybara_test_helpers
+  cuprite
   listen (~> 3.2)
   pg
   pry-byebug
@@ -262,7 +272,6 @@ DEPENDENCIES
   rails (~> 7)
   rexml
   rspec-rails
-  selenium-webdriver
   tzinfo-data
   vite_plugin_legacy
   vite_rails
@@ -270,4 +279,4 @@ DEPENDENCIES
   webdrivers
 
 BUNDLED WITH
-   2.3.17
+   2.3.22
