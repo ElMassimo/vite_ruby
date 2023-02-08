@@ -1,3 +1,13 @@
+## [3.0.14](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.13...vite_rails@3.0.14) (2023-02-08)
+
+
+### Features
+
+* allow javascript_include_tag options to vite_client_tag ([#337](https://github.com/ElMassimo/vite_ruby/issues/337)) ([417bcf3](https://github.com/ElMassimo/vite_ruby/commit/417bcf38366dd26901eb87cedd80d01118d7936f))
+* make vite_client_tag crossorigin: "anonymous" by default ([404a15a](https://github.com/ElMassimo/vite_ruby/commit/404a15a70c9d4fcd774735045c0d58d3e2aa37f2))
+
+
+
 ## [3.0.13](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.12...vite_rails@3.0.13) (2022-11-13)
 
 
