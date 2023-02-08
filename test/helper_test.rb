@@ -62,7 +62,7 @@ class HelperTest < HelperTestCase
   def test_vite_client_tag
     assert_nil vite_client_tag
     with_dev_server_running {
-      assert_equal '<script src="/vite-dev/@vite/client" type="module"></script>', vite_client_tag
+      assert_equal '<script src="/vite-dev/@vite/client" crossorigin="anonymous" type="module"></script>', vite_client_tag
     }
   end
 
