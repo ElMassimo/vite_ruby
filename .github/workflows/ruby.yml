@@ -17,13 +17,12 @@ jobs:
           "3.1",
         ]
         gemfile: [
-          "Gemfile-rails.6.0.x",
           "Gemfile-rails.6.1.x",
           "Gemfile-rails.7.0.x"
         ]
         experimental: [false]
         include:
-          - ruby: "3.1"
+          - ruby: "3.2"
             os: ubuntu-latest
             gemfile: Gemfile-rails-edge
             experimental: true
