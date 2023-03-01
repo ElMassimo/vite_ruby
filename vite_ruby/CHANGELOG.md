@@ -1,3 +1,12 @@
+## [3.2.15](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.14...vite_ruby@3.2.15) (2023-03-01)
+
+
+### Features
+
+* install dependencies with yarn if npx is not available ([#343](https://github.com/ElMassimo/vite_ruby/issues/343)) ([90c5db2](https://github.com/ElMassimo/vite_ruby/commit/90c5db2e45ed89aedfa02f0f167925e4ccb02d6d)), closes [#342](https://github.com/ElMassimo/vite_ruby/issues/342)
+
+
+
 ## [3.2.14](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.13...vite_ruby@3.2.14) (2022-12-22)
 
 
