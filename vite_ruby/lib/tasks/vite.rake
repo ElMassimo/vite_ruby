@@ -43,7 +43,10 @@ namespace :vite do
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
     cmd = ViteRuby.commands.legacy_npm_version? ? 'npx ci --yes' : 'npx --yes ci'
-    system({ 'NODE_ENV' => 'development' }, cmd)
+    result = system({ 'NODE_ENV' => 'development' }, cmd)
+
+    # Fallback to `yarn` if `npx` is not available.
+    system({ 'NODE_ENV' => 'development' }, 'yarn install --frozen-lockfile') if result.nil?
   end
 
   desc "Provide information on ViteRuby's environment"
