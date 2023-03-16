@@ -1,4 +1,5 @@
-import { basename, posix } from 'path'
+import { basename, posix, resolve } from 'path'
+import { existsSync, readFileSync } from 'fs'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import createDebugger from 'debug'
 
@@ -74,6 +75,16 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 // Internal: Allows to watch additional paths outside the source code dir.
 function configureServer (server: ViteDevServer) {
   server.watcher.add(watchAdditionalPaths)
+
+  return () => server.middlewares.use((req, res, next) => {
+    if (req.url === '/index.html' && !existsSync(resolve(server.config.root, 'index.html'))) {
+      res.statusCode = 404
+      const file = readFileSync(resolve(__dirname, 'dev-server-index.html'), 'utf-8')
+      res.end(file)
+    }
+
+    next()
+  })
 }
 
 function outputOptions (assetsDir: string, ssrBuild: boolean) {
