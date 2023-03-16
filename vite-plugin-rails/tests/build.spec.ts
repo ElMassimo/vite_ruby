@@ -1,4 +1,5 @@
 import { resolve } from 'path'
+import { readFileSync } from 'fs'
 import { beforeAll, describe, test, expect } from 'vitest'
 import execa from 'execa'
 import glob from 'fast-glob'
@@ -12,7 +13,8 @@ describe('config', () => {
   }, 60000)
 
   test('generated files', async () => {
-    const files = await glob('**/*', { cwd: `${exampleDir}/public/vite`, onlyFiles: true })
+    const outDir = `${exampleDir}/public/vite`
+    const files = await glob('**/*', { cwd: outDir, onlyFiles: true })
     expect(files.sort()).toEqual(expect.arrayContaining([
       'assets/app-80592535.css',
       'assets/app-80592535.css.br',
@@ -50,5 +52,11 @@ describe('config', () => {
       'assets/vue-b821fb22.css.br',
       'assets/vue-b821fb22.css.gz',
     ]))
+
+    const parseManifest = (path: string) => JSON.parse(readFileSync(`${outDir}/${path}`, 'utf-8'))
+    const manifest = parseManifest('manifest.json')
+    const manifestAssets = parseManifest('manifest-assets.json')
+
+    expect({ ...manifest, ...manifestAssets }).toMatchSnapshot()
   })
 })
