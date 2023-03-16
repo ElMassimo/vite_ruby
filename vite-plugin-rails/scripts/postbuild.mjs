@@ -12,7 +12,12 @@ const code = source.replaceAll(
   '!mod.default',
 )
 
-if (code !== source)
+if (code !== source) {
+  console.info(`Writing ${file}`)
   fs.writeFileSync(file, code)
-else
-  throw new Error('Did not find CJS pattern to replace.')
+}
+else {
+  const message = 'Did not find CJS pattern to replace.'
+  console.error(message)
+  throw new Error(message)
+}

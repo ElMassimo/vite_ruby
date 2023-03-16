@@ -1,6 +1,5 @@
 import path from 'path'
 import { promises as fsp } from 'fs'
-import { createHash } from 'crypto'
 import createDebugger from 'debug'
 
 import type { Plugin, ResolvedConfig } from 'vite'
@@ -18,10 +17,6 @@ interface AssetsManifestChunk {
 
 type AssetsManifest = Map<string, AssetsManifestChunk>
 
-function getAssetHash (content: Buffer) {
-  return createHash('sha256').update(content).digest('hex').slice(0, 8)
-}
-
 // Internal: Writes a manifest file that allows to map an entrypoint asset file
 // name to the corresponding output file name.
 export function assetsManifestPlugin (): Plugin {
@@ -35,17 +30,9 @@ export function assetsManifestPlugin (): Plugin {
 
     for (const [filename, absoluteFilename] of remainingAssets) {
       const content = await fsp.readFile(absoluteFilename)
-      const hash = getAssetHash(content)
-
-      const ext = path.extname(filename)
-      const filenameWithoutExt = filename.slice(0, -ext.length)
-      const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}.${hash}${ext}`)
-
+      const ref = ctx.emitFile({ name: path.basename(filename), type: 'asset', source: content })
+      const hashedFilename = ctx.getFileName(ref)
       manifest.set(path.relative(config.root, absoluteFilename), { file: hashedFilename, src: filename })
-
-      // Avoid duplicates if the file was referenced in a different entrypoint.
-      if (!bundle[hashedFilename])
-        ctx.emitFile({ name: filename, fileName: hashedFilename, type: 'asset', source: content })
     }
   }
 
