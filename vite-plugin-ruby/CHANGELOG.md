@@ -1,3 +1,12 @@
+## [3.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.2.0...vite-plugin-ruby@3.2.1) (2023-03-16)
+
+
+### Features
+
+* help users that visit the vite dev server directly ([#346](https://github.com/ElMassimo/vite_ruby/issues/346)) ([0f40a1d](https://github.com/ElMassimo/vite_ruby/commit/0f40a1de2d29201a32d7d2f679e99b1ed3208246))
+
+
+
 # [3.2.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.3...vite-plugin-ruby@3.2.0) (2023-03-16)
 
 
