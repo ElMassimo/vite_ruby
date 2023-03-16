@@ -1,3 +1,12 @@
+# [3.2.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.3...vite-plugin-ruby@3.2.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* ssr incompatibility with vite 4 ([#345](https://github.com/ElMassimo/vite_ruby/issues/345)) ([3491bde](https://github.com/ElMassimo/vite_ruby/commit/3491bdedad2b0fcb8a1895efa4dafb3874d14efd)), closes [#333](https://github.com/ElMassimo/vite_ruby/issues/333)
+
+
+
 ## [3.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.1.2...vite-plugin-ruby@3.1.3) (2022-12-02)
 
 
