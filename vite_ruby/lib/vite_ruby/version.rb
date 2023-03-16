@@ -4,6 +4,6 @@ class ViteRuby
   VERSION = '3.2.15'
 
   # Internal: Versions used by default when running `vite install`.
-  DEFAULT_VITE_VERSION = '^4.0.0'
-  DEFAULT_PLUGIN_VERSION = '^3.1.2'
+  DEFAULT_VITE_VERSION = '^4.2.0'
+  DEFAULT_PLUGIN_VERSION = '^3.2.0'
 end
