@@ -1,3 +1,13 @@
+# [3.3.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.15...vite_ruby@3.3.0) (2023-03-16)
+
+
+### Features
+
+* add support for the --profile flag when running vite build ([4a949fd](https://github.com/ElMassimo/vite_ruby/commit/4a949fde1672b899c7c0382e99a669195c7ea639)), closes [#332](https://github.com/ElMassimo/vite_ruby/issues/332)
+* change defaults to vite@4.2.0 and vite-plugin-ruby@3.2.0 ([e9f5702](https://github.com/ElMassimo/vite_ruby/commit/e9f570294c34682a6dd18fdc2ef13675f33375e6))
+
+
+
 ## [3.2.15](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.14...vite_ruby@3.2.15) (2023-03-01)
 
 
