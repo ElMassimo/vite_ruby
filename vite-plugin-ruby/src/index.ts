@@ -45,8 +45,8 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     outDir,
     rollupOptions: {
       input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
-      output: ssrBuild ? {} : {
-        ...outputOptions(assetsDir),
+      output: {
+        ...outputOptions(assetsDir, ssrBuild),
         ...userConfig.build?.rollupOptions?.output,
       },
     },
@@ -76,16 +76,14 @@ function configureServer (server: ViteDevServer) {
   server.watcher.add(watchAdditionalPaths)
 }
 
-function outputOptions (assetsDir: string) {
+function outputOptions (assetsDir: string, ssrBuild: boolean) {
   // Internal: Avoid nesting entrypoints unnecessarily.
   const outputFileName = (ext: string) => ({ name }: { name: string }) => {
     const shortName = basename(name).split('.')[0]
-    return posix.join(assetsDir, `${shortName}.[hash].${ext}`)
+    return posix.join(assetsDir, `${shortName}-[hash].${ext}`)
   }
 
   return {
-    entryFileNames: outputFileName('js'),
-    chunkFileNames: outputFileName('js'),
-    assetFileNames: outputFileName('[ext]'),
+    entryFileNames: ssrBuild ? undefined : outputFileName('js'),
   }
 }

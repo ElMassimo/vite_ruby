@@ -39,7 +39,7 @@ export function assetsManifestPlugin (): Plugin {
 
       const ext = path.extname(filename)
       const filenameWithoutExt = filename.slice(0, -ext.length)
-      const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}.${hash}${ext}`)
+      const hashedFilename = path.posix.join(config.build.assetsDir, `${path.basename(filenameWithoutExt)}-${hash}${ext}`)
 
       manifest.set(path.relative(config.root, absoluteFilename), { file: hashedFilename, src: filename })
 
