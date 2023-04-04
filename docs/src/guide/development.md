@@ -66,7 +66,7 @@ These files will be automatically detected and passed on to Vite, all [configura
 You can add them to your HTML layouts or views using the provided [tag helpers].
 
 :::tip Additional Entrypoints
-By default, files inside `~/{assets,fonts,icons,images}/**/*assets` are also
+By default, files inside `~/{assets,fonts,icons,images}/**/*` are also
 bundled as entrypoints, allowing you to reference them in [tag helpers].
 
 Use <kbd>[additionalEntrypoints]</kbd> to configure entrypoints manually.
