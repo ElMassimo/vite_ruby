@@ -34,14 +34,14 @@ module ViteRails::TagHelpers
   def vite_javascript_tag(*names,
                           type: 'module',
                           asset_type: :javascript,
-                          skip_preload_tags: true,
+                          skip_preload_tags: false,
                           skip_style_tags: false,
                           crossorigin: 'anonymous',
                           media: 'screen',
                           **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
-    tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin, **options) unless skip_preload_tags
+    # tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin, **options) unless skip_preload_tags
 
     options[:extname] = false if Rails::VERSION::MAJOR >= 7
 
