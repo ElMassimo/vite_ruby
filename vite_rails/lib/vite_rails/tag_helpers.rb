@@ -34,7 +34,7 @@ module ViteRails::TagHelpers
   def vite_javascript_tag(*names,
                           type: 'module',
                           asset_type: :javascript,
-                          skip_preload_tags: false,
+                          skip_preload_tags: true,
                           skip_style_tags: false,
                           crossorigin: 'anonymous',
                           media: 'screen',
