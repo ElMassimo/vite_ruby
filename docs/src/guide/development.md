@@ -173,6 +173,20 @@ It's safe if you are running tests in a CI as it will build in production mode.
 When running tests locally, you can test the production build by not starting the Vite dev server for tests, or by setting the `CI` environment variable.
 :::
 
+## Integration Tests in the CI ✅
+
+When running tests in the CI, it's more reliable if assets are available
+__before__ tests start to run, as it:
+
+- Prevents timeouts in Capybara during <kbd>[autoBuild]</kbd>
+- Prevents race conditions when running tests in parallel (each thread could start a build)
+
+To achieve that, it's recommended to run `bin/rake assets:precompile`—which should [also run `vite build`][deployment]—in a previous CI step.
+
+You can verify your setup is working by disabling <kbd>[autoBuild]</kbd>. A convenient way to do that is to add `VITE_RUBY_AUTO_BUILD="false"` to the build environment variables.
+
 [avoid rebuilds]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/spec/features/home_spec.rb#15
 [publicOutputDir]: /config/#publicoutputdir
 [port]: /config/#port
+[ruby config]: /config/#ruby-configuration-file-💎
+[deployment]: /guide/deployment
