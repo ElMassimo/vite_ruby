@@ -84,10 +84,16 @@ private
 
   # Internal: Renders a modulepreload link tag.
   def vite_preload_tag(*sources, crossorigin:, **options)
+    crossorigin = "anonymous" if crossorigin == true
+    options[:crossorigin] = crossorigin if crossorigin == true
+
     sources.map { |source|
       href = path_to_asset(source)
-      try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
-      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
+      link_attrs = "<#{href}>; rel=preload; as=script"
+      link_attrs += "; crossorigin=#{ crossorigin }" unless crossorigin.nil?
+
+      try(:request).try(:send_early_hints, 'Link' => link_attrs)
+      tag.link(rel: 'modulepreload', href: href, as: 'script', **options)
     }.join("\n").html_safe
   end
 end
