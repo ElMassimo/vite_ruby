@@ -1,3 +1,12 @@
+## [3.3.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.0...vite_ruby@3.3.1) (2023-04-28)
+
+
+### Features
+
+* upgrade default vite version to 4.3 ([b186456](https://github.com/ElMassimo/vite_ruby/commit/b18645605dd40b312da1137a6440abc8fe4c5ae7))
+
+
+
 # [3.3.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.2.15...vite_ruby@3.3.0) (2023-03-16)
 
 
