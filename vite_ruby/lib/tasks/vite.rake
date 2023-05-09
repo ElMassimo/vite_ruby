@@ -63,10 +63,12 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
       Rake::Task["#{ prefix }vite:build_all"].invoke
     end
   else
+    desc 'Bundle Vite assets'
     Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build_all'])
   end
 
   unless Rake::Task.task_defined?('assets:clean')
+    desc 'Remove old compiled assets'
     Rake::Task.define_task('assets:clean', [:keep, :age])
   end
   Rake::Task['assets:clean'].enhance do |_, args|
@@ -78,6 +80,7 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
       Rake::Task['vite:clobber'].invoke
     end
   else
+    desc 'Remove compiled assets'
     Rake::Task.define_task('assets:clobber' => 'vite:clobber')
   end
 end
