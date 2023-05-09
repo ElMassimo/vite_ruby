@@ -1,3 +1,12 @@
+## [3.3.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.1...vite_ruby@3.3.2) (2023-05-09)
+
+
+### Bug Fixes
+
+* ensure assets:precompile task is displayed when using `rake -T` ([66af6eb](https://github.com/ElMassimo/vite_ruby/commit/66af6eb0268e7a989562feb38da74072817f0d49))
+
+
+
 ## [3.3.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.0...vite_ruby@3.3.1) (2023-04-28)
 
 
