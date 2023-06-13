@@ -51,13 +51,22 @@ class ViteRuby::Manifest
     if dev_server_running?
       <<~REACT_REFRESH
         <script type="module">
-          import RefreshRuntime from '#{ prefix_asset_with_host('@react-refresh') }'
-          RefreshRuntime.injectIntoGlobalHook(window)
-          window.$RefreshReg$ = () => {}
-          window.$RefreshSig$ = () => (type) => type
-          window.__vite_plugin_react_preamble_installed__ = true
+          #{ react_preamble_code }
         </script>
       REACT_REFRESH
+    end
+  end
+
+  # Public: Source script for the React Refresh plugin.
+  def react_preamble_code
+    if dev_server_running?
+      <<~REACT_PREAMBLE_CODE
+        import RefreshRuntime from '#{ prefix_asset_with_host('@react-refresh') }'
+        RefreshRuntime.injectIntoGlobalHook(window)
+        window.$RefreshReg$ = () => {}
+        window.$RefreshSig$ = () => (type) => type
+        window.__vite_plugin_react_preamble_installed__ = true
+      REACT_PREAMBLE_CODE
     end
   end
 

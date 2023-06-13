@@ -59,6 +59,10 @@ end
 class HelperTest < HelperTestCase
   tests ViteRails::TagHelpers
 
+  def content_security_policy_nonce
+    'iyhD0Yc0W+c='
+  end
+
   def test_vite_client_tag
     assert_nil vite_client_tag
     with_dev_server_running {
@@ -130,13 +134,33 @@ class HelperTest < HelperTestCase
   def test_vite_react_refresh_tag
     assert_nil vite_react_refresh_tag
     with_dev_server_running {
-      assert_equal <<~HTML, vite_react_refresh_tag
+      assert_equal <<~HTML.chomp, vite_react_refresh_tag
         <script type="module">
-          import RefreshRuntime from '/vite-dev/@react-refresh'
-          RefreshRuntime.injectIntoGlobalHook(window)
-          window.$RefreshReg$ = () => {}
-          window.$RefreshSig$ = () => (type) => type
-          window.__vite_plugin_react_preamble_installed__ = true
+        //<![CDATA[
+        import RefreshRuntime from '/vite-dev/@react-refresh'
+        RefreshRuntime.injectIntoGlobalHook(window)
+        window.$RefreshReg$ = () => {}
+        window.$RefreshSig$ = () => (type) => type
+        window.__vite_plugin_react_preamble_installed__ = true
+
+        //]]>
+        </script>
+      HTML
+    }
+  end
+
+  def test_vite_react_refresh_tag_with_nonce
+    with_dev_server_running {
+      assert_equal <<~HTML.chomp, vite_react_refresh_tag(nonce: true)
+        <script type="module" nonce="#{ content_security_policy_nonce }">
+        //<![CDATA[
+        import RefreshRuntime from '/vite-dev/@react-refresh'
+        RefreshRuntime.injectIntoGlobalHook(window)
+        window.$RefreshReg$ = () => {}
+        window.$RefreshSig$ = () => (type) => type
+        window.__vite_plugin_react_preamble_installed__ = true
+
+        //]]>
         </script>
       HTML
     }
