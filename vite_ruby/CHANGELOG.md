@@ -1,3 +1,13 @@
+## [3.3.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.2...vite_ruby@3.3.3) (2023-06-19)
+
+
+### Features
+
+* allow skipping dev dependencies on install ([#374](https://github.com/ElMassimo/vite_ruby/issues/374)) ([a309f4f](https://github.com/ElMassimo/vite_ruby/commit/a309f4f9fc62fb7b9d0728b66b30ad90e68ba7bf))
+* Use javascript_tag helper for vite_react_refresh_tag ([#372](https://github.com/ElMassimo/vite_ruby/issues/372)) ([238c6bd](https://github.com/ElMassimo/vite_ruby/commit/238c6bd211c0fafaa6170f0bdd631a0f6e41d992)), closes [#249](https://github.com/ElMassimo/vite_ruby/issues/249)
+
+
+
 ## [3.3.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.1...vite_ruby@3.3.2) (2023-05-09)
 
 
