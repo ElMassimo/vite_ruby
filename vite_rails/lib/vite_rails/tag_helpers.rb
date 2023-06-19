@@ -10,8 +10,10 @@ module ViteRails::TagHelpers
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
-  def vite_react_refresh_tag
-    vite_manifest.react_refresh_preamble&.html_safe
+  def vite_react_refresh_tag(**options)
+    return unless react_preamble_code = vite_manifest.react_preamble_code
+
+    javascript_tag(react_preamble_code&.html_safe, type: :module, **options)
   end
 
   # Public: Resolves the path for the specified Vite asset.
