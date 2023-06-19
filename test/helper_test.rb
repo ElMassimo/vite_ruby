@@ -131,10 +131,10 @@ class HelperTest < HelperTestCase
     }
   end
 
-  def test_vite_react_refresh_tag
+  def test_vite_react_refresh_tag_without_nonce
     assert_nil vite_react_refresh_tag
     with_dev_server_running {
-      assert_equal <<~HTML.chomp, vite_react_refresh_tag
+      assert_equal <<~HTML.chomp, vite_react_refresh_tag(nonce: nil)
         <script type="module">
         //<![CDATA[
         import RefreshRuntime from '/vite-dev/@react-refresh'
@@ -149,9 +149,9 @@ class HelperTest < HelperTestCase
     }
   end
 
-  def test_vite_react_refresh_tag_with_nonce
+  def test_vite_react_refresh_tag_with_nonce_by_default
     with_dev_server_running {
-      assert_equal <<~HTML.chomp, vite_react_refresh_tag(nonce: true)
+      assert_equal <<~HTML.chomp, vite_react_refresh_tag
         <script type="module" nonce="#{ content_security_policy_nonce }">
         //<![CDATA[
         import RefreshRuntime from '/vite-dev/@react-refresh'
