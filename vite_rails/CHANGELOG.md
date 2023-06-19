@@ -1,3 +1,13 @@
+## [3.0.15](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.14...vite_rails@3.0.15) (2023-06-19)
+
+
+### Features
+
+* add nonce by default to react refresh tag (close [#249](https://github.com/ElMassimo/vite_ruby/issues/249)) ([a31f0a9](https://github.com/ElMassimo/vite_ruby/commit/a31f0a97588568a964b52005beee63217c7bcfa9))
+* Use javascript_tag helper for vite_react_refresh_tag ([#372](https://github.com/ElMassimo/vite_ruby/issues/372)) ([238c6bd](https://github.com/ElMassimo/vite_ruby/commit/238c6bd211c0fafaa6170f0bdd631a0f6e41d992)), closes [#249](https://github.com/ElMassimo/vite_ruby/issues/249)
+
+
+
 ## [3.0.14](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.13...vite_rails@3.0.14) (2023-02-08)
 
 
