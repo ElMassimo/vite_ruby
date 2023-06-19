@@ -19,10 +19,10 @@ importers:
       sass: ^1.62.1
       stylus: ^0.54.8
       terser: ^5.17.1
-      vite: ^4.3.3
+      vite: ^4.3.0
       vite-plugin-bugsnag: ^2.0.2
       vite-plugin-rails: ^0.1.0
-      vite-plugin-ruby: ^3.2.1
+      vite-plugin-ruby: ^3.2.0
       vite-plugin-windicss: ^1.8.10
     dependencies:
       '@bugsnag/js': 7.20.2
@@ -49,7 +49,7 @@ importers:
 
   example_engine:
     specifiers:
-      vite: ^4.3.3
+      vite: ^4.3.0
       vite-plugin-ruby: ^3.2.0
     devDependencies:
       vite: 4.3.3

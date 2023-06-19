@@ -115,7 +115,7 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.12.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-wait (0.2.1)
     launchy (2.5.0)
@@ -123,17 +123,17 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.19.1)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
-    minitest (5.18.0)
+    mini_portile2 (2.8.2)
+    minitest (5.18.1)
     msgpack (1.4.2)
     net-imap (0.2.3)
       digest
@@ -151,8 +151,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.14.2)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.15.2)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.13.1)
@@ -164,8 +164,8 @@ GEM
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
-    racc (1.6.2)
-    rack (2.2.6.4)
+    racc (1.7.1)
+    rack (2.2.7)
     rack-proxy (0.7.6)
       rack
     rack-test (2.1.0)
@@ -187,8 +187,9 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.5.0)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     railties (7.0.1)
       actionpack (= 7.0.1)
       activesupport (= 7.0.1)
@@ -225,16 +226,16 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     strscan (3.0.1)
-    thor (1.2.1)
+    thor (1.2.2)
     timeout (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     vite_plugin_legacy (3.0.2)
       vite_ruby (~> 3.0, >= 3.0.4)
-    vite_rails (3.0.14)
+    vite_rails (3.0.15)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0, >= 3.2.2)
-    vite_ruby (3.3.0)
+    vite_ruby (3.3.3)
       dry-cli (>= 0.7, < 2)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -253,7 +254,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.7)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   ruby
@@ -279,4 +280,4 @@ DEPENDENCIES
   webdrivers
 
 BUNDLED WITH
-   2.3.22
+   2.4.10
