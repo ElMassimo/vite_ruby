@@ -1,3 +1,12 @@
+## [3.3.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.3...vite_ruby@3.3.4) (2023-06-27)
+
+
+### Bug Fixes
+
+* check only once per second when dev server is not running ([#377](https://github.com/ElMassimo/vite_ruby/issues/377)) ([fb33f0a](https://github.com/ElMassimo/vite_ruby/commit/fb33f0a28077f9912deed257b7be3a7e050c2d94))
+
+
+
 ## [3.3.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.3.2...vite_ruby@3.3.3) (2023-06-19)
 
 
