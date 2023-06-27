@@ -8,13 +8,18 @@ class DevServerTest < ViteRuby::Test
 
     refresh_config(mode: 'development')
     refute ViteRuby.instance.dev_server_running?
+
+    running_checked_at = ViteRuby.instance.instance_variable_get('@running_checked_at')
+    assert_in_delta(Time.now.to_f, running_checked_at.to_f, 0.01)
   end
 
   def test_running
     refresh_config(mode: 'development')
-    ViteRuby.instance.instance_variable_set('@running_at', Time.now)
+    ViteRuby.instance.instance_variable_set('@running', true)
+    ViteRuby.instance.instance_variable_set('@running_checked_at', Time.now)
     assert ViteRuby.instance.dev_server_running?
   ensure
-    ViteRuby.instance.remove_instance_variable('@running_at')
+    ViteRuby.instance.remove_instance_variable('@running')
+    ViteRuby.instance.remove_instance_variable('@running_checked_at')
   end
 end

@@ -85,13 +85,16 @@ class ViteRuby
   # NOTE: Checks only once every second since every lookup calls this method.
   def dev_server_running?
     return false unless run_proxy?
-    return true if @running_at && Time.now - @running_at < 1
+    return @running if defined?(@running) && Time.now - @running_checked_at < 1
 
-    Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
-    @running_at = Time.now
-    true
-  rescue StandardError
-    @running_at = false
+    begin
+      Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
+      @running = true
+    rescue StandardError
+      @running = false
+    ensure
+      @running_checked_at = Time.now
+    end
   end
 
   # Public: Additional environment variables to pass to Vite.
