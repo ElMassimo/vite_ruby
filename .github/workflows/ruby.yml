@@ -39,6 +39,8 @@ jobs:
         with:
           node-version: '18'
 
+      - uses: oven-sh/setup-bun@v1
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
