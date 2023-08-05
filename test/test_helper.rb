@@ -10,7 +10,9 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/stub_any_instance'
 
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: true)]
+unless ENV['RM_INFO']
+  Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true, location: true, fast_fail: true)]
+end
 
 require 'rails'
 require 'rails/test_help'

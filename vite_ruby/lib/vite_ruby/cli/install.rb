@@ -117,6 +117,7 @@ private
 
   # Internal: Support all popular package managers.
   def npm_install
+    return 'bun install' if root.join('bun.lockb').exist?
     return 'yarn add' if root.join('yarn.lock').exist?
     return 'pnpm install' if root.join('pnpm-lock.yaml').exist?
 
