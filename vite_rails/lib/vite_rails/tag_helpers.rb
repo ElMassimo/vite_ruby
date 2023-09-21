@@ -88,10 +88,15 @@ private
 
   # Internal: Renders a modulepreload link tag.
   def vite_preload_tag(*sources, crossorigin:, **options)
-    sources.map { |source|
-      href = path_to_asset(source)
-      try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
+    asset_paths = sources.map { | source | path_to_asset(source) }
+    try(:request).try(
+      :send_early_hints,
+      'Link' => asset_paths.map do |href|
+        %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin })
+      end.join(", "),
+    )
+    asset_paths.map do |href|
       tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
-    }.join("\n").html_safe
+    end.join("\n").html_safe
   end
 end
