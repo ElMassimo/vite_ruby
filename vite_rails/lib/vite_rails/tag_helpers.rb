@@ -91,12 +91,12 @@ private
     asset_paths = sources.map { |source| path_to_asset(source) }
     try(:request).try(
       :send_early_hints,
-      'Link' => asset_paths.map do |href|
+      'Link' => asset_paths.map { |href|
         %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin })
-      end.join("\n"),
+      }.join("\n"),
     )
-    asset_paths.map do |href|
+    asset_paths.map { |href|
       tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
-    end.join('\n').html_safe
+    }.join("\n").html_safe
   end
 end
