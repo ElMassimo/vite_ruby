@@ -180,4 +180,16 @@ class HelperTest < HelperTestCase
         vite_image_tag('images/logo.png', srcset: { 'images/logo-2x.png' => '2x' }, alt: 'Logo')
     }
   end
+
+  if Rails.gem_version >= Gem::Version.new('7.1.0')
+    def test_vite_picture_tag
+      assert_equal <<~HTML.gsub(/\n\s*/, ''), vite_picture_tag('images/logo.svg', 'images/logo.png', class: 'test', image: { alt: 'Logo' })
+        <picture class="test">
+          <source srcset="/vite-production/assets/logo.322aae0c.svg" type="image/svg+xml" />
+          <source srcset="/vite-production/assets/logo.f42fb7ea.png" type="image/png" />
+          <img alt="Logo" src="/vite-production/assets/logo.f42fb7ea.png" />
+        </picture>
+      HTML
+    end
+  end
 end
