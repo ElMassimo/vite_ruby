@@ -70,10 +70,11 @@ If using `.jsx` or any pre-processor, make sure to be explicit:
 <%= vite_stylesheet_tag 'theme.scss' %>
 ```
 
-For images you can use <kbd>[vite_image_tag][helpers]</kbd>:
+For images you can use <kbd>[vite_image_tag][helpers]</kbd> or <kbd>[vite_picture_tag][helpers]</kbd> (Rails 7.1+):
 
 ```erb
 <%= vite_image_tag 'images/logo.jpg' %>
+<%= vite_picture_tag 'images/logo.avif', 'images/logo.jpg', image: {alt: 'example'}) %>
 ```
 
 For other types of assets, you can use <kbd>[vite_asset_path][helpers]</kbd> and pass the resulting URI to the appropriate tag helper.
