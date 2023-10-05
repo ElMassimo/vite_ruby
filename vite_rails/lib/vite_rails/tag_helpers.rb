@@ -79,15 +79,17 @@ module ViteRails::TagHelpers
     image_tag(vite_asset_path(name), options)
   end
 
-  if defined?(Rails) && Rails.gem_version >= Gem::Version.new('7.1.0')
-    # Public: Renders a <picture> tag with one or more Vite asset sources.
-    def vite_picture_tag(*sources, &block)
-      sources.flatten!
-      options = sources.extract_options!
-
-      vite_sources = sources.map { |src| vite_asset_path(src) }
-      picture_tag(*vite_sources, options, &block)
+  # Public: Renders a <picture> tag with one or more Vite asset sources.
+  def vite_picture_tag(*sources, &block)
+    unless Rails.gem_version >= Gem::Version.new('7.1.0')
+      raise NotImplementedError, '`vite_picture_tag` is only available for Rails 7.1 or above.'
     end
+
+    sources.flatten!
+    options = sources.extract_options!
+
+    vite_sources = sources.map { |src| vite_asset_path(src) }
+    picture_tag(*vite_sources, options, &block)
   end
 
 private
