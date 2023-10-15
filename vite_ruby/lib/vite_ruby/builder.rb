@@ -66,7 +66,10 @@ private
   def build_with_vite(*args)
     logger.info 'Building with Vite ⚡️'
 
-    run(['build', *args])
+    p(run(['build', *args]))
+
+  ensure
+    logger.debug '[Done]'
   end
 
   # Internal: Outputs the build results.

@@ -16,7 +16,7 @@ module ViteRuby::IO
         stdin.close
         out = Thread.new { read_lines(stdout, &with_output) }
         err = Thread.new { stderr.read }
-        [out.value, err.value.to_s, wait_threads.value]
+        p([out.value, err.value.to_s, wait_threads.value])
       }
     end
 
