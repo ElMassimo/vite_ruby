@@ -31,7 +31,9 @@ private
     puts '-' * 100
     puts 'command_for'
     [config.to_env(env)].tap do |cmd|
+      puts 'cmd'
       args = args.clone
+      pp config.root
       unless config.root.join('bun.lockb').exist?
         puts '-' * 100
         puts 'WARNING: NOT BUN.'
