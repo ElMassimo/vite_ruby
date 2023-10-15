@@ -8,6 +8,7 @@ class ViteRuby::Runner
 
   # Public: Executes Vite with the specified arguments.
   def run(argv, exec: false)
+    pp "run: #{argv}"
     config.within_root {
       cmd = command_for(argv)
       return Kernel.exec(*cmd) if exec
@@ -27,6 +28,8 @@ private
 
   # Internal: Returns an Array with the command to run.
   def command_for(args)
+    puts '-' * 100
+    puts 'command_for'
     [config.to_env(env)].tap do |cmd|
       args = args.clone
       unless config.root.join('bun.lockb').exist?
