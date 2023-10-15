@@ -10,7 +10,8 @@ class ViteRuby::Runner
   def run(argv, exec: false)
     pp "run: #{argv}"
     config.within_root {
-      cmd = command_for(argv)
+      p cmd = command_for(argv)
+      puts "Executing (#{exec.inspect}) ..."
       return Kernel.exec(*cmd) if exec
 
       log_or_noop = ->(line) { logger.info('vite') { line } } unless config.hide_build_console_output
@@ -29,17 +30,18 @@ private
   # Internal: Returns an Array with the command to run.
   def command_for(args)
     puts '-' * 100
-    puts 'command_for'
+    puts "command_for: #{env.inspect}"
     [config.to_env(env)].tap do |cmd|
-      puts 'cmd'
+      puts "cmd: #{cmd}"
       args = args.clone
-      pp config.root
+      pp [config.root, config.root.join('bun.lockb')]
       unless config.root.join('bun.lockb').exist?
         puts '-' * 100
         puts 'WARNING: NOT BUN.'
         cmd.push('node', '--inspect-brk') if args.delete('--inspect')
         cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
       end
+      pp [*vite_executable]
       cmd.push(*vite_executable)
       cmd.push(*args)
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
