@@ -42,6 +42,8 @@ namespace :vite do
 
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
+    return if ENV['VITE_RUBY_SKIP_INSTALL_DEPENDENCIES'] == 'true'
+
     install_env_args = ENV['VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES'] == 'true' ? {} : { 'NODE_ENV' => 'development' }
     cmd = ViteRuby.commands.legacy_npm_version? ? 'npx ci --yes' : 'npx --yes ci'
     result = system(install_env_args, cmd)
