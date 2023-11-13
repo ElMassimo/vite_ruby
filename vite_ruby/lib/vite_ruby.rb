@@ -44,6 +44,8 @@ class ViteRuby
       instance.manifest.refresh
     end
 
+    alias eager_load! bootstrap
+
     # Internal: Loads all available rake tasks.
     def install_tasks
       load File.expand_path('tasks/vite.rake', __dir__)

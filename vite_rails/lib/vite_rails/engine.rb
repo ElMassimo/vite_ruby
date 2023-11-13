@@ -23,7 +23,9 @@ class ViteRails::Engine < Rails::Engine
     end
   end
 
-  initializer 'vite_rails.bootstrap' do
+  initializer 'vite_rails.bootstrap' do |app|
+    app.config.eager_load_namespaces << ViteRuby
+
     if defined?(Rails::Server) || defined?(Rails::Console)
       ViteRuby.bootstrap
       if defined?(Spring)
