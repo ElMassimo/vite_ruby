@@ -45,19 +45,19 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "fast-glob": "^3.2.12"
+    "fast-glob": "^3.3.2"
   },
   "peerDependencies": {
-    "vite": ">=4.0.0"
+    "vite": ">=5.0.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.7",
-    "@types/node": "^14.18.38",
-    "rollup": "^3.19.1",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^18.7.14",
+    "rollup": "^4.2.0",
     "standard-version": "^9.5.0",
-    "tsup": "^6.6.3",
+    "tsup": "^7.2.0",
     "typescript": "^4.9.5",
-    "vite": "^4.3.3",
-    "vitest": "^0.18.1"
+    "vite": "^5.0.0",
+    "vitest": "^0.34.6"
   }
 }

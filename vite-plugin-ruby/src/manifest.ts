@@ -47,12 +47,15 @@ export function assetsManifestPlugin (): Plugin {
     async generateBundle (_options, bundle) {
       if (!config.build.manifest) return
 
+      const manifestDir = typeof config.build.manifest === 'string' ? path.basename(config.build.manifest) : '.vite'
+      const fileName = `${manifestDir}/manifest-assets.json`
+
       const manifest: AssetsManifest = new Map()
       await fingerprintRemainingAssets(this, bundle, manifest)
-      debug({ manifest })
+      debug({ manifest, fileName })
 
       this.emitFile({
-        fileName: 'manifest-assets.json',
+        fileName,
         type: 'asset',
         source: JSON.stringify(Object.fromEntries(manifest), null, 2),
       })

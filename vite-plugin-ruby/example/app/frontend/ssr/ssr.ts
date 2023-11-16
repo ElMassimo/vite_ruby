@@ -5,7 +5,7 @@ import createServer from '@inertiajs/server'
 import logo from '~/images/logo.svg'
 console.info({ logo })
 
-const pages = import.meta.globEagerDefault('../pages/*.vue')
+const pages = import.meta.glob('../pages/*.vue', { import: 'default', eager: true })
 
 createServer(page => createInertiaApp({
   page,

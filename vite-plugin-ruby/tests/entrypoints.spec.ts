@@ -28,8 +28,8 @@ describe('resolveEntrypointFiles', () => {
 
     expectEntrypoints({ additionalEntrypoints: ['app/assets/*.{js,css}'] }).toEqual([
       ...defaultEntrypoints,
-      ['../assets/external.js', resolve('example/app/assets/external.js')],
-      ['../assets/theme.css', resolve('example/app/assets/theme.css')],
+      ['app/assets/external.js', resolve('example/app/assets/external.js')],
+      ['app/assets/theme.css', resolve('example/app/assets/theme.css')],
     ])
   })
 
