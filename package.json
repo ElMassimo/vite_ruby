@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "docs": "npm -C docs run dev",
     "docs:search": "npm -C docs run search",
-    "release": "node scripts/release",
+    "release": "node scripts/release.cjs",
     "lint": "lint-staged",
     "postinstall": "husky install",
-    "changelog": "node scripts/changelog"
+    "changelog": "node scripts/changelog.cjs"
   },
   "devDependencies": {
     "@mussi/eslint-config": "^0.5.1",
