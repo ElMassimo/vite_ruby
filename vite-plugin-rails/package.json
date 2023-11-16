@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-rails",
   "description": "Convention over configuration for using Vite in Rails apps",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

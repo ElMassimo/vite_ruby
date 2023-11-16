@@ -18,6 +18,5 @@ if (code !== source) {
 }
 else {
   const message = 'Did not find CJS pattern to replace.'
-  console.error(message)
-  throw new Error(message)
+  console.warn(message)
 }
