@@ -1,3 +1,12 @@
+# [5.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.2.2...vite-plugin-ruby@5.0.0) (2023-11-16)
+
+
+### Features
+
+* add support for vite 5, which changed default manifest path ([818132a](https://github.com/ElMassimo/vite_ruby/commit/818132a07af3f17ba27ae09c44fcd59029064238))
+
+
+
 ## [3.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.2.1...vite-plugin-ruby@3.2.2) (2023-04-28)
 
 
