@@ -61,7 +61,7 @@ class ConfigTest < ViteRuby::Test
   end
 
   def test_manifest_path
-    assert_path 'test_app/public/vite-production/manifest.json', @config.manifest_path
+    assert_path 'test_app/public/vite-production/.vite/manifest.json', @config.manifest_paths.first
   end
 
   def test_build_cache_dir
