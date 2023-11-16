@@ -30,7 +30,7 @@ class EngineRakeTasksTest < ViteRuby::Test
 
     within_mounted_app { `bundle exec rake app:vite:build` }
     assert_path_exists app_public_dir
-    assert_path_exists app_public_dir.join('manifest.json')
+    assert_path_exists app_public_dir.join('.vite/manifest.json')
     assert_path_exists app_public_dir.join('assets')
     refute_path_exists app_ssr_dir
 
@@ -39,14 +39,14 @@ class EngineRakeTasksTest < ViteRuby::Test
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
     assert_path_exists app_ssr_dir.join('ssr.mjs')
-    refute_path_exists app_ssr_dir.join('manifest.json')
-    refute_path_exists app_ssr_dir.join('manifest-assets.json')
+    refute_path_exists app_ssr_dir.join('.vite/manifest.json')
+    refute_path_exists app_ssr_dir.join('.vite/manifest-assets.json')
 
     within_mounted_app { `bundle exec rake app:vite:clean` }
-    assert_path_exists app_public_dir.join('manifest.json') # Still fresh
+    refute Dir.empty?(app_public_dir.join('assets')) # Still fresh
 
     within_mounted_app { `bundle exec rake app:vite:clean[0,0]` }
-    refute_path_exists app_public_dir.join('manifest.json')
+    refute Dir.empty?(app_public_dir.join('assets')) # Still referenced in manifest
 
     within_mounted_app { `bundle exec rake app:vite:clobber` }
     refute_path_exists app_public_dir
@@ -61,7 +61,7 @@ class EngineRakeTasksTest < ViteRuby::Test
 
     within_mounted_app_root { `bin/vite build --mode development` }
     assert_path_exists app_public_dir
-    assert_path_exists app_public_dir.join('manifest.json')
+    assert_path_exists app_public_dir.join('.vite/manifest.json')
     assert_path_exists app_public_dir.join('assets')
 
     within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }

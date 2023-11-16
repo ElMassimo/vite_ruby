@@ -50,7 +50,7 @@ class ViteRuby::Commands
 
     versions
       .each_with_index
-      .drop_while { |(mtime, _), index|
+      .drop_while { |(mtime, _files), index|
         max_age = [0, Time.now - Time.at(mtime)].max
         max_age < age_in_seconds || index < keep_up_to
       }
@@ -143,14 +143,16 @@ private
 
   def versions
     all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - config.manifest_paths - current_version_files
+    entries = all_files - config.manifest_paths - files_referenced_in_manifests
     entries.reject { |file| File.directory?(file) }
       .group_by { |file| File.mtime(file).utc.to_i }
       .sort.reverse
   end
 
-  def current_version_files
-    Dir.glob(manifest.refresh.values.map { |value| config.build_output_dir.join("#{ value['file'] }*") })
+  def files_referenced_in_manifests
+    config.manifest_paths.flat_map { |path|
+      JSON.parse(path.read).map { |_, entry| entry['file'] }
+    }.compact.uniq.map { |path| config.build_output_dir.join(path).to_s }
   end
 
   def with_node_env(env)

@@ -10,7 +10,7 @@
   "devDependencies": {
     "ci": "^2.0.0",
     "right-pad": "^1.0.1",
-    "vite": "^3.0.0",
+    "vite": "^5.0.0",
     "vite-plugin-ruby": "^1.0.8"
   }
 }
