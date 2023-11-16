@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@mussi/eslint-config": "^0.5.1",
-    "@types/node": "^14.18.21",
+    "@types/node": "^18",
     "chalk": "^4.1.2",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
