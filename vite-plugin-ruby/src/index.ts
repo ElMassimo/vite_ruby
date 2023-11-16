@@ -95,6 +95,7 @@ function outputOptions (assetsDir: string, ssrBuild: boolean) {
   }
 
   return {
+    assetFileNames: ssrBuild ? undefined : outputFileName('[ext]'),
     entryFileNames: ssrBuild ? undefined : outputFileName('js'),
   }
 }

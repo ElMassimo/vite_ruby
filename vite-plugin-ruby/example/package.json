@@ -12,15 +12,16 @@
     "@inertiajs/inertia": "^0.11.1",
     "@inertiajs/inertia-vue3": "^0.6.0",
     "@inertiajs/server": "^0.1.0",
-    "@vitejs/plugin-legacy": "^4.0.2",
-    "@vitejs/plugin-vue": "^4.1.0",
-    "@vue/server-renderer": "^3.2.47",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vue/server-renderer": "^3.3.8",
+    "@types/node": "^18",
     "cross-env": "^7.0.3",
     "sass": "^1.59.3",
     "terser": "^5.16.6",
     "typescript": "^4.9.5",
-    "vite": "^4.3.3",
+    "vite": "^5.0.0",
     "vite-plugin-ruby": "workspace:*",
-    "vue": "^3.2.47"
+    "vue": "^3.3.8"
   }
 }

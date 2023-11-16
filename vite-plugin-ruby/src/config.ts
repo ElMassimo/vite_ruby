@@ -40,10 +40,13 @@ export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: stri
     return entrypointFiles.map(file => ['ssr', file])
   }
 
-  return entrypointFiles.map(filename => [
-    relative(sourceCodeDir, filename),
-    filename,
-  ])
+  return entrypointFiles.map((filename) => {
+    let name = relative(sourceCodeDir, filename)
+    if (name.startsWith('..'))
+      name = relative(projectRoot, filename)
+
+    return [name, filename]
+  })
 }
 
 // Internal: Allows to use the `~` shorthand in the config globs.

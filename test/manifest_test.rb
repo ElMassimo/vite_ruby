@@ -52,20 +52,22 @@ class ManifestTest < ViteRuby::Test
     stub_builder(build_successful: true) {
       asset_file = 'calendar.js'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
       assert_match '"autoBuild" is set to `false`', error.message
 
       asset_file = 'images/logo.gif'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find #{ asset_file } in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find #{ asset_file } in the manifests", error.message
 
       asset_file = '/app/styles/theme.css'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find ../styles/theme.css in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find ../styles/theme.css in the manifests", error.message
 
       asset_file = '~/favicon.ico'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find favicon.ico in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find favicon.ico in the manifests", error.message
+
+      assert_match "Manifest files found:\n  #{ manifest_path }", error.message
     }
   end
 
@@ -77,7 +79,7 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
       assert_match 'The file path is incorrect.', error.message
     }
   end
@@ -94,7 +96,7 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in #{ manifest_path }", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
       assert_match 'The last build failed.', error.message
       assert_match "  #{ error_lines[0] }", error.message
       assert_match "  #{ error_lines[1] }", error.message
@@ -108,7 +110,7 @@ class ManifestTest < ViteRuby::Test
       path_for(asset_file, type: :javascript)
     end
 
-    assert_match "Vite Ruby can't find entrypoints/#{ asset_file }.js in #{ manifest_path }", error.message
+    assert_match "Vite Ruby can't find entrypoints/#{ asset_file }.js in the manifests", error.message
   end
 
   def test_lookup_success!
@@ -229,7 +231,7 @@ private
   end
 
   def manifest_path
-    'public/vite-production/manifest.json'
+    'public/vite-production/.vite/manifest.json'
   end
 
   def prefixed(file)

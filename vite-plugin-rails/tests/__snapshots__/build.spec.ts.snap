@@ -1,100 +1,92 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`config > generated files 1`] = `
 {
   "../assets/external.js": {
-    "file": "assets/external-088a12da.js",
-    "integrity": "sha384-DvDpUu3eA3F/iqvmqdNIqZMtzask1fdO3XdPkofJredvkRYsli0qXW4ZmoXJ+I6Y",
+    "file": "assets/external-TUcZQQlC.js",
+    "integrity": "sha384-afpxQsY7Zl0vHthljoHJFlj4eX3fvxujTRCy532FF3prt0UsynDiMGZaI9HOENvv",
     "isEntry": true,
     "src": "../assets/external.js",
   },
   "../assets/logo.png": {
-    "file": "assets/logo-03d6d6da.png",
+    "file": "assets/logo-j5j6qipL.png",
     "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
-    "src": "../assets/logo.png",
+    "src": "app/assets/logo.png",
   },
   "../assets/theme.css": {
-    "file": "assets/theme-eb94a372.css",
+    "file": "assets/theme-gVQjH5fM.css",
     "integrity": "sha384-tXSaWp9h7f9IDyqcyqxE2oHEre7hVTMpGM1IZPUdwc9do71+G5Fb37fW6KleExPw",
     "isEntry": true,
     "src": "../assets/theme.css",
   },
-  "_log-092f4148.js": {
-    "file": "assets/log-092f4148.js",
-    "integrity": "sha384-wxFAVzKyAfoglkWpc+0kyZLsVyT/L5zBCnxcOoB2M2SaWssBh7IH/lwlp3oik12R",
-  },
   "entrypoints/app.css": {
-    "file": "assets/app-80592535.css",
+    "file": "assets/app-HiPXl-_u.css",
     "integrity": "sha384-j2SX6yHUu2YQv/067X7HfP4nv2AUV8u5F+we/wI1eQKP0FweNgIiRxCg6vhW6yJE",
     "isEntry": true,
     "src": "entrypoints/app.css",
   },
-  "entrypoints/frameworks/vue.css": {
-    "file": "assets/vue-b821fb22.css",
-    "integrity": "sha384-GRybFdmgQZ7Y99dAzgYdORQOvWzkmO/RMLBmnnfyJz945msdtTfBj0lhp7Ecr0+M",
-    "src": "entrypoints/frameworks/vue.css",
-  },
   "entrypoints/frameworks/vue.js": {
-    "assets": [
-      "assets/logo-322aae0c.svg",
-    ],
     "css": [
-      "assets/vue-b821fb22.css",
+      "assets/vue-Mdlordc1.css",
     ],
-    "file": "assets/vue-3d27911e.js",
-    "integrity": "sha384-rJ3zJcJUd1UTJykZHqg8m76+iq0KjkTPK3b+/HMfDQjlkRrdOtJuFt2FFy0mEKPq",
+    "file": "assets/vue-eqttolrD.js",
+    "integrity": "sha384-6gtOC4AW4VZcDnsQqkGMNawlK0PQsbPs0MGQ980Umdx2UHjMHpBXMor4rtgjervR",
     "isEntry": true,
     "src": "entrypoints/frameworks/vue.js",
   },
   "entrypoints/main.ts": {
     "css": [
-      "assets/app-80592535.css",
-      "assets/theme-eb94a372.css",
+      "assets/app-HiPXl-_u.css",
+      "assets/theme-gVQjH5fM.css",
     ],
-    "file": "assets/main-fd323c2a.js",
+    "file": "assets/main-E96L_vrM.js",
     "imports": [
-      "_log-092f4148.js",
       "entrypoints/frameworks/vue.js",
     ],
-    "integrity": "sha384-FzmFcmeWbqfgCaX4Q3iJJMAJwGK5KzYVH4xPhrUQ1/QnYW52ASjEDaTf+nYSRnsq",
+    "integrity": "sha384-Vp1tt9FfnLGaJafO0IbRYkaLSCnR2xJj0OIL7Fz040Gx9DwwCZ3CyByPRFy1mBDP",
     "isEntry": true,
     "src": "entrypoints/main.ts",
   },
   "entrypoints/sassy.scss": {
-    "file": "assets/sassy-2f9e231e.css",
+    "file": "assets/sassy-NCcoc604.css",
     "integrity": "sha384-4tkn835gOI7C29uZzlN/PGxd+XyQTG1/9AHpbWYbYLbgWZ1UmDDBFW1iq43MC70L",
     "isEntry": true,
     "src": "entrypoints/sassy.scss",
   },
   "images/logo.png": {
-    "file": "assets/logo-f42fb7ea.png",
+    "file": "assets/logo-Yf1y9V5e.png",
     "integrity": "sha384-zHCg6OQ1T1xX21KMsW9Bb2ECIIMeec41+3KtT0gygdsrmm/Z5qD5TVtTPhyJNGot",
     "src": "images/logo.png",
   },
   "images/logo.svg": {
-    "file": "assets/logo-322aae0c.svg",
+    "file": "assets/logo-DbqOB_Bf.svg",
     "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
     "src": "images/logo.svg",
   },
   "index.html": {
     "css": [
-      "assets/sassy-2f9e231e.css",
-      "assets/app-80592535.css",
-      "assets/theme-eb94a372.css",
+      "assets/sassy-NCcoc604.css",
+      "assets/app-HiPXl-_u.css",
+      "assets/theme-gVQjH5fM.css",
     ],
-    "file": "assets/index-fe03930f.js",
+    "file": "assets/index-ChIRGsHu.js",
     "imports": [
-      "_log-092f4148.js",
+      "entrypoints/main.ts",
       "entrypoints/frameworks/vue.js",
     ],
-    "integrity": "sha384-l59i0bYhGSsMSoG7dtVF4pcmcGP5KhVcE7TG+6TFqFDB3JcuRNmZY6gOEmsv7SWP",
+    "integrity": "sha384-VQYOqTB26w+BvFbNf9g399k8VIDD6LltF/epq+w/O7yKihiZSnV6iGxbK4pAgc02",
     "isEntry": true,
     "src": "index.html",
   },
   "logo.png": {
-    "file": "assets/logo-03d6d6da.png",
+    "file": "assets/logo-j5j6qipL.png",
     "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
     "src": "logo.png",
+  },
+  "logo.svg": {
+    "file": "assets/logo-DbqOB_Bf.svg",
+    "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
+    "src": "logo.svg",
   },
 }
 `;

@@ -7,8 +7,8 @@
     "dev": "vite"
   },
   "engines": {
-    "node": "16",
-    "pnpm": "7"
+    "node": "18",
+    "pnpm": "8"
   },
   "dependencies": {
     "@bugsnag/js": "^7.20.2",

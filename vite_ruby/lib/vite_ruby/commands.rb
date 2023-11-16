@@ -131,7 +131,7 @@ private
   def_delegators :@vite_ruby, :config, :builder, :manifest, :logger, :logger=
 
   def may_clean?
-    config.build_output_dir.exist? && config.manifest_path.exist?
+    config.build_output_dir.exist? && config.manifest_paths.any?
   end
 
   def clean_files(files)
