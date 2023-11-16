@@ -3,6 +3,6 @@ export const tsup: Options = {
   clean: true,
   dts: true,
   shims: true,
-  target: 'node14',
+  target: 'node18',
   format: ['esm', 'cjs'],
 }
