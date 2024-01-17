@@ -95,7 +95,7 @@ const path = videoClips.download.path(video) // "/video_clips/5/download"
 
 ## [Stimulus Helpers](https://github.com/ElMassimo/stimulus-vite-helpers)
 
-Use <kbd>[stimulus-vite-helpers]</kbd> to easily register all [Stimulus] controllers using [`globEager`][glob import].
+Use <kbd>[stimulus-vite-helpers]</kbd> to easily register all [Stimulus] controllers using [`import.meta.glob`][glob import].
 
 ```ts
 const controllers = import.meta.glob('./**/*_controller.js', { eager: true })
