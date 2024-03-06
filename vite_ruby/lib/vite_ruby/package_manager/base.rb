@@ -8,20 +8,14 @@ class ViteRuby::PackageManager::Base
   end
 
   def install_dependencies_command(frozen: true)
-    return frozen ? 'bun install --frozen-lockfile' : 'bun install' if bun?
-    return frozen ? 'yarn install --frozen-lockfile' : 'yarn install' if yarn?
     return frozen ? 'pnpm install --frozen-lockfile' : 'pnpm install' if pnpm?
 
     if frozen
       commands.legacy_npm_version? ? 'npm ci --yes' : 'npm --yes ci'
-    else
-      'npm install'
     end
   end
 
   def add_dependencies_command
-    return 'bun install' if bun?
-    return 'yarn add' if yarn?
     return 'pnpm install' if pnpm?
 
     'npm install'
@@ -32,7 +26,7 @@ class ViteRuby::PackageManager::Base
     [config.to_env(env)].tap do |cmd|
       args = args.clone
 
-      if !bun? && (args.include?('--inspect') || args.include?('--trace_deprecation'))
+      if nodejs_runtime? && (args.include?('--inspect') || args.include?('--trace_deprecation'))
         cmd.push('node')
         cmd.push('--inspect-brk') if args.delete('--inspect')
         cmd.push('--trace-deprecation') if args.delete('--trace_deprecation')
@@ -47,6 +41,10 @@ class ViteRuby::PackageManager::Base
   end
 
   private
+
+  def nodejs_runtime?
+    !bun?
+  end
 
   def pnpm?
     root.join('pnpm-lock.yaml').exist?
@@ -65,19 +63,10 @@ class ViteRuby::PackageManager::Base
     bin_path = config.vite_bin_path
 
     if File.exist?(bin_path)
-      # Forces a script or package to use Bun's runtime instead of Node.js (via symlinking node)
-      return ['bun', '--bun', bin_path] if bun?
-
       return [bin_path]
     end
 
-    if bun?
-      %w[bun --bun vite]
-    elsif yarn?
-      return nil
-    else
-      ["#{ `npm bin`.chomp }/vite"]
-    end
+    ["#{ `npm bin`.chomp }/vite"] unless bun? || yarn?
   end
 
   def commands
