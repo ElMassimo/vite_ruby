@@ -2,12 +2,6 @@
 
 module ViteRuby::PackageManager
   class Yarn < Base
-    attr_reader :root
-
-    def initialize(root: ViteRuby.config.root)
-      @root = root
-    end
-
     def install_dependencies_command(frozen: true)
       frozen ? 'yarn install --frozen-lockfile' : 'yarn install'
     end
@@ -17,10 +11,6 @@ module ViteRuby::PackageManager
     end
 
     private
-
-    def yarn?
-      true
-    end
 
     def vite_executable
       super || %w[yarn vite]

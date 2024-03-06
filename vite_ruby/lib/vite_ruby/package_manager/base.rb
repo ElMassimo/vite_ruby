@@ -8,16 +8,12 @@ class ViteRuby::PackageManager::Base
   end
 
   def install_dependencies_command(frozen: true)
-    return frozen ? 'pnpm install --frozen-lockfile' : 'pnpm install' if pnpm?
-
     if frozen
       commands.legacy_npm_version? ? 'npm ci --yes' : 'npm --yes ci'
     end
   end
 
   def add_dependencies_command
-    return 'pnpm install' if pnpm?
-
     'npm install'
   end
 
@@ -43,30 +39,13 @@ class ViteRuby::PackageManager::Base
   private
 
   def nodejs_runtime?
-    !bun?
-  end
-
-  def pnpm?
-    root.join('pnpm-lock.yaml').exist?
-  end
-
-  def bun?
-    root.join('bun.lockb').exist?
-  end
-
-  def yarn?
-    root.join('yarn.lock').exist?
+    true
   end
 
   # Internal: Resolves to an executable for Vite.
   def vite_executable
     bin_path = config.vite_bin_path
-
-    if File.exist?(bin_path)
-      return [bin_path]
-    end
-
-    ["#{ `npm bin`.chomp }/vite"] unless bun? || yarn?
+    [bin_path] if File.exist?(bin_path)
   end
 
   def commands

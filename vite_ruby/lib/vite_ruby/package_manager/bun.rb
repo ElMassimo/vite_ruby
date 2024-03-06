@@ -2,12 +2,6 @@
 
 module ViteRuby::PackageManager
   class Bun < Base
-    attr_reader :root
-
-    def initialize(root: ViteRuby.config.root)
-      @root = root
-    end
-
     def install_dependencies_command(frozen: true)
       frozen ? 'bun install --frozen-lockfile' : 'bun install'
     end
@@ -18,8 +12,8 @@ module ViteRuby::PackageManager
 
     private
 
-    def bun?
-      true
+    def nodejs_runtime?
+      false
     end
 
     def vite_executable
