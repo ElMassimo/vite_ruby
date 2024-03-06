@@ -128,7 +128,7 @@ class ViteRuby
     @commands ||= ViteRuby::Commands.new(self)
   end
 
-  def package_manager(**)
+  def package_manager
     @package_manager ||= ViteRuby::PackageManager.resolve(root: config.root)
   end
 

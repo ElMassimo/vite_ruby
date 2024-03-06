@@ -7,31 +7,25 @@ class ViteRuby::PackageManager::Base
     @root = root
   end
 
-  def install_dependencies_command(frozen: true)
-    if frozen
-      commands.legacy_npm_version? ? 'npm ci --yes' : 'npm --yes ci'
-    end
-  end
-
-  def add_dependencies_command
-    'npm install'
-  end
-
   # Internal: Returns an Array with the command to run.
   def command_for(args)
     [config.to_env(env)].tap do |cmd|
       args = args.clone
 
+      # Apply runtime arguments for nodejs
       if nodejs_runtime? && (args.include?('--inspect') || args.include?('--trace_deprecation'))
         cmd.push('node')
         cmd.push('--inspect-brk') if args.delete('--inspect')
         cmd.push('--trace-deprecation') if args.delete('--trace_deprecation')
       end
 
+      # Add vite executable
       cmd.push(*vite_executable)
+
+      # Adds vite's arguments
       cmd.push(*args)
 
-      # force mode to be set
+      # Force `mode`, a vite's argument, to be set
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
