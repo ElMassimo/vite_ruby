@@ -31,12 +31,17 @@ class ViteRuby::PackageManager::Base
   def command_for(args)
     [config.to_env(env)].tap do |cmd|
       args = args.clone
-      unless config.root.join('bun.lockb').exist?
-        cmd.push('node', '--inspect-brk') if args.delete('--inspect')
-        cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
+
+      if !bun? && (args.include?('--inspect') || args.include?('--trace_deprecation'))
+        cmd.push('node')
+        cmd.push('--inspect-brk') if args.delete('--inspect')
+        cmd.push('--trace-deprecation') if args.delete('--trace_deprecation')
       end
+
       cmd.push(*vite_executable)
       cmd.push(*args)
+
+      # force mode to be set
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
@@ -69,7 +74,7 @@ class ViteRuby::PackageManager::Base
     if bun?
       %w[bun --bun vite]
     elsif yarn?
-      %w[yarn vite]
+      return nil
     else
       ["#{ `npm bin`.chomp }/vite"]
     end

@@ -129,7 +129,7 @@ class ViteRuby
   end
 
   def package_manager(**)
-    @package_manager ||= ViteRuby::PackageManager::Base.new(root: config.root)
+    @package_manager ||= ViteRuby::PackageManager.resolve(root: config.root)
   end
 
   # Public: Current instance configuration for Vite.
