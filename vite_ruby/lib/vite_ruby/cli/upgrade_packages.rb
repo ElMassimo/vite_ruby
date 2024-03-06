@@ -6,6 +6,6 @@ class ViteRuby::CLI::UpgradePackages < ViteRuby::CLI::Install
   def call(**)
     say 'Upgrading npm packages'
     deps = js_dependencies.join(' ')
-    run_with_capture("#{ npm_install } -D #{ deps }")
+    run_with_capture("#{ add_dependencies_command } -D #{ deps }")
   end
 end

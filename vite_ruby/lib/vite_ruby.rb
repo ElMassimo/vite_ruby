@@ -32,7 +32,7 @@ class ViteRuby
   class << self
     extend Forwardable
 
-    def_delegators :instance, :config, :configure, :commands, :digest, :env, :run, :run_proxy?
+    def_delegators :instance, :config, :configure, :commands, :digest, :env, :run, :run_proxy?, :package_manager
     def_delegators :config, :mode
 
     def instance
@@ -126,6 +126,10 @@ class ViteRuby
   # Internal: Helper to run commands related with Vite.
   def commands
     @commands ||= ViteRuby::Commands.new(self)
+  end
+
+  def package_manager(**)
+    @package_manager ||= ViteRuby::PackageManager::Base.new(root: config.root)
   end
 
   # Public: Current instance configuration for Vite.
