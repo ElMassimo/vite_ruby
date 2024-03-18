@@ -195,6 +195,7 @@ private
     postcss.config.js
     tailwind.config.js
     vite.config.js
+    vite.config.mjs
     vite.config.ts
     windi.config.ts
     yarn.lock
