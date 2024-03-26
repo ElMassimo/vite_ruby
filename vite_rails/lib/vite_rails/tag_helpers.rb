@@ -94,10 +94,9 @@ module ViteRails::TagHelpers
 
   # Public: Renders a meta tag with the Vite content security policy nonce.
   def vite_csp_meta_tag
-    tag("meta", {property: "csp-nonce", nonce: content_security_policy_nonce})
+    tag('meta', { property: 'csp-nonce', nonce: content_security_policy_nonce })
   end
 
-  
 private
 
   # Internal: Returns the current manifest loaded by Vite Ruby.
