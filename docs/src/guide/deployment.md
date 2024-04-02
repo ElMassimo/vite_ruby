@@ -101,6 +101,9 @@ along the `assets:precompile` rake task.
 You can disable the extension of the `assets:precompile` rake task by setting
 the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` environment variable to `true`.
 
+By default, dependencies will be automatically installed as part of the `assets:precompile` extension.
+Set `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL` to `true` to skip dependency installation.
+
 ## Compressing Assets 📦
 
 Most CDN and edge service providers will automatically serve compressed assets,
