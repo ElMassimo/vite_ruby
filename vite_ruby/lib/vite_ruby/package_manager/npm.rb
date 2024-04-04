@@ -14,12 +14,11 @@ module ViteRuby::PackageManager
       'npm install'
     end
 
-    private
+  private
 
     # Internal: Resolves to an executable for Vite.
     def vite_executable
       super || ["#{ `npm bin`.chomp }/vite"]
     end
-
   end
 end

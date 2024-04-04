@@ -10,7 +10,7 @@ module ViteRuby::PackageManager
       'bun install'
     end
 
-    private
+  private
 
     def nodejs_runtime?
       false

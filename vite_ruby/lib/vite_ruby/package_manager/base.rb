@@ -30,7 +30,7 @@ class ViteRuby::PackageManager::Base
     end
   end
 
-  private
+private
 
   def nodejs_runtime?
     true

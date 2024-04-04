@@ -10,7 +10,7 @@ module ViteRuby::PackageManager
       'yarn add'
     end
 
-    private
+  private
 
     def vite_executable
       super || %w[yarn vite]
