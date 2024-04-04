@@ -24,8 +24,7 @@
     "lint-staged": "^10.5.4",
     "minimist": "^1.2.6",
     "semver": "^7.3.7",
-    "typescript": "^4.7.4",
-    "yarn": "^1.22.21"
+    "typescript": "^4.7.4"
   },
   "lint-staged": {
     "*.{js,ts,tsx,jsx,vue}": [

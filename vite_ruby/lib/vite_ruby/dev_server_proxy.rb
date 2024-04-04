@@ -54,8 +54,8 @@ private
 
   def vite_should_handle?(env)
     path = normalize_uri(env['PATH_INFO'])
-    path.start_with?(vite_url_prefix) || # Vite asset
-      file_in_vite_root?(path) # Fallback if Vite can serve the file
+    return true if path.start_with?(vite_url_prefix) # Vite asset
+    return true if file_in_vite_root?(path) # Fallback if Vite can serve the file
   end
 
   # NOTE: When using an empty 'public_output_dir', we need to rely on a

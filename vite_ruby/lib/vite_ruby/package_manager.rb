@@ -3,10 +3,8 @@
 module ViteRuby::PackageManager
   def self.resolve(root:)
     package_manager_name = ENV.fetch('VITE_RUBY_PACKAGE_MANAGER', detect_package_manager(root))
-    package_manager_class_for(package_manager_name).new(root:)
+    package_manager_class_for(package_manager_name).new(root: root)
   end
-
-  private
 
   def self.package_manager_class_for(package_manager_name)
     case package_manager_name.to_sym
@@ -33,4 +31,3 @@ module ViteRuby::PackageManager
     end
   end
 end
-
