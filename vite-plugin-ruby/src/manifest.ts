@@ -47,7 +47,7 @@ export function assetsManifestPlugin (): Plugin {
     async generateBundle (_options, bundle) {
       if (!config.build.manifest) return
 
-      const manifestDir = typeof config.build.manifest === 'string' ? path.basename(config.build.manifest) : '.vite'
+      const manifestDir = typeof config.build.manifest === 'string' ? path.dirname(config.build.manifest) : '.vite'
       const fileName = `${manifestDir}/manifest-assets.json`
 
       const manifest: AssetsManifest = new Map()
