@@ -27,7 +27,7 @@ class ViteRuby::Config
     ]
 
     vite5_manifest_paths = manifest_files.map do |path|
-      build_output_dir.join(".vite/#{path}")
+      build_output_dir.join(".vite/#{ path }")
     end
 
     vite4_manifest_paths = manifest_files.map do |path|
