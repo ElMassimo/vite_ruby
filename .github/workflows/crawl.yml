@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container: algolia/docsearch-scraper
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: 'sudo apt-get install -y jq'
       - run: 'echo "CONFIG=$(cat docs/.algolia/config.json | jq -r tostring)" >> $GITHUB_ENV'
       - run: "cd /root && pipenv install"
