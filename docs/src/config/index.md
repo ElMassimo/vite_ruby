@@ -315,6 +315,16 @@ You can customize this behavior using the following options.
 
   Otherwise, this setting allows to skip that check. Use it responsibly.
 
+### skipInstallDevDependencies
+
+- **Version Added:** ``
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES`
+
+ Skip `npx ci` from being ran, which happens when for example, `bundle exec assets:precompile` is ran.
+ When this is enabled, packages specified in the lock file are installed through the package manager available.
+
+
 ### skipProxy (experimental)
 
 - **Version Added:** `3.2.12`
