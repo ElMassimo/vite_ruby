@@ -31,6 +31,7 @@ jobs:
 
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}
+      SECRET_KEY_BASE_DUMMY: 1
 
     steps:
       - uses: actions/checkout@v4
