@@ -26,6 +26,7 @@
 [ssrOutputDir]: /config/#ssroutputdir
 [ssr mode]: https://vitejs.dev/guide/ssr.html#server-side-rendering
 [inertia-ssr]: https://github.com/ElMassimo/inertia-rails-ssr-template
+[deployment]: /guide/deployment.html#deployment-🚀
 
 # Configuring Vite Ruby
 
@@ -268,15 +269,6 @@ You can customize this behavior using the following options.
   "base": "/nested_path"
   ```
 
-### configPath
-
-- **Default:** `config/vite.json`
-- **Env Var:** `VITE_RUBY_CONFIG_PATH`
-
-  Specify where the [JSON config] file is located (relative to <kbd>[root]</kbd>).
-
-  Not supported in the JSON file.
-
 ### devServerConnectTimeout
 
 - **Default:** `0.01` (seconds)
@@ -362,6 +354,36 @@ You can customize this behavior using the following options.
     },
   })
   ```
+## ENV-Only Options
+
+### `config_path`
+
+- **Default:** `config/vite.json`
+- **Env Var:** `VITE_RUBY_CONFIG_PATH`
+
+  Specify where the [JSON config] file is located (relative to <kbd>[root]</kbd>).
+
+### `skip_install_dev_dependencies`
+
+- **Version Added:** `3.3.3`
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES`
+
+  When enabled, the `vite:install_dependencies` rake task will also install
+  development dependencies, which is usually necessary in order to run a Vite build.
+
+  By adding Vite and its plugins (plus other tools such as ESLint) as development
+  dependencies, you can easily prune them after assets have been precompiled.
+
+### `skip_assets_precompile_extension`
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION`
+
+  When enabled, `vite:build` won't be run [automatically][deployment]
+  when the `assets:precompile` rake task is run, allowing you to fully customize
+  your deployment.
+
 ## SSR Options (experimental)
 
 _Vite Ruby_ supports building your app in [SSR mode], obtaining a Node.js app

@@ -93,13 +93,17 @@ running `assets:precompile`.
 This allows you to skip installation in servers that won't precompile assets, or
 easily prune them after assets have been precompiled.
 
+You can opt-out by setting the [`VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES`](/config/#skip-install-dev-dependencies)
+environment variable to `true`.
+
 ## Disabling extension of the `assets:precompile` task
 
 During complex migrations, it might be convenient that `vite:build` is not run
 along the `assets:precompile` rake task.
 
 You can disable the extension of the `assets:precompile` rake task by setting
-the `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION` environment variable to `true`.
+the [`VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION`](/config/#skip-assets-precompile-extension)
+environment variable to `true`.
 
 ## Compressing Assets 📦
 
