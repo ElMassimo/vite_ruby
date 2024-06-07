@@ -363,6 +363,27 @@ You can customize this behavior using the following options.
 
   Specify where the [JSON config] file is located (relative to <kbd>[root]</kbd>).
 
+### `skip_assets_precompile_extension`
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION`
+
+  When enabled, `vite:build` won't be run [automatically][deployment]
+  when the `assets:precompile` rake task is run, allowing you to fully customize
+  your deployment.
+
+### `skip_assets_precompile_install`
+
+- **Version Added:** `3.6.0`
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL`
+
+  When enabled, `assets:precompile` won't invoke `vite:install_dependencies`
+  before invoking `vite:build`.
+
+  This can be useful in CI setups where all node dependencies necessary for the
+  Vite build have already been installed in a previous step.
+
 ### `skip_install_dev_dependencies`
 
 - **Version Added:** `3.3.3`
@@ -374,15 +395,6 @@ You can customize this behavior using the following options.
 
   By adding Vite and its plugins (plus other tools such as ESLint) as development
   dependencies, you can easily prune them after assets have been precompiled.
-
-### `skip_assets_precompile_extension`
-
-- **Default:** `false`
-- **Env Var:** `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION`
-
-  When enabled, `vite:build` won't be run [automatically][deployment]
-  when the `assets:precompile` rake task is run, allowing you to fully customize
-  your deployment.
 
 ## SSR Options (experimental)
 

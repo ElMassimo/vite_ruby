@@ -96,6 +96,15 @@ easily prune them after assets have been precompiled.
 You can opt-out by setting the [`VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES`](/config/#skip-install-dev-dependencies)
 environment variable to `true`.
 
+## Disabling `node_modules` installation in `assets:precompile`
+
+By default, node dependencies will be automatically installed as part of the `assets:precompile` task.
+
+If all dependencies that necessary for the Vite build have already been installed
+in a previous step, you may skip installation by setting the
+[`VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL`](/config/#skip-assets-precompile-install)
+environment variable to `true`.
+
 ## Disabling extension of the `assets:precompile` task
 
 During complex migrations, it might be convenient that `vite:build` is not run
@@ -105,8 +114,6 @@ You can disable the extension of the `assets:precompile` rake task by setting
 the [`VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION`](/config/#skip-assets-precompile-extension)
 environment variable to `true`.
 
-By default, dependencies will be automatically installed as part of the `assets:precompile` extension.
-Set `VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL` to `true` to skip dependency installation.
 
 ## Compressing Assets 📦
 
