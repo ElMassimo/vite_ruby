@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'ostruct'
+
 # Public: Registry for accessing resources managed by Vite, using a generated
 # manifest file which maps entrypoint names to file paths.
 #
