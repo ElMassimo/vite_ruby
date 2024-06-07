@@ -1,3 +1,12 @@
+# [3.6.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.5.0...vite_ruby@3.6.0) (2024-06-07)
+
+
+### Features
+
+* allow skipping dependency install in assets:precompile ([#451](https://github.com/ElMassimo/vite_ruby/issues/451)) ([5a922b2](https://github.com/ElMassimo/vite_ruby/commit/5a922b2071446e3880b17503474a0c7806eab6a7))
+
+
+
 # [3.5.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.4.0...vite_ruby@3.5.0) (2023-11-16)
 
 
