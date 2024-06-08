@@ -44,7 +44,7 @@ module ViteRubyTestHelpers
     refresh_config
   end
 
-  def test_app_path
+  def path_to_test_app
     File.expand_path('test_app', __dir__)
   end
 
@@ -70,7 +70,7 @@ private
   end
 
   def assert_run_command(*argv, flags: [])
-    Dir.chdir(test_app_path) {
+    Dir.chdir(path_to_test_app) {
       begin
         mock = Minitest::Mock.new
         mock.expect(:call, nil, [ViteRuby.config.to_env, %r{node_modules/.bin/vite}, *argv, *flags])

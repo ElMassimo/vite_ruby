@@ -180,7 +180,7 @@ private
     [app_frontend_dir, app_public_dir, app_ssr_dir, tmp_dir].each do |dir|
       dir.rmtree if dir.exist?
     end
-    root_dir.join('app/views/layouts/application.html.erb').write(Pathname.new(test_app_path).join('app/views/layouts/application.html.erb').read)
+    root_dir.join('app/views/layouts/application.html.erb').write(Pathname.new(path_to_test_app).join('app/views/layouts/application.html.erb').read)
     gitignore_path.write('')
     @command_results = []
   end
