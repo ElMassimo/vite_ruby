@@ -18,8 +18,14 @@ require 'vite_plugin_legacy'
 
 module TestApp
   class Application < ::Rails::Application
-    config.secret_key_base = 'abcdef'
+    config.load_defaults Rails::VERSION::STRING.to_f
+    config.secret_key_base = SecureRandom.hex
     config.eager_load = true
     config.active_support.test_order = :sorted
+
+    if Rails.gem_version >= Gem::Version.new('7.0.0')
+      # Option added in Rails 7.0, defaults to false. Some helper_test tests assume true.
+      config.action_view.apply_stylesheet_media_default = true
+    end
   end
 end
