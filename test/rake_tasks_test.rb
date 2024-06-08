@@ -43,6 +43,20 @@ class RakeTasksTest < ViteRuby::Test
                     'Expected development dependencies to be installed as well'
   end
 
+  def test_rake_vite_install_dependencies_supports_bun
+    ViteRuby.commands.send(:with_node_env, 'production') do
+      Dir.chdir(test_app_path) do
+        `touch bun.lockb`
+        `bundle exec rake vite:install_dependencies`
+      end
+    end
+
+    assert_includes installed_node_module_names, 'right-pad',
+                    'Expected development dependencies to be installed as well'
+  ensure
+    FileUtils.rm_f(File.expand_path('bun.lockb', test_app_path))
+  end
+
 private
 
   def test_app_path
