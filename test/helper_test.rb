@@ -181,8 +181,8 @@ class HelperTest < HelperTestCase
     }
   end
 
-  if Rails.gem_version >= Gem::Version.new('7.1.0')
-    def test_vite_picture_tag
+  def test_vite_picture_tag
+    if Rails.gem_version >= Gem::Version.new('7.1.0')
       assert_equal <<~HTML.gsub(/\n\s*/, ''), vite_picture_tag('images/logo.svg', 'images/logo.png', class: 'test', image: { alt: 'Logo' })
         <picture class="test">
           <source srcset="/vite-production/assets/logo.322aae0c.svg" type="image/svg+xml" />
@@ -190,6 +190,10 @@ class HelperTest < HelperTestCase
           <img alt="Logo" src="/vite-production/assets/logo.f42fb7ea.png" />
         </picture>
       HTML
+    else
+      assert_raises(NotImplementedError, /vite_picture_tag/) {
+        vite_picture_tag
+      }
     end
   end
 end
