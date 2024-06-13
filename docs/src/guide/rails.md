@@ -48,6 +48,7 @@ templates, you can using the following helpers:
 - <kbd>[vite_javascript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a JavaScript file
 - <kbd>[vite_typescript_tag][helpers]</kbd>: Renders a `<script>` tag referencing a TypeScript file
 - <kbd>[vite_stylesheet_tag][helpers]</kbd>: Renders a `<link>` tag referencing a CSS file
+- <kbd>[vite_csp_meta_tag][helpers]</kbd>: Renders a `<meta>` tag with the Content Security Policy nonce in a format vite expects (https://vitejs.dev/guide/features.html#content-security-policy-csp).
 
 You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd>stylesheet_link_tag</kbd>.
 
@@ -56,6 +57,7 @@ You can pass any options supported by <kbd>javascript_include_tag</kbd> and <kbd
   <title>Example</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <%= vite_csp_meta_tag >
   <%= vite_client_tag %>
 
   <%= vite_javascript_tag 'application' %>
@@ -143,3 +145,9 @@ When running the development server, these tags are omitted, as Vite will load t
 ```erb
 <script src="/vite/assets/application.js" type="module" crossorigin="anonymous"/>
 ```
+
+### Content Security Policy - Vite CSP nonce tagging (Vite >= 5.2)
+
+In non-build environments with hot reloading (usually the development and test environments), Vite will automatically add a nonce to the script and style tags it generates pulling the nonce value from a meta tag. To support this, you should call `<%= vite_csp_meta_tag %>` in your layout or template which renders your `head` element. This will render a `<meta>` tag with the Content Security Policy nonce in a format that Vite expects. This is a slightly modified version of the `csp_meta_tag` helper provided by Rails which is not compatible with Vite CSP nonce tagging.
+
+For more information on how Vite handles Content Security Policy, see the [Vite documentation](https://vitejs.dev/guide/features.html#content-security-policy-csp).
