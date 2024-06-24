@@ -6,7 +6,7 @@
 console.log('Vite ⚡️ Rails')
 
 // If using a TypeScript entrypoint file:
-//     <%= vite_typescript_tag 'application' %>
+//     <%= vite_typescript_tag 'application.ts' %>
 //
 // If you want to use .jsx or .tsx, add the extension:
 //     <%= vite_javascript_tag 'application.jsx' %>
