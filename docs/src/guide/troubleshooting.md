@@ -158,11 +158,23 @@ This is probably the case if you are seeing errors such as `#<Errno::EMFILE: Too
 
 Follow [this article][ulimit] for information on how to increase the limit of file descriptors in your OS.
 
-### Safari does not reflect CSS changes in development
+### Safari does not reflect CSS and JS changes in development
 
-Safari [ignores](https://apple.stackexchange.com/questions/439451/safari-is-caching-hard-i-have-to-empty-for-each-change-in-my-css) the `Cache-Control: no-cache` header for CSS stylesheets, which is inconvenient in development as HMR for CSS does not work as expected, requiring the cache to be cleared manually in order to see changes.
+Safari [ignores](https://bugs.webkit.org/show_bug.cgi?id=193533) the `Cache-Control: no-cache` header for preloaded CSS and JS files, which is inconvenient in development as HMR does not work as expected, requiring the cache to be cleared manually in order to see changes.
 
-A workaround is to import the CSS from a [`vite_javascript_tag` entrypoint][smart output] instead of using `vite_stylesheet_tag`. When the CSS is requested in this way it becomes a JS request in development, avoiding the bug in Safari.
+By default, Rails javascript and stylesheet tag helpers cause a `Link: ... rel=preload` header to be emitted, which triggers the Safari bug. As a workaround, you can disable the preload behavior in development as follows:
+
+```ruby
+# config/environments/development.rb
+
+Rails.application.configure do
+  # Disable `Link: ... rel=preload` header to workaround Safari caching bug
+  # https://bugs.webkit.org/show_bug.cgi?id=193533
+  config.action_view.preload_links_header = false
+end
+```
+
+With preloading disabled, Safari will properly refresh changed files and HMR will work.
 
 ## Fixed Issues
 
