@@ -143,7 +143,7 @@ private
 
   def versions
     all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - config.manifest_paths - files_referenced_in_manifests
+    entries = all_files - config.manifest_paths - files_to_retain
     entries.reject { |file| File.directory?(file) }
       .group_by { |file| File.mtime(file).utc.to_i }
       .sort.reverse
@@ -153,6 +153,10 @@ private
     config.manifest_paths.flat_map { |path|
       JSON.parse(path.read).map { |_, entry| entry['file'] }
     }.compact.uniq.map { |path| config.build_output_dir.join(path).to_s }
+  end
+
+  def files_to_retain
+    Dir.glob(files_referenced_in_manifests.map { |path| "#{ path }*" }).flatten
   end
 
   def with_node_env(env)

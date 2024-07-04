@@ -37,30 +37,50 @@ class CommandsTest < ViteRuby::Test
 
   def test_clean
     with_rails_env('test') { |config|
-      manifest = config.build_output_dir.join('.vite/manifest.json')
+      ensure_output_dirs(config)
+
       js_file = config.build_output_dir.join('assets/application.js')
+      js_file.write('export {}')
+
+      # Simulate using vite-plugin-rails & rollup-plugin-gzip to produce
+      # source maps, gzip & brotli compressed versions of the file.
+      source_map_file = config.build_output_dir.join('assets/application.js.map')
+      source_map_file.write('export {}')
+      gzip_file = config.build_output_dir.join('assets/application.js.gz')
+      gzip_file.write('export {}')
+      brotli_file = config.build_output_dir.join('assets/application.js.br')
+      brotli_file.write('export {}')
 
       # Should not clean, the manifest does not exist.
-      ensure_output_dirs(config)
       refute clean
 
-      # Should not clean, the file is recent.
+      manifest = config.build_output_dir.join('.vite/manifest.json')
       manifest.write('{}')
-      js_file.write('export {}')
+
+      # Should not clean, the file is recent.
       assert clean_from_task(OpenStruct.new)
       assert_path_exists manifest
       assert_path_exists js_file
+      assert_path_exists source_map_file
+      assert_path_exists gzip_file
+      assert_path_exists brotli_file
 
       # Should not clean if directly referenced.
       manifest.write('{ "application.js": { "file": "assets/application.js" } }')
       assert clean(keep_up_to: 0, age_in_seconds: 0)
       assert_path_exists js_file
+      assert_path_exists source_map_file
+      assert_path_exists gzip_file
+      assert_path_exists brotli_file
 
       # Should clean if we remove age restrictions.
       manifest.write('{}')
       assert clean(keep_up_to: 0, age_in_seconds: 0)
       assert_path_exists config.build_output_dir
       refute_path_exists js_file
+      refute_path_exists source_map_file
+      refute_path_exists gzip_file
+      refute_path_exists brotli_file
     }
   end
 
