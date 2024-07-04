@@ -142,8 +142,8 @@ private
   end
 
   def versions
-    all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - config.manifest_paths - files_to_retain
+    all_files = Dir.glob("#{ config.build_output_dir }/**/*", File::FNM_DOTMATCH)
+    entries = all_files - config.manifest_paths.map(&:to_s) - files_to_retain
     entries.reject { |file| File.directory?(file) }
       .group_by { |file| File.mtime(file).utc.to_i }
       .sort.reverse

@@ -68,6 +68,7 @@ class CommandsTest < ViteRuby::Test
       # Should not clean if directly referenced.
       manifest.write('{ "application.js": { "file": "assets/application.js" } }')
       assert clean(keep_up_to: 0, age_in_seconds: 0)
+      assert_path_exists manifest
       assert_path_exists js_file
       assert_path_exists source_map_file
       assert_path_exists gzip_file
@@ -77,6 +78,7 @@ class CommandsTest < ViteRuby::Test
       manifest.write('{}')
       assert clean(keep_up_to: 0, age_in_seconds: 0)
       assert_path_exists config.build_output_dir
+      assert_path_exists manifest
       refute_path_exists js_file
       refute_path_exists source_map_file
       refute_path_exists gzip_file
