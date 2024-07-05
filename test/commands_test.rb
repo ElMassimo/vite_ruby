@@ -43,6 +43,8 @@ class CommandsTest < ViteRuby::Test
       js_file.write('export {}')
       css_module = config.build_output_dir.join('assets/styles.css')
       css_module.write('.foo {}')
+      image = config.build_output_dir.join('assets/image.svg')
+      image.write('<svg/>')
 
       # Simulate using vite-plugin-rails & rollup-plugin-gzip to produce
       # source maps, gzip & brotli compressed versions of the file.
@@ -73,10 +75,14 @@ class CommandsTest < ViteRuby::Test
       assert_path_exists css_module
       assert_path_exists css_gzip_file
       assert_path_exists css_brotli_file
+      assert_path_exists image
 
       # Should not clean if directly referenced.
       manifest.write('{
         "application.js": {
+          "assets": [
+            "assets/image.svg"
+          ],
           "css": [
             "assets/styles.css"
           ],
@@ -95,6 +101,7 @@ class CommandsTest < ViteRuby::Test
       assert_path_exists css_module
       assert_path_exists css_gzip_file
       assert_path_exists css_brotli_file
+      assert_path_exists image
 
       # Should clean if we remove age restrictions.
       manifest.write('{}')
@@ -108,6 +115,7 @@ class CommandsTest < ViteRuby::Test
       refute_path_exists css_module
       refute_path_exists css_gzip_file
       refute_path_exists css_brotli_file
+      refute_path_exists image
     }
   end
 
