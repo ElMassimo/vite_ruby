@@ -41,6 +41,8 @@ class CommandsTest < ViteRuby::Test
 
       js_file = config.build_output_dir.join('assets/application.js')
       js_file.write('export {}')
+      css_module = config.build_output_dir.join('assets/styles.css')
+      css_module.write('.foo {}')
 
       # Simulate using vite-plugin-rails & rollup-plugin-gzip to produce
       # source maps, gzip & brotli compressed versions of the file.
@@ -50,6 +52,10 @@ class CommandsTest < ViteRuby::Test
       gzip_file.write('export {}')
       brotli_file = config.build_output_dir.join('assets/application.js.br')
       brotli_file.write('export {}')
+      css_gzip_file = config.build_output_dir.join('assets/styles.css.gz')
+      css_gzip_file.write('.foo {}')
+      css_brotli_file = config.build_output_dir.join('assets/styles.css.br')
+      css_brotli_file.write('.foo {}')
 
       # Should not clean, the manifest does not exist.
       refute clean
@@ -64,15 +70,28 @@ class CommandsTest < ViteRuby::Test
       assert_path_exists source_map_file
       assert_path_exists gzip_file
       assert_path_exists brotli_file
+      assert_path_exists css_module
+      assert_path_exists css_gzip_file
+      assert_path_exists css_brotli_file
 
       # Should not clean if directly referenced.
-      manifest.write('{ "application.js": { "file": "assets/application.js" } }')
+      manifest.write('{
+        "application.js": {
+          "css": [
+            "assets/styles.css"
+          ],
+          "file": "assets/application.js"
+        }
+      }')
       assert clean(keep_up_to: 0, age_in_seconds: 0)
       assert_path_exists manifest
       assert_path_exists js_file
       assert_path_exists source_map_file
       assert_path_exists gzip_file
       assert_path_exists brotli_file
+      assert_path_exists css_module
+      assert_path_exists css_gzip_file
+      assert_path_exists css_brotli_file
 
       # Should clean if we remove age restrictions.
       manifest.write('{}')
@@ -83,6 +102,9 @@ class CommandsTest < ViteRuby::Test
       refute_path_exists source_map_file
       refute_path_exists gzip_file
       refute_path_exists brotli_file
+      refute_path_exists css_module
+      refute_path_exists css_gzip_file
+      refute_path_exists css_brotli_file
     }
   end
 
