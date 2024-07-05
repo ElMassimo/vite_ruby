@@ -81,6 +81,9 @@ class CommandsTest < ViteRuby::Test
             "assets/styles.css"
           ],
           "file": "assets/application.js"
+        },
+        "noassetsorcss.js": {
+          "file": "assets/noassetsorcss.js"
         }
       }')
       assert clean(keep_up_to: 0, age_in_seconds: 0)

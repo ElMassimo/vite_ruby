@@ -151,7 +151,9 @@ private
 
   def files_referenced_in_manifests
     config.manifest_paths.flat_map { |path|
-      JSON.parse(path.read).flat_map { |_, entry| [entry['file']] + entry['css'] }
+      JSON.parse(path.read).flat_map do |_, entry|
+        [entry['file']] + entry.fetch('css', [])
+      end
     }.compact.uniq.map { |path| config.build_output_dir.join(path).to_s }
   end
 
