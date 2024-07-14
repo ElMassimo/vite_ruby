@@ -181,6 +181,10 @@ class HelperTest < HelperTestCase
     }
   end
 
+  def test_vite_csp_meta_tag
+    assert_equal %(<meta property="csp-nonce" nonce="#{ content_security_policy_nonce }" />), vite_csp_meta_tag
+  end
+
   if Rails.gem_version >= Gem::Version.new('7.1.0')
     def test_vite_picture_tag
       assert_equal <<~HTML.gsub(/\n\s*/, ''), vite_picture_tag('images/logo.svg', 'images/logo.png', class: 'test', image: { alt: 'Logo' })
