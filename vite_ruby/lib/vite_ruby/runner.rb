@@ -28,11 +28,14 @@ private
   # Internal: Returns an Array with the command to run.
   def command_for(args)
     [config.to_env(env)].tap do |cmd|
-      args = args.clone
-      cmd.push('node', '--inspect-brk') if args.delete('--inspect')
-      cmd.push('node', '--trace-deprecation') if args.delete('--trace_deprecation')
+      npx_options, vite_args = args.partition { |arg| arg.start_with?('--node-options') }
       cmd.push(*vite_executable)
-      cmd.push(*args)
+
+      # NOTE: Vite will parse args, so we need to disambiguate and pass them to
+      # `npx` before specifying the `vite` executable.
+      cmd.insert(-2, *npx_options) unless npx_options.empty?
+
+      cmd.push(*vite_args)
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
@@ -40,12 +43,12 @@ private
   # Internal: Resolves to an executable for Vite.
   def vite_executable
     bin_path = config.vite_bin_path
-    return [bin_path] if File.exist?(bin_path)
+    return [bin_path] if bin_path && File.exist?(bin_path)
 
     if config.root.join('yarn.lock').exist?
       %w[yarn vite]
     else
-      ["#{ `npm bin`.chomp }/vite"]
+      %w[npx vite]
     end
   end
 end
