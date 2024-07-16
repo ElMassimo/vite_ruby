@@ -81,7 +81,7 @@ private
   def install_js_dependencies
     package_json = root.join('package.json')
     unless package_json.exist?
-      write(package.json, <<~JSON)
+      write package_json, <<~JSON
         {
           "private": true,
           "type": "module"

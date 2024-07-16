@@ -22,6 +22,16 @@ class FilesTest < ViteRuby::Test
     FileUtils.remove_entry_secure(root)
   end
 
+  def test_fresh_installation
+    app_root = root.join('test_fresh_install').tap(&:mkpath)
+    Dir.chdir(app_root) {
+      `bundle exec vite install`
+    }
+    assert_path_exists app_root.join('vite.config.ts')
+    assert_path_exists app_root.join('package.json')
+    assert 'module', JSON.parse(app_root.join('package.json').read)['type']
+  end
+
   def test_write
     path = root.join('write')
     write(path, "Hello\nWorld")

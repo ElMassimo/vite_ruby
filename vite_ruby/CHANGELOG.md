@@ -1,3 +1,7 @@
+## [3.6.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.1...vite_ruby@3.6.2) (2024-07-16)
+
+
+
 ## [3.6.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.0...vite_ruby@3.6.1) (2024-07-16)
 
 
