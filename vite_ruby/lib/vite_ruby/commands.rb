@@ -113,6 +113,7 @@ class ViteRuby::Commands
       $stdout.puts "npm: #{ `npm --version` }"
       $stdout.puts "yarn: #{ `yarn --version` rescue nil }"
       $stdout.puts "pnpm: #{ `pnpm --version` rescue nil }"
+      $stdout.puts "bun: #{ `bun --version` rescue nil }"
       $stdout.puts "ruby: #{ `ruby --version` }"
 
       $stdout.puts "\n"

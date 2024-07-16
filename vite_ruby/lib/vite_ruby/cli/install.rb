@@ -94,7 +94,7 @@ private
     end
 
     deps = js_dependencies.join(' ')
-    run_with_capture("#{ npm_install } -D #{ deps }", stdin_data: "\n")
+    run_with_capture("#{ add_dependencies_command } -D #{ deps }", stdin_data: "\n")
   end
 
   # Internal: Adds compilation output dirs to git ignore.
@@ -114,7 +114,7 @@ private
 
   # Internal: The root path for the Ruby application.
   def root
-    @root ||= silent_warnings { config.root }
+    config.root
   end
 
   def say(*args)
@@ -129,19 +129,7 @@ private
   end
 
   # Internal: Support all popular package managers.
-  def npm_install
-    return 'yarn add' if root.join('yarn.lock').exist?
-    return 'pnpm install' if root.join('pnpm-lock.yaml').exist?
-
-    'npm install'
-  end
-
-  # Internal: Avoid printing warning about missing vite.json, we will create one.
-  def silent_warnings
-    old_stderr = $stderr
-    $stderr = StringIO.new
-    yield
-  ensure
-    $stderr = old_stderr
+  def add_dependencies_command
+    ViteRuby.package_manager.add_dependencies_command
   end
 end

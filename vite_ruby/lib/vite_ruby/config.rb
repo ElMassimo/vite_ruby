@@ -189,6 +189,7 @@ private
 
   # Internal: If any of these files is modified the build won't be skipped.
   DEFAULT_WATCHED_PATHS = %w[
+    bun.lockb
     package-lock.json
     package.json
     pnpm-lock.yaml
