@@ -16,7 +16,7 @@
   "https": null,
   "port": 3036,
   "hideBuildConsoleOutput": false,
-  "viteBinPath": "node_modules/.bin/vite",
+  "viteBinPath": null,
   "watchAdditionalPaths": [],
   "base": "",
   "ssrBuildEnabled": false,
