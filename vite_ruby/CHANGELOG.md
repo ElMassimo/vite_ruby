@@ -1,3 +1,12 @@
+## [3.6.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.0...vite_ruby@3.6.1) (2024-07-16)
+
+
+### Bug Fixes
+
+* use ESM by default in new installations ([#479](https://github.com/ElMassimo/vite_ruby/issues/479)) ([cc379ca](https://github.com/ElMassimo/vite_ruby/commit/cc379ca613dd4e5863f8556be62ea623b56cfe0c)), closes [#431](https://github.com/ElMassimo/vite_ruby/issues/431)
+
+
+
 # [3.6.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.5.0...vite_ruby@3.6.0) (2024-06-07)
 
 
