@@ -95,7 +95,7 @@ Use the `~/` alias to the <kbd>[sourceCodeDir]</kbd> to disambiguate the referen
 Please refer to [Vite's troubleshooting guide](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated).
 
 You might need to add `"type": "module"` to your `package.json`, or rename
-`vite.config.ts` to `vite.config.mjs`.
+`vite.config.ts` to `vite.config.mts`.
 
 ## HMR Issues
 
