@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container: algolia/docsearch-scraper
     steps:
-      - run: 'sudo apt-get -y libc6=2.28-10+deb10u4 libc-bin=2.28-10+deb10u4'
+      - run: 'sudo apt-get install -y libc6=2.28-10+deb10u4 libc-bin=2.28-10+deb10u4'
       - uses: actions/checkout@v4
       - run: 'sudo apt-get install -y jq'
       - run: 'echo "CONFIG=$(cat docs/.algolia/config.json | jq -r tostring)" >> $GITHUB_ENV'
