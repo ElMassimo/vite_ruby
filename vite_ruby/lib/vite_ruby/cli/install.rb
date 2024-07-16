@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'stringio'
+require 'json'
 
 class ViteRuby::CLI::Install < Dry::CLI::Command
   desc 'Performs the initial configuration setup to get started with Vite Ruby.'
@@ -79,7 +80,19 @@ private
   # Internal: Installs vite and vite-plugin-ruby at the project level.
   def install_js_dependencies
     package_json = root.join('package.json')
-    write(package_json, '{}') unless package_json.exist?
+    unless package_json.exist?
+      write(package.json, <<~JSON)
+        {
+          "private": true,
+          "type": "module"
+        }
+      JSON
+    end
+
+    if (JSON.parse(package_json.read)['type'] != 'module' rescue nil)
+      FileUtils.mv root.join('vite.config.ts'), root.join('vite.config.mts'), force: true, verbose: true
+    end
+
     deps = js_dependencies.join(' ')
     run_with_capture("#{ npm_install } -D #{ deps }", stdin_data: "\n")
   end

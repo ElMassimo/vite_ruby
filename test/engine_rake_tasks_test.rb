@@ -38,7 +38,7 @@ class EngineRakeTasksTest < ViteRuby::Test
     app_frontend_dir.join('ssr/ssr.js').write(SSR_ENTRYPOINT)
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
-    assert_path_exists app_ssr_dir.join('ssr.mjs')
+    assert_path_exists app_ssr_dir.join('ssr.js')
     refute_path_exists app_ssr_dir.join('.vite/manifest.json')
     refute_path_exists app_ssr_dir.join('.vite/manifest-assets.json')
 
@@ -89,7 +89,7 @@ class EngineRakeTasksTest < ViteRuby::Test
       }
 
       FileUtils.mkdir_p(app_ssr_dir.to_s)
-      ssr_path = app_ssr_dir.join('ssr.mjs')
+      ssr_path = app_ssr_dir.join('ssr.js')
       ssr_path.write('')
       stub_kernel_exec('node', ssr_path.to_s) {
         ViteRuby::CLI::SSR.new.call(mode: ViteRuby.mode)

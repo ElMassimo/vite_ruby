@@ -90,6 +90,13 @@ Use the `~/` alias to the <kbd>[sourceCodeDir]</kbd> to disambiguate the referen
 <%= vite_stylesheet_tag '~/style.css' unless ViteRuby.instance.dev_server_running? %>
 ```
 
+### The CJS build of Vite's Node API is deprecated
+
+Please refer to [Vite's troubleshooting guide](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated).
+
+You might need to add `"type": "module"` to your `package.json`, or rename
+`vite.config.ts` to `vite.config.mjs`.
+
 ## HMR Issues
 
 ### Hot Module Refresh does not work for React

@@ -197,6 +197,7 @@ private
     vite.config.js
     vite.config.mjs
     vite.config.ts
+    vite.config.mts
     windi.config.ts
     yarn.lock
   ].freeze
