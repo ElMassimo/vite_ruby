@@ -12,7 +12,8 @@ end
 
 module TestDummyApp
   class Application < Rails::Application
-    config.secret_key_base = 'abcdef'
+    config.load_defaults Rails::VERSION::STRING.to_f
+    config.secret_key_base = SecureRandom.hex
     config.eager_load = true
   end
 end
