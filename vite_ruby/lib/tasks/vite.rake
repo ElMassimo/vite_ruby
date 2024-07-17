@@ -45,8 +45,8 @@ namespace :vite do
     install_env_args = ENV['VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES'] == 'true' ? {} : { 'NODE_ENV' => 'development' }
 
     install_cmd = case (pkg = ViteRuby.config.package_manager)
-    when "npm" then "npm ci"
-    else "#{pkg} install --frozen-lockfile"
+    when 'npm' then 'npm ci'
+    else "#{ pkg } install --frozen-lockfile"
     end
 
     system(install_env_args, install_cmd)
