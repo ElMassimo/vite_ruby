@@ -28,27 +28,26 @@ private
   # Internal: Returns an Array with the command to run.
   def command_for(args)
     [config.to_env(env)].tap do |cmd|
-      npx_options, vite_args = args.partition { |arg| arg.start_with?('--node-options') }
-      cmd.push(*vite_executable)
-
-      # NOTE: Vite will parse args, so we need to disambiguate and pass them to
-      # `npx` before specifying the `vite` executable.
-      cmd.insert(-2, *npx_options) unless npx_options.empty?
-
+      exec_args, vite_args = args.partition { |arg| arg.start_with?('--node-options') }
+      cmd.push(*vite_executable(*exec_args))
       cmd.push(*vite_args)
       cmd.push('--mode', config.mode) unless args.include?('--mode') || args.include?('-m')
     end
   end
 
   # Internal: Resolves to an executable for Vite.
-  def vite_executable
+  def vite_executable(*exec_args)
     bin_path = config.vite_bin_path
     return [bin_path] if bin_path && File.exist?(bin_path)
 
-    if config.root.join('yarn.lock').exist?
-      %w[yarn vite]
-    else
-      %w[npx vite]
+    x = case config.package_manager
+    when 'npm' then %w[npx]
+    when 'pnpm' then %w[pnpm exec]
+    when 'bun' then %w[bun x]
+    when 'yarn' then %w[yarn]
+    else raise ArgumentError, "Unknown package manager #{ config.package_manager.inspect }"
     end
+
+    [*x, *exec_args, 'vite']
   end
 end

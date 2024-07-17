@@ -109,11 +109,11 @@ class ViteRuby::Commands
         $stdout.puts "#{ framework }: #{ Gem.loaded_specs[framework]&.version }"
       end
 
-      $stdout.puts "node: #{ `node --version` }"
-      $stdout.puts "npm: #{ `npm --version` }"
-      $stdout.puts "yarn: #{ `yarn --version` rescue nil }"
-      $stdout.puts "pnpm: #{ `pnpm --version` rescue nil }"
       $stdout.puts "ruby: #{ `ruby --version` }"
+      $stdout.puts "node: #{ `node --version` }"
+
+      pkg = config.package_manager
+      $stdout.puts "#{ pkg }: #{ `#{ pkg } --version` rescue nil }"
 
       $stdout.puts "\n"
       packages = `npm ls vite vite-plugin-ruby`
