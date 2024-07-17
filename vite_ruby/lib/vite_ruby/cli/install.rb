@@ -97,7 +97,7 @@ private
       FileUtils.mv root.join('vite.config.ts'), root.join('vite.config.mts'), force: true, verbose: true
     end
 
-    install_dependencies js_dependencies.join(' ')
+    install_js_packages js_dependencies.join(' ')
   end
 
   # Internal: Adds compilation output dirs to git ignore.
@@ -131,7 +131,7 @@ private
     end
   end
 
-  def install_dependencies(deps)
+  def install_js_packages(deps)
     run_with_capture("#{ config.package_manager } add -D #{ deps }", stdin_data: "\n")
   end
 
