@@ -1,3 +1,13 @@
+# [3.7.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.2...vite_ruby@3.7.0) (2024-07-17)
+
+
+### Features
+
+* add `package_manager` config option, experimental support for bun ([#481](https://github.com/ElMassimo/vite_ruby/issues/481)) ([4426cb1](https://github.com/ElMassimo/vite_ruby/commit/4426cb1007dbb58f4637a4423b1e7d640db96841)), closes [#324](https://github.com/ElMassimo/vite_ruby/issues/324)
+* change default execution to use `npx vite` instead ([#480](https://github.com/ElMassimo/vite_ruby/issues/480)) ([330f61f](https://github.com/ElMassimo/vite_ruby/commit/330f61fedadf1274547a069856125e52002d0065)), closes [#462](https://github.com/ElMassimo/vite_ruby/issues/462)
+
+
+
 ## [3.6.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.1...vite_ruby@3.6.2) (2024-07-16)
 
 
