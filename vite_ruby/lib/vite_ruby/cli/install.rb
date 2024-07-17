@@ -6,7 +6,7 @@ require 'json'
 class ViteRuby::CLI::Install < Dry::CLI::Command
   desc 'Performs the initial configuration setup to get started with Vite Ruby.'
 
-  option(:package_manager, values: %w[npm pnpm yarn bun], aliases: ['package-manager'], desc: 'The package manager to use when installing JS dependencies.')
+  option(:package_manager, values: %w[npm pnpm yarn bun], aliases: %w[package-manager with], desc: 'The package manager to use when installing JS dependencies.')
 
   def call(package_manager: nil, **)
     ENV['VITE_RUBY_PACKAGE_MANAGER'] ||= package_manager if package_manager
