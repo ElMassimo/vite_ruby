@@ -96,15 +96,25 @@ private
   def coerce_values(config)
     config['mode'] = config['mode'].to_s
     config['port'] = config['port'].to_i
-    config['root'] = Pathname.new(config['root'])
-    config['build_cache_dir'] = config['root'].join(config['build_cache_dir'])
-    config['ssr_output_dir'] = config['root'].join(config['ssr_output_dir'])
+    config['root'] = root = Pathname.new(config['root'])
+    config['build_cache_dir'] = root.join(config['build_cache_dir'])
+    config['ssr_output_dir'] = root.join(config['ssr_output_dir'])
     coerce_booleans(config, 'auto_build', 'hide_build_console_output', 'https', 'skip_compatibility_check', 'skip_proxy')
+    config['package_manager'] ||= detect_package_manager(root)
   end
 
   # Internal: Coerces configuration options to boolean.
   def coerce_booleans(config, *names)
     names.each { |name| config[name] = [true, 'true'].include?(config[name]) }
+  end
+
+  def detect_package_manager(root)
+    return 'npm' if root.join('package-lock.json').exist?
+    return 'pnpm' if root.join('pnpm-lock.yaml').exist?
+    return 'bun' if root.join('bun.lockb').exist?
+    return 'yarn' if root.join('yarn.lock').exist?
+
+    'npm'
   end
 
   def initialize(attrs)
@@ -189,6 +199,7 @@ private
 
   # Internal: If any of these files is modified the build won't be skipped.
   DEFAULT_WATCHED_PATHS = %w[
+    bun.lockb
     package-lock.json
     package.json
     pnpm-lock.yaml
@@ -196,8 +207,8 @@ private
     tailwind.config.js
     vite.config.js
     vite.config.mjs
-    vite.config.ts
     vite.config.mts
+    vite.config.ts
     windi.config.ts
     yarn.lock
   ].freeze
