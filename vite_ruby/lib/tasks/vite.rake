@@ -22,7 +22,7 @@ namespace :vite do
   desc 'Bundle entrypoints using Vite Ruby (SSR only if enabled)'
   task build_all: :'vite:verify_install' do
     ViteRuby.commands.build_from_task
-    ViteRuby.commands.build_from_task('--ssr') if ViteRuby.config.ssr_build_enabled
+    ViteRuby.commands.build_from_task('--ssr', '--force') if ViteRuby.config.ssr_build_enabled
   end
 
   desc 'Remove old bundles created by ViteRuby'
