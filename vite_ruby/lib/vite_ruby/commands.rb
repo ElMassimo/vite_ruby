@@ -142,8 +142,8 @@ private
   end
 
   def versions
-    all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - config.manifest_paths - files_referenced_in_manifests
+    all_files = Dir.glob("#{ config.build_output_dir }/**/*", File::FNM_DOTMATCH)
+    entries = all_files - config.manifest_paths.map(&:to_s) - files_to_retain
     entries.reject { |file| File.directory?(file) }
       .group_by { |file| File.mtime(file).utc.to_i }
       .sort.reverse
@@ -151,8 +151,14 @@ private
 
   def files_referenced_in_manifests
     config.manifest_paths.flat_map { |path|
-      JSON.parse(path.read).map { |_, entry| entry['file'] }
+      JSON.parse(path.read).flat_map do |_, entry|
+        [entry['file']] + entry.fetch('css', []) + entry.fetch('assets', [])
+      end
     }.compact.uniq.map { |path| config.build_output_dir.join(path).to_s }
+  end
+
+  def files_to_retain
+    Dir.glob(files_referenced_in_manifests.map { |path| "#{ path }*" }).flatten
   end
 
   def with_node_env(env)
