@@ -34,8 +34,25 @@ const debug = createDebugger('vite-plugin-ruby:config')
 function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const config = loadConfiguration(env.mode, projectRoot, userConfig)
   const { assetsDir, base, outDir, server, root, entrypoints, ssrBuild } = config
+  const existingRollupOptions = userConfig.build?.rollupOptions || {};
 
   const isLocal = config.mode === 'development' || config.mode === 'test'
+
+  const buildRollupInputs = () => {
+    const existingInputs = userConfig.build?.rollupOptions?.input || {};
+  
+    if (typeof existingInputs === 'string') {
+      return { 
+        [existingInputs]: existingInputs,
+        ...Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
+      };
+    } else {
+      return {
+        ...existingInputs,
+        ...Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
+      };
+    }
+  }
 
   const build = {
     emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
@@ -45,7 +62,8 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     manifest: !ssrBuild,
     outDir,
     rollupOptions: {
-      input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
+      ...existingRollupOptions,
+      input: buildRollupInputs(),
       output: {
         ...outputOptions(assetsDir, ssrBuild),
         ...userConfig.build?.rollupOptions?.output,
