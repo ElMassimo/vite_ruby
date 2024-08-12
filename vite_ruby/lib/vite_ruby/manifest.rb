@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'ostruct'
-
 # Public: Registry for accessing resources managed by Vite, using a generated
 # manifest file which maps entrypoint names to file paths.
 #
@@ -214,7 +212,7 @@ private
 
   # Internal: Raises a detailed message when an entry is missing in the manifest.
   def missing_entry_error(name, **options)
-    raise ViteRuby::MissingEntrypointError, OpenStruct.new(
+    raise ViteRuby::MissingEntrypointError.new(
       file_name: resolve_entry_name(name, **options),
       last_build: builder.last_build_metadata,
       manifest: @manifest,

@@ -5,11 +5,10 @@
 # NOTE: The complexity here is justified by the improved usability of providing
 # a more specific error message depending on the situation.
 class ViteRuby::MissingEntrypointError < ViteRuby::Error
-  extend Forwardable
-  def_delegators :@info, :file_name, :last_build, :manifest, :config
+  attr_reader :file_name, :last_build, :manifest, :config
 
-  def initialize(info)
-    @info = info
+  def initialize(file_name:, last_build:, manifest:, config:)
+    @file_name, @last_build, @manifest, @config = file_name, last_build, manifest, config
     super <<~MSG
       Vite Ruby can't find #{ file_name } in the manifests.
 
