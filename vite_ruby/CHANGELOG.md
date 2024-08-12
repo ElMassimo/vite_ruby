@@ -1,3 +1,17 @@
+# [3.8.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.7.0...vite_ruby@3.8.0) (2024-08-12)
+
+
+### Bug Fixes
+
+* remove `vite:clean` rake task as it can potentially break apps ([824b4ef](https://github.com/ElMassimo/vite_ruby/commit/824b4ef8397828423d2ddda117bf27e365954961)), closes [#438](https://github.com/ElMassimo/vite_ruby/issues/438) [#490](https://github.com/ElMassimo/vite_ruby/issues/490) [#404](https://github.com/ElMassimo/vite_ruby/issues/404)
+
+
+### Features
+
+* remove `ostruct` dependency (closes [#489](https://github.com/ElMassimo/vite_ruby/issues/489)) ([1dfec47](https://github.com/ElMassimo/vite_ruby/commit/1dfec4759bf2c107433c5f1618d97439f6d5bd01))
+
+
+
 # [3.7.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.6.2...vite_ruby@3.7.0) (2024-07-17)
 
 
