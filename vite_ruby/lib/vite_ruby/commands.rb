@@ -28,38 +28,6 @@ class ViteRuby::Commands
     $stdout.puts "Removed vite cache and output dirs:\n\t#{ dirs.join("\n\t") }"
   end
 
-  # Public: Receives arguments from a rake task.
-  def clean_from_task(args)
-    ensure_log_goes_to_stdout {
-      clean(keep_up_to: Integer(args.keep || 2), age_in_seconds: Integer(args.age || 3600))
-    }
-  end
-
-  # Public: Cleanup old assets in the output directory.
-  #
-  # keep_up_to - Max amount of backups to preserve.
-  # age_in_seconds - Amount of time to look back in order to preserve them.
-  #
-  # NOTE: By default keeps the last version, or 2 if created in the past hour.
-  #
-  # Examples:
-  #   To force only 1 backup to be kept: clean(1, 0)
-  #   To only keep files created within the last 10 minutes: clean(0, 600)
-  def clean(keep_up_to: 2, age_in_seconds: 3600)
-    return false unless may_clean?
-
-    versions
-      .each_with_index
-      .drop_while { |(mtime, _files), index|
-        max_age = [0, Time.now - Time.at(mtime)].max
-        max_age < age_in_seconds || index < keep_up_to
-      }
-      .each do |(_, files), _|
-        clean_files(files)
-      end
-    true
-  end
-
   # Internal: Installs the binstub for the CLI in the appropriate path.
   def install_binstubs
     `bundle binstub vite_ruby --path #{ config.root.join('bin') }`
@@ -129,31 +97,6 @@ private
   extend Forwardable
 
   def_delegators :@vite_ruby, :config, :builder, :manifest, :logger, :logger=
-
-  def may_clean?
-    config.build_output_dir.exist? && config.manifest_paths.any?
-  end
-
-  def clean_files(files)
-    files.select { |file| File.file?(file) }.each do |file|
-      File.delete(file)
-      logger.info("Removed #{ file }")
-    end
-  end
-
-  def versions
-    all_files = Dir.glob("#{ config.build_output_dir }/**/*")
-    entries = all_files - config.manifest_paths - files_referenced_in_manifests
-    entries.reject { |file| File.directory?(file) }
-      .group_by { |file| File.mtime(file).utc.to_i }
-      .sort.reverse
-  end
-
-  def files_referenced_in_manifests
-    config.manifest_paths.flat_map { |path|
-      JSON.parse(path.read).map { |_, entry| entry['file'] }
-    }.compact.uniq.map { |path| config.build_output_dir.join(path).to_s }
-  end
 
   def with_node_env(env)
     original = ENV['NODE_ENV']

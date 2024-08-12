@@ -25,11 +25,6 @@ namespace :vite do
     ViteRuby.commands.build_from_task('--ssr') if ViteRuby.config.ssr_build_enabled
   end
 
-  desc 'Remove old bundles created by ViteRuby'
-  task :clean, [:keep, :age] => :'vite:verify_install' do |_, args|
-    ViteRuby.commands.clean_from_task(args)
-  end
-
   desc 'Remove the build output directory for ViteRuby'
   task clobber: :'vite:verify_install' do
     ViteRuby.commands.clobber
@@ -74,14 +69,6 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
     else
       Rake::Task.define_task('assets:precompile' => ['vite:install_dependencies', 'vite:build_all'])
     end
-  end
-
-  unless Rake::Task.task_defined?('assets:clean')
-    desc 'Remove old compiled assets'
-    Rake::Task.define_task('assets:clean', [:keep, :age])
-  end
-  Rake::Task['assets:clean'].enhance do |_, args|
-    Rake::Task['vite:clean'].invoke(*args.to_h.values)
   end
 
   if Rake::Task.task_defined?('assets:clobber')

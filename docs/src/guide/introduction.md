@@ -69,8 +69,8 @@ Interested in hearing more? [Read an introduction __blog post__][blog post], [le
 
 ### 🚀 Integrated with <kbd>assets:precompile</kbd>
 
-  [Rake tasks] for building and cleaning Vite assets are [automatically integrated][deployment]
-  with <kbd>assets:precompile</kbd> and <kbd>assets:clean</kbd>, so deploying is straightforward.
+  [Rake tasks] for building and Vite assets are [automatically integrated][deployment]
+  with <kbd>assets:precompile</kbd>, so deploying is straightforward.
 
 ### 🏗 Auto-build when not running Vite
 

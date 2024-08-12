@@ -63,12 +63,6 @@ The following rake tasks are available:
 
   Called automatically whenever <kbd>assets:precompile</kbd> is called.
 
-- <kbd>vite:clean[keep,age]</kbd>
-
-  Remove previous Vite builds.
-
-  Called automatically whenever <kbd>assets:clean</kbd> is called.
-
 - <kbd>vite:clobber</kbd>
 
   Remove the Vite build output directory.

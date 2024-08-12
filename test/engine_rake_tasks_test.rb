@@ -42,12 +42,6 @@ class EngineRakeTasksTest < ViteRuby::Test
     refute_path_exists app_ssr_dir.join('.vite/manifest.json')
     refute_path_exists app_ssr_dir.join('.vite/manifest-assets.json')
 
-    within_mounted_app { `bundle exec rake app:vite:clean` }
-    refute Dir.empty?(app_public_dir.join('assets')) # Still fresh
-
-    within_mounted_app { `bundle exec rake app:vite:clean[0,0]` }
-    refute Dir.empty?(app_public_dir.join('assets')) # Still referenced in manifest
-
     within_mounted_app { `bundle exec rake app:vite:clobber` }
     refute_path_exists app_public_dir
   end
