@@ -1,3 +1,20 @@
+# [5.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.0.0...vite-plugin-ruby@5.1.0) (2024-09-04)
+
+
+### Bug Fixes
+
+* infer correct dirname when a custom manifest is provided ([#458](https://github.com/ElMassimo/vite_ruby/issues/458)) ([cc46e3a](https://github.com/ElMassimo/vite_ruby/commit/cc46e3af8de735e8046a5126710c859f2ffe80ff))
+* storybook compatibility, plugins can now add entrypoints ([#488](https://github.com/ElMassimo/vite_ruby/issues/488)) ([a8103b7](https://github.com/ElMassimo/vite_ruby/commit/a8103b7421160c391cc84064c5a170502c8cb40f))
+
+
+### Features
+
+* add `package_manager` config option, experimental support for bun ([#481](https://github.com/ElMassimo/vite_ruby/issues/481)) ([4426cb1](https://github.com/ElMassimo/vite_ruby/commit/4426cb1007dbb58f4637a4423b1e7d640db96841)), closes [#324](https://github.com/ElMassimo/vite_ruby/issues/324)
+* change default execution to use `npx vite` instead ([#480](https://github.com/ElMassimo/vite_ruby/issues/480)) ([330f61f](https://github.com/ElMassimo/vite_ruby/commit/330f61fedadf1274547a069856125e52002d0065)), closes [#462](https://github.com/ElMassimo/vite_ruby/issues/462)
+* upgrade vite-plugin-rails dependencies to support vite 5 ([b4eade9](https://github.com/ElMassimo/vite_ruby/commit/b4eade9b92413172501df8f762a9c0164633ee95))
+
+
+
 # [5.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@3.2.2...vite-plugin-ruby@5.0.0) (2023-11-16)
 
 
