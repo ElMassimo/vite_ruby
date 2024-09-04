@@ -37,6 +37,13 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   const isLocal = config.mode === 'development' || config.mode === 'test'
 
+  const rollupOptions = userConfig.build?.rollupOptions
+  let rollupInput = rollupOptions?.input
+
+  // Normalize any entrypoints provided by plugins.
+  if (typeof rollupInput === 'string')
+    rollupInput = { [rollupInput]: rollupInput }
+
   const build = {
     emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
     sourcemap: !isLocal,
@@ -45,10 +52,14 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     manifest: !ssrBuild,
     outDir,
     rollupOptions: {
-      input: Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
+      ...rollupOptions,
+      input: {
+        ...rollupInput,
+        ...Object.fromEntries(filterEntrypointsForRollup(entrypoints)),
+      },
       output: {
         ...outputOptions(assetsDir, ssrBuild),
-        ...userConfig.build?.rollupOptions?.output,
+        ...rollupOptions?.output,
       },
     },
   }
