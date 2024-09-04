@@ -43,7 +43,7 @@ private
     x = case config.package_manager
     when 'npm' then %w[npx]
     when 'pnpm' then %w[pnpm exec]
-    when 'bun' then %w[bun x]
+    when 'bun' then %w[bun x --bun]
     when 'yarn' then %w[yarn]
     else raise ArgumentError, "Unknown package manager #{ config.package_manager.inspect }"
     end
