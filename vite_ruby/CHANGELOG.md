@@ -1,3 +1,12 @@
+## [3.8.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.0...vite_ruby@3.8.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* actually run vite inside bun ([#492](https://github.com/ElMassimo/vite_ruby/issues/492)) ([36d3e96](https://github.com/ElMassimo/vite_ruby/commit/36d3e96a6ea9bd9f45881cecb5be78510d6ff017))
+
+
+
 # [3.8.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.7.0...vite_ruby@3.8.0) (2024-08-12)
 
 
