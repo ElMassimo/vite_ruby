@@ -1,3 +1,12 @@
+## [3.8.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.1...vite_ruby@3.8.2) (2024-09-05)
+
+
+### Bug Fixes
+
+* bump up expected plugin version ([b8dec4f](https://github.com/ElMassimo/vite_ruby/commit/b8dec4f5b516fe2acc63e980b465987c0c2c9c92)), closes [#493](https://github.com/ElMassimo/vite_ruby/issues/493)
+
+
+
 ## [3.8.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.0...vite_ruby@3.8.1) (2024-09-04)
 
 
