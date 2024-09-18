@@ -335,10 +335,12 @@ You can customize this behavior using the following options.
 
 ### viteBinPath
 
-- **Default:** `node_modules/.bin/vite`
+- **Default:** `null`
 - **Env Var:** `VITE_RUBY_VITE_BIN_PATH`
 
   The path where the Vite.js binary is installed. It will be used to execute the `dev` and `build` commands.
+
+  These commands are executed by your package manager unless this variable is defined.
 
 ### watchAdditionalPaths
 
