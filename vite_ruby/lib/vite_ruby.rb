@@ -107,7 +107,7 @@ class ViteRuby
 
   # Public: The proxy for assets should only run in development mode.
   def run_proxy?
-    config.mode == 'development' || (config.mode == 'test' && !ENV['CI'])
+    config.mode == 'development' || (config.mode.include?('test') && !ENV['CI'])
   rescue StandardError => error
     logger.error("Failed to check mode for Vite: #{ error.message }")
     false
