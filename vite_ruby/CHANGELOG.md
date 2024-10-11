@@ -1,3 +1,12 @@
+# [3.9.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.3...vite_ruby@3.9.0) (2024-10-11)
+
+
+### Bug Fixes
+
+* enforce vite 5 manifest location ([#432](https://github.com/ElMassimo/vite_ruby/issues/432)) ([ce2df58](https://github.com/ElMassimo/vite_ruby/commit/ce2df5859018b3e305fc1a13443199d268dffca8)), closes [/github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb#L16](https://github.com//github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/vite_ruby/builder.rb/issues/L16)
+
+
+
 ## [3.8.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.2...vite_ruby@3.8.3) (2024-10-11)
 
 
