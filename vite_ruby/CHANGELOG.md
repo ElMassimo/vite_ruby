@@ -1,3 +1,12 @@
+## [3.8.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.2...vite_ruby@3.8.3) (2024-10-11)
+
+
+### Bug Fixes
+
+* add `logger` as a runtime dependency rather than default gem ([#502](https://github.com/ElMassimo/vite_ruby/issues/502)) ([6abbccf](https://github.com/ElMassimo/vite_ruby/commit/6abbccf7224f99944c0fe63245f0e84f45fce89f))
+
+
+
 ## [3.8.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.1...vite_ruby@3.8.2) (2024-09-05)
 
 
