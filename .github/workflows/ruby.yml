@@ -19,7 +19,8 @@ jobs:
         gemfile: [
           "Gemfile-rails.6.1.x",
           "Gemfile-rails.7.0.x",
-          "Gemfile-rails.7.1.x"
+          "Gemfile-rails.7.1.x",
+          "Gemfile-rails.7.2.x",
         ]
         experimental: [false]
         include:
