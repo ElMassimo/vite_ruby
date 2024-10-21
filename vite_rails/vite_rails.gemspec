@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
-  s.add_dependency 'railties', '>= 5.1', '< 8'
+  s.add_dependency 'railties', '>= 5.1', '< 9'
   s.add_dependency 'vite_ruby', '>= 3.2.2', '~> 3.0'
 
   s.add_development_dependency 'spring', '~> 2.1'
