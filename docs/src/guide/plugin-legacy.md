@@ -1,8 +1,6 @@
 [vite_plugin_legacy]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_plugin_legacy
 [plugin-legacy]: https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 [vite_legacy_javascript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
-[vite_legacy_typescript_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
-[vite_legacy_polyfill_tag]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_plugin_legacy/lib/vite_plugin_legacy/tag_helpers.rb
 
 # Plugin Legacy
 
@@ -27,11 +25,8 @@ bundle install
 
 In order to include the polyfills and script tags you can using the following helpers:
 
-- <kbd>[vite_legacy_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript file.
-- <kbd>[vite_legacy_typescript_tag]</kbd>: Render a `<script>` tag referencing a TypeScript file.
-- <kbd>[vite_legacy_polyfill_tag]</kbd>: Renders the polyfills necessary to enable code-splitting in legacy browsers.
+- <kbd>[vite_legacy_javascript_tag]</kbd>: Render a `<script>` tag referencing a JavaScript or TypeScript entrypoints.
 
-The polyfill is included by default when using <kbd>[vite_legacy_javascript_tag]</kbd>
 
 ```erb
 <head>
@@ -40,11 +35,11 @@ The polyfill is included by default when using <kbd>[vite_legacy_javascript_tag]
   <%= csp_meta_tag %>
   <%= vite_client_tag %>
 
+  <%= vite_legacy_javascript_tag 'application' => :javascript %>
   <%= vite_javascript_tag 'application' %>
 </head>
 <body>
   <%= yield %>
-  <%= vite_legacy_javascript_tag 'application' %>
 </body>
 ```
 

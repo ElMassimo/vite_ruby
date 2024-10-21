@@ -9,12 +9,12 @@
 
     <link rel="icon" type="image/png" href="<%= vite_asset_path('images/logo.png') %>">
 
+    <%= vite_legacy_javascript_tag 'application' => :typescript %>
     <%= vite_stylesheet_tag 'styles.scss' %>
     <%= vite_typescript_tag 'application', 'data-turbo-track': 'reload', media: 'all' %>
   </head>
 
   <body>
     <%= yield %>
-    <%= vite_legacy_typescript_tag 'application' %>
   </body>
 </html>
