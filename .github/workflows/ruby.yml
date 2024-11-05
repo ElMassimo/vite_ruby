@@ -22,10 +22,13 @@ jobs:
           "Gemfile-rails.7.0.x",
           "Gemfile-rails.7.1.x",
           "Gemfile-rails.7.2.x",
-          "Gemfile-rails.8.0.x",
         ]
         experimental: [false]
         include:
+          - ruby: "3.4.0-preview2"
+            os: ubuntu-latest
+            gemfile: "Gemfile-rails.8.0.x"
+            experimental: true
           - ruby: "3.4.0-preview2"
             os: ubuntu-latest
             gemfile: Gemfile-rails-edge

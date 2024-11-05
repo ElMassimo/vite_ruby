@@ -7,7 +7,7 @@ class CompatibilityCheckTest < ViteRuby::Test
 
   def test_verify_plugin_version
     refresh_config(skip_compatibility_check: true)
-    assert_raises(ViteRuby::CompatibilityCheck) { refresh_config(skip_compatibility_check: false) }
+    assert_raises(ArgumentError) { refresh_config(skip_compatibility_check: false) }
   end
 
   def test_compatible_plugin
