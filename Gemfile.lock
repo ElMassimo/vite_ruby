@@ -265,9 +265,9 @@ DEPENDENCIES
   pry-byebug (~> 3.9)
   rails
   rake (~> 13.0)
-  rubocop (~> 1.9, < 1.29)
-  rubocop-minitest (~> 0.10, < 0.20)
-  rubocop-performance (~> 1.9, < 1.14)
+  rubocop (~> 1.9)
+  rubocop-minitest (~> 0.10)
+  rubocop-performance (~> 1.9)
   simplecov (< 0.18)
   spring (~> 2.1)
   vite_plugin_legacy!
