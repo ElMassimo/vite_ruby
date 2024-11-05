@@ -101,8 +101,8 @@ private
 
   # Internal: Renders a modulepreload link tag.
   def vite_preload_tag(*sources, crossorigin:, **options)
-    url_options, tag_options = options.partition { |key, _| %i[host protocol].include?(key) }.map(&:to_h)
-    asset_paths = sources.map { |source| path_to_asset(source, url_options) }
+    url_options = options.extract!(:host, :protocol)
+    asset_paths = sources.map { |source| path_to_asset(source, **url_options) }
     try(:request).try(
       :send_early_hints,
       'Link' => asset_paths.map { |href|
@@ -110,7 +110,7 @@ private
       }.join("\n"),
     )
     asset_paths.map { |href|
-      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **tag_options)
+      tag.link(rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
     }.join("\n").html_safe
   end
 end

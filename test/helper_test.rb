@@ -105,6 +105,14 @@ class HelperTest < HelperTestCase
     }
   end
 
+  def test_vite_preload_tag
+    assert_includes vite_typescript_tag('main', host: 'example.com', protocol: 'https'), [
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="anonymous">),
+    ].join("\n")
+  end
+
   def test_vite_javascript_tag
     assert_similar [
       %(<script src="/vite-production/assets/main.9dcad042.js" crossorigin="anonymous" type="module"></script>),
