@@ -1,3 +1,12 @@
+## [5.1.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.0...vite-plugin-ruby@5.1.1) (2024-11-05)
+
+
+### Bug Fixes
+
+* do not override userConfig.server.origin when provided ([#505](https://github.com/ElMassimo/vite_ruby/issues/505)) ([57a6e7a](https://github.com/ElMassimo/vite_ruby/commit/57a6e7ace701cc5d1199d3e5a6fcd7276b29a693))
+
+
+
 # [5.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.0.0...vite-plugin-ruby@5.1.0) (2024-09-04)
 
 
