@@ -26,6 +26,7 @@ class ConfigTest < ViteRuby::Test
 
   def test_matching_default_config_json
     root = Pathname.new(__dir__).join('..')
+
     assert_equal root.join('vite-plugin-ruby/default.vite.json').read, root.join('vite_ruby/default.vite.json').read
   end
 
@@ -49,6 +50,7 @@ class ConfigTest < ViteRuby::Test
     assert_path 'test_app/public/vite-production', @config.build_output_dir
 
     @config = resolve_config(config_path: 'config/vite_public_dir.json')
+
     assert_path 'public/vite', @config.build_output_dir
   end
 
@@ -56,6 +58,7 @@ class ConfigTest < ViteRuby::Test
     assert_nil @config.to_env['EXAMPLE_PATH']
 
     refresh_config(config_path: 'config/vite_public_dir.json')
+
     assert_equal 'from_ruby', ViteRuby.config.public_output_dir
     assert_equal Gem.loaded_specs['rails'].full_gem_path, ViteRuby.config.to_env['EXAMPLE_PATH']
   end
@@ -71,6 +74,7 @@ class ConfigTest < ViteRuby::Test
   def test_watch_additional_paths
     assert_empty @config.watch_additional_paths
     @config = resolve_config(config_path: 'config/vite_additional_paths.json')
+
     assert_equal ['config/*'], @config.watch_additional_paths
   end
 
@@ -105,11 +109,13 @@ class ConfigTest < ViteRuby::Test
 
   def test_to_env
     env = @config.to_env
+
     assert_nil env['VITE_RUBY_ASSET_HOST']
 
     Rails.application.config.action_controller.asset_host = 'assets-cdn.com'
     env = refresh_config.to_env
-    assert_equal env['VITE_RUBY_ASSET_HOST'], 'assets-cdn.com'
+
+    assert_equal('assets-cdn.com', env['VITE_RUBY_ASSET_HOST'])
   ensure
     Rails.application.config.action_controller.asset_host = nil
   end
@@ -131,6 +137,7 @@ class ConfigTest < ViteRuby::Test
       'VITE_RUBY_SKIP_COMPATIBILITY_CHECK' => 'true',
     )
     @config = resolve_config
+
     assert @config.auto_build
     assert_equal 'example.com', @config.host
     assert_equal 1920, @config.port

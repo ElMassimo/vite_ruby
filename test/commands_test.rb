@@ -39,8 +39,10 @@ class CommandsTest < ViteRuby::Test
     with_rails_env('test') { |config|
       ensure_output_dirs(config)
       config.build_output_dir.join('.vite/manifest.json').write('{}')
+
       assert_path_exists config.build_output_dir
       clobber
+
       refute_path_exists config.build_output_dir
     }
   end

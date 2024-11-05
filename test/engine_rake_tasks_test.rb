@@ -16,19 +16,23 @@ class EngineRakeTasksTest < ViteRuby::Test
 
   def test_tasks_mounted
     output = within_mounted_app { `bundle exec rake -T` }
+
     assert_includes output, 'app:vite'
   end
 
   def test_rake_tasks
     within_mounted_app { `bundle exec rake app:vite:binstubs` }
+
     assert_path_exists vite_binstub_path
 
     within_mounted_app_root { `bin/vite install` }
+
     assert_path_exists vite_config_ts_path
     assert_path_exists procfile_dev
     assert_path_exists app_frontend_dir
 
     within_mounted_app { `bundle exec rake app:vite:build` }
+
     assert_path_exists app_public_dir
     assert_path_exists app_public_dir.join('.vite/manifest.json')
     assert_path_exists app_public_dir.join('assets')
@@ -38,22 +42,26 @@ class EngineRakeTasksTest < ViteRuby::Test
     app_frontend_dir.join('ssr/ssr.js').write(SSR_ENTRYPOINT)
 
     within_mounted_app { `bundle exec rake app:vite:build_all` }
+
     assert_path_exists app_ssr_dir.join('ssr.js')
     refute_path_exists app_ssr_dir.join('.vite/manifest.json')
     refute_path_exists app_ssr_dir.join('.vite/manifest-assets.json')
 
     within_mounted_app { `bundle exec rake app:vite:clobber` }
+
     refute_path_exists app_public_dir
   end
 
   def test_cli
     within_mounted_app_root { `bundle exec vite install` }
+
     assert_path_exists vite_binstub_path
     assert_path_exists vite_config_ts_path
     assert_path_exists procfile_dev
     assert_path_exists app_frontend_dir
 
     within_mounted_app_root { `bin/vite build --mode development` }
+
     assert_path_exists app_public_dir
     assert_path_exists app_public_dir.join('.vite/manifest.json')
     assert_path_exists app_public_dir.join('assets')
@@ -75,6 +83,7 @@ class EngineRakeTasksTest < ViteRuby::Test
         ViteRuby::CLI::Upgrade.new.call
       }
       ViteRuby::CLI::UpgradePackages.new.call
+
       stub_runner('build') {
         assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
       }
@@ -113,6 +122,7 @@ private
   def stub_runner(*args, **opts, &block)
     mock = Minitest::Mock.new
     status = MockProcessStatus.new
+
     mock.expect(:call, ['stdout', 'stderr', status]) do |*argv, **options|
       assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
     end

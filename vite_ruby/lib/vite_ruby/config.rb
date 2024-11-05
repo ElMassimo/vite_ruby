@@ -101,7 +101,8 @@ private
 
   # Internal: Coerces configuration options to boolean.
   def coerce_booleans(config, *names)
-    names.each { |name| config[name] = [true, 'true'].include?(config[name]) }
+    truthy = [true, 'true']
+    names.each { |name| config[name] = truthy.include?(config[name]) }
   end
 
   def detect_package_manager(root)
@@ -133,7 +134,7 @@ private
 
     # Internal: Converts camelCase to snake_case.
     SNAKE_CASE = ->(camel_cased_word) {
-      camel_cased_word.to_s.gsub(/::/, '/')
+      camel_cased_word.to_s.gsub('::', '/')
         .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
         .gsub(/([a-z\d])([A-Z])/, '\1_\2')
         .tr('-', '_')

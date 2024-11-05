@@ -52,19 +52,23 @@ class ManifestTest < ViteRuby::Test
     stub_builder(build_successful: true) {
       asset_file = 'calendar.js'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
+
       assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
       assert_match '"autoBuild" is set to `false`', error.message
 
       asset_file = 'images/logo.gif'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
+
       assert_match "Vite Ruby can't find #{asset_file} in the manifests", error.message
 
       asset_file = '/app/styles/theme.css'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
+
       assert_match "Vite Ruby can't find ../styles/theme.css in the manifests", error.message
 
       asset_file = '~/favicon.ico'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
+
       assert_match "Vite Ruby can't find favicon.ico in the manifests", error.message
 
       assert_match "Manifest files found:\n  #{manifest_path}", error.message
@@ -141,6 +145,7 @@ class ManifestTest < ViteRuby::Test
         prefixed('theme.e6d9734b.css'),
       ],
     }
+
     assert_equal entry['file'], path_for('main', type: :typescript)
     assert_equal entry, lookup!('main.ts', type: :javascript)
     assert_equal lookup!('main', type: :typescript), lookup!('main.ts', type: :javascript)
@@ -151,6 +156,7 @@ class ManifestTest < ViteRuby::Test
     refresh_config(mode: 'development')
     with_dev_server_running {
       entry = { 'file' => '/vite-dev/entrypoints/application.js' }
+
       assert_equal entry, lookup!('application.js', type: :javascript)
       assert_equal entry, lookup!('entrypoints/application.js')
 
@@ -181,6 +187,7 @@ class ManifestTest < ViteRuby::Test
     }
 
     refresh_config(asset_host: 'http://example.com', mode: 'development')
+
     with_dev_server_running {
       assert_equal 'http://example.com/vite-dev/@vite/client', vite_client_src
     }
@@ -196,6 +203,7 @@ class ManifestTest < ViteRuby::Test
     assert_nil lookup('frameworks/vue.js')
 
     file = prefixed('vue.3002ada6.js')
+
     assert_equal file, path_for('entrypoints/frameworks/vue.js')
     assert_equal file, path_for('~/entrypoints/frameworks/vue.js')
     assert_equal lookup('~/entrypoints/frameworks/vue', type: :javascript), lookup('entrypoints/frameworks/vue.js')
@@ -212,11 +220,13 @@ class ManifestTest < ViteRuby::Test
 
   def test_lookup_success
     entry = { 'file' => prefixed('app.517bf154.css'), 'src' => 'entrypoints/app.css' }
+
     assert_equal entry, lookup('app.css')
     assert_equal entry, lookup('app.css', type: :stylesheet)
     assert_equal entry, lookup('app', type: :stylesheet)
 
     entry = { 'file' => prefixed('logo.322aae0c.svg'), 'src' => 'images/logo.svg' }
+
     assert_equal entry, lookup('images/logo.svg')
   end
 

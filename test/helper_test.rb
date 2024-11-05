@@ -39,7 +39,7 @@ protected
 
   def with_dev_server_running(&block)
     refresh_config(mode: 'development')
-    super(&block)
+    super
   end
 end
 

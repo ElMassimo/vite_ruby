@@ -57,11 +57,11 @@ class ViteRuby
     # Internal: Detects if the application has installed a framework-specific
     # variant of Vite Ruby.
     def framework_libraries
-      COMPANION_LIBRARIES.map { |name, framework|
+      COMPANION_LIBRARIES.filter_map { |name, framework|
         if library = Gem.loaded_specs[name]
           [framework, library]
         end
-      }.compact
+      }
     end
   end
 

@@ -27,15 +27,17 @@ class FilesTest < ViteRuby::Test
     Dir.chdir(app_root) {
       `bundle exec vite install`
     }
+
     assert_path_exists app_root.join('vite.config.ts')
     assert_path_exists app_root.join('package.json')
-    assert 'module', JSON.parse(app_root.join('package.json').read)['type']
+    assert_equal 'module', JSON.parse(app_root.join('package.json').read)['type']
   end
 
   def test_write
     path = root.join('write')
     write(path, "Hello\nWorld")
-    assert path.exist?
+
+    assert_predicate path, :exist?
     assert_content path, "Hello\nWorld"
   end
 

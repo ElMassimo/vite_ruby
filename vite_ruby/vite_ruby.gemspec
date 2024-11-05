@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.metadata = {
     'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_ruby@#{ViteRuby::VERSION}/vite_ruby",
     'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ViteRuby::VERSION}/vite_ruby/CHANGELOG.md",
+    'rubygems_mfa_required' => 'true',
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
@@ -32,7 +33,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '< 0.18'
 
   s.files = Dir.glob('{lib,exe,templates}/**/*') + %w[default.vite.json README.md CHANGELOG.md LICENSE.txt]
-  s.test_files = `git ls-files -- spec/*`.split("\n")
   s.bindir = 'exe'
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
 

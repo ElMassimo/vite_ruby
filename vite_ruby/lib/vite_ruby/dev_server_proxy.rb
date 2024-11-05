@@ -17,7 +17,7 @@ class ViteRuby::DevServerProxy < Rack::Proxy
   def perform_request(env)
     if vite_should_handle?(env) && dev_server_running?
       forward_to_vite_dev_server(env)
-      super(env)
+      super
     else
       @app.call(env)
     end

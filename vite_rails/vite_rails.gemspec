@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.metadata = {
     'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_rails@#{ViteRails::VERSION}/vite_rails",
     'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_rails@#{ViteRails::VERSION}/vite_rails/CHANGELOG.md",
+    'rubygems_mfa_required' => 'true',
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')
@@ -25,5 +26,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spring', '~> 2.1'
 
   s.files = Dir.glob('{lib,templates}/**/*') + %w[README.md CHANGELOG.md LICENSE.txt]
-  s.test_files = `git ls-files -- test/*`.split("\n")
 end

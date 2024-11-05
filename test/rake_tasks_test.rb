@@ -6,6 +6,7 @@ class RakeTasksTest < ViteRuby::Test
   def test_rake_tasks
     assert ViteRuby.install_tasks
     output = Dir.chdir(path_to_test_app) { `rake -T` }
+
     assert_includes output, 'vite:build'
     assert_includes output, 'vite:build_ssr'
     assert_includes output, 'vite:clobber'
@@ -15,6 +16,7 @@ class RakeTasksTest < ViteRuby::Test
 
   def test_rake_task_vite_check_binstubs
     output = Dir.chdir(path_to_test_app) { `rake vite:verify_install 2>&1` }
+
     refute_includes output, 'vite binstub not found.'
   end
 
