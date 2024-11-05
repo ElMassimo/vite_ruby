@@ -41,7 +41,7 @@ namespace :vite do
 
     install_cmd = case (pkg = ViteRuby.config.package_manager)
     when 'npm' then 'npm ci'
-    else "#{ pkg } install --frozen-lockfile"
+    else "#{pkg} install --frozen-lockfile"
     end
 
     system(install_env_args, install_cmd)
@@ -58,9 +58,9 @@ unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION'] == 'true'
     Rake::Task['assets:precompile'].enhance do |task|
       prefix = task.name.split(/#|assets:precompile/).first
       unless ENV['VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL'] == 'true'
-        Rake::Task["#{ prefix }vite:install_dependencies"].invoke
+        Rake::Task["#{prefix}vite:install_dependencies"].invoke
       end
-      Rake::Task["#{ prefix }vite:build_all"].invoke
+      Rake::Task["#{prefix}vite:build_all"].invoke
     end
   else
     desc 'Bundle Vite assets'

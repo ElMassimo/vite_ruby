@@ -7,7 +7,7 @@ class ViteRuby::MissingExecutableError < ViteRuby::Error
       ❌ The vite binary is not available. Have you installed the npm packages?
 
       :troubleshooting:
-      #{ error }
+      #{error}
     MSG
   end
 end

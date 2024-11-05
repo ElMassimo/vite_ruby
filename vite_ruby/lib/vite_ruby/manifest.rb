@@ -51,7 +51,7 @@ class ViteRuby::Manifest
     if dev_server_running?
       <<~REACT_REFRESH
         <script type="module">
-          #{ react_preamble_code }
+          #{react_preamble_code}
         </script>
       REACT_REFRESH
     end
@@ -61,7 +61,7 @@ class ViteRuby::Manifest
   def react_preamble_code
     if dev_server_running?
       <<~REACT_PREAMBLE_CODE
-        import RefreshRuntime from '#{ prefix_asset_with_host('@react-refresh') }'
+        import RefreshRuntime from '#{prefix_asset_with_host('@react-refresh')}'
         RefreshRuntime.injectIntoGlobalHook(window)
         window.$RefreshReg$ = () => {}
         window.$RefreshSig$ = () => (type) => type
@@ -164,7 +164,7 @@ private
     return resolve_virtual_entry(name) if type == :virtual
 
     name = with_file_extension(name.to_s, type)
-    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
+    raise ArgumentError, "Asset names can not be relative. Found: #{name}" if name.start_with?('.')
 
     # Explicit path, relative to the source_code_dir.
     name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
@@ -194,7 +194,7 @@ private
   # Internal: Adds a file extension to the file name, unless it already has one.
   def with_file_extension(name, entry_type)
     if File.extname(name).empty? && (ext = extension_for_type(entry_type))
-      "#{ name }.#{ ext }"
+      "#{name}.#{ext}"
     else
       name
     end

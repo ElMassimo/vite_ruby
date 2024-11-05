@@ -12,7 +12,7 @@ class ConfigTest < ViteRuby::Test
   end
 
   def assert_pathname(expected, actual)
-    assert_equal Pathname.new(expand_path("test_app/#{ expected }")), actual
+    assert_equal Pathname.new(expand_path("test_app/#{expected}")), actual
   end
 
   def resolve_config(mode: 'production', root: path_to_test_app, **attrs)

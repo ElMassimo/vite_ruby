@@ -74,9 +74,6 @@ Style/Documentation:
 Naming/RescuedExceptionsVariableName:
   PreferredName: error
 
-Layout/SpaceInsideStringInterpolation:
-  EnforcedStyle: space
-
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 

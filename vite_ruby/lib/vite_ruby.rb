@@ -7,9 +7,9 @@ require 'socket'
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem
-loader.ignore("#{ __dir__ }/install")
-loader.ignore("#{ __dir__ }/tasks")
-loader.ignore("#{ __dir__ }/exe")
+loader.ignore("#{__dir__}/install")
+loader.ignore("#{__dir__}/tasks")
+loader.ignore("#{__dir__}/exe")
 loader.inflector.inflect('cli' => 'CLI')
 loader.inflector.inflect('ssr' => 'SSR')
 loader.inflector.inflect('io' => 'IO')
@@ -109,7 +109,7 @@ class ViteRuby
   def run_proxy?
     config.mode == 'development' || (config.mode == 'test' && !ENV['CI'])
   rescue StandardError => error
-    logger.error("Failed to check mode for Vite: #{ error.message }")
+    logger.error("Failed to check mode for Vite: #{error.message}")
     false
   end
 

@@ -25,12 +25,12 @@ class ViteRuby::Commands
   def clobber
     dirs = [config.build_output_dir, config.ssr_output_dir, config.build_cache_dir, config.vite_cache_dir]
     dirs.each { |dir| dir.rmtree if dir.exist? }
-    $stdout.puts "Removed vite cache and output dirs:\n\t#{ dirs.join("\n\t") }"
+    $stdout.puts "Removed vite cache and output dirs:\n\t#{dirs.join("\n\t")}"
   end
 
   # Internal: Installs the binstub for the CLI in the appropriate path.
   def install_binstubs
-    `bundle binstub vite_ruby --path #{ config.root.join('bin') }`
+    `bundle binstub vite_ruby --path #{config.root.join('bin')}`
     `bundle config --delete bin`
   end
 
@@ -59,7 +59,7 @@ class ViteRuby::Commands
     unless config_path.exist?
       warn <<~WARN
 
-        Configuration #{ config_path } file for vite-plugin-ruby not found.
+        Configuration #{config_path} file for vite-plugin-ruby not found.
         Make sure `bundle exec vite install` has run successfully before running dependent tasks.
       WARN
       exit!
@@ -69,23 +69,23 @@ class ViteRuby::Commands
   # Internal: Prints information about ViteRuby's environment.
   def print_info
     config.within_root do
-      $stdout.puts "bin/vite present?: #{ File.exist? 'bin/vite' }"
+      $stdout.puts "bin/vite present?: #{File.exist? 'bin/vite'}"
 
-      $stdout.puts "vite_ruby: #{ ViteRuby::VERSION }"
+      $stdout.puts "vite_ruby: #{ViteRuby::VERSION}"
       ViteRuby.framework_libraries.each do |framework, library|
-        $stdout.puts "#{ library.name }: #{ library.version }"
-        $stdout.puts "#{ framework }: #{ Gem.loaded_specs[framework]&.version }"
+        $stdout.puts "#{library.name}: #{library.version}"
+        $stdout.puts "#{framework}: #{Gem.loaded_specs[framework]&.version}"
       end
 
-      $stdout.puts "ruby: #{ `ruby --version` }"
-      $stdout.puts "node: #{ `node --version` }"
+      $stdout.puts "ruby: #{`ruby --version`}"
+      $stdout.puts "node: #{`node --version`}"
 
       pkg = config.package_manager
-      $stdout.puts "#{ pkg }: #{ `#{ pkg } --version` rescue nil }"
+      $stdout.puts "#{pkg}: #{`#{pkg} --version` rescue nil}"
 
       $stdout.puts "\n"
       packages = `npm ls vite vite-plugin-ruby`
-      packages_msg = packages.include?('vite@') ? "installed packages:\n#{ packages }" : '❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed.'
+      packages_msg = packages.include?('vite@') ? "installed packages:\n#{packages}" : '❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed.'
       $stdout.puts packages_msg
 
       ViteRuby::CompatibilityCheck.verify_plugin_version(config.root)
@@ -110,7 +110,7 @@ private
     old_logger, original_sync = logger, $stdout.sync
 
     $stdout.sync = true
-    self.logger = Logger.new($stdout, formatter: proc { |_, _, progname, msg| progname == 'vite' ? msg : "#{ msg }\n" })
+    self.logger = Logger.new($stdout, formatter: proc { |_, _, progname, msg| progname == 'vite' ? msg : "#{msg}\n" })
     yield
   ensure
     self.logger, $stdout.sync = old_logger, original_sync

@@ -36,8 +36,8 @@ protected
   # Internal: The JS packages that should be added to the app.
   def js_dependencies
     [
-      "vite@#{ ViteRuby::DEFAULT_VITE_VERSION }",
-      "vite-plugin-ruby@#{ ViteRuby::DEFAULT_PLUGIN_VERSION }",
+      "vite@#{ViteRuby::DEFAULT_VITE_VERSION}",
+      "vite-plugin-ruby@#{ViteRuby::DEFAULT_PLUGIN_VERSION}",
     ]
   end
 
@@ -132,7 +132,7 @@ private
   end
 
   def install_js_packages(deps)
-    run_with_capture("#{ config.package_manager } add -D #{ deps }", stdin_data: "\n")
+    run_with_capture("#{config.package_manager} add -D #{deps}", stdin_data: "\n")
   end
 
   # Internal: Avoid printing warning about missing vite.json, we will create one.

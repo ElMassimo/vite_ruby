@@ -11,10 +11,10 @@ class ViteRuby::CLI::SSR < ViteRuby::CLI::Vite
     ViteRuby.env['VITE_RUBY_MODE'] = mode
 
     ssr_entrypoint = JS_EXTENSIONS
-      .map { |ext| ViteRuby.config.ssr_output_dir.join("ssr.#{ ext }") }
+      .map { |ext| ViteRuby.config.ssr_output_dir.join("ssr.#{ext}") }
       .find(&:exist?)
 
-    raise ArgumentError, "No ssr entrypoint found `#{ ViteRuby.config.ssr_output_dir.relative_path_from(ViteRuby.config.root) }/ssr.{#{ JS_EXTENSIONS.join(',') }}`. Have you run bin/vite build --ssr?" unless ssr_entrypoint
+    raise ArgumentError, "No ssr entrypoint found `#{ViteRuby.config.ssr_output_dir.relative_path_from(ViteRuby.config.root)}/ssr.{#{JS_EXTENSIONS.join(',')}}`. Have you run bin/vite build --ssr?" unless ssr_entrypoint
 
     cmd = [
       'node',

@@ -45,7 +45,7 @@ private
     when 'pnpm' then %w[pnpm exec]
     when 'bun' then %w[bun x --bun]
     when 'yarn' then %w[yarn]
-    else raise ArgumentError, "Unknown package manager #{ config.package_manager.inspect }"
+    else raise ArgumentError, "Unknown package manager #{config.package_manager.inspect}"
     end
 
     [*x, *exec_args, 'vite']

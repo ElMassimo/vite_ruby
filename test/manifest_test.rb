@@ -40,9 +40,9 @@ class ManifestTest < ViteRuby::Test
       assert_equal 'images/logo.svg', resolve_entry_name('images/logo.svg')
       assert_equal 'images/logo.svg', resolve_entry_name('~/images/logo.svg')
       assert_equal 'favicon.ico', resolve_entry_name('~/favicon.ico')
-      assert_equal "/@fs#{ ViteRuby.config.root }/package.json", resolve_entry_name('/package.json')
-      assert_equal "/@fs#{ ViteRuby.config.root }/images/logo.svg", resolve_entry_name('/images/logo.svg')
-      assert_equal "/@fs#{ ViteRuby.config.root }/app/assets/theme.css", resolve_entry_name('/app/assets/theme.css')
+      assert_equal "/@fs#{ViteRuby.config.root}/package.json", resolve_entry_name('/package.json')
+      assert_equal "/@fs#{ViteRuby.config.root}/images/logo.svg", resolve_entry_name('/images/logo.svg')
+      assert_equal "/@fs#{ViteRuby.config.root}/app/assets/theme.css", resolve_entry_name('/app/assets/theme.css')
     }
 
     assert_equal 'entrypoints/application.js', resolve_entry_name('entrypoints/application.js')
@@ -52,12 +52,12 @@ class ManifestTest < ViteRuby::Test
     stub_builder(build_successful: true) {
       asset_file = 'calendar.js'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
       assert_match '"autoBuild" is set to `false`', error.message
 
       asset_file = 'images/logo.gif'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
-      assert_match "Vite Ruby can't find #{ asset_file } in the manifests", error.message
+      assert_match "Vite Ruby can't find #{asset_file} in the manifests", error.message
 
       asset_file = '/app/styles/theme.css'
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
@@ -67,7 +67,7 @@ class ManifestTest < ViteRuby::Test
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
       assert_match "Vite Ruby can't find favicon.ico in the manifests", error.message
 
-      assert_match "Manifest files found:\n  #{ manifest_path }", error.message
+      assert_match "Manifest files found:\n  #{manifest_path}", error.message
     }
   end
 
@@ -79,7 +79,7 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
       assert_match 'The file path is incorrect.', error.message
     }
   end
@@ -96,10 +96,10 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{ asset_file } in the manifests", error.message
+      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
       assert_match 'The last build failed.', error.message
-      assert_match "  #{ error_lines[0] }", error.message
-      assert_match "  #{ error_lines[1] }", error.message
+      assert_match "  #{error_lines[0]}", error.message
+      assert_match "  #{error_lines[1]}", error.message
     }
   end
 
@@ -110,7 +110,7 @@ class ManifestTest < ViteRuby::Test
       path_for(asset_file, type: :javascript)
     end
 
-    assert_match "Vite Ruby can't find entrypoints/#{ asset_file }.js in the manifests", error.message
+    assert_match "Vite Ruby can't find entrypoints/#{asset_file}.js in the manifests", error.message
   end
 
   def test_lookup_success!
@@ -166,7 +166,7 @@ class ManifestTest < ViteRuby::Test
       assert_equal '/vite-dev/logo.png',
         path_for('~/logo.png')
 
-      assert_equal "/vite-dev/@fs#{ ViteRuby.config.root }/app/assets/theme.css",
+      assert_equal "/vite-dev/@fs#{ViteRuby.config.root}/app/assets/theme.css",
         path_for('/app/assets/theme', type: :stylesheet)
     }
   end
@@ -235,6 +235,6 @@ private
   end
 
   def prefixed(file)
-    "/vite-production/assets/#{ file }"
+    "/vite-production/assets/#{file}"
   end
 end

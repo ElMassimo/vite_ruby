@@ -69,8 +69,8 @@ class BuilderTest < ViteRuby::Test
   end
 
   def test_last_build_path
-    assert_equal builder.send(:last_build_path, ssr: false).basename.to_s, "last-build-#{ ViteRuby.config.mode }.json"
-    assert_equal builder.send(:last_build_path, ssr: true).basename.to_s, "last-ssr-build-#{ ViteRuby.config.mode }.json"
+    assert_equal builder.send(:last_build_path, ssr: false).basename.to_s, "last-build-#{ViteRuby.config.mode}.json"
+    assert_equal builder.send(:last_build_path, ssr: true).basename.to_s, "last-ssr-build-#{ViteRuby.config.mode}.json"
   end
 
   def test_watched_files_digest

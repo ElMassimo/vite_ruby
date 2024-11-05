@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.license  = 'MIT'
 
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_rails@#{ ViteRails::VERSION }/vite_rails",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_rails@#{ ViteRails::VERSION }/vite_rails/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_rails@#{ViteRails::VERSION}/vite_rails",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_rails@#{ViteRails::VERSION}/vite_rails/CHANGELOG.md",
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')

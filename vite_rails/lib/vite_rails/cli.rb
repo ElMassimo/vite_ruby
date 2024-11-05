@@ -15,7 +15,7 @@ module ViteRails::CLI::Build
   def ensure_rails_init
     require File.expand_path('config/environment', Dir.pwd)
   rescue StandardError, LoadError => error
-    $stderr << "Unable to initialize Rails application before Vite build:\n\n\t#{ error.message }\n\n"
+    $stderr << "Unable to initialize Rails application before Vite build:\n\n\t#{error.message}\n\n"
   end
 end
 
@@ -28,7 +28,7 @@ module ViteRails::CLI::Install
   def setup_app_files
     cp RAILS_TEMPLATES.join('config/rails-vite.json'), config.config_path
     if dir = %w[app/javascript app/packs].find { |path| root.join(path).exist? }
-      replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{ dir }",)
+      replace_first_line config.config_path, 'app/frontend', %(    "sourceCodeDir": "#{dir}",)
     end
     setup_content_security_policy root.join('config/initializers/content_security_policy.rb')
     append root.join('Procfile.dev'), 'web: bin/rails s'

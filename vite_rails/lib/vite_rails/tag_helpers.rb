@@ -72,7 +72,7 @@ module ViteRails::TagHelpers
   def vite_image_tag(name, **options)
     if options[:srcset] && !options[:srcset].is_a?(String)
       options[:srcset] = options[:srcset].map do |src_name, size|
-        "#{ vite_asset_path(src_name) } #{ size }"
+        "#{vite_asset_path(src_name)} #{size}"
       end.join(', ')
     end
 
@@ -106,7 +106,7 @@ private
     try(:request).try(
       :send_early_hints,
       'Link' => asset_paths.map { |href|
-        %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin })
+        %(<#{href}>; rel=modulepreload; as=script; crossorigin=#{crossorigin})
       }.join("\n"),
     )
     asset_paths.map { |href|

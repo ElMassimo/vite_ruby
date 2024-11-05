@@ -58,7 +58,7 @@ private
 
   # Internal: The leading path to every Vite asset.
   def vite_assets_prefix
-    "/#{ ViteRuby.instance.config.public_output_dir }"
+    "/#{ViteRuby.instance.config.public_output_dir}"
   end
 
   # Internal: Renders a modulepreload link tag.

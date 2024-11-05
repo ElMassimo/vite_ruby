@@ -15,7 +15,7 @@ protected
 
     libraries = ViteRuby.framework_libraries.map { |_f, library| library.name }
 
-    run_with_capture("bundle update #{ libraries.join(' ') }")
+    run_with_capture("bundle update #{libraries.join(' ')}")
   end
 
   # NOTE: Spawn a new process so that it uses the updated vite_ruby.

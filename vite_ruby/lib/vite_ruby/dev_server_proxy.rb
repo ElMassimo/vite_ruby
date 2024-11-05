@@ -71,6 +71,6 @@ private
   #
   # If the path starts with that prefix, it will be redirected to Vite.
   def vite_url_prefix
-    @vite_url_prefix ||= config.public_output_dir.empty? ? VITE_DEPENDENCY_PREFIX : "/#{ config.public_output_dir }/"
+    @vite_url_prefix ||= config.public_output_dir.empty? ? VITE_DEPENDENCY_PREFIX : "/#{config.public_output_dir}/"
   end
 end

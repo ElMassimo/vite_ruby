@@ -23,10 +23,10 @@ class HelperTestCase < ActionView::TestCase
 protected
 
   def link(href:, rel: 'stylesheet', media: 'screen', crossorigin: nil)
-    attrs = [%(media="#{ media }"), %(href="#{ href }"), (%(crossorigin="#{ crossorigin }") if crossorigin)].compact
+    attrs = [%(media="#{media}"), %(href="#{href}"), (%(crossorigin="#{crossorigin}") if crossorigin)].compact
     attrs[1], attrs[2] = attrs[2], attrs[1] if Rails.gem_version > Gem::Version.new('6.1') && Rails.gem_version < Gem::Version.new('6.2') && attrs[2]
     attrs.reverse! if Rails.gem_version > Gem::Version.new('6.2')
-    %(<link rel="#{ rel }" #{ attrs.join(' ') } />)
+    %(<link rel="#{rel}" #{attrs.join(' ')} />)
   end
 
   def assert_similar(*args)
@@ -160,7 +160,7 @@ class HelperTest < HelperTestCase
   def test_vite_react_refresh_tag_with_nonce_by_default
     with_dev_server_running {
       assert_equal <<~HTML.chomp, vite_react_refresh_tag
-        <script type="module" nonce="#{ content_security_policy_nonce }">
+        <script type="module" nonce="#{content_security_policy_nonce}">
         //<![CDATA[
         import RefreshRuntime from '/vite-dev/@react-refresh'
         RefreshRuntime.injectIntoGlobalHook(window)

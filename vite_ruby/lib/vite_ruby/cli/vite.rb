@@ -26,9 +26,9 @@ class ViteRuby::CLI::Vite < Dry::CLI::Command
       ('--trace-deprecation' if trace_deprecation),
     ].compact.join(' ')
 
-    args << %(--node-options="#{ node_options }") unless node_options.empty?
+    args << %(--node-options="#{node_options}") unless node_options.empty?
 
-    boolean_opts.map { |name, value| args << "--#{ name }" if value }
+    boolean_opts.map { |name, value| args << "--#{name}" if value }
 
     yield(args)
   end

@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.license  = 'MIT'
 
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_padrino@#{ VitePadrino::VERSION }/vite_padrino",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_padrino@#{ VitePadrino::VERSION }/vite_padrino/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_padrino@#{VitePadrino::VERSION}/vite_padrino",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_padrino@#{VitePadrino::VERSION}/vite_padrino/CHANGELOG.md",
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')

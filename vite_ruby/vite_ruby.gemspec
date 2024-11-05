@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/ElMassimo/vite_ruby'
   s.license  = 'MIT'
   s.metadata = {
-    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby",
-    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ ViteRuby::VERSION }/vite_ruby/CHANGELOG.md",
+    'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_ruby@#{ViteRuby::VERSION}/vite_ruby",
+    'changelog_uri' => "https://github.com/ElMassimo/vite_ruby/blob/vite_ruby@#{ViteRuby::VERSION}/vite_ruby/CHANGELOG.md",
   }
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5')

@@ -6,7 +6,7 @@ module ViteRailsLegacy::TagHelpers
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
 
-    "<script#{ tag_options({ src: src, type: 'module' }, escape: true) }></script>".html_safe
+    "<script#{tag_options({ src: src, type: 'module' }, escape: true)}></script>".html_safe
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
@@ -61,7 +61,7 @@ module ViteRailsLegacy::TagHelpers
   def vite_image_tag(name, **options)
     if options[:srcset] && !options[:srcset].is_a?(String)
       options[:srcset] = options[:srcset].map do |src_name, size|
-        "#{ vite_asset_path(src_name) } #{ size }"
+        "#{vite_asset_path(src_name)} #{size}"
       end.join(', ')
     end
 
@@ -79,7 +79,7 @@ private
   def vite_preload_tag(*sources, crossorigin:, **options)
     sources.map { |source|
       href = path_to_asset(source)
-      try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
+      try(:request).try(:send_early_hints, 'Link' => %(<#{href}>; rel=modulepreload; as=script; crossorigin=#{crossorigin}))
       tag('link', rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin, **options)
     }.join("\n").html_safe
   end

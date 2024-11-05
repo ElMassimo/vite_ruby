@@ -22,7 +22,7 @@ module ViteRuby::CompatibilityCheck
     def raise_unless_satisfied(npm_req, ruby_req)
       unless compatible_plugin?(npm_req, ruby_req)
         raise ArgumentError, <<~ERROR
-          vite-plugin-ruby@#{ npm_req } might not be compatible with vite_ruby-#{ ViteRuby::VERSION }
+          vite-plugin-ruby@#{npm_req} might not be compatible with vite_ruby-#{ViteRuby::VERSION}
 
           You may disable this check if needed: https://vite-ruby.netlify.app/config/#skipcompatibilitycheck
 
