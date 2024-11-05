@@ -50,9 +50,9 @@ class LegacyHelperTest < HelperTestCase
   })
 
   def test_plugin_legacy
-    assert_includes vite_legacy_javascript_tag('/app/assets/external'), '/vite-production/assets/external.a35ee0db-legacy.js'
-    assert_includes vite_legacy_typescript_tag('main.ts'), '/vite-production/assets/main.20bbd3a5-legacy.js'
-    assert_includes vite_legacy_polyfill_tag, '/vite-production/assets/polyfills-legacy.07477394.js'
+    assert_includes vite_legacy_javascript_tag('/app/assets/external' => :javascript), '/vite-production/assets/external.a35ee0db-legacy.js'
+    assert_includes vite_legacy_javascript_tag('main.ts' => :typescript), '/vite-production/assets/main.20bbd3a5-legacy.js'
+    assert_includes vite_legacy_javascript_tag('main.ts' => :typescript), '/vite-production/assets/polyfills-legacy.07477394.js'
   end
 end
 
