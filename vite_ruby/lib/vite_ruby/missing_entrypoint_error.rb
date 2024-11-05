@@ -24,8 +24,8 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
   def possible_causes(last_build)
     if last_build.success == false
       FAILED_BUILD_CAUSES
-        .sub(':mode:', config.mode)
-        .sub(':errors:', last_build.errors.to_s.gsub(/^(?!$)/, '  '))
+        .sub(":mode:", config.mode)
+        .sub(":errors:", last_build.errors.to_s.gsub(/^(?!$)/, "  "))
     elsif config.auto_build
       DEFAULT_CAUSES
     else

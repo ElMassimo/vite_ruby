@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'pathname'
-require 'fileutils'
+require "pathname"
+require "fileutils"
 
 # NOTE: Extracted from dry-cli version 0.6.0, which later removed this file as
 # it was refactored and extracted into the more complete (and complex) dry-files.

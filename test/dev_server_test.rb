@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class DevServerTest < ViteRuby::Test
   def test_not_running
     refute_predicate ViteRuby.instance, :dev_server_running?
 
-    refresh_config(mode: 'development')
+    refresh_config(mode: "development")
 
     refute_predicate ViteRuby.instance, :dev_server_running?
 
@@ -16,7 +16,7 @@ class DevServerTest < ViteRuby::Test
   end
 
   def test_running
-    refresh_config(mode: 'development')
+    refresh_config(mode: "development")
     ViteRuby.instance.instance_variable_set(:@running, true)
     ViteRuby.instance.instance_variable_set(:@running_checked_at, Time.now)
 
