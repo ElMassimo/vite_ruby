@@ -37,7 +37,7 @@ namespace :vite do
 
   desc 'Ensure build dependencies like Vite are installed before bundling'
   task :install_dependencies do
-    install_env_args = ENV['VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES'] == 'true' ? {} : { 'NODE_ENV' => 'development' }
+    install_env_args = (ENV['VITE_RUBY_SKIP_INSTALL_DEV_DEPENDENCIES'] == 'true') ? {} : {'NODE_ENV' => 'development'}
 
     install_cmd = case (pkg = ViteRuby.config.package_manager)
     when 'npm' then 'npm ci'

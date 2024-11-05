@@ -9,7 +9,7 @@ class ViteRuby::Commands
 
   # Public: Defaults to production, and exits if the build fails.
   def build_from_task(*args)
-    with_node_env(ENV.fetch('NODE_ENV', 'production')) {
+    with_node_env(ENV.fetch("NODE_ENV", "production")) {
       ensure_log_goes_to_stdout {
         build(*args) || exit!
       }
@@ -30,7 +30,7 @@ class ViteRuby::Commands
 
   # Internal: Installs the binstub for the CLI in the appropriate path.
   def install_binstubs
-    `bundle binstub vite_ruby --path #{config.root.join('bin')}`
+    `bundle binstub vite_ruby --path #{config.root.join("bin")}`
     `bundle config --delete bin`
   end
 
@@ -46,7 +46,7 @@ class ViteRuby::Commands
 
   # Internal: Verifies if ViteRuby is properly installed.
   def verify_install
-    unless File.exist?(config.root.join('bin/vite'))
+    unless File.exist?(config.root.join("bin/vite"))
       warn <<~WARN
 
         vite binstub not found.
@@ -69,7 +69,7 @@ class ViteRuby::Commands
   # Internal: Prints information about ViteRuby's environment.
   def print_info
     config.within_root do
-      $stdout.puts "bin/vite present?: #{File.exist? 'bin/vite'}"
+      $stdout.puts "bin/vite present?: #{File.exist? "bin/vite"}"
 
       $stdout.puts "vite_ruby: #{ViteRuby::VERSION}"
       ViteRuby.framework_libraries.each do |framework, library|
@@ -85,7 +85,7 @@ class ViteRuby::Commands
 
       $stdout.puts "\n"
       packages = `npm ls vite vite-plugin-ruby`
-      packages_msg = packages.include?('vite@') ? "installed packages:\n#{packages}" : '❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed.'
+      packages_msg = packages.include?("vite@") ? "installed packages:\n#{packages}" : "❌ Check that vite and vite-plugin-ruby have been added as development dependencies and installed."
       $stdout.puts packages_msg
 
       ViteRuby::CompatibilityCheck.verify_plugin_version(config.root)
@@ -99,18 +99,18 @@ private
   def_delegators :@vite_ruby, :config, :builder, :manifest, :logger, :logger=
 
   def with_node_env(env)
-    original = ENV['NODE_ENV']
-    ENV['NODE_ENV'] = env
+    original = ENV["NODE_ENV"]
+    ENV["NODE_ENV"] = env
     yield
   ensure
-    ENV['NODE_ENV'] = original
+    ENV["NODE_ENV"] = original
   end
 
   def ensure_log_goes_to_stdout
     old_logger, original_sync = logger, $stdout.sync
 
     $stdout.sync = true
-    self.logger = Logger.new($stdout, formatter: proc { |_, _, progname, msg| progname == 'vite' ? msg : "#{msg}\n" })
+    self.logger = Logger.new($stdout, formatter: proc { |_, _, progname, msg| (progname == "vite") ? msg : "#{msg}\n" })
     yield
   ensure
     self.logger, $stdout.sync = old_logger, original_sync

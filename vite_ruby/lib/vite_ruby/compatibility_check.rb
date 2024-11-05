@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require "json"
 
 # Internal: Verifies that the installed vite-plugin-ruby version is compatible
 # with the current version of vite_ruby.
@@ -11,9 +11,9 @@ module ViteRuby::CompatibilityCheck
   class << self
     # Public: Attempt to verify that the vite-plugin-ruby version is compatible.
     def verify_plugin_version(root)
-      package = JSON.parse(root.join('package.json').read) rescue {}
-      requirement = package.dig('devDependencies', 'vite-plugin-ruby') ||
-                    package.dig('dependencies', 'vite-plugin-ruby')
+      package = JSON.parse(root.join("package.json").read) rescue {}
+      requirement = package.dig("devDependencies", "vite-plugin-ruby") ||
+        package.dig("dependencies", "vite-plugin-ruby")
 
       raise_unless_satisfied(requirement, ViteRuby::DEFAULT_PLUGIN_VERSION)
     end
@@ -37,12 +37,12 @@ module ViteRuby::CompatibilityCheck
     # requirement.
     def compatible_plugin?(npm_req, ruby_req)
       npm_req, ruby_req = [npm_req, ruby_req]
-        .map { |req| Gem::Requirement.new(req.sub('^', '~>')) }
+        .map { |req| Gem::Requirement.new(req.sub("^", "~>")) }
 
       current_version = npm_req.requirements.first.second
 
       ruby_req.satisfied_by?(current_version)
-    rescue StandardError
+    rescue
       true
     end
   end

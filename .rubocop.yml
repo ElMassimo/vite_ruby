@@ -5,6 +5,9 @@ require:
   - rubocop-performance
   - rubocop-minitest
 
+inherit_gem:
+  standard: config/ruby-3.0.yml
+
 inherit_mode:
   merge:
     - Exclude

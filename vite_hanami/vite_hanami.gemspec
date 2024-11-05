@@ -4,13 +4,13 @@ $LOAD_PATH.push File.expand_path('./lib', __dir__)
 require 'vite_hanami/version'
 
 Gem::Specification.new do |s|
-  s.name     = 'vite_hanami'
-  s.version  = ViteHanami::VERSION
-  s.authors  = ['Máximo Mussini']
-  s.email    = ['maximomussini@gmail.com']
-  s.summary  = 'Use Vite in Hanami and bring joy to your JavaScript experience'
+  s.name = 'vite_hanami'
+  s.version = ViteHanami::VERSION
+  s.authors = ['Máximo Mussini']
+  s.email = ['maximomussini@gmail.com']
+  s.summary = 'Use Vite in Hanami and bring joy to your JavaScript experience'
   s.homepage = 'https://github.com/ElMassimo/vite_ruby'
-  s.license  = 'MIT'
+  s.license = 'MIT'
 
   s.metadata = {
     'source_code_uri' => "https://github.com/ElMassimo/vite_ruby/tree/vite_hanami@#{ViteHanami::VERSION}/vite_hanami",

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'digest/sha1'
+require "digest/sha1"
 
 # Public: Keeps track of watched files and triggers builds as needed.
 class ViteRuby::Builder
@@ -11,9 +11,9 @@ class ViteRuby::Builder
   # Public: Checks if the watched files have changed since the last compilation,
   # and triggers a Vite build if any files have changed.
   def build(*args)
-    last_build = last_build_metadata(ssr: args.include?('--ssr'))
+    last_build = last_build_metadata(ssr: args.include?("--ssr"))
 
-    if args.delete('--force') || last_build.stale? || config.manifest_paths.empty?
+    if args.delete("--force") || last_build.stale? || config.manifest_paths.empty?
       stdout, stderr, status = build_with_vite(*args)
       log_build_result(stdout, stderr, status)
       record_build_metadata(last_build, errors: stderr, success: status.success?)
@@ -46,7 +46,7 @@ private
 
   # Internal: The file path where metadata of the last build is stored.
   def last_build_path(ssr:)
-    config.build_cache_dir.join("last#{'-ssr' if ssr}-build-#{config.mode}.json")
+    config.build_cache_dir.join("last#{"-ssr" if ssr}-build-#{config.mode}.json")
   end
 
   # Internal: Returns a digest of all the watched files, allowing to detect
@@ -58,15 +58,15 @@ private
       files = Dir[*config.watched_paths].reject { |f| File.directory?(f) }
       file_ids = files.sort.map { |f| "#{File.basename(f)}/#{Digest::SHA1.file(f).hexdigest}" }
       @last_digest_at = Time.now
-      @last_digest = Digest::SHA1.hexdigest(file_ids.join('/'))
+      @last_digest = Digest::SHA1.hexdigest(file_ids.join("/"))
     end
   end
 
   # Public: Initiates a Vite build command to generate assets.
   def build_with_vite(*args)
-    logger.info 'Building with Vite ⚡️'
+    logger.info "Building with Vite ⚡️"
 
-    run(['build', *args])
+    run(["build", *args])
   end
 
   # Internal: Outputs the build results.
@@ -79,8 +79,8 @@ private
     else
       logger.error stderr
       logger.error status
-      logger.error 'Build with Vite failed! ❌'
-      logger.error '❌ Check that vite and vite-plugin-ruby are in devDependencies and have been installed. ' if stderr.include?('ERR! canceled')
+      logger.error "Build with Vite failed! ❌"
+      logger.error "❌ Check that vite and vite-plugin-ruby are in devDependencies and have been installed. " if stderr.include?("ERR! canceled")
     end
   end
 end
