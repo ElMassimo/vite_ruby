@@ -1,14 +1,21 @@
 inherit_from: .rubocop_todo.yml
 
 require:
+  - standard
   - rubocop-performance
   - rubocop-minitest
+
+inherit_gem:
+  standard: config/ruby-3.0.yml
 
 inherit_mode:
   merge:
     - Exclude
     
 AllCops:
+  TargetRubyVersion: 3.0
+  SuggestExtensions: false
+  NewCops: enable
   Exclude:
     - "node_modules/**/*"
     - "**/*/node_modules/**/*"
@@ -18,14 +25,9 @@ AllCops:
     - "vendor/bundle"
     - "tmp/**/*"
     - "test/mounted_app/test/dummy/bin/*"
-  TargetRubyVersion: 2.5
 
 Style/IfUnlessModifier:
   Enabled: false
-
-Lint/UnusedMethodArgument:
-  Exclude:
-    - "vite_rails/lib/vite_rails/tag_helpers.rb"
 
 Style/RescueModifier:
   Enabled: false
@@ -39,6 +41,12 @@ Style/GuardClause:
 Style/MultilineBlockChain:
   Enabled: false
 
+Style/HashEachMethods:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
 Layout/ElseAlignment:
   Enabled: false
 
@@ -49,6 +57,9 @@ Layout/IndentationWidth:
   Enabled: false
 
 Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
   Enabled: false
 
 Layout/IndentationConsistency:
@@ -69,9 +80,6 @@ Style/Documentation:
 Naming/RescuedExceptionsVariableName:
   PreferredName: error
 
-Layout/SpaceInsideStringInterpolation:
-  EnforcedStyle: space
-
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -91,6 +99,12 @@ Style/MissingRespondToMissing:
   Enabled: false
 
 Style/ParallelAssignment:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/SuperWithArgsParentheses:
   Enabled: false
 
 Style/TrailingCommaInArrayLiteral:
@@ -149,3 +163,13 @@ Security/YAMLLoad:
 
 Style/MutableConstant:
   Enabled: false
+
+Minitest/MultipleAssertions:
+  Enabled: false
+
+Minitest/AssertRaisesWithRegexpArgument:
+  Enabled: false
+
+Minitest/UselessAssertion:
+  Exclude:
+    - test/helper_test.rb

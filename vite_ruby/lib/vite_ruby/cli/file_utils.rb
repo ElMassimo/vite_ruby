@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'pathname'
-require 'fileutils'
+require "pathname"
+require "fileutils"
 
 # NOTE: Extracted from dry-cli version 0.6.0, which later removed this file as
 # it was refactored and extracted into the more complete (and complex) dry-files.
@@ -36,7 +36,7 @@ module ViteRuby::CLI::FileUtils
       return if content.join.include?(contents)
 
       content << "\n" unless content.last&.end_with?("\n")
-      content << "#{ contents }\n"
+      content << "#{contents}\n"
 
       write(path, content)
     end
@@ -47,7 +47,7 @@ module ViteRuby::CLI::FileUtils
     # @api private
     def replace_first_line(path, target, replacement)
       content = read_lines(path)
-      content[index(content, path, target)] = "#{ replacement }\n"
+      content[index(content, path, target)] = "#{replacement}\n"
 
       write(path, content)
     end
@@ -95,14 +95,14 @@ module ViteRuby::CLI::FileUtils
     # @api private
     def index(content, path, target)
       content.index { |line| line.include?(target) } ||
-        raise(ArgumentError, "Cannot find `#{ target }' inside `#{ path }'.")
+        raise(ArgumentError, "Cannot find `#{target}' inside `#{path}'.")
     end
 
     # @since 1.2.11
     # @api private
     def rindex(content, path, target)
       content.rindex { |line| line.include?(target) } ||
-        raise(ArgumentError, "Cannot find `#{ target }' inside `#{ path }'.")
+        raise(ArgumentError, "Cannot find `#{target}' inside `#{path}'.")
     end
 
     # @since 1.2.11
@@ -113,7 +113,7 @@ module ViteRuby::CLI::FileUtils
 
       i = finder.call(content, path, target)
 
-      content.insert(i, "#{ contents }\n")
+      content.insert(i, "#{contents}\n")
       write(path, content)
     end
 
@@ -125,7 +125,7 @@ module ViteRuby::CLI::FileUtils
 
       i = finder.call(content, path, target)
 
-      content.insert(i + 1, "#{ contents }\n")
+      content.insert(i + 1, "#{contents}\n")
       write(path, content)
     end
   end

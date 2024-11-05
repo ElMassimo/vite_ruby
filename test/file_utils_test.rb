@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require 'securerandom'
+require "test_helper"
+require "securerandom"
 
 class FilesTest < ViteRuby::Test
   delegate(
@@ -11,11 +11,11 @@ class FilesTest < ViteRuby::Test
     :inject_line_before,
     :inject_line_after,
     :inject_line_after_last,
-    to: 'ViteRuby::CLI::FileUtils',
+    to: "ViteRuby::CLI::FileUtils",
   )
 
   def root
-    @root ||= Pathname.new(Dir.pwd).join('tmp', SecureRandom.uuid).tap(&:mkpath)
+    @root ||= Pathname.new(Dir.pwd).join("tmp", SecureRandom.uuid).tap(&:mkpath)
   end
 
   def teardown
@@ -23,24 +23,26 @@ class FilesTest < ViteRuby::Test
   end
 
   def test_fresh_installation
-    app_root = root.join('test_fresh_install').tap(&:mkpath)
+    app_root = root.join("test_fresh_install").tap(&:mkpath)
     Dir.chdir(app_root) {
       `bundle exec vite install`
     }
-    assert_path_exists app_root.join('vite.config.ts')
-    assert_path_exists app_root.join('package.json')
-    assert 'module', JSON.parse(app_root.join('package.json').read)['type']
+
+    assert_path_exists app_root.join("vite.config.ts")
+    assert_path_exists app_root.join("package.json")
+    assert_equal "module", JSON.parse(app_root.join("package.json").read)["type"]
   end
 
   def test_write
-    path = root.join('write')
+    path = root.join("write")
     write(path, "Hello\nWorld")
-    assert path.exist?
+
+    assert_predicate path, :exist?
     assert_content path, "Hello\nWorld"
   end
 
   def test_append
-    path = root.join('append.rb')
+    path = root.join("append.rb")
     content = <<~CONTENT
       class Append
       end
@@ -58,7 +60,7 @@ class FilesTest < ViteRuby::Test
   end
 
   def test_replace_first_line
-    path = root.join('replace_string.rb')
+    path = root.join("replace_string.rb")
     content = <<~CONTENT
       class Replace
         def self.perform
@@ -67,7 +69,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
 
     write(path, content)
-    replace_first_line(path, 'perform', '  def self.call(input)')
+    replace_first_line(path, "perform", "  def self.call(input)")
 
     assert_content path, <<~CONTENT
       class Replace
@@ -78,7 +80,7 @@ class FilesTest < ViteRuby::Test
   end
 
   def test_injects_line_before
-    path = root.join('inject_before_string.rb')
+    path = root.join("inject_before_string.rb")
     content = <<~CONTENT
       class InjectBefore
         def self.call
@@ -87,7 +89,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
 
     write(path, content)
-    inject_line_before(path, 'call', '  # It performs the operation')
+    inject_line_before(path, "call", "  # It performs the operation")
 
     assert_content path, <<~CONTENT
       class InjectBefore
@@ -99,7 +101,7 @@ class FilesTest < ViteRuby::Test
   end
 
   def test_injects_line_after
-    path = root.join('inject_after.rb')
+    path = root.join("inject_after.rb")
     content = <<~CONTENT
       class InjectAfter
         def self.call
@@ -108,7 +110,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
 
     write(path, content)
-    inject_line_after(path, 'call', '    :result')
+    inject_line_after(path, "call", "    :result")
 
     assert_content path, <<~CONTENT
       class InjectAfter
@@ -120,7 +122,7 @@ class FilesTest < ViteRuby::Test
   end
 
   def test_injects_line_after_last
-    path = root.join('inject_after_last.rb')
+    path = root.join("inject_after_last.rb")
     content = <<~CONTENT
       class InjectAfter
         def self.call
@@ -131,7 +133,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
 
     write(path, content)
-    inject_line_after_last(path, 'call', '    :result')
+    inject_line_after_last(path, "call", "    :result")
 
     assert_content path, <<~CONTENT
       class InjectAfter

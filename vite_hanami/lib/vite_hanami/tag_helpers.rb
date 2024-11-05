@@ -6,7 +6,7 @@ module ViteHanami::TagHelpers
   def vite_client
     return unless src = vite_manifest.vite_client_src
 
-    html.script(src: src, type: 'module')
+    html.script(src: src, type: "module")
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
@@ -25,12 +25,12 @@ module ViteHanami::TagHelpers
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_javascript(*names,
-                      type: 'module',
-                      asset_type: :javascript,
-                      skip_preload_tags: false,
-                      skip_style_tags: false,
-                      crossorigin: 'anonymous',
-                      **options)
+    type: "module",
+    asset_type: :javascript,
+    skip_preload_tags: false,
+    skip_style_tags: false,
+    crossorigin: "anonymous",
+    **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, **options)
     tags << vite_modulepreload(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
@@ -58,7 +58,7 @@ private
 
   # Internal: The leading path to every Vite asset.
   def vite_assets_prefix
-    "/#{ ViteRuby.instance.config.public_output_dir }"
+    "/#{ViteRuby.instance.config.public_output_dir}"
   end
 
   # Internal: Renders a modulepreload link tag.
@@ -66,7 +66,7 @@ private
     _safe_tags(*sources) { |source|
       href = asset_path(source)
       _push_promise(href, as: :script)
-      html.link(rel: 'modulepreload', href: href, as: :script, crossorigin: crossorigin)
+      html.link(rel: "modulepreload", href: href, as: :script, crossorigin: crossorigin)
     }
   end
 
@@ -76,7 +76,7 @@ private
     if self.class.assets_configuration.cdn || !source.to_s.start_with?(vite_assets_prefix)
       self.class.assets_configuration.asset_path(source)
     else
-      Hanami::Utils::PathPrefix.new('/').join(source).to_s
+      Hanami::Utils::PathPrefix.new("/").join(source).to_s
     end
   end
 end

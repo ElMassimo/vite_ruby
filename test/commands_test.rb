@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class CommandsTest < ViteRuby::Test
   def test_bootstrap
     assert ViteRuby.bootstrap
   end
 
-  delegate :build, :build_from_task, :clobber, to: 'ViteRuby.commands'
+  delegate :build, :build_from_task, :clobber, to: "ViteRuby.commands"
 
   def test_build_returns_success_status_when_stale
     stub_builder(stale: true, build_successful: true) {
@@ -36,11 +36,13 @@ class CommandsTest < ViteRuby::Test
   end
 
   def test_clobber
-    with_rails_env('test') { |config|
+    with_rails_env("test") { |config|
       ensure_output_dirs(config)
-      config.build_output_dir.join('.vite/manifest.json').write('{}')
+      config.build_output_dir.join(".vite/manifest.json").write("{}")
+
       assert_path_exists config.build_output_dir
       clobber
+
       refute_path_exists config.build_output_dir
     }
   end
@@ -50,7 +52,7 @@ private
   def ensure_output_dirs(config)
     config.build_output_dir.rmtree rescue nil
     config.build_output_dir.mkdir unless config.build_output_dir.exist?
-    config.build_output_dir.join('.vite').mkdir unless config.build_output_dir.join('.vite').exist?
-    config.build_output_dir.join('assets').mkdir unless config.build_output_dir.join('assets').exist?
+    config.build_output_dir.join(".vite").mkdir unless config.build_output_dir.join(".vite").exist?
+    config.build_output_dir.join("assets").mkdir unless config.build_output_dir.join("assets").exist?
   end
 end

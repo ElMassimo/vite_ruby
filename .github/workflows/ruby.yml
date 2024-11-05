@@ -23,11 +23,11 @@ jobs:
         ]
         experimental: [false]
         include:
-          - ruby: "3.3"
+          - ruby: "3.4.0-preview2"
             os: ubuntu-latest
-            gemfile: Gemfile-rails-edge
+            gemfile: "Gemfile-rails.8.0.x"
             experimental: true
-          - ruby: "3.4.0-preview1"
+          - ruby: "3.4.0-preview2"
             os: ubuntu-latest
             gemfile: Gemfile-rails-edge
             experimental: true

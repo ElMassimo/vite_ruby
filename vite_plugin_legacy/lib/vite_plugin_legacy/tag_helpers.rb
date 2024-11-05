@@ -9,7 +9,7 @@ module VitePluginLegacy::TagHelpers
 
     legacy_name = name.sub(/(\..+)|$/, '-legacy\1')
     import_tag = content_tag(:script, nomodule: true) {
-      "System.import('#{ vite_asset_path(legacy_name, type: asset_type) }')".html_safe
+      "System.import('#{vite_asset_path(legacy_name, type: asset_type)}')".html_safe
     }
 
     safe_join [vite_legacy_polyfill_tag, import_tag]
@@ -25,6 +25,6 @@ module VitePluginLegacy::TagHelpers
   def vite_legacy_polyfill_tag
     return if ViteRuby.instance.dev_server_running?
 
-    content_tag(:script, nil, nomodule: true, src: vite_asset_path('legacy-polyfills', type: :virtual))
+    content_tag(:script, nil, nomodule: true, src: vite_asset_path("legacy-polyfills", type: :virtual))
   end
 end

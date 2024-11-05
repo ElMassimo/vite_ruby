@@ -5,7 +5,7 @@ private
 
   # Override: Default values for a Rails application.
   def config_defaults
-    require 'rails'
+    require "rails"
     asset_host = Rails.application&.config&.action_controller&.asset_host
     super(
       asset_host: asset_host.is_a?(Proc) ? nil : asset_host,

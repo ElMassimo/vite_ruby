@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'bundler/gem_tasks'
+require "bundler/gem_tasks"
 
 class Bundler::GemHelper
   def version_tag
-    "vite_ruby@#{ version }"
+    "vite_ruby@#{version}"
   end
 end
