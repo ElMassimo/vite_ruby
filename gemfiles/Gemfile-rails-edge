@@ -4,8 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rails', github: 'rails/rails', branch: 'main'
 
-gem 'mutex_m'
-
 gemspec path: '../vite_ruby'
 gemspec path: '../vite_rails'
 gemspec path: '../vite_plugin_legacy'

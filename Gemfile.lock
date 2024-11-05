@@ -17,6 +17,7 @@ PATH
     vite_ruby (3.9.0)
       dry-cli (>= 0.7, < 2)
       logger (~> 1.6)
+      mutex_m
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
 
