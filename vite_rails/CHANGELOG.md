@@ -1,3 +1,12 @@
+## [3.0.19](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.18...vite_rails@3.0.19) (2024-11-05)
+
+
+### Bug Fixes
+
+* respect host and protocol options in vite_preload_tag ([#413](https://github.com/ElMassimo/vite_ruby/issues/413)) ([bcd8151](https://github.com/ElMassimo/vite_ruby/commit/bcd8151e77e90b5c219650db604ccf6bb6617720))
+
+
+
 ## [3.0.18](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.17...vite_rails@3.0.18) (2024-10-21)
 
 
