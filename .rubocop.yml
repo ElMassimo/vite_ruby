@@ -1,6 +1,5 @@
-inherit_from: .rubocop_todo.yml
-
 require:
+  - standard
   - rubocop-performance
   - rubocop-minitest
 
@@ -18,7 +17,7 @@ AllCops:
     - "vendor/bundle"
     - "tmp/**/*"
     - "test/mounted_app/test/dummy/bin/*"
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
 
 Style/IfUnlessModifier:
   Enabled: false
@@ -37,6 +36,12 @@ Style/GuardClause:
   Enabled: false
 
 Style/MultilineBlockChain:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Layout/LineLength:
   Enabled: false
 
 Layout/ElseAlignment:

@@ -10,7 +10,7 @@ Benchmark.ips do |x|
 
   path = '/application.ts'
 
-  x.report('start_with? [1..-1]') { path.start_with?('/') ? path[1..-1] : path }
+  x.report('start_with? [1..-1]') { path.start_with?('/') ? path[1..] : path }
   x.report('sub %r{^/}') { path.sub(%r{^/}, '') }
   x.report('sub REGEX') { path.sub(REGEX, '') }
   x.compare!
