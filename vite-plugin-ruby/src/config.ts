@@ -89,9 +89,8 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
 
   const server: ServerOptions = { fs, host: config.host, https, port, strictPort: true }
 
-  const originPresent = "server" in userConfig && "origin" in userConfig.server;
-  if (booleanOption(config.skipProxy) && !originPresent)
-    server.origin = `${https ? 'https' : 'http'}://${config.host}:${config.port}`
+  if (booleanOption(config.skipProxy))
+    server.origin = userConfig.server?.origin || `${https ? 'https' : 'http'}://${config.host}:${config.port}`
 
   // Connect directly to the Vite dev server, rack-proxy does not proxy websocket connections.
   const hmr = userConfig.server?.hmr ?? {}
