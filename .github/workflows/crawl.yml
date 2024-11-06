@@ -12,10 +12,11 @@ jobs:
     env:
       API_KEY: ${{secrets.ALGOLIA_API_KEY}}
       APPLICATION_ID: GERZE019PN
-    runs-on: ubuntu-latest
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+    runs-on: ubuntu-24.04
     container: algolia/docsearch-scraper
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: 'sudo apt-get install -y jq'
       - run: 'echo "CONFIG=$(cat docs/.algolia/config.json | jq -r tostring)" >> $GITHUB_ENV'
       - run: "cd /root && pipenv install"

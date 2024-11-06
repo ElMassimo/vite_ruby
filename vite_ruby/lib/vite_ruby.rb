@@ -1,32 +1,32 @@
 # frozen_string_literal: true
 
-require 'logger'
-require 'forwardable'
-require 'pathname'
-require 'socket'
+require "logger"
+require "forwardable"
+require "pathname"
+require "socket"
 
-require 'zeitwerk'
+require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem
-loader.ignore("#{ __dir__ }/install")
-loader.ignore("#{ __dir__ }/tasks")
-loader.ignore("#{ __dir__ }/exe")
-loader.inflector.inflect('cli' => 'CLI')
-loader.inflector.inflect('ssr' => 'SSR')
-loader.inflector.inflect('io' => 'IO')
+loader.ignore("#{__dir__}/install")
+loader.ignore("#{__dir__}/tasks")
+loader.ignore("#{__dir__}/exe")
+loader.inflector.inflect("cli" => "CLI")
+loader.inflector.inflect("ssr" => "SSR")
+loader.inflector.inflect("io" => "IO")
 loader.setup
 
 class ViteRuby
   # Internal: Prefix used for environment variables that modify the configuration.
-  ENV_PREFIX = 'VITE_RUBY'
+  ENV_PREFIX = "VITE_RUBY"
 
   # Internal: Companion libraries for Vite Ruby, and their target framework.
   COMPANION_LIBRARIES = {
-    'vite_rails' => 'rails',
-    'vite_hanami' => 'hanami',
-    'vite_padrino' => 'padrino',
-    'jekyll-vite' => 'jekyll',
-    'vite_rails_legacy' => 'rails',
-    'vite_plugin_legacy' => 'rack',
+    "vite_rails" => "rails",
+    "vite_hanami" => "hanami",
+    "vite_padrino" => "padrino",
+    "jekyll-vite" => "jekyll",
+    "vite_rails_legacy" => "rails",
+    "vite_plugin_legacy" => "rack",
   }
 
   class << self
@@ -46,7 +46,7 @@ class ViteRuby
 
     # Internal: Loads all available rake tasks.
     def install_tasks
-      load File.expand_path('tasks/vite.rake', __dir__)
+      load File.expand_path("tasks/vite.rake", __dir__)
     end
 
     # Internal: Creates a new instance with the specified options.
@@ -57,11 +57,11 @@ class ViteRuby
     # Internal: Detects if the application has installed a framework-specific
     # variant of Vite Ruby.
     def framework_libraries
-      COMPANION_LIBRARIES.map { |name, framework|
+      COMPANION_LIBRARIES.filter_map { |name, framework|
         if library = Gem.loaded_specs[name]
           [framework, library]
         end
-      }.compact
+      }
     end
   end
 
@@ -90,7 +90,7 @@ class ViteRuby
     begin
       Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
       @running = true
-    rescue StandardError
+    rescue
       @running = false
     ensure
       @running_checked_at = Time.now
@@ -107,9 +107,9 @@ class ViteRuby
 
   # Public: The proxy for assets should only run in development mode.
   def run_proxy?
-    config.mode == 'development' || (config.mode == 'test' && !ENV['CI'])
-  rescue StandardError => error
-    logger.error("Failed to check mode for Vite: #{ error.message }")
+    config.mode == "development" || (config.mode == "test" && !ENV["CI"])
+  rescue => error
+    logger.error("Failed to check mode for Vite: #{error.message}")
     false
   end
 
@@ -149,4 +149,4 @@ class ViteRuby
   end
 end
 
-require 'vite_ruby/version'
+require "vite_ruby/version"

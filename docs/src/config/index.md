@@ -285,6 +285,18 @@ You can customize this behavior using the following options.
 
   Allows to skip Vite build output from logs, to keep the noise down.
 
+### packageManager
+
+- **Default:** auto-detected based on existing lockfiles, otherwise `"npm"`
+- **Env Var:** `VITE_RUBY_PACKAGE_MANAGER`
+
+  Allows to specify which package manager to use, such as:
+
+  - `npm`
+  - `pnpm`
+  - `yarn`
+  - `bun` (experimental)
+
 ### root
 
 - **Default:** `Rails.root`
@@ -323,10 +335,12 @@ You can customize this behavior using the following options.
 
 ### viteBinPath
 
-- **Default:** `node_modules/.bin/vite`
+- **Default:** `null`
 - **Env Var:** `VITE_RUBY_VITE_BIN_PATH`
 
   The path where the Vite.js binary is installed. It will be used to execute the `dev` and `build` commands.
+
+  These commands are executed by your package manager unless this variable is defined.
 
 ### watchAdditionalPaths
 

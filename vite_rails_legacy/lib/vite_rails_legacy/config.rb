@@ -3,7 +3,7 @@
 module ViteRailsLegacy::Config
   # Override: Default values for a Rails application.
   def config_defaults
-    require 'rails'
+    require "rails"
     asset_host = Rails.application&.config&.action_controller&.asset_host
     super(
       asset_host: asset_host.is_a?(Proc) ? nil : asset_host,
@@ -13,5 +13,5 @@ module ViteRailsLegacy::Config
   end
 end
 
-require 'active_support/core_ext/hash'
+require "active_support/core_ext/hash"
 ViteRuby::Config.singleton_class.prepend(ViteRailsLegacy::Config)

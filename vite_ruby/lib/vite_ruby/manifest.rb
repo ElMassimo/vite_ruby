@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'ostruct'
-
 # Public: Registry for accessing resources managed by Vite, using a generated
 # manifest file which maps entrypoint names to file paths.
 #
@@ -21,20 +19,20 @@ class ViteRuby::Manifest
   #
   # Raises an error if the resource could not be found in the manifest.
   def path_for(name, **options)
-    lookup!(name, **options).fetch('file')
+    lookup!(name, **options).fetch("file")
   end
 
   # Public: Returns scripts, imported modules, and stylesheets for the specified
   # entrypoint files.
   def resolve_entries(*names, **options)
     entries = names.map { |name| lookup!(name, **options) }
-    script_paths = entries.map { |entry| entry.fetch('file') }
+    script_paths = entries.map { |entry| entry.fetch("file") }
 
-    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry['imports'] }.compact.uniq
+    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry["imports"] }.compact.uniq
     {
       scripts: script_paths,
-      imports: imports.map { |entry| entry.fetch('file') }.uniq,
-      stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry['css'] }.compact.uniq,
+      imports: imports.map { |entry| entry.fetch("file") }.uniq,
+      stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry["css"] }.compact.uniq,
     }
   end
 
@@ -45,7 +43,7 @@ class ViteRuby::Manifest
 
   # Public: The path from where the browser can download the Vite HMR client.
   def vite_client_src
-    prefix_asset_with_host('@vite/client') if dev_server_running?
+    prefix_asset_with_host("@vite/client") if dev_server_running?
   end
 
   # Public: The content of the preamble needed by the React Refresh plugin.
@@ -53,7 +51,7 @@ class ViteRuby::Manifest
     if dev_server_running?
       <<~REACT_REFRESH
         <script type="module">
-          #{ react_preamble_code }
+          #{react_preamble_code}
         </script>
       REACT_REFRESH
     end
@@ -63,7 +61,7 @@ class ViteRuby::Manifest
   def react_preamble_code
     if dev_server_running?
       <<~REACT_PREAMBLE_CODE
-        import RefreshRuntime from '#{ prefix_asset_with_host('@react-refresh') }'
+        import RefreshRuntime from '#{prefix_asset_with_host("@react-refresh")}'
         RefreshRuntime.injectIntoGlobalHook(window)
         window.$RefreshReg$ = () => {}
         window.$RefreshSig$ = () => (type) => type
@@ -97,7 +95,7 @@ protected
 private
 
   # Internal: The prefix used by Vite.js to request files with an absolute path.
-  FS_PREFIX = '/@fs/'
+  FS_PREFIX = "/@fs/"
 
   extend Forwardable
 
@@ -112,7 +110,7 @@ private
   # Internal: Finds the specified entry in the manifest.
   def find_manifest_entry(name)
     if dev_server_running?
-      { 'file' => prefix_vite_asset(name) }
+      {"file" => prefix_vite_asset(name)}
     else
       manifest[name]
     end
@@ -130,19 +128,21 @@ private
 
   # Internal: Loads and merges the manifest files, resolving the asset paths.
   def load_manifest
-    files = config.manifest_paths
-    files.map { |path| JSON.parse(path.read) }.inject({}, &:merge).tap(&method(:resolve_references))
+    config.manifest_paths
+      .map { |path| JSON.parse(path.read) }
+      .inject({}, &:merge)
+      .tap { |manifest| resolve_references(manifest) }
   end
 
   # Internal: Scopes an asset to the output folder in public, as a path.
   def prefix_vite_asset(path)
-    File.join(vite_asset_origin || '/', config.public_output_dir, path)
+    File.join(vite_asset_origin || "/", config.public_output_dir, path)
   end
 
   # Internal: Prefixes an asset with the `asset_host` for tags that do not use
   # the framework tag helpers.
   def prefix_asset_with_host(path)
-    File.join(vite_asset_origin || config.asset_host || '/', config.public_output_dir, path)
+    File.join(vite_asset_origin || config.asset_host || "/", config.public_output_dir, path)
   end
 
   # Internal: The origin of assets managed by Vite.
@@ -153,11 +153,11 @@ private
   # Internal: Resolves the paths that reference a manifest entry.
   def resolve_references(manifest)
     manifest.each_value do |entry|
-      entry['file'] = prefix_vite_asset(entry['file'])
+      entry["file"] = prefix_vite_asset(entry["file"])
       %w[css assets].each do |key|
         entry[key] = entry[key].map { |path| prefix_vite_asset(path) } if entry[key]
       end
-      entry['imports']&.map! { |name| manifest.fetch(name) }
+      entry["imports"]&.map! { |name| manifest.fetch(name) }
     end
   end
 
@@ -166,7 +166,7 @@ private
     return resolve_virtual_entry(name) if type == :virtual
 
     name = with_file_extension(name.to_s, type)
-    raise ArgumentError, "Asset names can not be relative. Found: #{ name }" if name.start_with?('.')
+    raise ArgumentError, "Asset names can not be relative. Found: #{name}" if name.start_with?(".")
 
     # Explicit path, relative to the source_code_dir.
     name.sub(%r{^~/(.+)$}) { return Regexp.last_match(1) }
@@ -175,7 +175,7 @@ private
     name.sub(%r{^/(.+)$}) { return resolve_absolute_entry(Regexp.last_match(1)) }
 
     # Sugar: Prefix with the entrypoints dir if the path is not nested.
-    name.include?('/') ? name : File.join(config.entrypoints_dir, name)
+    name.include?("/") ? name : File.join(config.entrypoints_dir, name)
   end
 
   # Internal: Entry names in the manifest are relative to the Vite.js.
@@ -196,7 +196,7 @@ private
   # Internal: Adds a file extension to the file name, unless it already has one.
   def with_file_extension(name, entry_type)
     if File.extname(name).empty? && (ext = extension_for_type(entry_type))
-      "#{ name }.#{ ext }"
+      "#{name}.#{ext}"
     else
       name
     end
@@ -205,16 +205,16 @@ private
   # Internal: Allows to receive :javascript and :stylesheet as :type in helpers.
   def extension_for_type(entry_type)
     case entry_type
-    when :javascript then 'js'
-    when :stylesheet then 'css'
-    when :typescript then 'ts'
+    when :javascript then "js"
+    when :stylesheet then "css"
+    when :typescript then "ts"
     else entry_type
     end
   end
 
   # Internal: Raises a detailed message when an entry is missing in the manifest.
   def missing_entry_error(name, **options)
-    raise ViteRuby::MissingEntrypointError, OpenStruct.new(
+    raise ViteRuby::MissingEntrypointError.new(
       file_name: resolve_entry_name(name, **options),
       last_build: builder.last_build_metadata,
       manifest: @manifest,

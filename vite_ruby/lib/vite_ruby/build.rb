@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'time'
+require "json"
+require "time"
 
 # Internal: Value object with information about the last build.
 ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current_digest, :last_build_path, :errors, keyword_init: true) do
@@ -28,7 +28,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
 
     # Internal: To make it evident that there's no last build in error messages.
     def default_metadata
-      { timestamp: 'never', digest: 'none' }
+      {timestamp: "never", digest: "none"}
     end
   end
 
@@ -56,7 +56,7 @@ ViteRuby::Build = Struct.new(:success, :timestamp, :vite_ruby, :digest, :current
   def with_result(**attrs)
     self.class.new(
       **attrs,
-      timestamp: Time.now.strftime('%F %T'),
+      timestamp: Time.now.strftime("%F %T"),
       vite_ruby: ViteRuby::VERSION,
       digest: current_digest,
       current_digest: current_digest,

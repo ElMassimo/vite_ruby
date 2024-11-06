@@ -6,7 +6,7 @@ module VitePadrino::TagHelpers
   def vite_client_tag
     return unless src = vite_manifest.vite_client_src
 
-    content_tag(:script, nil, src: src, type: 'module')
+    content_tag(:script, nil, src: src, type: "module")
   end
 
   # Public: Renders a script tag to enable HMR with React Refresh.
@@ -24,12 +24,12 @@ module VitePadrino::TagHelpers
 
   # Public: Renders a <script> tag for the specified Vite entrypoints.
   def vite_javascript_tag(*names,
-                          type: 'module',
-                          asset_type: :javascript,
-                          skip_preload_tags: false,
-                          skip_style_tags: false,
-                          crossorigin: 'anonymous',
-                          **options)
+    type: "module",
+    asset_type: :javascript,
+    skip_preload_tags: false,
+    skip_style_tags: false,
+    crossorigin: "anonymous",
+    **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
     tags << vite_preload_tag(*entries.fetch(:imports), crossorigin: crossorigin) unless skip_preload_tags
@@ -59,8 +59,8 @@ private
   def vite_preload_tag(*sources, crossorigin:)
     sources.map { |source|
       href = asset_path(source)
-      try(:request).try(:send_early_hints, 'Link' => %(<#{ href }>; rel=modulepreload; as=script; crossorigin=#{ crossorigin }))
-      tag(:link, rel: 'modulepreload', href: href, as: 'script', crossorigin: crossorigin)
+      try(:request).try(:send_early_hints, "Link" => %(<#{href}>; rel=modulepreload; as=script; crossorigin=#{crossorigin}))
+      tag(:link, rel: "modulepreload", href: href, as: "script", crossorigin: crossorigin)
     }.join("\n").html_safe
   end
 end

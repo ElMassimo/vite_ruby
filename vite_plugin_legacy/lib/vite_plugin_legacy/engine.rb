@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rails/railtie'
+require "rails/railtie"
 
 class VitePluginLegacy::Engine < Rails::Engine
-  initializer 'vite_plugin_legacy.helper' do
+  initializer "vite_plugin_legacy.helper" do
     ActiveSupport.on_load(:action_controller) do
       ActionController::Base.helper(VitePluginLegacy::TagHelpers)
     end
