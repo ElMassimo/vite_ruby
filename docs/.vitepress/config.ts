@@ -140,7 +140,7 @@ export default defineConfigWithTheme<Config>({
         text: 'MIT License',
         link: 'https://opensource.org/licenses/MIT',
       },
-      copyright: 'Copyright © 2021-2022',
+      copyright: 'Copyright © 2021-2024',
     },
   },
   vite: {
