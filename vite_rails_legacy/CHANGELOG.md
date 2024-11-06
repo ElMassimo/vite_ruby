@@ -1,3 +1,7 @@
+# [3.1.0](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.5...vite_rails_legacy@3.1.0) (2024-11-06)
+
+
+
 ## [3.0.5](https://github.com/ElMassimo/vite_ruby/compare/vite_rails_legacy@3.0.4...vite_rails_legacy@3.0.5) (2022-04-29)
 
 
