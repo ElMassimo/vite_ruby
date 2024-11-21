@@ -1,3 +1,12 @@
+## [3.9.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.0...vite_ruby@3.9.1) (2024-11-21)
+
+
+### Performance Improvements
+
+* avoid calling `uniq` on array of hashes ([3e6ad00](https://github.com/ElMassimo/vite_ruby/commit/3e6ad001be6baacdec0597d33bc220d4242521af)), closes [#416](https://github.com/ElMassimo/vite_ruby/issues/416)
+
+
+
 # [3.9.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.8.3...vite_ruby@3.9.0) (2024-10-11)
 
 

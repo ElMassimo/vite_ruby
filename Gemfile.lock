@@ -14,7 +14,7 @@ PATH
 PATH
   remote: vite_ruby
   specs:
-    vite_ruby (3.9.0)
+    vite_ruby (3.9.1)
       dry-cli (>= 0.7, < 2)
       logger (~> 1.6)
       mutex_m
