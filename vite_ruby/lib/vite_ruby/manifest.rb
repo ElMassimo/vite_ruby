@@ -28,10 +28,10 @@ class ViteRuby::Manifest
     entries = names.map { |name| lookup!(name, **options) }
     script_paths = entries.map { |entry| entry.fetch("file") }
 
-    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry["imports"] }.compact.uniq
+    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry["imports"] }.compact
     {
       scripts: script_paths,
-      imports: imports.map { |entry| entry.fetch("file") }.uniq,
+      imports: imports.filter_map { |entry| entry.fetch("file") }.uniq,
       stylesheets: dev_server_running? ? [] : (entries + imports).flat_map { |entry| entry["css"] }.compact.uniq,
     }
   end
