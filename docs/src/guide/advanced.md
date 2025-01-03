@@ -56,7 +56,7 @@ or when all components should be registered in all pages.
 
 ```js
 // app/frontend/entrypoints/application.js
-import.meta.globEager('../../components/**/*_component.js')
+import.meta.glob('../../components/**/*_component.js', { eager: true })
 ```
 
 Any files imported from each `.js` file will be bundled as well.

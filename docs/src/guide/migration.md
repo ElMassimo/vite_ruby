@@ -90,11 +90,11 @@ Proceed to fix any errors that occur (i.e. differences between Webpack and Vite.
   + <img src="<%= vite_asset_path('images/logo.svg') %>">
   ```
 
-- Replace `require.context` with [`import.meta.glob`][glob] or [`import.meta.globEager`][glob].
+- Replace `require.context` with [`import.meta.glob`][glob].
 
   ```diff
   - const context = require.context("./controllers", true, /\.js$/)
-  + const controllers = import.meta.globEager('./**/*_controller.js')
+  + const controllers = import.meta.glob('./**/*_controller.js', { eager: true })
   ```
 
   If you want to automatically register the Stimulus Controllers, have a look at <kbd>[stimulus-vite-helpers]</kbd> as a replacement for <kbd>@hotwired/stimulus-webpack-helpers</kbd>

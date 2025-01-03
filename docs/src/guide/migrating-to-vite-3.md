@@ -33,7 +33,7 @@ In Vite 3, [`import.meta.glob`](https://vitejs.dev/guide/migration.html#import-m
 
 ```ts
 // app/frontend/controllers/index.js
-const controllers = import.meta.globEager('../**/*_controller.js')
+const controllers = import.meta.glob('../**/*_controller.js', { eager: true })
 ```
 
 That code now transforms to:
@@ -51,7 +51,7 @@ Depending on the the pattern you might not need to make any changes, but if you
 need the full path, you can leverage the new support for aliases:
 
 ```ts
-const controllers = import.meta.globEager('~/controllers/**/*_controller.js')
+const controllers = import.meta.glob('~/controllers/**/*_controller.js', { eager: true })
 ```
 
 :::tip Prefer Aliases

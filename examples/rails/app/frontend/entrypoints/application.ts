@@ -15,7 +15,7 @@ setTimeout(() => import('~/outer_import'), 5000)
 import '@administrator/timer'
 
 // Import all channels.
-import.meta.globEager('../channels/**/*_channel.js')
+import.meta.glob('../channels/**/*_channel.js', { eager: true })
 
 Turbo.start()
 ActiveStorage.start()
