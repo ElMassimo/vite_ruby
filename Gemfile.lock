@@ -109,7 +109,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
-    docile (1.4.0)
+    docile (1.4.1)
     drb (2.2.1)
     dry-cli (1.2.0)
     erubi (1.13.1)
@@ -239,11 +239,12 @@ GEM
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
-    simplecov (0.17.1)
+    simplecov (0.22.0)
       docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     spring (2.1.1)
     standard (1.43.0)
       language_server-protocol (~> 3.17.0.2)
@@ -285,7 +286,7 @@ DEPENDENCIES
   rubocop
   rubocop-minitest
   rubocop-performance
-  simplecov (< 0.18)
+  simplecov (< 0.23)
   spring (~> 2.1)
   standard
   vite_plugin_legacy!
