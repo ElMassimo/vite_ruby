@@ -234,6 +234,7 @@ private
 
   def assert_raises_manifest_missing_entry_error(auto_build: false, &block)
     error = nil
+
     ViteRuby.config.stub :auto_build, auto_build do
       error = assert_raises(ViteRuby::MissingEntrypointError, &block)
     end
