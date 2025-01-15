@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest-stub_any_instance", "~> 1.0"
   s.add_development_dependency "pry-byebug", "~> 3.9"
   s.add_development_dependency "rake", "~> 13.0"
-  s.add_development_dependency "simplecov", "< 0.18"
+  s.add_development_dependency "simplecov", "< 0.23"
 
   s.files = Dir.glob("{lib,exe,templates}/**/*") + %w[default.vite.json README.md CHANGELOG.md LICENSE.txt]
   s.bindir = "exe"
