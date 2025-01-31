@@ -108,7 +108,7 @@ private
   def detect_package_manager(root)
     return "npm" if root.join("package-lock.json").exist?
     return "pnpm" if root.join("pnpm-lock.yaml").exist?
-    return "bun" if root.join("bun.lockb").exist?
+    return "bun" if root.join("bun.lockb").exist? || root.join("bun.lock").exist?
     return "yarn" if root.join("yarn.lock").exist?
 
     "npm"
