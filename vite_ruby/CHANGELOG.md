@@ -1,3 +1,12 @@
+## [3.9.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.1...vite_ruby@3.9.2) (2025-03-26)
+
+
+### Features
+
+* update `detect_package_manager` to look for new Bun lockfile ([#530](https://github.com/ElMassimo/vite_ruby/issues/530)) ([eca05a3](https://github.com/ElMassimo/vite_ruby/commit/eca05a3021250736776746e4711066a1e00fde68))
+
+
+
 ## [3.9.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.0...vite_ruby@3.9.1) (2024-11-21)
 
 
