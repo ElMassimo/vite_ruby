@@ -5,7 +5,7 @@ require "vite_rails"
 module ViteRails::CLI
 end
 
-module ViteRails::CLI::Build
+module ViteRails::CLI::EnsureRailsInit
   def call(**options)
     ensure_rails_init
     super
@@ -15,7 +15,7 @@ module ViteRails::CLI::Build
   def ensure_rails_init
     require File.expand_path("config/environment", Dir.pwd)
   rescue StandardError, LoadError => error
-    $stderr << "Unable to initialize Rails application before Vite build:\n\n\t#{error.message}\n\n"
+    $stderr << "Unable to initialize Rails application before Vite:\n\n\t#{error.message}\n\n"
   end
 end
 
@@ -80,5 +80,6 @@ module ViteRails::CLI::Install
   end
 end
 
-ViteRuby::CLI::Build.prepend(ViteRails::CLI::Build)
+ViteRuby::CLI::Build.prepend(ViteRails::CLI::EnsureRailsInit)
+ViteRuby::CLI::Dev.prepend(ViteRails::CLI::EnsureRailsInit)
 ViteRuby::CLI::Install.prepend(ViteRails::CLI::Install)
