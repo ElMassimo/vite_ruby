@@ -24,7 +24,7 @@ end
 module ViteRails::CLI::Install
   RAILS_TEMPLATES = Pathname.new(File.expand_path("../../templates", __dir__))
 
-  # Override: Setup a typical apps/web Hanami app to use Vite.
+  # Override: Setup a typical apps/web Rails app to use Vite.
   def setup_app_files
     cp RAILS_TEMPLATES.join("config/rails-vite.json"), config.config_path
     if dir = %w[app/javascript app/packs].find { |path| root.join(path).exist? }
