@@ -46,7 +46,7 @@ Have in mind that this is optional, as both approaches can coexist without issue
 
 When migrating from [Webpacker], start by following the [guide] to get a [basic setup][sourceCodeDir] working before proceeding to migrate existing code.
 
-During installation, Vite Ruby detect if the `app/javascript` directory exists,
+During installation, Vite Ruby checks if the `app/javascript` directory exists,
 and use that in your `config/vite.json` instead of the [default][sourceCodeDir].
 
 ```json
