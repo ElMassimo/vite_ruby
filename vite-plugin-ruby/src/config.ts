@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path'
-import glob from 'fast-glob'
+import { globSync } from 'tinyglobby'
 
 import type { UserConfig, ServerOptions } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
@@ -29,7 +29,7 @@ export function resolveEntrypointFiles (projectRoot: string, sourceCodeDir: stri
     ? [config.ssrEntrypoint]
     : [`~/${config.entrypointsDir}/**/*`, ...config.additionalEntrypoints]
 
-  const entrypointFiles = glob.sync(resolveGlobs(projectRoot, sourceCodeDir, inputGlobs))
+  const entrypointFiles = globSync(resolveGlobs(projectRoot, sourceCodeDir, inputGlobs), { expandDirectories: false })
 
   if (config.ssrBuild) {
     if (entrypointFiles.length === 0)

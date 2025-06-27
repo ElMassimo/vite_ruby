@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "fast-glob": "^3.3.2"
+    "tinyglobby": "^0.2.14"
   },
   "peerDependencies": {
     "vite": ">=5.0.0"
