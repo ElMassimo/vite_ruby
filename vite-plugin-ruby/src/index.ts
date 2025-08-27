@@ -45,6 +45,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     rollupInput = { [rollupInput]: rollupInput }
 
   // Detect if we're using rolldown
+  // @ts-ignore - Vite plugin context provides meta information
   const isUsingRolldown = this.meta && this.meta.rolldownVersion;
   const optionsKey = isUsingRolldown ? "rolldownOptions" : "rollupOptions";
 
