@@ -27,6 +27,32 @@ This section lists a few common gotchas, and bugs introduced in the past.
 
 Please skim through __before__ opening an [issue][GitHub Issues].
 
+## Performance Problems
+
+### Slow development environment
+
+Because Vite does not bundle your code during development, larger applications can end up depending on hundreds — even thousands — of individual assets.
+
+By default, Vite Ruby proxies these assets through your Rails server at `/vite-dev/*`. Since Rails servers are not typically configured to handle thousands of concurrent IO-bound requests, this can lead to significant amounts of request queueing.
+
+There are three different ways to solve this:
+
+1. Configure the [`skipProxy`](/config/index.html#skipproxy-experimental) setting to `true`. Requests will be sent to the Vite development server directly, without going through your Rails server.
+2. Increase the number of Puma threads in development. Puma is typically configured with `3` threads, which is great for production when your assets are bundled or even handled by a separate proxy or CDN, but this should be increased to `100` or more when using Vite Ruby’s proxy in development.
+3. If you are running your app through a separate proxy such as [Caddy](https://caddyserver.com) in development, you can configure it to proxy requests that match `/vite-dev/*` directly to the Vite development server while leaving the rest of your app to be served by your Rails server.
+
+Here’s an example `Caddyfile` configuration.
+
+```
+myapp.localhost {
+  handle /vite-dev/* {
+    reverse_proxy localhost:3036
+  }
+  reverse_proxy localhost:5400
+  tls internal
+}
+```
+
 ## Installation Problems
 
 ### Missing executable error
