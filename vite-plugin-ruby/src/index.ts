@@ -44,6 +44,11 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   if (typeof rollupInput === 'string')
     rollupInput = { [rollupInput]: rollupInput }
 
+  // Detect if we're using rolldown
+  // @ts-ignore - Vite plugin context provides meta information
+  const isUsingRolldown = this.meta && this.meta.rolldownVersion;
+  const optionsKey = isUsingRolldown ? "rolldownOptions" : "rollupOptions";
+
   const build = {
     emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
     sourcemap: !isLocal,
@@ -51,7 +56,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     assetsDir,
     manifest: !ssrBuild,
     outDir,
-    rollupOptions: {
+    [optionsKey]: {
       ...rollupOptions,
       input: {
         ...rollupInput,
@@ -101,6 +106,7 @@ function configureServer (server: ViteDevServer) {
 function outputOptions (assetsDir: string, ssrBuild: boolean) {
   // Internal: Avoid nesting entrypoints unnecessarily.
   const outputFileName = (ext: string) => ({ name }: { name: string }) => {
+    if (typeof name === "undefined") return "";
     const shortName = basename(name).split('.')[0]
     return posix.join(assetsDir, `${shortName}-[hash].${ext}`)
   }
