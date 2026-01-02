@@ -1,3 +1,12 @@
+## [5.1.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.1...vite-plugin-ruby@5.1.2) (2026-01-02)
+
+
+### Bug Fixes
+
+* add support for `vite-rolldown` ([#571](https://github.com/ElMassimo/vite_ruby/issues/571)) ([925cf98](https://github.com/ElMassimo/vite_ruby/commit/925cf98ce5fcf12c5b31a19ea6f84f2c746f9c3a))
+
+
+
 ## [5.1.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.0...vite-plugin-ruby@5.1.1) (2024-11-05)
 
 
