@@ -89,6 +89,20 @@
       "assets/theme.e6d9734b.css"
     ]
   },
+  "entrypoints/main.js": {
+    "file": "assets/main.CkQYLEXT.js",
+    "name": "entrypoints/custom-name",
+    "src": "entrypoints/main.js",
+    "isEntry": true
+  },
+  "stylesheets/application.scss": {
+    "file": "assets/application-ru2hYTUX.css",
+    "src": "stylesheets/application.scss",
+    "isEntry": true,
+    "names": [
+      "stylesheets/application.css"
+    ]
+  },
   "../assets/external.js": {
     "file": "assets/external.d1ae13f1.js",
     "src": "../assets/external.js",
