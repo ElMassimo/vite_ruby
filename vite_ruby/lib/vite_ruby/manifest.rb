@@ -152,13 +152,23 @@ private
 
   # Internal: Resolves the paths that reference a manifest entry.
   def resolve_references(manifest)
+    asset_entries = {}
     manifest.each_value do |entry|
-      entry["file"] = prefix_vite_asset(entry["file"])
+      file = entry["file"] = prefix_vite_asset(entry["file"])
       %w[css assets].each do |key|
         entry[key] = entry[key].map { |path| prefix_vite_asset(path) } if entry[key]
       end
       entry["imports"]&.map! { |name| manifest.fetch(name) }
+      asset_entries[entry["name"] + ".js"] = entry if entry["name"] && entry["isEntry"]
+      # handle scss/css entrypoints
+      entry["names"]&.each do |name|
+        asset_entries[name] = {
+          "isEntry" => true,
+          "file" => file,
+        }
+      end
     end
+    manifest.merge!(asset_entries)
   end
 
   # Internal: Resolves the manifest entry name for the specified resource.

@@ -152,6 +152,26 @@ class ManifestTest < ViteRuby::Test
     assert_equal lookup!("entrypoints/main", type: :typescript), lookup!("main.ts")
   end
 
+  def test_custom_name_lookup_success!
+    entry = {
+      "file" => prefixed("main.CkQYLEXT.js"),
+      "name" => "entrypoints/custom-name",
+      "src" => "entrypoints/main.js",
+      "isEntry" => true,
+    }
+
+    assert_equal entry, lookup!("custom-name", type: :javascript)
+  end
+
+  def test_css_lookup_success!
+    entry = {
+      "isEntry" => true,
+      "file" => prefixed("application-ru2hYTUX.css"),
+    }
+
+    assert_equal entry, lookup!("stylesheets/application.css", type: :stylesheet)
+  end
+
   def test_lookup_success_with_dev_server_running!
     refresh_config(mode: "development")
     with_dev_server_running {
