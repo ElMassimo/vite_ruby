@@ -1,3 +1,12 @@
+## [5.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.2...vite-plugin-ruby@5.1.3) (2026-02-16)
+
+
+### Bug Fixes
+
+* vite 6 compatibility, check for 'this' before accessing this.meta ([#587](https://github.com/ElMassimo/vite_ruby/issues/587)) ([f73186f](https://github.com/ElMassimo/vite_ruby/commit/f73186fb37742aafbe67bbd94194f31ef78b621a))
+
+
+
 ## [5.1.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.1...vite-plugin-ruby@5.1.2) (2026-01-02)
 
 
