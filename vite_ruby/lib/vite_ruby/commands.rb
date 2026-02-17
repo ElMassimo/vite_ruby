@@ -30,7 +30,8 @@ class ViteRuby::Commands
 
   # Internal: Installs the binstub for the CLI in the appropriate path.
   def install_binstubs
-    `bundle binstub vite_ruby --path #{config.root.join("bin")}`
+    `bundle config set bin #{config.root.join("bin")}`
+    `bundle binstub vite_ruby`
     `bundle config --delete bin`
   end
 
