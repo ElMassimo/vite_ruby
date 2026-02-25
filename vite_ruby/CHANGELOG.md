@@ -1,3 +1,17 @@
+## [3.9.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.2...vite_ruby@3.9.3) (2026-02-25)
+
+
+### Bug Fixes
+
+* coerce dev server connect timeout when set via env vars ([0e2801e](https://github.com/ElMassimo/vite_ruby/commit/0e2801e6e9a4da6e534d1b0dbba28f5baadefd4d)), closes [#591](https://github.com/ElMassimo/vite_ruby/issues/591)
+
+
+### Features
+
+* upgrade default vite version to 6.2.6 ([95c247a](https://github.com/ElMassimo/vite_ruby/commit/95c247a66d86f15ad9ce783acf92fef96646091b))
+
+
+
 ## [3.9.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.1...vite_ruby@3.9.2) (2025-03-26)
 
 
