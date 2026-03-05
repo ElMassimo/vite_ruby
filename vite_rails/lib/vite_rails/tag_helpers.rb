@@ -40,7 +40,7 @@ module ViteRails::TagHelpers
     asset_type: :javascript,
     skip_preload_tags: false,
     skip_style_tags: false,
-    crossorigin: "anonymous",
+    crossorigin: "",
     media: "screen",
     **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
@@ -49,7 +49,7 @@ module ViteRails::TagHelpers
 
     options[:extname] = false if Rails::VERSION::MAJOR >= 7
 
-    tags << stylesheet_link_tag(*entries.fetch(:stylesheets), media: media, **options) unless skip_style_tags
+    tags << stylesheet_link_tag(*entries.fetch(:stylesheets), media: media, crossorigin: crossorigin, **options) unless skip_style_tags
 
     tags
   end
