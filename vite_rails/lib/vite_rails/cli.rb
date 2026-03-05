@@ -31,7 +31,7 @@ module ViteRails::CLI::Install
       replace_first_line config.config_path, "app/frontend", %(    "sourceCodeDir": "#{dir}",)
     end
     setup_content_security_policy root.join("config/initializers/content_security_policy.rb")
-    append root.join("Procfile.dev"), "web: bin/rails s"
+    append_if_no_web_entry root.join("Procfile.dev"), "web: bin/rails s"
   end
 
   # Internal: Configure CSP rules that allow to load @vite/client correctly.
@@ -54,6 +54,18 @@ module ViteRails::CLI::Install
           # Allow @vite/client to hot reload style changes in development
       #    policy.style_src *policy.style_src, :unsafe_inline if Rails.env.development?
     CSP
+  end
+
+  # Internal: Append a line to a file only if no line starts with 'web:'
+  # @param path [Pathname] The path to the file
+  # @param contents [String] The line to append
+  def append_if_no_web_entry(path, contents)
+    content = read_lines(path)
+
+    # Check if any line starts with 'web:'
+    return if content.any? { |line| line.strip.start_with?("web:") }
+
+    append path, contents
   end
 
   # Override: Create a sample JS file and attempt to inject it in an HTML template.
