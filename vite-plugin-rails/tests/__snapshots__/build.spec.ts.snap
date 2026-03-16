@@ -3,90 +3,108 @@
 exports[`config > generated files 1`] = `
 {
   "../assets/external.js": {
-    "file": "assets/external-TUcZQQlC.js",
-    "integrity": "sha384-afpxQsY7Zl0vHthljoHJFlj4eX3fvxujTRCy532FF3prt0UsynDiMGZaI9HOENvv",
+    "file": "assets/external-BhRq1rkB.js",
+    "integrity": "sha384-4hrEqv/ugWWLGpFPtMAi9b7TyJ1nfReR6Rk5n+u3d4ar/yhVSYWvVXFqcrZgCAnG",
     "isEntry": true,
+    "name": "app/assets/external.js",
     "src": "../assets/external.js",
   },
   "../assets/logo.png": {
-    "file": "assets/logo-j5j6qipL.png",
+    "file": "assets/logo-CPmPqqKk.png",
     "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
     "src": "app/assets/logo.png",
   },
   "../assets/theme.css": {
-    "file": "assets/theme-gVQjH5fM.css",
-    "integrity": "sha384-tXSaWp9h7f9IDyqcyqxE2oHEre7hVTMpGM1IZPUdwc9do71+G5Fb37fW6KleExPw",
+    "file": "assets/theme-C09nxUps.css",
+    "integrity": "sha384-gOxt2ZzkwfdFXE6YALyPXRfW9ox13B5dw1j6hciZMSpv4FW117dQCGJYWuX7gHhV",
     "isEntry": true,
+    "name": "app/assets/theme.css",
+    "names": [
+      "app/assets/theme.css",
+    ],
     "src": "../assets/theme.css",
   },
+  "_logo-CPmPqqKk.png": {
+    "file": "assets/logo-CPmPqqKk.png",
+    "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
+    "src": "_logo-CPmPqqKk.png",
+  },
+  "_logo-Nuo4H8F_.svg": {
+    "file": "assets/logo-Nuo4H8F_.svg",
+    "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
+    "src": "_logo-Nuo4H8F_.svg",
+  },
   "entrypoints/app.css": {
-    "file": "assets/app-HiPXl-_u.css",
-    "integrity": "sha384-j2SX6yHUu2YQv/067X7HfP4nv2AUV8u5F+we/wI1eQKP0FweNgIiRxCg6vhW6yJE",
+    "file": "assets/app-OK6MABcH.css",
+    "integrity": "sha384-T/ai70rXe9JcUyfq8yDHJEpj5Dfyf5USrp8lFAA6zerwRx6nd3BV/69pA6FhMKv/",
     "isEntry": true,
+    "name": "entrypoints/app.css",
+    "names": [
+      "entrypoints/app.css",
+    ],
     "src": "entrypoints/app.css",
   },
   "entrypoints/frameworks/vue.js": {
     "css": [
-      "assets/vue-Mdlordc1.css",
+      "assets/vue-BepfPMzO.css",
     ],
-    "file": "assets/vue-eqttolrD.js",
-    "integrity": "sha384-6gtOC4AW4VZcDnsQqkGMNawlK0PQsbPs0MGQ980Umdx2UHjMHpBXMor4rtgjervR",
+    "file": "assets/vue-DfcDSmWc.js",
+    "integrity": "sha384-dOTbnQCHfSkK0UJITuosO5HEqNnPC2P5TPs2GcIr7joNRpeqE6L2l7OZ4Mr9qEmZ",
     "isEntry": true,
+    "name": "entrypoints/frameworks/vue.js",
     "src": "entrypoints/frameworks/vue.js",
   },
   "entrypoints/main.ts": {
     "css": [
-      "assets/app-HiPXl-_u.css",
-      "assets/theme-gVQjH5fM.css",
+      "assets/theme-C09nxUps.css",
+      "assets/app-OK6MABcH.css",
     ],
-    "file": "assets/main-E96L_vrM.js",
+    "file": "assets/main-ifTZ8Gak.js",
     "imports": [
       "entrypoints/frameworks/vue.js",
     ],
-    "integrity": "sha384-Vp1tt9FfnLGaJafO0IbRYkaLSCnR2xJj0OIL7Fz040Gx9DwwCZ3CyByPRFy1mBDP",
+    "integrity": "sha384-wHNSNP7htGfvUl3fP1igPqLkuZXfSZR23FkxTgkZryV0h1b3D8tSUmxyg1ntSOsP",
     "isEntry": true,
+    "name": "entrypoints/main.ts",
     "src": "entrypoints/main.ts",
   },
   "entrypoints/sassy.scss": {
-    "file": "assets/sassy-NCcoc604.css",
+    "file": "assets/sassy-D5kz_As0.css",
     "integrity": "sha384-4tkn835gOI7C29uZzlN/PGxd+XyQTG1/9AHpbWYbYLbgWZ1UmDDBFW1iq43MC70L",
     "isEntry": true,
+    "name": "entrypoints/sassy.scss",
+    "names": [
+      "entrypoints/sassy.css",
+    ],
     "src": "entrypoints/sassy.scss",
   },
   "images/logo.png": {
-    "file": "assets/logo-Yf1y9V5e.png",
+    "file": "assets/logo-Bh_XL1Xl.png",
     "integrity": "sha384-zHCg6OQ1T1xX21KMsW9Bb2ECIIMeec41+3KtT0gygdsrmm/Z5qD5TVtTPhyJNGot",
     "src": "images/logo.png",
   },
   "images/logo.svg": {
-    "file": "assets/logo-DbqOB_Bf.svg",
+    "file": "assets/logo-Nuo4H8F_.svg",
     "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
     "src": "images/logo.svg",
   },
   "index.html": {
-    "css": [
-      "assets/sassy-NCcoc604.css",
-      "assets/app-HiPXl-_u.css",
-      "assets/theme-gVQjH5fM.css",
+    "assets": [
+      "assets/logo-Bh_XL1Xl.png",
     ],
-    "file": "assets/index-ChIRGsHu.js",
+    "css": [
+      "assets/app-OK6MABcH.css",
+      "assets/sassy-D5kz_As0.css",
+    ],
+    "file": "assets/index-dwdj7H_c.js",
     "imports": [
       "entrypoints/main.ts",
-      "entrypoints/frameworks/vue.js",
+      "entrypoints/main.ts",
     ],
-    "integrity": "sha384-VQYOqTB26w+BvFbNf9g399k8VIDD6LltF/epq+w/O7yKihiZSnV6iGxbK4pAgc02",
+    "integrity": "sha384-qW41eMQzWrdqYdnIPdQqjgsDZa52c+ksecHmoI0BZu5QuHN3aup216z35d/6ej6L",
     "isEntry": true,
+    "name": "index.html",
     "src": "index.html",
-  },
-  "logo.png": {
-    "file": "assets/logo-j5j6qipL.png",
-    "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
-    "src": "logo.png",
-  },
-  "logo.svg": {
-    "file": "assets/logo-DbqOB_Bf.svg",
-    "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
-    "src": "logo.svg",
   },
 }
 `;

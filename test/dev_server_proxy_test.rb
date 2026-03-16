@@ -7,9 +7,9 @@ class DevServerProxyTest < ViteRuby::Test
 
   def app
     # Capture all changes to the env made by the proxy.
-    capture_app = Rack::Builder.new.run(->(env) {
+    capture_app = ->(env) {
       [200, {"Content-Type" => "application/json"}, env.to_json]
-    })
+    }
     # Avoid actually using the proxy.
     if RUBY_VERSION.start_with?("2.4")
       Rack::Proxy.send(:remove_method, :perform_request) if Rack::Proxy.method_defined?(:perform_request)
