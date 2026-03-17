@@ -32,8 +32,15 @@ module ViteRuby::CLI::FileUtils
     # @since 1.2.11
     # @api private
     def append(path, contents)
+      append_unless_present(path, contents, pattern: contents)
+    end
+
+    # Adds a new line at the bottom of the file, unless any line matches the pattern.
+    #
+    # @api private
+    def append_unless_present(path, contents, pattern:)
       content = read_lines(path)
-      return if content.join.include?(contents)
+      return if content.any? { |line| line.include?(pattern) }
 
       content << "\n" unless content.last&.end_with?("\n")
       content << "#{contents}\n"
