@@ -1,22 +1,16 @@
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("DB_HOST", "localhost") %>
-  user: <%= ENV.fetch("DB_USER", "") %>
-  password: <%= ENV.fetch("DB_PASSWORD", "") %>
   timeout: 5000
 
 development:
   <<: *default
-  database: vite_rails_blog_development
+  database: db/development.sqlite3
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: vite_rails_blog_test
+  database: db/test.sqlite3
 
 production:
   <<: *default
-  database: vite_rails_blog
+  database: db/production.sqlite3

@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{ repo }.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7'
-gem 'pg'
+gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma'
 # Use Redis adapter to run Action Cable in production

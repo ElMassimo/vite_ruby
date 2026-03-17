@@ -154,7 +154,6 @@ GEM
     nokogiri (1.15.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -225,6 +224,8 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sqlite3 (1.5.3)
+      mini_portile2 (~> 2.8.0)
     strscan (3.0.1)
     thor (1.2.2)
     timeout (0.2.0)
@@ -267,12 +268,12 @@ DEPENDENCIES
   capybara_test_helpers
   cuprite
   listen (~> 3.2)
-  pg
   pry-byebug
   puma
   rails (~> 7)
   rexml
   rspec-rails
+  sqlite3 (~> 1.4)
   tzinfo-data
   vite_plugin_legacy
   vite_rails
