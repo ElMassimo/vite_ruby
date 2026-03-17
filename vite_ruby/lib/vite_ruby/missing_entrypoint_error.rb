@@ -16,7 +16,6 @@ class ViteRuby::MissingEntrypointError < ViteRuby::Error
       #{possible_causes(last_build)}
       :troubleshooting:
       #{"Manifest files found:\n#{config.manifest_paths.map { |path| "  #{path.relative_path_from(config.root)}" }.join("\n")}\n" if last_build.success}
-      #{"Content in your manifests:\n#{JSON.pretty_generate(manifest)}\n" if last_build.success}
       #{"Last build in #{config.mode} mode:\n#{last_build.to_json}\n" if last_build.success}
     MSG
   end
