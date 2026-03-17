@@ -1,3 +1,13 @@
+# [0.6.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-rails@0.5.0...vite-plugin-rails@0.6.0) (2026-03-17)
+
+
+### Features
+
+* make vite-plugin-rails esm only ([174a410](https://github.com/ElMassimo/vite_ruby/commit/174a4101a80c5c84b537e79861cfe3fb7225e98f))
+* upgrade `rollup-plugin-gzip` for compatibility with vite 8 ([5001ca4](https://github.com/ElMassimo/vite_ruby/commit/5001ca4420fec0080569467810723054ae7e88c1)), closes [#593](https://github.com/ElMassimo/vite_ruby/issues/593)
+
+
+
 # 0.5.0 (2023-11-16)
 
 
