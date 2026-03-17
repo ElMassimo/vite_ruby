@@ -154,16 +154,13 @@ importers:
 
   vite-plugin-ruby:
     dependencies:
-      debug:
-        specifier: ^4.3.4
-        version: 4.3.4
-      fast-glob:
-        specifier: ^3.3.2
-        version: 3.3.2
+      obug:
+        specifier: ^2.0
+        version: 2.1.1
+      tinyglobby:
+        specifier: ^0.2.12
+        version: 0.2.15
     devDependencies:
-      '@types/debug':
-        specifier: ^4.1.12
-        version: 4.1.12
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.15

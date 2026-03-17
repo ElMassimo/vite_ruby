@@ -15,9 +15,9 @@ describe('resolveEntrypointFiles', () => {
   test('client build', () => {
     const defaultEntrypoints = [
       ['entrypoints/app.css', resolve('example/app/frontend/entrypoints/app.css')],
+      ['entrypoints/frameworks/vue.js', resolve('example/app/frontend/entrypoints/frameworks/vue.js')],
       ['entrypoints/main.ts', resolve('example/app/frontend/entrypoints/main.ts')],
       ['entrypoints/sassy.scss', resolve('example/app/frontend/entrypoints/sassy.scss')],
-      ['entrypoints/frameworks/vue.js', resolve('example/app/frontend/entrypoints/frameworks/vue.js')],
     ]
 
     expectEntrypoints({}).toEqual([
@@ -27,9 +27,9 @@ describe('resolveEntrypointFiles', () => {
     ])
 
     expectEntrypoints({ additionalEntrypoints: ['app/assets/*.{js,css}'] }).toEqual([
-      ...defaultEntrypoints,
       ['app/assets/external.js', resolve('example/app/assets/external.js')],
       ['app/assets/theme.css', resolve('example/app/assets/theme.css')],
+      ...defaultEntrypoints,
     ])
   })
 

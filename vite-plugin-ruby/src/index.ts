@@ -1,7 +1,7 @@
 import { basename, posix, resolve } from 'path'
 import { existsSync, readFileSync } from 'fs'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
-import createDebugger from 'debug'
+import { createDebug } from 'obug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
@@ -27,7 +27,7 @@ export default function ViteRubyPlugin (): PluginOption[] {
   ]
 }
 
-const debug = createDebugger('vite-plugin-ruby:config')
+const debug = createDebug('vite-plugin-ruby:config')
 
 // Internal: Resolves the configuration from environment variables and a JSON
 // config file, and configures the entrypoints and manifest generation.
