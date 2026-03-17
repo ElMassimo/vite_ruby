@@ -108,21 +108,21 @@ class HelperTest < HelperTestCase
 
   def test_vite_preload_tag
     assert_includes vite_typescript_tag("main", host: "example.com", protocol: "https"), [
-      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="anonymous">),
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/log.818edfb8.js" as="script" crossorigin="">),
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="">),
+      %(<link rel="modulepreload" href="https://example.com/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="">),
     ].join("\n")
   end
 
   def test_vite_javascript_tag
     assert_similar [
-      %(<script src="/vite-production/assets/main.9dcad042.js" crossorigin="anonymous" type="module"></script>),
-      %(<link rel="modulepreload" href="/vite-production/assets/log.818edfb8.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="anonymous">),
-      %(<link rel="modulepreload" href="/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="anonymous">),
-      link(href: "/vite-production/assets/app.517bf154.css"),
-      link(href: "/vite-production/assets/theme.e6d9734b.css"),
-      link(href: "/vite-production/assets/vue.ec0a97cc.css"),
+      %(<script src="/vite-production/assets/main.9dcad042.js" crossorigin="" type="module"></script>),
+      %(<link rel="modulepreload" href="/vite-production/assets/log.818edfb8.js" as="script" crossorigin="">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vue.3002ada6.js" as="script" crossorigin="">),
+      %(<link rel="modulepreload" href="/vite-production/assets/vendor.0f7c0ec3.js" as="script" crossorigin="">),
+      link(href: "/vite-production/assets/app.517bf154.css", crossorigin: ""),
+      link(href: "/vite-production/assets/theme.e6d9734b.css", crossorigin: ""),
+      link(href: "/vite-production/assets/vue.ec0a97cc.css", crossorigin: ""),
     ].join, vite_typescript_tag("main")
 
     assert_equal vite_javascript_tag("main.ts"),
@@ -132,10 +132,10 @@ class HelperTest < HelperTestCase
       vite_javascript_tag("~/entrypoints/frameworks/vue.js")
 
     with_dev_server_running {
-      assert_equal %(<script src="/vite-dev/entrypoints/frameworks/vue.js" crossorigin="anonymous" type="module"></script>),
+      assert_equal %(<script src="/vite-dev/entrypoints/frameworks/vue.js" crossorigin="" type="module"></script>),
         vite_javascript_tag("entrypoints/frameworks/vue")
 
-      assert_equal %(<script src="/vite-dev/entrypoints/main.ts" crossorigin="anonymous" type="module"></script>),
+      assert_equal %(<script src="/vite-dev/entrypoints/main.ts" crossorigin="" type="module"></script>),
         vite_typescript_tag("main")
     }
   end
