@@ -1,3 +1,13 @@
+# [3.10.0](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.20...vite_rails@3.10.0) (2026-03-17)
+
+
+### Bug Fixes
+
+* add crossorigin attribute to style tag ([#544](https://github.com/ElMassimo/vite_ruby/issues/544)) ([d57495e](https://github.com/ElMassimo/vite_ruby/commit/d57495ea9f0bd87682d997c54d9b352b5b986799))
+* Check if `web` entry already on `Procfile.dev` before appending it ([#542](https://github.com/ElMassimo/vite_ruby/issues/542)) ([4546cf4](https://github.com/ElMassimo/vite_ruby/commit/4546cf48cbef881b4b57deb0fd9e43440e9897f4))
+
+
+
 ## [3.0.20](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.19...vite_rails@3.0.20) (2026-01-02)
 
 
