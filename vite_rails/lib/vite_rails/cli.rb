@@ -31,7 +31,7 @@ module ViteRails::CLI::Install
       replace_first_line config.config_path, "app/frontend", %(    "sourceCodeDir": "#{dir}",)
     end
     setup_content_security_policy root.join("config/initializers/content_security_policy.rb")
-    append root.join("Procfile.dev"), "web: bin/rails s"
+    append_unless_present root.join("Procfile.dev"), "web: bin/rails s", pattern: "web:"
   end
 
   # Internal: Configure CSP rules that allow to load @vite/client correctly.
