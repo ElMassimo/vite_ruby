@@ -1,7 +1,6 @@
+import ViteReact from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import rails from 'vite-plugin-rails'
-import ViteLegacy from '@vitejs/plugin-legacy'
-import ViteReact from '@vitejs/plugin-react'
 import WindiCSS from 'vite-plugin-windicss'
 import BugsnagPlugins from './plugins/bugsnag'
 
@@ -15,9 +14,6 @@ export default defineConfig({
         HEROKU_RELEASE_VERSION: 'development',
         HEROKU_SLUG_COMMIT: 'main',
       },
-    }),
-    ViteLegacy({
-      targets: ['defaults', 'not IE 11'],
     }),
     ViteReact(),
     WindiCSS({

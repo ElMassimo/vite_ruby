@@ -22,17 +22,15 @@
   "version": "0.1.0",
   "devDependencies": {
     "@types/rails__activestorage": "^7.0.1",
-    "@vitejs/plugin-legacy": "4.0.3",
-    "@vitejs/plugin-react": "^4.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "less": "^4.1.3",
     "ms": "^2.1.3",
-    "sass": "^1.62.1",
-    "stylus": "^0.54.8",
-    "terser": "^5.17.1",
+    "sass": "^1.98.0",
+    "stylus": "^0.64.0",
     "vite": "^8.0.0",
     "vite-plugin-bugsnag": "^2.0.2",
-    "vite-plugin-rails": "^0.1.0",
-    "vite-plugin-ruby": "^3.2.0",
+    "vite-plugin-rails": "^0.6.0",
+    "vite-plugin-ruby": "^5.2.0",
     "vite-plugin-windicss": "^1.8.10"
   }
 }
