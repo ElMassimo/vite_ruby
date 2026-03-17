@@ -1,6 +1,6 @@
 import path from 'path'
 import { promises as fsp } from 'fs'
-import createDebugger from 'debug'
+import { createDebug } from 'obug'
 
 import type { Plugin, ResolvedConfig } from 'vite'
 
@@ -8,7 +8,7 @@ import type { OutputBundle, PluginContext } from 'rollup'
 import { UnifiedConfig } from './types'
 import { filterEntrypointAssets } from './config'
 
-const debug = createDebugger('vite-plugin-ruby:assets-manifest')
+const debug = createDebug('vite-plugin-ruby:assets-manifest')
 
 interface AssetsManifestChunk {
   src?: string

@@ -48,17 +48,12 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Setup Code Climate test-reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-
       - name: Ruby Tests
         run: bin/rake test
 
-      - name: Upload code coverage to Code Climate
+      - name: Upload coverage to Qlty
         if: ${{ contains(github.ref, 'main') }}
-        run: |
-          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-          ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}}
+        uses: qltysh/qlty-action/coverage@main
+        with:
+          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
+          files: coverage/.resultset.json

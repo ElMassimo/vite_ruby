@@ -95,6 +95,7 @@ private
     config["root"] = root = Pathname.new(config["root"])
     config["build_cache_dir"] = root.join(config["build_cache_dir"])
     config["ssr_output_dir"] = root.join(config["ssr_output_dir"])
+    config["dev_server_connect_timeout"] = config["dev_server_connect_timeout"].to_f
     coerce_booleans(config, "auto_build", "hide_build_console_output", "https", "skip_compatibility_check", "skip_proxy")
     config["package_manager"] ||= detect_package_manager(root)
   end

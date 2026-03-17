@@ -1,3 +1,12 @@
+## [3.0.20](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.19...vite_rails@3.0.20) (2026-01-02)
+
+
+### Bug Fixes
+
+* Early Hint links should be separated by a comma ([#576](https://github.com/ElMassimo/vite_ruby/issues/576)) ([6fd220a](https://github.com/ElMassimo/vite_ruby/commit/6fd220abdedf4b36089359565867e61251d8b605))
+
+
+
 ## [3.0.19](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.18...vite_rails@3.0.19) (2024-11-05)
 
 

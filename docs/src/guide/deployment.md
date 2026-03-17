@@ -8,9 +8,7 @@
 [plugins]: https://vitejs.dev/plugins/
 [configuration reference]: /config/
 [example1]: https://github.com/ElMassimo/pingcrm-vite
-[heroku1]: https://pingcrm-vite.herokuapp.com/
 [example2]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
-[heroku2]: https://vite-rails-demo.herokuapp.com/
 [build options]: /config/#build-options
 [configuration reference]: /config/
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
@@ -32,7 +30,7 @@ Deploying a Ruby web app using _Vite Ruby_ should be quite straightforward.
 
 <kbd>assets:precompile</kbd> is a standard for Ruby web apps, and is typically
 run automatically for you upon deployment if you are using a PaaS such as
-[Heroku][heroku1], or added in [Capistrano](#using-capistrano) scripts.
+[Heroku](#using-heroku), or added in [Capistrano](#using-capistrano) scripts.
 
 <kbd>vite:build</kbd> will be executed whenever <kbd>assets:precompile</kbd> is run,
 and the resulting assets will be placed [inside][publicOutputDir] the `public` folder.
@@ -174,4 +172,4 @@ heroku config:set NPM_CONFIG_INCLUDE='dev' YARN_PRODUCTION=false
 ```
 That will ensure that [vite] and [vite-plugin-ruby] are available, along with other build tools.
 
-If you are looking for example setups, check out this [Vue app][example1] and its [live demo][heroku1], or this very [simple app][example2] and its [live demo][heroku2].
+If you are looking for example setups, check out this [Vue app][example1] or this very [simple app][example2].

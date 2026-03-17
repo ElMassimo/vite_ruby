@@ -1,7 +1,7 @@
 import { basename, posix, resolve } from 'path'
 import { existsSync, readFileSync } from 'fs'
 import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
-import createDebugger from 'debug'
+import { createDebug } from 'obug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
@@ -27,7 +27,7 @@ export default function ViteRubyPlugin (): PluginOption[] {
   ]
 }
 
-const debug = createDebugger('vite-plugin-ruby:config')
+const debug = createDebug('vite-plugin-ruby:config')
 
 // Internal: Resolves the configuration from environment variables and a JSON
 // config file, and configures the entrypoints and manifest generation.
@@ -44,6 +44,11 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   if (typeof rollupInput === 'string')
     rollupInput = { [rollupInput]: rollupInput }
 
+  // Detect if we're using rolldown
+  // @ts-ignore - Vite plugin context provides meta information from 7 onwards.
+  const isUsingRolldown = this && this.meta && this.meta.rolldownVersion
+  const optionsKey = isUsingRolldown ? 'rolldownOptions' : 'rollupOptions'
+
   const build = {
     emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
     sourcemap: !isLocal,
@@ -51,7 +56,7 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     assetsDir,
     manifest: !ssrBuild,
     outDir,
-    rollupOptions: {
+    [optionsKey]: {
       ...rollupOptions,
       input: {
         ...rollupInput,
@@ -101,6 +106,7 @@ function configureServer (server: ViteDevServer) {
 function outputOptions (assetsDir: string, ssrBuild: boolean) {
   // Internal: Avoid nesting entrypoints unnecessarily.
   const outputFileName = (ext: string) => ({ name }: { name: string }) => {
+    if (typeof name === 'undefined') return ''
     const shortName = basename(name).split('.')[0]
     return posix.join(assetsDir, `${shortName}-[hash].${ext}`)
   }
