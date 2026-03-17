@@ -3,8 +3,8 @@
 exports[`config > generated files 1`] = `
 {
   "../assets/external.js": {
-    "file": "assets/external-BhRq1rkB.js",
-    "integrity": "sha384-4hrEqv/ugWWLGpFPtMAi9b7TyJ1nfReR6Rk5n+u3d4ar/yhVSYWvVXFqcrZgCAnG",
+    "file": "assets/external-BwssHmjP.js",
+    "integrity": "sha384-U9qU8CtmZAV7LLzMBzP9NVBCp+XAYYx03gCzvQZYfQuRJZvsWa1L9wEDoHtYQqVd",
     "isEntry": true,
     "name": "app/assets/external.js",
     "src": "../assets/external.js",
@@ -48,8 +48,8 @@ exports[`config > generated files 1`] = `
     "css": [
       "assets/vue-BepfPMzO.css",
     ],
-    "file": "assets/vue-DfcDSmWc.js",
-    "integrity": "sha384-dOTbnQCHfSkK0UJITuosO5HEqNnPC2P5TPs2GcIr7joNRpeqE6L2l7OZ4Mr9qEmZ",
+    "file": "assets/vue-CoJ_KGkH.js",
+    "integrity": "sha384-z6zaKxiS0m3H8sWN92KZHtoafYXYCKYqAhtd2nRnds+tgO1WnE+Wm8NfcCuf5LTC",
     "isEntry": true,
     "name": "entrypoints/frameworks/vue.js",
     "src": "entrypoints/frameworks/vue.js",
@@ -59,11 +59,11 @@ exports[`config > generated files 1`] = `
       "assets/theme-C09nxUps.css",
       "assets/app-OK6MABcH.css",
     ],
-    "file": "assets/main-ifTZ8Gak.js",
+    "file": "assets/main-Ddvw3iap.js",
     "imports": [
       "entrypoints/frameworks/vue.js",
     ],
-    "integrity": "sha384-wHNSNP7htGfvUl3fP1igPqLkuZXfSZR23FkxTgkZryV0h1b3D8tSUmxyg1ntSOsP",
+    "integrity": "sha384-Ep2dj4XV6THhLdkgG0rqwUg4g9CFZLQVH+a+KAvALAEQhhY+grtX0Hj2ZdQK3LRZ",
     "isEntry": true,
     "name": "entrypoints/main.ts",
     "src": "entrypoints/main.ts",
@@ -96,12 +96,12 @@ exports[`config > generated files 1`] = `
       "assets/app-OK6MABcH.css",
       "assets/sassy-D5kz_As0.css",
     ],
-    "file": "assets/index-dwdj7H_c.js",
+    "file": "assets/index-qTzjl5TV.js",
     "imports": [
       "entrypoints/main.ts",
       "entrypoints/main.ts",
     ],
-    "integrity": "sha384-qW41eMQzWrdqYdnIPdQqjgsDZa52c+ksecHmoI0BZu5QuHN3aup216z35d/6ej6L",
+    "integrity": "sha384-o33u4LIOheMYUEftMVfRyLb7iOMoCQuLr2MpmuYmRcQEzC5rRF9y6e/rD6f/vExA",
     "isEntry": true,
     "name": "index.html",
     "src": "index.html",
