@@ -3,14 +3,9 @@
   "description": "Convention over configuration for using Vite in Rails apps",
   "version": "0.5.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
   "license": "MIT",
@@ -34,13 +29,11 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "dev": "npm run build:only -- --watch",
+    "dev": "npm run build -- --watch",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "build:only": "tsup src/index.ts",
-    "build": "npm run build:only && npm run postbuild",
+    "build": "tsdown",
     "prepublishOnly": "npm run build",
-    "postbuild": "node scripts/postbuild.mjs",
     "test": "vitest",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag vite-plugin-rails@$PACKAGE_VERSION && git push --tags"
   },
@@ -60,7 +53,7 @@
     "@types/node": "^22.0.0",
     "rollup": "^4.2.0",
     "standard-version": "^9.5.0",
-    "tsup": "^7.2.0",
+    "tsdown": "^0.21.4",
     "typescript": "^5.0.0",
     "vite": "^8.0.0",
     "vitest": "^0.34.6"
