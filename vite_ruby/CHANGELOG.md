@@ -1,3 +1,19 @@
+# [3.10.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.3...vite_ruby@3.10.0) (2026-03-17)
+
+
+### Bug Fixes
+
+* avoid displaying manifest contents (close [#568](https://github.com/ElMassimo/vite_ruby/issues/568)) ([edc8e13](https://github.com/ElMassimo/vite_ruby/commit/edc8e13d205e27332f8f1339588a7d007a1faa7a))
+* binstub creation ([#589](https://github.com/ElMassimo/vite_ruby/issues/589)) ([cd2ad27](https://github.com/ElMassimo/vite_ruby/commit/cd2ad273ddf155f7c89098d5a25de4d58b31da16))
+* Check if `web` entry already on `Procfile.dev` before appending it ([#542](https://github.com/ElMassimo/vite_ruby/issues/542)) ([4546cf4](https://github.com/ElMassimo/vite_ruby/commit/4546cf48cbef881b4b57deb0fd9e43440e9897f4))
+
+
+### Features
+
+* bump default plugin version ([9d8f3b4](https://github.com/ElMassimo/vite_ruby/commit/9d8f3b42e9020a1b6d91bf7432899bff0697fc5a))
+
+
+
 ## [3.9.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.2...vite_ruby@3.9.3) (2026-02-25)
 
 
