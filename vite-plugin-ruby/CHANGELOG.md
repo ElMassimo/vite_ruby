@@ -1,3 +1,12 @@
+# [5.2.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.3...vite-plugin-ruby@5.2.0) (2026-03-17)
+
+
+### Features
+
+* replace fast-glob with tinyglobby ([e67b612](https://github.com/ElMassimo/vite_ruby/commit/e67b612ff01b883610b96471dde2a1f57f30055e))
+
+
+
 ## [5.1.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.2...vite-plugin-ruby@5.1.3) (2026-02-16)
 
 
