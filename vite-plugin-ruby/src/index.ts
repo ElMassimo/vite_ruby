@@ -56,6 +56,8 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     assetsDir,
     manifest: !ssrBuild,
     outDir,
+    // Clear rollupOptions when using rolldown, since ...userConfig.build may have spread it in.
+    ...(isUsingRolldown && { rollupOptions: undefined }),
     [optionsKey]: {
       ...rollupOptions,
       input: {
