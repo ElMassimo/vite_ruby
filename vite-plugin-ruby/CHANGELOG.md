@@ -1,3 +1,12 @@
+## [5.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.0...vite-plugin-ruby@5.2.1) (2026-03-24)
+
+
+### Bug Fixes
+
+* remove `rollupOptions` when using rolldown (close [#597](https://github.com/ElMassimo/vite_ruby/issues/597)) ([6308859](https://github.com/ElMassimo/vite_ruby/commit/6308859cb675740751dae119f9cda472c836100e))
+
+
+
 # [5.2.0](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.1.3...vite-plugin-ruby@5.2.0) (2026-03-17)
 
 
