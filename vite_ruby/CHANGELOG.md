@@ -1,3 +1,12 @@
+## [3.10.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.0...vite_ruby@3.10.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* adding `web:` to `Procfile.dev` during installation (close [#599](https://github.com/ElMassimo/vite_ruby/issues/599)) ([5ed99b4](https://github.com/ElMassimo/vite_ruby/commit/5ed99b40b2688ee91c73ee382a2a7a632bcc9bac))
+
+
+
 # [3.10.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.9.3...vite_ruby@3.10.0) (2026-03-17)
 
 
