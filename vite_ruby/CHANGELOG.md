@@ -1,3 +1,12 @@
+## [3.10.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.1...vite_ruby@3.10.2) (2026-03-30)
+
+
+### Bug Fixes
+
+* ensure imported CSS is resolved recursively (close [#600](https://github.com/ElMassimo/vite_ruby/issues/600)) ([#601](https://github.com/ElMassimo/vite_ruby/issues/601)) ([de4f4a0](https://github.com/ElMassimo/vite_ruby/commit/de4f4a0d0d80990dd73ade74ac40b1e7abdf40b6))
+
+
+
 ## [3.10.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.0...vite_ruby@3.10.1) (2026-03-25)
 
 
