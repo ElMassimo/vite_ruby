@@ -118,6 +118,12 @@ class ManifestTest < ViteRuby::Test
   end
 
   def test_lookup_success!
+    vendor_chunk = {
+      "file" => prefixed("vendor.0f7c0ec3.js"),
+      "css" => [
+        prefixed("vue.ec0a97cc.css"),
+      ],
+    }
     entry = {
       "file" => prefixed("main.9dcad042.js"),
       "src" => "entrypoints/main.ts",
@@ -129,16 +135,12 @@ class ManifestTest < ViteRuby::Test
           "src" => "entrypoints/frameworks/vue.js",
           "isEntry" => true,
           "imports" => [
-            {"file" => prefixed("vendor.0f7c0ec3.js")},
-          ],
-          "css" => [
-            prefixed("vue.ec0a97cc.css"),
+            vendor_chunk,
           ],
           "assets" => [
             prefixed("logo.322aae0c.svg"),
           ],
         },
-        {"file" => prefixed("vendor.0f7c0ec3.js")},
       ],
       "css" => [
         prefixed("app.517bf154.css"),
