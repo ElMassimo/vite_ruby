@@ -25,12 +25,12 @@ Gem::Specification.new do |s|
   s.add_dependency "rack-proxy", "~> 0.6", ">= 0.6.1"
   s.add_dependency "zeitwerk", "~> 2.2"
 
-  s.add_development_dependency "m", "~> 1.5"
-  s.add_development_dependency "minitest", "~> 5.0"
-  s.add_development_dependency "minitest-reporters", "~> 1.4"
-  s.add_development_dependency "minitest-stub_any_instance", "~> 1.0"
   s.add_development_dependency "pry-byebug", "~> 3.9"
   s.add_development_dependency "rake", "~> 13.0"
+  s.add_development_dependency "rspec-core", "~> 3.13"
+  s.add_development_dependency "rspec-expectations", "~> 3.13"
+  s.add_development_dependency "rspec-mocks", "~> 3.13"
+  s.add_development_dependency "rspec-rails", "~> 7.1"
   s.add_development_dependency "simplecov", "< 0.23"
 
   s.files = Dir.glob("{lib,exe,templates}/**/*") + %w[default.vite.json README.md CHANGELOG.md LICENSE.txt]
