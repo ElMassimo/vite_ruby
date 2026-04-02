@@ -2,80 +2,98 @@
 
 require "test_helper"
 
-class ManifestTest < ViteRuby::Test
-  def setup
-    super
+describe "ManifestTest" do
+  include ViteRubyTestHelpers
+
+  before do
     ViteRuby::Manifest.instance_eval { public :lookup, :lookup!, :resolve_entry_name }
   end
 
-  def teardown
+  after do |_error|
     ViteRuby::Manifest.instance_eval { private :lookup, :lookup!, :resolve_entry_name }
-    super
   end
 
-  delegate :path_for, :lookup, :lookup!, :resolve_entry_name, :vite_client_src, to: "ViteRuby.instance.manifest"
+  def path_for(*args, **kwargs)
+    ViteRuby.instance.manifest.path_for(*args, **kwargs)
+  end
 
-  def test_resolve_entry_name
-    assert_equal "entrypoints/application.js", resolve_entry_name("application", type: :javascript)
-    assert_equal "entrypoints/application.js", resolve_entry_name("application.js", type: :javascript)
-    assert_equal "entrypoints/application.js", resolve_entry_name("application.js")
-    assert_equal "entrypoints/application.ts", resolve_entry_name("application", type: :typescript)
-    assert_equal "entrypoints/application.ts", resolve_entry_name("application.ts", type: :typescript)
+  def lookup(*args, **kwargs)
+    ViteRuby.instance.manifest.lookup(*args, **kwargs)
+  end
 
-    assert_equal "entrypoints/styles.css", resolve_entry_name("styles", type: :stylesheet)
-    assert_equal "entrypoints/styles.css", resolve_entry_name("styles.css", type: :stylesheet)
-    assert_equal "entrypoints/styles.css", resolve_entry_name("styles.css")
-    assert_equal "entrypoints/styles.scss", resolve_entry_name("styles.scss", type: :stylesheet)
+  def lookup!(*args, **kwargs)
+    ViteRuby.instance.manifest.send(:lookup!, *args, **kwargs)
+  end
 
-    assert_equal "entrypoints/logo.svg", resolve_entry_name("logo.svg")
-    assert_equal "images/logo.svg", resolve_entry_name("images/logo.svg")
-    assert_equal "images/logo.svg", resolve_entry_name("~/images/logo.svg")
-    assert_equal "favicon.ico", resolve_entry_name("~/favicon.ico")
-    assert_equal "../../package.json", resolve_entry_name("/package.json")
-    assert_equal "../../images/logo.svg", resolve_entry_name("/images/logo.svg")
-    assert_equal "../assets/theme.css", resolve_entry_name("/app/assets/theme.css")
+  def resolve_entry_name(*args, **kwargs)
+    ViteRuby.instance.manifest.send(:resolve_entry_name, *args, **kwargs)
+  end
+
+  def vite_client_src
+    ViteRuby.instance.manifest.vite_client_src
+  end
+
+  it "resolve_entry_name" do
+    expect(resolve_entry_name("application", type: :javascript)).to be == "entrypoints/application.js"
+    expect(resolve_entry_name("application.js", type: :javascript)).to be == "entrypoints/application.js"
+    expect(resolve_entry_name("application.js")).to be == "entrypoints/application.js"
+    expect(resolve_entry_name("application", type: :typescript)).to be == "entrypoints/application.ts"
+    expect(resolve_entry_name("application.ts", type: :typescript)).to be == "entrypoints/application.ts"
+
+    expect(resolve_entry_name("styles", type: :stylesheet)).to be == "entrypoints/styles.css"
+    expect(resolve_entry_name("styles.css", type: :stylesheet)).to be == "entrypoints/styles.css"
+    expect(resolve_entry_name("styles.css")).to be == "entrypoints/styles.css"
+    expect(resolve_entry_name("styles.scss", type: :stylesheet)).to be == "entrypoints/styles.scss"
+
+    expect(resolve_entry_name("logo.svg")).to be == "entrypoints/logo.svg"
+    expect(resolve_entry_name("images/logo.svg")).to be == "images/logo.svg"
+    expect(resolve_entry_name("~/images/logo.svg")).to be == "images/logo.svg"
+    expect(resolve_entry_name("~/favicon.ico")).to be == "favicon.ico"
+    expect(resolve_entry_name("/package.json")).to be == "../../package.json"
+    expect(resolve_entry_name("/images/logo.svg")).to be == "../../images/logo.svg"
+    expect(resolve_entry_name("/app/assets/theme.css")).to be == "../assets/theme.css"
 
     with_dev_server_running {
-      assert_equal "entrypoints/logo.svg", resolve_entry_name("logo.svg")
-      assert_equal "images/logo.svg", resolve_entry_name("images/logo.svg")
-      assert_equal "images/logo.svg", resolve_entry_name("~/images/logo.svg")
-      assert_equal "favicon.ico", resolve_entry_name("~/favicon.ico")
-      assert_equal "/@fs#{ViteRuby.config.root}/package.json", resolve_entry_name("/package.json")
-      assert_equal "/@fs#{ViteRuby.config.root}/images/logo.svg", resolve_entry_name("/images/logo.svg")
-      assert_equal "/@fs#{ViteRuby.config.root}/app/assets/theme.css", resolve_entry_name("/app/assets/theme.css")
+      expect(resolve_entry_name("logo.svg")).to be == "entrypoints/logo.svg"
+      expect(resolve_entry_name("images/logo.svg")).to be == "images/logo.svg"
+      expect(resolve_entry_name("~/images/logo.svg")).to be == "images/logo.svg"
+      expect(resolve_entry_name("~/favicon.ico")).to be == "favicon.ico"
+      expect(resolve_entry_name("/package.json")).to be == "/@fs#{ViteRuby.config.root}/package.json"
+      expect(resolve_entry_name("/images/logo.svg")).to be == "/@fs#{ViteRuby.config.root}/images/logo.svg"
+      expect(resolve_entry_name("/app/assets/theme.css")).to be == "/@fs#{ViteRuby.config.root}/app/assets/theme.css"
     }
 
-    assert_equal "entrypoints/application.js", resolve_entry_name("entrypoints/application.js")
+    expect(resolve_entry_name("entrypoints/application.js")).to be == "entrypoints/application.js"
   end
 
-  def test_lookup_exception!
+  it "lookup_exception!" do
     stub_builder(build_successful: true) {
       asset_file = "calendar.js"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
-      assert_match '"autoBuild" is set to `false`', error.message
+      expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
+      expect(error.message).to be.include?('"autoBuild" is set to `false`')
 
       asset_file = "images/logo.gif"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      assert_match "Vite Ruby can't find #{asset_file} in the manifests", error.message
+      expect(error.message).to be =~ /Vite Ruby can't find #{asset_file} in the manifests/
 
       asset_file = "/app/styles/theme.css"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      assert_match "Vite Ruby can't find ../styles/theme.css in the manifests", error.message
+      expect(error.message).to be.include?("Vite Ruby can't find ../styles/theme.css in the manifests")
 
       asset_file = "~/favicon.ico"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      assert_match "Vite Ruby can't find favicon.ico in the manifests", error.message
+      expect(error.message).to be.include?("Vite Ruby can't find favicon.ico in the manifests")
 
-      assert_match "Manifest files found:\n  #{manifest_path}", error.message
+      expect(error.message).to be =~ /Manifest files found:\n  #{manifest_path}/
     }
   end
 
-  def test_lookup_exception_when_auto_build
+  it "lookup_exception_when_auto_build" do
     stub_builder(build_successful: true) {
       asset_file = "calendar.js"
 
@@ -83,12 +101,12 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
-      assert_match "The file path is incorrect.", error.message
+      expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
+      expect(error.message).to be.include?("The file path is incorrect.")
     }
   end
 
-  def test_lookup_exception_when_build_failed
+  it "lookup_exception_when_build_failed" do
     error_lines = [
       "SyntaxError: Hero.jsx: Unexpected token (6:6)",
       "  4 |   return <>",
@@ -100,24 +118,24 @@ class ManifestTest < ViteRuby::Test
         path_for(asset_file)
       end
 
-      assert_match "Vite Ruby can't find entrypoints/#{asset_file} in the manifests", error.message
-      assert_match "The last build failed.", error.message
-      assert_match "  #{error_lines[0]}", error.message
-      assert_match "  #{error_lines[1]}", error.message
+      expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
+      expect(error.message).to be.include?("The last build failed.")
+      expect(error.message).to be(:include?, "  #{error_lines[0]}")
+      expect(error.message).to be(:include?, "  #{error_lines[1]}")
     }
   end
 
-  def test_lookup_with_type_exception!
+  it "lookup_with_type_exception!" do
     asset_file = "calendar"
 
     error = assert_raises_manifest_missing_entry_error do
       path_for(asset_file, type: :javascript)
     end
 
-    assert_match "Vite Ruby can't find entrypoints/#{asset_file}.js in the manifests", error.message
+    expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file}\.js in the manifests/
   end
 
-  def test_lookup_success!
+  it "lookup_success!" do
     vendor_chunk = {
       "file" => prefixed("vendor.0f7c0ec3.js"),
       "css" => [
@@ -148,98 +166,96 @@ class ManifestTest < ViteRuby::Test
       ],
     }
 
-    assert_equal entry["file"], path_for("main", type: :typescript)
-    assert_equal entry, lookup!("main.ts", type: :javascript)
-    assert_equal lookup!("main", type: :typescript), lookup!("main.ts", type: :javascript)
-    assert_equal lookup!("entrypoints/main", type: :typescript), lookup!("main.ts")
+    expect(path_for("main", type: :typescript)).to be == entry["file"]
+    expect(lookup!("main.ts", type: :javascript)).to be == entry
+    expect(lookup!("main", type: :typescript)).to be == lookup!("main.ts", type: :javascript)
+    expect(lookup!("entrypoints/main", type: :typescript)).to be == lookup!("main.ts")
   end
 
-  def test_lookup_success_with_dev_server_running!
+  it "lookup_success_with_dev_server_running!" do
     refresh_config(mode: "development")
     with_dev_server_running {
       entry = {"file" => "/vite-dev/entrypoints/application.js"}
 
-      assert_equal entry, lookup!("application.js", type: :javascript)
-      assert_equal entry, lookup!("entrypoints/application.js")
+      expect(lookup!("application.js", type: :javascript)).to be == entry
+      expect(lookup!("entrypoints/application.js")).to be == entry
 
-      assert_equal "/vite-dev/entrypoints/application.ts",
-        path_for("application", type: :typescript)
+      expect(path_for("application", type: :typescript)).to be == "/vite-dev/entrypoints/application.ts"
 
-      assert_equal "/vite-dev/entrypoints/styles.css",
-        path_for("styles", type: :stylesheet)
+      expect(path_for("styles", type: :stylesheet)).to be == "/vite-dev/entrypoints/styles.css"
 
-      assert_equal "/vite-dev/image/logo.png",
-        path_for("image/logo.png")
+      expect(path_for("image/logo.png")).to be == "/vite-dev/image/logo.png"
 
-      assert_equal "/vite-dev/logo.png",
-        path_for("~/logo.png")
+      expect(path_for("~/logo.png")).to be == "/vite-dev/logo.png"
 
-      assert_equal "/vite-dev/@fs#{ViteRuby.config.root}/app/assets/theme.css",
-        path_for("/app/assets/theme", type: :stylesheet)
+      expect(path_for("/app/assets/theme", type: :stylesheet)).to be == "/vite-dev/@fs#{ViteRuby.config.root}/app/assets/theme.css"
     }
   end
 
-  def test_vite_client_src
+  it "vite_client_src" do
     refresh_config(mode: "development")
 
-    assert_nil vite_client_src
+    expect(vite_client_src).to be_nil
 
     with_dev_server_running {
-      assert_equal "/vite-dev/@vite/client", vite_client_src
+      expect(vite_client_src).to be == "/vite-dev/@vite/client"
     }
 
     refresh_config(asset_host: "http://example.com", mode: "development")
 
     with_dev_server_running {
-      assert_equal "http://example.com/vite-dev/@vite/client", vite_client_src
+      expect(vite_client_src).to be == "http://example.com/vite-dev/@vite/client"
     }
   end
 
-  def test_lookup_nil
-    assert_nil lookup("foo.js")
+  it "lookup_nil" do
+    expect(lookup("foo.js")).to be_nil
   end
 
-  def test_lookup_nested_entrypoint
+  it "lookup_nested_entrypoint" do
     # Because it's a nested dir, it won't be prefixed automatically and it must
     # be explicitly disambiguated.
-    assert_nil lookup("frameworks/vue.js")
+    expect(lookup("frameworks/vue.js")).to be_nil
 
     file = prefixed("vue.3002ada6.js")
 
-    assert_equal file, path_for("entrypoints/frameworks/vue.js")
-    assert_equal file, path_for("~/entrypoints/frameworks/vue.js")
-    assert_equal lookup("~/entrypoints/frameworks/vue", type: :javascript), lookup("entrypoints/frameworks/vue.js")
+    expect(path_for("entrypoints/frameworks/vue.js")).to be == file
+    expect(path_for("~/entrypoints/frameworks/vue.js")).to be == file
+    expect(lookup("~/entrypoints/frameworks/vue", type: :javascript)).to be == lookup("entrypoints/frameworks/vue.js")
   end
 
-  def test_path_for_assets
-    assert_equal prefixed("logo.f42fb7ea.png"), path_for("images/logo.png")
-    assert_equal prefixed("logo.f42fb7ea.png"), path_for("~/images/logo.png")
+  it "path_for_assets" do
+    expect(path_for("images/logo.png")).to be == prefixed("logo.f42fb7ea.png")
+    expect(path_for("~/images/logo.png")).to be == prefixed("logo.f42fb7ea.png")
 
-    assert_equal prefixed("external.d1ae13f1.js"), path_for("/app/assets/external", type: :javascript)
-    assert_equal prefixed("logo.03d6d6da.png"), path_for("/app/assets/logo.png")
-    assert_equal prefixed("theme.e6d9734b.css"), path_for("/app/assets/theme", type: :stylesheet)
+    expect(path_for("/app/assets/external", type: :javascript)).to be == prefixed("external.d1ae13f1.js")
+    expect(path_for("/app/assets/logo.png")).to be == prefixed("logo.03d6d6da.png")
+    expect(path_for("/app/assets/theme", type: :stylesheet)).to be == prefixed("theme.e6d9734b.css")
   end
 
-  def test_lookup_success
+  it "lookup_success" do
     entry = {"file" => prefixed("app.517bf154.css"), "src" => "entrypoints/app.css"}
 
-    assert_equal entry, lookup("app.css")
-    assert_equal entry, lookup("app.css", type: :stylesheet)
-    assert_equal entry, lookup("app", type: :stylesheet)
+    expect(lookup("app.css")).to be == entry
+    expect(lookup("app.css", type: :stylesheet)).to be == entry
+    expect(lookup("app", type: :stylesheet)).to be == entry
 
     entry = {"file" => prefixed("logo.322aae0c.svg"), "src" => "images/logo.svg"}
 
-    assert_equal entry, lookup("images/logo.svg")
+    expect(lookup("images/logo.svg")).to be == entry
   end
 
 private
 
   def assert_raises_manifest_missing_entry_error(auto_build: false, &block)
     error = nil
-
-    ViteRuby.config.stub :auto_build, auto_build do
-      error = assert_raises(ViteRuby::MissingEntrypointError, &block)
+    mock(ViteRuby.config).replace(:auto_build) { auto_build }
+    begin
+      yield
+    rescue ViteRuby::MissingEntrypointError => e
+      error = e
     end
+    raise "Expected ViteRuby::MissingEntrypointError to be raised" if error.nil?
     error
   end
 

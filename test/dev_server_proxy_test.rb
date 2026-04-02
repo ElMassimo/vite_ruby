@@ -2,10 +2,11 @@
 
 require "test_helper"
 
-class DevServerProxyTest < ViteRuby::Test
+describe "DevServerProxyTest" do
+  include ViteRubyTestHelpers
   include Rack::Test::Methods
 
-  def app
+  let(:app) {
     # Capture all changes to the env made by the proxy.
     capture_app = ->(env) {
       [200, {"Content-Type" => "application/json"}, env.to_json]
@@ -20,102 +21,102 @@ class DevServerProxyTest < ViteRuby::Test
     end
 
     ViteRuby::DevServerProxy.new(capture_app)
-  end
+  }
 
-  def test_non_asset
+  it "non_asset" do
     get_with_dev_server_running "/"
 
     assert_not_forwarded
   end
 
-  def test_non_vite_asset
+  it "non_vite_asset" do
     get_with_dev_server_running "/fake_import.js"
 
     assert_not_forwarded
   end
 
-  def test_vite_asset
+  it "vite_asset" do
     get_with_dev_server_running "/vite-production/application.js"
 
     assert_forwarded to: "/vite-production/application.js"
   end
 
-  def test_vite_client
+  it "vite_client" do
     get_with_dev_server_running "/@vite/client"
 
     assert_not_forwarded
   end
 
-  def test_vite_client_with_empty_prefix
+  it "vite_client_with_empty_prefix" do
     refresh_config(public_output_dir: "")
     get_with_dev_server_running "/@vite/client"
 
     assert_forwarded to: "/@vite/client"
   end
 
-  def test_vite_import
+  it "vite_import" do
     get_with_dev_server_running "/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css"
 
     assert_not_forwarded
   end
 
-  def test_vite_import_with_empty_prefix
+  it "vite_import_with_empty_prefix" do
     refresh_config(public_output_dir: "")
     get_with_dev_server_running "/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css"
 
     assert_forwarded to: "/@fs//package/example/app/frontend/App.vue?import&t=1611322300214&vue&type=style&index=0&lang.css"
   end
 
-  def test_hmr_for_stylesheet
+  it "hmr_for_stylesheet" do
     get_with_dev_server_running "/entrypoints/colored.css?t=1611322562923"
 
     assert_forwarded to: "/entrypoints/colored.css?t=1611322562923"
   end
 
-  def test_hmr_for_imported_entrypoint
+  it "hmr_for_imported_entrypoint" do
     get_with_dev_server_running "/entrypoints/colored.css?import&t=1611322562923"
 
     assert_forwarded to: "/entrypoints/colored.css?import&t=1611322562923"
   end
 
-  def test_entrypoint_imported_from_entrypoint
+  it "entrypoint_imported_from_entrypoint" do
     header "Referer", "http://localhost:3000/vite-production/application.js"
     get_with_dev_server_running "/entrypoints/example_import.js"
 
     assert_forwarded to: "/entrypoints/example_import.js"
   end
 
-  def test_scss_with_extra_css
+  it "scss_with_extra_css" do
     get_with_dev_server_running "/vite-production/entrypoints/sassy.scss.css"
 
     assert_forwarded to: "/vite-production/entrypoints/sassy.scss"
   end
 
-  def test_stylus_with_extra_css
+  it "stylus_with_extra_css" do
     get_with_dev_server_running "/vite-production/entrypoints/sassy.stylus.css"
 
     assert_forwarded to: "/vite-production/entrypoints/sassy.stylus"
   end
 
-  def test_min_css
+  it "min_css" do
     get_with_dev_server_running "/vite-production/colored.min.css"
 
     assert_forwarded to: "/vite-production/colored.min.css"
   end
 
-  def test_module_css
+  it "module_css" do
     get_with_dev_server_running "/vite-production/colored.module.css"
 
     assert_forwarded to: "/vite-production/colored.module.css"
   end
 
-  def test_random_extension_css
+  it "random_extension_css" do
     get_with_dev_server_running "/vite-production/colored.bubble.css"
 
     assert_forwarded to: "/vite-production/colored.bubble.css"
   end
 
-  def test_without_dev_server_running
+  it "without_dev_server_running" do
     get "/vite-production/application.js"
 
     assert_not_forwarded
@@ -130,7 +131,7 @@ class DevServerProxyTest < ViteRuby::Test
     assert_not_forwarded
   end
 
-  def test_empty_public_output_dir
+  it "empty_public_output_dir" do
     refresh_config(public_output_dir: "")
     get_with_dev_server_running "/"
 
@@ -154,26 +155,26 @@ private
   end
 
   def assert_not_forwarded
-    assert_predicate last_response, :ok?
+    expect(last_response).to be(:ok?)
     env = JSON.parse(last_response.body)
 
-    assert_nil env["HTTP_X_FORWARDED_HOST"]
-    assert_nil env["HTTP_X_FORWARDED_PORT"]
+    expect(env["HTTP_X_FORWARDED_HOST"]).to be_nil
+    expect(env["HTTP_X_FORWARDED_PORT"]).to be_nil
   end
 
   def assert_forwarded(to: nil)
-    assert_predicate last_response, :ok?
+    expect(last_response).to be(:ok?)
     env = JSON.parse(last_response.body)
 
-    assert_equal ViteRuby.config.host, env["HTTP_X_FORWARDED_HOST"]
-    assert_equal ViteRuby.config.port, Integer(env["HTTP_X_FORWARDED_PORT"])
+    expect(env["HTTP_X_FORWARDED_HOST"]).to be == ViteRuby.config.host
+    expect(Integer(env["HTTP_X_FORWARDED_PORT"])).to be == ViteRuby.config.port
 
     return unless to
 
     path, query = to.split("?")
 
-    assert_equal path, env["PATH_INFO"]
-    assert_equal query.to_s, env["QUERY_STRING"].to_s
-    assert_equal to, env["REQUEST_URI"]
+    expect(env["PATH_INFO"]).to be == path
+    expect(env["QUERY_STRING"].to_s).to be == query.to_s
+    expect(env["REQUEST_URI"]).to be == to
   end
 end

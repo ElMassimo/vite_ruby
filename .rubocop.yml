@@ -3,7 +3,6 @@ inherit_from: .rubocop_todo.yml
 require:
   - standard
   - rubocop-performance
-  - rubocop-minitest
 
 inherit_gem:
   standard: config/ruby-3.0.yml
@@ -164,12 +163,3 @@ Security/YAMLLoad:
 Style/MutableConstant:
   Enabled: false
 
-Minitest/MultipleAssertions:
-  Enabled: false
-
-Minitest/AssertRaisesWithRegexpArgument:
-  Enabled: false
-
-Minitest/UselessAssertion:
-  Exclude:
-    - test/helper_test.rb

@@ -2,32 +2,35 @@
 
 require "test_helper"
 
-class RunnerTest < ViteRuby::Test
-  def test_dev_server_command
+describe "RunnerTest" do
+  include ViteRubyTestHelpers
+
+  it "dev server command" do
     assert_run_command(flags: ["--mode", "production"])
   end
 
-  def test_dev_server_command_with_argument
+  it "dev server command with argument" do
     assert_run_command("--quiet", flags: ["--mode", "production"])
   end
 
-  def test_build_command
+  it "build command" do
     assert_run_command("build", flags: ["--mode", "production"])
   end
 
-  def test_build_command_with_argument
+  it "build command with argument" do
     with_rails_env("development") do
       assert_run_command("build", "--emptyOutDir", flags: ["--mode", "development"])
     end
   end
 
-  def test_command_capture
-    ViteRuby::Runner.stub_any_instance(:vite_executable, "echo") {
-      stdout, stderr, status = ViteRuby.run(['"Hello"'])
+  it "command capture" do
+    original = ViteRuby::Runner.instance_method(:vite_executable)
+    ViteRuby::Runner.define_method(:vite_executable) { "echo" }
+    stdout, stderr, status = ViteRuby.run(['"Hello"'])
+    ViteRuby::Runner.define_method(:vite_executable, original)
 
-      assert_equal %("Hello" --mode production\n), stdout
-      assert_equal "", stderr
-      assert status
-    }
+    expect(stdout).to be == %("Hello" --mode production\n)
+    expect(stderr).to be == ""
+    expect(status).to be_truthy
   end
 end

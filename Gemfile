@@ -10,8 +10,8 @@ gemspec path: "./vite_plugin_legacy"
 
 group :development, :test do
   gem "benchmark-ips"
+  gem "minitest", "~> 5.0"  # provides Object#stub for block-scoped stubs
   gem "rubocop"
-  gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "standard", require: false
 end

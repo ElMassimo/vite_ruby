@@ -4,7 +4,13 @@ require "test_helper"
 
 require "vite_plugin_legacy"
 
-class HelperTestCase < ActionView::TestCase
+# Use Class.new to create the class anonymously (name is nil when inherited fires),
+# which prevents ActionView::TestCase.inherited from calling default_helper_module!.
+# In sus, the enclosing file-class has a name containing "[" and "]" (not valid
+# constant characters), and default_helper_module! would raise NameError trying to
+# constantize that name. By creating the class anonymously, anonymous? returns true
+# and the call is skipped.
+HelperTestCase = Class.new(ActionView::TestCase) do
   include ViteRubyTestHelpers
 
   attr_reader :request
@@ -44,7 +50,7 @@ protected
   end
 end
 
-class LegacyHelperTest < HelperTestCase
+LegacyHelperTest = Class.new(HelperTestCase) do
   tests(Module.new {
     include ViteRails::TagHelpers
     include VitePluginLegacy::TagHelpers
@@ -57,7 +63,7 @@ class LegacyHelperTest < HelperTestCase
   end
 end
 
-class HelperTest < HelperTestCase
+HelperTest = Class.new(HelperTestCase) do
   tests ViteRails::TagHelpers
 
   def content_security_policy_nonce
@@ -204,5 +210,65 @@ class HelperTest < HelperTestCase
         vite_picture_tag
       }
     end
+  end
+end
+
+def run_helper_test(klass, method_name)
+  instance = klass.new(method_name)
+  instance.setup if instance.respond_to?(:setup)
+  instance.public_send(method_name)
+rescue Minitest::Assertion => e
+  raise e.message.to_s
+end
+
+describe "LegacyHelperTest" do
+  include ViteRubyTestHelpers
+
+  it "renders plugin legacy tags" do
+    run_helper_test(LegacyHelperTest, :test_plugin_legacy)
+  end
+end
+
+describe "HelperTest" do
+  include ViteRubyTestHelpers
+
+  it "renders vite client tag" do
+    run_helper_test(HelperTest, :test_vite_client_tag)
+  end
+
+  it "returns vite asset path" do
+    run_helper_test(HelperTest, :test_vite_asset_path)
+  end
+
+  it "returns vite asset url" do
+    run_helper_test(HelperTest, :test_vite_asset_url)
+  end
+
+  it "renders vite stylesheet tag" do
+    run_helper_test(HelperTest, :test_vite_stylesheet_tag)
+  end
+
+  it "renders vite preload tag" do
+    run_helper_test(HelperTest, :test_vite_preload_tag)
+  end
+
+  it "renders vite javascript tag" do
+    run_helper_test(HelperTest, :test_vite_javascript_tag)
+  end
+
+  it "renders vite react refresh tag without nonce" do
+    run_helper_test(HelperTest, :test_vite_react_refresh_tag_without_nonce)
+  end
+
+  it "renders vite react refresh tag with nonce by default" do
+    run_helper_test(HelperTest, :test_vite_react_refresh_tag_with_nonce_by_default)
+  end
+
+  it "renders vite image tag" do
+    run_helper_test(HelperTest, :test_vite_image_tag)
+  end
+
+  it "renders vite picture tag" do
+    run_helper_test(HelperTest, :test_vite_picture_tag)
   end
 end

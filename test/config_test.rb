@@ -2,125 +2,127 @@
 
 require "test_helper"
 
-class ConfigTest < ViteRuby::Test
+CONFIG_TEST_DIR = File.expand_path(__dir__)
+
+describe "ConfigTest" do
+  include ViteRubyTestHelpers
+
+  let(:config) { resolve_config }
+
   def expand_path(path)
-    File.expand_path(Pathname.new(__dir__).join(path).to_s)
+    File.expand_path(Pathname.new(CONFIG_TEST_DIR).join(path).to_s)
   end
 
   def assert_path(expected, actual)
-    assert_equal expand_path(expected), actual.to_s
+    expect(actual.to_s).to be == expand_path(expected)
   end
 
   def assert_pathname(expected, actual)
-    assert_equal Pathname.new(expand_path("test_app/#{expected}")), actual
+    expect(actual).to be == Pathname.new(expand_path("test_app/#{expected}"))
   end
 
   def resolve_config(mode: "production", root: path_to_test_app, **attrs)
     ViteRuby::Config.resolve_config(mode: mode, root: root, **attrs)
   end
 
-  def setup
-    super
-    @config = resolve_config
+  it "matching_default_config_json" do
+    root = Pathname.new(CONFIG_TEST_DIR).join("..")
+
+    expect(root.join("vite-plugin-ruby/default.vite.json").read).to be == root.join("vite_ruby/default.vite.json").read
   end
 
-  def test_matching_default_config_json
-    root = Pathname.new(__dir__).join("..")
-
-    assert_equal root.join("vite-plugin-ruby/default.vite.json").read, root.join("vite_ruby/default.vite.json").read
+  it "source_code_dir" do
+    expect(config.source_code_dir).to be == "app/frontend"
   end
 
-  def test_source_code_dir
-    assert_equal "app/frontend", @config.source_code_dir
+  it "entrypoints_dir" do
+    assert_path "test_app/app/frontend/entrypoints", config.resolved_entrypoints_dir
   end
 
-  def test_entrypoints_dir
-    assert_path "test_app/app/frontend/entrypoints", @config.resolved_entrypoints_dir
+  it "vite_root_dir" do
+    assert_path "test_app/app/frontend", config.vite_root_dir
   end
 
-  def test_vite_root_dir
-    assert_path "test_app/app/frontend", @config.vite_root_dir
+  it "public_dir" do
+    expect(config.public_dir).to be == "public"
   end
 
-  def test_public_dir
-    assert_equal "public", @config.public_dir
+  it "build_output_dir" do
+    assert_path "test_app/public/vite-production", config.build_output_dir
+
+    other_config = resolve_config(config_path: "config/vite_public_dir.json")
+
+    assert_path "public/vite", other_config.build_output_dir
   end
 
-  def test_build_output_dir
-    assert_path "test_app/public/vite-production", @config.build_output_dir
-
-    @config = resolve_config(config_path: "config/vite_public_dir.json")
-
-    assert_path "public/vite", @config.build_output_dir
-  end
-
-  def test_ruby_config_file
-    assert_nil @config.to_env["EXAMPLE_PATH"]
+  it "ruby_config_file" do
+    expect(config.to_env["EXAMPLE_PATH"]).to be_nil
 
     refresh_config(config_path: "config/vite_public_dir.json")
 
-    assert_equal "from_ruby", ViteRuby.config.public_output_dir
-    assert_equal Gem.loaded_specs["rails"].full_gem_path, ViteRuby.config.to_env["EXAMPLE_PATH"]
+    expect(ViteRuby.config.public_output_dir).to be == "from_ruby"
+    expect(ViteRuby.config.to_env["EXAMPLE_PATH"]).to be == Gem.loaded_specs["rails"].full_gem_path
   end
 
-  def test_manifest_path
-    assert_path "test_app/public/vite-production/.vite/manifest.json", @config.manifest_paths.first
+  it "manifest_path" do
+    assert_path "test_app/public/vite-production/.vite/manifest.json", config.manifest_paths.first
   end
 
-  def test_build_cache_dir
-    assert_path "test_app/tmp/cache/vite", @config.build_cache_dir
+  it "build_cache_dir" do
+    assert_path "test_app/tmp/cache/vite", config.build_cache_dir
   end
 
-  def test_watch_additional_paths
-    assert_empty @config.watch_additional_paths
-    @config = resolve_config(config_path: "config/vite_additional_paths.json")
+  it "watch_additional_paths" do
+    expect(config.watch_additional_paths).to be(:empty?)
 
-    assert_equal ["config/*"], @config.watch_additional_paths
+    other_config = resolve_config(config_path: "config/vite_additional_paths.json")
+
+    expect(other_config.watch_additional_paths).to be == ["config/*"]
   end
 
-  def test_auto_build
-    refute @config.auto_build
+  it "auto_build" do
+    expect(config.auto_build).to be_falsey
 
-    with_rails_env("development") do |config|
-      assert config.auto_build
+    with_rails_env("development") do |c|
+      expect(c.auto_build).to be_truthy
     end
 
-    with_rails_env("test") do |config|
-      assert config.auto_build
+    with_rails_env("test") do |c|
+      expect(c.auto_build).to be_truthy
     end
 
-    with_rails_env("staging") do |config|
-      refute config.auto_build
-    end
-  end
-
-  def test_protocol
-    assert_equal "http", @config.protocol
-  end
-
-  def test_host_with_port
-    assert_equal 3036, @config.port
-
-    with_rails_env("development") do |config|
-      assert_equal 3535, config.port
-      assert_equal "localhost:3535", config.host_with_port
+    with_rails_env("staging") do |c|
+      expect(c.auto_build).to be_falsey
     end
   end
 
-  def test_to_env
-    env = @config.to_env
+  it "protocol" do
+    expect(config.protocol).to be == "http"
+  end
 
-    assert_nil env["VITE_RUBY_ASSET_HOST"]
+  it "host_with_port" do
+    expect(config.port).to be == 3036
+
+    with_rails_env("development") do |c|
+      expect(c.port).to be == 3535
+      expect(c.host_with_port).to be == "localhost:3535"
+    end
+  end
+
+  it "to_env" do
+    env = config.to_env
+
+    expect(env["VITE_RUBY_ASSET_HOST"]).to be_nil
 
     Rails.application.config.action_controller.asset_host = "assets-cdn.com"
     env = refresh_config.to_env
 
-    assert_equal("assets-cdn.com", env["VITE_RUBY_ASSET_HOST"])
+    expect(env["VITE_RUBY_ASSET_HOST"]).to be == "assets-cdn.com"
   ensure
     Rails.application.config.action_controller.asset_host = nil
   end
 
-  def test_environment_vars
+  it "environment_vars" do
     ViteRuby.env.tap(&:clear).merge!(
       "VITE_RUBY_AUTO_BUILD" => "true",
       "VITE_RUBY_HOST" => "example.com",
@@ -136,36 +138,36 @@ class ConfigTest < ViteRuby::Test
       "VITE_RUBY_HIDE_BUILD_CONSOLE_OUTPUT" => "true",
       "VITE_RUBY_SKIP_COMPATIBILITY_CHECK" => "true",
     )
-    @config = resolve_config
+    cfg = resolve_config
 
-    assert @config.auto_build
-    assert_equal "example.com", @config.host
-    assert_equal 1920, @config.port
-    assert @config.https
-    assert_equal "https", @config.protocol
-    assert_equal "config/vite_additional_paths.json", @config.config_path
-    assert_pathname "tmp/vitebuild", @config.build_cache_dir
-    assert_equal "pb", @config.public_dir
-    assert_equal "ft", @config.public_output_dir
-    assert_pathname "pb/ft", @config.build_output_dir
-    assert_equal "as", @config.assets_dir
-    assert_equal "app", @config.source_code_dir
-    assert @config.skip_compatibility_check
-    assert_equal "frontend/entrypoints", @config.entrypoints_dir
-    assert_pathname "app", @config.vite_root_dir
-    assert_pathname "app/frontend/entrypoints", @config.resolved_entrypoints_dir
-    assert @config.hide_build_console_output
+    expect(cfg.auto_build).to be_truthy
+    expect(cfg.host).to be == "example.com"
+    expect(cfg.port).to be == 1920
+    expect(cfg.https).to be_truthy
+    expect(cfg.protocol).to be == "https"
+    expect(cfg.config_path).to be == "config/vite_additional_paths.json"
+    assert_pathname "tmp/vitebuild", cfg.build_cache_dir
+    expect(cfg.public_dir).to be == "pb"
+    expect(cfg.public_output_dir).to be == "ft"
+    assert_pathname "pb/ft", cfg.build_output_dir
+    expect(cfg.assets_dir).to be == "as"
+    expect(cfg.source_code_dir).to be == "app"
+    expect(cfg.skip_compatibility_check).to be_truthy
+    expect(cfg.entrypoints_dir).to be == "frontend/entrypoints"
+    assert_pathname "app", cfg.vite_root_dir
+    assert_pathname "app/frontend/entrypoints", cfg.resolved_entrypoints_dir
+    expect(cfg.hide_build_console_output).to be_truthy
   ensure
     ViteRuby.env.clear
   end
 
-  def test_watched_paths
-    assert_equal "app/frontend", @config.source_code_dir
-    assert_equal ["~/{assets,fonts,icons,images}/**/*"], @config.additional_entrypoints
-    assert_equal [
+  it "watched_paths" do
+    expect(config.source_code_dir).to be == "app/frontend"
+    expect(config.additional_entrypoints).to be == ["~/{assets,fonts,icons,images}/**/*"]
+    expect(config.watched_paths).to be == [
       "app/frontend/**/*",
       "config/vite.{rb,json}",
       *ViteRuby::Config::DEFAULT_WATCHED_PATHS,
-    ], @config.watched_paths
+    ]
   end
 end

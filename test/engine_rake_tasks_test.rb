@@ -3,74 +3,156 @@
 require "test_helper"
 require "fileutils"
 
-class EngineRakeTasksTest < ViteRuby::Test
-  def setup
-    super
+RAKE_TASKS_BIN = File.expand_path("../bin/rake", __dir__)
+
+ENGINE_TASKS_SSR_ENTRYPOINT = <<~SSR
+  import http from 'http'
+
+  const server = http.createServer((req, res) => {
+    res.writeHead(200)
+    res.end('Hello, World!!!')
+  })
+
+  server.listen(8080)
+SSR
+
+describe "EngineRakeTasks" do
+  include ViteRubyTestHelpers
+
+  let(:mounted_app_path) { Pathname.new(File.expand_path("mounted_app", __dir__)) }
+  let(:root_dir) { mounted_app_path.join("test/dummy") }
+  let(:gitignore_path) { root_dir.join(".gitignore") }
+  let(:vite_binstub_path) { root_dir.join("bin/vite") }
+  let(:vite_config_ts_path) { root_dir.join("vite.config.ts") }
+  let(:procfile_dev) { root_dir.join("Procfile.dev") }
+  let(:app_frontend_dir) { root_dir.join("app/frontend") }
+  let(:app_public_dir) { root_dir.join("public/vite-dev") }
+  let(:app_ssr_dir) { root_dir.join("public/vite-ssr") }
+  let(:tmp_dir) { root_dir.join("tmp") }
+
+  before do
     remove_vite_files
   end
 
-  def teardown
+  after do |_error|
     remove_vite_files
-    super
   end
 
-  def test_tasks_mounted
-    output = within_mounted_app { `bundle exec rake -T` }
-
-    assert_includes output, "app:vite"
+  def within_mounted_app(&block)
+    Dir.chdir(mounted_app_path, &block)
   end
 
-  def test_rake_tasks
-    within_mounted_app { `bundle exec rake app:vite:binstubs` }
+  def within_mounted_app_root(&block)
+    Dir.chdir(mounted_app_path.join("test/dummy"), &block)
+  end
 
-    assert_path_exists vite_binstub_path
+  def stub_runner(*args, **opts)
+    status = MockProcessStatus.new
+    if args.first == "build"
+      extra_args = args[1..]
+      captured = nil
+      original = ViteRuby::Builder.instance_method(:build_with_vite)
+      ViteRuby::Builder.define_method(:build_with_vite) { |*actual_args|
+        captured = actual_args
+ ["stdout", "", status]
+      }
+      begin
+        yield
+      ensure
+        ViteRuby::Builder.define_method(:build_with_vite, original)
+      end
+      expect(captured).to be == extra_args
+    else
+      expected = [args, opts].flatten.reject(&:blank?)
+      captured = nil
+      original = ViteRuby.instance_method(:run)
+      ViteRuby.define_method(:run) { |argv, **options|
+        captured = [argv] + [options]
+ ["stdout", "", status]
+      }
+      begin
+        yield
+      ensure
+        ViteRuby.define_method(:run, original)
+      end
+      expect(captured.flatten.reject(&:blank?)).to be == expected
+    end
+  end
+
+  def stub_kernel_exec(*command)
+    captured = nil
+    Kernel.stub(:exec, ->(*args) { captured = args }) { yield }
+    expect(captured).to be == command
+  end
+
+  def remove_vite_files
+    [vite_binstub_path, vite_config_ts_path, procfile_dev].each do |file|
+      file.delete if file.exist?
+    end
+    [app_frontend_dir, app_public_dir, app_ssr_dir, tmp_dir].each do |dir|
+      dir.rmtree if dir.exist?
+    end
+    root_dir.join("app/views/layouts/application.html.erb").write(Pathname.new(path_to_test_app).join("app/views/layouts/application.html.erb").read)
+    gitignore_path.write("")
+  end
+
+  it "lists vite tasks when mounted" do
+    output = within_mounted_app { `#{RAKE_TASKS_BIN} -T` }
+    expect(output).to be(:include?, "app:vite")
+  end
+
+  it "runs rake tasks" do
+    within_mounted_app { `#{RAKE_TASKS_BIN} app:vite:binstubs` }
+
+    expect(vite_binstub_path).to be(:exist?)
 
     within_mounted_app_root { `bin/vite install` }
 
-    assert_path_exists vite_config_ts_path
-    assert_path_exists procfile_dev
-    assert_path_exists app_frontend_dir
+    expect(vite_config_ts_path).to be(:exist?)
+    expect(procfile_dev).to be(:exist?)
+    expect(app_frontend_dir).to be(:exist?)
 
-    within_mounted_app { `bundle exec rake app:vite:build` }
+    within_mounted_app { `#{RAKE_TASKS_BIN} app:vite:build` }
 
-    assert_path_exists app_public_dir
-    assert_path_exists app_public_dir.join(".vite/manifest.json")
-    assert_path_exists app_public_dir.join("assets")
-    refute_path_exists app_ssr_dir
+    expect(app_public_dir).to be(:exist?)
+    expect(app_public_dir.join(".vite/manifest.json")).to be(:exist?)
+    expect(app_public_dir.join("assets")).to be(:exist?)
+    expect(app_ssr_dir).not.to be(:exist?)
 
     app_frontend_dir.join("ssr").mkdir
-    app_frontend_dir.join("ssr/ssr.js").write(SSR_ENTRYPOINT)
+    app_frontend_dir.join("ssr/ssr.js").write(ENGINE_TASKS_SSR_ENTRYPOINT)
 
-    within_mounted_app { `bundle exec rake app:vite:build_all` }
+    within_mounted_app { `#{RAKE_TASKS_BIN} app:vite:build_all` }
 
-    assert_path_exists app_ssr_dir.join("ssr.js")
-    refute_path_exists app_ssr_dir.join(".vite/manifest.json")
-    refute_path_exists app_ssr_dir.join(".vite/manifest-assets.json")
+    expect(app_ssr_dir.join("ssr.js")).to be(:exist?)
+    expect(app_ssr_dir.join(".vite/manifest.json")).not.to be(:exist?)
+    expect(app_ssr_dir.join(".vite/manifest-assets.json")).not.to be(:exist?)
 
-    within_mounted_app { `bundle exec rake app:vite:clobber` }
+    within_mounted_app { `#{RAKE_TASKS_BIN} app:vite:clobber` }
 
-    refute_path_exists app_public_dir
+    expect(app_public_dir).not.to be(:exist?)
   end
 
-  def test_cli
+  it "runs CLI commands" do
     within_mounted_app_root { `bundle exec vite install` }
 
-    assert_path_exists vite_binstub_path
-    assert_path_exists vite_config_ts_path
-    assert_path_exists procfile_dev
-    assert_path_exists app_frontend_dir
+    expect(vite_binstub_path).to be(:exist?)
+    expect(vite_config_ts_path).to be(:exist?)
+    expect(procfile_dev).to be(:exist?)
+    expect(app_frontend_dir).to be(:exist?)
 
     within_mounted_app_root { `bin/vite build --mode development` }
 
-    assert_path_exists app_public_dir
-    assert_path_exists app_public_dir.join(".vite/manifest.json")
-    assert_path_exists app_public_dir.join("assets")
+    expect(app_public_dir).to be(:exist?)
+    expect(app_public_dir.join(".vite/manifest.json")).to be(:exist?)
+    expect(app_public_dir.join("assets")).to be(:exist?)
 
-    within_mounted_app_root { assert_includes `bin/vite version`, ViteRails::VERSION }
+    version_output = within_mounted_app_root { `bin/vite version` }
+    expect(version_output).to be(:include?, ViteRails::VERSION)
   end
 
-  def test_cli_commands
-    within_mounted_app_root {
+  it "runs CLI command objects" do
+    within_mounted_app_root do
       ViteRuby.commands.verify_install
 
       ENV["VITE_RUBY_ROOT"] = Dir.pwd
@@ -85,10 +167,10 @@ class EngineRakeTasksTest < ViteRuby::Test
       ViteRuby::CLI::UpgradePackages.new.call
 
       stub_runner("build") {
-        assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)
+        expect(ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode)).to be_truthy
       }
       stub_runner("build", "--ssr") {
-        assert ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode, ssr: true)
+        expect(ViteRuby::CLI::Build.new.call(mode: ViteRuby.mode, ssr: true)).to be_truthy
       }
 
       FileUtils.mkdir_p(app_ssr_dir.to_s)
@@ -99,104 +181,13 @@ class EngineRakeTasksTest < ViteRuby::Test
       }
 
       stub_runner("--wat", exec: true) {
-        assert ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ["--wat"])
+        expect(ViteRuby::CLI::Dev.new.call(mode: ViteRuby.mode, args: ["--wat"])).to be_truthy
       }
 
       ViteRuby::CLI::Clobber.new.call(mode: ViteRuby.mode)
-    }
+    end
   ensure
     ENV.delete("VITE_RUBY_ROOT")
     refresh_config
   end
-
-private
-
-  def within_mounted_app(&block)
-    Dir.chdir(mounted_app_path, &block).tap { |result| @command_results << result }
-  end
-
-  def within_mounted_app_root(&block)
-    Dir.chdir(mounted_app_path.join("test/dummy"), &block).tap { |result| @command_results << result }
-  end
-
-  def stub_runner(*args, **opts, &block)
-    mock = Minitest::Mock.new
-    status = MockProcessStatus.new
-
-    mock.expect(:call, ["stdout", "stderr", status]) do |*argv, **options|
-      assert_equal [args, opts].flatten.reject(&:blank?), (argv + [options]).flatten.reject(&:blank?)
-    end
-    ViteRuby.stub_any_instance(:run, ->(*stub_args, **stub_opts) { mock.call(*stub_args, **stub_opts) }, &block)
-    mock.verify
-  end
-
-  def stub_kernel_exec(*command, &block)
-    mock = Minitest::Mock.new
-    mock.expect(:call, nil, command)
-    Kernel.stub(:exec, mock, &block)
-    mock.verify
-  end
-
-  def mounted_app_path
-    Pathname.new(File.expand_path(__dir__)).join("mounted_app")
-  end
-
-  def root_dir
-    mounted_app_path.join("test/dummy")
-  end
-
-  def gitignore_path
-    root_dir.join(".gitignore")
-  end
-
-  def vite_binstub_path
-    root_dir.join("bin/vite")
-  end
-
-  def vite_config_ts_path
-    root_dir.join("vite.config.ts")
-  end
-
-  def procfile_dev
-    root_dir.join("Procfile.dev")
-  end
-
-  def app_frontend_dir
-    root_dir.join("app/frontend")
-  end
-
-  def app_public_dir
-    root_dir.join("public/vite-dev")
-  end
-
-  def app_ssr_dir
-    root_dir.join("public/vite-ssr")
-  end
-
-  def tmp_dir
-    root_dir.join("tmp")
-  end
-
-  def remove_vite_files
-    [vite_binstub_path, vite_config_ts_path, procfile_dev].each do |file|
-      file.delete if file.exist?
-    end
-    [app_frontend_dir, app_public_dir, app_ssr_dir, tmp_dir].each do |dir|
-      dir.rmtree if dir.exist?
-    end
-    root_dir.join("app/views/layouts/application.html.erb").write(Pathname.new(path_to_test_app).join("app/views/layouts/application.html.erb").read)
-    gitignore_path.write("")
-    @command_results = []
-  end
-
-  SSR_ENTRYPOINT = <<~SSR
-    import http from 'http'
-
-    const server = http.createServer((req, res) => {
-      res.writeHead(200)
-      res.end('Hello, World!!!')
-    })
-
-    server.listen(8080)
-  SSR
 end

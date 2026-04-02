@@ -2,52 +2,64 @@
 
 require "test_helper"
 
-class CommandsTest < ViteRuby::Test
-  def test_bootstrap
-    assert ViteRuby.bootstrap
+describe "CommandsTest" do
+  include ViteRubyTestHelpers
+
+  it "bootstrap" do
+    expect(ViteRuby.bootstrap).to be_truthy
   end
 
-  delegate :build, :build_from_task, :clobber, to: "ViteRuby.commands"
-
-  def test_build_returns_success_status_when_stale
+  it "build returns success status when stale" do
     stub_builder(stale: true, build_successful: true) {
-      assert build
-      assert build_from_task
+      expect(build).to be_truthy
+      expect(build_from_task).to be_truthy
     }
   end
 
-  def test_build_returns_success_status_when_fresh
+  it "build returns success status when fresh" do
     stub_builder(stale: false, build_successful: true) {
-      assert build
-      assert build_from_task
+      expect(build).to be_truthy
+      expect(build_from_task).to be_truthy
     }
   end
 
-  def test_build_returns_failure_status_when_fresh
+  it "build returns failure status when fresh" do
     stub_builder(stale: false, build_successful: false) {
-      refute build
+      expect(build).to be_falsey
     }
   end
 
-  def test_build_returns_failure_status_when_stale
+  it "build returns failure status when stale" do
     stub_builder(stale: true, build_successful: false) {
-      refute build
+      expect(build).to be_falsey
     }
   end
 
-  def test_clobber
+  it "clobber" do
     with_rails_env("test") { |config|
       ensure_output_dirs(config)
       config.build_output_dir.join(".vite/manifest.json").write("{}")
 
-      assert_path_exists config.build_output_dir
+      expect(config.build_output_dir).to be(:exist?)
       clobber
 
-      refute_path_exists config.build_output_dir
+      expect(config.build_output_dir).not.to be(:exist?)
     }
   end
 
 private
+
+  def build
+    ViteRuby.commands.build
+  end
+
+  def build_from_task
+    ViteRuby.commands.build_from_task
+  end
+
+  def clobber
+    ViteRuby.commands.clobber
+  end
 
   def ensure_output_dirs(config)
     config.build_output_dir.rmtree rescue nil

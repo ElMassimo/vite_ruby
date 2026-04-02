@@ -3,127 +3,146 @@
 require "test_helper"
 require "open3"
 
-class BuilderTest < ViteRuby::Test
-  delegate :builder, :manifest, to: "ViteRuby.instance"
+describe "BuilderTest" do
+  include ViteRubyTestHelpers
+
+  def builder
+    ViteRuby.instance.builder
+  end
+
+  def manifest
+    ViteRuby.instance.manifest
+  end
 
   def last_build
     builder.last_build_metadata
   end
 
-  def setup
-    super
+  before do
     [builder.send(:last_build_path, ssr: true), builder.send(:last_build_path, ssr: false)].each do |path|
       path.delete if path.exist?
     end
   end
 
-  def teardown
-    setup
+  after do |_error|
+    [builder.send(:last_build_path, ssr: true), builder.send(:last_build_path, ssr: false)].each do |path|
+      path.delete if path.exist?
+    end
   end
 
   def vite_env(*vars)
     ViteRuby.config.to_env(*vars)
   end
 
-  def test_custom_environment_variables
-    assert_nil vite_env["FOO"]
+  it "custom_environment_variables" do
+    expect(vite_env["FOO"]).to be_nil
     ViteRuby.env["FOO"] = "BAR"
 
-    assert_equal "BAR", vite_env["FOO"]
-    assert_equal "OTHER", vite_env("FOO" => "OTHER")["FOO"]
+    expect(vite_env["FOO"]).to be == "BAR"
+    expect(vite_env("FOO" => "OTHER")["FOO"]).to be == "OTHER"
   end
 
-  def test_freshness
-    assert_predicate last_build, :stale?
-    refute_predicate last_build, :fresh?
+  it "freshness" do
+    expect(last_build).to be(:stale?)
+    expect(last_build).not.to be(:fresh?)
   end
 
-  def test_freshness_on_build_success
-    assert_predicate last_build, :stale?
+  it "freshness_on_build_success" do
+    expect(last_build).to be(:stale?)
     stub_runner(success: true) {
-      assert builder.build
-      assert last_build.success
-      assert_empty last_build.errors
-      assert_predicate last_build, :fresh?
-      assert last_build.digest
-      assert last_build.timestamp
+      expect(builder.build).to be_truthy
+      expect(last_build.success).to be_truthy
+      expect(last_build.errors).to be(:empty?)
+      expect(last_build).to be(:fresh?)
+      expect(last_build.digest).not.to be_nil
+      expect(last_build.timestamp).not.to be_nil
 
       refresh_config(auto_build: true)
 
-      refute_nil manifest.send(:lookup, "app.css")
+      expect(manifest.send(:lookup, "app.css")).not.to be_nil
     }
   end
 
-  def test_freshness_on_build_fail
-    assert_predicate last_build, :stale?
+  it "freshness_on_build_fail" do
+    expect(last_build).to be(:stale?)
     error_message = "SyntaxError: Hero.jsx: Unexpected token (6:6)"
     stub_runner(errors: error_message) {
-      refute builder.build
-      refute last_build.success
-      assert_equal last_build.errors, error_message
-      assert_predicate last_build, :fresh?
-      assert last_build.digest
-      assert last_build.timestamp
+      expect(builder.build).to be_falsey
+      expect(last_build.success).to be_falsey
+      expect(last_build.errors).to be == error_message
+      expect(last_build).to be(:fresh?)
+      expect(last_build.digest).not.to be_nil
+      expect(last_build.timestamp).not.to be_nil
 
       refresh_config(auto_build: true)
 
-      assert_nil manifest.send(:lookup, "app.css")
+      expect(manifest.send(:lookup, "app.css")).to be_nil
     }
   end
 
-  def test_last_build_path
-    assert_equal builder.send(:last_build_path, ssr: false).basename.to_s, "last-build-#{ViteRuby.config.mode}.json"
-    assert_equal builder.send(:last_build_path, ssr: true).basename.to_s, "last-ssr-build-#{ViteRuby.config.mode}.json"
+  it "last_build_path" do
+    expect(builder.send(:last_build_path, ssr: false).basename.to_s).to be == "last-build-#{ViteRuby.config.mode}.json"
+    expect(builder.send(:last_build_path, ssr: true).basename.to_s).to be == "last-ssr-build-#{ViteRuby.config.mode}.json"
   end
 
-  def test_watched_files_digest
+  it "watched_files_digest" do
     previous_digest = ViteRuby.digest
     refresh_config
 
-    assert_equal previous_digest, ViteRuby.digest
+    expect(ViteRuby.digest).to be == previous_digest
   end
 
-  def test_external_env_variables
-    assert_equal "production", vite_env["VITE_RUBY_MODE"]
-    assert_equal Rails.root.to_s, vite_env["VITE_RUBY_ROOT"]
+  it "external_env_variables" do
+    expect(vite_env["VITE_RUBY_MODE"]).to be == "production"
+    expect(vite_env["VITE_RUBY_ROOT"]).to be == Rails.root.to_s
 
     ENV["VITE_RUBY_MODE"] = "foo.bar"
     ENV["VITE_RUBY_ROOT"] = "/baz"
     refresh_config
 
-    assert_equal "foo.bar", vite_env["VITE_RUBY_MODE"]
-    assert_equal "/baz", vite_env["VITE_RUBY_ROOT"]
+    expect(vite_env["VITE_RUBY_MODE"]).to be == "foo.bar"
+    expect(vite_env["VITE_RUBY_ROOT"]).to be == "/baz"
   ensure
     ENV.delete("VITE_RUBY_MODE")
     ENV.delete("VITE_RUBY_ROOT")
     refresh_config
   end
 
-  def test_missing_executable
+  it "missing_executable" do
     refresh_config(vite_bin_path: "none/vite")
 
     # It fails because we stub the File.exist? check, so the binary is missing.
-    error = assert_raises(ViteRuby::MissingExecutableError) {
+    error = nil
+    expect {
       File.stub(:exist?, true) { builder.build }
+    }.to raise_exception(ViteRuby::MissingExecutableError)
+
+    File.stub(:exist?, true) {
+      begin
+        builder.build
+      rescue ViteRuby::MissingExecutableError => e
+        error = e
+      end
     }
 
-    assert_match "The vite binary is not available.", error.message
+    expect(error.message).to be.include?("The vite binary is not available.")
 
     # The provided binary does not exist, so it uses the default strategy.
-    stub_runner(success: true) { assert builder.build }
+    stub_runner(success: true) { expect(builder.build).to be_truthy }
   end
 
-  def test_build_cache
+  it "build_cache" do
     build = ViteRuby::Build.from_previous(Pathname.new(__FILE__), "digest")
 
-    assert_equal("never", build.timestamp)
-    assert_predicate(build, :retry_failed?)
+    expect(build.timestamp).to be == "never"
+    expect(build).to be(:retry_failed?)
   end
 
 private
 
   def stub_runner(errors: "", success: errors.empty?, &block)
-    args = ["stdout", errors, MockProcessStatus.new(success: success)]
-    ViteRuby::IO.stub(:capture, args, &block)
+    args_result = ["stdout", errors, MockProcessStatus.new(success: success)]
+    mock(ViteRuby::IO).replace(:capture) { args_result }
+    yield
   end
 end

@@ -2,15 +2,17 @@
 
 require "test_helper"
 
-class ModeTest < ViteRuby::Test
-  def test_mode
-    assert_equal Rails.env, ViteRuby.config.mode
-    assert_equal ViteRuby.config.mode, ViteRuby.mode
+describe "ModeTest" do
+  include ViteRubyTestHelpers
+
+  it "mode" do
+    expect(ViteRuby.config.mode).to be == Rails.env
+    expect(ViteRuby.mode).to be == ViteRuby.config.mode
   end
 
-  def test_mode_with_rails_env
+  it "mode with rails env" do
     with_rails_env("staging") do |config|
-      assert_equal "staging", config.mode
+      expect(config.mode).to be == "staging"
     end
   end
 end

@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
-require "rake/testtask"
+task :test do
+  require "sus/config"
+  require "sus"
 
-Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList["test/**/*_test.rb"]
-  t.verbose = true
+  config = Sus::Config.load(arguments: [])
+  registry = config.registry
+  assertions = Sus::Assertions.default
+  config.before_tests(assertions)
+  registry.call(assertions)
+  config.after_tests(assertions)
+
+  exit(1) unless assertions.passed?
 end
 
 task default: :test
