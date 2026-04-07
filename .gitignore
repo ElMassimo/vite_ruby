@@ -52,3 +52,4 @@ test/mounted_app/test/dummy/bin/vite
 test/mounted_app/test/dummy/bin/racc
 
 examples/with_engine
+.claude/
