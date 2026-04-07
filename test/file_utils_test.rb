@@ -3,7 +3,7 @@
 require "test_helper"
 require "securerandom"
 
-class FilesTest < ViteRuby::Test
+describe "FilesTest" do
   delegate(
     :append,
     :write,
@@ -22,26 +22,28 @@ class FilesTest < ViteRuby::Test
     FileUtils.remove_entry_secure(root)
   end
 
-  def test_fresh_installation
-    app_root = root.join("test_fresh_install").tap(&:mkpath)
-    Dir.chdir(app_root) {
-      `bundle exec vite install`
-    }
-
-    assert_path_exists app_root.join("vite.config.ts")
-    assert_path_exists app_root.join("package.json")
-    assert_equal "module", JSON.parse(app_root.join("package.json").read)["type"]
+  def assert_content(path, content)
+    expect(content).to_include(path.read)
   end
 
-  def test_write
+  test "fresh installation" do
+    app_root = root.join("test_fresh_install").tap(&:mkpath)
+    Dir.chdir(app_root) { `bundle exec vite install` }
+
+    expect(app_root.join("vite.config.ts")).to_be(:exist?)
+    expect(app_root.join("package.json")).to_be(:exist?)
+    expect(JSON.parse(app_root.join("package.json").read)["type"]) == "module"
+  end
+
+  test "write" do
     path = root.join("write")
     write(path, "Hello\nWorld")
 
-    assert_predicate path, :exist?
+    expect(path).to_be(:exist?)
     assert_content path, "Hello\nWorld"
   end
 
-  def test_append
+  test "append" do
     path = root.join("append.rb")
     content = <<~CONTENT
       class Append
@@ -59,7 +61,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
   end
 
-  def test_replace_first_line
+  test "replace first line" do
     path = root.join("replace_string.rb")
     content = <<~CONTENT
       class Replace
@@ -79,7 +81,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
   end
 
-  def test_injects_line_before
+  test "injects line before" do
     path = root.join("inject_before_string.rb")
     content = <<~CONTENT
       class InjectBefore
@@ -100,7 +102,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
   end
 
-  def test_injects_line_after
+  test "injects line after" do
     path = root.join("inject_after.rb")
     content = <<~CONTENT
       class InjectAfter
@@ -121,7 +123,7 @@ class FilesTest < ViteRuby::Test
     CONTENT
   end
 
-  def test_injects_line_after_last
+  test "injects line after last" do
     path = root.join("inject_after_last.rb")
     content = <<~CONTENT
       class InjectAfter
@@ -144,11 +146,5 @@ class FilesTest < ViteRuby::Test
         end
       end
     CONTENT
-  end
-
-private
-
-  def assert_content(path, content)
-    assert_includes content, path.read
   end
 end

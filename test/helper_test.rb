@@ -4,13 +4,16 @@ require "test_helper"
 
 require "vite_plugin_legacy"
 
-class HelperTestCase < ActionView::TestCase
+# Use Class.new so that when ActionView::TestCase.inherited fires, the class
+# has no name yet (name.nil? → anonymous? = true), which skips default_helper_module!.
+HelperTestCase = Class.new(ActionView::TestCase) do
   include ViteRubyTestHelpers
 
   attr_reader :request
 
   def setup
     super
+    refresh_config
     @request = Class.new do
       def send_early_hints(links)
       end
@@ -44,7 +47,7 @@ protected
   end
 end
 
-class LegacyHelperTest < HelperTestCase
+LegacyHelperTest = Class.new(HelperTestCase) do
   tests(Module.new {
     include ViteRails::TagHelpers
     include VitePluginLegacy::TagHelpers
@@ -57,7 +60,7 @@ class LegacyHelperTest < HelperTestCase
   end
 end
 
-class HelperTest < HelperTestCase
+HelperTest = Class.new(HelperTestCase) do
   tests ViteRails::TagHelpers
 
   def content_security_policy_nonce
@@ -125,11 +128,8 @@ class HelperTest < HelperTestCase
       link(href: "/vite-production/assets/vue.ec0a97cc.css", crossorigin: ""),
     ].join, vite_typescript_tag("main")
 
-    assert_equal vite_javascript_tag("main.ts"),
-      vite_typescript_tag("main")
-
-    assert_equal vite_javascript_tag("entrypoints/frameworks/vue"),
-      vite_javascript_tag("~/entrypoints/frameworks/vue.js")
+    assert_equal vite_javascript_tag("main.ts"), vite_typescript_tag("main")
+    assert_equal vite_javascript_tag("entrypoints/frameworks/vue"), vite_javascript_tag("~/entrypoints/frameworks/vue.js")
 
     with_dev_server_running {
       assert_equal %(<script src="/vite-dev/entrypoints/frameworks/vue.js" crossorigin="" type="module"></script>),
@@ -200,9 +200,64 @@ class HelperTest < HelperTestCase
         </picture>
       HTML
     else
-      assert_raises(NotImplementedError, /vite_picture_tag/) {
-        vite_picture_tag
-      }
+      assert_raises(NotImplementedError, /vite_picture_tag/) { vite_picture_tag }
     end
+  end
+end
+
+# Run each ActionView-based test method via describe/test blocks
+def run_helper_test(klass, method_name)
+  instance = klass.new(method_name)
+  instance.setup
+  instance.public_send(method_name)
+rescue Minitest::Assertion => e
+  raise e.message.to_s
+end
+
+describe "LegacyHelperTest" do
+  test "plugin legacy" do
+    run_helper_test(LegacyHelperTest, :test_plugin_legacy)
+  end
+end
+
+describe "HelperTest" do
+  test "vite client tag" do
+    run_helper_test(HelperTest, :test_vite_client_tag)
+  end
+
+  test "vite asset path" do
+    run_helper_test(HelperTest, :test_vite_asset_path)
+  end
+
+  test "vite asset url" do
+    run_helper_test(HelperTest, :test_vite_asset_url)
+  end
+
+  test "vite stylesheet tag" do
+    run_helper_test(HelperTest, :test_vite_stylesheet_tag)
+  end
+
+  test "vite preload tag" do
+    run_helper_test(HelperTest, :test_vite_preload_tag)
+  end
+
+  test "vite javascript tag" do
+    run_helper_test(HelperTest, :test_vite_javascript_tag)
+  end
+
+  test "vite react refresh tag without nonce" do
+    run_helper_test(HelperTest, :test_vite_react_refresh_tag_without_nonce)
+  end
+
+  test "vite react refresh tag with nonce by default" do
+    run_helper_test(HelperTest, :test_vite_react_refresh_tag_with_nonce_by_default)
+  end
+
+  test "vite image tag" do
+    run_helper_test(HelperTest, :test_vite_image_tag)
+  end
+
+  test "vite picture tag" do
+    run_helper_test(HelperTest, :test_vite_picture_tag)
   end
 end

@@ -3,7 +3,6 @@ inherit_from: .rubocop_todo.yml
 require:
   - standard
   - rubocop-performance
-  - rubocop-minitest
 
 inherit_gem:
   standard: config/ruby-3.0.yml
@@ -164,12 +163,21 @@ Security/YAMLLoad:
 Style/MutableConstant:
   Enabled: false
 
-Minitest/MultipleAssertions:
-  Enabled: false
-
-Minitest/AssertRaisesWithRegexpArgument:
-  Enabled: false
-
-Minitest/UselessAssertion:
+# Quickdraw uses `expect(x) == y` as an assertion method — rubocop
+# incorrectly treats the `==` return value as unused in void context.
+Lint/Void:
   Exclude:
-    - test/helper_test.rb
+    - "test/**/*_test.rb"
+
+Style/NilComparison:
+  Exclude:
+    - "test/**/*_test.rb"
+
+Style/NonNilCheck:
+  Exclude:
+    - "test/**/*_test.rb"
+
+Lint/UselessAssignment:
+  Exclude:
+    - "test/**/*_test.rb"
+

@@ -2,29 +2,29 @@
 
 require "test_helper"
 
-class CompatibilityCheckTest < ViteRuby::Test
+describe "CompatibilityCheck" do
   delegate :verify_plugin_version, :raise_unless_satisfied, :compatible_plugin?, to: "ViteRuby::CompatibilityCheck"
 
-  def test_verify_plugin_version
+  test "verify plugin version" do
     refresh_config(skip_compatibility_check: true)
-    assert_raises(ArgumentError) { refresh_config(skip_compatibility_check: false) }
+    expect { refresh_config(skip_compatibility_check: false) }.to_raise(ArgumentError)
   end
 
-  def test_compatible_plugin
-    refute compatible_plugin?("^3.1.0", "^3.0.1")
-    refute compatible_plugin?("^4.1.0", "^3.0")
-    refute compatible_plugin?("4.1.0", "^3.0")
+  test "compatible plugin" do
+    refute(compatible_plugin?("^3.1.0", "^3.0.1"))
+    refute(compatible_plugin?("^4.1.0", "^3.0"))
+    refute(compatible_plugin?("4.1.0", "^3.0"))
 
-    assert compatible_plugin?("3.0.5", "^3.0.1")
-    assert compatible_plugin?("^3.0.9", "^3.0.1")
-    assert compatible_plugin?("3.1.0", "^3.0")
-    assert compatible_plugin?("^3.1.0", "^3.0")
-    assert compatible_plugin?(nil, "^3.0")
-    assert compatible_plugin?(nil, nil)
+    assert(compatible_plugin?("3.0.5", "^3.0.1"))
+    assert(compatible_plugin?("^3.0.9", "^3.0.1"))
+    assert(compatible_plugin?("3.1.0", "^3.0"))
+    assert(compatible_plugin?("^3.1.0", "^3.0"))
+    assert(compatible_plugin?(nil, "^3.0"))
+    assert(compatible_plugin?(nil, nil))
   end
 
-  def test_raise_unless_satisfied
-    assert_raises(ArgumentError) { raise_unless_satisfied("^4.1.0", "^3.0") }
+  test "raise unless satisfied" do
+    expect { raise_unless_satisfied("^4.1.0", "^3.0") }.to_raise(ArgumentError)
     raise_unless_satisfied("3.1.0", "^3.0")
     raise_unless_satisfied(nil, "^3.0")
   end
