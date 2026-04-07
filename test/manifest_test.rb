@@ -195,6 +195,73 @@ class ManifestTest < ViteRuby::Test
     }
   end
 
+  # NOTE: skipProxy (experimental since v3.2.12) causes asset URLs to point
+  # directly to the Vite dev server. Known caveats:
+  #
+  # 1. CORS: Browser makes cross-origin requests to Vite. Vite sets permissive
+  #    CORS headers by default, but custom middleware may interfere.
+  # 2. Rails 6 .scss.css: Without the proxy to normalize .scss.css → .scss,
+  #    Rails 6's stylesheet_link_tag produces URLs Vite can't serve.
+  # 3. Cookies: Asset requests to a different origin won't carry same-origin
+  #    cookies. Usually not an issue since assets don't require auth.
+  # 4. SSL: Both Rails and Vite need valid certs when using HTTPS.
+  # 5. Docker/VM: "localhost:3036" from the browser may not reach Vite inside
+  #    a container. Must configure host to a reachable address.
+  # 6. vite_asset_url may produce double-origin URLs since path_for already
+  #    returns an absolute URL when skipProxy is enabled.
+
+  def test_lookup_success_with_skip_proxy_and_dev_server_running
+    refresh_config(mode: "development", skip_proxy: true)
+    with_dev_server_running {
+      origin = ViteRuby.config.origin # "https://localhost:3535"
+
+      entry = {"file" => "#{origin}/vite-dev/entrypoints/application.js"}
+      assert_equal entry, lookup!("application.js", type: :javascript)
+      assert_equal entry, lookup!("entrypoints/application.js")
+
+      assert_equal "#{origin}/vite-dev/entrypoints/application.ts",
+        path_for("application", type: :typescript)
+
+      assert_equal "#{origin}/vite-dev/entrypoints/styles.css",
+        path_for("styles", type: :stylesheet)
+
+      assert_equal "#{origin}/vite-dev/image/logo.png",
+        path_for("image/logo.png")
+
+      assert_equal "#{origin}/vite-dev/logo.png",
+        path_for("~/logo.png")
+
+      assert_equal "#{origin}/vite-dev/@fs#{ViteRuby.config.root}/app/assets/theme.css",
+        path_for("/app/assets/theme", type: :stylesheet)
+    }
+  end
+
+  def test_vite_client_src_with_skip_proxy
+    refresh_config(mode: "development", skip_proxy: true)
+
+    assert_nil vite_client_src
+
+    with_dev_server_running {
+      assert_equal "#{ViteRuby.config.origin}/vite-dev/@vite/client", vite_client_src
+    }
+
+    # Origin from skip_proxy takes precedence over asset_host
+    refresh_config(asset_host: "http://example.com", mode: "development", skip_proxy: true)
+
+    with_dev_server_running {
+      assert_equal "#{ViteRuby.config.origin}/vite-dev/@vite/client", vite_client_src
+    }
+  end
+
+  def test_skip_proxy_has_no_effect_without_dev_server
+    refresh_config(skip_proxy: true)
+
+    # Production paths are unchanged — skipProxy only matters when dev server runs
+    assert_equal prefixed("main.9dcad042.js"), path_for("main", type: :typescript)
+    assert_equal prefixed("app.517bf154.css"), path_for("app", type: :stylesheet)
+    assert_equal prefixed("logo.f42fb7ea.png"), path_for("images/logo.png")
+  end
+
   def test_lookup_nil
     assert_nil lookup("foo.js")
   end

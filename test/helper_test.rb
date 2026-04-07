@@ -42,6 +42,11 @@ protected
     refresh_config(mode: "development")
     super
   end
+
+  def with_skip_proxy_dev_server_running(&block)
+    refresh_config(mode: "development", skip_proxy: true)
+    ViteRuby.instance.stub(:dev_server_running?, true, &block)
+  end
 end
 
 class LegacyHelperTest < HelperTestCase
@@ -187,6 +192,82 @@ class HelperTest < HelperTestCase
 
       assert_equal %(<img srcset="/vite-dev/images/logo-2x.png 2x" alt="Logo" src="/vite-dev/images/logo.png" />),
         vite_image_tag("images/logo.png", srcset: {"images/logo-2x.png" => "2x"}, alt: "Logo")
+    }
+  end
+
+  # skipProxy tests: validate that all tag helpers emit absolute URLs pointing
+  # directly to the Vite dev server when skipProxy is enabled.
+
+  def test_vite_client_tag_with_skip_proxy
+    assert_nil vite_client_tag
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_equal %(<script src="#{origin}/vite-dev/@vite/client" crossorigin="anonymous" type="module"></script>), vite_client_tag
+    }
+  end
+
+  def test_vite_asset_path_with_skip_proxy
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_equal "#{origin}/vite-dev/entrypoints/main.ts", vite_asset_path("main.ts")
+      assert_equal "#{origin}/vite-dev/entrypoints/app.css", vite_asset_path("app.css")
+      assert_equal "#{origin}/vite-dev/images/logo.png", vite_asset_path("images/logo.png")
+    }
+  end
+
+  def test_vite_javascript_tag_with_skip_proxy
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_equal %(<script src="#{origin}/vite-dev/entrypoints/main.ts" crossorigin="" type="module"></script>),
+        vite_typescript_tag("main")
+
+      assert_equal %(<script src="#{origin}/vite-dev/entrypoints/frameworks/vue.js" crossorigin="" type="module"></script>),
+        vite_javascript_tag("entrypoints/frameworks/vue")
+    }
+  end
+
+  def test_vite_stylesheet_tag_with_skip_proxy
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_similar link(href: "#{origin}/vite-dev/entrypoints/app.css"), vite_stylesheet_tag("app")
+      assert_equal vite_stylesheet_tag("app"), vite_stylesheet_tag("app.css")
+
+      if Rails::VERSION::MAJOR >= 7
+        assert_similar link(href: "#{origin}/vite-dev/entrypoints/sassy.scss"), vite_stylesheet_tag("sassy.scss")
+      else
+        # Rails 6 appends .css to non-.css extensions. Without the proxy to
+        # normalize .scss.css → .scss, Vite cannot serve this URL.
+        assert_similar link(href: "#{origin}/vite-dev/entrypoints/sassy.scss.css"), vite_stylesheet_tag("sassy.scss")
+      end
+    }
+  end
+
+  def test_vite_image_tag_with_skip_proxy
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_equal %(<img alt="Logo" src="#{origin}/vite-dev/images/logo.png" />),
+        vite_image_tag("images/logo.png", alt: "Logo")
+
+      assert_equal %(<img srcset="#{origin}/vite-dev/images/logo-2x.png 2x" alt="Logo" src="#{origin}/vite-dev/images/logo.png" />),
+        vite_image_tag("images/logo.png", srcset: {"images/logo-2x.png" => "2x"}, alt: "Logo")
+    }
+  end
+
+  def test_vite_react_refresh_tag_with_skip_proxy
+    with_skip_proxy_dev_server_running {
+      origin = ViteRuby.config.origin
+      assert_equal <<~HTML.chomp, vite_react_refresh_tag(nonce: nil)
+        <script type="module">
+        //<![CDATA[
+        import RefreshRuntime from '#{origin}/vite-dev/@react-refresh'
+        RefreshRuntime.injectIntoGlobalHook(window)
+        window.$RefreshReg$ = () => {}
+        window.$RefreshSig$ = () => (type) => type
+        window.__vite_plugin_react_preamble_installed__ = true
+
+        //]]>
+        </script>
+      HTML
     }
   end
 
