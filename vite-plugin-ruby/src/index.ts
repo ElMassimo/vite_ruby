@@ -9,6 +9,15 @@ import { assetsManifestPlugin } from './manifest'
 
 export * from './types'
 
+export interface PreRenderedAsset {
+  type: 'asset'
+  name?: string // Vite v7, deprecated
+  names?: string[] // Vite v8
+  originalFileName?: string // Vite v7, deprecated
+  originalFileNames?: string[] // Vite v8
+  source: string | Uint8Array
+}
+
 // Public: The resolved project root.
 export const projectRoot = configOptionFromEnv('root') || process.cwd()
 
@@ -107,9 +116,10 @@ function configureServer (server: ViteDevServer) {
 
 function outputOptions (assetsDir: string, ssrBuild: boolean) {
   // Internal: Avoid nesting entrypoints unnecessarily.
-  const outputFileName = (ext: string) => ({ name }: { name: string }) => {
-    if (typeof name === 'undefined') return ''
-    const shortName = basename(name).split('.')[0]
+  const outputFileName = (ext: string) => (asset: PreRenderedAsset) => {
+    // Vite v8 uses `names`, earlier versions use `name`
+    const resolvedName = asset.names?.[0] ?? asset.name ?? '[name]'
+    const shortName = basename(resolvedName).split('.')[0]
     return posix.join(assetsDir, `${shortName}-[hash].${ext}`)
   }
 

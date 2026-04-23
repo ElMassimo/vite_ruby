@@ -28,4 +28,34 @@ describe('config', () => {
       pluginConfig({ ...defaultConfig, build: { ssr: true } }, { mode: 'production' })
     }).toThrow('No SSR entrypoint available')
   })
+
+  describe('outputFileName (assetFileNames)', () => {
+    function getAssetFileNames () {
+      const plugin = ViteRuby()
+      const pluginConfig = plugin[0].config
+      defaultConfig.configPath = './default.vite.json'
+      const result = pluginConfig(defaultConfig, { mode: 'production' })
+      return result.build.rollupOptions.output.assetFileNames as (asset: any) => string
+    }
+
+    const source = 'content'
+
+    test('legacy `name` shape (Vite v7)', () => {
+      const assetFileNames = getAssetFileNames()
+      const result = assetFileNames({ type: 'asset', name: 'application.css', source })
+      expect(result).toMatch(/^assets\/application-[^.]+\.\[ext\]$/)
+    })
+
+    test('new `names` shape (Vite v8)', () => {
+      const assetFileNames = getAssetFileNames()
+      const result = assetFileNames({ type: 'asset', names: ['application.css'], originalFileNames: [], source })
+      expect(result).toMatch(/^assets\/application-[^.]+\.\[ext\]$/)
+    })
+
+    test('falls back to `[name]` placeholder when both are absent', () => {
+      const assetFileNames = getAssetFileNames()
+      const result = assetFileNames({ type: 'asset', source })
+      expect(result).toBe('assets/[name]-[hash].[ext]')
+    })
+  })
 })
