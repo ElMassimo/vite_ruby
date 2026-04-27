@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
     "rubygems_mfa_required" => "true",
   }
 
-  s.required_ruby_version = Gem::Requirement.new(">= 3.3")
+  s.required_ruby_version = Gem::Requirement.new(">= 2.4")
 
   s.add_dependency "railties", "< 5"
   s.add_dependency "vite_ruby", "~> 3.0"
