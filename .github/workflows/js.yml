@@ -32,5 +32,12 @@ jobs:
       - name: Build all workspace packages
         run: pnpm -r build
 
-      - name: Test
-        run: pnpm -C ${{ matrix.package }} test --run
+      - name: Test with coverage
+        run: pnpm -C ${{ matrix.package }} coverage
+
+      - name: Upload coverage to Qlty
+        if: ${{ matrix.node == 24 && contains(github.ref, 'main') }}
+        uses: qltysh/qlty-action/coverage@main
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: ${{ matrix.package }}/coverage/lcov.info
