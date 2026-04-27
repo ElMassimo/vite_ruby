@@ -29,8 +29,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm -C ${{ matrix.package }} build
+      - name: Build all workspace packages
+        run: pnpm -r build
 
       - name: Test
         run: pnpm -C ${{ matrix.package }} test --run

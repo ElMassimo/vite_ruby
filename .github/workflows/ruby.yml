@@ -48,6 +48,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Enable corepack (yarn/pnpm shims for test_app)
+        run: corepack enable
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
