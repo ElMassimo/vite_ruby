@@ -60,7 +60,6 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 
   const build = {
     emptyOutDir: userConfig.build?.emptyOutDir ?? (ssrBuild || isLocal),
-    sourcemap: !isLocal,
     ...userConfig.build,
     assetsDir,
     manifest: !ssrBuild,
