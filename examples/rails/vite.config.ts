@@ -4,6 +4,8 @@ import rails from 'vite-plugin-rails'
 import WindiCSS from 'vite-plugin-windicss'
 import BugsnagPlugins from './plugins/bugsnag'
 
+const administratorAssetsPath = process.env.ADMINISTRATOR_ASSETS_PATH
+
 export default defineConfig({
   plugins: [
     BugsnagPlugins,
@@ -26,13 +28,13 @@ export default defineConfig({
   ],
   // Example: Importing assets from arbitrary paths.
   resolve: {
-    alias: {
-      '@administrator/': `${process.env.ADMINISTRATOR_ASSETS_PATH}/`,
-    },
+    alias: administratorAssetsPath
+      ? { '@administrator/': `${administratorAssetsPath}/` }
+      : {},
   },
   server: {
     fs: {
-      allow: [process.env.ADMINISTRATOR_ASSETS_PATH!],
+      allow: administratorAssetsPath ? [administratorAssetsPath] : [],
     },
   },
 })
