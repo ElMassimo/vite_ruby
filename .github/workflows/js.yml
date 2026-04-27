@@ -4,12 +4,14 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Vite Plugin Ruby
+    name: ${{ matrix.package }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node: [20]
+        node: [22, 24]
+        package: [vite-plugin-ruby, vite-plugin-rails]
 
     runs-on: ${{ matrix.os }}
 
@@ -18,17 +20,17 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           node-version: ${{ matrix.node }}
 
-      - run: pnpm -C vite-plugin-ruby install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm -C vite-plugin-ruby build
+      - name: Build all workspace packages
+        run: pnpm -r build
 
       - name: Test
-        run: pnpm -C vite-plugin-ruby test
+        run: pnpm -C ${{ matrix.package }} test --run

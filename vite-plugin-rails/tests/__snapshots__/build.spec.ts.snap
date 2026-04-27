@@ -3,20 +3,20 @@
 exports[`config > generated files 1`] = `
 {
   "../assets/external.js": {
-    "file": "assets/external-BwssHmjP.js",
-    "integrity": "sha384-U9qU8CtmZAV7LLzMBzP9NVBCp+XAYYx03gCzvQZYfQuRJZvsWa1L9wEDoHtYQqVd",
+    "file": "assets/external.js",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "app/assets/external.js",
     "src": "../assets/external.js",
   },
   "../assets/logo.png": {
-    "file": "assets/logo-CPmPqqKk.png",
-    "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
+    "file": "assets/logo.png",
+    "integrity": "<integrity>",
     "src": "app/assets/logo.png",
   },
   "../assets/theme.css": {
-    "file": "assets/theme-C09nxUps.css",
-    "integrity": "sha384-gOxt2ZzkwfdFXE6YALyPXRfW9ox13B5dw1j6hciZMSpv4FW117dQCGJYWuX7gHhV",
+    "file": "assets/theme.css",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "app/assets/theme.css",
     "names": [
@@ -24,19 +24,19 @@ exports[`config > generated files 1`] = `
     ],
     "src": "../assets/theme.css",
   },
-  "_logo-CPmPqqKk.png": {
-    "file": "assets/logo-CPmPqqKk.png",
-    "integrity": "sha384-IGw3tfo4Xt0lp6sO9t5mYtILwfBxDFR8sRCtroxGjhE3r9UxNYgtimkCNzsJU9AP",
-    "src": "_logo-CPmPqqKk.png",
+  "_logo.png": {
+    "file": "assets/logo.png",
+    "integrity": "<integrity>",
+    "src": "_logo.png",
   },
-  "_logo-Nuo4H8F_.svg": {
-    "file": "assets/logo-Nuo4H8F_.svg",
-    "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
-    "src": "_logo-Nuo4H8F_.svg",
+  "_logo.svg": {
+    "file": "assets/logo.svg",
+    "integrity": "<integrity>",
+    "src": "_logo.svg",
   },
   "entrypoints/app.css": {
-    "file": "assets/app-OK6MABcH.css",
-    "integrity": "sha384-T/ai70rXe9JcUyfq8yDHJEpj5Dfyf5USrp8lFAA6zerwRx6nd3BV/69pA6FhMKv/",
+    "file": "assets/app.css",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "entrypoints/app.css",
     "names": [
@@ -46,31 +46,31 @@ exports[`config > generated files 1`] = `
   },
   "entrypoints/frameworks/vue.js": {
     "css": [
-      "assets/vue-BepfPMzO.css",
+      "assets/vue.css",
     ],
-    "file": "assets/vue-CoJ_KGkH.js",
-    "integrity": "sha384-z6zaKxiS0m3H8sWN92KZHtoafYXYCKYqAhtd2nRnds+tgO1WnE+Wm8NfcCuf5LTC",
+    "file": "assets/vue.js",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "entrypoints/frameworks/vue.js",
     "src": "entrypoints/frameworks/vue.js",
   },
   "entrypoints/main.ts": {
     "css": [
-      "assets/theme-C09nxUps.css",
-      "assets/app-OK6MABcH.css",
+      "assets/theme.css",
+      "assets/app.css",
     ],
-    "file": "assets/main-Ddvw3iap.js",
+    "file": "assets/main.js",
     "imports": [
       "entrypoints/frameworks/vue.js",
     ],
-    "integrity": "sha384-Ep2dj4XV6THhLdkgG0rqwUg4g9CFZLQVH+a+KAvALAEQhhY+grtX0Hj2ZdQK3LRZ",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "entrypoints/main.ts",
     "src": "entrypoints/main.ts",
   },
   "entrypoints/sassy.scss": {
-    "file": "assets/sassy-D5kz_As0.css",
-    "integrity": "sha384-4tkn835gOI7C29uZzlN/PGxd+XyQTG1/9AHpbWYbYLbgWZ1UmDDBFW1iq43MC70L",
+    "file": "assets/sassy.css",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "entrypoints/sassy.scss",
     "names": [
@@ -79,29 +79,29 @@ exports[`config > generated files 1`] = `
     "src": "entrypoints/sassy.scss",
   },
   "images/logo.png": {
-    "file": "assets/logo-Bh_XL1Xl.png",
-    "integrity": "sha384-zHCg6OQ1T1xX21KMsW9Bb2ECIIMeec41+3KtT0gygdsrmm/Z5qD5TVtTPhyJNGot",
+    "file": "assets/logo.png",
+    "integrity": "<integrity>",
     "src": "images/logo.png",
   },
   "images/logo.svg": {
-    "file": "assets/logo-Nuo4H8F_.svg",
-    "integrity": "sha384-qQuFPGf9f7DHitjACIjHvY2GwlcFjg+HatTRP3bwG7iAX8MzOW4Sr2dfca6uZlDA",
+    "file": "assets/logo.svg",
+    "integrity": "<integrity>",
     "src": "images/logo.svg",
   },
   "index.html": {
     "assets": [
-      "assets/logo-Bh_XL1Xl.png",
+      "assets/logo.png",
     ],
     "css": [
-      "assets/app-OK6MABcH.css",
-      "assets/sassy-D5kz_As0.css",
+      "assets/app.css",
+      "assets/sassy.css",
     ],
-    "file": "assets/index-qTzjl5TV.js",
+    "file": "assets/index.js",
     "imports": [
       "entrypoints/main.ts",
       "entrypoints/main.ts",
     ],
-    "integrity": "sha384-o33u4LIOheMYUEftMVfRyLb7iOMoCQuLr2MpmuYmRcQEzC5rRF9y6e/rD6f/vExA",
+    "integrity": "<integrity>",
     "isEntry": true,
     "name": "index.html",
     "src": "index.html",

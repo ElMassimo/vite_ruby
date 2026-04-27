@@ -69,6 +69,7 @@ class ViteRuby
 
   def initialize(**config_options)
     @config_options = config_options
+    @running_mutex = Mutex.new
   end
 
   def logger
@@ -85,15 +86,18 @@ class ViteRuby
   # NOTE: Checks only once every second since every lookup calls this method.
   def dev_server_running?
     return false unless run_proxy?
-    return @running if defined?(@running) && Time.now - @running_checked_at < 1
 
-    begin
-      Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
-      @running = true
-    rescue
-      @running = false
-    ensure
-      @running_checked_at = Time.now
+    @running_mutex.synchronize do
+      return @running if defined?(@running) && Time.now - @running_checked_at < 1
+
+      begin
+        Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
+        @running = true
+      rescue
+        @running = false
+      ensure
+        @running_checked_at = Time.now
+      end
     end
   end
 

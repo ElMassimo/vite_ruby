@@ -7,6 +7,25 @@ import glob from 'fast-glob'
 const projectRoot = resolve(__dirname, '../')
 const exampleDir = `${projectRoot}/example`
 
+// Strip 8-char content hashes Vite/Rolldown injects into asset filenames so
+// the snapshot stays stable across routine dependency bumps (Vite, Rolldown,
+// Vue, sass, etc.) that change chunk bytes without changing manifest shape.
+const stripHash = (s: string): string => s.replace(/-[A-Za-z0-9_-]{8}(?=\.)/g, '')
+
+const normalize = (value: unknown): unknown => {
+  if (typeof value === 'string') return stripHash(value)
+  if (Array.isArray(value)) return value.map(normalize)
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [
+        stripHash(k),
+        k === 'integrity' ? '<integrity>' : normalize(v),
+      ]),
+    )
+  }
+  return value
+}
+
 describe('config', () => {
   beforeAll(async () => {
     await execa('npm', ['run', 'build'], { stdio: process.env.DEBUG ? 'inherit' : undefined, cwd: exampleDir })
@@ -15,39 +34,35 @@ describe('config', () => {
   test('generated files', async () => {
     const outDir = `${exampleDir}/public/vite`
     const files = await glob('**/*', { cwd: outDir, onlyFiles: true })
-    expect(files.sort()).toEqual(expect.arrayContaining([
-      'assets/app-OK6MABcH.css',
-      'assets/app-OK6MABcH.css.br',
-      'assets/app-OK6MABcH.css.gz',
-      'assets/external-BwssHmjP.js',
-      'assets/external-BwssHmjP.js.br',
-      'assets/external-BwssHmjP.js.gz',
-      'assets/external-BwssHmjP.js.map',
-      'assets/index-qTzjl5TV.js',
-      'assets/index-qTzjl5TV.js.br',
-      'assets/index-qTzjl5TV.js.gz',
-      'assets/logo-Bh_XL1Xl.png',
-      'assets/logo-CPmPqqKk.png',
-      'assets/logo-Nuo4H8F_.svg',
-      'assets/logo-Nuo4H8F_.svg.br',
-      'assets/logo-Nuo4H8F_.svg.gz',
-      'assets/main-Ddvw3iap.js',
-      'assets/main-Ddvw3iap.js.br',
-      'assets/main-Ddvw3iap.js.gz',
-      'assets/main-Ddvw3iap.js.map',
-      'assets/sassy-D5kz_As0.css',
-      'assets/sassy-D5kz_As0.css.br',
-      'assets/sassy-D5kz_As0.css.gz',
-      'assets/theme-C09nxUps.css',
-      'assets/theme-C09nxUps.css.br',
-      'assets/theme-C09nxUps.css.gz',
-      'assets/vue-BepfPMzO.css',
-      'assets/vue-BepfPMzO.css.br',
-      'assets/vue-BepfPMzO.css.gz',
-      'assets/vue-CoJ_KGkH.js',
-      'assets/vue-CoJ_KGkH.js.br',
-      'assets/vue-CoJ_KGkH.js.gz',
-      'assets/vue-CoJ_KGkH.js.map',
+    expect(files.map(stripHash).sort()).toEqual(expect.arrayContaining([
+      'assets/app.css',
+      'assets/app.css.br',
+      'assets/app.css.gz',
+      'assets/external.js',
+      'assets/external.js.br',
+      'assets/external.js.gz',
+      'assets/index.js',
+      'assets/index.js.br',
+      'assets/index.js.gz',
+      'assets/logo.png',
+      'assets/logo.svg',
+      'assets/logo.svg.br',
+      'assets/logo.svg.gz',
+      'assets/main.js',
+      'assets/main.js.br',
+      'assets/main.js.gz',
+      'assets/sassy.css',
+      'assets/sassy.css.br',
+      'assets/sassy.css.gz',
+      'assets/theme.css',
+      'assets/theme.css.br',
+      'assets/theme.css.gz',
+      'assets/vue.css',
+      'assets/vue.css.br',
+      'assets/vue.css.gz',
+      'assets/vue.js',
+      'assets/vue.js.br',
+      'assets/vue.js.gz',
       'index.html',
       'index.html.br',
       'index.html.gz',
@@ -57,6 +72,6 @@ describe('config', () => {
     const manifest = parseManifest('manifest.json')
     const manifestAssets = parseManifest('manifest-assets.json')
 
-    expect({ ...manifest, ...manifestAssets }).toMatchSnapshot()
+    expect(normalize({ ...manifest, ...manifestAssets })).toMatchSnapshot()
   })
 })

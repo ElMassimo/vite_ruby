@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env DEBUG=vite-plugin-ruby:* vite --open",
-    "build": "cross-env DEBUG=vite-plugin-ruby:* vite build --mode production --emptyOutDir",
+    "build": "cross-env NODE_ENV=production DEBUG=vite-plugin-ruby:* vite build --mode production --emptyOutDir",
     "preview": "cross-env RAILS_ENV=production DEBUG=vite-plugin-ruby:* vite preview --open"
   },
   "devDependencies": {
