@@ -7,8 +7,8 @@
     "dev": "vite"
   },
   "engines": {
-    "node": "22",
-    "pnpm": "9"
+    "node": ">=22",
+    "pnpm": ">=9"
   },
   "dependencies": {
     "@bugsnag/js": "^7.20.2",
@@ -30,7 +30,7 @@
     "vite": "^8.0.0",
     "vite-plugin-bugsnag": "^2.0.2",
     "vite-plugin-rails": "^0.6.0",
-    "vite-plugin-ruby": "^5.2.0",
+    "vite-plugin-ruby": "^5.2.1",
     "vite-plugin-windicss": "^1.8.10"
   }
 }
