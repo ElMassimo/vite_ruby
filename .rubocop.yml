@@ -6,14 +6,14 @@ require:
   - rubocop-minitest
 
 inherit_gem:
-  standard: config/ruby-3.0.yml
+  standard: config/ruby-3.3.yml
 
 inherit_mode:
   merge:
     - Exclude
-    
+
 AllCops:
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.3
   SuggestExtensions: false
   NewCops: enable
   Exclude:

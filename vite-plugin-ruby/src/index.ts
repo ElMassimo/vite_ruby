@@ -99,6 +99,7 @@ function configureServer (server: ViteDevServer) {
       res.statusCode = 404
       const file = readFileSync(resolve(__dirname, 'dev-server-index.html'), 'utf-8')
       res.end(file)
+      return
     }
 
     next()

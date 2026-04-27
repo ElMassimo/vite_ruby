@@ -60,8 +60,8 @@ jobs:
         run: bin/rake test
 
       - name: Upload coverage to Qlty
-        if: ${{ contains(github.ref, 'main') }}
-        uses: qltysh/qlty-action/coverage@main
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
         with:
           token: ${{secrets.QLTY_COVERAGE_TOKEN}}
           files: coverage/.resultset.json
