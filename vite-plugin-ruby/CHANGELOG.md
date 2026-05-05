@@ -1,3 +1,12 @@
+## [5.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.1...vite-plugin-ruby@5.2.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* allow new Vite v8 `outputOptions` callback shape ([#604](https://github.com/ElMassimo/vite_ruby/issues/604)) ([990cafa](https://github.com/ElMassimo/vite_ruby/commit/990cafa05e6bdb3c64214190febd8f85a077f598)), closes [/github.com/rolldown/rolldown/blob/a71934bf/packages/rolldown/src/options/output-options.ts#L66-L77](https://github.com//github.com/rolldown/rolldown/blob/a71934bf/packages/rolldown/src/options/output-options.ts/issues/L66-L77)
+
+
+
 ## [5.2.1](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.0...vite-plugin-ruby@5.2.1) (2026-03-24)
 
 
