@@ -71,6 +71,7 @@ class HelperTest < HelperTestCase
     }
 
     refresh_config(mode: "development", bundled_dev: true)
+
     ViteRuby.instance.stub(:dev_server_running?, true) {
       assert_nil vite_client_tag
     }

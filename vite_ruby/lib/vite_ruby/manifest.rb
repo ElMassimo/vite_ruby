@@ -174,7 +174,7 @@ private
     return nil unless response.code.to_i == 200
 
     JSON.parse(response.body).fetch("tags")
-  rescue StandardError
+  rescue
     nil
   end
 

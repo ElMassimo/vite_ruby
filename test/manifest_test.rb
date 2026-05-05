@@ -227,6 +227,7 @@ class ManifestTest < ViteRuby::Test
     with_dev_server_running {
       ViteRuby::Manifest.stub_any_instance(:fetch_backend_entry_tags, nil) {
         entries = ViteRuby.instance.manifest.resolve_entries("main", type: :typescript)
+
         assert_equal ["/vite-dev/entrypoints/main.ts"], entries.fetch(:scripts)
         assert_empty entries.fetch(:stylesheets)
         assert_empty entries.fetch(:imports)
