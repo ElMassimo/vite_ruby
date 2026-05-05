@@ -68,9 +68,6 @@
     "imports": [
       "_vendor.0f7c0ec3.js"
     ],
-    "css": [
-      "assets/vue.ec0a97cc.css"
-    ],
     "assets": [
       "assets/logo.322aae0c.svg"
     ]
@@ -81,8 +78,7 @@
     "isEntry": true,
     "imports": [
       "_log.818edfb8.js",
-      "entrypoints/frameworks/vue.js",
-      "_vendor.0f7c0ec3.js"
+      "entrypoints/frameworks/vue.js"
     ],
     "css": [
       "assets/app.517bf154.css",
@@ -95,7 +91,10 @@
     "isEntry": true
   },
   "_vendor.0f7c0ec3.js": {
-    "file": "assets/vendor.0f7c0ec3.js"
+    "file": "assets/vendor.0f7c0ec3.js",
+    "css": [
+      "assets/vue.ec0a97cc.css"
+    ]
   },
   "_log.818edfb8.js": {
     "file": "assets/log.818edfb8.js"

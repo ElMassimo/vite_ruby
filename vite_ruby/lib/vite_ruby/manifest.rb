@@ -22,13 +22,30 @@ class ViteRuby::Manifest
     lookup!(name, **options).fetch("file")
   end
 
+  # Internal: Recursively collects all imported chunks for a given entry.
+  # Returns chunks in dependency-first order (deepest imports first), deduped.
+  def import_chunks_for(entry, seen_filenames: Set.new)
+    chunks = []
+
+    entry["imports"]&.each do |chunk|
+      filename = chunk["file"]
+      next if seen_filenames.include?(filename)
+      seen_filenames.add(filename)
+
+      chunks.concat(import_chunks_for(chunk, seen_filenames: seen_filenames))
+      chunks << chunk
+    end
+
+    chunks
+  end
+
   # Public: Returns scripts, imported modules, and stylesheets for the specified
   # entrypoint files.
   def resolve_entries(*names, **options)
     entries = names.map { |name| lookup!(name, **options) }
     script_paths = entries.map { |entry| entry.fetch("file") }
 
-    imports = dev_server_running? ? [] : entries.flat_map { |entry| entry["imports"] }.compact
+    imports = dev_server_running? ? [] : entries.flat_map { |entry| import_chunks_for(entry) }
     {
       scripts: script_paths,
       imports: imports.filter_map { |entry| entry.fetch("file") }.uniq,
