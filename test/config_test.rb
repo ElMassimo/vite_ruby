@@ -80,6 +80,7 @@ class ConfigTest < ViteRuby::Test
 
   def test_auto_build
     refute @config.auto_build
+    refute @config.bundled_dev
 
     with_rails_env("development") do |config|
       assert config.auto_build
@@ -123,6 +124,7 @@ class ConfigTest < ViteRuby::Test
   def test_environment_vars
     ViteRuby.env.tap(&:clear).merge!(
       "VITE_RUBY_AUTO_BUILD" => "true",
+      "VITE_RUBY_BUNDLED_DEV" => "true",
       "VITE_RUBY_HOST" => "example.com",
       "VITE_RUBY_PORT" => "1920",
       "VITE_RUBY_HTTPS" => "true",
@@ -139,6 +141,7 @@ class ConfigTest < ViteRuby::Test
     @config = resolve_config
 
     assert @config.auto_build
+    assert @config.bundled_dev
     assert_equal "example.com", @config.host
     assert_equal 1920, @config.port
     assert @config.https

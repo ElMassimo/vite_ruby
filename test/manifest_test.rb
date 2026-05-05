@@ -193,6 +193,45 @@ class ManifestTest < ViteRuby::Test
     with_dev_server_running {
       assert_equal "http://example.com/vite-dev/@vite/client", vite_client_src
     }
+
+    refresh_config(mode: "development", bundled_dev: true)
+
+    with_dev_server_running {
+      assert_nil vite_client_src
+    }
+  end
+
+  def test_resolve_entries_with_backend_tags_when_bundled_dev
+    refresh_config(mode: "development", bundled_dev: true)
+
+    tags = {
+      "scripts" => [{"src" => "/vite-dev/assets/main.js"}],
+      "styles" => [{"href" => "/vite-dev/assets/main.css"}],
+      "preloads" => [{"href" => "/vite-dev/assets/vendor.js"}],
+    }
+
+    with_dev_server_running {
+      ViteRuby::Manifest.stub_any_instance(:fetch_backend_entry_tags, tags) {
+        entries = ViteRuby.instance.manifest.resolve_entries("main", type: :typescript)
+
+        assert_equal ["/vite-dev/assets/main.js"], entries.fetch(:scripts)
+        assert_equal ["/vite-dev/assets/main.css"], entries.fetch(:stylesheets)
+        assert_equal ["/vite-dev/assets/vendor.js"], entries.fetch(:imports)
+      }
+    }
+  end
+
+  def test_resolve_entries_falls_back_when_backend_tags_missing
+    refresh_config(mode: "development", bundled_dev: true)
+
+    with_dev_server_running {
+      ViteRuby::Manifest.stub_any_instance(:fetch_backend_entry_tags, nil) {
+        entries = ViteRuby.instance.manifest.resolve_entries("main", type: :typescript)
+        assert_equal ["/vite-dev/entrypoints/main.ts"], entries.fetch(:scripts)
+        assert_empty entries.fetch(:stylesheets)
+        assert_empty entries.fetch(:imports)
+      }
+    }
   end
 
   def test_lookup_nil

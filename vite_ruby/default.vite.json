@@ -20,6 +20,7 @@
   "viteBinPath": null,
   "watchAdditionalPaths": [],
   "base": "",
+  "bundledDev": false,
   "ssrBuildEnabled": false,
   "ssrEntrypoint": "~/ssr/ssr.{js,ts,jsx,tsx}",
   "ssrOutputDir": "public/vite-ssr"

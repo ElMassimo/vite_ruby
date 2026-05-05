@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "cgi"
+require "json"
+require "net/http"
+
 # Public: Registry for accessing resources managed by Vite, using a generated
 # manifest file which maps entrypoint names to file paths.
 #
@@ -42,6 +46,10 @@ class ViteRuby::Manifest
   # Public: Returns scripts, imported modules, and stylesheets for the specified
   # entrypoint files.
   def resolve_entries(*names, **options)
+    if dev_server_running? && config.bundled_dev
+      return resolve_entries_with_backend(*names, **options)
+    end
+
     entries = names.map { |name| lookup!(name, **options) }
     script_paths = entries.map { |entry| entry.fetch("file") }
 
@@ -60,12 +68,12 @@ class ViteRuby::Manifest
 
   # Public: The path from where the browser can download the Vite HMR client.
   def vite_client_src
-    prefix_asset_with_host("@vite/client") if dev_server_running?
+    prefix_asset_with_host("@vite/client") if dev_server_running? && !config.bundled_dev
   end
 
   # Public: The content of the preamble needed by the React Refresh plugin.
   def react_refresh_preamble
-    if dev_server_running?
+    if dev_server_running? && !config.bundled_dev
       <<~REACT_REFRESH
         <script type="module">
           #{react_preamble_code}
@@ -76,7 +84,7 @@ class ViteRuby::Manifest
 
   # Public: Source script for the React Refresh plugin.
   def react_preamble_code
-    if dev_server_running?
+    if dev_server_running? && !config.bundled_dev
       <<~REACT_PREAMBLE_CODE
         import RefreshRuntime from '#{prefix_asset_with_host("@react-refresh")}'
         RefreshRuntime.injectIntoGlobalHook(window)
@@ -114,6 +122,9 @@ private
   # Internal: The prefix used by Vite.js to request files with an absolute path.
   FS_PREFIX = "/@fs/"
 
+  # Internal: Endpoint exposed by vite-plugin-backend-full-bundle.
+  BACKEND_FULL_BUNDLE_ENDPOINT = "/@vite-plugin-backend-full-bundle/entry-tags"
+
   extend Forwardable
 
   def_delegators :@vite_ruby, :config, :builder, :dev_server_running?
@@ -122,6 +133,49 @@ private
   # won't focus on the frontend, or when running the Vite server is not desired.
   def should_build?
     config.auto_build && !dev_server_running?
+  end
+
+  # Internal: Retrieves entry tags from the endpoint exposed by
+  # vite-plugin-backend-full-bundle, and falls back to the classic dev behavior
+  # if the endpoint is not available.
+  def resolve_entries_with_backend(*names, **options)
+    tags = names.filter_map do |name|
+      entry_name = resolve_entry_name(name, **options)
+      fetch_backend_entry_tags(entry_name)
+    end
+
+    if tags.empty?
+      return {
+        scripts: names.map { |name| lookup!(name, **options).fetch("file") },
+        imports: [],
+        stylesheets: [],
+      }
+    end
+
+    {
+      scripts: tags.flat_map { |entry| entry.fetch("scripts", []) }.filter_map { |tag| tag["src"] }.uniq,
+      imports: tags.flat_map { |entry| entry.fetch("preloads", []) }.filter_map { |tag| tag["href"] }.uniq,
+      stylesheets: tags.flat_map { |entry| entry.fetch("styles", []) }.filter_map { |tag| tag["href"] }.uniq,
+    }
+  end
+
+  def fetch_backend_entry_tags(entry)
+    path = "#{BACKEND_FULL_BUNDLE_ENDPOINT}?entry=#{CGI.escape(entry)}"
+    uri = URI.join(config.origin, path)
+
+    response = Net::HTTP.start(
+      uri.hostname,
+      uri.port,
+      use_ssl: uri.scheme == "https",
+      open_timeout: config.dev_server_connect_timeout,
+      read_timeout: config.dev_server_connect_timeout,
+    ) { |http| http.get(uri.request_uri) }
+
+    return nil unless response.code.to_i == 200
+
+    JSON.parse(response.body).fetch("tags")
+  rescue StandardError
+    nil
   end
 
   # Internal: Finds the specified entry in the manifest.

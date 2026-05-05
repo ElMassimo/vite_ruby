@@ -69,6 +69,11 @@ class HelperTest < HelperTestCase
     with_dev_server_running {
       assert_equal '<script src="/vite-dev/@vite/client" crossorigin="anonymous" type="module"></script>', vite_client_tag
     }
+
+    refresh_config(mode: "development", bundled_dev: true)
+    ViteRuby.instance.stub(:dev_server_running?, true) {
+      assert_nil vite_client_tag
+    }
   end
 
   def test_vite_asset_path
@@ -137,6 +142,23 @@ class HelperTest < HelperTestCase
 
       assert_equal %(<script src="/vite-dev/entrypoints/main.ts" crossorigin="" type="module"></script>),
         vite_typescript_tag("main")
+    }
+
+    refresh_config(mode: "development", bundled_dev: true)
+    backend_tags = {
+      "scripts" => [{"src" => "/vite-dev/assets/main.js"}],
+      "styles" => [{"href" => "/vite-dev/assets/main.css"}],
+      "preloads" => [{"href" => "/vite-dev/assets/vendor.js"}],
+    }
+
+    ViteRuby.instance.stub(:dev_server_running?, true) {
+      ViteRuby::Manifest.stub_any_instance(:fetch_backend_entry_tags, backend_tags) {
+        assert_similar [
+          %(<script src="/vite-dev/assets/main.js" crossorigin="" type="module"></script>),
+          %(<link rel="modulepreload" href="/vite-dev/assets/vendor.js" as="script" crossorigin="">),
+          link(href: "/vite-dev/assets/main.css", crossorigin: ""),
+        ].join, vite_typescript_tag("main")
+      }
     }
   end
 

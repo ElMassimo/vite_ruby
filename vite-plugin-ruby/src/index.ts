@@ -33,7 +33,7 @@ const debug = createDebug('vite-plugin-ruby:config')
 // config file, and configures the entrypoints and manifest generation.
 function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const config = loadConfiguration(env.mode, projectRoot, userConfig)
-  const { assetsDir, base, outDir, server, root, entrypoints, ssrBuild } = config
+  const { assetsDir, base, outDir, server, root, entrypoints, ssrBuild, bundledDev } = config
 
   const isLocal = config.mode === 'development' || config.mode === 'test'
 
@@ -86,6 +86,10 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
     root,
     server,
     build,
+    experimental: {
+      ...userConfig.experimental,
+      bundledDev,
+    },
     viteRuby: config,
   })
 }

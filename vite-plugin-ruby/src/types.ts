@@ -17,6 +17,7 @@ export interface ResolvedConfig {
   publicOutputDir: string
   watchAdditionalPaths: string[]
   base: string
+  bundledDev: boolean
   skipProxy: boolean
   /**
    * @private
