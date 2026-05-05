@@ -1,3 +1,12 @@
+# [3.11.0](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.10.0...vite_rails@3.11.0) (2026-05-05)
+
+
+### Features
+
+* default to skipProxy in new installations ([2932c0e](https://github.com/ElMassimo/vite_ruby/commit/2932c0ed66143d1a1d05d71787c2a5b0a47403f3))
+
+
+
 # [3.10.0](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.0.20...vite_rails@3.10.0) (2026-03-17)
 
 
