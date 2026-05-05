@@ -72,7 +72,7 @@ describe "ManifestTest" do
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
       expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
-      expect(error.message).to be.include?('"autoBuild" is set to `false`')
+      expect(error.message).to be(:include?, '"autoBuild" is set to `false`')
 
       asset_file = "images/logo.gif"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
@@ -82,12 +82,12 @@ describe "ManifestTest" do
       asset_file = "/app/styles/theme.css"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      expect(error.message).to be.include?("Vite Ruby can't find ../styles/theme.css in the manifests")
+      expect(error.message).to be(:include?, "Vite Ruby can't find ../styles/theme.css in the manifests")
 
       asset_file = "~/favicon.ico"
       error = assert_raises_manifest_missing_entry_error { path_for(asset_file) }
 
-      expect(error.message).to be.include?("Vite Ruby can't find favicon.ico in the manifests")
+      expect(error.message).to be(:include?, "Vite Ruby can't find favicon.ico in the manifests")
 
       expect(error.message).to be =~ /Manifest files found:\n  #{manifest_path}/
     }
@@ -102,7 +102,7 @@ describe "ManifestTest" do
       end
 
       expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
-      expect(error.message).to be.include?("The file path is incorrect.")
+      expect(error.message).to be(:include?, "The file path is incorrect.")
     }
   end
 
@@ -119,7 +119,7 @@ describe "ManifestTest" do
       end
 
       expect(error.message).to be =~ /Vite Ruby can't find entrypoints\/#{asset_file} in the manifests/
-      expect(error.message).to be.include?("The last build failed.")
+      expect(error.message).to be(:include?, "The last build failed.")
       expect(error.message).to be(:include?, "  #{error_lines[0]}")
       expect(error.message).to be(:include?, "  #{error_lines[1]}")
     }

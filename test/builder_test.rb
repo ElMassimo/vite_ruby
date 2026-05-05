@@ -125,7 +125,7 @@ describe "BuilderTest" do
       end
     }
 
-    expect(error.message).to be.include?("The vite binary is not available.")
+    expect(error.message).to be(:include?, "The vite binary is not available.")
 
     # The provided binary does not exist, so it uses the default strategy.
     stub_runner(success: true) { expect(builder.build).to be_truthy }
