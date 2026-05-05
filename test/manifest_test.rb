@@ -214,6 +214,7 @@ class ManifestTest < ViteRuby::Test
       origin = ViteRuby.config.origin # "https://localhost:3535"
 
       entry = {"file" => "#{origin}/vite-dev/entrypoints/application.js"}
+
       assert_equal entry, lookup!("application.js", type: :javascript)
       assert_equal entry, lookup!("entrypoints/application.js")
 

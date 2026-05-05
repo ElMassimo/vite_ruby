@@ -202,6 +202,7 @@ class HelperTest < HelperTestCase
     assert_nil vite_client_tag
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_equal %(<script src="#{origin}/vite-dev/@vite/client" crossorigin="anonymous" type="module"></script>), vite_client_tag
     }
   end
@@ -209,6 +210,7 @@ class HelperTest < HelperTestCase
   def test_vite_asset_path_with_skip_proxy
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_equal "#{origin}/vite-dev/entrypoints/main.ts", vite_asset_path("main.ts")
       assert_equal "#{origin}/vite-dev/entrypoints/app.css", vite_asset_path("app.css")
       assert_equal "#{origin}/vite-dev/images/logo.png", vite_asset_path("images/logo.png")
@@ -218,6 +220,7 @@ class HelperTest < HelperTestCase
   def test_vite_javascript_tag_with_skip_proxy
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_equal %(<script src="#{origin}/vite-dev/entrypoints/main.ts" crossorigin="" type="module"></script>),
         vite_typescript_tag("main")
 
@@ -229,6 +232,7 @@ class HelperTest < HelperTestCase
   def test_vite_stylesheet_tag_with_skip_proxy
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_similar link(href: "#{origin}/vite-dev/entrypoints/app.css"), vite_stylesheet_tag("app")
       assert_equal vite_stylesheet_tag("app"), vite_stylesheet_tag("app.css")
 
@@ -245,6 +249,7 @@ class HelperTest < HelperTestCase
   def test_vite_image_tag_with_skip_proxy
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_equal %(<img alt="Logo" src="#{origin}/vite-dev/images/logo.png" />),
         vite_image_tag("images/logo.png", alt: "Logo")
 
@@ -256,6 +261,7 @@ class HelperTest < HelperTestCase
   def test_vite_react_refresh_tag_with_skip_proxy
     with_skip_proxy_dev_server_running {
       origin = ViteRuby.config.origin
+
       assert_equal <<~HTML.chomp, vite_react_refresh_tag(nonce: nil)
         <script type="module">
         //<![CDATA[
