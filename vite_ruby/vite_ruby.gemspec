@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rack-proxy", "~> 0.6", ">= 0.6.1"
   s.add_dependency "zeitwerk", "~> 2.2"
 
+  s.add_development_dependency "minitest", "~> 5.0"
   s.add_development_dependency "pry-byebug", "~> 3.9"
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "simplecov", "< 0.23"
