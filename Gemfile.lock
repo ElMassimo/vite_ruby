@@ -183,7 +183,7 @@ GEM
       stringio
     racc (1.8.1)
     rack (3.2.6)
-    rack-proxy (0.7.7)
+    rack-proxy (0.8.2)
       rack
     rack-session (2.1.2)
       base64 (>= 0.1.0)
