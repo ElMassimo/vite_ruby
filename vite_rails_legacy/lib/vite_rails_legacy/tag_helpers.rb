@@ -37,7 +37,7 @@ module ViteRailsLegacy::TagHelpers
     skip_preload_tags: false,
     skip_style_tags: false,
     crossorigin: "anonymous",
-    media: "screen",
+    media: nil,
     **options)
     entries = vite_manifest.resolve_entries(*names, type: asset_type)
     tags = javascript_include_tag(*entries.fetch(:scripts), crossorigin: crossorigin, type: type, extname: false, **options)
