@@ -1,3 +1,12 @@
+## [3.11.1](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.11.0...vite_rails@3.11.1) (2026-07-03)
+
+
+### Bug Fixes
+
+* stop overriding Rails' media default in vite_javascript_tag ([#610](https://github.com/ElMassimo/vite_ruby/issues/610)) ([a7cd412](https://github.com/ElMassimo/vite_ruby/commit/a7cd41285d431accdff1a432fa79603ea2873095)), closes [#535](https://github.com/ElMassimo/vite_ruby/issues/535)
+
+
+
 # [3.11.0](https://github.com/ElMassimo/vite_ruby/compare/vite_rails@3.10.0...vite_rails@3.11.0) (2026-05-05)
 
 
