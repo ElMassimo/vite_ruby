@@ -33,15 +33,20 @@ type EmittedOutputAsset = OutputAsset & { originalFileNames?: string[] }
 // when they don't, only one of the two hashed files actually ends up on disk.
 // Reusing the existing entry sidesteps the mismatch entirely, and also avoids
 // writing the same asset to disk twice.
-function findExistingAsset (bundle: OutputBundle, absoluteFilename: string): string | undefined {
+function findExistingAsset (bundle: OutputBundle, root: string, absoluteFilename: string): string | undefined {
   const normalizedFilename = slash(absoluteFilename)
+
+  // Rollup documents `originalFileNames` as absolute paths, but Rolldown (Vite
+  // v8's default bundler) can report them relative to `config.root` instead.
+  const resolveOriginalFileName = (fileName: string) =>
+    slash(path.isAbsolute(fileName) ? fileName : path.resolve(root, fileName))
 
   for (const chunk of Object.values(bundle)) {
     if (chunk.type !== 'asset') continue
 
     const asset = chunk as EmittedOutputAsset
     const originalFileNames = asset.originalFileNames ?? (asset.originalFileName ? [asset.originalFileName] : [])
-    if (originalFileNames.some(fileName => slash(fileName) === normalizedFilename)) return asset.fileName
+    if (originalFileNames.some(fileName => resolveOriginalFileName(fileName) === normalizedFilename)) return asset.fileName
   }
 }
 
@@ -57,7 +62,7 @@ export function assetsManifestPlugin (): Plugin {
     const remainingAssets = filterEntrypointAssets(viteRubyConfig.entrypoints)
 
     for (const [filename, absoluteFilename] of remainingAssets) {
-      const hashedFilename = findExistingAsset(bundle, absoluteFilename) ?? await emitAsset(ctx, filename, absoluteFilename)
+      const hashedFilename = findExistingAsset(bundle, config.root, absoluteFilename) ?? await emitAsset(ctx, filename, absoluteFilename)
       manifest.set(path.relative(config.root, absoluteFilename), { file: hashedFilename, src: filename })
     }
   }

@@ -88,6 +88,27 @@ describe('assetsManifestPlugin', () => {
     })
   })
 
+  test('resolves `originalFileNames` reported relative to config.root (observed with Rolldown)', async () => {
+    const absoluteFilename = resolve(root, 'images/logo.svg')
+    const { plugin, ctx, emitFile, getFileName } = setup([['images/logo.svg', absoluteFilename]])
+
+    const bundle = {
+      'assets/logo-existingHash.svg': {
+        type: 'asset',
+        fileName: 'assets/logo-existingHash.svg',
+        originalFileNames: ['images/logo.svg'],
+        source: '',
+      },
+    } as unknown as OutputBundle
+
+    await (plugin.generateBundle as any).call(ctx, {}, bundle)
+
+    expect(getFileName).not.toHaveBeenCalled()
+    expect(manifestAssetsSource(emitFile)).toEqual({
+      'images/logo.svg': { file: 'assets/logo-existingHash.svg', src: 'images/logo.svg' },
+    })
+  })
+
   test('supports the legacy singular `originalFileName` (pre-Vite-v8 shape)', async () => {
     const absoluteFilename = resolve(root, 'images/logo.svg')
     const { plugin, ctx, emitFile, getFileName } = setup([['images/logo.svg', absoluteFilename]])
