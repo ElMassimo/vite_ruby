@@ -1,3 +1,12 @@
+## [3.10.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.3...vite_ruby@3.10.4) (2026-08-26)
+
+
+### Bug Fixes
+
+* update Vite Ruby gems conservatively ([#613](https://github.com/ElMassimo/vite_ruby/issues/613)) ([c5cc08a](https://github.com/ElMassimo/vite_ruby/commit/c5cc08a8514090a2060c41f6975530869fc6616c))
+
+
+
 ## [3.10.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.2...vite_ruby@3.10.3) (2026-08-26)
 
 
