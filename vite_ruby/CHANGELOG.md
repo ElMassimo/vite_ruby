@@ -1,3 +1,12 @@
+## [3.10.3](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.2...vite_ruby@3.10.3) (2026-08-26)
+
+
+### Bug Fixes
+
+* relax dependency for `rack-proxy` (closes [#619](https://github.com/ElMassimo/vite_ruby/issues/619)) ([37b1edb](https://github.com/ElMassimo/vite_ruby/commit/37b1edb5ee74704192ed0b23efb6c4976e120e7d))
+
+
+
 ## [3.10.2](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.1...vite_ruby@3.10.2) (2026-03-30)
 
 
