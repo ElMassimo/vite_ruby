@@ -6,6 +6,8 @@ import { createDebug } from 'obug'
 import { cleanConfig, configOptionFromEnv } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
+import { bindDevServerCleanup, resolveDevServerMeta, writeDevServerMeta } from './dev-server'
+import { DEV_SERVER_META_FILE } from './constants'
 
 export * from './types'
 
@@ -102,6 +104,12 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 // Internal: Allows to watch additional paths outside the source code dir.
 function configureServer (server: ViteDevServer) {
   server.watcher.add(watchAdditionalPaths)
+
+  const devServerMetaPath = resolve(projectRoot, DEV_SERVER_META_FILE)
+  server.httpServer?.once('listening', () => {
+    writeDevServerMeta(devServerMetaPath, resolveDevServerMeta(server.httpServer?.address(), server.config))
+    bindDevServerCleanup(devServerMetaPath)
+  })
 
   return () => server.middlewares.use((req, res, next) => {
     if (req.url === '/index.html' && !existsSync(resolve(server.config.root, 'index.html'))) {
