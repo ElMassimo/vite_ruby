@@ -1,3 +1,12 @@
+## [5.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.2...vite-plugin-ruby@5.2.3) (2026-08-27)
+
+
+### Bug Fixes
+
+* use server.ws.clientPort on Vite 8.1+ ([#620](https://github.com/ElMassimo/vite_ruby/issues/620)) ([6fd5e93](https://github.com/ElMassimo/vite_ruby/commit/6fd5e936f79670a13f70dbbb7686fe57c0be96e1)), closes [#614](https://github.com/ElMassimo/vite_ruby/issues/614)
+
+
+
 ## [5.2.2](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.1...vite-plugin-ruby@5.2.2) (2026-05-05)
 
 
