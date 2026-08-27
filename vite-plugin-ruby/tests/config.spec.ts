@@ -9,8 +9,8 @@ const exampleDir = resolve('example')
 const expectBaseFor = (config: Partial<ResolvedConfig>) =>
   expect(resolveViteBase({ ...defaultConfig, ...config }))
 
-const expectResolvedConfig = (config: UserConfig, ...keys: string[]) => {
-  let resolvedConfig: any = loadConfiguration('development', exampleDir, config)
+const expectResolvedConfig = (config: UserConfig, version: string, ...keys: string[]) => {
+  let resolvedConfig: any = loadConfiguration('development', exampleDir, config, version)
   keys.forEach((option) => { resolvedConfig = resolvedConfig[option] })
   return expect(resolvedConfig)
 }
@@ -42,8 +42,8 @@ describe('resolveViteBase', () => {
 })
 
 describe('loadConfiguration', () => {
-  test('configures server', () => {
-    expectResolvedConfig({}, 'server')
+  test('writes hmr.clientPort on Vite 8.0', () => {
+    expectResolvedConfig({}, '8.0.16', 'server')
       .toEqual({
         fs: {
           allow: [
@@ -61,17 +61,36 @@ describe('loadConfiguration', () => {
       })
   })
 
+  test('writes ws.clientPort on Vite 8.1', () => {
+    expectResolvedConfig({}, '8.1.0', 'server')
+      .toEqual({
+        fs: {
+          allow: [
+            exampleDir,
+          ],
+          strict: true,
+        },
+        ws: {
+          clientPort: 3037,
+        },
+        host: 'localhost',
+        https: null,
+        port: 3037,
+        strictPort: true,
+      })
+  })
+
   test('avoids overriding user config for hmr', () => {
-    expectResolvedConfig({}, 'server')
-      .toHaveProperty('hmr', { clientPort: 3037 })
-
-    expectResolvedConfig({ server: { hmr: { host: 'vite.myapp.test', clientPort: 443 } } }, 'server')
+    expectResolvedConfig({ server: { hmr: { host: 'vite.myapp.test', clientPort: 443 } } }, '8.0.16', 'server')
       .not.toHaveProperty('hmr')
 
-    expectResolvedConfig({ server: { hmr: true } }, 'server')
+    expectResolvedConfig({ server: { hmr: { host: 'vite.myapp.test', clientPort: 443 } } }, '8.1.0', 'server')
+      .not.toHaveProperty('ws')
+
+    expectResolvedConfig({ server: { hmr: true } }, '8.1.0', 'server')
       .not.toHaveProperty('hmr')
 
-    expectResolvedConfig({ server: { hmr: false } }, 'server')
+    expectResolvedConfig({ server: { hmr: false } }, '8.1.0', 'server')
       .not.toHaveProperty('hmr')
   })
 })

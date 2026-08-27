@@ -1,9 +1,10 @@
 import { join, relative, resolve } from 'path'
 import { globSync } from 'tinyglobby'
 
+import { version as viteVersion } from 'vite'
 import type { UserConfig, ServerOptions } from 'vite'
 import { APP_ENV, ALL_ENVS_KEY, ENTRYPOINT_TYPES_REGEX } from './constants'
-import { booleanOption, loadJsonConfig, configOptionFromEnv, slash } from './utils'
+import { booleanOption, isObject, loadJsonConfig, configOptionFromEnv, slash } from './utils'
 import { Config, ResolvedConfig, UnifiedConfig, MultiEnvConfig, Entrypoints } from './types'
 
 // Internal: Default configuration that is also read from Ruby.
@@ -68,7 +69,7 @@ function configFromEnv (): Config {
 
 // Internal: Allows to load configuration from a json file, and VITE_RUBY
 // prefixed environment variables.
-export function loadConfiguration (viteMode: string, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
+export function loadConfiguration (viteMode: string, projectRoot: string, userConfig: UserConfig, version = viteVersion): UnifiedConfig {
   const envConfig = configFromEnv()
   const mode = envConfig.mode || APP_ENV || viteMode
   const filePath = join(projectRoot, envConfig.configPath || (defaultConfig.configPath as string))
@@ -76,11 +77,20 @@ export function loadConfiguration (viteMode: string, projectRoot: string, userCo
   const fileConfig: Config = { ...multiEnvConfig[ALL_ENVS_KEY], ...multiEnvConfig[mode] }
 
   // Combine the three possible sources: env > json file > defaults.
-  return coerceConfigurationValues({ ...defaultConfig, ...fileConfig, ...envConfig, mode }, projectRoot, userConfig)
+  return coerceConfigurationValues({ ...defaultConfig, ...fileConfig, ...envConfig, mode }, projectRoot, userConfig, version)
+}
+
+// Vite 8.0 types `server.ws` as `false` only; 8.1 reads a transport object.
+type ServerWithWsTransport = Omit<ServerOptions, 'ws'> & { ws?: Record<string, unknown> | false }
+
+// Internal: Vite 8.1 renamed the websocket transport options; 8.0 still reads server.hmr.
+function viteUsesServerWs (version: string): boolean {
+  const [major, minor = 0] = version.split('.').map(part => Number.parseInt(part, 10))
+  return major > 8 || (major === 8 && minor >= 1)
 }
 
 // Internal: Coerces the configuration values and deals with relative paths.
-function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string, userConfig: UserConfig): UnifiedConfig {
+function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string, userConfig: UserConfig, version: string): UnifiedConfig {
   // Coerce the values to the expected types.
   const port = config.port = parseInt(config.port as unknown as string)
   const https = config.https = userConfig.server?.https || booleanOption(config.https)
@@ -93,10 +103,14 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
     server.origin = userConfig.server?.origin || `${https ? 'https' : 'http'}://${config.host}:${config.port}`
 
   // Connect directly to the Vite dev server, rack-proxy does not proxy websocket connections.
+  // Vite 8.1 moved clientPort from server.hmr to server.ws; 8.0 still reads hmr.
+  const ws = userConfig.server?.ws ?? {}
   const hmr = userConfig.server?.hmr ?? {}
-  if (typeof hmr === 'object' && !hmr.hasOwnProperty('clientPort')) {
-    hmr.clientPort ||= port
-    server.hmr = hmr
+  if (isObject(ws) && isObject(hmr) && !ws.hasOwnProperty('clientPort') && !hmr.hasOwnProperty('clientPort')) {
+    if (viteUsesServerWs(version))
+      (server as ServerWithWsTransport).ws = { ...ws, clientPort: port }
+    else
+      server.hmr = { ...hmr, clientPort: port }
   }
 
   // Use the sourceCodeDir as the Vite.js root.
