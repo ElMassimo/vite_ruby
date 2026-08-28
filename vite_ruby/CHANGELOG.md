@@ -1,3 +1,12 @@
+## [3.10.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.4...vite_ruby@3.10.5) (2026-08-28)
+
+
+### Bug Fixes
+
+* support rack-proxy 1.0 (close [#622](https://github.com/ElMassimo/vite_ruby/issues/622)) ([#623](https://github.com/ElMassimo/vite_ruby/issues/623)) ([3486248](https://github.com/ElMassimo/vite_ruby/commit/3486248d14a7968fe5a9c88f7454540c933f344b))
+
+
+
 ## [3.10.4](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.3...vite_ruby@3.10.4) (2026-08-26)
 
 
