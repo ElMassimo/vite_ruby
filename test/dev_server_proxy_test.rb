@@ -40,6 +40,14 @@ class DevServerProxyTest < ViteRuby::Test
     assert_forwarded to: "/vite-production/application.js"
   end
 
+  def test_forwards_to_configured_backend
+    get_with_dev_server_running "/vite-production/application.js"
+
+    env = JSON.parse(last_response.body)
+
+    assert_equal ViteRuby.config.origin, env["rack.backend"]
+  end
+
   def test_vite_client
     get_with_dev_server_running "/@vite/client"
 
