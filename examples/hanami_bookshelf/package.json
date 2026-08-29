@@ -2,12 +2,12 @@
   "name": "vite-hanami-demo",
   "private": true,
   "engines": {
-    "node": "15.x",
+    "node": ">=22.12.0",
     "yarn": "1.x"
   },
   "devDependencies": {
     "sass": "^1.35.2",
-    "vite": "^3.0.0",
+    "vite": "^8.0.0",
     "vite-plugin-ruby": "^3.0.8"
   }
 }
