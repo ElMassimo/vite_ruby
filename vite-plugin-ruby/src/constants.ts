@@ -7,6 +7,9 @@ export const ENV_PREFIX = 'VITE_RUBY'
 // Internal: Key of the vite.json file that is applied to all environments.
 export const ALL_ENVS_KEY = 'all'
 
+// Internal: Path, relative to the project root, of the dev server metadata file.
+export const DEV_SERVER_META_FILE = 'tmp/vite-ruby.json'
+
 // Internal: Extensions of CSS files or known precompilers.
 export const KNOWN_CSS_EXTENSIONS = [
   'css',

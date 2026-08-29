@@ -5,6 +5,7 @@
 [watchAdditionalPaths]: /config/#watchadditionalpaths
 [entrypointsDir]: /config/#entrypointsDir
 [devServerConnectTimeout]: /config/#devserverconnecttimeout
+[devServerConnectionCheck]: /config/#devserverconnectioncheck
 [host]: /config/#host
 [port]: /config/#port
 [vite]: https://vitejs.dev/
@@ -164,7 +165,10 @@ First, verify that the dev server is reachable by starting a new console session
 > ViteRuby.instance.dev_server_running?
 ```
 
-If it returns `false`, try increasing the <kbd>[devServerConnectTimeout]</kbd>, restart the console and retry.
+By default this reads `tmp/vite-ruby.json`, written by the Vite plugin while the dev server runs.
+If it returns `false` while the dev server is running, make sure you are on a recent [vite-plugin-ruby] that writes this file, and that `tmp/` is writable.
+
+If you have enabled <kbd>[devServerConnectionCheck]</kbd>, try increasing the <kbd>[devServerConnectTimeout]</kbd>, restart the console and retry.
 In systems with constrained resources the [default timeout][devServerConnectTimeout] might not be enough.
 
 If that doesn't work, verify that the [host] and [port] configuration is correct.

@@ -269,11 +269,26 @@ You can customize this behavior using the following options.
   "base": "/nested_path"
   ```
 
+### devServerConnectionCheck
+
+- **Default:** `false`
+- **Env Var:** `VITE_RUBY_DEV_SERVER_CONNECTION_CHECK`
+
+  By default the dev server is detected by reading `tmp/vite-ruby.json`, a
+  metadata file the Vite plugin writes with the dev server URL when it starts,
+  and removes when it stops.
+
+  Enable this to detect the dev server by opening a TCP connection to the
+  configured `host` and `port` instead. Useful if the metadata file can become
+  stale, for example when the Vite process is force-killed (`SIGKILL`) and has no
+  chance to remove it.
+
 ### devServerConnectTimeout
 
 - **Default:** `0.01` (seconds)
 
-  Timeout when attempting to connect to the dev server (in seconds).
+  Timeout when attempting to connect to the dev server (in seconds), used only
+  when [`devServerConnectionCheck`](#devserverconnectioncheck) is enabled.
 
   You can increase this timeout if the fallback compilation is being triggered
   even though the dev server is running.

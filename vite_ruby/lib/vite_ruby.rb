@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "json"
 require "logger"
 require "forwardable"
 require "pathname"
@@ -82,19 +83,11 @@ class ViteRuby
   end
 
   # Public: Returns true if the Vite development server is currently running.
-  # NOTE: Checks only once every second since every lookup calls this method.
   def dev_server_running?
-    return false unless run_proxy?
-    return @running if defined?(@running) && Time.now - @running_checked_at < 1
+    return false unless dev_mode?
+    return dev_server_connected? if config.dev_server_connection_check
 
-    begin
-      Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
-      @running = true
-    rescue
-      @running = false
-    ensure
-      @running_checked_at = Time.now
-    end
+    !dev_server_meta.nil?
   end
 
   # Public: Additional environment variables to pass to Vite.
@@ -105,13 +98,15 @@ class ViteRuby
     @env ||= ENV.select { |key, _| key.start_with?(ENV_PREFIX) }
   end
 
-  # Public: The proxy for assets should only run in development mode.
-  def run_proxy?
+  # Public: Whether we are in an environment that might run the Vite dev server.
+  def dev_mode?
     config.mode == "development" || (config.mode == "test" && !ENV["CI"])
   rescue => error
     logger.error("Failed to check mode for Vite: #{error.message}")
     false
   end
+  # Public: The proxy for assets should only run in development mode.
+  alias_method :run_proxy?, :dev_mode?
 
   # Internal: Executes the vite binary.
   def run(argv, **options)
@@ -146,6 +141,34 @@ class ViteRuby
   # Public: Enables looking up assets managed by Vite using name and type.
   def manifest
     @manifest ||= ViteRuby::Manifest.new(self)
+  end
+
+private
+
+  # Internal: Returns true if a TCP connection to the dev server can be opened.
+  def dev_server_connected?
+    return @running if defined?(@running) && Time.now - @running_checked_at < 1
+
+    begin
+      Socket.tcp(config.host, config.port, connect_timeout: config.dev_server_connect_timeout).close
+      @running = true
+    rescue
+      @running = false
+    ensure
+      @running_checked_at = Time.now
+    end
+  end
+
+  # Internal: Metadata written by the running Vite dev server, or nil when stopped.
+  def dev_server_meta
+    return @dev_server_meta if defined?(@dev_server_meta) && Time.now - @dev_server_meta_checked_at < 1
+
+    path = config.dev_server_meta_path
+    @dev_server_meta = (JSON.parse(path.read) if path.exist?)
+  rescue JSON::ParserError, SystemCallError
+    @dev_server_meta = nil
+  ensure
+    @dev_server_meta_checked_at = Time.now
   end
 end
 
