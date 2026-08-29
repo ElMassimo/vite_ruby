@@ -12,22 +12,22 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ruby: [
-          "3.1",
-          "3.2",
           "3.3",
+          "3.4",
+          "4.0"
         ]
         gemfile: [
-          "Gemfile-rails.7.0.x",
+          "Gemfile-rails.7.0.x", 
           "Gemfile-rails.7.1.x",
           "Gemfile-rails.7.2.x",
         ]
         experimental: [false]
         include:
-          - ruby: "3.4"
+          - ruby: "4.0"
             os: ubuntu-latest
             gemfile: "Gemfile-rails.8.0.x"
             experimental: true
-          - ruby: "3.4"
+          - ruby: "4.0"
             os: ubuntu-latest
             gemfile: Gemfile-rails-edge
             experimental: true
@@ -37,11 +37,11 @@ jobs:
       SECRET_KEY_BASE_DUMMY: 1
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version-file: ".node-version"
 
       - uses: ruby/setup-ruby@v1
         with:

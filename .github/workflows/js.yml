@@ -6,24 +6,19 @@ jobs:
   build:
     name: Vite Plugin Ruby
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [20]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           cache: 'pnpm'
-          node-version: ${{ matrix.node }}
+          node-version-file: ".node-version"
 
       - run: pnpm -C vite-plugin-ruby install --frozen-lockfile
 
