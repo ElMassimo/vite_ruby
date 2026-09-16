@@ -6,6 +6,7 @@ require "digest/sha1"
 class ViteRuby::Builder
   def initialize(vite_ruby)
     @vite_ruby = vite_ruby
+    @file_digests = {}
   end
 
   # Public: Checks if the watched files have changed since the last compilation,
@@ -55,11 +56,46 @@ private
     return @last_digest if @last_digest_at && Time.now - @last_digest_at < 1
 
     config.within_root do
-      files = Dir[*config.watched_paths].reject { |f| File.directory?(f) }
-      file_ids = files.sort.map { |f| "#{File.basename(f)}/#{Digest::SHA1.file(f).hexdigest}" }
+      previous_digests = @file_digests
+      @file_digests = {}
+      file_ids = Dir[*config.watched_paths].sort.filter_map { |file|
+        file_digest(file, previous_digests)
+      }
       @last_digest_at = Time.now
       @last_digest = Digest::SHA1.hexdigest(file_ids.join("/"))
     end
+  end
+
+  # Internal: Returns the id of a watched file, or nil if it's a directory.
+  #
+  # NOTE: Reading and hashing every watched file dominates the cost of the
+  # check, and the answer is almost always the same one as the last time, so the
+  # contents are read again only once the file has been touched. The digest
+  # stays content-based: a checkout that changes mtimes but not contents still
+  # counts as unchanged, and no Vite build is triggered.
+  def file_digest(file, previous_digests)
+    stat = File.stat(file)
+    return if stat.directory?
+
+    signature = [stat.mtime, stat.size]
+    previous_signature, previous_id = previous_digests[file]
+    id = if previous_signature == signature && !recently_modified?(stat)
+      previous_id
+    else
+      "#{File.basename(file)}/#{Digest::SHA1.file(file).hexdigest}"
+    end
+    @file_digests[file] = [signature, id]
+    id
+  end
+
+  # Internal: Whether the file was modified too recently to trust its mtime.
+  #
+  # NOTE: A file edited twice within the resolution of the file system clock,
+  # without changing its size, would keep the same signature. Rehashing the
+  # files touched in the last second rules that out, the same way Git resolves
+  # a racily clean entry in the index.
+  def recently_modified?(stat)
+    Time.now - stat.mtime < 1
   end
 
   # Public: Initiates a Vite build command to generate assets.

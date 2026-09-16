@@ -4,7 +4,12 @@ require "test_helper"
 require "open3"
 
 class BuilderTest < ViteRuby::Test
+  include ActiveSupport::Testing::TimeHelpers
+
   delegate :builder, :manifest, to: "ViteRuby.instance"
+
+  # A watched file, as the digest sees it: relative to the root.
+  WATCHED_FILE = "app/frontend/entrypoints/application.js"
 
   def last_build
     builder.last_build_metadata
@@ -83,6 +88,37 @@ class BuilderTest < ViteRuby::Test
     assert_equal previous_digest, ViteRuby.digest
   end
 
+  # NOTE: Each digest is taken in a separate time travel, because the result is
+  # memoized for a second.
+  def test_watched_files_digest_reads_changed_files_only
+    previous_digest = ViteRuby.digest
+
+    travel 1.minute do
+      assert_empty hashed_files { assert_equal previous_digest, ViteRuby.digest }
+    end
+
+    FileUtils.touch(watched_file)
+
+    travel 2.minutes do
+      assert_equal [WATCHED_FILE], hashed_files {
+        assert_equal previous_digest, ViteRuby.digest
+      }
+    end
+  end
+
+  def test_watched_files_digest_detects_changed_contents
+    previous_digest = ViteRuby.digest
+    contents = watched_file.read
+
+    travel 1.minute do
+      watched_file.write("#{contents}\n// Changed")
+
+      refute_equal previous_digest, ViteRuby.digest
+    end
+  ensure
+    watched_file.write(contents)
+  end
+
   def test_external_env_variables
     assert_equal "production", vite_env["VITE_RUBY_MODE"]
     assert_equal Rails.root.to_s, vite_env["VITE_RUBY_ROOT"]
@@ -121,6 +157,18 @@ class BuilderTest < ViteRuby::Test
   end
 
 private
+
+  def watched_file
+    Pathname.new(path_to_test_app).join(WATCHED_FILE)
+  end
+
+  # Collects the files whose contents were read to compute the digest.
+  def hashed_files
+    files = []
+    original = Digest::SHA1.method(:file)
+    Digest::SHA1.stub(:file, ->(file) { files << file.to_s; original.call(file) }) { yield }
+    files
+  end
 
   def stub_runner(errors: "", success: errors.empty?, &block)
     args = ["stdout", errors, MockProcessStatus.new(success: success)]
