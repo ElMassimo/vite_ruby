@@ -1,11 +1,11 @@
 [upgrade]: https://vite-ruby.netlify.app/guide/development.html#cli-commands-%E2%8C%A8%EF%B8%8F
-[Migration Guide]: https://vitejs.dev/guide/migration.html
+[Migration Guide]: https://vite.dev/guide/migration.html
 [Changelog]: https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#300-2022-07-13
 [stimulus-vite-helpers]: https://github.com/ElMassimo/stimulus-vite-helpers
 
 # Upgrading to Vite 3
 
-[Vite 3 has been released](https://vitejs.dev/blog/announcing-vite3.html)!
+[Vite 3 has been released](https://vite.dev/blog/announcing-vite3.html)!
 
 Check the [Migration Guide] and the [Changelog] for more information.
 
@@ -29,7 +29,7 @@ From now on, versions of `vite_ruby` will match Vite's major version number, for
 
 #### `import.meta.glob` changes
 
-In Vite 3, [`import.meta.glob`](https://vitejs.dev/guide/migration.html#import-meta-glob) will use keys relative to the current module.
+In Vite 3, [`import.meta.glob`](https://vite.dev/guide/migration.html#import-meta-glob) will use keys relative to the current module.
 
 ```ts
 // app/frontend/controllers/index.js

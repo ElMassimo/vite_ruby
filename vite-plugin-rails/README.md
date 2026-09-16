@@ -83,7 +83,7 @@ You can disable each manually:
 ### [Environment](https://github.com/ElMassimo/vite-plugin-environment)
 
 [`vite-plugin-environment`][vite-plugin-environment] is used to expose environment variables to your
-client code, using the [`import.meta.env`](https://vitejs.dev/guide/env-and-mode.html#env-files) convention from Vite.
+client code, using the [`import.meta.env`](https://vite.dev/guide/env-and-mode.html#env-files) convention from Vite.
 
 This plugin allows you to conveniently provide defaults, or fail on required env variables:
 

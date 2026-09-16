@@ -9,7 +9,7 @@
     "now": "npm run build && npm run preview"
   },
   "dependencies": {
-    "@mussi/vitepress-theme": "^1.0.2",
+    "@mussi/vitepress-theme": "^2.0.0",
     "vite": "^8.2.1",
     "vite-plugin-windicss": "^1.9.4",
     "vitepress": "^2.0.0-alpha.20",

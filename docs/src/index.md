@@ -1,20 +1,31 @@
 ---
-page: true
-sidebar: false
+layout: home
+
+hero:
+  name: Vite Ruby
+  text: Bringing joy to your frontend experience
+  image:
+    src: /logo.svg
+    alt: Vite Ruby
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/introduction
+    - theme: alt
+      text: Install
+      link: /guide/
+
 features:
-  - title: 🔥 Fast Server Start
-    details: Unlike Webpacker, files are processed on demand!
+  - icon: 🔥
+    title: Fast Server Start
+    details: Files are processed on demand.
     link: /motivation.html#webpack—increasing-load-times
-  - title: ⚡️ Instant Changes
-    details: Fast updates thanks to HMR. Goodbye full-page reloads!
+  - icon: ⚡️
+    title: Instant Changes
+    details: Fast HMR updates. Goodbye full-page reloads!
     link: /guide/introduction.html#why-vite-🤔
-  - title: 🚀 Zero-Config Deploys
-    details: Integrates with Rake asset management tasks.
+  - icon: 🚀
+    title: Zero-Config Deploys
+    details: Integrates with Rake asset tasks.
     link: /guide/deployment.html
 ---
-
-<script setup>
-import Home from '../.vitepress/theme/components/Home.vue'
-</script>
-
-<Home />

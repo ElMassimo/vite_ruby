@@ -3,9 +3,9 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
-[plugins]: https://vitejs.dev/plugins/
+[plugins]: https://vite.dev/plugins/
 [configuration reference]: /config/
 [build]: /config/#build-options
 [dev options]: /config/#development-options

@@ -1,8 +1,7 @@
 import baseConfig from '@mussi/vitepress-theme/config'
 
-import { defineConfigWithTheme, HeadConfig, UserConfig } from 'vitepress'
-import type { Config } from '@mussi/vitepress-theme'
-import { NavItem, SidebarConfig } from '@mussi/vitepress-theme/src/vitepress/config'
+import { defineConfig, HeadConfig } from 'vitepress'
+import type { Config, NavItem, SidebarConfig } from '@mussi/vitepress-theme'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -36,9 +35,6 @@ const head: HeadConfig = [
   ['meta', { property: 'og:description', content: description }],
 ]
 
-if (isProd)
-  head.push(['script', { src: 'https://unpkg.com/thesemetrics@latest', async: '' }])
-
 const nav: NavItem[] = [
   { text: 'Guide', link: '/guide/' },
   { text: 'Config', link: '/config/' },
@@ -48,7 +44,7 @@ const nav: NavItem[] = [
       {
         text: 'Documentation',
         items: [
-          { text: 'Vite', link: 'https://vitejs.dev/' },
+          { text: 'Vite', link: 'https://vite.dev/' },
         ],
       },
       {
@@ -109,24 +105,22 @@ const sidebar: SidebarConfig = {
   ],
 }
 
-export default defineConfigWithTheme<Config>({
-  extends: baseConfig as () => UserConfig<Config>,
+export default defineConfig<Config>({
+  extends: baseConfig,
   title: 'Vite Ruby',
   head,
   description,
   lang: 'en-US',
-  scrollOffset: 'header',
   srcDir: 'src',
   themeConfig: {
     logo: '/logo.svg',
-    author: {
-      name: 'Maximo Mussini',
-      link: 'https://maximomussini.com',
-    },
-    algolia: {
-      appId: 'GERZE019PN',
-      apiKey: 'cdb4a3df8ecf73fadf6bde873fc1b0d2',
-      indexName: 'vite_rails',
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: 'GERZE019PN',
+        apiKey: 'cdb4a3df8ecf73fadf6bde873fc1b0d2',
+        indexName: 'vite_rails',
+      },
     },
     nav,
     sidebar,
@@ -135,12 +129,13 @@ export default defineConfigWithTheme<Config>({
       { icon: 'twitter', link: 'https://twitter.com/MaximoMussini' },
       { icon: 'discord', link: 'https://discord.gg/9sSq53jxb4' },
     ],
+    editLink: {
+      pattern: 'https://github.com/ElMassimo/vite_ruby/edit/main/docs/:path',
+      text: 'Edit this page on GitHub',
+    },
     footer: {
-      license: {
-        text: 'MIT License',
-        link: 'https://opensource.org/licenses/MIT',
-      },
-      copyright: 'Copyright © 2021',
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2021–present Maximo Mussini',
     },
   },
   vite: {

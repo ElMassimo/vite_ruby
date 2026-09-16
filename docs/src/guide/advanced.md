@@ -10,7 +10,7 @@
 [config.json]: /config/#shared-configuration-file-📄
 [sidecar assets]: https://viewcomponent.org/guide/javascript_and_css.html
 [viewcomponent]: https://viewcomponent.org/
-[glob imports]: https://vitejs.dev/guide/features.html#glob-import
+[glob imports]: https://vite.dev/guide/features.html#glob-import
 
 # Advanced Usage
 

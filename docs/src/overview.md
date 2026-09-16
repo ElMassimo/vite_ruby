@@ -4,11 +4,11 @@
 [rails]: https://rubyonrails.org/
 [webpack]: https://webpack.js.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite.js]: https://vitejs.dev/
+[vite.js]: https://vite.dev/
 [guide]: /guide/
-[why vite]: https://vitejs.dev/guide/why.html#slow-server-start
+[why vite]: https://vite.dev/guide/why.html#slow-server-start
 [assets pipeline]: https://github.com/rails/sprockets/blob/master/guides/how_sprockets_works.md
-[plugin]: https://vitejs.dev/guide/using-plugins.html
+[plugin]: https://vite.dev/guide/using-plugins.html
 [Rack]: https://github.com/rack/rack
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [deployment]: /guide/deployment
@@ -38,7 +38,7 @@ The following conventions are common in [Rack]-based applications:
 
   - <kbd>rake assets:precompile</kbd> will process CSS and JS files in the project, and write the result in a subdirectory under `public`.
 
-## Vite.js <img class="logo" src="https://vitejs.dev/logo.svg" alt="Logo"/>
+## Vite.js <img class="logo" src="https://vite.dev/logo.svg" alt="Logo"/>
 
 In production, Vite.js will bundle assets for efficiency and write the result to an **output directory**—just like [webpack] or the [assets pipeline].
 

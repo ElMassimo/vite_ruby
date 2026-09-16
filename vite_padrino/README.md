@@ -37,7 +37,7 @@
 [config]: https://vite-ruby.netlify.app/config/
 [vite_rails]: https://github.com/ElMassimo/vite_ruby
 [webpacker]: https://github.com/rails/webpacker
-[vite]: http://vitejs.dev/
+[vite]: https://vite.dev/
 [config file]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/
@@ -46,8 +46,8 @@
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [vite_padrino]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_padrino
-[no bundling]: https://vitejs.dev/guide/why.html#the-problems
-[bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
+[no bundling]: https://vite.dev/guide/why.html#the-problems
+[bundling]: https://vite.dev/guide/why.html#why-bundle-for-production
 
 [Vite] is to frontend tooling as Ruby to programming, pure joy! 😍
 

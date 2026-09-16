@@ -2,7 +2,7 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite_rails_legacy]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails_legacy
 [vite_hanami]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_hanami
@@ -10,7 +10,7 @@
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [commands]: /guide/development.html#cli-commands-⌨%EF%B8%8F
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
-[plugins]: https://vitejs.dev/plugins/
+[plugins]: https://vite.dev/plugins/
 [configuration reference]: /config/
 [simple app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
 [example app]: https://github.com/ElMassimo/pingcrm-vite

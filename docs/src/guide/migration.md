@@ -3,7 +3,7 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/guide/using-plugins.html
+[vite]: https://vite.dev/guide/using-plugins.html
 [rollup]: https://rollupjs.org/guide/en/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [guide]: /guide/
@@ -11,7 +11,7 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [entrypointsDir]: /config/#entrypointsdir
 [watchAdditionalPaths]: /config/#watchadditionalpaths
-[glob]: https://vitejs.dev/guide/features.html#glob-import
+[glob]: https://vite.dev/guide/features.html#glob-import
 [clear rake]: https://www.rubydoc.info/gems/rake/Rake%2FTask:clear
 [vite:install_dependencies]: https://github.com/ElMassimo/vite_ruby/blob/main/vite_ruby/lib/tasks/vite.rake#L32-L35
 [npx]: https://docs.npmjs.com/cli/v7/commands/npx
@@ -22,7 +22,7 @@
 [import aliases]: /guide/development.html#import-aliases-👉
 [assets pipeline]: https://guides.rubyonrails.org/asset_pipeline.html
 [glob expression]: https://github.com/ElMassimo/vite_ruby/blob/eeccd3fc4e7db9524a2bd1075ca1282f3f53c029/vite-plugin-ruby/example/config/vite.json#L9
-[resolve.alias]: https://vitejs.dev/config/#resolve-alias
+[resolve.alias]: https://vite.dev/config/#resolve-alias
 [sprockets]: https://github.com/rails/sprockets-rails
 [sprockets example]: https://github.com/ElMassimo/vite_ruby/pull/165
 [stimulus-vite-helpers]: https://github.com/ElMassimo/stimulus-vite-helpers
@@ -151,7 +151,7 @@ Check [Vite Rollup Plugins] and [Awesome Vite] to find equivalent plugins.
 
 [Vite Rollup Plugins]: https://vite-rollup-plugins.patak.dev/
 [Awesome Vite]: https://github.com/vitejs/awesome-vite#plugins
-[out of the box]: https://vitejs.dev/guide/features.html
+[out of the box]: https://vite.dev/guide/features.html
 
 ## Assets 🎨
 

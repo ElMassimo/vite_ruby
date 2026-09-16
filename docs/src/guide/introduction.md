@@ -1,7 +1,7 @@
 [library]: https://github.com/ElMassimo/vite_ruby
 [vite_rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_rails
 [plugin]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [webpacker]: https://github.com/rails/webpacker
 [webpack]: https://github.com/webpack/webpack
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
@@ -13,8 +13,8 @@
 [vite_ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite_ruby
 [vite_hanami]: /guide/hanami
 [vite_padrino]: /guide/padrino
-[no bundling]: https://vitejs.dev/guide/why.html#the-problems
-[bundling]: https://vitejs.dev/guide/why.html#why-bundle-for-production
+[no bundling]: https://vite.dev/guide/why.html#the-problems
+[bundling]: https://vite.dev/guide/why.html#why-bundle-for-production
 [motivation]: /motivation
 [overview]: /overview
 [jekyll-vite]: https://github.com/ElMassimo/jekyll-vite
@@ -56,7 +56,7 @@ Interested in hearing more? [Read an introduction __blog post__][blog post], [le
 
 ## Features ⚡️
 
-[Everything Vite provides](https://vitejs.dev/guide/features.html), plus:
+[Everything Vite provides](https://vite.dev/guide/features.html), plus:
 
 ### 🤖 Automatic entrypoint detection
 

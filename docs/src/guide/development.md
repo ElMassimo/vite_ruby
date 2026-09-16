@@ -3,9 +3,9 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
-[plugins]: https://vitejs.dev/plugins/
+[plugins]: https://vite.dev/plugins/
 [configuration reference]: /config/
 [build]: /config/#build-options
 [dev options]: /config/#development-options
@@ -14,7 +14,7 @@
 [sourceCodeDir]: /config/#sourcecodedir
 [additionalEntrypoints]: /guide/advanced.html#additional-entrypoints
 [autoBuild]: /config/#autobuild
-[entrypoints]: https://vitejs.dev/guide/build.html#multi-page-app
+[entrypoints]: https://vite.dev/guide/build.html#multi-page-app
 [Importing styles from JS]: https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/app/frontend/entrypoints/application.ts#L8-L9
 [layout]: https://github.com/ElMassimo/vite_ruby/blob/main/examples/rails/app/views/layouts/application.html.erb#L12
 [sourceCodeDir]: /config/#sourcecodedir
@@ -23,8 +23,8 @@
 [aliased]: https://github.com/rollup/plugins/tree/master/packages/alias
 [jekyll-vite]: https://jekyll-vite.netlify.app/posts/tag-helpers/
 [Advanced Usage]: /guide/advanced
-[css]: https://vitejs.dev/guide/features.html#css
-[preprocessors]: https://vitejs.dev/guide/features.html#css-pre-processors
+[css]: https://vite.dev/guide/features.html#css
+[preprocessors]: https://vite.dev/guide/features.html#css-pre-processors
 [tag helper]: #tag-helpers-🏷
 
 # Developing with Vite

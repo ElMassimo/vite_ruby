@@ -37,7 +37,7 @@
 [config]: https://vite-ruby.netlify.app/config/
 [vite_rails]: https://github.com/ElMassimo/vite_ruby
 [webpacker]: https://github.com/rails/webpacker
-[vite]: http://vitejs.dev/
+[vite]: https://vite.dev/
 [config file]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/default.vite.json
 [example app]: https://github.com/ElMassimo/pingcrm-vite
 [heroku]: https://pingcrm-vite.herokuapp.com/

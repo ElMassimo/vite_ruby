@@ -1,19 +1,19 @@
 [project]: https://github.com/ElMassimo/vite_ruby
 [vite-plugin-full-reload]: https://github.com/ElMassimo/vite-plugin-full-reload
-[vite-plugin-windicss]: https://github.com/windicss/vite-plugin-windicss
+[tailwind-vite]: https://tailwindcss.com/docs/installation/using-vite
 [example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
 [Vite Ruby]: https://github.com/ElMassimo/vite_ruby
 [JS From Routes]: https://js-from-routes.netlify.app/
-[Windi CSS]: https://github.com/windicss/windicss
+[Tailwind CSS]: https://tailwindcss.com/
 [vite-plugin-stimulus-hmr]: https://github.com/ElMassimo/vite-plugin-stimulus-hmr
 [jumpstart]: https://github.com/ElMassimo/jumpstart-vite
 [stimulus]: https://stimulus.hotwire.dev/
 [stimulus-vite-helpers]: https://github.com/ElMassimo/stimulus-vite-helpers
-[glob import]: https://vitejs.dev/guide/features.html#glob-import
-[plugins]: https://vitejs.dev/plugins/
+[glob import]: https://vite.dev/guide/features.html#glob-import
+[plugins]: https://vite.dev/plugins/
 [sourceCodeDir]: /config/#sourcecodedir
-[import meta env]: https://vitejs.dev/guide/env-and-mode.html#env-variables
-[meta env]: https://vitejs.dev/guide/env-and-mode.html#env-files
+[import meta env]: https://vite.dev/guide/env-and-mode.html#env-variables
+[meta env]: https://vite.dev/guide/env-and-mode.html#env-files
 [vite-plugin-environment]: https://github.com/ElMassimo/vite-plugin-environment
 [vite-plugin-rails]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-rails
 [rollup-plugin-gzip]: https://github.com/kryops/rollup-plugin-gzip
@@ -72,7 +72,7 @@ or if using [`import.meta.env`][import meta env] in the client code is not an op
 
 Use <kbd>[vite-plugin-full-reload]</kbd> to automatically reload the page when making changes to server-rendered layouts and templates, improving the feedback cycle.
 
-Works nicely in combination with <kbd>[vite-plugin-windicss](#windi-css)</kbd> and [JS From Routes](#js-from-routes).
+Works nicely in combination with [JS From Routes](#js-from-routes).
 
 ```ts
 plugins: [
@@ -115,25 +115,21 @@ plugins: [
   StimulusHMR(),
 ```
 
-## [Windi CSS](https://github.com/windicss/windicss)
+## [Tailwind CSS 4][Tailwind CSS]
 
-Use <kbd>[vite-plugin-windicss]</kbd> to get an [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) and powerful alternative to Tailwind CSS.
-
-This configuration will detect utility classes in components and server-rendered templates:
-
-  - <kbd>root</kbd> should match the project root which is usually where `vite.config.ts` is located
-  - Scans `erb` and `haml` files to detect classes in server templates
-  - Scans the <kbd>[sourceCodeDir]</kbd> to detect classes in components
+Use the official <kbd>[@tailwindcss/vite][tailwind-vite]</kbd> plugin to integrate Tailwind CSS 4 with Vite.
 
 ```ts
 plugins: [
-  WindiCSS({
-    root: __dirname,
-    scan: {
-      fileExtensions: ['erb', 'haml', 'html', 'vue', 'js', 'ts', 'jsx', 'tsx'],
-      dirs: ['app/views', 'app/frontend'], // or app/javascript, or app/packs
-    },
-  }),
+  tailwindcss(),
 ```
 
-Add <kbd>[vite-plugin-full-reload](/guide/plugins.html#full-reload)</kbd> to have the page refresh when making changes to the templates.
+Import Tailwind in your application stylesheet:
+
+```css
+@import "tailwindcss";
+```
+
+Tailwind CSS 4 can be configured to detect classes in both frontend code and server-rendered templates.
+
+Add <kbd>[vite-plugin-full-reload](/guide/plugins.html#full-reload)</kbd> when template changes should also refresh the page.

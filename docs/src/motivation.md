@@ -5,7 +5,7 @@
 [rails]: https://rubyonrails.org/
 [webpack]: https://webpack.js.org/
 [webpacker]: https://github.com/rails/webpacker
-[vite.js]: https://vitejs.dev/
+[vite.js]: https://vite.dev/
 [adds several hard dependencies]: https://github.com/rails/webpacker/blob/da362b8c96a4be5a4af8f8ad886f5dd8451f457f/package.json#L15-L35
 [webpack-chain]: https://github.com/neutrinojs/webpack-chain
 [vue-cli]: https://cli.vuejs.org/

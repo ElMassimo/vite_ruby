@@ -1,6 +1,6 @@
 [installation]: /guide/#installation-💿
-[config reference]: https://vitejs.dev/config/
-[plugins]: https://vitejs.dev/plugins/
+[config reference]: https://vite.dev/config/
+[plugins]: https://vite.dev/plugins/
 [entrypoints]: /guide/development.html#entrypoints-⤵%EF%B8%8F
 [json config]: /config/#shared-configuration-file-%f0%9f%93%84
 [sourceCodeDir]: /config/#sourcecodedir
@@ -13,18 +13,18 @@
 [root]: /config/#root
 [https]: /config/#https
 [alignment with Rails defaults]: https://github.com/rails/webpacker/issues/769
-[source maps]: https://vitejs.dev/config/#build-sourcemap
+[source maps]: https://vite.dev/config/#build-sourcemap
 [import aliases]: /guide/development.html#import-aliases-👉
 [reference these files]: https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/example/app/frontend/entrypoints/main.ts#L4
-[resolve.alias]: https://vitejs.dev/config/#resolve-alias
+[resolve.alias]: https://vite.dev/config/#resolve-alias
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [Vite config file]: /config/#configuring-vite-⚡
 [runtime env var]: https://github.com/ElMassimo/vite_ruby/discussions/159#discussioncomment-1841817
-[emptyOutDir]: https://vitejs.dev/config/#build-emptyoutdir
+[emptyOutDir]: https://vite.dev/config/#build-emptyoutdir
 [ssrEntrypoint]: /config/#ssrentrypoint
 [ssrOutputDir]: /config/#ssroutputdir
-[ssr mode]: https://vitejs.dev/guide/ssr.html#server-side-rendering
+[ssr mode]: https://vite.dev/guide/ssr.html#server-side-rendering
 [inertia-ssr]: https://github.com/ElMassimo/inertia-rails-ssr-template
 [deployment]: /guide/deployment.html#deployment-🚀
 

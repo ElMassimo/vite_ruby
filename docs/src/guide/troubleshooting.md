@@ -7,13 +7,14 @@
 [devServerConnectTimeout]: /config/#devserverconnecttimeout
 [host]: /config/#host
 [port]: /config/#port
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [viteBinPath]: /config/#vitebinpath
 [docker example]: https://github.com/ElMassimo/vite_rails_docker_example
 [Using Heroku]: /guide/deployment#using-heroku
 [example app]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails/vite.config.ts
-[windi]: /guide/plugins.html#windi-css
+[tailwind]: /guide/plugins.html#tailwind-css-4
+[tailwind-sources]: https://tailwindcss.com/docs/detecting-classes-in-source-files
 [@vitejs/plugin-react]: https://www.npmjs.com/package/@vitejs/plugin-react
 [tag helpers]: /guide/development.html#tag-helpers-🏷
 [ulimit]: https://wilsonmar.github.io/maximum-limits/
@@ -118,7 +119,7 @@ Use the `~/` alias to the <kbd>[sourceCodeDir]</kbd> to disambiguate the referen
 
 ### The CJS build of Vite's Node API is deprecated
 
-Please refer to [Vite's troubleshooting guide](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated).
+Please refer to [Vite's troubleshooting guide](https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated).
 
 You might need to add `"type": "module"` to your `package.json`, or rename
 `vite.config.ts` to `vite.config.mts`.
@@ -245,13 +246,9 @@ You can opt out by configuring <kbd>[additionalEntrypoints]</kbd>, see _[Advance
 
 ## Other Libraries
 
-### Tailwind CSS is slow to load
+### Setting up Tailwind CSS
 
-A project called [Windi CSS](https://github.com/windicss/windicss) addresses this pain point − I've created a [documentation website](http://windicss.netlify.app/).
-
-A [plugin for Vite.js](https://github.com/windicss/vite-plugin-windicss) is available, and should allow you to get [insanely faster](https://twitter.com/antfu7/status/1361398324587163648) load times in comparison.
-
-Check the [_Recommended Plugins_][windi] section for more information.
+Tailwind CSS 4 provides an official Vite plugin with automatic content detection. Check the [_Recommended Plugins_][tailwind] section for installation instructions.
 
 ### esbuild: cannot execute binary file
 
@@ -261,11 +258,9 @@ Since `esbuild` relies on a `postinstall` script, and the architecture of the ho
 
 Try reinstalling `esbuild` in the host or container—depending on where you intend to run it—to ensure it's built for the corresponding system architecture.
 
-### Windi CSS does not detect changes to server templates
+### Tailwind CSS does not detect classes in server templates
 
-Ensure you're using `vite-plugin-windicss@0.9.5` or higher.
-
-Check the [_Recommended Plugins_][windi] section for more information.
+Tailwind CSS 4 scans project files automatically. If templates live outside the detected project tree or are ignored by default, register them explicitly with the [`@source` directive][tailwind-sources] in your application stylesheet.
 
 ## Contact ✉️
 

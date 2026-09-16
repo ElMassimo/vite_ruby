@@ -2,10 +2,10 @@
 [rails]: https://rubyonrails.org/
 [webpacker]: https://github.com/rails/webpacker
 [vite rails]: https://github.com/ElMassimo/vite_ruby
-[vite]: https://vitejs.dev/
+[vite]: https://vite.dev/
 [vite-plugin-ruby]: https://github.com/ElMassimo/vite_ruby/tree/main/vite-plugin-ruby
 [vite-templates]: https://github.com/vitejs/vite/tree/main/packages/create-app
-[plugins]: https://vitejs.dev/plugins/
+[plugins]: https://vite.dev/plugins/
 [configuration reference]: /config/
 [example1]: https://github.com/ElMassimo/pingcrm-vite
 [example2]: https://github.com/ElMassimo/vite_ruby/tree/main/examples/rails
@@ -127,7 +127,7 @@ While it was originally designed for sprockets, you can easily configure it for 
 It's necessary to extend [the default configuration](https://github.com/capistrano/rails/blob/d86a8db16281f09d8cfff9ee791297134bce9801/lib/capistrano/tasks/assets.rake#L139)
 so that it detects the following files:
 
-- `manifest.json`: generated [by Vite](https://vitejs.dev/config/build-options.html#build-manifest) for entrypoints
+- `manifest.json`: generated [by Vite](https://vite.dev/config/build-options.html#build-manifest) for entrypoints
 - `manifest-assets.json`: generated [by `vite-plugin-ruby`](https://github.com/ElMassimo/vite_ruby/blob/main/vite-plugin-ruby/src/manifest.ts#L26-L29)   for other assets
 
 ```ruby
