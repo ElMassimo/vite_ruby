@@ -10,7 +10,7 @@ services:
     tty: true
     volumes:
       - /bundler_cache
-      - /yarn_cache
+      - /pnpm_cache
 
   db:
     image: postgres:13

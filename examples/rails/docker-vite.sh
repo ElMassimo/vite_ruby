@@ -3,9 +3,6 @@
 set -e
 
 bin/docker_gems
-yarn install
-cd example_engine
-yarn install
-cd ..
+pnpm install
 
 bin/vite dev

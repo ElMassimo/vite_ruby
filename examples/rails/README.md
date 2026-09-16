@@ -17,7 +17,7 @@ If using Docker, run `bin/docker_setup` to build the images and create the db.
 Alternatively, you can run:
 
 - <kbd>bundle install</kbd>: Install the ruby gems
-- <kbd>yarn install</kbd>: Install the npm packages
+- <kbd>pnpm install</kbd>: Install the npm packages
 - <kbd>bin/rake db:create db:migrate</kbd>: Create the database and tables
 
 ## Development 🚀

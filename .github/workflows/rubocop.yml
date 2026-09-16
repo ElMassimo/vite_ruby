@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ruby: [
-          3.3
+          4.0
         ]
 
     steps:

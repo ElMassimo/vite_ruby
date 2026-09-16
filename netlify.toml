@@ -1,9 +1,9 @@
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "24"
   NPM_FLAGS = "--version" # uncomment if using pnpm to skip npm install
 
 [build]
   base = "docs/"
   ignore = "git diff --quiet 'HEAD^' HEAD ."
   publish = ".vitepress/dist"
-  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
+  command = "npx pnpm@12 i --store=node_modules/.pnpm-store && npx pnpm@12 run build"

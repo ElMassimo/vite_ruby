@@ -23,11 +23,11 @@ jobs:
         ]
         experimental: [false]
         include:
-          - ruby: "3.4"
+          - ruby: "4.0"
             os: ubuntu-latest
             gemfile: "Gemfile-rails.8.0.x"
             experimental: true
-          - ruby: "3.4"
+          - ruby: "4.0"
             os: ubuntu-latest
             gemfile: Gemfile-rails-edge
             experimental: true
@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - uses: ruby/setup-ruby@v1
         with:

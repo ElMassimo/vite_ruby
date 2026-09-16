@@ -4,6 +4,10 @@
   "private": true,
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "24",
+    "pnpm": "12"
+  },
   "scripts": {
     "docs": "npm -C docs run dev",
     "docs:search": "npm -C docs run search",
