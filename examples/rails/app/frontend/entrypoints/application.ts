@@ -2,8 +2,8 @@
 import * as Turbo from '@hotwired/turbo'
 import * as ActiveStorage from '@rails/activestorage'
 
-// Enable Windi CSS styles and preflight
-import 'windi.css'
+// Enable Tailwind CSS 4 styles and preflight
+import '~/styles/tailwind.css'
 
 // Example: Import a stylesheet in app/frontend/styles
 import '~/styles/theme.css'

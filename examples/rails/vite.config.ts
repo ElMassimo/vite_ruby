@@ -1,7 +1,7 @@
+import tailwindcss from '@tailwindcss/vite'
 import ViteReact from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import rails from 'vite-plugin-rails'
-import WindiCSS from 'vite-plugin-windicss'
 import BugsnagPlugins from './plugins/bugsnag'
 
 export default defineConfig({
@@ -16,13 +16,7 @@ export default defineConfig({
       },
     }),
     ViteReact(),
-    WindiCSS({
-      root: __dirname,
-      scan: {
-        fileExtensions: ['erb', 'html', 'vue', 'jsx', 'tsx'], // and maybe haml
-        dirs: ['app/views', 'app/frontend'], // or app/javascript
-      },
-    }),
+    tailwindcss(),
   ],
   // Example: Importing assets from arbitrary paths.
   resolve: {

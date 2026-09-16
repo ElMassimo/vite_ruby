@@ -1,5 +1,5 @@
 .smooth {
-  @apply transition-all duration-300 text-shadow;
+  transition: all 300ms;
 }
 
 .hero > span {
