@@ -1,2 +1,4 @@
 packages:
   - example_engine/
+allowBuilds:
+  '@parcel/watcher': true

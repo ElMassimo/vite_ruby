@@ -1,0 +1,14 @@
+packages:
+  - '.'
+allowBuilds:
+  vue-demi: true
+overrides:
+  '@mussi/vitepress-theme>@docsearch/css': 3.0.0
+  '@mussi/vitepress-theme>@docsearch/js': 3.0.0
+  '@docsearch/js@3.0.0>preact': 10.7.1
+peerDependencyRules:
+  ignoreMissing:
+    - '@algolia/client-search'
+    - '@types/react'
+    - react
+    - react-dom

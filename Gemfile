@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "benchmark"
 gem "rails"
 
 gemspec path: "./vite_ruby"

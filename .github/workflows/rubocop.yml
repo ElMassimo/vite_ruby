@@ -1,6 +1,9 @@
 name: Rubocop
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, next]
+  pull_request:
 
 jobs:
   build:
@@ -10,7 +13,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ruby: [
-          3.3
+          4.0
         ]
 
     steps:

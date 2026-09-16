@@ -5,3 +5,7 @@ packages:
   - vite-plugin-rails/
   - vite-plugin-rails/example/
   - vite-plugin-rails/tests/
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: true
+  esbuild: true
