@@ -163,10 +163,13 @@ private
   end
 
   # Collects the files whose contents were read to compute the digest.
-  def hashed_files
+  def hashed_files(&block)
     files = []
     original = Digest::SHA1.method(:file)
-    Digest::SHA1.stub(:file, ->(file) { files << file.to_s; original.call(file) }) { yield }
+    Digest::SHA1.stub(:file, ->(file) {
+      files << file.to_s
+      original.call(file)
+    }, &block)
     files
   end
 
