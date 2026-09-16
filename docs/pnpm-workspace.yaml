@@ -1,0 +1,10 @@
+packages:
+  - '.'
+allowBuilds:
+  vue-demi: true
+peerDependencyRules:
+  ignoreMissing:
+    - '@algolia/client-search'
+    - '@types/react'
+    - react
+    - react-dom

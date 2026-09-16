@@ -1,25 +1,18 @@
 {
   "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.2",
   "scripts": {
     "dev": "vitepress dev --port 3005 --open",
     "build": "vitepress build",
-    "preview": "vitepress serve --port 5050 --open",
+    "preview": "vitepress preview --port 5050 --open",
     "now": "npm run build && npm run preview"
   },
   "dependencies": {
     "@mussi/vitepress-theme": "^1.0.2",
-    "vite-plugin-windicss": "^1.8.3",
-    "vitepress": "^0.22.3",
-    "vue": "^3.2.31"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search",
-        "react",
-        "react-dom",
-        "@types/react"
-      ]
-    }
+    "vite": "^8.2.1",
+    "vite-plugin-windicss": "^1.9.4",
+    "vitepress": "^2.0.0-alpha.20",
+    "vue": "^3.5.41"
   }
 }

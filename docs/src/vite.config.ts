@@ -7,7 +7,7 @@ export default defineConfig({
     windicss({
       preflight: false,
       scan: {
-        dirs: [resolve(__dirname, '../.vitepress/theme/components')],
+        dirs: [resolve(import.meta.dirname, '../.vitepress/theme/components')],
       },
     }),
   ],

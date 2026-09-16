@@ -356,7 +356,7 @@ You can customize this behavior using the following options.
 
   In order to [reference these files] it's highly recommended to [define][resolve.alias] your own [import aliases]:
 
-  ```js{7}
+  ```js {7}
   import { resolve } from 'path'
   import { defineConfig } from 'vite'
 
