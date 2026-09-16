@@ -1,6 +1,9 @@
 name: build
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, next]
+  pull_request:
 
 jobs:
   build:
@@ -11,14 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby: "3.1"
-            os: ubuntu-latest
-            gemfile: "Gemfile-rails.7.0.x"
-            experimental: false
-          - ruby: "3.2"
-            os: ubuntu-latest
-            gemfile: "Gemfile-rails.7.1.x"
-            experimental: false
           - ruby: "3.3"
             os: ubuntu-latest
             gemfile: "Gemfile-rails.7.2.x"
