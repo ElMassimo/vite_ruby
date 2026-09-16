@@ -1,3 +1,12 @@
+## [3.10.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.5...vite_ruby@3.10.6) (2026-09-16)
+
+
+### Performance Improvements
+
+* skip re-hashing unchanged watched files on every build check ([#625](https://github.com/ElMassimo/vite_ruby/issues/625)) ([e0ad345](https://github.com/ElMassimo/vite_ruby/commit/e0ad34511b7fc0e34cdfbf2bbe9aca4660b2e904)), closes [#624](https://github.com/ElMassimo/vite_ruby/issues/624)
+
+
+
 ## [3.10.5](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.4...vite_ruby@3.10.5) (2026-08-28)
 
 
