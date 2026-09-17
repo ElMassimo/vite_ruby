@@ -1,3 +1,12 @@
+## [5.2.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.3...vite-plugin-ruby@5.2.4) (2026-09-17)
+
+
+### Features
+
+* detect if dev server is running using a local file (close [#391](https://github.com/ElMassimo/vite_ruby/issues/391)) ([#621](https://github.com/ElMassimo/vite_ruby/issues/621)) ([d424fbf](https://github.com/ElMassimo/vite_ruby/commit/d424fbf5fbd3782c4446c4c357331320e3512352))
+
+
+
 ## [5.2.3](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.2...vite-plugin-ruby@5.2.3) (2026-08-27)
 
 
