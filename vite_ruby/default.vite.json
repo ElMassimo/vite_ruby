@@ -6,6 +6,7 @@
   "buildCacheDir": "tmp/cache/vite",
   "publicOutputDir": "vite",
   "configPath": "config/vite.json",
+  "devServerConnectionCheck": false,
   "devServerConnectTimeout": 0.01,
   "packageManager": null,
   "publicDir": "public",

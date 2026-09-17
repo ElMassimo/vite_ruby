@@ -5,6 +5,9 @@ require "json"
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
 class ViteRuby::Config
+  # Internal: Name of the metadata file written by the Vite dev server.
+  DEV_SERVER_META_FILENAME = "vite-ruby.json"
+
   def origin
     "#{protocol}://#{host_with_port}"
   end
@@ -36,6 +39,11 @@ class ViteRuby::Config
   # Public: The directory where Vite will store the built assets.
   def build_output_dir
     root.join(public_dir, public_output_dir)
+  end
+
+  # Internal: Path to the metadata file written by the Vite dev server.
+  def dev_server_meta_path
+    root.join("tmp", DEV_SERVER_META_FILENAME)
   end
 
   # Public: The directory where the entries are located.
@@ -96,7 +104,7 @@ private
     config["build_cache_dir"] = root.join(config["build_cache_dir"])
     config["ssr_output_dir"] = root.join(config["ssr_output_dir"])
     config["dev_server_connect_timeout"] = config["dev_server_connect_timeout"].to_f
-    coerce_booleans(config, "auto_build", "hide_build_console_output", "https", "skip_compatibility_check", "skip_proxy")
+    coerce_booleans(config, "auto_build", "dev_server_connection_check", "hide_build_console_output", "https", "skip_compatibility_check", "skip_proxy")
     config["package_manager"] ||= detect_package_manager(root)
   end
 
