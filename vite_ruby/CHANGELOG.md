@@ -1,3 +1,12 @@
+# [3.11.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.6...vite_ruby@3.11.0) (2026-09-17)
+
+
+### Features
+
+* detect if dev server is running using a local file (close [#391](https://github.com/ElMassimo/vite_ruby/issues/391)) ([#621](https://github.com/ElMassimo/vite_ruby/issues/621)) ([d424fbf](https://github.com/ElMassimo/vite_ruby/commit/d424fbf5fbd3782c4446c4c357331320e3512352))
+
+
+
 ## [3.10.6](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.5...vite_ruby@3.10.6) (2026-09-16)
 
 
