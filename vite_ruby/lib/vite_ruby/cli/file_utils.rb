@@ -14,7 +14,7 @@ module ViteRuby::CLI::FileUtils
     def write(path, *content)
       mkdir_p(path)
       File.open(path, File::CREAT | File::WRONLY | File::TRUNC) do |file|
-        file.write(Array(content).flatten.join)
+        file.write(Array(content).join)
       end
     end
 
