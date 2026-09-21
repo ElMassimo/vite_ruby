@@ -12,7 +12,6 @@
 class ViteRuby::Manifest
   def initialize(vite_ruby)
     @vite_ruby = vite_ruby
-    @build_mutex = Mutex.new if config.auto_build
   end
 
   # Public: Returns the path for the specified Vite entrypoint file.
@@ -104,7 +103,9 @@ protected
   #   manifest.lookup('calendar.js')
   #   => { "file" => "/vite/assets/calendar-1016838bab065ae1e122.js", "imports" => [] }
   def lookup(name, **options)
-    @build_mutex.synchronize { builder.build || (return nil) } if should_build?
+    if should_build?
+      return unless builder.build
+    end
 
     find_manifest_entry resolve_entry_name(name, **options)
   end
@@ -116,7 +117,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :builder, :dev_server_running?
+  def_delegators :@vite_ruby, :build_lock, :config, :builder, :dev_server_running?
 
   # NOTE: Auto compilation is convenient when running tests, when the developer
   # won't focus on the frontend, or when running the Vite server is not desired.
@@ -145,6 +146,12 @@ private
 
   # Internal: Loads and merges the manifest files, resolving the asset paths.
   def load_manifest
+    return read_manifest unless config.auto_build
+
+    build_lock.synchronize(File::LOCK_SH) { read_manifest }
+  end
+
+  def read_manifest
     config.manifest_paths
       .map { |path| JSON.parse(path.read) }
       .inject({}, &:merge)
