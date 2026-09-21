@@ -1,4 +1,6 @@
 import { describe, test, expect } from 'vitest'
+import { createLogger } from 'vite'
+import type { LogOptions } from 'vite'
 import { defaultConfig } from '@plugin/config'
 import ViteRuby from '@plugin/index'
 
@@ -27,6 +29,25 @@ describe('config', () => {
     expect(() => {
       pluginConfig({ ...defaultConfig, build: { ssr: true } }, { mode: 'production' })
     }).toThrow('No SSR entrypoint available')
+  })
+
+  test('prints build output paths relative to the Ruby project root', () => {
+    const messages: Array<[string, LogOptions | undefined]> = []
+    const logger = createLogger()
+    logger.info = (message, options) => messages.push([message, options])
+
+    const plugin = ViteRuby()
+    const pluginConfig = plugin[0].config
+    defaultConfig.configPath = './default.vite.json'
+    const result = pluginConfig({ ...defaultConfig, customLogger: logger }, { command: 'build', mode: 'production' })
+
+    result.customLogger.info('\u001B[2m../../public/vite/assets/application.js\u001B[22m 1.23 kB', { timestamp: true })
+    result.customLogger.info('unrelated ../../public/vite message')
+
+    expect(messages).toEqual([
+      ['\u001B[2mpublic/vite/assets/application.js\u001B[22m 1.23 kB', { timestamp: true }],
+      ['unrelated ../../public/vite message', undefined],
+    ])
   })
 
   describe('outputFileName (assetFileNames)', () => {

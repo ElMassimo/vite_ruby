@@ -1,9 +1,10 @@
-import { basename, posix, resolve } from 'path'
+import { basename, posix, relative, resolve } from 'path'
 import { existsSync, readFileSync } from 'fs'
-import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
+import { createLogger } from 'vite'
+import type { ConfigEnv, Logger, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import { createDebug } from 'obug'
 
-import { cleanConfig, configOptionFromEnv } from './utils'
+import { cleanConfig, configOptionFromEnv, slash } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
 import { bindDevServerCleanup, resolveDevServerMeta, writeDevServerMeta } from './dev-server'
@@ -47,6 +48,9 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   const { assetsDir, base, outDir, server, root, entrypoints, ssrBuild } = config
 
   const isLocal = config.mode === 'development' || config.mode === 'test'
+  const customLogger = env.command === 'build'
+    ? buildOutputLogger(userConfig, root, outDir)
+    : userConfig.customLogger
 
   const rollupOptions = userConfig.build?.rollupOptions
   let rollupInput = rollupOptions?.input
@@ -93,12 +97,38 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
   return cleanConfig({
     resolve: { alias },
     base,
+    customLogger,
     envDir,
     root,
     server,
     build,
     viteRuby: config,
   })
+}
+
+// Internal: Displays build output paths relative to the Ruby project root instead of Vite's nested root.
+function buildOutputLogger (userConfig: UserConfig, root: string, outDir: string): Logger {
+  const logger = userConfig.customLogger || createLogger(userConfig.logLevel, { allowClearScreen: userConfig.clearScreen })
+  const viteOutputDir = slash(outDir)
+  const projectOutputDir = slash(relative(projectRoot, resolve(root, outDir)))
+  const outputPathPattern = new RegExp(`^((?:\\x1B\\[[0-?]*[ -/]*[@-~])*)${escapeRegExp(viteOutputDir)}(?=/|$)`)
+
+  return new Proxy(logger, {
+    get (target, property) {
+      if (property === 'info') {
+        return (message: string, options?: Parameters<Logger['info']>[1]) => {
+          target.info(message.replace(outputPathPattern, `$1${projectOutputDir}`), options)
+        }
+      }
+
+      const value = Reflect.get(target, property, target)
+      return typeof value === 'function' ? value.bind(target) : value
+    },
+  })
+}
+
+function escapeRegExp (value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 // Internal: Allows to watch additional paths outside the source code dir.
