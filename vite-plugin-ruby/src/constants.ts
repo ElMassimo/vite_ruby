@@ -4,6 +4,9 @@ export const APP_ENV = process.env.RAILS_ENV || process.env.RACK_ENV || process.
 // Internal: Prefix used for environment variables that modify the configuration.
 export const ENV_PREFIX = 'VITE_RUBY'
 
+// Internal: Marks the processes that vite_ruby starts. It has no VITE_ prefix, so Vite does not expose it.
+export const RUNNER_PID_ENV_VAR = 'RUBY_VITE_RUNNER_PID'
+
 // Internal: Key of the vite.json file that is applied to all environments.
 export const ALL_ENVS_KEY = 'all'
 
