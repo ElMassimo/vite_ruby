@@ -7,7 +7,7 @@ import { cleanConfig, configOptionFromEnv } from './utils'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
 import { bindDevServerCleanup, resolveDevServerMeta, writeDevServerMeta } from './dev-server'
-import { DEV_SERVER_META_FILE } from './constants'
+import { DEV_SERVER_META_FILE, RUNNER_PID_ENV_VAR } from './constants'
 
 export * from './types'
 
@@ -28,6 +28,9 @@ let watchAdditionalPaths: string[] = []
 
 // Public: Vite Plugin to detect entrypoints in a Ruby app, and allows to load a shared JSON configuration file that can be read from Ruby.
 export default function ViteRubyPlugin (): PluginOption[] {
+  // Vite is running, so processes that it starts can run vite_ruby again.
+  delete process.env[RUNNER_PID_ENV_VAR]
+
   return [
     {
       name: 'vite-plugin-ruby',

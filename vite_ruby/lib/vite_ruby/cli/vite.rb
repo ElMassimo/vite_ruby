@@ -17,6 +17,7 @@ class ViteRuby::CLI::Vite < Dry::CLI::Command
   end
 
   def call(mode:, args: [], clobber: false, node_options: nil, inspect: nil, trace_deprecation: nil, **boolean_opts)
+    ViteRuby::Runner.check_for_self_invocation!
     ViteRuby.env["VITE_RUBY_MODE"] = mode
     ViteRuby.commands.clobber if clobber
 

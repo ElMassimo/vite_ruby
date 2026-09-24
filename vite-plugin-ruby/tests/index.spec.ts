@@ -2,6 +2,14 @@ import { describe, test, expect } from 'vitest'
 import { defaultConfig } from '@plugin/config'
 import ViteRuby from '@plugin/index'
 
+describe('runner marker', () => {
+  test('removes the marker so that processes started by Vite do not inherit it', () => {
+    process.env.RUBY_VITE_RUNNER_PID = '123'
+    ViteRuby()
+    expect(process.env.RUBY_VITE_RUNNER_PID).toBeUndefined()
+  })
+})
+
 describe('config', () => {
   test('environment defaults', () => {
     const plugin = ViteRuby()

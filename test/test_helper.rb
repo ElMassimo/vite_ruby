@@ -44,6 +44,14 @@ module ViteRubyTestHelpers
     refresh_config
   end
 
+  def with_env(vars)
+    original = vars.keys.to_h { |key| [key, ENV[key]] }
+    vars.each { |key, value| ENV[key] = value }
+    yield
+  ensure
+    original.each { |key, value| ENV[key] = value }
+  end
+
   def path_to_test_app
     File.expand_path("test_app", __dir__)
   end
@@ -70,15 +78,16 @@ private
   end
 
   def assert_run_command(*argv, flags: [])
+    env = ViteRuby.config.to_env.merge(ViteRuby::Runner::RUNNER_PID_ENV_VAR => Process.pid.to_s)
     Dir.chdir(path_to_test_app) {
       begin
         mock = Minitest::Mock.new
-        mock.expect(:call, nil, [ViteRuby.config.to_env, %r{node_modules/.bin/vite}, *argv, *flags])
+        mock.expect(:call, nil, [env, %r{node_modules/.bin/vite}, *argv, *flags])
         Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
         mock.verify
       rescue ArgumentError => _error
         mock = Minitest::Mock.new
-        mock.expect(:call, nil, [ViteRuby.config.to_env, "yarn", "vite", *argv, *flags])
+        mock.expect(:call, nil, [env, "yarn", "vite", *argv, *flags])
         Kernel.stub(:exec, mock) { ViteRuby.run(argv, exec: true) }
         mock.verify
       end
