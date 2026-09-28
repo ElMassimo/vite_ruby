@@ -274,9 +274,10 @@ You can customize this behavior using the following options.
 - **Default:** `false`
 - **Env Var:** `VITE_RUBY_DEV_SERVER_CONNECTION_CHECK`
 
-  By default the dev server is detected by reading `tmp/vite-ruby.json`, a
-  metadata file the Vite plugin writes with the dev server URL when it starts,
-  and removes when it stops.
+  By default the dev server is detected by reading `tmp/vite-ruby-<mode>.json`
+  (for example, `tmp/vite-ruby-development.json`), a metadata file the Vite
+  plugin writes when the dev server starts and removes when it stops. The
+  metadata must have the configured port for the current mode.
 
   Enable this to detect the dev server by opening a TCP connection to the
   configured `host` and `port` instead. Useful if the metadata file can become

@@ -87,7 +87,8 @@ class ViteRuby
     return false unless dev_mode?
     return dev_server_connected? if config.dev_server_connection_check
 
-    !dev_server_meta.nil?
+    meta = dev_server_meta
+    meta.is_a?(Hash) && meta["port"] == config.port
   end
 
   # Public: Additional environment variables to pass to Vite.

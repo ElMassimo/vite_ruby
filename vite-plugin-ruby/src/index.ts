@@ -4,10 +4,10 @@ import type { ConfigEnv, PluginOption, UserConfig, ViteDevServer } from 'vite'
 import { createDebug } from 'obug'
 
 import { cleanConfig, configOptionFromEnv } from './utils'
+import type { UnifiedConfig } from './types'
 import { filterEntrypointsForRollup, loadConfiguration, resolveGlobs } from './config'
 import { assetsManifestPlugin } from './manifest'
-import { bindDevServerCleanup, resolveDevServerMeta, writeDevServerMeta } from './dev-server'
-import { DEV_SERVER_META_FILE } from './constants'
+import { bindDevServerCleanup, devServerMetaPath, resolveDevServerMeta, writeDevServerMeta } from './dev-server'
 
 export * from './types'
 
@@ -105,10 +105,11 @@ function config (userConfig: UserConfig, env: ConfigEnv): UserConfig {
 function configureServer (server: ViteDevServer) {
   server.watcher.add(watchAdditionalPaths)
 
-  const devServerMetaPath = resolve(projectRoot, DEV_SERVER_META_FILE)
+  const rubyConfig = server.config as typeof server.config & { viteRuby: UnifiedConfig }
+  const metaPath = devServerMetaPath(projectRoot, rubyConfig.viteRuby.mode)
   server.httpServer?.once('listening', () => {
-    writeDevServerMeta(devServerMetaPath, resolveDevServerMeta(server.httpServer?.address(), server.config))
-    bindDevServerCleanup(devServerMetaPath)
+    writeDevServerMeta(metaPath, resolveDevServerMeta(server.httpServer?.address(), server.config))
+    bindDevServerCleanup(metaPath)
   })
 
   return () => server.middlewares.use((req, res, next) => {

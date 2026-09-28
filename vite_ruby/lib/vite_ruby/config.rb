@@ -5,8 +5,8 @@ require "json"
 # Public: Allows to resolve configuration sourced from `config/vite.json` and
 # environment variables, combining them with the default options.
 class ViteRuby::Config
-  # Internal: Name of the metadata file written by the Vite dev server.
-  DEV_SERVER_META_FILENAME = "vite-ruby.json"
+  # Internal: Base name of the metadata file written by the Vite dev server.
+  DEV_SERVER_META_BASENAME = "vite-ruby"
 
   def origin
     "#{protocol}://#{host_with_port}"
@@ -43,7 +43,7 @@ class ViteRuby::Config
 
   # Internal: Path to the metadata file written by the Vite dev server.
   def dev_server_meta_path
-    root.join("tmp", DEV_SERVER_META_FILENAME)
+    root.join("tmp", "#{DEV_SERVER_META_BASENAME}-#{mode}.json")
   end
 
   # Public: The directory where the entries are located.

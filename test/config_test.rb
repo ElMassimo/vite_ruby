@@ -63,6 +63,12 @@ class ConfigTest < ViteRuby::Test
     assert_equal Gem.loaded_specs["rails"].full_gem_path, ViteRuby.config.to_env["EXAMPLE_PATH"]
   end
 
+  def test_dev_server_meta_path_is_scoped_to_mode
+    assert_path "test_app/tmp/vite-ruby-production.json", @config.dev_server_meta_path
+    assert_path "test_app/tmp/vite-ruby-development.json", resolve_config(mode: "development").dev_server_meta_path
+    assert_path "test_app/tmp/vite-ruby-test.json", resolve_config(mode: "test").dev_server_meta_path
+  end
+
   def test_manifest_path
     assert_path "test_app/public/vite-production/.vite/manifest.json", @config.manifest_paths.first
   end

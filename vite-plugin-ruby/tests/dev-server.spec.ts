@@ -3,7 +3,7 @@ import { tmpdir } from 'os'
 import { join } from 'path'
 import { describe, it, expect } from 'vitest'
 
-import { removeOwnedMeta, resolveDevServerMeta, writeDevServerMeta } from '../src/dev-server'
+import { devServerMetaPath, removeOwnedMeta, resolveDevServerMeta, writeDevServerMeta } from '../src/dev-server'
 
 const withServer = (server: Record<string, unknown>) => ({ server }) as any
 
@@ -23,6 +23,15 @@ describe('resolveDevServerMeta', () => {
   })
 })
 
+describe('devServerMetaPath', () => {
+  it('uses separate metadata files for the resolved Ruby modes', () => {
+    const root = join(tmpdir(), 'vite-app')
+
+    expect(devServerMetaPath(root, 'development')).toBe(join(root, 'tmp/vite-ruby-development.json'))
+    expect(devServerMetaPath(root, 'test')).toBe(join(root, 'tmp/vite-ruby-test.json'))
+  })
+})
+
 describe('removeOwnedMeta', () => {
   it('only removes the file when the pid matches', () => {
     const path = join(mkdtempSync(join(tmpdir(), 'vpr-')), 'vite-ruby.json')
@@ -33,5 +42,19 @@ describe('removeOwnedMeta', () => {
 
     removeOwnedMeta(path, 4242)
     expect(existsSync(path)).toBe(false)
+  })
+
+  it('does not remove another mode\'s metadata when a server stops', () => {
+    const root = mkdtempSync(join(tmpdir(), 'vpr-'))
+    const devPath = devServerMetaPath(root, 'development')
+    const testPath = devServerMetaPath(root, 'test')
+    writeDevServerMeta(devPath, { url: 'x', host: 'h', port: 1, https: false, pid: 4242 })
+    writeDevServerMeta(testPath, { url: 'x', host: 'h', port: 2, https: false, pid: 4243 })
+
+    removeOwnedMeta(devPath, 4242)
+
+    expect(existsSync(devPath)).toBe(false)
+    expect(existsSync(testPath)).toBe(true)
+    removeOwnedMeta(testPath, 4243)
   })
 })
