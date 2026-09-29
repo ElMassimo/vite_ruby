@@ -1,3 +1,12 @@
+## [3.11.1](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.11.0...vite_ruby@3.11.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* scope dev server metadata to Ruby mode ([#632](https://github.com/ElMassimo/vite_ruby/issues/632)) ([#633](https://github.com/ElMassimo/vite_ruby/issues/633)) ([d3d8e6f](https://github.com/ElMassimo/vite_ruby/commit/d3d8e6f50524e9415df5e0621fe92117175f6dfd))
+
+
+
 # [3.11.0](https://github.com/ElMassimo/vite_ruby/compare/vite_ruby@3.10.6...vite_ruby@3.11.0) (2026-09-17)
 
 
