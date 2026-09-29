@@ -1,3 +1,12 @@
+## [5.2.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.4...vite-plugin-ruby@5.2.5) (2026-09-29)
+
+
+### Bug Fixes
+
+* scope dev server metadata to Ruby mode ([#632](https://github.com/ElMassimo/vite_ruby/issues/632)) ([#633](https://github.com/ElMassimo/vite_ruby/issues/633)) ([d3d8e6f](https://github.com/ElMassimo/vite_ruby/commit/d3d8e6f50524e9415df5e0621fe92117175f6dfd))
+
+
+
 ## [5.2.4](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.3...vite-plugin-ruby@5.2.4) (2026-09-17)
 
 
