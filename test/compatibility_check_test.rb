@@ -23,6 +23,12 @@ class CompatibilityCheckTest < ViteRuby::Test
     assert compatible_plugin?(nil, nil)
   end
 
+  def test_requires_plugin_version_with_mode_specific_metadata
+    assert_equal "^5.2.5", ViteRuby::DEFAULT_PLUGIN_VERSION
+    refute compatible_plugin?("^5.2.4", ViteRuby::DEFAULT_PLUGIN_VERSION)
+    assert compatible_plugin?("^5.2.5", ViteRuby::DEFAULT_PLUGIN_VERSION)
+  end
+
   def test_raise_unless_satisfied
     assert_raises(ArgumentError) { raise_unless_satisfied("^4.1.0", "^3.0") }
     raise_unless_satisfied("3.1.0", "^3.0")

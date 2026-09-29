@@ -1,5 +1,5 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs'
-import { dirname } from 'path'
+import { dirname, resolve } from 'path'
 import type { AddressInfo } from 'net'
 import type { ResolvedConfig } from 'vite'
 
@@ -17,6 +17,11 @@ const WILDCARD_HOSTS = new Set(['', '0.0.0.0', '::', '::1'])
 
 let exitHandlersBound = false
 let ownedMetaPath: string | null = null
+
+// Internal: Keeps metadata for each Ruby mode separate.
+export function devServerMetaPath (root: string, mode: string): string {
+  return resolve(root, 'tmp', `vite-ruby-${mode}.json`)
+}
 
 // Internal: Returns true when the address is a resolved TCP address.
 function isAddressInfo (address: string | AddressInfo | null | undefined): address is AddressInfo {
