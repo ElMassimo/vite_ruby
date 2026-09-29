@@ -11,6 +11,14 @@
     "file": "assets/app.517bf154.css",
     "src": "entrypoints/app.css"
   },
+  "entrypoints/print.css": {
+    "file": "assets/print.4b6e2a1f.js",
+    "src": "entrypoints/print.css",
+    "isEntry": true,
+    "css": [
+      "assets/print.9c0d7e35.css"
+    ]
+  },
   "images/logo.png": {
     "file": "assets/logo.f42fb7ea.png",
     "src": "images/logo.png"

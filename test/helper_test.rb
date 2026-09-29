@@ -111,6 +111,15 @@ class HelperTest < HelperTestCase
     }
   end
 
+  def test_vite_stylesheet_tag_with_javascript_wrapper_entry
+    # Vite 8 (Rolldown) may emit a JS wrapper as the `file` of a CSS-only entry.
+    assert_similar link(href: "/vite-production/assets/print.9c0d7e35.css"), vite_stylesheet_tag("print")
+
+    with_dev_server_running {
+      assert_similar link(href: "/vite-dev/entrypoints/print.css"), vite_stylesheet_tag("print")
+    }
+  end
+
   def test_vite_preload_tag
     assert_includes vite_typescript_tag("main", host: "example.com", protocol: "https"), [
       %(<link rel="modulepreload" href="https://example.com/vite-production/assets/log.818edfb8.js" as="script" crossorigin="">),

@@ -61,7 +61,7 @@ module ViteRails::TagHelpers
 
   # Public: Renders a <link> tag for the specified Vite entrypoints.
   def vite_stylesheet_tag(*names, **options)
-    style_paths = names.map { |name| vite_asset_path(name, type: :stylesheet) }
+    style_paths = names.flat_map { |name| vite_stylesheet_paths(name) }
 
     options[:extname] = false if Rails::VERSION::MAJOR >= 7
 
@@ -97,6 +97,18 @@ private
   # Internal: Returns the current manifest loaded by Vite Ruby.
   def vite_manifest
     ViteRuby.instance.manifest
+  end
+
+  # Internal: Resolves the stylesheets emitted for the specified entrypoint.
+  #
+  # NOTE: Rolldown may emit a JS wrapper as the `file` of a CSS-only entry, and
+  # list the actual stylesheet in `css` instead.
+  def vite_stylesheet_paths(name)
+    entries = vite_manifest.resolve_entries(name, type: :stylesheet)
+    file = entries.fetch(:scripts).first
+    stylesheets = entries.fetch(:stylesheets)
+    stylesheets = [file, *stylesheets] if stylesheets.empty? || file.end_with?(".css")
+    stylesheets.uniq.map { |path| path_to_asset(path) }
   end
 
   # Internal: Renders a modulepreload link tag.
