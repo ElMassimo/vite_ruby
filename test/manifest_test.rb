@@ -117,6 +117,16 @@ class ManifestTest < ViteRuby::Test
     assert_match "Vite Ruby can't find entrypoints/#{asset_file}.js in the manifests", error.message
   end
 
+  def test_lookup_does_not_initialize_build_dependencies_when_auto_build_is_disabled
+    refute ViteRuby.instance.instance_variable_defined?(:@builder)
+    refute ViteRuby.instance.instance_variable_defined?(:@build_lock)
+
+    assert_equal prefixed("app.517bf154.css"), path_for("app", type: :stylesheet)
+
+    refute ViteRuby.instance.instance_variable_defined?(:@builder)
+    refute ViteRuby.instance.instance_variable_defined?(:@build_lock)
+  end
+
   def test_lookup_success!
     vendor_chunk = {
       "file" => prefixed("vendor.0f7c0ec3.js"),
@@ -263,6 +273,12 @@ class ManifestTest < ViteRuby::Test
     assert_equal prefixed("logo.f42fb7ea.png"), path_for("images/logo.png")
   end
 
+  def test_manifest_read_waits_for_build_in_another_process
+    skip "Process.fork is not supported" unless Process.respond_to?(:fork)
+
+    assert_manifest_read_waits_for_build_in_another_process
+  end
+
   def test_lookup_nil
     assert_nil lookup("foo.js")
   end
@@ -301,6 +317,40 @@ class ManifestTest < ViteRuby::Test
   end
 
 private
+
+  def assert_manifest_read_waits_for_build_in_another_process
+    refresh_config(auto_build: true)
+    path = ViteRuby.config.manifest_paths.first
+    contents = path.read
+    reader, writer = IO.pipe
+
+    pid = Process.fork do
+      reader.close
+      ViteRuby.instance.build_lock.synchronize(File::LOCK_EX) do
+        path.write("")
+        writer.write("1")
+        writer.close
+        sleep 0.2
+        path.write(contents)
+      end
+      exit! 0
+    end
+
+    writer.close
+    reader.read(1)
+
+    assert ViteRuby.instance.manifest.refresh
+    assert_predicate Process.wait2(pid).last, :success?
+  ensure
+    reader&.close unless reader&.closed?
+    writer&.close unless writer&.closed?
+    path&.write(contents) if path && contents
+    begin
+      Process.wait(pid) if pid
+    rescue Errno::ECHILD
+      nil
+    end
+  end
 
   def assert_raises_manifest_missing_entry_error(auto_build: false, &block)
     error = nil

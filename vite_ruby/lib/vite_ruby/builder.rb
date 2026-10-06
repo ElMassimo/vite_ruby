@@ -12,19 +12,21 @@ class ViteRuby::Builder
   # Public: Checks if the watched files have changed since the last compilation,
   # and triggers a Vite build if any files have changed.
   def build(*args)
-    last_build = last_build_metadata(ssr: args.include?("--ssr"))
+    build_lock.synchronize(File::LOCK_EX) do
+      last_build = last_build_metadata(ssr: args.include?("--ssr"))
 
-    if args.delete("--force") || last_build.stale? || config.manifest_paths.empty?
-      stdout, stderr, status = build_with_vite(*args)
-      log_build_result(stdout, stderr, status)
-      record_build_metadata(last_build, errors: stderr, success: status.success?)
-      status.success?
-    elsif last_build.success
-      logger.debug "Skipping vite build. Watched files have not changed since the last build at #{last_build.timestamp}"
-      true
-    else
-      logger.error "Skipping vite build. Watched files have not changed since the build failed at #{last_build.timestamp} ❌"
-      false
+      if args.delete("--force") || last_build.stale? || config.manifest_paths.empty?
+        stdout, stderr, status = build_with_vite(*args)
+        log_build_result(stdout, stderr, status)
+        record_build_metadata(last_build, errors: stderr, success: status.success?)
+        status.success?
+      elsif last_build.success
+        logger.debug "Skipping vite build. Watched files have not changed since the last build at #{last_build.timestamp}"
+        true
+      else
+        logger.error "Skipping vite build. Watched files have not changed since the build failed at #{last_build.timestamp} ❌"
+        false
+      end
     end
   end
 
@@ -37,7 +39,7 @@ private
 
   extend Forwardable
 
-  def_delegators :@vite_ruby, :config, :logger, :run
+  def_delegators :@vite_ruby, :build_lock, :config, :logger, :run
 
   # Internal: Writes a digest of the watched files to disk for future checks.
   def record_build_metadata(build, **attrs)

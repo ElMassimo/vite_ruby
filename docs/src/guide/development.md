@@ -112,6 +112,10 @@ automatically when the asset is requested.
 This is very convenient when running integration tests, or when a developer
 does not want to start the Vite development server (at the expense of a slower feedback loop).
 
+When tests run in parallel processes, builds and manifest reads are synchronized
+across workers. The first worker builds stale assets while the others wait and
+reuse its result.
+
 ::: tip Enabled locally
 By [default][json config], <kbd>[autoBuild]</kbd> is enabled in the `test` and `development` environments.
 :::
@@ -178,10 +182,14 @@ When running tests locally, you can test the production build by not starting th
 When running tests in the CI, it's more reliable if assets are available
 __before__ tests start to run, as it:
 
-- Prevents timeouts in Capybara during <kbd>[autoBuild]</kbd>
-- Prevents race conditions when running tests in parallel (each thread could start a build)
+- Prevents timeouts in Capybara while waiting for <kbd>[autoBuild]</kbd>
+- Verifies the production asset build independently from the test suite
 
-To achieve that, it's recommended to run `bin/rake assets:precompile`—which should [also run `vite build`][deployment]—in a previous CI step.
+Parallel test workers are synchronized when using <kbd>[autoBuild]</kbd>, so
+precompilation is not required for correctness. It remains recommended in CI
+for predictable test startup and build failures.
+
+To achieve that, run `bin/rake assets:precompile`—which should [also run `vite build`][deployment]—in a previous CI step.
 
 You can verify your setup is working by disabling <kbd>[autoBuild]</kbd>. A convenient way to do that is to add `VITE_RUBY_AUTO_BUILD="false"` to the build environment variables.
 

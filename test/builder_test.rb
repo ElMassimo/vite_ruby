@@ -81,6 +81,12 @@ class BuilderTest < ViteRuby::Test
     assert_equal builder.send(:last_build_path, ssr: true).basename.to_s, "last-ssr-build-#{ViteRuby.config.mode}.json"
   end
 
+  def test_build_is_synchronized_between_processes
+    skip "Process.fork is not supported" unless Process.respond_to?(:fork)
+
+    assert_build_is_synchronized_between_processes
+  end
+
   def test_watched_files_digest
     previous_digest = ViteRuby.digest
     refresh_config
@@ -157,6 +163,39 @@ class BuilderTest < ViteRuby::Test
   end
 
 private
+
+  def assert_build_is_synchronized_between_processes
+    build_count_path = ViteRuby.config.build_cache_dir.join("build-count")
+    build_count_path.dirname.mkpath
+    reader, writer = IO.pipe
+    result = ["stdout", "", MockProcessStatus.new(success: true)]
+
+    ViteRuby::IO.stub(:capture, ->(*) {
+      build_count_path.open("a") { |file| file.puts Process.pid }
+      sleep 0.2
+      result
+    }) do
+      pids = Array.new(2) do
+        Process.fork do
+          writer.close
+          reader.read(1)
+          exit! builder.build ? 0 : 1
+        end
+      end
+
+      reader.close
+      2.times { writer.write("1") }
+      writer.close
+
+      assert pids.map { |pid| Process.wait2(pid).last }.all?(&:success?)
+    end
+
+    assert_equal 1, build_count_path.readlines.size
+  ensure
+    reader&.close unless reader&.closed?
+    writer&.close unless writer&.closed?
+    build_count_path&.delete if build_count_path&.exist?
+  end
 
   def watched_file
     Pathname.new(path_to_test_app).join(WATCHED_FILE)

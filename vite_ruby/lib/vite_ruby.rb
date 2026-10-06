@@ -114,6 +114,11 @@ class ViteRuby
     (@runner ||= ViteRuby::Runner.new(self)).run(argv, **options)
   end
 
+  # Internal: Synchronizes Vite builds and manifest reads.
+  def build_lock
+    @build_lock ||= ViteRuby::BuildLock.new(self)
+  end
+
   # Public: Keeps track of watched files and triggers builds as needed.
   def builder
     @builder ||= ViteRuby::Builder.new(self)
