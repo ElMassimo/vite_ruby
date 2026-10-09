@@ -41,6 +41,13 @@ class FilesTest < ViteRuby::Test
     assert_content path, "Hello\nWorld"
   end
 
+  def test_write_nested_content
+    path = root.join("write_nested")
+    write(path, "Hello\n", ["World", "!"])
+
+    assert_content path, "Hello\nWorld!"
+  end
+
   def test_append
     path = root.join("append.rb")
     content = <<~CONTENT
