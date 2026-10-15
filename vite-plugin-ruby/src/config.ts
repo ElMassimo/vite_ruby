@@ -106,7 +106,8 @@ function coerceConfigurationValues (config: ResolvedConfig, projectRoot: string,
   // Vite 8.1 moved clientPort from server.hmr to server.ws; 8.0 still reads hmr.
   const ws = userConfig.server?.ws ?? {}
   const hmr = userConfig.server?.hmr ?? {}
-  if (isObject(ws) && isObject(hmr) && !ws.hasOwnProperty('clientPort') && !hmr.hasOwnProperty('clientPort')) {
+  // Vite's hmr compatibility object defines clientPort even when it is unset.
+  if (isObject(ws) && isObject(hmr) && ws.clientPort == null && hmr.clientPort == null) {
     if (viteUsesServerWs(version))
       (server as ServerWithWsTransport).ws = { ...ws, clientPort: port }
     else

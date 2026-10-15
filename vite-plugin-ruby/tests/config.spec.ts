@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { describe, test, expect } from 'vitest'
 import { defaultConfig, resolveViteBase, loadConfiguration } from '@plugin/config'
 import type { ResolvedConfig } from '@plugin/types'
-import type { UserConfig } from 'vite'
+import { mergeConfig, type UserConfig } from 'vite'
 
 const exampleDir = resolve('example')
 
@@ -78,6 +78,39 @@ describe('loadConfiguration', () => {
         port: 3037,
         strictPort: true,
       })
+  })
+
+  test('defaults clientPort when hmr exposes an unset compatibility getter', () => {
+    const hmr = Object.defineProperty({}, 'clientPort', { get: () => undefined })
+
+    expectResolvedConfig({ server: { hmr } }, '8.1.0', 'server', 'ws')
+      .toEqual({ clientPort: 3037 })
+  })
+
+  test.each(['hmr', 'ws'])('defaults clientPort after Vite merges server.%s options', (transport) => {
+    const config = mergeConfig(
+      { server: { [transport]: { host: 'localhost' } } },
+      { server: {} },
+    )
+
+    expectResolvedConfig(config, '8.1.0', 'server', 'ws')
+      .toHaveProperty('clientPort', 3037)
+  })
+
+  test.each([0, 443])('preserves an explicit clientPort of %s', (clientPort) => {
+    expectResolvedConfig({ server: { hmr: { clientPort } } }, '8.0.16', 'server')
+      .not.toHaveProperty('hmr')
+
+    expectResolvedConfig({ server: { hmr: { clientPort } } }, '8.1.0', 'server')
+      .not.toHaveProperty('ws')
+
+    expectResolvedConfig({ server: { ws: { clientPort } } } as UserConfig, '8.1.0', 'server')
+      .not.toHaveProperty('ws')
+  })
+
+  test.each(['hmr', 'ws'])('does not configure clientPort when server.%s is disabled', (transport) => {
+    expectResolvedConfig({ server: { [transport]: false } }, '8.1.0', 'server')
+      .not.toHaveProperty('ws')
   })
 
   test('avoids overriding user config for hmr', () => {
