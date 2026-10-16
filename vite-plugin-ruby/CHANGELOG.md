@@ -1,3 +1,12 @@
+## [5.2.6](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.5...vite-plugin-ruby@5.2.6) (2026-10-16)
+
+
+### Bug Fixes
+
+* restore hmr client port on Vite 8.1+ ([#637](https://github.com/ElMassimo/vite_ruby/issues/637)) ([7054636](https://github.com/ElMassimo/vite_ruby/commit/70546362a62289508ff8706919a8fa55824f1a84)), closes [#636](https://github.com/ElMassimo/vite_ruby/issues/636)
+
+
+
 ## [5.2.5](https://github.com/ElMassimo/vite_ruby/compare/vite-plugin-ruby@5.2.4...vite-plugin-ruby@5.2.5) (2026-09-29)
 
 
