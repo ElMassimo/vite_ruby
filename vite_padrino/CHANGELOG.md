@@ -1,3 +1,17 @@
+## [3.0.1](https://github.com/ElMassimo/vite_ruby/compare/vite_padrino@3.0.0...vite_padrino@3.0.1) (2026-10-16)
+
+
+### Bug Fixes
+
+* **padrino:** avoid ActiveSupport's try ([#635](https://github.com/ElMassimo/vite_ruby/issues/635)) ([ab4540f](https://github.com/ElMassimo/vite_ruby/commit/ab4540fcaf3043dda81ab6e42ca8425c4a42b9b4))
+
+
+### Features
+
+* enable hmr when running tests in development with vite dev server ([e253bba](https://github.com/ElMassimo/vite_ruby/commit/e253bba26d164aabc7a9526df504c207ad2cf6f9))
+
+
+
 # [3.0.0](https://github.com/ElMassimo/vite_ruby/compare/vite_padrino@0.5.4...vite_padrino@3.0.0) (2021-08-16)
 
 See https://github.com/ElMassimo/vite_ruby/pull/116 for features and breaking changes.
